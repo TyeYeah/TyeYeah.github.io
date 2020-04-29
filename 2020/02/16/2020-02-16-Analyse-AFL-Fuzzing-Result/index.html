@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Analyse AFL Fuzzing Result - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,After doing fuzzing, we concentrate on result analysis.
+Check Fuzzer Statusafl-whatsupIt helps show,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Analyse AFL Fuzzing Result</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Analyse AFL Fuzzing Result</h1>
+        <div class="stuff">
+            <span>February 16, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/afl/">afl</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/fuzzing/">fuzzing</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>After doing fuzzing, we concentrate on result analysis.</p>
+<h2 id="Check-Fuzzer-Status"><a href="#Check-Fuzzer-Status" class="headerlink" title="Check Fuzzer Status"></a>Check Fuzzer Status</h2><h3 id="afl-whatsup"><a href="#afl-whatsup" class="headerlink" title="afl-whatsup"></a>afl-whatsup</h3><p>It helps showing the running status and overall running overview of each fuzzer, where the data is the sum of all fuzzers.<br>Plus the -s option to display only the overview.</p>
+<p>Use:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ afl-whatsup -s syncdir</span><br></pre></td></tr></table></figure></p>
+<p>To see:<br><img src="/imghost/aafr/1.jpg" alt="afl-whatsup e.g."></p>
+<p>It’s real time status without auto refreshing.<br>People always give it a loop to have updating feedback.</p>
+<h3 id="afl-gotcpu"><a href="#afl-gotcpu" class="headerlink" title="afl-gotcpu"></a>afl-gotcpu</h3><p>It helps checking status of every core.</p>
+<p><img src="/imghost/aafr/2.jpg" alt="afl-gotcpu e.g."></p>
+<h3 id="afl-stat"><a href="#afl-stat" class="headerlink" title="afl-stat"></a>afl-stat</h3><p>It is one of <a href="https://gitlab.com/rc0r/afl-utils" target="_blank" rel="noopener">afl-utils</a>, the AFL auxiliary tools .This tool is similar to the output of afl-whatsup.</p>
+<p>Before using it, you need a configuration file to set the output directory of each afl-fuzz instance:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set file name as afl-stats.conf</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"fuzz_dirs"</span>: [</span><br><span class="line">      <span class="string">"/root/syncdir/SESSION000"</span>,</span><br><span class="line">      <span class="string">"/root/syncdir/SESSION001"</span>,</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">"/root/syncdir/SESSION00x"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Then specify the configuration file to run:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ afl-stats -c afl-stats.conf</span><br><span class="line"></span><br><span class="line">[SESSION000 on fuzzer1]</span><br><span class="line">Alive:   1/1</span><br><span class="line">Execs:   64 m</span><br><span class="line">Speed:   0.3 x/s</span><br><span class="line">Pend:    6588/249</span><br><span class="line">Crashes: 101</span><br><span class="line">[SESSION001 on fuzzer1]</span><br><span class="line">Alive:   1/1</span><br><span class="line">Execs:   105 m</span><br><span class="line">Speed:   576.6 x/s</span><br><span class="line">Pend:    417/0</span><br><span class="line">Crashes: 291</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="afl-plot"><a href="#afl-plot" class="headerlink" title="afl-plot"></a>afl-plot</h3><p>Besides command line utils, we have <code>afl-plot</code> to produce ( plot ) more intuitive results.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install dependency -- gnuplot</span></span><br><span class="line">$ apt install gnuplot</span><br><span class="line">$ afl-plot afl_state_dir graph_output_dir</span><br><span class="line"></span><br><span class="line"><span class="comment"># see outputs</span></span><br><span class="line">$ <span class="built_in">cd</span> graph_output_dir</span><br><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── exec_speed.png</span><br><span class="line">├── high_freq.png</span><br><span class="line">├── index.html</span><br><span class="line">└── low_freq.png</span><br><span class="line"></span><br><span class="line">0 directories, 4 files</span><br></pre></td></tr></table></figure></p>
+<p>Click index.html to see graphs.</p>
+<h2 id="When-to-Stop"><a href="#When-to-Stop" class="headerlink" title="When to Stop"></a>When to Stop</h2><p>Normally you should wait as long as you can, until fuzzer get 100% coverage, but it’s hard to judge.</p>
+<p>Look at upper right corner of AFL running panel, you see overall results<br><img src="/imghost/aafr/3.jpg" alt="upper right corner"><br>With cycles num increasing, it’s color turns from red to yellow, bule and eventually green.<br>Green means useless to do further fuzzing. </p>
+<p>There’re some AFL extensions like <code>pythia</code>.<br>It shows status and give estimates of crash and path.<br><img src="/imghost/aafr/4.jpg" alt="pythia 1"></p>
+<ul>
+<li>correctness: probability of finding a crash leading input.</li>
+<li>fuzzability: difficulty of finding a new path. The higher, the easier to fuzz.</li>
+<li>current paths: the number of paths.<br>currently found.</li>
+<li>path coverag: path coverage.</li>
+</ul>
+<p>Once you have waited for several days,<br><img src="/imghost/aafr/5.jpg" alt="pythia 2"><br>or the path coverage reaches 99%, or correctness decreases to 1e-08, stop the fuzz.</p>
+<h2 id="Output-Result"><a href="#Output-Result" class="headerlink" title="Output Result"></a>Output Result</h2><p>Contents of multi-fuzzer instance sync dirs<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tree -L 3</span><br><span class="line">.</span><br><span class="line">├── fuzzer1</span><br><span class="line">│   ├── crashes</span><br><span class="line">│   │   ├── id:000000,sig:06,src:000019+000074,op:splice,rep:2</span><br><span class="line">│   │   ├── ...</span><br><span class="line">│   │   ├── id:000002,sig:06,src:000038+000125,op:splice,rep:4</span><br><span class="line">│   │   └── README.txt</span><br><span class="line">│   ├── fuzz_bitmap</span><br><span class="line">│   ├── fuzzer_stats</span><br><span class="line">│   ├── hangs</span><br><span class="line">│   │   └── id:000000,src:000007,op:flip1,pos:55595</span><br><span class="line">│   ├── plot_data</span><br><span class="line">│   └── queue</span><br><span class="line">│       ├── id:000000,orig:1.png</span><br><span class="line">│ ├── ....</span><br><span class="line">│       └── id:000101,sync:fuzzer10,src:000102</span><br><span class="line">└── fuzzer2</span><br><span class="line">  ├── crashes</span><br><span class="line">  ├── ...</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>queue: stores all testcases with special executive paths.</li>
+<li>crashes: stores cases causing target to receive fatal signal and crash.</li>
+<li>crashes/README.txt： saves command parameters to execute crash cases.</li>
+<li>hangs： cases leading to target timeout.</li>
+<li>fuzzer_stats： afl-fuzz status.</li>
+<li>plot_data： for afl-plot to plot.</li>
+</ul>
+<h2 id="Process-Result"><a href="#Process-Result" class="headerlink" title="Process Result"></a>Process Result</h2><h3 id="Crash-Exploration-Mode"><a href="#Crash-Exploration-Mode" class="headerlink" title="Crash Exploration Mode"></a>Crash Exploration Mode</h3><p>Also called <code>peruvian rabbit mode</code>, making sure the bug is exploitable.</p>
+<p>Use <code>-C</code> parameter to turn on <code>crash exploration mode</code>, one crash case as input, afl-fuzz will produce related but different crashes.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -m none -C -i poc -o peruvian-were-rabbit_out -- /path/to/target @@</span><br></pre></td></tr></table></figure></p>
+<p>In this way, length of memory address can be messured, and buffer may be detected.</p>
+<h3 id="triage-crashes"><a href="#triage-crashes" class="headerlink" title="triage_crashes"></a>triage_crashes</h3><p>This is a script in AFL source code dir :<br><code>afl-2.52b/experimental/crash_triage/triage_crashes.sh</code><br>which helps trigger collected crashes.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ./triage_crashes.sh /path/to/afl_output_dir /path/to/tested_binary [...target params...]</span><br><span class="line"></span><br><span class="line">  +++ ID 000000, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000001, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000002, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000003, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000004, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000005, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000006, SIGNAL 11 +++</span><br></pre></td></tr></table></figure></p>
+<p>Different SIGNAL means different signals.<br>For example, 11 means SIGSEGV( indicates buffer overflow ), 06 means SIGABRT ( indicates double free ) …<br><a href="https://www-uxsup.csx.cam.ac.uk/courses/moved.Building/signals.pdf" target="_blank" rel="noopener">Linux signal list</a><br><a href="https://linux.die.net/man/7/signal" target="_blank" rel="noopener">signal(7) man page</a></p>
+<h3 id="crashwalk"><a href="#crashwalk" class="headerlink" title="crashwalk"></a>crashwalk</h3><p><code>crashwalk</code> gets you more detailed crashes classification results, and the specific causes of crashes.<br>It is based on <code>exploitable</code> plugin of gdb, install on ubuntu:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb golang</span><br><span class="line">$ mkdir ~/tools</span><br><span class="line">$ <span class="built_in">cd</span> ~/tools</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/jfoote/exploitable.git</span><br><span class="line">$ mkdir go</span><br><span class="line">$ <span class="built_in">export</span> GOPATH=~/tools/go</span><br><span class="line">$ <span class="built_in">export</span> CW_EXPLOITABLE=~/tools/exploitable/exploitable/exploitable.py</span><br><span class="line">$ go get -u -v github.com/bnagy/crashwalk/cmd/...</span><br></pre></td></tr></table></figure></p>
+<p>Follow the lead, use correct path. You will find three binary files in $GOPATH.</p>
+<p><code>crashwalk</code> has <code>Manual Mode</code> and <code>AFL Mode</code>.<br><code>Manual Mode</code> reads crashes/README.txt to get command.<br><code>AFL Mode</code> set parameters manually.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Manual Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir/fuzzer1/crashes/ -match id -- /path/to/target @@</span><br><span class="line"></span><br><span class="line"><span class="comment">#AFL Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir -afl</span><br></pre></td></tr></table></figure></p>
+<p><img src="/imghost/aafr/6.jpg" alt="crashwalk e.g."></p>
+<h3 id="afl-collect"><a href="#afl-collect" class="headerlink" title="afl-collect"></a>afl-collect</h3><p>One of <a href="https://gitlab.com/rc0r/afl-utils" target="_blank" rel="noopener">afl-utils</a> suite, also based on <code>exploitable</code> plugin to check availability of crash.<br>It also delete useless or duplicated crash sample<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usage: afl-collect [-d DATABASE] [-e|-g GDB_EXPL_SCRIPT_FILE] [-f LIST_FILENAME]</span><br><span class="line"> [-h] [-j THREADS] [-m] [-r [-rt TIMEOUT]] [-rr] sync_dir collection_dir -- target_cmd</span><br><span class="line"></span><br><span class="line">the following arguments are required: </span><br><span class="line">sync_dir, collection_dir, target_cmd</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ afl-collect -j 8 -d crashes.db -e gdb_script ./afl_sync_dir ./collection_dir -- /path/to/target --target-opts</span><br></pre></td></tr></table></figure></p>
+<p><img src="/imghost/aafr/7.jpg" alt="afl-collect e.g."></p>
+<h2 id="Code-Coverage"><a href="#Code-Coverage" class="headerlink" title="Code Coverage"></a>Code Coverage</h2><p>A method to measure coverage of program, like whether a line of source code has been executed, or whether an instruction in the assembly code has been executed.</p>
+<p>There’re three levels of coverage detections: function, basic-block, edge.</p>
+<h3 id="Basic-Block"><a href="#Basic-Block" class="headerlink" title="Basic Block"></a>Basic Block</h3><p>A set of sequentially executed instructions.<br>Once the first instruction is executed, following instructions must be executed.</p>
+<p>That means, one basic block contains only one entry and only on exit.</p>
+<p>For example:<br><img src="/imghost/aafr/8.jpg" alt="code pic"></p>
+<p>IDA can also divide it into four blocks:<br><img src="/imghost/aafr/9.jpg" alt="IDA view"></p>
+<h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><p>Edge is used to represent the jump between basic blocks.<br>Just like the lines between every blocks in IDA view.</p>
+<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>In the implementation of AFL, a tuple(branch_src, branch_dst) is used to record the information of the current basic block + the previous basic block, to obtain the target execution flow and code coverage.</p>
+<h3 id="Do-Caculation"><a href="#Do-Caculation" class="headerlink" title="Do Caculation"></a>Do Caculation</h3><p><code>GCOV</code> is released with gcc, with same principle of instrumentation by afl-gcc, it generates code coverage info after instrumented by gcc.</p>
+<p><code>LCOV</code> is another tool and also the graph front-end of <code>GCOV</code>.</p>
+<p><code>afl-cov</code> helps call two tools above to process result from afl-fuzz.</p>
+<h4 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h4><p>We mainly use <code>afl-cov</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install afl-cov</span><br><span class="line"><span class="comment"># this version seemes not supporting branch coverage statistics</span></span><br><span class="line"></span><br><span class="line">$ apt-get install lcov</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/mrash/afl-cov.git</span><br><span class="line">$ ./afl-cov/afl-cov -V</span><br><span class="line">$ afl-cov-0.6.2</span><br><span class="line"><span class="comment"># this way you get latest version</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Rebuild"><a href="#Rebuild" class="headerlink" title="Rebuild"></a>Rebuild</h4><p>First use <code>gcov</code> to rebuild source.<br>Adding <code>-fprofile-arcs</code> and <code>ftest-coverage</code> to <code>CFLAGS</code>.<br>Better reassign new dir by <code>--prefix</code> so as not to cover files <code>afl-gcc</code> instrumented.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ make clean </span><br><span class="line">$ ./configure --prefix=/another/absolute/path CC=<span class="string">"gcc"</span> CXX=<span class="string">"g++"</span> CFLAGS=<span class="string">"-fprofile-arcs -ftest-coverage"</span> --<span class="built_in">disable</span>-shared</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure></p>
+<h4 id="Calculate"><a href="#Calculate" class="headerlink" title="Calculate"></a>Calculate</h4><p>Then we execute <code>afl-cov</code>.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example</span></span><br><span class="line">$ afl-cov -d /path/to/syncdir --live --<span class="built_in">enable</span>-branch-coverage -c . -e <span class="string">"cat AFL_FILE | LD_LIBRARY_PATH=/path/to/lib /path/to/target AFL_FILE"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># '-d' to assign afl-fuzz output dir</span></span><br><span class="line"><span class="comment"># '--live' used for one running fuzzer ( updating dir )</span></span><br><span class="line"><span class="comment"># '--enable-branch-coverage' used to enable edge coverage (branch coverage) statistics</span></span><br><span class="line"><span class="comment"># '-c' to assign source code dir</span></span><br><span class="line"><span class="comment"># '-e' to set running command, and in this parameter</span></span><br><span class="line"><span class="comment"># "AFL_FILE" functions same as "@@" for afl-fuzz</span></span><br><span class="line"><span class="comment"># "LD_LIBRARY_PATH" load specific lib</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/imghost/aafr/10.jpg" alt="afl-cov e.g."></p>
+<p>Finally we get a code coverage report in html.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Check-Fuzzer-Status"><span class="toc-number">1.</span> <span class="toc-text">Check Fuzzer Status</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#afl-whatsup"><span class="toc-number">1.1.</span> <span class="toc-text">afl-whatsup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#afl-gotcpu"><span class="toc-number">1.2.</span> <span class="toc-text">afl-gotcpu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#afl-stat"><span class="toc-number">1.3.</span> <span class="toc-text">afl-stat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#afl-plot"><span class="toc-number">1.4.</span> <span class="toc-text">afl-plot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#When-to-Stop"><span class="toc-number">2.</span> <span class="toc-text">When to Stop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output-Result"><span class="toc-number">3.</span> <span class="toc-text">Output Result</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Process-Result"><span class="toc-number">4.</span> <span class="toc-text">Process Result</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Crash-Exploration-Mode"><span class="toc-number">4.1.</span> <span class="toc-text">Crash Exploration Mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#triage-crashes"><span class="toc-number">4.2.</span> <span class="toc-text">triage_crashes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crashwalk"><span class="toc-number">4.3.</span> <span class="toc-text">crashwalk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#afl-collect"><span class="toc-number">4.4.</span> <span class="toc-text">afl-collect</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Coverage"><span class="toc-number">5.</span> <span class="toc-text">Code Coverage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Block"><span class="toc-number">5.1.</span> <span class="toc-text">Basic Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Edge"><span class="toc-number">5.2.</span> <span class="toc-text">Edge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tuple"><span class="toc-number">5.3.</span> <span class="toc-text">Tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-Caculation"><span class="toc-number">5.4.</span> <span class="toc-text">Do Caculation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Installation"><span class="toc-number">5.4.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Rebuild"><span class="toc-number">5.4.2.</span> <span class="toc-text">Rebuild</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Calculate"><span class="toc-number">5.4.3.</span> <span class="toc-text">Calculate</span></a></li></ol></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

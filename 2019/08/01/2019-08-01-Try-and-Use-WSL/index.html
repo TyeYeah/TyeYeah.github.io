@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Try and Use WSL - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,After a medium period of working &amp;amp; studying on Deepin Linux, I experienced the force of deepin ,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Try and Use WSL</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Try and Use WSL</h1>
+        <div class="stuff">
+            <span>August 01, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/docker/">docker</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/hyper-v/">hyper-v</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/note/">note</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/windows/">windows</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/wsl/">wsl</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
+<p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a hard way.</p>
+<h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares(ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
+<p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a href="https://docs.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener">Official documents</a></p>
+<h3 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h3><p>WSL is a collection of components that enables native Linux ELF64 binaries to run on Windows. It contains both user mode and kernel mode components. It is primarily comprised of:</p>
+<ul>
+<li>User mode session manager service that handles the Linux instance life cycle</li>
+<li>Pico provider drivers (lxss.sys, lxcore.sys) that emulate a Linux kernel by translating Linux syscalls</li>
+<li>Pico processes that host the unmodified user mode Linux (e.g. /bin/bash)</li>
+</ul>
+<p>It is the space between the user mode Linux binaries and the Windows kernel components where the magic happens. By placing unmodified Linux binaries in Pico processes we enable Linux system calls to be directed into the Windows kernel. The lxss.sys and lxcore.sys drivers translate the Linux system calls into NT APIs and emulate the Linux kernel.</p>
+<p><img src="/imghost/tuw/2.jpg" alt="pic 2 Architecture"></p>
+<p>Now we can see the subsystem does not contain a real Linux Kernel, but it can satisfied lots of users.</p>
+<p>Pros:</p>
+<ul>
+<li>fast bootup, much faster than VirtualMachine in VM and Vbox</li>
+<li>almost perfect Linux Architecture simulation, and ELF support which means possible and convenient for running &amp; debugging ELF files when using Windows</li>
+<li>wsl’s linux file system can be directly browsed and accessed on Windows, though it’s not recommended, may be harmful. All files in rootfs directory :)</li>
+<li>same network configuration as host Windows, use 127.0.0.1 to access files on wsl server</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>no raw_socket using, which leads to many network-softwares(using socket) invalid</li>
+<li>some functions like systemd are also invalid</li>
+</ul>
+<p>Outlook:from official<br>What will happen to WSL 1? Will it be abandoned?<br>We currently have no plans to deprecate WSL 1. You can run WSL 1 and WSL 2 distros side by side, and can upgrade and downgrade any distro at any time. Adding WSL 2 as a new architecture presents a better platform for the WSL team to deliver features that make WSL an amazing way to run a Linux environment in Windows.</p>
+<h3 id="WSL2"><a href="#WSL2" class="headerlink" title="WSL2"></a>WSL2</h3><p>WSL 2 is a new version of the architecture that powers the Windows Subsystem for Linux to run ELF64 Linux binaries on Windows. This new architecture changes how these Linux binaries interact with Windows and your computer’s hardware, but still provides the same user experience as in WSL 1 (the current widely available version). Individual Linux distros can be run either as a WSL 1 distro, or as a WSL 2 distro, can be upgraded or downgraded at any time, and you can run WSL 1 and WSL 2 distros side by side. WSL 2 uses an entirely new architecture that uses a real Linux kernel.</p>
+<p><a href="https://devblogs.microsoft.com/commandline/announcing-wsl-2/" target="_blank" rel="noopener">Announcing WSL 2</a></p>
+<p><a href="https://devblogs.microsoft.com/commandline/wsl-2-is-now-available-in-windows-insiders/" target="_blank" rel="noopener">WSL 2 is now available in Windows Insiders</a></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-index" target="_blank" rel="noopener">Official documents</a></p>
+<p>WSL2 requires Insider Preview. And this time, after reading all above, we know WSL2 is really based on Hyper-v.</p>
+<p>Pros:</p>
+<ul>
+<li>A more realistic Linux with systemd now and raw_socket allowed(maybe all this thanks to Hyper-v)</li>
+<li>High levels of integration between Windows and Linux, extremely fast boot times, small resource footprint, and best of all will require no VM configuration or management</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Hyper-v means no other VMs except VirtualBox for 32 bits vm images as is said(test 64 bits vm images and NO)</li>
+<li>NAT network mode cannot be changed now, which means cut the network setting part of this “faster Hyper-v”, and somehow it becomes bit of inconvenient</li>
+<li>no direct browse or access to linux file system, because original roofs dir is replaced by the vm format file : ext4.vhdx. Still can use explorer.exe to open it</li>
+</ul>
+<p>Outlook:<br>The networking applications part and hardware support will be improved.Let’s look forward to it.<br>But WSL seems to be mor useful than WSL2</p>
+<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without VBoxGuestAdditions or VMwareTools, VM in Hyper-v is like ppt playing.</p>
+<p>Actually No.1 rival/<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
+<p>So my answer is NO, and be careful to try it cz after installing and uninstalling, VMs sometimes still disabled.</p>
+<p>Uninstall Solutions:</p>
+<ol>
+<li><p>When canceled the check mark, sometimes VMs not work yet</p>
+</li>
+<li><p>Then open cmd as Administrator and input<code>bcdedit /set hypervisorlaunchtype off</code> and then check VMs</p>
+</li>
+<li><p>The ultimate solution is this script in cmd</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mountvol X: /s</span><br><span class="line">copy %WINDIR%\System32\SecConfig.efi X:\EFI\Microsoft\Boot\SecConfig.efi /Y</span><br><span class="line">bcdedit /create &#123;<span class="number">0</span>cb3b571-<span class="number">2</span>f2e-<span class="number">4343</span>-a879-d86a476d7215&#125; /d <span class="string">"DebugTool"</span> /application osloader</span><br><span class="line">bcdedit /set &#123;<span class="number">0</span>cb3b571-<span class="number">2</span>f2e-<span class="number">4343</span>-a879-d86a476d7215&#125; path <span class="string">"\EFI\Microsoft\Boot\SecConfig.efi"</span></span><br><span class="line">bcdedit /set &#123;bootmgr&#125; bootsequence &#123;<span class="number">0</span>cb3b571-<span class="number">2</span>f2e-<span class="number">4343</span>-a879-d86a476d7215&#125;</span><br><span class="line">bcdedit /set &#123;<span class="number">0</span>cb3b571-<span class="number">2</span>f2e-<span class="number">4343</span>-a879-d86a476d7215&#125; loadoptions DISABLE-LSA-ISO,DISABLE-VBS</span><br><span class="line">bcdedit /set &#123;<span class="number">0</span>cb3b571-<span class="number">2</span>f2e-<span class="number">4343</span>-a879-d86a476d7215&#125; device partition=X:</span><br><span class="line">bcdedit /set hypervisorlaunchtype off</span><br><span class="line">mountvol X: /d</span><br></pre></td></tr></table></figure>
+<p>After this you will find another EFI boot selection added. Actually both new and the old one is definitely ok to run VMs, so feel free to use EasyBCD to delete extra EFI boot selection.</p>
+<h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated  system(seriously???) and few apps in it.</p>
+<p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own need.</p>
+<p>Consult <a href="https://docs.microsoft.com" target="_blank" rel="noopener">official documents</a> and <a href="https://devblogs.microsoft.com" target="_blank" rel="noopener">devblog</a> is always the right way to know and learn<br>For developers click <a href="https://developer.microsoft.com" target="_blank" rel="noopener">here</a>, and Windows API in <a href="https://msdn.microsoft.com" target="_blank" rel="noopener">here</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Subsystem-for-Linux"><span class="toc-number">1.</span> <span class="toc-text">Windows Subsystem for Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL"><span class="toc-number">1.1.</span> <span class="toc-text">WSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL2"><span class="toc-number">1.2.</span> <span class="toc-text">WSL2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyper-V"><span class="toc-number">2.</span> <span class="toc-text">Hyper-V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Sandbox"><span class="toc-number">3.</span> <span class="toc-text">Windows Sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

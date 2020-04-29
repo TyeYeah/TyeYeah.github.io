@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wine Tips - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Tips for dealing wine font or encoding problems.
+Solve Garbled TextInterfaceAfter installation of W,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Wine Tips</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Wine Tips</h1>
+        <div class="stuff">
+            <span>February 18, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/note/">note</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/wine/">wine</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Tips for dealing wine font or encoding problems.</p>
+<h2 id="Solve-Garbled-Text"><a href="#Solve-Garbled-Text" class="headerlink" title="Solve Garbled Text"></a>Solve Garbled Text</h2><h3 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h3><p>After installation of Wine, the execution and configuration interfaces may be garbled.<br>You need to add the missing fonts.</p>
+<p>Copy all font files under <code>C:/WINDOWS/Fonts/</code> on windows to <code>/usr/share/wine/fonts/</code> on Linux, then this can be solved. Get a copy to <code>/usr/share/fonts/</code> if it doesn’t work, and:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkfontscale <span class="comment"># generate fonts info</span></span><br><span class="line">$ sudo mkfontdir <span class="comment"># generate fonts directory</span></span><br><span class="line">$ sudo <span class="built_in">fc</span>-cache -fv <span class="comment"># refresh system fonts cache</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Software"><a href="#Software" class="headerlink" title="Software"></a>Software</h3><p>If the software you run appears grabled text, you also need to copy windows fonts, to <code>~/.wine/drive_c/windows</code>.</p>
+<p>Create a file named <code>xxx.reg</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">REGEDIT4</span><br><span class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]</span><br><span class="line">&quot;Arial&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Arial CE,238&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Arial CYR,204&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Arial Greek,161&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Arial TUR,162&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Courier New&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Courier New CE,238&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Courier New CYR,204&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Courier New Greek,161&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Courier New TUR,162&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;FixedSys&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Helv&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Helvetica&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;MS Sans Serif&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;MS Shell Dlg&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;MS Shell Dlg 2&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;System&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Tahoma&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Times&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Times New Roman CE,238&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Times New Roman CYR,204&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Times New Roman Greek,161&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Times New Roman TUR,162&quot;=&quot;simsun&quot;</span><br><span class="line">&quot;Tms Rmn&quot;=&quot;simsun&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Then run<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ regedit xxx.reg <span class="comment"># or 'wine regedit xxx.reg'</span></span><br></pre></td></tr></table></figure></p>
+<p>It’s from blog of others and I didn’t get text rightly displayed, so I tried this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">REGEDIT4</span><br><span class="line"> </span><br><span class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]</span><br><span class="line">&quot;Lucida Sans Unicode&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;Microsoft Sans Serif&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;MS Sans Serif&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;Tahoma&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;Tahoma Bold&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;SimSun&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;Arial&quot;=&quot;wqy-microhei.ttc&quot;</span><br><span class="line">&quot;Arial Black&quot;=&quot;wqy-microhei.ttc&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Succeeded. The edition of registry font link works well.</p>
+<h2 id="Winecfg"><a href="#Winecfg" class="headerlink" title="Winecfg"></a>Winecfg</h2><p>Later…</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Solve-Garbled-Text"><span class="toc-number">1.</span> <span class="toc-text">Solve Garbled Text</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Interface"><span class="toc-number">1.1.</span> <span class="toc-text">Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Software"><span class="toc-number">1.2.</span> <span class="toc-text">Software</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Winecfg"><span class="toc-number">2.</span> <span class="toc-text">Winecfg</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

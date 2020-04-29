@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Router PWN Preparation - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,It’s a world with the internet of things, and devices like routers is essential for both developers,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Router PWN Preparation</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Router PWN Preparation</h1>
+        <div class="stuff">
+            <span>January 11, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/arm/">arm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mips/">mips</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/qemu/">qemu</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/router/">router</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>It’s a world with the internet of things, and devices like routers is essential for both developers and researchers to study.  </p>
+<h1 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment Setup"></a>Environment Setup</h1><p>To analyse firmwares or apps from different architectures on your Linux PC, you have to use emulator to run them.<br>Here I introduce QEMU to you.</p>
+<h2 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h2><p>QEMU is a generic and open source machine emulator and virtualizer.<br>QEMU has two operating modes:</p>
+<ul>
+<li><p>Full system emulation<br>In this mode, QEMU emulates a full system (for example a PC), including a processor and various peripherals. It can be used to launch different Operating Systems without rebooting the PC or to debug system code.</p>
+</li>
+<li><p>User mode emulation (Linux host only)<br>In this mode, QEMU can launch Linux processes compiled for one CPU on another CPU. For example, it can be used to launch Wine or to ease cross-compilation and cross-debugging. </p>
+</li>
+</ul>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Full system emulation:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-system <span class="comment"># install many qemu's platform emulators</span></span><br></pre></td></tr></table></figure></p>
+<p>User mode emulation:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-user <span class="comment"># to run apps with dynamic linked libs</span></span><br><span class="line">$ apt install qemu-user-binfmt <span class="comment"># installed along with qemu-user</span></span><br><span class="line">$ apt install qemu-user-static <span class="comment"># to run apps with static linked libs</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Create-Virtual-Disk"><a href="#Create-Virtual-Disk" class="headerlink" title="Create Virtual Disk"></a>Create Virtual Disk</h3><p>It prepares for installation of virtual machine.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-img create -f qcow2 OS.img 20G</span><br><span class="line"><span class="comment"># 'create' means to create vm disk</span></span><br><span class="line"><span class="comment"># '-f qcow2' assigns its format. vmdk and qcow are ok.</span></span><br><span class="line"><span class="comment"># 'OS.img' names the vm disk</span></span><br><span class="line"><span class="comment"># '20G' means the size</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Install-Run-Virtual-Machine"><a href="#Install-Run-Virtual-Machine" class="headerlink" title="Install/Run Virtual Machine"></a>Install/Run Virtual Machine</h3><p>To install virtual machine<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-x86_64 -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br><span class="line"><span class="comment"># 'qemu-system-xxx' depends on what platform you want to use</span></span><br><span class="line"><span class="comment"># '-boot d' means boot from cdrom</span></span><br><span class="line"><span class="comment"># '-cdrom ubuntu-xxx' assigns the image to install</span></span><br><span class="line"><span class="comment"># '-hda OS.img' assigns the vm disk to use</span></span><br><span class="line"><span class="comment"># '-m 2048' means using 2048MB memory</span></span><br><span class="line"><span class="comment"># '-bios OVMF.fd' assigns bios(default bios is seabios)</span></span><br></pre></td></tr></table></figure></p>
+<p>To accelerate(use kvm)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-kvm </span><br><span class="line"></span><br><span class="line">$ kvm -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br></pre></td></tr></table></figure></p>
+<p>To run virtual machine<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-mips -M malta -nographic -no-reboot -kernel <span class="string">"zImage-mips"</span> -hda <span class="string">"image-mips.ext2"</span> -append <span class="string">"root=/dev/hda rw init=/usr/sbin/init.sh panic=1 PATH=/usr/bin console=ttyS0"</span> -net nic -net tap -drive file=/tmp/share.img</span><br><span class="line"><span class="comment"># '-M malta' assigns developing board/platform</span></span><br><span class="line"><span class="comment"># '-kernel "zImage-mips"' assigns kernel</span></span><br><span class="line"><span class="comment"># '-append "xxx"' gives boot arguments of kernel</span></span><br><span class="line"><span class="comment"># '-net nic -net tap' gives network configuration</span></span><br><span class="line"><span class="comment"># '-drive file=/tmp/share.img' define a new drive.</span></span><br></pre></td></tr></table></figure></p>
+<p>another example:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-mipsel -kernel openwrt-malta-le-vmlinux-initramfs.elf -M malta  -drive file=/tmp/share.img -net nic -net tap -nographic</span><br></pre></td></tr></table></figure></p>
+<p>another one:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-mips -M malta -kernel vmlinux-2.6.32-5-4kc-malta -hda debian_squeeze_mips_standard.qcow2 -append <span class="string">"root=/dev/sda1 console=tty0"</span> -net nic -net tap -nographic</span><br></pre></td></tr></table></figure></p>
+<h2 id="Network-Configuration"><a href="#Network-Configuration" class="headerlink" title="Network Configuration"></a>Network Configuration</h2><p>QEMU provides 4 network communication methods, which are:</p>
+<ol>
+<li>User mode stack: to implement a protocol stack in the QEMU process. Work like NAT server.</li>
+<li>Socket: Create a socket for a VLAN and connect multiple VLANs together.</li>
+<li>TAP / bridge: The most important communication method, we need to use this method if we want to apply QEMU virtual machine’s external communication.</li>
+<li>VDE: also used for connecting VLAN</li>
+</ol>
+<p>TAP mode works like VMWare’s network bridge.<br>Essentially implements network card virtually(not physically)</p>
+<h3 id="Software-Preparations"><a href="#Software-Preparations" class="headerlink" title="Software Preparations"></a>Software Preparations</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install bridge-utils        <span class="comment"># virtual network bridge utils</span></span><br><span class="line">$ apt-get install uml-utilities       <span class="comment"># UML（User-mode linux） utils</span></span><br></pre></td></tr></table></figure>
+<h3 id="Build-a-network-bridge"><a href="#Build-a-network-bridge" class="headerlink" title="Build a network bridge"></a>Build a network bridge</h3><p>At first your network is:<br><img src="/imghost/rpp/1.png" alt="original ifconfig result"><br>Build the bridge<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig yournetcard down           <span class="comment"># stop netcard interface</span></span><br><span class="line">$ brctl addbr br0                     <span class="comment"># add a netbridge br0</span></span><br><span class="line">$ brctl addif br0 yournetcard         <span class="comment"># add an interface in br0</span></span><br><span class="line">$ brctl stp br0 off                   <span class="comment"># spanning-tree-protocol can be closed</span></span><br><span class="line">$ brctl setfd br0 1                   <span class="comment"># set br0 forwarding delay</span></span><br><span class="line">$ brctl sethello br0 1                <span class="comment"># set br0 hello time</span></span><br><span class="line">$ ifconfig br0 0.0.0.0 promisc up     <span class="comment"># start br0 interface</span></span><br><span class="line">$ ifconfig yournetcard 0.0.0.0 promisc up    <span class="comment"># start netcard</span></span><br><span class="line">$ dhclient br0                        <span class="comment"># get br0 ip from dhcp server</span></span><br><span class="line">$ brctl show br0                      <span class="comment"># see br0 list</span></span><br><span class="line">$ brctl showstp br0                   <span class="comment"># see br0 interfaces</span></span><br></pre></td></tr></table></figure></p>
+<p>Type <code>ifconfig</code> to see result:<br><img src="/imghost/rpp/2.jpg" alt="ifconfig result 1"></p>
+<p>The brief picture of network(bridge and internet):<br><img src="/imghost/rpp/3.jpg" alt="bridge 1"></p>
+<h3 id="Create-a-TAP-device"><a href="#Create-a-TAP-device" class="headerlink" title="Create a TAP device"></a>Create a TAP device</h3><p>Create a TAP device to be an interface on the bridge, which QEMU can use<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tunctl -t tap0 -u root              <span class="comment"># create a tap0 interface, only accessed by root</span></span><br><span class="line">$ brctl addif br0 tap0                <span class="comment"># add tap0 to br0</span></span><br><span class="line">$ ifconfig tap0 0.0.0.0 promisc up    <span class="comment"># start tap0 interface</span></span><br><span class="line">$ brctl showstp br0                   <span class="comment"># show br0 interfaces</span></span><br></pre></td></tr></table></figure></p>
+<p>Type <code>ifconfig</code> to see result:<br><img src="/imghost/rpp/4.jpg" alt="ifconfig result 2"></p>
+<p>Now the picture of network(bridge and internet)<br><img src="/imghost/rpp/5.jpg" alt="bridge 2"></p>
+<p>Well, if other device or interface is needed…<br>Existence of more than 2 interfaces is permitted in the bridge:<br><img src="/imghost/rpp/6.jpg" alt="ifconfig result 3"></p>
+<h3 id="Connect-QEMU-to-tap0"><a href="#Connect-QEMU-to-tap0" class="headerlink" title="Connect QEMU to tap0"></a>Connect QEMU to tap0</h3><p>Now we just need to connect QEMU vm to tap0<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo qemu-system-mipsel -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_squeeze_mipsel_standard.qcow2 -append <span class="string">"root=/dev/sda1 console=tty0"</span> -nographic -net nic -net tap,ifname=tap0,script=no,downscript=no</span><br></pre></td></tr></table></figure></p>
+<p>Finally we get vm connected to internet</p>
+<p>But the problems are:</p>
+<ol>
+<li>sometimes, under special circumstances, QEMU cannot connect to internet. type <code>ifconfig</code> to check network configuration, and use <code>dhclient br0</code> to get dhcp ip again.</li>
+<li>All commands above used by <code>root</code>, so remember to add <code>sudo</code>.</li>
+<li>Once you reboot, all configs disappear. Write a script please.</li>
+</ol>
+<h3 id="Another-Method"><a href="#Another-Method" class="headerlink" title="Another Method"></a>Another Method</h3><p>Edit /etc/network/interfaces<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">auto lo </span><br><span class="line">iface lo inet loopback </span><br><span class="line"></span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0  inet manual </span><br><span class="line">up ifconfig eth0  0.0.0.0 up </span><br><span class="line"></span><br><span class="line">auto br0</span><br><span class="line">iface br0 inet dhcp </span><br><span class="line">bridge_ports eth0 </span><br><span class="line">bridge_stp off </span><br><span class="line">bridge_maxwait 1</span><br></pre></td></tr></table></figure></p>
+<p>Edit /etc/qemu-ifup<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh </span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Executing /etc/qemu-ifup"</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Bringing <span class="variable">$1</span> for bridged mode..."</span> </span><br><span class="line">sudo /sbin/ifconfig <span class="variable">$1</span> 0.0.0.0 promisc up </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Adding <span class="variable">$1</span> to br0..."</span> </span><br><span class="line">sudo /sbin/brctl addif br0 <span class="variable">$1</span> </span><br><span class="line">sleep 3</span><br></pre></td></tr></table></figure></p>
+<p>Then<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod a+x /etc/qemu-ifup</span><br></pre></td></tr></table></figure></p>
+<p>Restart network<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/networking restart</span><br></pre></td></tr></table></figure></p>
+<p>In this way, there is no need to next time you boot</p>
+<h2 id="MIPS-Environment"><a href="#MIPS-Environment" class="headerlink" title="MIPS Environment"></a>MIPS Environment</h2><p>MIPS (an acronym for Microprocessor without Interlocked Pipeline Stages)<br>A project at Stanford University intended to simplify processor design by eliminating hardware interlocks between the five pipeline stages. </p>
+<ul>
+<li><p>To debug MIPS, install</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb-multiarch <span class="comment"># same usage as gdb</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A good gdb plugin is recommended:<br>  <code>https://github.com/pwndbg/pwndbg</code></p>
+</li>
+<li>A router running environment:<br>  <code>https://github.com/firmadyne/firmadyne</code></li>
+<li>A useful plugin for IDA:<br>  <code>https://github.com/devttys0/ida/tree/master/plugins/mipsrop</code></li>
+<li>And the full binwalk:<br>  <code>https://github.com/ReFirmLabs/binwalk</code></li>
+</ul>
+<h2 id="ARM-Environment"><a href="#ARM-Environment" class="headerlink" title="ARM Environment"></a>ARM Environment</h2><p>ARM was founded as Advanced RISC Machines in 1990 as RISC is the main CPU design strategy implemented in its processors.</p>
+<h3 id="install-libs"><a href="#install-libs" class="headerlink" title="install libs"></a>install libs</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt install -y gcc-arm-linux-gnueabi        <span class="comment">#32-bit</span></span><br><span class="line">$ apt install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu      <span class="comment">#64-bit</span></span><br></pre></td></tr></table></figure>
+<p>Here we have:<br>64-bit:<br><code>gcc-aarch64-linux-gnu</code>    <code>g++-aarch64-linux-gnu</code><br>32-bit:<br><code>gcc-arm-linux-gnueabi</code>    <code>gcc-arm-linux-gnueabihf</code><br><code>g++-arm-linux-gnueabi</code>    <code>g++-arm-linux-gnueabihf</code> </p>
+<ul>
+<li><p>Let’s distinguish the two:<br><code>gcc-arm-linux-gnueabi</code> – The GNU C compiler for <code>armel</code> architecture<br><code>gcc-arm-linux-gnueabihf</code> – The GNU C compiler for <code>armhf</code> architecture<br>The only difference is, they means differnet value of ‘-mfloat-abi’ option of gcc</p>
+<p>  There are 3 values to choose for ‘-mfloat-abi’:</p>
+<ol>
+<li>soft: do float caculation without <code>fpu</code>(floating-point unit), but using software method.</li>
+<li>softfp: default method that <code>armel</code> arch uses (default value <code>gcc-arm-linux-gnueabi</code> uses), which means using <code>fpu</code> to calculate, but save arguments in general registors.</li>
+<li>hard: default method that <code>armhf</code> arch uses (default value <code>gcc-arm-linux-gnueabihf</code> uses), which means using <code>fpu</code> to calculate, and save arguments in <code>fpu</code> registors.</li>
+</ol>
+</li>
+<li><p>Let’s distinguish <code>gcc</code> and <code>g++</code><br>GCC: GNU Compiler Collection, Referrers to all the different languages that are supported by the GNU compiler.<br><code>gcc</code>: GNU C Compiler<br><code>g++</code>: GNU C++ Compiler</p>
+<p>  The main differences:</p>
+<ol>
+<li><code>gcc</code> will compile: .c/.cpp files as C and C++ respectively.</li>
+<li><code>g++</code> will compile: .c/.cpp files but they will all be treated as C++ files.<br>Also if you use <code>g++</code> to link the object files it automatically links in the std C++ libraries (<code>gcc</code> does not do this).</li>
+<li><code>gcc</code> compiling C files has less predefined macros.</li>
+<li><code>gcc</code> compiling .cpp and g++ compiling *.c/.cpp files has a few extra macros.</li>
+</ol>
+</li>
+</ul>
+<h3 id="Run-Apps"><a href="#Run-Apps" class="headerlink" title="Run Apps"></a>Run Apps</h3><ul>
+<li><p>run apps with dynamic libs</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-arm -L /usr/arm-linux-gnueabi ./filename       <span class="comment">#32-bit</span></span><br><span class="line">$ qemu-aarch64 -L /usr/aarch64-linux-gnu ./filename   <span class="comment">#64-bit</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install gdb</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>debug 32-bit apps</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># term window 1</span></span><br><span class="line">$ qemu-arm -g 1234 -L /usr/arm-linux-gnueabi ./file</span><br><span class="line"><span class="comment"># term window 2</span></span><br><span class="line">$ gdb-multiarch ./file</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>debug 64-bit apps</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># term window 1</span></span><br><span class="line">$ qemu-aarch64 -g 1234 -L /usr/aarch64-linux-gnu ./file</span><br><span class="line"><span class="comment"># term window 2</span></span><br><span class="line">$ gdb-multiarch ./file</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h1><h2 id="CISC-and-RISC"><a href="#CISC-and-RISC" class="headerlink" title="CISC and RISC"></a>CISC and RISC</h2><p>There are two main types of computer architectures that will be covered in this project: Complex Instruction Set Computing (<code>CISC</code>) and Reduced Instruction Set Computing (<code>RISC</code>).<br>An example of <code>CISC</code> is the <code>x86</code> architecture. Examples of <code>RISC</code> are the <code>ARM</code>, the <code>MIPS</code>, and the <code>PowerPC</code> architectures.<br>The differences between <code>CISC</code> and <code>RISC</code> is their  behaviors in how they execute instructions. </p>
+<h3 id="CISC"><a href="#CISC" class="headerlink" title="CISC"></a>CISC</h3><p>The <code>CISC</code> architecture aims to complete a task in as few assembly instructions as possible. This is done with an emphasis on building rich instruction sets with an emphasis on complex hardware.<br>The hardware in a <code>CISC</code> system must have the ability to interpret several series of operations at a given time.<br>The <code>CISC</code> architecture uses microcode,which is the interpreter between the hardware of a computer and the architectural level of a computer.<br>Characteristics of the <code>CISC</code> instruction set include:</p>
+<ul>
+<li>2-operand format: instructions have a source and destination</li>
+<li>Multiple addressing modes for memory</li>
+<li>Instructions that take multiple clock cycles to execute</li>
+</ul>
+<p>An example of a <code>CISC</code> instruction would be one that performs multiple jobs at once. There could be an instruction called <code>MULT</code> that will load two values into registers, multiply them, and then store the result in another register.</p>
+<p>There  are drawbacks  to  <code>CISC</code>  as  well.<br>These  include  the  increased  complexity  of  an instruction  set, as each  new  chip  hardware  generation  must  maintain  the  same  properties  of  the previous generation.<br>Since <code>CISC</code> attempts to execute code in as few instructions as possible, the compensation is that the instructions will take more clock cycles to execute.<br>The complexity of <code>CISC</code> can be shown in the flow diagram below. </p>
+<p><img src="/imghost/rpp/7.png" alt="CISC flow graph"></p>
+<p><code>CISC</code> starts with the machine instructions, converts them to microcode, then converts to microinstructions, which is then executed.</p>
+<h3 id="RISC"><a href="#RISC" class="headerlink" title="RISC"></a>RISC</h3><p>The <code>RISC</code> instruction set focuses on using more  simple instructions that can each be executed in just one clock cycle.<br>From the <code>CISC</code> example shown above, the <code>RISC</code> equivalent would split up the <code>MULT</code> instruction into  three different instructions: <code>LOAD</code>, <code>MULT</code>, and <code>STORE</code>.<br>The <code>RISC</code> instruction set is more emphasized on software. Separating commands into multiple instructions allows for pipelining and more efficient use of hardware.<br>Characteristics of the <code>RISC</code> instruction set include:</p>
+<ul>
+<li>More optimized register usage with 32 or more registers</li>
+<li>Simplified compiler design by using general purpose registers</li>
+<li>Use registers instead of the stack to pass arguments and hold variables</li>
+<li>Reduced number of instructions (compared with <code>CISC</code>)</li>
+</ul>
+<p>The main drawback to <code>RISC</code> is increased instruction size from having more instructions.<br>Since <code>RISC</code> processors depend on compilers to explicitly emit each instruction, the compilers will determine the performance of the program.<br>The flow diagram of <code>RISC</code> is shown below, which is much less complex than <code>CISC</code>.</p>
+<p><img src="/imghost/rpp/8.png" alt="RISC flow graph"></p>
+<p>The machine instruction is executed immediately. There are no conversions that need to be made.</p>
+<h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p>This section will give a brief overview on how to interpret <code>x86</code> assembly code.<br>The <code>x86</code> architecture has eight general purpose registers, each 32-bits in size which can be seen below</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EAX –Extended Accumulator Register</span><br><span class="line">EBX –Extended Base Register</span><br><span class="line">ECD –Extended Counter Register</span><br><span class="line">EDX –Extended Data Register</span><br><span class="line">ESI –Extended Source Index</span><br><span class="line">EDI –Extended Destination index</span><br><span class="line">EBP –Extended Base Pointer</span><br><span class="line">ESP –Extended Stack Pointer</span><br></pre></td></tr></table></figure>
+<p>The <code>x86</code> architecture uses  the  stack  as  the  part  of  memory  to  store  local  variables  and function arguments.<br>The stack has a Last In First Out (LIFO) structure. The <code>ESP</code> and <code>EBP</code> registers are associated with the stack, where the <code>ESP</code> (stack pointer) always points to the top of the stack.<br>The <code>EBP</code> (base pointer) is the reference on the stack that never changes. The <code>ESP</code> register is the pointer to the top of the stack when the function is first called. </p>
+<p>Arithmetic  operations  follow  the  same  general  syntax.<br>For  addition  and  subtraction, the syntax is <code>ADD/SUB dest, src</code>. Where <code>ADD/SUB</code> is the operation and <code>dest</code> is the destination register and <code>src</code> is the source register.<br>Example instructions are shown below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add eax, 7</span><br><span class="line">sub eax, 4</span><br></pre></td></tr></table></figure></p>
+<p>There are three possible ways to perform multiplication.<br>There is multiplication of </p>
+<ul>
+<li>just the <code>eax</code> register with a value,</li>
+<li>two values stored into a register</li>
+<li>a register with a value stored into that same register. </li>
+</ul>
+<p>The first way only has 1 argument. This means that the <code>eax</code> register is taken and multiplied by that value.<br>The second way shows that the multiplication of the two end arguments are stored  into  the first  argument  register.<br>The  last  way  multiplies  the  value  in  the  first  argument register and the value in the second argument and stores the result in the first argument register.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mul 5</span><br><span class="line">mul edx, 3, 6</span><br><span class="line">mul ecx, 8</span><br></pre></td></tr></table></figure></p>
+<p>For division the instructions are split up into multiple steps using the <code>eax</code> and <code>ecx</code> register.<br>The <code>eax</code> register stores the dividend while the <code>ecx</code> register stores the divisor.<br>The resulting answer is stored in <code>eax</code> with the remainder in <code>edx</code>.<br>In following codes, the first line stores 16 in register <code>eax</code>. The second line stores 5 in <code>ecx</code>. The last instruction divides 16 by 5. It then stores the result, 3, in <code>eax</code>. The remainder, 1, is stored in <code>edx</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax, 16</span><br><span class="line">mov ecx, 5</span><br><span class="line">div ecx</span><br></pre></td></tr></table></figure></p>
+<p>Branching is an important aspect to understand in any assembly language. <code>x86</code> uses jumps to denote branches. A few jump commands are shown below.<br>These command include a jump if values are equal to each other, not equal to each other, or greater than or less than zero.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JMP     jump</span><br><span class="line">JE      jump if equal to</span><br><span class="line">JLE     jumpif less than or equal to</span><br><span class="line">JNZ     jump if not zero</span><br><span class="line">JZ      jump if zero</span><br><span class="line">JBE     jump if below or equal to</span><br><span class="line">JGE     jump if greater than or equal to</span><br></pre></td></tr></table></figure></p>
+<h2 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h2><p><code>ARM</code> has 37 registers each of size 32-bits.<br>The general purpose registers  are labeled <code>r0</code>-<code>r12</code>.<br>There is a stack pointer (<code>SP</code>) register, link register (<code>LR</code>), and program counter (<code>PC</code>) register.<br><code>SP</code> is also known as <code>r13</code>, <code>LR</code> is known as <code>r14</code>, and <code>PC</code> is known as <code>r15</code>.</p>
+<p>The syntax for addition,subtraction, multiplication, and division operations are all similar for Intel syntax, with the operation coming first, the destination coming second, and the two values being operated on coming last.<br><code>AT&amp;T</code> syntax is the other way around,with the destination address coming last. However, these examples will all use the Intel syntax. Examples are shown below.</p>
+<p>The first line shows the addition of the value in register <code>r1</code> and 7 stored into the <code>r0</code> register. The second line subtracts 8 from the value in <code>r3</code> and stores the result in the <code>r0</code> register. The third line multiplies 5 and 6 and stores the answer in the <code>r0</code> register. The final line divides 12 by 4 and stores the result in the <code>r0</code> register.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ADD r0, r1, 7</span><br><span class="line">SUB r0, r3, 8</span><br><span class="line">MUL r0, 5, 6</span><br><span class="line">SDIV r0, 12, 4</span><br></pre></td></tr></table></figure></p>
+<p><code>ARM</code> uses branches to transition code. The syntax is similar to the jumping as shown in the <code>x86</code> architecture. Example <code>ARM</code> branch operations are shown below.<br>There are branches for if a value is greater than or equal to another value or less than or equal to another value.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BGE     Branch if greater than or equal to</span><br><span class="line">BLE     Branch if less than or equal to</span><br><span class="line">BLT     Branch if less than</span><br><span class="line">BNE     Branch if not equal to zero</span><br></pre></td></tr></table></figure></p>
+<h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><p>In  <code>MIPS</code>,  there  are  32  registers  of  size  32-bits  that  are  for  use  with  integer  and  logic instructions.<br>They are labeled <code>$0</code> - <code>$31</code>.<br>Table in the following shows this usage of these 32 registers. There are registers for a dedicated zero value, return values, temporary data, saved registers, etc.</p>
+<table>
+<thead>
+<tr>
+<th>Register Number</th>
+<th>Conventional Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>$zero</td>
+<td>Hard-wired to 0</td>
+</tr>
+<tr>
+<td>$1</td>
+<td>$at</td>
+<td>Reserved for pseudo-instructions</td>
+</tr>
+<tr>
+<td>$2 - $3</td>
+<td>$v0 - $v1</td>
+<td>Return values from functions</td>
+</tr>
+<tr>
+<td>$4 - $7</td>
+<td>$a0 - $a3</td>
+<td>Arguments to functions, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$8 - $15</td>
+<td>$t0 - $t7</td>
+<td>Temporary data, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$16 - $23</td>
+<td>$s0 - $s7</td>
+<td>Saved registers, preserved by subprograms</td>
+</tr>
+<tr>
+<td>$24 - $25</td>
+<td>$t8 - $t9</td>
+<td>More temporary registers, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$26 - $27</td>
+<td>$k0 - $k1</td>
+<td>Reserved for kernel</td>
+</tr>
+<tr>
+<td>$28</td>
+<td>$gp</td>
+<td>Global Area Pointer</td>
+</tr>
+<tr>
+<td>$29</td>
+<td>$sp</td>
+<td>Stack Pointer</td>
+</tr>
+<tr>
+<td>$30</td>
+<td>$fp</td>
+<td>Frame Pointer</td>
+</tr>
+<tr>
+<td>$31</td>
+<td>$ra</td>
+<td>Return Address</td>
+</tr>
+</tbody>
+</table>
+<p>Arithmetic syntax for <code>MIPS</code> is similar to that of <code>ARM</code>. Examples for addition, subtraction, multiplication,  and  division  are  shown below.<br>The  results  for  division  and  multiplication  are stored in the special register <code>$LO</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add $t0, $s1, $s2</span><br><span class="line">sub $s4, $s5, $s0</span><br><span class="line">mult $s3, %t4</span><br><span class="line">div $s2, $t0</span><br></pre></td></tr></table></figure></p>
+<p>In <code>MIPS</code>, there are branches to move around code, similar to <code>ARM</code>. Following part shows some common branch instructions. <code>MIPS</code> is different from the other referenced architectures in that it utilizes the branch delay slot.<br>The branch delay slot means that after a branch operation is reached, the  instruction  after  the  branch  will  be  executed  before  the  branch  itself  is  taken.</p>
+<p>The  <code>BEQ</code> instruction will compare two values. If the values are equal to each other, then the branch will be taken.<br>Similarly, <code>BNE</code> will compare two values and if the values are not equal, the branch will be taken.<br><code>BGEZ</code> will compare a register to 0. If the value is greater than zero, the branch will be taken.<br>The opposite is true for <code>BLTZ</code>, where the branch will be taken if the value being compared is less than zero.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BEQ     Branch if equalto</span><br><span class="line">BNE     Branch if not equal</span><br><span class="line">BGEZ    Branch if greater than or equal to zero</span><br><span class="line">BLTZ    Branch if less than zero</span><br></pre></td></tr></table></figure></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Environment-Setup"><span class="toc-number">1.</span> <span class="toc-text">Environment Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#QEMU"><span class="toc-number">1.1.</span> <span class="toc-text">QEMU</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">1.1.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Virtual-Disk"><span class="toc-number">1.1.2.</span> <span class="toc-text">Create Virtual Disk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Run-Virtual-Machine"><span class="toc-number">1.1.3.</span> <span class="toc-text">Install/Run Virtual Machine</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Configuration"><span class="toc-number">1.2.</span> <span class="toc-text">Network Configuration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Software-Preparations"><span class="toc-number">1.2.1.</span> <span class="toc-text">Software Preparations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-a-network-bridge"><span class="toc-number">1.2.2.</span> <span class="toc-text">Build a network bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-TAP-device"><span class="toc-number">1.2.3.</span> <span class="toc-text">Create a TAP device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connect-QEMU-to-tap0"><span class="toc-number">1.2.4.</span> <span class="toc-text">Connect QEMU to tap0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Another-Method"><span class="toc-number">1.2.5.</span> <span class="toc-text">Another Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MIPS-Environment"><span class="toc-number">1.3.</span> <span class="toc-text">MIPS Environment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM-Environment"><span class="toc-number">1.4.</span> <span class="toc-text">ARM Environment</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#install-libs"><span class="toc-number">1.4.1.</span> <span class="toc-text">install libs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-Apps"><span class="toc-number">1.4.2.</span> <span class="toc-text">Run Apps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-Knowledge"><span class="toc-number">2.</span> <span class="toc-text">Basic Knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CISC-and-RISC"><span class="toc-number">2.1.</span> <span class="toc-text">CISC and RISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CISC"><span class="toc-number">2.1.1.</span> <span class="toc-text">CISC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RISC"><span class="toc-number">2.1.2.</span> <span class="toc-text">RISC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x86"><span class="toc-number">2.2.</span> <span class="toc-text">x86</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM"><span class="toc-number">2.3.</span> <span class="toc-text">ARM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MIPS"><span class="toc-number">2.4.</span> <span class="toc-text">MIPS</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>First how-to-do note - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,This is the first note.
+First how-to-do note（mysql with docker、hexo）Due to my project in college, I,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">First how-to-do note</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">First how-to-do note</h1>
+        <div class="stuff">
+            <span>October 21, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/docker/">docker</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/hexo/">hexo</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mysql/">mysql</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/note/">note</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This is the first note.</p>
+<h2 id="First-how-to-do-note（mysql-with-docker、hexo）"><a href="#First-how-to-do-note（mysql-with-docker、hexo）" class="headerlink" title="First how-to-do note（mysql with docker、hexo）"></a>First how-to-do note（mysql with docker、hexo）</h2><p>Due to my project in college, I have to migrate the MYSQL 5.5 environment to MYSQL 8.0 version on my cloud host, but with a problem that I cant start my mysql.service correctly ,I decide to deploy mysql with docker and learning basic docker using skills in the meantime.<br>By the way I have forgotten how to build my GitHub Pages with hexo, and this time I will give it a summary.</p>
+<h2 id="Basic-Steps-for-MySQL-Server-Deployment-with-Docker"><a href="#Basic-Steps-for-MySQL-Server-Deployment-with-Docker" class="headerlink" title="Basic Steps for MySQL Server Deployment with Docker"></a>Basic Steps for MySQL Server Deployment with Docker</h2><h3 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h3><p>first you need to install docker and test it(using root on debian)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ apt update </span><br><span class="line">$ apt install docker <span class="comment"># "wget -qO- https://get.docker.com/ | sh", to get the newest </span></span><br><span class="line">$ apt install docker.io <span class="comment"># turns out to be useful, while the one above does not...</span></span><br><span class="line">$ systemctl start docker <span class="comment"># or service docker start, to start service</span></span><br><span class="line">$ docker run hello-world <span class="comment"># docker-style hello-world to check your install</span></span><br></pre></td></tr></table></figure></p>
+<p>some usages<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show help</span></span><br><span class="line">$ docker / docker xxx --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># show images on localhost </span></span><br><span class="line">$ docker images </span><br><span class="line"><span class="comment"># show running containers </span></span><br><span class="line">$ docker ps [-a]</span><br><span class="line"><span class="comment"># search images xxx</span></span><br><span class="line">$ docker search xxx</span><br><span class="line"><span class="comment"># get what you want</span></span><br><span class="line">$ docker pull xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you have a specific target like me, only one step to get the image</span></span><br><span class="line">$ docker run --name=mysqlxxx -p 33060:3306 -d mysql/mysql-server:tag</span><br><span class="line"><span class="comment"># '--name=mysqlxxx' means name it &amp; call it by name, rather than by calling its long random id string</span></span><br><span class="line"><span class="comment"># '-d' means run it in the background</span></span><br><span class="line"><span class="comment"># '-p 33060:3306' to bind local port 33060 with docker's 3306 port</span></span><br><span class="line"><span class="comment"># notice:tag should be replaced with 5.5/5.6/5.7/8.0/8.0.x(x-&gt;latest)...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile usage</span></span><br><span class="line"><span class="comment"># to build your own docker image</span></span><br><span class="line"><span class="comment"># please search how to write Dockerfile, then</span></span><br><span class="line">$ docker build -t xxx .</span><br><span class="line"><span class="comment"># '-t' to assign name of image </span></span><br><span class="line"><span class="comment"># the '.' at the tail indicate location of Dockerfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#to delete</span></span><br><span class="line">$ docker stop containerID</span><br><span class="line">$ docker rm containerID</span><br><span class="line">$ docker rmi imageID</span><br></pre></td></tr></table></figure></p>
+<h3 id="About-MYSQL"><a href="#About-MYSQL" class="headerlink" title="About MYSQL"></a>About MYSQL</h3><p>then we have a mysql docker, can be accessed by localhost:33060, but some configurations needed<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this step is to see original password </span></span><br><span class="line">$ docker logs mysqlxxx 2&gt;&amp;1 | grep GENERATED <span class="comment"># logs to see logs</span></span><br><span class="line"><span class="comment"># outputs like ↓</span></span><br><span class="line">GENERATED ROOT PASSWORD: Axegh3kAJyDLaRuBemecis&amp;EShOs</span><br><span class="line"></span><br><span class="line"><span class="comment"># login mysql first</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it mysqlxxx mysql -uroot -p </span><br><span class="line"><span class="comment"># '-it' usually combined to get interact with dockers, with commands follow</span></span><br><span class="line"><span class="comment"># 'mysql -uroot -p' is the example</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># change password</span></span><br><span class="line">mysql&gt; ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'password'</span>;</span><br><span class="line"><span class="comment"># or commands in docker shell</span></span><br><span class="line">$ docker -it mysqlxxx /bin/bash </span><br><span class="line">$ mysqladmin -uroot -p password newpassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># then open remote connection permit</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> host = <span class="string">'%'</span> <span class="built_in">where</span> user = <span class="string">'root'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Now we have a mysql docker which can be accessed remotely</p>
+<h2 id="GitHub-Pages-with-Hexo"><a href="#GitHub-Pages-with-Hexo" class="headerlink" title="GitHub Pages with Hexo"></a>GitHub Pages with Hexo</h2><h3 id="Using-Hexo"><a href="#Using-Hexo" class="headerlink" title="Using Hexo"></a>Using Hexo</h3><p>Node.js is required, and Git is required on Windows<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g <span class="comment"># use npm </span></span><br><span class="line">$ hexo init blogname <span class="comment"># initial blog</span></span><br><span class="line">$ <span class="built_in">cd</span> blogname <span class="comment"># enter blog directory</span></span><br><span class="line">$ hexo server <span class="comment"># start hexo as a server and you'll see hexo-style hello-world</span></span><br></pre></td></tr></table></figure></p>
+<p>directory structure<br>    .<br>    ├── .deploy<br>    ├── public  //to publish your html<br>    ├── scaffolds<br>    ├── scripts<br>    ├── source<br>    |   ├── _drafts<br>    |   └── _posts  //md files to be generated as html<br>    ├── themes  //themes’ conf is _config.yml in this dir<br>    ├── _config.yml  //blog’s configure<br>    └── package.json</p>
+<p>common usages<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new passagename <span class="comment"># create passagename.md in source/_posts/</span></span><br><span class="line">$ hexo new page pagename <span class="comment"># create pagename.html maybe</span></span><br><span class="line">$ hexo generate <span class="comment"># *.md are generated to be *.html</span></span><br><span class="line">$ hexo deploy <span class="comment"># deploy your blog on github</span></span><br></pre></td></tr></table></figure></p>
+<p>simplify:</p>
+<pre><code>hexo n == hexo new
+hexo g == hexo generate
+hexo s == hexo server
+hexo d == hexo deploy
+</code></pre><p>combine:</p>
+<pre><code>$ hexo deploy -g
+$ hexo server -g
+$ hexo d -g
+$ hexo s -g
+</code></pre><h3 id="GitHub-Part"><a href="#GitHub-Part" class="headerlink" title="GitHub Part"></a>GitHub Part</h3><ol>
+<li><p>first you need a github account</p>
+</li>
+<li><p>then create a repository named : xxx.github.io (xxx =&gt; github username)</p>
+</li>
+<li><p>configure your ssh public-key to login github without password(necessary for windows git)</p>
+</li>
+</ol>
+<ul>
+<li><p>configure git’s username &amp; email (ensure your updates show on the wall)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"your GitHub username"</span></span><br><span class="line">$ git config --global user.email <span class="string">"your GitHub mailaddress"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>check out whether you have public/private keys</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>if you can see xxx and xxx.pub, it means u got a keypair</p>
+</li>
+<li><p>if not, generate by yourself</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"xx@xx.com"</span></span><br><span class="line"><span class="comment"># '-t' have encryption method followed, and 'rsa' can be replaced</span></span><br><span class="line"><span class="comment"># no need to bother other args</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>type some password once, and you have a keypair now</p>
+</li>
+<li>then paste strings in xxx.pub to : github index -&gt; head portrait -&gt; Setting -&gt; SSH and GPG keys<br> and now you can login github without typing password in ssh or git bash</li>
+</ul>
+<ol start="4">
+<li>configure hexo</li>
+</ol>
+<ul>
+<li><p>in _config.yml(xxx=&gt;github username):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install plugin</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>deploy blog on github</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sticky post</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &apos;top: true&apos; in &apos;Front-matter&apos; to use it</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3><p>replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> //maybe not necessary</p>
+<p>when using <code>{something...}</code> add {% raw %}at the front and {% endraw %}as the tail,and finally looks like <code>{% raw %}{something...}{% endraw %}</code>in your text to escape <code>{</code> and<code>}</code><br>but in the code block sorrounded by three `, do whatever u want.</p>
+<p>as for multiple tags in hexo articles writing, use tags:[tag1, tag2, …]</p>
+<p>image hosting<br><a href="https://sm.ms/" target="_blank" rel="noopener">https://sm.ms/</a><br>tables generator<br><a href="http://www.tablesgenerator.com/" target="_blank" rel="noopener">http://www.tablesgenerator.com/</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#First-how-to-do-note（mysql-with-docker、hexo）"><span class="toc-number">1.</span> <span class="toc-text">First how-to-do note（mysql with docker、hexo）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Steps-for-MySQL-Server-Deployment-with-Docker"><span class="toc-number">2.</span> <span class="toc-text">Basic Steps for MySQL Server Deployment with Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Usage"><span class="toc-number">2.1.</span> <span class="toc-text">Basic Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#About-MYSQL"><span class="toc-number">2.2.</span> <span class="toc-text">About MYSQL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub-Pages-with-Hexo"><span class="toc-number">3.</span> <span class="toc-text">GitHub Pages with Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-Hexo"><span class="toc-number">3.1.</span> <span class="toc-text">Using Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-Part"><span class="toc-number">3.2.</span> <span class="toc-text">GitHub Part</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notes-for-Markdown-in-Hexo"><span class="toc-number">3.3.</span> <span class="toc-text">Notes for Markdown in Hexo</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
