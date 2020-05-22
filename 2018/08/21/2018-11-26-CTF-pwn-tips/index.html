@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CTF pwn tips - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,From Naetw
+CTF-pwn-tipsCatalog
+Overflow
+Find string in gdb
+Binary Service
+Find specific function of,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">CTF pwn tips</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">CTF pwn tips</h1>
+        <div class="stuff">
+            <span>August 21, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/list/">list</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>From <a href="https://github.com/Naetw" target="_blank" rel="noopener">Naetw</a></p>
+<h1 id="CTF-pwn-tips"><a href="#CTF-pwn-tips" class="headerlink" title="CTF-pwn-tips"></a>CTF-pwn-tips</h1><h1 id="Catalog"><a href="#Catalog" class="headerlink" title="Catalog"></a>Catalog</h1><ul>
+<li><a href="#overflow">Overflow</a></li>
+<li><a href="#find-string-in-gdb">Find string in gdb</a></li>
+<li><a href="#binary-service">Binary Service</a></li>
+<li><a href="#find-specific-function-offset-in-libc">Find specific function offset in libc</a></li>
+<li><a href="#find-binsh-or-sh-in-library">Find ‘/bin/sh’ or ‘sh’ in library</a></li>
+<li><a href="#leak-stack-address">Leak stack address</a></li>
+<li><a href="#fork-problem-in-gdb">Fork problem in gdb</a></li>
+<li><a href="#secret-of-a-mysterious-section---tls">Secret of a mysterious section - .tls</a></li>
+<li><a href="#predictable-rngrandom-number-generator">Predictable RNG(Random Number Generator)</a></li>
+<li><a href="#make-stack-executable">Make stack executable</a></li>
+<li><a href="#use-one-gadget-rce-instead-of-system">Use one-gadget-RCE instead of system</a></li>
+<li><a href="#hijack-hook-function">Hijack hook function</a></li>
+<li><a href="#use-printf-to-trigger-malloc-and-free">Use printf to trigger malloc and free</a></li>
+<li><a href="#use-execveat-to-open-a-shell">Use execveat to open a shell</a></li>
+</ul>
+<h2 id="Overflow"><a href="#Overflow" class="headerlink" title="Overflow"></a>Overflow</h2><p>Assume that: <code>char buf[40]</code> and <code>signed int num</code></p>
+<h3 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h3><ul>
+<li><p><code>scanf(&quot;%s&quot;, buf)</code></p>
+<ul>
+<li><code>%s</code> doesn’t have boundary check.</li>
+<li><strong>pwnable</strong></li>
+</ul>
+</li>
+<li><p><code>scanf(&quot;%39s&quot;, buf)</code></p>
+<ul>
+<li><code>%39s</code> only takes 39 bytes from the input and puts NULL byte at the end of input.</li>
+<li><strong>useless</strong></li>
+</ul>
+</li>
+<li><p><code>scanf(&quot;%40s&quot;, buf)</code></p>
+<ul>
+<li>At first sight, it seems reasonable.(seems)</li>
+<li>It takes <strong>40 bytes</strong> from input, but it also <strong>puts NULL byte at the end of input.</strong></li>
+<li>Therefore, it has <strong>one-byte-overflow</strong>.</li>
+<li><strong>pwnable</strong></li>
+</ul>
+</li>
+<li><p><code>scanf(&quot;%d&quot;, &amp;num)</code></p>
+<ul>
+<li>Used with <code>alloca(num)</code><ul>
+<li>Since <code>alloca</code> allocates memory from the stack frame of the caller, there is an instruction <code>sub esp, eax</code> to achieve that.</li>
+<li>If we make num negative, it will have overlapped stack frame.</li>
+<li>E.g. <a href="https://github.com/ctfs/write-ups-2016/tree/master/seccon-ctf-quals-2016/exploit/cheer-msg-100" target="_blank" rel="noopener">Seccon CTF quals 2016 cheer_msg</a></li>
+</ul>
+</li>
+<li>Use num to access some data structures<ul>
+<li>In most of the time, programs only check the higher bound and forget to make num unsigned.</li>
+<li>Making num negative may let us overwrite some important data to control the world!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="gets"><a href="#gets" class="headerlink" title="gets"></a>gets</h3><ul>
+<li><p><code>gets(buf)</code></p>
+<ul>
+<li>No boundary check.</li>
+<li><strong>pwnable</strong></li>
+</ul>
+</li>
+<li><p><code>fgets(buf, 40, stdin)</code></p>
+<ul>
+<li>It takes only <strong>39 bytes</strong> from the input and puts NULL byte at the end of input.</li>
+<li><strong>useless</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="read"><a href="#read" class="headerlink" title="read"></a>read</h3><ul>
+<li><code>read(stdin, buf, 40)</code><ul>
+<li>It takes <strong>40 bytes</strong> from the input, and it doesn’t put NULL byte at the end of input.</li>
+<li>It seems safe, but it may have <strong>information leak</strong>.</li>
+<li><strong>leakable</strong></li>
+</ul>
+</li>
+</ul>
+<p>E.g.</p>
+<p><strong>memory layout</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x7fffffffdd00: 0x4141414141414141      0x4141414141414141</span><br><span class="line">0x7fffffffdd10: 0x4141414141414141      0x4141414141414141</span><br><span class="line">0x7fffffffdd20: 0x4141414141414141      0x00007fffffffe1cd</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>If there is a <code>printf</code> or <code>puts</code> used to output the buf, it will keep outputting until reaching NULL byte.</li>
+<li><p>In this case, we can get <code>&#39;A&#39;*40 + &#39;\xcd\xe1\xff\xff\xff\x7f&#39;</code>.</p>
+</li>
+<li><p><code>fread(buf, 1, 40, stdin)</code></p>
+<ul>
+<li>Almost the same as <code>read</code>.</li>
+<li><strong>leakable</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="strcpy"><a href="#strcpy" class="headerlink" title="strcpy"></a>strcpy</h3><p>Assume that there is another buffer: <code>char buf2[60]</code></p>
+<ul>
+<li><p><code>strcpy(buf, buf2)</code></p>
+<ul>
+<li>No boundary check.</li>
+<li>It copies the content of buf2(until reaching NULL byte) which may be longer than <code>length(buf)</code> to buf.</li>
+<li>Therefore, it may happen overflow.</li>
+<li><strong>pwnable</strong></li>
+</ul>
+</li>
+<li><p><code>strncpy(buf, buf2, 40)</code> &amp;&amp; <code>memcpy(buf, buf2, 40)</code></p>
+<ul>
+<li>It copies 40 bytes from buf2 to buf, but it won’t put NULL byte at the end.</li>
+<li>Since there is no NULL byte to terminate, it may have <strong>information leak</strong>.</li>
+<li><strong>leakable</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="strcat"><a href="#strcat" class="headerlink" title="strcat"></a>strcat</h3><p>Assume that there is another buffer: <code>char buf2[60]</code></p>
+<ul>
+<li><p><code>strcat(buf, buf2)</code></p>
+<ul>
+<li>Of course, it may cause <strong>overflow</strong> if <code>length(buf)</code> isn’t large enough.</li>
+<li>It puts NULL byte at the end, it may cause <strong>one-byte-overflow</strong>.</li>
+<li>In some cases, we can use this NULL byte to change stack address or heap address.</li>
+<li><strong>pwnable</strong></li>
+</ul>
+</li>
+<li><p><code>strncat(buf, buf2, n)</code></p>
+<ul>
+<li>Almost the same as <code>strcat</code>, but with size limitation.</li>
+<li><strong>pwnable</strong></li>
+<li>E.g. <a href="https://github.com/ctfs/write-ups-2016/tree/master/seccon-ctf-quals-2016/exploit/jmper-300" target="_blank" rel="noopener">Seccon CTF quals 2016 jmper</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Find-string-in-gdb"><a href="#Find-string-in-gdb" class="headerlink" title="Find string in gdb"></a>Find string in gdb</h2><p>In the problem of <a href="http://j00ru.vexillium.org/blog/24_03_15/dragons_ctf.pdf" target="_blank" rel="noopener">SSP</a>, we need to find out the offset between <code>argv[0]</code> and the input buffer.</p>
+<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><ul>
+<li>Use <code>p/x ((char **)environ)</code> in gdb, and the address of argv[0] will be the <code>output - 0x10</code></li>
+</ul>
+<p>E.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) p/x (char **)environ</span><br><span class="line">$9 = 0x7fffffffde38</span><br><span class="line">(gdb) x/gx 0x7fffffffde38-0x10</span><br><span class="line">0x7fffffffde28: 0x00007fffffffe1cd</span><br><span class="line">(gdb) x/s 0x00007fffffffe1cd</span><br><span class="line">0x7fffffffe1cd: &quot;/home/naetw/CTF/seccon2016/check/checker&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="gdb-peda"><a href="#gdb-peda" class="headerlink" title="gdb peda"></a><a href="https://github.com/longld/peda" target="_blank" rel="noopener">gdb peda</a></h3><ul>
+<li>Use <code>searchmem &quot;/home/naetw/CTF/seccon2016/check/checker&quot;</code></li>
+<li>Then use <code>searchmem $result_address</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ searchmem &quot;/home/naetw/CTF/seccon2016/check/checker&quot;</span><br><span class="line">Searching for &apos;/home/naetw/CTF/seccon2016/check/checker&apos; in: None ranges</span><br><span class="line">Found 3 results, display max 3 items:</span><br><span class="line">[stack] : 0x7fffffffe1cd (&quot;/home/naetw/CTF/seccon2016/check/checker&quot;)</span><br><span class="line">[stack] : 0x7fffffffed7c (&quot;/home/naetw/CTF/seccon2016/check/checker&quot;)</span><br><span class="line">[stack] : 0x7fffffffefcf (&quot;/home/naetw/CTF/seccon2016/check/checker&quot;)</span><br><span class="line">gdb-peda$ searchmem 0x7fffffffe1cd</span><br><span class="line">Searching for &apos;0x7fffffffe1cd&apos; in: None ranges</span><br><span class="line">Found 2 results, display max 2 items:</span><br><span class="line">   libc : 0x7ffff7dd33b8 --&gt; 0x7fffffffe1cd (&quot;/home/naetw/CTF/seccon2016/check/checker&quot;)</span><br><span class="line">[stack] : 0x7fffffffde28 --&gt; 0x7fffffffe1cd (&quot;/home/naetw/CTF/seccon2016/check/checker&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="Binary-Service"><a href="#Binary-Service" class="headerlink" title="Binary Service"></a>Binary Service</h2><p>Normal:</p>
+<ul>
+<li><code>ncat -vc ./binary -kl 127.0.0.1 $port</code></li>
+</ul>
+<p>With specific library in two ways:</p>
+<ul>
+<li><code>ncat -vc &#39;LD_PRELOAD=/path/to/libc.so ./binary&#39; -kl 127.0.0.1 $port</code></li>
+<li><code>ncat -vc &#39;LD_LIBRARY_PATH=/path/of/libc.so ./binary&#39; -kl 127.0.0.1 $port</code></li>
+</ul>
+<p>After this, you can connect to binary service by command <code>nc localhost $port</code>.</p>
+<h2 id="Find-specific-function-offset-in-libc"><a href="#Find-specific-function-offset-in-libc" class="headerlink" title="Find specific function offset in libc"></a>Find specific function offset in libc</h2><p>If we leaked libc address of certain function successfully, we could use get libc base address by subtracting the offset of that function.</p>
+<h3 id="Manually"><a href="#Manually" class="headerlink" title="Manually"></a>Manually</h3><ul>
+<li><code>readelf -s $libc | grep ${function}@</code></li>
+</ul>
+<p>E.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -s libc-2.19.so | grep system@</span><br><span class="line">    620: 00040310    56 FUNC    GLOBAL DEFAULT   12 __libc_system@@GLIBC_PRIVATE</span><br><span class="line">   1443: 00040310    56 FUNC    WEAK   DEFAULT   12 system@@GLIBC_2.0</span><br></pre></td></tr></table></figure>
+<h3 id="Automatically"><a href="#Automatically" class="headerlink" title="Automatically"></a>Automatically</h3><ul>
+<li>Use <a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwntools</a>, then you can use it in your exploit script.</li>
+</ul>
+<p>E.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">'libc.so'</span>)</span><br><span class="line">system_off = libc.symbols[<span class="string">'system'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="Find-‘-bin-sh’-or-‘sh’-in-library"><a href="#Find-‘-bin-sh’-or-‘sh’-in-library" class="headerlink" title="Find ‘/bin/sh’ or ‘sh’ in library"></a>Find ‘/bin/sh’ or ‘sh’ in library</h2><p>Need libc base address first</p>
+<h3 id="Manually-1"><a href="#Manually-1" class="headerlink" title="Manually"></a>Manually</h3><ul>
+<li><code>objdump -s libc.so | less</code> then search ‘sh’</li>
+<li><code>strings -tx libc.so | grep /bin/sh</code></li>
+</ul>
+<h3 id="Automatically-1"><a href="#Automatically-1" class="headerlink" title="Automatically"></a>Automatically</h3><ul>
+<li>Use <a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener">pwntools</a></li>
+</ul>
+<p>E.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">'libc.so'</span>)</span><br><span class="line">...</span><br><span class="line">sh = base + next(libc.search(<span class="string">'sh\x00'</span>))</span><br><span class="line">binsh = base + next(libc.search(<span class="string">'/bin/sh\x00'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="Leak-stack-address"><a href="#Leak-stack-address" class="headerlink" title="Leak stack address"></a>Leak stack address</h2><p><strong>constraints</strong>:</p>
+<ul>
+<li>Have already leaked libc base address</li>
+<li>Can leak the content of arbitrary address</li>
+</ul>
+<p>There is a symbol <code>environ</code> in libc, whose value is the same as the third argument of <code>main</code> function, <code>char **envp</code>.<br>The value of <code>char **envp</code> is on the stack, thus we can leak stack address with this symbol.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(gdb) list 1</span><br><span class="line">1       #include &lt;stdlib.h&gt;</span><br><span class="line">2       #include &lt;stdio.h&gt;</span><br><span class="line">3</span><br><span class="line">4       extern char **environ;</span><br><span class="line">5</span><br><span class="line">6       int main(int argc, char **argv, char **envp)</span><br><span class="line">7       &#123;</span><br><span class="line">8           return 0;</span><br><span class="line">9       &#125;</span><br><span class="line">(gdb) x/gx 0x7ffff7a0e000 + 0x3c5f38</span><br><span class="line">0x7ffff7dd3f38 &lt;environ&gt;:       0x00007fffffffe230</span><br><span class="line">(gdb) p/x (char **)envp</span><br><span class="line">$12 = 0x7fffffffe230</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>0x7ffff7a0e000</code> is current libc base address</li>
+<li><code>0x3c5f38</code> is offset of <code>environ</code> in libc</li>
+</ul>
+<p>This <a href="https://www.gnu.org/software/libc/manual/html_node/Program-Arguments.html" target="_blank" rel="noopener">manual</a> explains details about <code>environ</code>.</p>
+<h2 id="Fork-problem-in-gdb"><a href="#Fork-problem-in-gdb" class="headerlink" title="Fork problem in gdb"></a>Fork problem in gdb</h2><p>When you use <strong>gdb</strong> to debug a binary with <code>fork()</code> function, you can use the following command to determine which process to follow (The default setting of original gdb is parent, while that of gdb-peda is child.):</p>
+<ul>
+<li><code>set follow-fork-mode parent</code></li>
+<li><code>set follow-fork-mode child</code></li>
+</ul>
+<p>Alternatively, using <code>set detach-on-fork off</code>, we can then control both sides of each fork. Using <code>inferior X</code> where <code>X</code> is any of the numbers that show up for <code>info inferiors</code> will switch to that side of the fork. This is useful if both sides of the fork are necessary to attack a challenge, and the simple <code>follow</code> ones above aren’t sufficient.</p>
+<h2 id="Secret-of-a-mysterious-section-tls"><a href="#Secret-of-a-mysterious-section-tls" class="headerlink" title="Secret of a mysterious section - .tls"></a>Secret of a mysterious section - .tls</h2><p><strong>constraints</strong>:</p>
+<ul>
+<li>Need <code>malloc</code> function and you can malloc with arbitrary size</li>
+<li>Arbitrary address leaking</li>
+</ul>
+<p>We make <code>malloc</code> use <code>mmap</code> to allocate memory(size 0x21000 is enough). In general, these pages will be placed at the address just before <code>.tls</code> section.</p>
+<p>There is some useful information on <strong><code>.tls</code></strong>, such as the address of <code>main_arena</code>, <code>canary</code> (value of stack guard), and a strange <code>stack address</code> which points to somewhere on the stack but with a fixed offset.</p>
+<p><strong>Before calling mmap:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7fecbfe4d000-7fecbfe51000 r--p 001bd000 fd:00 131210         /lib/x86_64-linux-gnu/libc-2.24.so</span><br><span class="line">7fecbfe51000-7fecbfe53000 rw-p 001c1000 fd:00 131210         /lib/x86_64-linux-gnu/libc-2.24.so</span><br><span class="line">7fecbfe53000-7fecbfe57000 rw-p 00000000 00:00 0</span><br><span class="line">7fecbfe57000-7fecbfe7c000 r-xp 00000000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br><span class="line">7fecc0068000-7fecc006a000 rw-p 00000000 00:00 0              &lt;- .tls section</span><br><span class="line">7fecc0078000-7fecc007b000 rw-p 00000000 00:00 0</span><br><span class="line">7fecc007b000-7fecc007c000 r--p 00024000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br><span class="line">7fecc007c000-7fecc007d000 rw-p 00025000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br></pre></td></tr></table></figure>
+<p><strong>After call mmap:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7fecbfe4d000-7fecbfe51000 r--p 001bd000 fd:00 131210         /lib/x86_64-linux-gnu/libc-2.24.so</span><br><span class="line">7fecbfe51000-7fecbfe53000 rw-p 001c1000 fd:00 131210         /lib/x86_64-linux-gnu/libc-2.24.so</span><br><span class="line">7fecbfe53000-7fecbfe57000 rw-p 00000000 00:00 0</span><br><span class="line">7fecbfe57000-7fecbfe7c000 r-xp 00000000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br><span class="line">7fecc0045000-7fecc006a000 rw-p 00000000 00:00 0              &lt;- memory of mmap + .tls section</span><br><span class="line">7fecc0078000-7fecc007b000 rw-p 00000000 00:00 0</span><br><span class="line">7fecc007b000-7fecc007c000 r--p 00024000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br><span class="line">7fecc007c000-7fecc007d000 rw-p 00025000 fd:00 131206         /lib/x86_64-linux-gnu/ld-2.24.so</span><br></pre></td></tr></table></figure>
+<h2 id="Predictable-RNG-Random-Number-Generator"><a href="#Predictable-RNG-Random-Number-Generator" class="headerlink" title="Predictable RNG(Random Number Generator)"></a>Predictable RNG(Random Number Generator)</h2><p>When the binary uses the RNG to make the address of important information or sth, we can guess the same value if it’s predictable.</p>
+<p>Assuming that it’s predictable, we can use <a href="https://docs.python.org/2/library/ctypes.html" target="_blank" rel="noopener">ctypes</a> which is a build-in module in Python.</p>
+<p><strong>ctypes</strong> allows calling a function in DLL(Dynamic-Link Library) or Shared Library.</p>
+<p>Therefore, if binary has an init_proc like this:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">srand(time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="keyword">while</span>(addr &lt;= <span class="number">0x10000</span>)&#123;</span><br><span class="line">    addr = rand() &amp; <span class="number">0xfffff000</span>;</span><br><span class="line">&#125;</span><br><span class="line">secret = mmap(addr,<span class="number">0x1000</span>,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS ,<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(secret == <span class="number">-1</span>)&#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"mmap error"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then we can use <strong>ctypes</strong> to get the same value of addr.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">LIBC = ctypes.cdll.LoadLibrary(<span class="string">'/path/to/dll'</span>)</span><br><span class="line">LIBC.srand(LIBC.time(<span class="number">0</span>))</span><br><span class="line">addr = LIBC.rand() &amp; <span class="number">0xfffff000</span></span><br></pre></td></tr></table></figure>
+<h2 id="Make-stack-executable"><a href="#Make-stack-executable" class="headerlink" title="Make stack executable"></a>Make stack executable</h2><ul>
+<li><a href="http://radare.today/posts/defeating-baby_rop-with-radare2/" target="_blank" rel="noopener">link1</a></li>
+<li><a href="https://sploitfun.wordpress.com/author/sploitfun/" target="_blank" rel="noopener">link2</a></li>
+<li>Haven’t read yet orz</li>
+</ul>
+<h2 id="Use-one-gadget-RCE-instead-of-system"><a href="#Use-one-gadget-RCE-instead-of-system" class="headerlink" title="Use one-gadget-RCE instead of system"></a>Use one-gadget-RCE instead of system</h2><p><strong>constraints</strong>:</p>
+<ul>
+<li>Have libc base address</li>
+<li>Write to arbitrary address</li>
+</ul>
+<p>Almost every pwnable challenge needs to call <code>system(&#39;/bin/sh&#39;)</code> in the end of the exploit, but if we want to call that, we have to manipulate the parameters and, of course, hijack some functions to <code>system</code>. What if we <strong>can’t</strong> manipulate the parameter?</p>
+<p>Use <a href="http://j00ru.vexillium.org/blog/24_03_15/dragons_ctf.pdf" target="_blank" rel="noopener">one-gadget-RCE</a>!</p>
+<p>With <strong>one-gadget-RCE</strong>, we can just hijack <code>.got.plt</code> or something we can use to control eip to make program jump to <strong>one-gadget</strong>, but there are some constraints that need satisfying before using it.</p>
+<p>There are lots of <strong>one-gadgets</strong> in libc. Each one has different constraints but those are similar. Each constraint is about the state of registers.</p>
+<p>E.g.</p>
+<ul>
+<li>ebx is the address of <code>rw-p</code> area of libc</li>
+<li>[esp+0x34] == NULL</li>
+</ul>
+<p>How can we get these constraints? Here is an useful tool <a href="https://github.com/david942j/one_gadget" target="_blank" rel="noopener">one_gadget</a> !!!!</p>
+<p>So if we can satisfy those constraints, we can get the shell more easily.</p>
+<h2 id="Hijack-hook-function"><a href="#Hijack-hook-function" class="headerlink" title="Hijack hook function"></a>Hijack hook function</h2><p><strong>constraints</strong>:</p>
+<ul>
+<li>Have libc base address</li>
+<li>Write to arbitrary address</li>
+<li>The program uses <code>malloc</code>, <code>free</code> or <code>realloc</code>.</li>
+</ul>
+<p>By manual:</p>
+<blockquote>
+<p>The GNU C Library lets you modify the behavior of <code>malloc</code>, <code>realloc</code>, and <code>free</code> by specifying appropriate hook functions. You can use these hooks to help you debug programs that use dynamic memory allocation, for example.</p>
+</blockquote>
+<p>There are hook variables declared in malloc.h and their default values are <code>0x0</code>.</p>
+<ul>
+<li><code>__malloc_hook</code></li>
+<li><code>__free_hook</code></li>
+<li>…</li>
+</ul>
+<p>Since they are used to help us debug programs, they are writable during the execution.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0xf77228e0 &lt;__free_hook&gt;:       0x00000000</span><br><span class="line">0xf7722000 0xf7727000 rw-p      mapped</span><br></pre></td></tr></table></figure>
+<p>Let’s look into the <a href="https://code.woboq.org/userspace/glibc/malloc/malloc.c.html#2917" target="_blank" rel="noopener">src</a> of malloc.c. I will use <code>__libc_free</code> to demo.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (*hook) (<span class="keyword">void</span> *, <span class="keyword">const</span> <span class="keyword">void</span> *) = atomic_forced_read (__free_hook);</span><br><span class="line"><span class="keyword">if</span> (__builtin_expect (hook != <span class="literal">NULL</span>, <span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">    (*hook)(mem, RETURN_ADDRESS (<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It checks the value of <code>__free_hook</code>. If it’s not NULL, it will call the hook function first. Here, we would like to use <strong>one-gadget-RCE</strong>. Since hook function is called in the libc, the constraints of <strong>one-gadget</strong> are usually satisfied.</p>
+<h2 id="Use-printf-to-trigger-malloc-and-free"><a href="#Use-printf-to-trigger-malloc-and-free" class="headerlink" title="Use printf to trigger malloc and free"></a>Use printf to trigger malloc and free</h2><p>Look into the source of printf, there are several places which may trigger malloc. Take <a href="https://code.woboq.org/userspace/glibc/stdio-common/vfprintf.c.html#1470" target="_blank" rel="noopener">vfprintf.c line 1470</a> for example:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXTSIZ 32</span></span><br><span class="line"><span class="keyword">enum</span> &#123; WORK_BUFFER_SIZE = <span class="number">1000</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (width &gt;= WORK_BUFFER_SIZE - EXTSIZ)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* We have to use a special buffer.  */</span></span><br><span class="line">    <span class="keyword">size_t</span> needed = ((<span class="keyword">size_t</span>) width + EXTSIZ) * <span class="keyword">sizeof</span> (CHAR_T);</span><br><span class="line">    <span class="keyword">if</span> (__libc_use_alloca (needed))</span><br><span class="line">        workend = (CHAR_T *) alloca (needed) + width + EXTSIZ;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        workstart = (CHAR_T *) <span class="built_in">malloc</span> (needed);</span><br><span class="line">        <span class="keyword">if</span> (workstart == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            done = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">goto</span> all_done;</span><br><span class="line">        &#125;</span><br><span class="line">        workend = workstart + width + EXTSIZ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can find that <code>malloc</code> will be triggered if the width field is large enough.(Of course, <code>free</code> will also be triggered at the end of printf if <code>malloc</code> has been triggered.) However, WORK_BUFFER_SIZE is not large enough, since we need to go to <strong>else</strong> block. Let’s take a look at <code>__libc_use_alloca</code> and see what exactly the minimum size of width we should give.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* Minimum size for a thread.  We are free to choose a reasonable value.  */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PTHREAD_STACK_MIN        16384</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __MAX_ALLOCA_CUTOFF        65536</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> __libc_use_alloca (<span class="keyword">size_t</span> size)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (__builtin_expect (size &lt;= PTHREAD_STACK_MIN / <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">        || __builtin_expect (__libc_alloca_cutoff (size), <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> __libc_alloca_cutoff (<span class="keyword">size_t</span> size)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> size &lt;= (MIN (__MAX_ALLOCA_CUTOFF,</span><br><span class="line">					THREAD_GETMEM (THREAD_SELF, stackblock_size) / <span class="number">4</span></span><br><span class="line">					<span class="comment">/* The main thread, before the thread library is</span></span><br><span class="line"><span class="comment">						initialized, has zero in the stackblock_size</span></span><br><span class="line"><span class="comment">						element.  Since it is the main thread we can</span></span><br><span class="line"><span class="comment">						assume the maximum available stack space.  */</span></span><br><span class="line">					?: __MAX_ALLOCA_CUTOFF * <span class="number">4</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We have to make sure that:</p>
+<ol>
+<li><code>size &gt; PTHREAD_STACK_MIN / 4</code></li>
+<li><code>size &gt; MIN(__MAX_ALLOCA_CUTOFF, THREAD_GETMEM(THREAD_SELF, stackblock_size) / 4 ?: __MAX_ALLOCA_CUTOFF * 4)</code><ul>
+<li>I did not fully understand what exactly the function - THREAD_GETMEM do, but it seems that it mostly returns 0.</li>
+<li>Therefore, the second condition is usually <code>size &gt; 65536</code></li>
+</ul>
+</li>
+</ol>
+<p>More details:</p>
+<ul>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html" target="_blank" rel="noopener">__builtin_expect</a></li>
+<li><a href="https://code.woboq.org/userspace/glibc/sysdeps/x86_64/nptl/tls.h.html#_M/THREAD_GETMEM" target="_blank" rel="noopener">THREAD_GETMEM</a></li>
+</ul>
+<h3 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h3><ul>
+<li>The minimum size of width to trigger <code>malloc</code> &amp; <code>free</code> is 65537 most of the time.</li>
+<li>If there is a Format String Vulnerability and the program ends right after calling <code>printf(buf)</code>, we can hijack <code>__malloc_hook</code> or <code>__free_hook</code> with <code>one-gadget</code> and use the trick mentioned above to trigger <code>malloc</code> &amp; <code>free</code> then we can still get the shell even there is no more function call or sth after <code>printf(buf)</code>.</li>
+</ul>
+<h2 id="Use-execveat-to-open-a-shell"><a href="#Use-execveat-to-open-a-shell" class="headerlink" title="Use execveat to open a shell"></a>Use execveat to open a shell</h2><p>When it comes to opening a shell with system call, <code>execve</code> always pops up in mind. However, it’s not always easily available due to the lack of gadgets or others constraints.<br>Actually, there is a system call, <code>execveat</code>, with following prototype:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execveat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *pathname,</span></span></span><br><span class="line"><span class="function"><span class="params">             <span class="keyword">char</span> *<span class="keyword">const</span> argv[], <span class="keyword">char</span> *<span class="keyword">const</span> envp[],</span></span></span><br><span class="line"><span class="function"><span class="params">             <span class="keyword">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>According to its <a href="http://man7.org/linux/man-pages/man2/execveat.2.html" target="_blank" rel="noopener">man page</a>, it operates in the same way as <code>execve</code>. As for the additional arguments, it mentions that:</p>
+<blockquote>
+<p>If pathname is absolute, then dirfd is ignored.</p>
+</blockquote>
+<p>Hence, if we make <code>pathname</code> point to <code>&quot;/bin/sh&quot;</code>, and set <code>argv</code>, <code>envp</code> and <code>flags</code> to 0, we can still get a shell whatever the value of <code>dirfd</code>.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CTF-pwn-tips"><span class="toc-number">1.</span> <span class="toc-text">CTF-pwn-tips</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Catalog"><span class="toc-number">2.</span> <span class="toc-text">Catalog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overflow"><span class="toc-number">2.1.</span> <span class="toc-text">Overflow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#scanf"><span class="toc-number">2.1.1.</span> <span class="toc-text">scanf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gets"><span class="toc-number">2.1.2.</span> <span class="toc-text">gets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#read"><span class="toc-number">2.1.3.</span> <span class="toc-text">read</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strcpy"><span class="toc-number">2.1.4.</span> <span class="toc-text">strcpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strcat"><span class="toc-number">2.1.5.</span> <span class="toc-text">strcat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-string-in-gdb"><span class="toc-number">2.2.</span> <span class="toc-text">Find string in gdb</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb"><span class="toc-number">2.2.1.</span> <span class="toc-text">gdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb-peda"><span class="toc-number">2.2.2.</span> <span class="toc-text">gdb peda</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Service"><span class="toc-number">2.3.</span> <span class="toc-text">Binary Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-specific-function-offset-in-libc"><span class="toc-number">2.4.</span> <span class="toc-text">Find specific function offset in libc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Manually"><span class="toc-number">2.4.1.</span> <span class="toc-text">Manually</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automatically"><span class="toc-number">2.4.2.</span> <span class="toc-text">Automatically</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-‘-bin-sh’-or-‘sh’-in-library"><span class="toc-number">2.5.</span> <span class="toc-text">Find ‘/bin/sh’ or ‘sh’ in library</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Manually-1"><span class="toc-number">2.5.1.</span> <span class="toc-text">Manually</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automatically-1"><span class="toc-number">2.5.2.</span> <span class="toc-text">Automatically</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Leak-stack-address"><span class="toc-number">2.6.</span> <span class="toc-text">Leak stack address</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fork-problem-in-gdb"><span class="toc-number">2.7.</span> <span class="toc-text">Fork problem in gdb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Secret-of-a-mysterious-section-tls"><span class="toc-number">2.8.</span> <span class="toc-text">Secret of a mysterious section - .tls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Predictable-RNG-Random-Number-Generator"><span class="toc-number">2.9.</span> <span class="toc-text">Predictable RNG(Random Number Generator)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Make-stack-executable"><span class="toc-number">2.10.</span> <span class="toc-text">Make stack executable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-one-gadget-RCE-instead-of-system"><span class="toc-number">2.11.</span> <span class="toc-text">Use one-gadget-RCE instead of system</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hijack-hook-function"><span class="toc-number">2.12.</span> <span class="toc-text">Hijack hook function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-printf-to-trigger-malloc-and-free"><span class="toc-number">2.13.</span> <span class="toc-text">Use printf to trigger malloc and free</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#conclusion"><span class="toc-number">2.13.1.</span> <span class="toc-text">conclusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-execveat-to-open-a-shell"><span class="toc-number">2.14.</span> <span class="toc-text">Use execveat to open a shell</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
