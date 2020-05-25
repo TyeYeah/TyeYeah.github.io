@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>About Stealing Credentials</title>
+    <url>/2020/05/25/About-Stealing-Credentials/</url>
+    <content><![CDATA[<p>This part we discuss</p>
+]]></content>
+      <categories>
+        <category>Penetration Testing</category>
+      </categories>
+      <tags>
+        <tag>windows</tag>
+        <tag>pentest</tag>
+        <tag>domain</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>About Reverse Shell</title>
     <url>/2020/03/31/2020-03-31-About-Reverse-Shell/</url>
     <content><![CDATA[<p>Reverse Shell is normal used for its advantages in avoiding being detected.<br>Attacker’s machine (which has a public IP and is reachable over the internet) acts as a server. It opens a communication channel on a port and waits for incoming connections.<br>Victim’s machine acts as a client and initiates a connection to the attacker’s listening server.</p>
@@ -488,13 +502,6 @@ lcx_listen -- like lcx -listen
 <p>lcx_tran usage<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ ./ew -s ssocksd  -l 9999</span><br><span class="line">$ ./ew -s lcx_tran -l 1080 -f 127.0.0.1 -g 9999</span><br></pre></td></tr></table></figure></p>
 <p>lcx_listen、lcx_slave usages<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ ./ew -s lcx_listen -l 1080 -e 8888</span><br><span class="line">$ ./ew -s ssocksd    -l 9999</span><br><span class="line">$ ./ew -s lcx_slave  -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</span><br></pre></td></tr></table></figure></p>
 <p>A comprehensive example<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ ./ew -s rcsocks -l 1080 -e 8888</span><br><span class="line">$ ./ew -s lcx_slave -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</span><br><span class="line">$ ./ew -s lcx_listen -l 9999 -e 7777</span><br><span class="line">$ ./ew -s rssocks -d 127.0.0.1 -e 7777</span><br></pre></td></tr></table></figure></p>
-<h2 id="Netsh"><a href="#Netsh" class="headerlink" title="Netsh"></a>Netsh</h2><p>Netsh(network shell) is a command-line utility included in Microsoft’s Windows NT line of operating systems beginning with Windows 2000. It allows local or remote configuration of network devices, like iptables on Linux. </p>
-<p>Port forwarding can be done via <code>netsh</code> by adding a forwarding rule. Transfer data from local_ip:local_port to target_ip:target_port as below.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy add v4tov4 listenaddress=local_ip listenport=local_port connectaddress=target_ip connectport=target_port</span><br></pre></td></tr></table></figure></p>
-<p>Show current rules<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy show all</span><br><span class="line">...</span><br><span class="line">$ netsh interface portproxy dump</span><br><span class="line"></span><br><span class="line"><span class="comment">#========================</span></span><br><span class="line"><span class="comment"># Port Proxy configuration</span></span><br><span class="line"><span class="comment">#========================</span></span><br><span class="line">pushd interface portproxy</span><br><span class="line">reset</span><br><span class="line">add v4tov4 listenport=local_port connectaddress=target_ip connectport=target_port</span><br><span class="line">popd</span><br><span class="line"><span class="comment"># End of Port Proxy configuration</span></span><br></pre></td></tr></table></figure></p>
-<p>Delete the forwarding rule.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy delete v4tov4 listenport=local_port</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ netsh interface portproxy delete v4tov4 listenport=local_port listenaddress=local_ip</span><br><span class="line"><span class="comment"># or clean all</span></span><br><span class="line">$ netsh interface portproxy reset</span><br></pre></td></tr></table></figure></p>
-<p>Ipv6 is needed on Widows XP.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface ipv6 install</span><br></pre></td></tr></table></figure></p>
-<p>Choose a protocol.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy add v4tov4 listenport=local_port connectport=target_ip connectaddress= target_ip protocol=tcp</span><br></pre></td></tr></table></figure></p>
-<p>Attention: only <code>tcp</code> permitted, and <code>127.0.0.1</code> is not allowed, please use 0.0.0.0 or leave `listenaddress omitted to stand localhost.</p>
 <h2 id="FRP"><a href="#FRP" class="headerlink" title="FRP"></a>FRP</h2><p>It is developed by go on <a href="https://github.com/fatedier/frp" target="_blank" rel="noopener">Github</a>, a high-performance reverse proxy application for intranet penetration.</p>
 <p>After extraction there are:<br><code>frpc  frpc_full.ini  frpc.ini  frps  frps_full.ini  frps.ini</code><br>The first three files are client programs and configuration files, last three are server programs and configuration files.</p>
 <p>The situation is, we want to access client(in intranet) through(have to) server –&gt; reverse proxy.</p>
@@ -507,6 +514,10 @@ lcx_listen -- like lcx -listen
 <h2 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a>reGeorg</h2><p>It transfers data using web pages (js, php, jsp, asp …).<br>Download it by<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/sensepost/reGeorg.git</span><br></pre></td></tr></table></figure></p>
 <p>On your VPS to build a socks5 proxy<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ python reGeorgSocksProxy.py -p 8080 -u http://xx.xx.xx.xx/tunnel.jsp</span><br></pre></td></tr></table></figure></p>
 <p>We use socks5 by connecting VPS_ip:8080</p>
+<h2 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h2><p>Edit <code>/etc/sysctl.conf</code> to allow forwarding.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward = 1</span><br></pre></td></tr></table></figure></p>
+<p>Then stop the service temporarily.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ service iptables stop</span><br></pre></td></tr></table></figure></p>
+<p>Configure rules. Connect VPS to access target.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING --dst VPS_ip -p tcp --dport VPS_port -j DNAT --to-destination target_ip:target_port</span><br><span class="line"></span><br><span class="line">iptables -t nat -A POSTROUTING --dst target_ip -p tcp --dport target_port -j SNAT --to-source VPS_ip</span><br></pre></td></tr></table></figure></p>
+<p>Save configuration and restart service.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">service iptables save &amp;&amp; service iptables start</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
         <category>Penetration Testing</category>
@@ -539,7 +550,7 @@ lcx_listen -- like lcx -listen
 <p>There is only one <code>Root Domain</code> in a <code>Domain</code>, first created and at the top level, having no parent domain but child domain.</p>
 <h2 id="Domain-Pentest-Technologies"><a href="#Domain-Pentest-Technologies" class="headerlink" title="Domain Pentest Technologies"></a>Domain Pentest Technologies</h2><p>All of below works only after you have taken a <code>Domain</code> member.  </p>
 <h3 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h3><p>View network environment: <code>ipconfig /all</code></p>
-<p>Get <code>domain controller</code> IP: <code>dsquery server</code><br>Get <code>domain controller</code> host name: <code>net group &quot;domain controllers&quot; /domain</code><br>Get <code>domain administrator</code> user name: <code>net group &quot;domain admins&quot; /domain</code><br>Get all <code>domain</code> users hostnames:<code>net group &quot;domain computers&quot; /domain</code><br>Get all <code>domain</code> users: <code>net user /domain</code><br>Get <code>domain</code> user information: <code>net user &quot;username&quot;/domain</code></p>
+<p>Get <code>domain controller</code> IP: <code>dsquery server</code><br>Get <code>domain controller</code> host name: <code>net group &quot;domain controllers&quot; /domain</code><br>Get <code>domain administrator</code> user name: <code>net group &quot;domain admins&quot; /domain</code><br>Get all <code>domain</code> users hostnames:<code>net group &quot;domain computers&quot; /domain</code><br>Get all <code>domain</code> users: <code>net user /domain</code><br>Get <code>domain</code> user information: <code>net user &quot;username&quot; /domain</code></p>
 <ul>
 <li>Here is a special user called <code>krbtgt</code>. It’s used for Kerberos authentication. After obtaining its hash, we can forge a ticket for a pass-the-ticket attack.</li>
 </ul>
@@ -554,6 +565,13 @@ lcx_listen -- like lcx -listen
 <h3 id="Lateral-Movement"><a href="#Lateral-Movement" class="headerlink" title="Lateral Movement"></a>Lateral Movement</h3><p>If <code>Domain Admin</code> didn’t logged in this pc, we have to find one that has been logged.</p>
 <p>If we get one local administrator account, use <code>net use</code> to build <code>IPC$</code> connection, or use <code>wmic</code> commands or <code>rdp</code> or <code>psexec</code> to build connection.</p>
 <h4 id="Port-Forwarding"><a href="#Port-Forwarding" class="headerlink" title="Port Forwarding"></a>Port Forwarding</h4><p>With it you are able to use pentest tools on your pc, to scan or attack target in <code>Domain</code>, through <code>Domain</code> network route.</p>
+<p>Netsh(network shell) is a command-line utility included in Microsoft’s Windows NT line of operating systems beginning with Windows 2000. It allows local or remote configuration of network devices, like iptables on Linux. </p>
+<p>Port forwarding can be done via <code>netsh</code> by adding a forwarding rule. Transfer data from local_ip:local_port to target_ip:target_port as below.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy add v4tov4 listenaddress=local_ip listenport=local_port connectaddress=target_ip connectport=target_port</span><br></pre></td></tr></table></figure></p>
+<p>Show current rules<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy show all</span><br><span class="line">...</span><br><span class="line">$ netsh interface portproxy dump</span><br><span class="line"></span><br><span class="line"><span class="comment">#========================</span></span><br><span class="line"><span class="comment"># Port Proxy configuration</span></span><br><span class="line"><span class="comment">#========================</span></span><br><span class="line">pushd interface portproxy</span><br><span class="line">reset</span><br><span class="line">add v4tov4 listenport=local_port connectaddress=target_ip connectport=target_port</span><br><span class="line">popd</span><br><span class="line"><span class="comment"># End of Port Proxy configuration</span></span><br></pre></td></tr></table></figure></p>
+<p>Delete the forwarding rule.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy delete v4tov4 listenport=local_port</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ netsh interface portproxy delete v4tov4 listenport=local_port listenaddress=local_ip</span><br><span class="line"><span class="comment"># or clean all</span></span><br><span class="line">$ netsh interface portproxy reset</span><br></pre></td></tr></table></figure></p>
+<p>Ipv6 is needed on Widows XP.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface ipv6 install</span><br></pre></td></tr></table></figure></p>
+<p>Choose a protocol.<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">$ netsh interface portproxy add v4tov4 listenport=local_port connectport=target_ip connectaddress= target_ip protocol=tcp</span><br></pre></td></tr></table></figure></p>
+<p>Attention: only <code>tcp</code> permitted, and <code>127.0.0.1</code> is not allowed, please use 0.0.0.0 or leave `listenaddress omitted to stand localhost.</p>
 <h4 id="IPC"><a href="#IPC" class="headerlink" title="IPC"></a>IPC</h4><p>View target share resources: <code>net view \\IP</code><br>View target time: <code>net time \\IP</code><br>Build IPC null connection: <code>net use \\xxx.xxx.xxx.xxx\ipc$ &quot;&quot; /user:&quot;domain\username&quot;</code><br>Build IPC connection(not null): <code>net use \\xxx.xxx.xxx.xxx\ipc$ &quot;password&quot; /user:&quot;domain\username&quot;</code><br>Delete IPC connection: <code>net use \\xxx.xxx.xxx.xxx\ipc$ /del</code><br>Having a IPC connection and privileges, mapping target disk <code>c:</code> to local disk <code>z:</code> : <code>net use z: \\xxx.xxx.xxx.xxx\c$</code><br>Delete mapping: <code>net use z: /del</code><br>Close default IPC share: <code>net use ipc$ /del</code></p>
 <p>note:</p>
 <ol>
@@ -597,7 +615,7 @@ lcx_listen -- like lcx -listen
 <li>DCOM</li>
 <li>WCE</li>
 </ul>
-<p>Use pentest framework is easier, and before it, using <code>powerview</code> and <code>BloodHound</code> to gather information benefits a lot.</p>
+<p>Using pentest framework is easier, and before it, using <code>powerview</code> and <code>BloodHound</code> to gather information benefits a lot.</p>
 <h3 id="Penetration-Testing-Persistence"><a href="#Penetration-Testing-Persistence" class="headerlink" title="Penetration Testing Persistence"></a>Penetration Testing Persistence</h3><p>To keep controlling and convenient for later connection, pentesters always leave a backdoor, timed task or something in the target pc.</p>
 <h4 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h4><ul>
 <li>Normal webshell</li>
@@ -610,7 +628,7 @@ lcx_listen -- like lcx -listen
 <h4 id="Useful-Directory"><a href="#Useful-Directory" class="headerlink" title="Useful Directory"></a>Useful Directory</h4><p>Best place to put backdoor is somewhere user cannot see easily –&gt; the <code>System Volume Information</code> directory. </p>
 <p>It is hidden for normal users, even for administrator, and is only accessed by <code>system</code>. use <code>c:/system~l</code> to access <code>c:/System Volume Information</code>.</p>
 <h4 id="Tools-1"><a href="#Tools-1" class="headerlink" title="Tools"></a>Tools</h4><ul>
-<li>Pentest framework</li>
+<li><a href="#Pentest-framework">Pentest framework</a></li>
 <li>Powershell </li>
 <li>NC</li>
 </ul>
@@ -624,7 +642,7 @@ lcx_listen -- like lcx -listen
 <li>Bypass UAC</li>
 </ul>
 <h4 id="Tools-2"><a href="#Tools-2" class="headerlink" title="Tools"></a>Tools</h4><ul>
-<li>Pentest framework</li>
+<li><a href="#Pentest-framework">Pentest framework</a></li>
 <li>UACME</li>
 <li>Forge token<ul>
 <li>Incognito</li>
@@ -1174,7 +1192,7 @@ lcx_listen -- like lcx -listen
 <h3 id="Cross-Compile"><a href="#Cross-Compile" class="headerlink" title="Cross Compile"></a>Cross Compile</h3><p><code>buildroot</code> is a framework to build embedded Linux software on Linux. It is made up of <code>makefile</code> and <code>Kconfig</code> configuration files. Like compiling Linux kernel, configure <code>buildroot</code> and edit <code>menuconfig</code> to compile a complete Linux system software (including boot, kernel, rootfs and libs) that can be directly burned and run on the machine.</p>
 <p>Download <code>buildroot</code>.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ wget http://buildroot.uclibc.org/downloads/snapshots/buildroot-snapshot.tar.bz2</span><br><span class="line">$ tar -jxvf buildroot-snapshot.tar.bz2</span><br><span class="line">$ <span class="built_in">cd</span> buildroot</span><br></pre></td></tr></table></figure></p>
 <p>Configure <code>buildroot</code>.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install libncurses-dev patch</span><br><span class="line">$ make clean</span><br><span class="line">$ make menuconfig</span><br></pre></td></tr></table></figure></p>
-<p>When interface shows up like this,<br><img src="/imghost/rpp/7.jpg" alt="ifconfig result 3"><br>Set <code>Target Architecture</code> as <code>MIPS (little endian)</code> (depending on your target);<br><img src="/imghost/rpp/8.jpg" alt="ifconfig result 3"><br>Set <code>Kernel Headers</code> as your host Linux version,because it will run on your pc.<br><img src="/imghost/rpp/9.jpg" alt="ifconfig result 3"></p>
+<p>When interface shows up like this,<br><img src="/imghost/rpp/7.jpg" alt="Target Option"><br>Set <code>Target Architecture</code> as <code>MIPS (little endian)</code> (depending on your target);<br><img src="/imghost/rpp/8.jpg" alt="Target Architecture"><br>Set <code>Kernel Headers</code> as your host Linux version,because it will run on your pc.<br><img src="/imghost/rpp/9.jpg" alt="Kernel Headers"></p>
 <p>Install it.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install texinfo</span><br><span class="line">$ sudo apt-get install bison</span><br><span class="line">$ sudo apt-get install flex</span><br><span class="line">$ sudo make</span><br></pre></td></tr></table></figure></p>
 <p>Compiled files will be found in directory <code>output</code>. Cross compile utils will be in <code>buildroot/output/host/usr/bin</code>, and the compiler is <code>mips-linux-gcc</code>.</p>
 <p>Configure environment variables and test.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gedit ~/.bashrc</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:Path/to/buildroot/output/host/usr/bin</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">$ mips-linux-gcc -o <span class="built_in">test</span> test.c -static</span><br></pre></td></tr></table></figure></p>
@@ -1355,20 +1373,21 @@ lcx_listen -- like lcx -listen
 <h2 id="Red-Orchestra-2-Heroes-of-Stalingrad"><a href="#Red-Orchestra-2-Heroes-of-Stalingrad" class="headerlink" title="Red Orchestra 2: Heroes of Stalingrad"></a>Red Orchestra 2: Heroes of Stalingrad</h2><p>If you want to play sole mode(PVE)<br>Enter the game and press [~] to open the console and enter: <code>open gamemode-mapname</code> </p>
 <h3 id="Game-Mode"><a href="#Game-Mode" class="headerlink" title="Game Mode"></a>Game Mode</h3><p>1 TE：Territory（attack &amp; defence）<br>2 FF：FireFighter（TeamDeath Match）<br>3 CD：Countdown（timed awd）</p>
 <h3 id="Match-Map"><a href="#Match-Map" class="headerlink" title="Match Map"></a>Match Map</h3><p>Apartments<br>Barracks<br>CommissarsHouse<br>FallenFighters<br>GrainElevator<br>Gumrak<br>PavlovsHouse<br>RedOctoberFactory<br>Spartanovka<br>Station<br>…</p>
-<h3 id="e-g"><a href="#e-g" class="headerlink" title="e.g."></a>e.g.</h3><p><code>open TE-Spartanovka</code> in console</p>
+<h3 id="PvE-local"><a href="#PvE-local" class="headerlink" title="PvE (local)"></a>PvE (local)</h3><p>Type <code>open TE-Spartanovka</code> in console.<br>There are only one person player(you), and you can add bots to it.</p>
 <h3 id="Add-Bots"><a href="#Add-Bots" class="headerlink" title="Add Bots"></a>Add Bots</h3><p>Let’s talk about how to load the robot BOT:</p>
 <p>After entering the game, select your faction. After you get the gun steady, open the console and enter:<code>forceaddbots botsnumber camp</code></p>
 <p>Soviet camp = 1<br>German camp = 2</p>
 <p>for example:<br>The Soviets adds 2 soldiers, in console:<code>forceaddbots 2 1</code></p>
 <p>The German adds 3 soldiers, in console:<code>forceaddbots 3 2</code></p>
 <h2 id="Rising-Storm-2-Vietnam"><a href="#Rising-Storm-2-Vietnam" class="headerlink" title="Rising Storm 2: Vietnam"></a>Rising Storm 2: Vietnam</h2><p>To play single-player mode, after entering the game interface, press f3 to open the console.</p>
-<p>Enter <code>Open VNTE-CuChi?Minplayers=64?Maxplayers=64?Timelimit=1 200</code> to enter the map.</p>
+<h3 id="PvE-local-1"><a href="#PvE-local-1" class="headerlink" title="PvE (local)"></a>PvE (local)</h3><p>Enter <code>Open VNTE-CuChi?Minplayers=64?Maxplayers=64?Timelimit=1 200</code> to enter the map, and you will find plenty of bots there.</p>
 <ul>
 <li>VNTE-mapname (no spaces when entering the map name)</li>
 <li>minplayers = 64? maxplayers = 64 (minimum and maximum)</li>
 <li>timelimit = 1 200 (1 is the number of rounds, 200 is the time)</li>
 </ul>
 <p>After entering the map, enter addbots 64 and join the bot</p>
+<h3 id="Map-Set"><a href="#Map-Set" class="headerlink" title="Map Set"></a>Map Set</h3><p>VNTE-CuChi<br>VNTE-Hill937<br>VNTE-AnLaoValley<br>VNTE-SongBe<br>VNTE-HueCity<br>VNTE-LongTan<br>VNTE-RungSac<br>VNTE-OperationForrest<br>…</p>
 <h2 id="DEAD-OR-ALIVE-5-Last-Round-Core-Fighters"><a href="#DEAD-OR-ALIVE-5-Last-Round-Core-Fighters" class="headerlink" title="DEAD OR ALIVE 5 Last Round: Core Fighters"></a>DEAD OR ALIVE 5 Last Round: Core Fighters</h2><p>Download and play the game.<br>Find the game in the library Right-click the game to open the game properties-&gt;test, enter <code>DOA5LROnlineBetaBranch</code>, then check the code and activate.</p>
 <h2 id="Counter-Strike-Global-Offensive"><a href="#Counter-Strike-Global-Offensive" class="headerlink" title="Counter-Strike: Global Offensive"></a>Counter-Strike: Global Offensive</h2><p>Press key <code>~</code> to open command first.</p>
 <h3 id="Cheat-Mode"><a href="#Cheat-Mode" class="headerlink" title="Cheat Mode"></a>Cheat Mode</h3><pre><code>sv_cheats 0/1                -- disable/enable cheat(needed by folowing part)
@@ -2216,8 +2235,120 @@ $ hexo s -g
         <category>List</category>
       </categories>
       <tags>
-        <tag>pwn</tag>
         <tag>list</tag>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Reverse Engineering Reading List</title>
+    <url>/2018/10/01/2018-09-31-Reverse-Engineering-Reading-List/</url>
+    <content><![CDATA[<p><strong>From <a href="https://github.com/onethawt/" target="_blank" rel="noopener">onethawt</a></strong></p>
+<p>If any of the links are down and you can’t retrieve them on <a href="http://archive.org" target="_blank" rel="noopener">archive.org</a>, <a href="http://one.thawt.io/contact/" target="_blank" rel="noopener">contact me</a> and I can give you a copy of the document.</p>
+<h2 id="Software-amp-Libraries"><a href="#Software-amp-Libraries" class="headerlink" title="Software &amp; Libraries"></a>Software &amp; Libraries</h2><ul>
+<li><a href="https://www.hex-rays.com/products/ida/" target="_blank" rel="noopener">IDA Pro</a>: The <strong>KING</strong> IDA is a Windows, Linux or Mac OS X hosted multi-processor disassembler and debugger that offers so many features it is hard to describe them all.</li>
+<li><a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener">Ghidra</a>: Ghidra is a software reverse engineering (SRE) framework created and maintained by the National Security Agency Research Directorate. This framework includes a suite of full-featured, high-end software analysis tools that enable users to analyze compiled code on a variety of platforms including Windows, Mac OS, and Linux. Capabilities include disassembly, assembly, decompilation, graphing, and scripting, along with hundreds of other features. Ghidra supports a wide variety of process instruction sets and executable formats and can be run in both user-interactive and automated modes. Users may also develop their own Ghidra plug-in components and/or scripts using Java or Python.</li>
+<li><a href="https://binary.ninja/" target="_blank" rel="noopener">Binary Ninja</a>: A reverse engineering platform. It focuses on a clean and easy to use interface with a powerful multithreaded analysis built on a custom IL to quickly adapt to a variety of architectures, platforms, and compilers.</li>
+<li><a href="http://www.capstone-engine.org/" target="_blank" rel="noopener">Capstone</a>: Capstone is a lightweight multi-platform, multi-architecture disassembly framework. Our target is to make Capstone the ultimate disassembly engine for binary analysis and reversing in the security community.</li>
+<li><a href="https://www.hopperapp.com/" target="_blank" rel="noopener">Hopper</a>: Hopper is a reverse engineering tool for OS X and Linux, that lets you disassemble, and decompile your 32/64bits Intel Mac, Linux, Windows and iOS executables! Based on capstone, scriptable.</li>
+<li><a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">PeachPy</a>: Portable efficient assembly code-generator in higher-level python.</li>
+<li><a href="http://www.radare.org/" target="_blank" rel="noopener">Radare2</a>: Portable reversing framework for disassembly, debugging, forensics, etc. Based on capstone, scriptable.</li>
+<li><a href="http://x64dbg.com/" target="_blank" rel="noopener">x64dbg</a>: Open source x64/x32 Windows debugger. Heir to Olly.</li>
+<li><a href="https://github.com/cboin/re_lab" target="_blank" rel="noopener">re_lab</a>: A portable reverse engineering environment using docker.</li>
+</ul>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><ul>
+<li><a href="https://github.com/rednaga/training/tree/master/DEFCON23" target="_blank" rel="noopener">Offensive &amp; Defensive Android Reverse Engineering</a></li>
+</ul>
+<h2 id="Assembly-Disassembly"><a href="#Assembly-Disassembly" class="headerlink" title="Assembly / Disassembly"></a>Assembly / Disassembly</h2><ul>
+<li><a href="http://blog.ptsecurity.com/2015/07/best-reverser-write-up-analyzing.html" target="_blank" rel="noopener">Analyzing Uncommon Firmware</a></li>
+<li><a href="https://drive.google.com/file/d/0B0l-Qo3D3sAoMEhkcFBFVzRiNEk/view" target="_blank" rel="noopener">ARM v7 Disassembling</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/wang-shuai" target="_blank" rel="noopener">UROBOROS - Reassembling Disassembling</a> -  a tool that can disassemble executables to the extent that the generated code can be assembled back to working binaries without manual effort.</li>
+</ul>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
+<li><a href="https://vimeo.com/6764570" target="_blank" rel="noopener">Reverse Engineering 101 Speaker Presentation</a></li>
+<li><a href="https://prezi.com/a5tm-lf0879-/reverse-engineering-101-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 101 - NYU: Poly 2010</a>: Intro to Reverse Engineering given at NYU:Poly on October 4th, 2010 by Aaron Portnoy and Peter Silberman. </li>
+<li><a href="https://prezi.com/e5a2tumdqocj/reverse-engineering-102-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 102 - NYU: Poly 2010</a>: Intro to Reverse Engineering (Day 2) given at NYU:Poly on October 11th, 2010 by Aaron Portnoy and Peter Silberman.</li>
+<li><a href="https://trailofbits.github.io/ctf/" target="_blank" rel="noopener">CTF Field Guide</a></li>
+</ul>
+<h3 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h3><ul>
+<li><a href="https://www.amazon.com/Modern-X86-Assembly-Language-Programming/dp/1484200659" target="_blank" rel="noopener">Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE, and AVX</a>: Fundamentals of x86 assembly language programming. It focuses on the aspects of the x86 instruction set that are most relevant to application software development.</li>
+<li><a href="https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901" target="_blank" rel="noopener">Practical Malware Analysis</a>: Practical Malware Analysis will teach you the tools and techniques used by professional analysts. With this book as your guide, you’ll be able to safely analyze, debug, and disassemble any malicious software that comes your way.</li>
+<li><a href="https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315" target="_blank" rel="noopener">Practical Reverse Engineering</a>: The book covers x86, x64, and ARM (the first book to cover all three); Windows kernel-mode code rootkits and drivers; virtual machine protection techniques; and much more. Best of all, it offers a systematic approach to the material, with plenty of hands-on exercises and real-world examples.</li>
+<li><a href="https://www.amazon.com/Reversing-Secrets-Engineering-Eldad-Eilam/dp/0764574817" target="_blank" rel="noopener">Reversing: Secrets of Reverse Engineering</a>: Beginning with a basic primer on reverse engineering-including computer internals, operating systems, and assembly language-and then discussing the various applications of reverse engineering, this book provides readers with practical, in-depth techniques for software reverse engineering.</li>
+<li><a href="https://beginners.re/" target="_blank" rel="noopener">Reverse Engineering for Beginners</a>: Available in english and russian, this ebook is a good introduction for beginners. Numerous topics are touched : Oracle RDBMS, Itanium, copy-protection dongles, LD_PRELOAD, stack overflow, ELF, win32 PE file format, x86-64, critical sections, syscalls, TLS, position-independent code (PIC), profile-guided optimization, C++ STL, OpenMP, win32 SEH.</li>
+<li><a href="https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898" target="_blank" rel="noopener">The IDA Pro Book: The Unofficial Guide to the World’s Most Popular Disassembler</a>: Hailed by the creator of IDA Pro as “profound, comprehensive, and accurate,” the second edition of The IDA Pro Book covers everything from the very first steps to advanced automation techniques.</li>
+</ul>
+<h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><ul>
+<li><a href="https://www.isoc.org/isoc/conferences/ndss/10/pdf/23.pdf" target="_blank" rel="noopener">Automatic Reverse Engineering of Data Structures from Binary Execution</a> [PDF]</li>
+<li><a href="http://ben.ransford.org/srg/papers/cozzie--digging.pdf" target="_blank" rel="noopener">Digging For Data Structures</a> [PDF]</li>
+<li><a href="http://www.isoc.org/isoc/conferences/ndss/11/pdf/5_1.pdf" target="_blank" rel="noopener">Howard: a dynamic excavator for reverse engineering data structures</a> [PDF]</li>
+<li><a href="http://www.cs.vu.nl/~herbertb/papers/mempick_wcre13.pdf" target="_blank" rel="noopener">MemPick: High-Level Data Structure Detection in C/C++ Binaries</a> [PDF]</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">TIE: Principled Reverse Engineering of Types in Binary Programs</a> [PDF]</li>
+</ul>
+<h2 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h2><ul>
+<li><a href="http://www.crisalis-project.eu/sites/crisalis-project.eu/files/crisalis_deliverable-D5.3.pdf" target="_blank" rel="noopener">Automated Vulnerability Discovery Techniques</a> [PDF]</li>
+<li><a href="https://www.usenix.org/sites/default/files/sec15_supplement.pdf" target="_blank" rel="noopener">Dismantling Megamos Crypto: Wirelessly Lockpicking a Vehicle Immobilizer</a> [PDF]</li>
+<li><a href="http://software.imdea.org/~juanca/papers/sigpath_esorics14.pdf" target="_blank" rel="noopener">Memory Graph Approach for Program Data Introspection and Modification</a> [PDF]</li>
+<li><a href="http://illmatics.com/Remote%20Car%20Hacking.pdf" target="_blank" rel="noopener">Remote Exploitation of an Unaltered Passenger Vehicle</a> [PDF]</li>
+</ul>
+<h2 id="Instruction-Sets"><a href="#Instruction-Sets" class="headerlink" title="Instruction Sets"></a>Instruction Sets</h2><ul>
+<li><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html" target="_blank" rel="noopener">Intel® 64 and IA-32 Architectures Software Developer Manuals</a>: These manuals describe the architecture and programming environment of the Intel® 64 and IA-32 architectures.</li>
+<li><a href="http://ref.x86asm.net/" target="_blank" rel="noopener">X86 Opcode and Instruction Reference</a>: This reference is intended to be precise opcode and instruction set reference (including x86-64). Its principal aim is exact definition of instruction parameters and attributes.</li>
+<li><a href="https://github.com/astocko/json-x86-64" target="_blank" rel="noopener">JSON x86-64 Intel instruction set</a>: The entire x86-64 Intel instruction set in a machine readable JSON format up to AVX-512.</li>
+<li><a href="http://www.felixcloutier.com/x86/" target="_blank" rel="noopener">X86-64 Reference</a>: Derived from the September 2014 version of the Intel® 64 and IA-32 Architectures Software Developer’s Manual, volumes 2A and 2B. <strong>Uses <a href="https://github.com/zneak/x86doc" target="_blank" rel="noopener">PDF mining</a> to generate the reference from official Intel docs.</strong></li>
+</ul>
+<h2 id="Mac-and-iOS"><a href="#Mac-and-iOS" class="headerlink" title="Mac and iOS"></a>Mac and iOS</h2><ul>
+<li><a href="https://github.com/iosre/iOSAppReverseEngineering" target="_blank" rel="noopener">iOS App Reverse Engineering</a>: iOS App Reverse Engineering is the world’s 1st book of very detailed iOS App reverse engineering skills</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">iOS Kernel Security</a> [PDF]</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/pod2g-jailbreak-techniques-wwjc-2012.pdf" target="_blank" rel="noopener">Jailbreaking Techniques</a> [PDF]</li>
+<li><a href="https://s3.amazonaws.com/s3.synack.com/T2_reversingIOSApps.pdf" target="_blank" rel="noopener">Reversing iOS Apps: A Practical Approach</a> [PDF]</li>
+</ul>
+<h2 id="Malware-Analysis"><a href="#Malware-Analysis" class="headerlink" title="Malware Analysis"></a>Malware Analysis</h2><ul>
+<li><a href="https://github.com/REhints/Publications/tree/master/Conferences/BH&#39;2015" target="_blank" rel="noopener">Distributing The Reconstruction Of High-Level Intermediate Representation For Large Scale Malware Analysis</a></li>
+</ul>
+<h3 id="Adware"><a href="#Adware" class="headerlink" title="Adware"></a>Adware</h3><ul>
+<li><a href="https://www.proteansec.com/whitepapers/Proteansec_Analysis_Disco_Savings.pdf" target="_blank" rel="noopener">Analysis of Disco Savings Adware</a> [PDF]</li>
+</ul>
+<h3 id="Trojans"><a href="#Trojans" class="headerlink" title="Trojans"></a>Trojans</h3><ul>
+<li><a href="https://www.proofpoint.com/us/threat-insight/post/You-Dirty-RAT" target="_blank" rel="noopener">You Dirty RAT: Analyzing an AlienSpy Payload</a></li>
+</ul>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><p><a href="http://www.di.fc.ul.pt/~nuno/PAPERS/WCRE11.pdf" target="_blank" rel="noopener">Reverse Engineering of Protocols from Network Traces</a> [PDF]</p>
+<h2 id="Obfuscation-and-Deobfuscation"><a href="#Obfuscation-and-Deobfuscation" class="headerlink" title="Obfuscation and Deobfuscation"></a>Obfuscation and Deobfuscation</h2><ul>
+<li><a href="http://www.cacs.louisiana.edu/~arun/papers/2010-pepm-lakhotia.pdf" target="_blank" rel="noopener">Context-Sensitive Analysis of Obfuscated x86 Executables</a> [PDF]</li>
+<li><a href="http://blog.mindedsecurity.com/2015/10/advanced-js-deobfuscation-via-ast-and.html" target="_blank" rel="noopener">Advanced JS Deobfuscation Via AST and Partial Evaluation</a></li>
+</ul>
+<h2 id="Research-Tools"><a href="#Research-Tools" class="headerlink" title="Research Tools"></a>Research Tools</h2><ul>
+<li><a href="https://www.cs.virginia.edu/~weimer/p/weimer-wcre2013-re-preprint.pdf" target="_blank" rel="noopener">Genetic Programming for Reverse Engineering</a></li>
+<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">IR Transformation Synthesis for Assembly Instructions</a></li>
+</ul>
+<h2 id="Unpacking"><a href="#Unpacking" class="headerlink" title="Unpacking"></a>Unpacking</h2><ul>
+<li><a href="https://www.blackhat.com/presentations/bh-usa-07/Yason/Whitepaper/bh-usa-07-yason-WP.pdf" target="_blank" rel="noopener">The Art of Unpacking</a> [PDF]</li>
+</ul>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Driver-Signature-Enforcement"><a href="#Driver-Signature-Enforcement" class="headerlink" title="Driver Signature Enforcement"></a>Driver Signature Enforcement</h3><ul>
+<li><a href="http://j00ru.vexillium.org/?p=1169" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #1: default drivers</a></li>
+<li><a href="http://j00ru.vexillium.org/?p=1393" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #2: CSRSS and thread desktops</a></li>
+<li><a href="http://j00ru.vexillium.org/?p=1455" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #3: The Ultimate Encounter</a></li>
+<li><a href="http://www.kernelmode.info/forum/viewtopic.php?t=3322&amp;f=11" target="_blank" rel="noopener">DSEFix - Defeating x64 Driver Signature Enforcement: Using exploitable signed drivers - VirtualBox driver</a></li>
+</ul>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
+<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">HyperV and vmbus internals</a></li>
+</ul>
+<h3 id="Patch-Guard"><a href="#Patch-Guard" class="headerlink" title="Patch Guard"></a>Patch Guard</h3><ul>
+<li><a href="http://www.uninformed.org/?v=3&amp;a=3&amp;t=txt" target="_blank" rel="noopener">Bypassing PatchGuard on Windows x64</a></li>
+<li><a href="http://fyyre.ivory-tower.de/projects/bootloader.txt" target="_blank" rel="noopener">Disable PatchGuard Vista &amp; Windows 7</a></li>
+<li><a href="http://fyyre.ivory-tower.de/projects/bootloader_v2.txt" target="_blank" rel="noopener">Disable PatchGuard Windows 8 &amp; Windows 10</a></li>
+<li><a href="https://github.com/hfiref0x/UPGDSED" target="_blank" rel="noopener">Universal Patchguard and Driver Signature Enforcement Disable</a></li>
+</ul>
+<h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><ul>
+<li><a href="http://www.pinvoke.net/" target="_blank" rel="noopener">PInvoke.net</a>: PInvoke.net is primarily a wiki, allowing developers to find, edit and add PInvoke* signatures, user-defined types, and any other information related to calling Win32 and other unmanaged APIs from managed code (written in languages such as C# or VB.NET).</li>
+</ul>
+]]></content>
+      <categories>
+        <category>List</category>
+      </categories>
+      <tags>
+        <tag>list</tag>
+        <tag>reverse</tag>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
@@ -2665,118 +2796,6 @@ $ hexo s -g
         <tag>list</tag>
         <tag>reverse</tag>
         <tag>ida</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Reverse Engineering Reading List</title>
-    <url>/2018/10/01/2018-09-31-Reverse-Engineering-Reading-List/</url>
-    <content><![CDATA[<p><strong>From <a href="https://github.com/onethawt/" target="_blank" rel="noopener">onethawt</a></strong></p>
-<p>If any of the links are down and you can’t retrieve them on <a href="http://archive.org" target="_blank" rel="noopener">archive.org</a>, <a href="http://one.thawt.io/contact/" target="_blank" rel="noopener">contact me</a> and I can give you a copy of the document.</p>
-<h2 id="Software-amp-Libraries"><a href="#Software-amp-Libraries" class="headerlink" title="Software &amp; Libraries"></a>Software &amp; Libraries</h2><ul>
-<li><a href="https://www.hex-rays.com/products/ida/" target="_blank" rel="noopener">IDA Pro</a>: The <strong>KING</strong> IDA is a Windows, Linux or Mac OS X hosted multi-processor disassembler and debugger that offers so many features it is hard to describe them all.</li>
-<li><a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener">Ghidra</a>: Ghidra is a software reverse engineering (SRE) framework created and maintained by the National Security Agency Research Directorate. This framework includes a suite of full-featured, high-end software analysis tools that enable users to analyze compiled code on a variety of platforms including Windows, Mac OS, and Linux. Capabilities include disassembly, assembly, decompilation, graphing, and scripting, along with hundreds of other features. Ghidra supports a wide variety of process instruction sets and executable formats and can be run in both user-interactive and automated modes. Users may also develop their own Ghidra plug-in components and/or scripts using Java or Python.</li>
-<li><a href="https://binary.ninja/" target="_blank" rel="noopener">Binary Ninja</a>: A reverse engineering platform. It focuses on a clean and easy to use interface with a powerful multithreaded analysis built on a custom IL to quickly adapt to a variety of architectures, platforms, and compilers.</li>
-<li><a href="http://www.capstone-engine.org/" target="_blank" rel="noopener">Capstone</a>: Capstone is a lightweight multi-platform, multi-architecture disassembly framework. Our target is to make Capstone the ultimate disassembly engine for binary analysis and reversing in the security community.</li>
-<li><a href="https://www.hopperapp.com/" target="_blank" rel="noopener">Hopper</a>: Hopper is a reverse engineering tool for OS X and Linux, that lets you disassemble, and decompile your 32/64bits Intel Mac, Linux, Windows and iOS executables! Based on capstone, scriptable.</li>
-<li><a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">PeachPy</a>: Portable efficient assembly code-generator in higher-level python.</li>
-<li><a href="http://www.radare.org/" target="_blank" rel="noopener">Radare2</a>: Portable reversing framework for disassembly, debugging, forensics, etc. Based on capstone, scriptable.</li>
-<li><a href="http://x64dbg.com/" target="_blank" rel="noopener">x64dbg</a>: Open source x64/x32 Windows debugger. Heir to Olly.</li>
-<li><a href="https://github.com/cboin/re_lab" target="_blank" rel="noopener">re_lab</a>: A portable reverse engineering environment using docker.</li>
-</ul>
-<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><ul>
-<li><a href="https://github.com/rednaga/training/tree/master/DEFCON23" target="_blank" rel="noopener">Offensive &amp; Defensive Android Reverse Engineering</a></li>
-</ul>
-<h2 id="Assembly-Disassembly"><a href="#Assembly-Disassembly" class="headerlink" title="Assembly / Disassembly"></a>Assembly / Disassembly</h2><ul>
-<li><a href="http://blog.ptsecurity.com/2015/07/best-reverser-write-up-analyzing.html" target="_blank" rel="noopener">Analyzing Uncommon Firmware</a></li>
-<li><a href="https://drive.google.com/file/d/0B0l-Qo3D3sAoMEhkcFBFVzRiNEk/view" target="_blank" rel="noopener">ARM v7 Disassembling</a></li>
-<li><a href="https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/wang-shuai" target="_blank" rel="noopener">UROBOROS - Reassembling Disassembling</a> -  a tool that can disassemble executables to the extent that the generated code can be assembled back to working binaries without manual effort.</li>
-</ul>
-<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
-<li><a href="https://vimeo.com/6764570" target="_blank" rel="noopener">Reverse Engineering 101 Speaker Presentation</a></li>
-<li><a href="https://prezi.com/a5tm-lf0879-/reverse-engineering-101-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 101 - NYU: Poly 2010</a>: Intro to Reverse Engineering given at NYU:Poly on October 4th, 2010 by Aaron Portnoy and Peter Silberman. </li>
-<li><a href="https://prezi.com/e5a2tumdqocj/reverse-engineering-102-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 102 - NYU: Poly 2010</a>: Intro to Reverse Engineering (Day 2) given at NYU:Poly on October 11th, 2010 by Aaron Portnoy and Peter Silberman.</li>
-<li><a href="https://trailofbits.github.io/ctf/" target="_blank" rel="noopener">CTF Field Guide</a></li>
-</ul>
-<h3 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h3><ul>
-<li><a href="https://www.amazon.com/Modern-X86-Assembly-Language-Programming/dp/1484200659" target="_blank" rel="noopener">Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE, and AVX</a>: Fundamentals of x86 assembly language programming. It focuses on the aspects of the x86 instruction set that are most relevant to application software development.</li>
-<li><a href="https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901" target="_blank" rel="noopener">Practical Malware Analysis</a>: Practical Malware Analysis will teach you the tools and techniques used by professional analysts. With this book as your guide, you’ll be able to safely analyze, debug, and disassemble any malicious software that comes your way.</li>
-<li><a href="https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315" target="_blank" rel="noopener">Practical Reverse Engineering</a>: The book covers x86, x64, and ARM (the first book to cover all three); Windows kernel-mode code rootkits and drivers; virtual machine protection techniques; and much more. Best of all, it offers a systematic approach to the material, with plenty of hands-on exercises and real-world examples.</li>
-<li><a href="https://www.amazon.com/Reversing-Secrets-Engineering-Eldad-Eilam/dp/0764574817" target="_blank" rel="noopener">Reversing: Secrets of Reverse Engineering</a>: Beginning with a basic primer on reverse engineering-including computer internals, operating systems, and assembly language-and then discussing the various applications of reverse engineering, this book provides readers with practical, in-depth techniques for software reverse engineering.</li>
-<li><a href="https://beginners.re/" target="_blank" rel="noopener">Reverse Engineering for Beginners</a>: Available in english and russian, this ebook is a good introduction for beginners. Numerous topics are touched : Oracle RDBMS, Itanium, copy-protection dongles, LD_PRELOAD, stack overflow, ELF, win32 PE file format, x86-64, critical sections, syscalls, TLS, position-independent code (PIC), profile-guided optimization, C++ STL, OpenMP, win32 SEH.</li>
-<li><a href="https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898" target="_blank" rel="noopener">The IDA Pro Book: The Unofficial Guide to the World’s Most Popular Disassembler</a>: Hailed by the creator of IDA Pro as “profound, comprehensive, and accurate,” the second edition of The IDA Pro Book covers everything from the very first steps to advanced automation techniques.</li>
-</ul>
-<h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><ul>
-<li><a href="https://www.isoc.org/isoc/conferences/ndss/10/pdf/23.pdf" target="_blank" rel="noopener">Automatic Reverse Engineering of Data Structures from Binary Execution</a> [PDF]</li>
-<li><a href="http://ben.ransford.org/srg/papers/cozzie--digging.pdf" target="_blank" rel="noopener">Digging For Data Structures</a> [PDF]</li>
-<li><a href="http://www.isoc.org/isoc/conferences/ndss/11/pdf/5_1.pdf" target="_blank" rel="noopener">Howard: a dynamic excavator for reverse engineering data structures</a> [PDF]</li>
-<li><a href="http://www.cs.vu.nl/~herbertb/papers/mempick_wcre13.pdf" target="_blank" rel="noopener">MemPick: High-Level Data Structure Detection in C/C++ Binaries</a> [PDF]</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">TIE: Principled Reverse Engineering of Types in Binary Programs</a> [PDF]</li>
-</ul>
-<h2 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h2><ul>
-<li><a href="http://www.crisalis-project.eu/sites/crisalis-project.eu/files/crisalis_deliverable-D5.3.pdf" target="_blank" rel="noopener">Automated Vulnerability Discovery Techniques</a> [PDF]</li>
-<li><a href="https://www.usenix.org/sites/default/files/sec15_supplement.pdf" target="_blank" rel="noopener">Dismantling Megamos Crypto: Wirelessly Lockpicking a Vehicle Immobilizer</a> [PDF]</li>
-<li><a href="http://software.imdea.org/~juanca/papers/sigpath_esorics14.pdf" target="_blank" rel="noopener">Memory Graph Approach for Program Data Introspection and Modification</a> [PDF]</li>
-<li><a href="http://illmatics.com/Remote%20Car%20Hacking.pdf" target="_blank" rel="noopener">Remote Exploitation of an Unaltered Passenger Vehicle</a> [PDF]</li>
-</ul>
-<h2 id="Instruction-Sets"><a href="#Instruction-Sets" class="headerlink" title="Instruction Sets"></a>Instruction Sets</h2><ul>
-<li><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html" target="_blank" rel="noopener">Intel® 64 and IA-32 Architectures Software Developer Manuals</a>: These manuals describe the architecture and programming environment of the Intel® 64 and IA-32 architectures.</li>
-<li><a href="http://ref.x86asm.net/" target="_blank" rel="noopener">X86 Opcode and Instruction Reference</a>: This reference is intended to be precise opcode and instruction set reference (including x86-64). Its principal aim is exact definition of instruction parameters and attributes.</li>
-<li><a href="https://github.com/astocko/json-x86-64" target="_blank" rel="noopener">JSON x86-64 Intel instruction set</a>: The entire x86-64 Intel instruction set in a machine readable JSON format up to AVX-512.</li>
-<li><a href="http://www.felixcloutier.com/x86/" target="_blank" rel="noopener">X86-64 Reference</a>: Derived from the September 2014 version of the Intel® 64 and IA-32 Architectures Software Developer’s Manual, volumes 2A and 2B. <strong>Uses <a href="https://github.com/zneak/x86doc" target="_blank" rel="noopener">PDF mining</a> to generate the reference from official Intel docs.</strong></li>
-</ul>
-<h2 id="Mac-and-iOS"><a href="#Mac-and-iOS" class="headerlink" title="Mac and iOS"></a>Mac and iOS</h2><ul>
-<li><a href="https://github.com/iosre/iOSAppReverseEngineering" target="_blank" rel="noopener">iOS App Reverse Engineering</a>: iOS App Reverse Engineering is the world’s 1st book of very detailed iOS App reverse engineering skills</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">iOS Kernel Security</a> [PDF]</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/pod2g-jailbreak-techniques-wwjc-2012.pdf" target="_blank" rel="noopener">Jailbreaking Techniques</a> [PDF]</li>
-<li><a href="https://s3.amazonaws.com/s3.synack.com/T2_reversingIOSApps.pdf" target="_blank" rel="noopener">Reversing iOS Apps: A Practical Approach</a> [PDF]</li>
-</ul>
-<h2 id="Malware-Analysis"><a href="#Malware-Analysis" class="headerlink" title="Malware Analysis"></a>Malware Analysis</h2><ul>
-<li><a href="https://github.com/REhints/Publications/tree/master/Conferences/BH&#39;2015" target="_blank" rel="noopener">Distributing The Reconstruction Of High-Level Intermediate Representation For Large Scale Malware Analysis</a></li>
-</ul>
-<h3 id="Adware"><a href="#Adware" class="headerlink" title="Adware"></a>Adware</h3><ul>
-<li><a href="https://www.proteansec.com/whitepapers/Proteansec_Analysis_Disco_Savings.pdf" target="_blank" rel="noopener">Analysis of Disco Savings Adware</a> [PDF]</li>
-</ul>
-<h3 id="Trojans"><a href="#Trojans" class="headerlink" title="Trojans"></a>Trojans</h3><ul>
-<li><a href="https://www.proofpoint.com/us/threat-insight/post/You-Dirty-RAT" target="_blank" rel="noopener">You Dirty RAT: Analyzing an AlienSpy Payload</a></li>
-</ul>
-<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><p><a href="http://www.di.fc.ul.pt/~nuno/PAPERS/WCRE11.pdf" target="_blank" rel="noopener">Reverse Engineering of Protocols from Network Traces</a> [PDF]</p>
-<h2 id="Obfuscation-and-Deobfuscation"><a href="#Obfuscation-and-Deobfuscation" class="headerlink" title="Obfuscation and Deobfuscation"></a>Obfuscation and Deobfuscation</h2><ul>
-<li><a href="http://www.cacs.louisiana.edu/~arun/papers/2010-pepm-lakhotia.pdf" target="_blank" rel="noopener">Context-Sensitive Analysis of Obfuscated x86 Executables</a> [PDF]</li>
-<li><a href="http://blog.mindedsecurity.com/2015/10/advanced-js-deobfuscation-via-ast-and.html" target="_blank" rel="noopener">Advanced JS Deobfuscation Via AST and Partial Evaluation</a></li>
-</ul>
-<h2 id="Research-Tools"><a href="#Research-Tools" class="headerlink" title="Research Tools"></a>Research Tools</h2><ul>
-<li><a href="https://www.cs.virginia.edu/~weimer/p/weimer-wcre2013-re-preprint.pdf" target="_blank" rel="noopener">Genetic Programming for Reverse Engineering</a></li>
-<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">IR Transformation Synthesis for Assembly Instructions</a></li>
-</ul>
-<h2 id="Unpacking"><a href="#Unpacking" class="headerlink" title="Unpacking"></a>Unpacking</h2><ul>
-<li><a href="https://www.blackhat.com/presentations/bh-usa-07/Yason/Whitepaper/bh-usa-07-yason-WP.pdf" target="_blank" rel="noopener">The Art of Unpacking</a> [PDF]</li>
-</ul>
-<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Driver-Signature-Enforcement"><a href="#Driver-Signature-Enforcement" class="headerlink" title="Driver Signature Enforcement"></a>Driver Signature Enforcement</h3><ul>
-<li><a href="http://j00ru.vexillium.org/?p=1169" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #1: default drivers</a></li>
-<li><a href="http://j00ru.vexillium.org/?p=1393" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #2: CSRSS and thread desktops</a></li>
-<li><a href="http://j00ru.vexillium.org/?p=1455" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #3: The Ultimate Encounter</a></li>
-<li><a href="http://www.kernelmode.info/forum/viewtopic.php?t=3322&amp;f=11" target="_blank" rel="noopener">DSEFix - Defeating x64 Driver Signature Enforcement: Using exploitable signed drivers - VirtualBox driver</a></li>
-</ul>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
-<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">HyperV and vmbus internals</a></li>
-</ul>
-<h3 id="Patch-Guard"><a href="#Patch-Guard" class="headerlink" title="Patch Guard"></a>Patch Guard</h3><ul>
-<li><a href="http://www.uninformed.org/?v=3&amp;a=3&amp;t=txt" target="_blank" rel="noopener">Bypassing PatchGuard on Windows x64</a></li>
-<li><a href="http://fyyre.ivory-tower.de/projects/bootloader.txt" target="_blank" rel="noopener">Disable PatchGuard Vista &amp; Windows 7</a></li>
-<li><a href="http://fyyre.ivory-tower.de/projects/bootloader_v2.txt" target="_blank" rel="noopener">Disable PatchGuard Windows 8 &amp; Windows 10</a></li>
-<li><a href="https://github.com/hfiref0x/UPGDSED" target="_blank" rel="noopener">Universal Patchguard and Driver Signature Enforcement Disable</a></li>
-</ul>
-<h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><ul>
-<li><a href="http://www.pinvoke.net/" target="_blank" rel="noopener">PInvoke.net</a>: PInvoke.net is primarily a wiki, allowing developers to find, edit and add PInvoke* signatures, user-defined types, and any other information related to calling Win32 and other unmanaged APIs from managed code (written in languages such as C# or VB.NET).</li>
-</ul>
-]]></content>
-      <categories>
-        <category>List</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
-        <tag>list</tag>
-        <tag>reverse</tag>
       </tags>
   </entry>
   <entry>
