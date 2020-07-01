@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="TyeYeah, CS,"> 
-    <meta name="description" content="blog on Hexo,In some OJ providing python sandbox, or web site written in python and using template rendering( ss,"> 
+    <meta name="description" content="blog on Hexo,In some OJ providing python sandbox, or web site written in python and using template rendering (ss,"> 
     <meta name="author" content="TyeYeah"> 
     <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -59,7 +59,7 @@
 
         </div>
         <div class="content markdown">
-            <p>In some OJ providing python sandbox, or web site written in python and using template rendering( <code>ssti</code> appears ), your pentest must have something to do with python sandbox escape. </p>
+            <p>In some OJ providing python sandbox, or web site written in python and using template rendering (<code>ssti</code> appears), your pentest must have something to do with python sandbox escape. </p>
 <h2 id="Python2-Sandbox-Escape"><a href="#Python2-Sandbox-Escape" class="headerlink" title="Python2 Sandbox Escape"></a>Python2 Sandbox Escape</h2><p>When you are in a restricted python environment, to get rid of every limits and spawn a shell is the main target, but kind of tricky.<br>Our final aim is to get shell with the help of <code>os</code>,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">'ifconfig'</span>)</span><br><span class="line">os.popen(<span class="string">'ifconfig'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>and <code>eval</code>/<code>exec</code>,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(<span class="string">'__import__("os").system("dir")'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>and <code>pty</code>,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pty</span><br><span class="line">pty.spawn(<span class="string">'ls'</span>)</span><br></pre></td></tr></table></figure></p>
