@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Format String Vulnerability</title>
-    <url>/2020/07/05/Format-String-Vulnerability/</url>
+    <title>Format String Vulnerability Intro</title>
+    <url>/2020/07/05/Format-String-Vulnerability-Intro/</url>
     <content><![CDATA[<p>The format string in many programming languages, refers to a control parameter used by a class of functions. It helps to output text in specific format, according to conversion specification or format specifiers that user set.</p>
 <h2 id="Format-String-Introduction"><a href="#Format-String-Introduction" class="headerlink" title="Format String Introduction"></a>Format String Introduction</h2><p>For <code>C</code> format string functions, characters are usually copied literally into the function’s output, but format specifiers, which start with a <code>%</code> character, indicate the location and method to translate a piece of data (such as a number) to characters.</p>
 <p>We take <code>printf</code> as an example.<br><img src="/imghost/fsv/example.png" alt="example"></p>
-<p>Format string functions include:<br>| method name                  | method function                                          |<br>|——————————|———————————————————-|<br>| scanf                        | scan input format string                                 |<br>| printf                       | output to stdout                                         |<br>| fprintf                      | output to FILE stream                                    |<br>| vprintf                      | output to stdout according to parameter list             |<br>| vfprintf                     | output to FILE stream according to parameter list        |<br>| sprintf                      | output to string                                         |<br>| snprintf                     | output assigned number chars to string                   |<br>| vsprintf                     | output to string according to parameter list             |<br>| vsnprintf                    | output specified number chars to string according to … |<br>| setproctitle                 | set argv                                                 |<br>| syslog                       | output log                                               |<br>| err, verr, warn, vwarn, etc. | error and warning output                                 |</p>
+<p>Format string functions include:</p>
+<table>
+<thead>
+<tr>
+<th>method name</th>
+<th>method function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scanf</td>
+<td>scan input format string</td>
+</tr>
+<tr>
+<td>printf</td>
+<td>output to stdout</td>
+</tr>
+<tr>
+<td>fprintf</td>
+<td>output to FILE stream</td>
+</tr>
+<tr>
+<td>vprintf</td>
+<td>output to stdout according to parameter list</td>
+</tr>
+<tr>
+<td>vfprintf</td>
+<td>output to FILE stream according to parameter list</td>
+</tr>
+<tr>
+<td>sprintf</td>
+<td>output to string</td>
+</tr>
+<tr>
+<td>snprintf</td>
+<td>output assigned number chars to string</td>
+</tr>
+<tr>
+<td>vsprintf</td>
+<td>output to string according to parameter list</td>
+</tr>
+<tr>
+<td>vsnprintf</td>
+<td>output specified number chars to string according to …</td>
+</tr>
+<tr>
+<td>setproctitle</td>
+<td>set argv</td>
+</tr>
+<tr>
+<td>syslog</td>
+<td>output log</td>
+</tr>
+<tr>
+<td>err, verr, warn, vwarn, etc.</td>
+<td>error and warning output</td>
+</tr>
+</tbody>
+</table>
 <p>Basic format is <code>%[parameter][flags][field width][.precision][length]type</code>, and you can check <a href="https://en.wikipedia.org/wiki/Printf_format_string" target="_blank" rel="noopener">this site</a> for meanings of every patterns.</p>
 <p>Things we need to focus on:</p>
 <ul>
 <li>parameter<ul>
-<li>n$        get specific parameter in format string</li>
+<li><code>n$</code>:        get specific parameter in format string</li>
 </ul>
 </li>
 <li>flag</li>
@@ -24,42 +82,75 @@
 </ul>
 </li>
 <li>length<ul>
-<li>hh        output a byte</li>
-<li>h         Output a double byte</li>
+<li><code>hh</code>:        output a byte</li>
+<li><code>h</code>:         Output a double byte</li>
 </ul>
 </li>
 <li>type<ul>
-<li>d/i       signed int</li>
-<li>u         unsigned int</li>
-<li>x/X       hex unsigned int</li>
-<li>o         octal unsigned int</li>
-<li>s         string (var assigns start address)</li>
-<li>c         character</li>
-<li>p         variable address</li>
-<li>n         number of written chars</li>
-<li>%         just <code>%</code> </li>
+<li><code>d/i</code>:       signed int</li>
+<li><code>u</code>:         unsigned int</li>
+<li><code>x/X</code>:       hex unsigned int</li>
+<li><code>o</code>:         octal unsigned int</li>
+<li><code>s</code>:         string (var assigns start address)</li>
+<li><code>c</code>:         character</li>
+<li><code>p</code>:         variable address</li>
+<li><code>n</code>:         number of written chars</li>
+<li><code>%</code>:         just <code>%</code> </li>
 </ul>
 </li>
 </ul>
 <h2 id="Vulnerability-Principle"><a href="#Vulnerability-Principle" class="headerlink" title="Vulnerability Principle"></a>Vulnerability Principle</h2><p>The <code>printf</code> reads given characters one by one.</p>
 <ul>
-<li>If not <code>%</code>, output to <code>stdout</code> </li>
-<li>If <code>%</code>, read next<ul>
-<li>If no chars, error report</li>
-<li>If <code>%</code>, output <code>%</code></li>
-<li>If else, analyze and output according to the parameters</li>
+<li>If not <code>%</code>, output to <code>stdout</code>. </li>
+<li>If <code>%</code> appears, read next,<ul>
+<li>If no chars following, error report.</li>
+<li>If <code>%</code> appears, output <code>%</code>.</li>
+<li>If other chars show up, analyze and output according to the parameters.</li>
 </ul>
 </li>
 </ul>
 <p>If we write <code>printf</code> wrongly like:<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"Color %s, Number %d, Float %4.2f"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>Without any following parameters, <code>printf</code> will get variables from the stack (from top of stack to the bottom).<br>For one thing, if it reads illegal data, the program crashes; for another thing, the output can be regarded as stack data leaking.</p>
+<p>Without any following parameters, <code>printf</code> will get variables from the stack memory (from top of the stack to bottom).<br>For one thing, if it reads illegal data, the program crashes; for another thing, the output can be regarded as stack data leaking.</p>
 <h2 id="Format-String-Exploit"><a href="#Format-String-Exploit" class="headerlink" title="Format String Exploit"></a>Format String Exploit</h2><p>Vulnerability comes with incorrect usage, like no parameters given after the format specifiers.</p>
-<p>There are 2 ways I mentioned above to exploit:</p>
+<p>Here is a vulnerable code sample (fmtstr.c):<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">123</span>,b = <span class="number">456</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">789</span>;</span><br><span class="line">        <span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"input:"</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"output:"</span>);</span><br><span class="line">        <span class="built_in">printf</span>(s);      <span class="comment">//vulnerable</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>And the instruction to compile (we start from 32-bit, and no protection program):<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gcc -m32 -fno-stack-protector -no-pie -o fmtstr fmtstr.c</span><br></pre></td></tr></table></figure></p>
+<p>There are 3 ways to exploit:</p>
 <ul>
 <li>program crashing</li>
 <li>memory data leaking</li>
+<li>memory data overwriting</li>
 </ul>
-<h3 id="Crash-program"><a href="#Crash-program" class="headerlink" title="Crash program"></a>Crash program</h3><p>Use lots of <code>%s</code> to let program read many undefined memory areas is the easist way.<br>This may not let you control program, but crashing remote service contributes denial of service attack.</p>
+<h3 id="Crash-program"><a href="#Crash-program" class="headerlink" title="Crash program"></a>Crash program</h3><p>Use lots of <code>%s</code> to let program read many undefined memory areas is the easist way.<br>This may not let you control program, but crashing remote service contributes to attacks like denial of service.</p>
+<p>But have you ever considered, how many <code>%s</code> are enough? and why?<br>We play with <code>fmtstr</code> that is compiled above. The relationship between inputs and outputs is:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%s%s%s</td>
+<td>%s%s%sW.</td>
+</tr>
+<tr>
+<td>%s%s%s%s%s</td>
+<td>%s%s%s%s%sW.(null)(null)</td>
+</tr>
+<tr>
+<td>%s%s%s%s%s%s…</td>
+<td>Segmentation fault</td>
+</tr>
+</tbody>
+</table>
+<p>USe gdb to analyze. Set a breakpoint to debug.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ gdb fmtstr -q</span><br><span class="line">GEF <span class="keyword">for</span> linux ready, <span class="built_in">type</span> <span class="string">'gef'</span> to start, <span class="string">'gef config'</span> to configure</span><br><span class="line">88 commands loaded <span class="keyword">for</span> GDB 9.2 using Python engine 3.8</span><br><span class="line">Reading symbols from fmtstr...</span><br><span class="line">(No debugging symbols found <span class="keyword">in</span> fmtstr)</span><br><span class="line">gef➤  b <span class="built_in">printf</span></span><br><span class="line">Breakpoint 1 at 0x8049030</span><br><span class="line">gef➤  r</span><br><span class="line">Starting program: /root/fmtstr</span><br><span class="line">input:</span><br><span class="line">%s%s%s          <span class="comment"># my input</span></span><br><span class="line">output:</span><br><span class="line"></span><br><span class="line">Breakpoint 1, 0xf7e31a90 <span class="keyword">in</span> <span class="built_in">printf</span> () from /lib/i386-linux-gnu/libc.so.6</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>Let’s look at the stack, since this vulnerability comes from no following parameters for potential format specifiers, so the format string functions will take parameters from stack.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">────────────────────────────────────────────────────────────────────────── stack ────</span><br><span class="line">0xffffd38c│+0x0000: 0x080491fc  →  &lt;main+106&gt; add esp, 0x10     ← <span class="variable">$esp</span></span><br><span class="line">0xffffd390│+0x0004: 0xffffd3a8  →  <span class="string">"%s%s%s"</span></span><br><span class="line">0xffffd394│+0x0008: 0xffffd3a8  →  <span class="string">"%s%s%s"</span>     <span class="comment"># 1st</span></span><br><span class="line">0xffffd398│+0x000c: 0xf7ffd940  →  0x00000000   <span class="comment"># 2nd</span></span><br><span class="line">0xffffd39c│+0x0010: 0x080491a9  →  &lt;main+23&gt; add ebx, 0x2e57    <span class="comment"># 3rd</span></span><br><span class="line">0xffffd3a0│+0x0014: 0x00000000      <span class="comment"># 4th</span></span><br><span class="line">0xffffd3a4│+0x0018: 0x00000000      <span class="comment"># 5th</span></span><br><span class="line">0xffffd3a8│+0x001c: <span class="string">"%s%s%s"</span>        <span class="comment"># 6th</span></span><br><span class="line">...</span><br><span class="line">─────────────────────────────────────────────────────────────────────────────────────</span><br></pre></td></tr></table></figure></p>
+<p>The current top of stack is <code>0xffffd38c</code>, storing <code>esp</code>. Value in <code>0xffffd390</code> is 1st parameter of <code>printf</code> function, while value in <code>0xffffd394</code> is 1st parameter of format string (2nd parameter of <code>printf</code>).</p>
+<p>We use <code>%s</code> to output what the values saved in stack point to (regard values in stack as string start addresses). Let’s see what exactly do they point to.<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">gef➤  x/x xffffd3a8</span><br><span class="line">0xffffd3a8:     0x73257325  </span><br><span class="line">gef➤  x/x 0xf7ffd940</span><br><span class="line">0xf7ffd940:     0x00000000</span><br><span class="line">gef➤  x/x 0x080491a9</span><br><span class="line">0x80491a9 &lt;main+23&gt;:    0x2e57c381</span><br><span class="line">gef➤  x/x 0x00000000</span><br><span class="line">0x0:    Cannot access memory at address 0x0</span><br><span class="line">gef➤  x/x <span class="string">"%s%s%s"</span>        <span class="comment"># the 6th parameter for format string </span></span><br><span class="line">0xf7fce670:     0x73257325</span><br><span class="line">gef➤  x/x %s%s%s</span><br><span class="line">A syntax error <span class="keyword">in</span> expression, near <span class="string">'%s%s%s'</span>.</span><br><span class="line">gef➤  x/x 0xffffd3a8</span><br><span class="line">0xffffd3a8:     0x73257325</span><br><span class="line">gef➤  x/x 0x73257325</span><br><span class="line">0x73257325:     Cannot access memory at address 0x73257325</span><br><span class="line">gef➤  c</span><br><span class="line">Continuing.</span><br><span class="line">%s%s%sW.</span><br><span class="line">[Inferior 1 (process 1419) exited normally]</span><br></pre></td></tr></table></figure></p>
+<p>The above are display of 1st, 2nd, 3rd, 4th … parameter that in order.<br>Normally values in stack will change on different pc, and different time to run. We can see that our input is 6th parameter, however this is fixed, because this order is determined by order of program instructions.</p>
+<p>Here we can also know how many <code>%s</code> are enough to crash it. Each <code>%s</code> we feed will print a item on the stack, and when the item (regarded as address) points to somewhere inaccessible, program breaks down.</p>
+<p>As we can see, though 4th and 5th parameter are <code>0x00000000</code> which points to a definitely inaccessible place, they are translated as pointing to null. So the first parameter that causes crashing is actually 6th item.<br>So the answer is, 6 <code>%s</code> is just enough (the more the better).</p>
 <h3 id="Leak-Memory"><a href="#Leak-Memory" class="headerlink" title="Leak Memory"></a>Leak Memory</h3><p>It includes the following operations.</p>
 <ul>
 <li>Leak stack memory data<ul>
@@ -73,7 +164,7 @@
 </ul>
 </li>
 </ul>
-<p>The basic principle is using format like <code>%n$p</code> or <code>%n$x</code> to leak data in stack memory.</p>
+<p>The basic principle is using format like <code>%n$p</code> or <code>%n$x</code>, even <code>%n$s</code> to leak data in stack memory.</p>
 <h3 id="Overwrite-Memory"><a href="#Overwrite-Memory" class="headerlink" title="Overwrite Memory"></a>Overwrite Memory</h3>]]></content>
       <categories>
         <category>Pwn</category>
