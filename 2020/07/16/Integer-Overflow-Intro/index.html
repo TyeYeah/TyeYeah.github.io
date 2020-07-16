@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Integer Overflow Intro - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Integer Overflow IntroductionIn C language, the basic data types of integers are divided into short,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Integer Overflow Intro</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Integer Overflow Intro</h1>
+        <div class="stuff">
+            <span>July 16, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/integer-overflow/">integer overflow</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="Integer-Overflow-Introduction"><a href="#Integer-Overflow-Introduction" class="headerlink" title="Integer Overflow Introduction"></a>Integer Overflow Introduction</h2><p>In C language, the basic data types of integers are divided into short (short), integer (int), and long (long). These three data types are also divided into signed and unsigned, each data type. They all have their own size ranges (because the size range of the data type is determined by the compiler, so the default is to use gcc-5.4 under 64 bits), as shown below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Type</th>
+<th style="text-align:center">Byte</th>
+<th style="text-align:center">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">short int</td>
+<td style="text-align:center">2byte(word)</td>
+<td style="text-align:center">0~32767(0~0x7fff) <br> -32768~-1(0x8000~0xffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned short int</td>
+<td style="text-align:center">2byte(word)</td>
+<td style="text-align:center">0~65535(0~0xffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4byte(dword)</td>
+<td style="text-align:center">0~2147483647(0~0x7fffffff) <br> -2147483648~-1(0x80000000~0xffffffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">4byte(dword)</td>
+<td style="text-align:center">0~4294967295(0~0xffffffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">long int</td>
+<td style="text-align:center">8byte(qword)</td>
+<td style="text-align:center">正: 0~0x7fffffffffffffff <br> Negative: 0x8000000000000000~0xffffffffffffffff</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned long int</td>
+<td style="text-align:center">8byte(qword)</td>
+<td style="text-align:center">0~0xffffffffffffffff</td>
+</tr>
+</tbody>
+</table>
+<p>When the data in the program exceeds the range of its data type, it will cause an overflow, and the overflow of the integer type is called integer overflow.</p>
+<h2 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h2><p>Next, the principle of integer overflow is briefly explained.</p>
+<h3 id="Upper-bound-overflow"><a href="#Upper-bound-overflow" class="headerlink" title="Upper bound overflow"></a>Upper bound overflow</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Fake code</span><br><span class="line">short int a;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = a + 1;</span><br><span class="line"></span><br><span class="line"># corresponding assembly</span><br><span class="line">movzx eax, word ptr [rbp - 0x1c]</span><br><span class="line">add    eax, 1</span><br><span class="line"></span><br><span class="line">mov word ptr [rbp - 0x1c], ax</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">unsigned short int b;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = b + 1;</span><br><span class="line"></span><br><span class="line"># assembly code</span><br><span class="line"></span><br><span class="line">add    word ptr [rbp - 0x1a], 1</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">There are two cases of upper bound overflow, one is `0x7fff + 1` and the other is `0xffff + 1`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Because the underlying instructions of the computer are not distinguishable between signed and unsigned, the data exists in binary form (the compiler level distinguishes between signed and unsigned, resulting in different assembly instructions).</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">So `add 0x7fff, 1 == 0x8000`, this upper bound overflow has no effect on unsigned integers, but in signed short integers, `0x7fff` means `32767`, but `0x8000` It is `-32768`, which is represented by a mathematical expression in the signed short integer `32767+1 == -32768`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The second case is `add 0xffff, 1`. In this case, the first operand is considered.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For example, the assembly code for the signed addition above is `add eax, 1`, because `eax=0xffff`, so `add eax, 1 == 0x10000`, but the unsigned assembly code is to add the memory `add Word ptr [rbp - 0x1a], 1 == 0x0000`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In the signed addition, although the result of `eax` is 0x10000, only the value of `ax=0x0000` is stored in the memory, and the result is the same as the unsigned.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Look at the result of this overflow from the digital level. In the signed short integer, `0xffff==-1, -1 + 1 == 0`, this calculation is no problem from a signed one.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">But in an unsigned short, `0xffff == 65535, 65535 + 1 == 0`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Lower bound overflow</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The next overflow is the same as the upper bound overflow. In the assembly code, just replace `add` with `sub`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">There are two cases as well:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The first is `sub 0x0000, 1 == 0xffff`, which is ok for signed `0 - 1 == -1`, but for unsigned it becomes `0 - 1 == 65535`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The second is `sub 0x8000, 1 == 0x7fff`, for unsigned it is `32768 - 1 == 32767` is correct, but for signed it becomes `-32768 - 1 = 32767` .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## example</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In the vulnerability of the integer overflow I have seen, I think it can be summarized in two cases.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Unrestricted range</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">This situation is well understood. For example, if you have a fixed-size bucket, pour water into it. If you don&amp;#39;t limit how much water is poured, the water will overflow from the bucket.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">A thing of a fixed size, you do not constrain it, can have unpredictable consequences.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Simply write an example:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```c</span><br><span class="line"></span><br><span class="line">$ cat test.c</span><br><span class="line"></span><br><span class="line">#include&lt;stddef.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">int len;</span><br><span class="line">int data_len;</span><br><span class="line">int header_len;</span><br><span class="line">    char *buf;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">header_len = 0x10;</span><br><span class="line">scanf (&amp;quot;% wool&amp;quot;, &amp;amp; data_len);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">len = data_len + header_len</span><br><span class="line">buf = malloc (read);</span><br><span class="line">    read(0, buf, data_len);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line">-1</span><br><span class="line"></span><br><span class="line">asdfasfasdfasdfafasfasfasdfasdf</span><br><span class="line"></span><br><span class="line"># gdb a.out</span><br><span class="line"></span><br><span class="line">► 0x40066d &lt;main+71&gt;    call   malloc@plt &lt;0x400500&gt;</span><br><span class="line"></span><br><span class="line">        size: 0xf</span><br></pre></td></tr></table></figure>
+<p>Only apply <code>0x20</code> size heap, but can input <code>0xffffffff</code> length data, from integer overflow to heap overflow</p>
+<h3 id="Wrong-type-conversion"><a href="#Wrong-type-conversion" class="headerlink" title="Wrong type conversion"></a>Wrong type conversion</h3><p>Even if the correct constraints on the variables, there is still the possibility of integer overflow vulnerabilities, I think can be summarized as the wrong type conversion, if you continue to subdivide, you can be divided into:</p>
+<ol>
+<li>A large range of variables is assigned to a small range of variables</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ cat test2.c</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!n)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"vuln"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"OK"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%ld"</span>, &amp;a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Bad"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        check(a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test2.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line"><span class="number">4294967296</span></span><br><span class="line"></span><br><span class="line">vuln</span><br></pre></td></tr></table></figure>
+<p>The above code is a large variable (long integer a), which is a variable with a small range (integer variable n) after passing the check function, causing an integer overflow.</p>
+<p>The long integer has 8 bytes of memory space, while the integer has only 4 bytes of memory space, so when long -&gt; int, it will cause truncation, and only the low 4 bytes of the long integer will be passed to the integer variable.</p>
+<p>In the above example, put <code>long: 0x100000000 -&amp;gt; int: 0x00000000</code>.</p>
+<p>But when a smaller variable can completely pass the value to a larger variable without causing data loss.</p>
+<ol start="2">
+<li>Only unilateral restrictions</li>
+</ol>
+<p>This case is only for signed types</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ cat test3.c</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> len, l;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">11</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span> (&amp;quot;% d&amp;quot;, &amp;amp; len);</span><br><span class="line"><span class="keyword">if</span> (len &amp;lt;<span class="number">10</span>) &#123;</span><br><span class="line">        l = read(<span class="number">0</span>, buf, len);</span><br><span class="line"></span><br><span class="line">        *(buf+l) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">puts</span>(buf);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Please len &lt; 10"</span>);        </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test3.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line"><span class="number">-1</span></span><br><span class="line"></span><br><span class="line">aaaaaaaaaaaa</span><br><span class="line">aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
+<p>On the surface, we have limited the variable len, but if you think about it, you can see that len is a signed integer, so the length of len can be negative, but in the read function, the type of the third parameter is <code>size_t</code> , the type is equivalent to <code>unsigned long int</code>, which is an unsigned long integer</p>
+<p>The two cases in the above example have a commonality, that is, the formal parameters of the function and the types of the actual parameters are different, so I think it can be summarized as the wrong type conversion.</p>
+<h2 id="CTF-example"><a href="#CTF-example" class="headerlink" title="CTF example"></a>CTF example</h2><p>Title: <a href="http://atum.li/2016/12/05/calc/" target="_blank" rel="noopener">Pwnhub Story&#39;s Beginning Cal</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Integer-Overflow-Introduction"><span class="toc-number">1.</span> <span class="toc-text">Integer Overflow Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Principle"><span class="toc-number">2.</span> <span class="toc-text">Principle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Upper-bound-overflow"><span class="toc-number">2.1.</span> <span class="toc-text">Upper bound overflow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wrong-type-conversion"><span class="toc-number">2.2.</span> <span class="toc-text">Wrong type conversion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF-example"><span class="toc-number">3.</span> <span class="toc-text">CTF example</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

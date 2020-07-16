@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Integer Overflow Intro</title>
+    <url>/2020/07/16/Integer-Overflow-Intro/</url>
+    <content><![CDATA[<h2 id="Integer-Overflow-Introduction"><a href="#Integer-Overflow-Introduction" class="headerlink" title="Integer Overflow Introduction"></a>Integer Overflow Introduction</h2><p>In C language, the basic data types of integers are divided into short (short), integer (int), and long (long). These three data types are also divided into signed and unsigned, each data type. They all have their own size ranges (because the size range of the data type is determined by the compiler, so the default is to use gcc-5.4 under 64 bits), as shown below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Type</th>
+<th style="text-align:center">Byte</th>
+<th style="text-align:center">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">short int</td>
+<td style="text-align:center">2byte(word)</td>
+<td style="text-align:center">0~32767(0~0x7fff) <br> -32768~-1(0x8000~0xffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned short int</td>
+<td style="text-align:center">2byte(word)</td>
+<td style="text-align:center">0~65535(0~0xffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4byte(dword)</td>
+<td style="text-align:center">0~2147483647(0~0x7fffffff) <br> -2147483648~-1(0x80000000~0xffffffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">4byte(dword)</td>
+<td style="text-align:center">0~4294967295(0~0xffffffff)</td>
+</tr>
+<tr>
+<td style="text-align:center">long int</td>
+<td style="text-align:center">8byte(qword)</td>
+<td style="text-align:center">正: 0~0x7fffffffffffffff <br> Negative: 0x8000000000000000~0xffffffffffffffff</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned long int</td>
+<td style="text-align:center">8byte(qword)</td>
+<td style="text-align:center">0~0xffffffffffffffff</td>
+</tr>
+</tbody>
+</table>
+<p>When the data in the program exceeds the range of its data type, it will cause an overflow, and the overflow of the integer type is called integer overflow.</p>
+<h2 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h2><p>Next, the principle of integer overflow is briefly explained.</p>
+<h3 id="Upper-bound-overflow"><a href="#Upper-bound-overflow" class="headerlink" title="Upper bound overflow"></a>Upper bound overflow</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># Fake code</span><br><span class="line">short int a;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = a + 1;</span><br><span class="line"></span><br><span class="line"># corresponding assembly</span><br><span class="line">movzx eax, word ptr [rbp - 0x1c]</span><br><span class="line">add    eax, 1</span><br><span class="line"></span><br><span class="line">mov word ptr [rbp - 0x1c], ax</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">unsigned short int b;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = b + 1;</span><br><span class="line"></span><br><span class="line"># assembly code</span><br><span class="line"></span><br><span class="line">add    word ptr [rbp - 0x1a], 1</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">There are two cases of upper bound overflow, one is `0x7fff + 1` and the other is `0xffff + 1`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Because the underlying instructions of the computer are not distinguishable between signed and unsigned, the data exists in binary form (the compiler level distinguishes between signed and unsigned, resulting in different assembly instructions).</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">So `add 0x7fff, 1 == 0x8000`, this upper bound overflow has no effect on unsigned integers, but in signed short integers, `0x7fff` means `32767`, but `0x8000` It is `-32768`, which is represented by a mathematical expression in the signed short integer `32767+1 == -32768`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The second case is `add 0xffff, 1`. In this case, the first operand is considered.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For example, the assembly code for the signed addition above is `add eax, 1`, because `eax=0xffff`, so `add eax, 1 == 0x10000`, but the unsigned assembly code is to add the memory `add Word ptr [rbp - 0x1a], 1 == 0x0000`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In the signed addition, although the result of `eax` is 0x10000, only the value of `ax=0x0000` is stored in the memory, and the result is the same as the unsigned.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Look at the result of this overflow from the digital level. In the signed short integer, `0xffff==-1, -1 + 1 == 0`, this calculation is no problem from a signed one.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">But in an unsigned short, `0xffff == 65535, 65535 + 1 == 0`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Lower bound overflow</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The next overflow is the same as the upper bound overflow. In the assembly code, just replace `add` with `sub`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">There are two cases as well:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The first is `sub 0x0000, 1 == 0xffff`, which is ok for signed `0 - 1 == -1`, but for unsigned it becomes `0 - 1 == 65535`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The second is `sub 0x8000, 1 == 0x7fff`, for unsigned it is `32768 - 1 == 32767` is correct, but for signed it becomes `-32768 - 1 = 32767` .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## example</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In the vulnerability of the integer overflow I have seen, I think it can be summarized in two cases.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Unrestricted range</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">This situation is well understood. For example, if you have a fixed-size bucket, pour water into it. If you don&amp;#39;t limit how much water is poured, the water will overflow from the bucket.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">A thing of a fixed size, you do not constrain it, can have unpredictable consequences.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Simply write an example:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```c</span><br><span class="line"></span><br><span class="line">$ cat test.c</span><br><span class="line"></span><br><span class="line">#include&lt;stddef.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">int len;</span><br><span class="line">int data_len;</span><br><span class="line">int header_len;</span><br><span class="line">    char *buf;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">header_len = 0x10;</span><br><span class="line">scanf (&amp;quot;% wool&amp;quot;, &amp;amp; data_len);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">len = data_len + header_len</span><br><span class="line">buf = malloc (read);</span><br><span class="line">    read(0, buf, data_len);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line">-1</span><br><span class="line"></span><br><span class="line">asdfasfasdfasdfafasfasfasdfasdf</span><br><span class="line"></span><br><span class="line"># gdb a.out</span><br><span class="line"></span><br><span class="line">► 0x40066d &lt;main+71&gt;    call   malloc@plt &lt;0x400500&gt;</span><br><span class="line"></span><br><span class="line">        size: 0xf</span><br></pre></td></tr></table></figure>
+<p>Only apply <code>0x20</code> size heap, but can input <code>0xffffffff</code> length data, from integer overflow to heap overflow</p>
+<h3 id="Wrong-type-conversion"><a href="#Wrong-type-conversion" class="headerlink" title="Wrong type conversion"></a>Wrong type conversion</h3><p>Even if the correct constraints on the variables, there is still the possibility of integer overflow vulnerabilities, I think can be summarized as the wrong type conversion, if you continue to subdivide, you can be divided into:</p>
+<ol>
+<li>A large range of variables is assigned to a small range of variables</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ cat test2.c</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!n)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"vuln"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"OK"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%ld"</span>, &amp;a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Bad"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        check(a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test2.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line"><span class="number">4294967296</span></span><br><span class="line"></span><br><span class="line">vuln</span><br></pre></td></tr></table></figure>
+<p>The above code is a large variable (long integer a), which is a variable with a small range (integer variable n) after passing the check function, causing an integer overflow.</p>
+<p>The long integer has 8 bytes of memory space, while the integer has only 4 bytes of memory space, so when long -&gt; int, it will cause truncation, and only the low 4 bytes of the long integer will be passed to the integer variable.</p>
+<p>In the above example, put <code>long: 0x100000000 -&amp;gt; int: 0x00000000</code>.</p>
+<p>But when a smaller variable can completely pass the value to a larger variable without causing data loss.</p>
+<ol start="2">
+<li>Only unilateral restrictions</li>
+</ol>
+<p>This case is only for signed types</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ cat test3.c</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> len, l;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">11</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span> (&amp;quot;% d&amp;quot;, &amp;amp; len);</span><br><span class="line"><span class="keyword">if</span> (len &amp;lt;<span class="number">10</span>) &#123;</span><br><span class="line">        l = read(<span class="number">0</span>, buf, len);</span><br><span class="line"></span><br><span class="line">        *(buf+l) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">puts</span>(buf);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Please len &lt; 10"</span>);        </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ gcc test3.c</span><br><span class="line"></span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line"><span class="number">-1</span></span><br><span class="line"></span><br><span class="line">aaaaaaaaaaaa</span><br><span class="line">aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
+<p>On the surface, we have limited the variable len, but if you think about it, you can see that len is a signed integer, so the length of len can be negative, but in the read function, the type of the third parameter is <code>size_t</code> , the type is equivalent to <code>unsigned long int</code>, which is an unsigned long integer</p>
+<p>The two cases in the above example have a commonality, that is, the formal parameters of the function and the types of the actual parameters are different, so I think it can be summarized as the wrong type conversion.</p>
+<h2 id="CTF-example"><a href="#CTF-example" class="headerlink" title="CTF example"></a>CTF example</h2><p>Title: <a href="http://atum.li/2016/12/05/calc/" target="_blank" rel="noopener">Pwnhub Story&#39;s Beginning Cal</a></p>
+]]></content>
+      <categories>
+        <category>Pwn</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>pwn</tag>
+        <tag>integer overflow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Format String Vulnerability Intro</title>
     <url>/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/</url>
     <content><![CDATA[<p>The format string in many programming languages, refers to a control parameter used by a class of functions. It helps to output text in specific format, according to conversion specification or format specifiers that user set.</p>
@@ -208,6 +284,7 @@
       <tags>
         <tag>linux</tag>
         <tag>pwn</tag>
+        <tag>format string</tag>
       </tags>
   </entry>
   <entry>
@@ -3241,8 +3318,8 @@ $ hexo s -g
         <category>List</category>
       </categories>
       <tags>
-        <tag>pwn</tag>
         <tag>list</tag>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
@@ -3352,9 +3429,9 @@ $ hexo s -g
         <category>List</category>
       </categories>
       <tags>
-        <tag>pwn</tag>
         <tag>list</tag>
         <tag>reverse</tag>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
