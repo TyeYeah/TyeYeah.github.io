@@ -121,7 +121,6 @@
 <p>The implementation of CFI requires that when jmp, or call to a register (or use register indirect addressing), the destination address must sometimes be obtained dynamically, and the overhead of rewriting is very large, which has caused certain difficulties in the practical application of CFI.</p>
 <p>CFG is the abbreviation of Control Flow Guard, which is a control flow protection. It is a combination of compiler and operating system protection, the purpose is to prevent untrusted indirect calls.</p>
 <p>In the course of the vulnerability attack, a common exploitation method is to overwrite or directly tamper with the value of a register, tamper with the address of the indirect call, and then control the program execution flow. CFG records all indirect call information during compilation and linking, and records them in the final executable file, and inserts additional checks before all indirect calls. When the address of the indirect call is tampered, An exception is triggered and the operating system intervenes.</p>
-<p>click <a href="https://www.freebuf.com/articles/security-management/58373.html" target="_blank" rel="noopener">here</a> to see more.</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
