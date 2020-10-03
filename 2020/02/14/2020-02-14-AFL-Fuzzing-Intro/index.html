@@ -74,7 +74,7 @@ Fuzzing IntroWhen performing softw,">
 <li>Mutation Based: mutated from existing data samples based on some rules</li>
 <li>Evolutionary: Contains both of the above, and mutates based on feedback from code coverage.</li>
 </ol>
-<h2 id="Brief-History"><a href="#Brief-History" class="headerlink" title="Brief History"></a>Brief History</h2><p>Not so brief, check it in <a href="/2020/10/02/A-Brief-History-of-Fuzzing/">A Brief History of Fuzzing</a></p>
+<h2 id="Brief-History"><a href="#Brief-History" class="headerlink" title="Brief History"></a>Brief History</h2><p>Not so brief, check it in <a href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/">A Brief History of Fuzzing</a></p>
 <h2 id="Fuzzing-Process"><a href="#Fuzzing-Process" class="headerlink" title="Fuzzing Process"></a>Fuzzing Process</h2><p>Take AFL as an example.<br>(Remember it’s a model only for afl-fuzz, not for every fuzzer)<br><img src="/imghost/afi/1.jpg" alt="AFL fuzzing process"><br>Do source code instrumentation before compilation, to record code coverage.</p>
 <p>The debugger provides some input for the program, the leftmost testcases, which are put into a queue after the AFL is loaded.</p>
 <p>For each iteration, AFL first takes a testcase from the queue, and then trims it to remove unnecessary data to improve the operation efficiency. </p>
