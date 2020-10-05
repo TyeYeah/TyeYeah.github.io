@@ -116,10 +116,10 @@ time formatterAttachment: time_formatterDescription: It is,">
 <p>As we got <code>libc.so.6</code>, we can leak the <code>libc</code> base address to get shell. The function <code>list</code> gives us opportunity to print <code>description</code>, we can overwrite it as some function <code>GOT</code> item and use <code>list</code> to leak its address.</p>
 <p>Here is our plan:</p>
 <ol>
-<li>Add a commodity (commodity 0)<br><img src="/imghost/apcaw/hg2.svg" alt="Step 1"></li>
-<li>Add another one (prevent from chunck merging)<br><img src="/imghost/apcaw/hg3.svg" alt="Step 2"></li>
-<li>Edit commodity 0’s <code>description</code> to release it and allocate new space.<br>If commodity 1 and description 1 do not exist, it will just expand old description 0 instead of allocate a new memory.<br><img src="/imghost/apcaw/hg4.svg" alt="Step 3"></li>
-<li>Add one more commodity (commodity 2).<br>Now if we edit description 0, we are editing commodity 2.<br><img src="/imghost/apcaw/hg5.svg" alt="Step 4"></li>
+<li>Add a commodity (commodity 0)<br><img src="/imghost/apcaw/uaf5.svg" alt="Step 1"></li>
+<li>Add another one (prevent from chunck merging)<br><img src="/imghost/apcaw/uaf6.svg" alt="Step 2"></li>
+<li>Edit commodity 0’s <code>description</code> to release it and allocate new space.<br>If commodity 1 and description 1 do not exist, it will just expand old description 0 instead of allocate a new memory.<br><img src="/imghost/apcaw/uaf7.svg" alt="Step 3"></li>
+<li>Add one more commodity (commodity 2).<br>Now if we edit description 0, we are editing commodity 2.<br><img src="/imghost/apcaw/uaf8.svg" alt="Step 4"></li>
 <li>Edit description 0 to overwrite <code>description</code> pointer in commodity 2 as some function’s <code>GOT</code> item, and use <code>list commodities</code> to leak address. </li>
 </ol>
 <p>Note: Pay attention to chunck size. The description 0 we released should be <code>unsorted bin</code> instead of <code>fastbin</code>.<br>Because in <code>fastbin</code> it only allocates chunck with same size, while in <code>Change the description of a commodity</code> the last byte will be set <code>0</code>. In commodity the last part is <code>char *description</code> and it is where I write function’s <code>GOT</code> item, so it cannot be <code>0</code>. The chuncks in <code>fastbin</code> are between <code>0x20</code> and <code>0x80</code> bytes, so description 0 should be larger.</p>
