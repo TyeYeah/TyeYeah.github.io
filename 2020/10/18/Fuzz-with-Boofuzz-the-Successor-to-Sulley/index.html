@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="TyeYeah, CS,"> 
-    <meta name="description" content="blog on Hexo,"> 
+    <meta name="description" content="blog on Hexo,Boofuzz is a fork of and the successor to the venerable Sulley fuzzing framework.
+IntroductionCompa,"> 
     <meta name="author" content="TyeYeah"> 
     <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -59,7 +60,91 @@
 
         </div>
         <div class="content markdown">
-            
+            <p><a href="https://github.com/jtpereyda/boofuzz" target="_blank" rel="noopener">Boofuzz</a> is a fork of and the successor to the venerable <a href="https://github.com/OpenRCE/sulley" target="_blank" rel="noopener">Sulley</a> fuzzing framework.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Comparing to <a href="https://github.com/google/AFL" target="_blank" rel="noopener">AFL</a>, a code coverage guided fuzzer aiming at binary programs, <code>boofuzz</code> is based on <code>Sulley</code>, a network protocol fuzzer.<br>As it is for fuzzing network protocols, users should pay more attention to the details of the protocol, so an analysis of a network protocol is really needed, because it determines how users write fuzzing scripts and whether they can find specific bugs. </p>
+<p>And:</p>
+<p>Like <code>Sulley</code>, <code>boofuzz</code> incorporates all the critical elements of a fuzzer:</p>
+<ul>
+<li>Easy and quick data generation.</li>
+<li>Instrumentation – AKA failure detection.</li>
+<li>Target reset after failure.</li>
+<li>Recording of test data.</li>
+</ul>
+<p>Unlike <code>Sulley</code>, <code>boofuzz</code> also features:</p>
+<ul>
+<li>Online <a href="https://boofuzz.readthedocs.io/" target="_blank" rel="noopener">documentation</a>.</li>
+<li>Support for arbitrary communications mediums.</li>
+<li>Built-in support for serial fuzzing, ethernet- and IP-layer, UDP broadcast.</li>
+<li>Better recording of test data – consistent, thorough, clear.</li>
+<li>Test result CSV export.</li>
+<li>Extensible instrumentation/failure detection.</li>
+<li>Much easier install experience!</li>
+<li>Far fewer bugs.</li>
+</ul>
+<p><a href="https://github.com/OpenRCE/sulley" target="_blank" rel="noopener">Sulley</a> is affectionately named after the giant teal and purple creature from Monsters Inc. due to his fuzziness.<br><img src="/imghost/fbss/sulley.jpg" alt="Sulley from Monsters Inc"><br><a href="https://github.com/jtpereyda/boofuzz" target="_blank" rel="noopener">Boofuzz</a> is likewise named after the only creature known to have scared Sulley himself: Boo!<br><img src="/imghost/fbss/boo.jpg" alt="Boo from Monsters Inc"></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p><code>Boofuzz</code> requires <code>Python</code> 2.7 or ≥ 3.5. Recommended installation requires pip. To ensure forward compatibility, <code>Python</code> 3 is recommended.<br>So If you are using <code>Python</code> 3:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install boofuzz</span><br></pre></td></tr></table></figure></p>
+<p>For <code>Python</code> 2 the <code>virtualenv</code> is recommended:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir boofuzz &amp;&amp; <span class="built_in">cd</span> boofuzz</span><br><span class="line">$ virtualenv -p /usr/bin/python env <span class="comment"># python 2</span></span><br><span class="line">$ python3 -m venv env <span class="comment"># python 3</span></span><br><span class="line">$ <span class="built_in">source</span> env/bin/activate </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">&gt; env\Scripts\activate.bat <span class="comment"># for windows</span></span><br><span class="line">(env) $ pip install -U pip setuptools</span><br><span class="line">(env) $ pip install boofuzz</span><br><span class="line"><span class="comment"># actions</span></span><br><span class="line">$ deactive</span><br></pre></td></tr></table></figure></p>
+<p>From source<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/jtpereyda/boofuzz.git</span><br><span class="line">$ <span class="built_in">cd</span> boofuzz</span><br><span class="line">$ pip install .</span><br></pre></td></tr></table></figure></p>
+<h2 id="Intro-to-Sulley"><a href="#Intro-to-Sulley" class="headerlink" title="Intro to Sulley"></a>Intro to Sulley</h2><p>As <code>boofuzz</code> is based on <code>Sulley</code>, the usages and structures of them are almost the same. Besides, for now <code>Sulley</code> gets richer technical materials to search, so we get to know it before learning <code>boofuzz</code>.</p>
+<p>First we get to know some words:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Words</th>
+<th style="text-align:center">Meanings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">host</td>
+<td style="text-align:center">host to start fuzzing (fuzzer)</td>
+</tr>
+<tr>
+<td style="text-align:center">target</td>
+<td style="text-align:center">the fuzzing target</td>
+</tr>
+<tr>
+<td style="text-align:center">agents</td>
+<td style="text-align:center">monitor target and get traffic</td>
+</tr>
+<tr>
+<td style="text-align:center">request</td>
+<td style="text-align:center">data package to send, a request for each data message</td>
+</tr>
+<tr>
+<td style="text-align:center">session</td>
+<td style="text-align:center">graph of several data packages, like a state graph of a stateful protocol</td>
+</tr>
+</tbody>
+</table>
+<p>The whole architecture is:<br><img src="/imghost/fbss/sulley-3-1.png" alt="architecture"><br>We check them one by one. First comes the data generation module.<br><img src="/imghost/fbss/sulley-3-2.png" alt="data generation (to build request)"><br>As <code>Sulley</code> is generation-based, we need to model the protocol and file.  </p>
+<ul>
+<li>A <code>primitive</code> means a byte, a string, a number (like integer), a checksum, a delimiter (special symbol in protocols), and other elements of a network protocol. They can be static or dynamic (to be fuzzing parameters).</li>
+<li>A <code>block</code> consists of many <code>primitives</code>, and <code>blocks</code> can be nested within each another <code>block</code>. It represents a series of primitives.</li>
+<li>A <code>group</code> (not in image, but useful) is to provide a fuzzing parameter with some candidate values (set range). It is often used with <code>block</code>. </li>
+<li>A data message consists of many <code>primitives</code> and <code>blocks</code>. Except them we can customize some special <code>primitives</code> –&gt; <code>legos</code>: Email address, IP address or so. </li>
+<li>And some utils, like calculating length, checksum and encryption module.</li>
+</ul>
+<p>Next comes the session management module.<br><img src="/imghost/fbss/sulley-3-3.png" alt="session management"><br>After building the request (data message), how to combine each of them to form a state machine? Use <code>pgraph</code>, a <code>Python</code> library, to create, edit and render graph. For example:<br><img src="/imghost/fbss/sulley-3-4.png" alt="example"><br>Each node are connected to form a stateful graph, we can operate each node (consists of <code>primitives</code>) and define some callback functions.<br>When it comes time to fuzz, <code>Sulley</code> walks the graph structure starting with the root node and fuzzing each component along the way.<br>It fuzzes nodes one by one until a path is done, then it walks into another path.</p>
+<p>Next is agents proxy module<br><img src="/imghost/fbss/sulley-3-5.png" alt="agents"><br>The agents proxy module is for monitoring and has 3 parts: VMControl, Netmon and Procmon.</p>
+<ul>
+<li>VMControl: We normally put target in virtual machine, and use this module to boot, shut or create snapshots for VM. Most important: recover host status when it crashes.</li>
+<li>Netmon: Monitor network traffic and save <code>pcap</code> files in the disk. It captures 2-way traffic.</li>
+<li>Procmon: On <code>Windows</code> it uses <a href="https://github.com/OpenRCE/pydbg" target="_blank" rel="noopener">pydbg</a> (another <a href="https://github.com/OpenRCE" target="_blank" rel="noopener"><code>OpenRce</code></a> project) to record program crashes and monitor the status, then write errors into <code>crash_bin</code> file.</li>
+</ul>
+<p>There are some independent utilities like:<br><img src="/imghost/fbss/sulley-3-6.png" alt="architecture"></p>
+<ul>
+<li>crashbin_explorer: Command line utility for exploring the results stored in serialized crash bin files.</li>
+<li>… (others get no comments)</li>
+</ul>
+<p>So the whole work flow of <code>Sulley</code> is:</p>
+<ol>
+<li>Data message modeling</li>
+<li>Connect to form state machine</li>
+<li>Other modules assist fuzzing</li>
+</ol>
+<p>See the <a href="http://www.fuzzing.org/wp-content/SulleyManual.pdf" target="_blank" rel="noopener">SulleyManual</a> for some other details.</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src>
@@ -105,7 +190,7 @@
     </div>
     
         <div class="side">
-				
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">2.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intro-to-Sulley"><span class="toc-number">3.</span> <span class="toc-text">Intro to Sulley</span></a></li></ol>	
         </div>
     
 </div>
