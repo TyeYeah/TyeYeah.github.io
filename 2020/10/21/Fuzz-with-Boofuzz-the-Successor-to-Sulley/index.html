@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fuzz with Boofuzz (the Successor to Sulley) - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Boofuzz is a fork of and the successor to the venerable Sulley fuzzing framework.
+IntroductionCompa,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Fuzz with Boofuzz (the Successor to Sulley)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Fuzz with Boofuzz (the Successor to Sulley)</h1>
+        <div class="stuff">
+            <span>October 21, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/boofuzz/">boofuzz</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/fuzzing/">fuzzing</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/sulley/">sulley</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><a href="https://github.com/jtpereyda/boofuzz" target="_blank" rel="noopener">Boofuzz</a> is a fork of and the successor to the venerable <a href="https://github.com/OpenRCE/sulley" target="_blank" rel="noopener">Sulley</a> fuzzing framework.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Comparing to <a href="https://github.com/google/AFL" target="_blank" rel="noopener">AFL</a>, a code coverage guided fuzzer aiming at binary programs, <code>boofuzz</code> is based on <code>Sulley</code>, a network protocol fuzzer.<br>As it is for fuzzing network protocols, users should pay more attention to the details of the protocol, so an analysis of a network protocol is really needed, because it determines how users write fuzzing scripts and whether they can find specific bugs. </p>
+<p>And:</p>
+<p>Like <code>Sulley</code>, <code>boofuzz</code> incorporates all the critical elements of a fuzzer:</p>
+<ul>
+<li>Easy and quick data generation.</li>
+<li>Instrumentation – AKA failure detection.</li>
+<li>Target reset after failure.</li>
+<li>Recording of test data.</li>
+</ul>
+<p>Unlike <code>Sulley</code>, <code>boofuzz</code> also features:</p>
+<ul>
+<li>Online <a href="https://boofuzz.readthedocs.io/" target="_blank" rel="noopener">documentation</a>.</li>
+<li>Support for arbitrary communications mediums.</li>
+<li>Built-in support for serial fuzzing, ethernet- and IP-layer, UDP broadcast.</li>
+<li>Better recording of test data – consistent, thorough, clear.</li>
+<li>Test result CSV export.</li>
+<li>Extensible instrumentation/failure detection.</li>
+<li>Much easier install experience!</li>
+<li>Far fewer bugs.</li>
+</ul>
+<p><a href="https://github.com/OpenRCE/sulley" target="_blank" rel="noopener">Sulley</a> is affectionately named after the giant teal and purple creature from Monsters Inc. due to his fuzziness.<br><img src="/imghost/fbss/sulley.jpg" alt="Sulley from Monsters Inc"><br><a href="https://github.com/jtpereyda/boofuzz" target="_blank" rel="noopener">Boofuzz</a> is likewise named after the only creature known to have scared Sulley himself: Boo!<br><img src="/imghost/fbss/boo.jpg" alt="Boo from Monsters Inc"></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p><code>Boofuzz</code> requires <code>Python</code> 2.7 or ≥ 3.5. Recommended installation requires pip. To ensure forward compatibility, <code>Python</code> 3 is recommended.<br>So If you are using <code>Python</code> 3:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install boofuzz</span><br></pre></td></tr></table></figure></p>
+<p>For <code>Python</code> 2 the <code>virtualenv</code> is recommended:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir boofuzz &amp;&amp; <span class="built_in">cd</span> boofuzz</span><br><span class="line">$ virtualenv -p /usr/bin/python env <span class="comment"># python 2</span></span><br><span class="line">$ python3 -m venv env <span class="comment"># python 3</span></span><br><span class="line">$ <span class="built_in">source</span> env/bin/activate </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">&gt; env\Scripts\activate.bat <span class="comment"># for windows</span></span><br><span class="line">(env) $ pip install -U pip setuptools</span><br><span class="line">(env) $ pip install boofuzz</span><br><span class="line"><span class="comment"># actions</span></span><br><span class="line">$ deactive</span><br></pre></td></tr></table></figure></p>
+<p>From source<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/jtpereyda/boofuzz.git</span><br><span class="line">$ <span class="built_in">cd</span> boofuzz</span><br><span class="line">$ pip install .</span><br></pre></td></tr></table></figure></p>
+<h2 id="Intro-to-Sulley"><a href="#Intro-to-Sulley" class="headerlink" title="Intro to Sulley"></a>Intro to Sulley</h2><p>As <code>boofuzz</code> is based on <code>Sulley</code>, the usages and structures of them are almost the same. Besides, for now <code>Sulley</code> gets richer technical materials to search, so we get to know it before learning <code>boofuzz</code>.</p>
+<p>First we get to know some words:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Words</th>
+<th style="text-align:center">Meanings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">host</td>
+<td style="text-align:center">host to start fuzzing (fuzzer)</td>
+</tr>
+<tr>
+<td style="text-align:center">target</td>
+<td style="text-align:center">the fuzzing target</td>
+</tr>
+<tr>
+<td style="text-align:center">agents</td>
+<td style="text-align:center">monitor target and get traffic</td>
+</tr>
+<tr>
+<td style="text-align:center">request</td>
+<td style="text-align:center">data package to send, a request for each data message</td>
+</tr>
+<tr>
+<td style="text-align:center">session</td>
+<td style="text-align:center">graph of several data packages, like a state graph of a stateful protocol</td>
+</tr>
+</tbody>
+</table>
+<p>The whole architecture is:<br><img src="/imghost/fbss/sulley-3-1.png" alt="architecture"><br>We check them one by one. First comes the data generation module.<br><img src="/imghost/fbss/sulley-3-2.png" alt="data generation (to build request)"><br>As <code>Sulley</code> is generation-based, we need to model the protocol and file.  </p>
+<ul>
+<li>A <code>primitive</code> can be a byte, a string, a number (like integer), a checksum, a delimiter (special symbol in protocols), and other elements of a network protocol. They can be static or dynamic (to be fuzzing parameters).</li>
+<li>A <code>block</code> consists of many <code>primitives</code>, and <code>blocks</code> can be nested within each another <code>block</code>. It represents a series of primitives.</li>
+<li>A <code>group</code> (not in image, but useful) is to provide a fuzzing parameter with some candidate values (set range). It is often used with <code>block</code>. </li>
+<li>A data message consists of many <code>primitives</code> and <code>blocks</code>. Except them we can customize some special <code>primitives</code> –&gt; <code>legos</code>: Email address, IP address or so. </li>
+<li>And some utils, like calculating length, checksum and encryption module.</li>
+</ul>
+<p>Next comes the session management module.<br><img src="/imghost/fbss/sulley-3-3.png" alt="session management"><br>After building the request (data message), how to combine each of them to form a state machine? Use <code>pgraph</code>, a <code>Python</code> library, to create, edit and render graph. For example:<br><img src="/imghost/fbss/sulley-3-4.png" alt="example"><br>Each node are connected to form a stateful graph, we can operate each node (consists of <code>primitives</code>) and define some callback functions.<br>When it comes time to fuzz, <code>Sulley</code> walks the graph structure starting with the root node and fuzzing each component along the way.<br>It fuzzes nodes one by one until a path is done, then it steps into another path.</p>
+<p>Next is agents proxy module<br><img src="/imghost/fbss/sulley-3-5.png" alt="agents"><br>The agents proxy module is for monitoring and has 3 parts: VMControl, Netmon and Procmon.</p>
+<ul>
+<li>VMControl: We normally put target in virtual machine, and use this module to boot, shut or create snapshots for VM. Most important: recover host status when it crashes.</li>
+<li>Netmon: Monitor network traffic and save <code>pcap</code> files in the disk. It captures 2-way traffic.</li>
+<li>Procmon: On <code>Windows</code> it uses <a href="https://github.com/OpenRCE/pydbg" target="_blank" rel="noopener">pydbg</a> (another <a href="https://github.com/OpenRCE" target="_blank" rel="noopener"><code>OpenRce</code></a> project) to record program crashes and monitor the status, then write errors into <code>crash_bin</code> file.</li>
+</ul>
+<p>There are some independent utilities like:<br><img src="/imghost/fbss/sulley-3-6.png" alt="architecture"></p>
+<ul>
+<li>crashbin_explorer: Command line utility for exploring the results stored in serialized crash bin files.</li>
+<li>… (others get no comments)</li>
+</ul>
+<p>So the whole work flow of <code>Sulley</code> is:</p>
+<ol>
+<li>Data message modeling</li>
+<li>Connect to form state machine</li>
+<li>Other modules assist fuzzing</li>
+</ol>
+<p>See the <a href="http://www.fuzzing.org/wp-content/SulleyManual.pdf" target="_blank" rel="noopener">SulleyManual</a> for some other details.</p>
+<h2 id="Usages-of-Boofuzz"><a href="#Usages-of-Boofuzz" class="headerlink" title="Usages of Boofuzz"></a>Usages of Boofuzz</h2><p>It is almost the same as <code>Sulley</code> so if you want to master this, read the <a href="http://www.fuzzing.org/wp-content/SulleyManual.pdf" target="_blank" rel="noopener">SulleyManual</a> carefully.</p>
+<p>Here we learn by <a href="https://github.com/jtpereyda/boofuzz/tree/master/examples" target="_blank" rel="noopener">examples</a> given in <code>boofuzz/examples/</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cd boofuzz/examples/</span><br><span class="line">$ ls</span><br><span class="line">ftp_simple.py                        fuzz_trillian_jabber.py</span><br><span class="line">ftp_with_procmon.py                  http_simple.py</span><br><span class="line">fuzz_ssl_client.py                   http_with_body.py</span><br><span class="line">fuzz_ssl_server.py                   iso8385.py</span><br><span class="line">fuzz_trend_control_manager_20901.py  mdns.py</span><br><span class="line">fuzz_trend_server_protect_5168.py    tftp_simple.py</span><br></pre></td></tr></table></figure></p>
+<p>From <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/ftp_simple.py" target="_blank" rel="noopener">ftp_simple.py</a> we can see there are 2 styles to build requests: the func <code>define_proto_static</code> and the func <code>define_proto</code> (newer).</p>
+<p>In <code>Sulley</code> we used to use is this style:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">define_proto_static</span><span class="params">(session)</span>:</span></span><br><span class="line">    <span class="string">"""Same protocol, using the static definition style."""</span></span><br><span class="line">    s_initialize(<span class="string">"user"</span>)</span><br><span class="line">    s_string(<span class="string">"USER"</span>)</span><br><span class="line">    s_delim(<span class="string">" "</span>)</span><br><span class="line">    s_string(<span class="string">"anonymous"</span>)</span><br><span class="line">    s_static(<span class="string">"\r\n"</span>)</span><br><span class="line"></span><br><span class="line">    s_initialize(<span class="string">"pass"</span>)</span><br><span class="line">    s_string(<span class="string">"PASS"</span>)</span><br><span class="line">    s_delim(<span class="string">" "</span>)</span><br><span class="line">    s_string(<span class="string">"james"</span>)</span><br><span class="line">    s_static(<span class="string">"\r\n"</span>)</span><br><span class="line"></span><br><span class="line">    s_initialize(<span class="string">"stor"</span>)</span><br><span class="line">    s_string(<span class="string">"STOR"</span>)</span><br><span class="line">    s_delim(<span class="string">" "</span>)</span><br><span class="line">    s_string(<span class="string">"AAAA"</span>)</span><br><span class="line">    s_static(<span class="string">"\r\n"</span>)</span><br><span class="line"></span><br><span class="line">    s_initialize(<span class="string">"retr"</span>)</span><br><span class="line">    s_string(<span class="string">"RETR"</span>)</span><br><span class="line">    s_delim(<span class="string">" "</span>)</span><br><span class="line">    s_string(<span class="string">"AAAA"</span>)</span><br><span class="line">    s_static(<span class="string">"\r\n"</span>)</span><br><span class="line"></span><br><span class="line">    session.connect(s_get(<span class="string">"user"</span>))</span><br><span class="line">    session.connect(s_get(<span class="string">"user"</span>), s_get(<span class="string">"pass"</span>))</span><br><span class="line">    session.connect(s_get(<span class="string">"pass"</span>), s_get(<span class="string">"stor"</span>))</span><br><span class="line">    session.connect(s_get(<span class="string">"pass"</span>), s_get(<span class="string">"retr"</span>))</span><br></pre></td></tr></table></figure></p>
+<p>The <code>s_initialize(&quot;user&quot;)</code> starts a new request, the <code>s_string(&quot;USER&quot;)</code> and <code>s_delim(&quot; &quot;)</code> define dynamic <code>primitives</code> (to be fuzzed), and <code>s_static(&quot;\r\n&quot;)</code> define static <code>primitives</code>.</p>
+<p>Statements like <code>session.connect(s_get(&quot;user&quot;))</code> or <code>session.connect(s_get(&quot;user&quot;), s_get(&quot;pass&quot;))</code> will set a root node or connect 2 nodes on a graph, a stateful graph like what we said in <code>session management</code>.</p>
+<p>While <code>define_proto</code> is a newer one, just found it was updated on 2020/10/21:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">define_proto</span><span class="params">(session)</span>:</span></span><br><span class="line">    <span class="comment"># disable Black formatting to keep custom indentation</span></span><br><span class="line">    <span class="comment"># fmt: off</span></span><br><span class="line">    user = Request(<span class="string">"user"</span>, children=(</span><br><span class="line">        String(<span class="string">"key"</span>, <span class="string">"USER"</span>),</span><br><span class="line">        Delim(<span class="string">"space"</span>, <span class="string">" "</span>),</span><br><span class="line">        String(<span class="string">"val"</span>, <span class="string">"anonymous"</span>),</span><br><span class="line">        Static(<span class="string">"end"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">    ))</span><br><span class="line"></span><br><span class="line">    passw = Request(<span class="string">"pass"</span>, children=(</span><br><span class="line">        String(<span class="string">"key"</span>, <span class="string">"PASS"</span>),</span><br><span class="line">        Delim(<span class="string">"space"</span>, <span class="string">" "</span>),</span><br><span class="line">        String(<span class="string">"val"</span>, <span class="string">"james"</span>),</span><br><span class="line">        Static(<span class="string">"end"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">    ))</span><br><span class="line"></span><br><span class="line">    stor = Request(<span class="string">"stor"</span>, children=(</span><br><span class="line">        String(<span class="string">"key"</span>, <span class="string">"STOR"</span>),</span><br><span class="line">        Delim(<span class="string">"space"</span>, <span class="string">" "</span>),</span><br><span class="line">        String(<span class="string">"val"</span>, <span class="string">"AAAA"</span>),</span><br><span class="line">        Static(<span class="string">"end"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">    ))</span><br><span class="line"></span><br><span class="line">    retr = Request(<span class="string">"retr"</span>, children=(</span><br><span class="line">        String(<span class="string">"key"</span>, <span class="string">"RETR"</span>),</span><br><span class="line">        Delim(<span class="string">"space"</span>, <span class="string">" "</span>),</span><br><span class="line">        String(<span class="string">"val"</span>, <span class="string">"AAAA"</span>),</span><br><span class="line">        Static(<span class="string">"end"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">    ))</span><br><span class="line">    <span class="comment"># fmt: on</span></span><br><span class="line"></span><br><span class="line">    session.connect(user)</span><br><span class="line">    session.connect(user, passw)</span><br><span class="line">    session.connect(passw, stor)</span><br><span class="line">    session.connect(passw, retr)</span><br></pre></td></tr></table></figure></p>
+<p>It implements a new and concise method to represent elements in the protocol.</p>
+<p>Next we check <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/ftp_with_procmon.py" target="_blank" rel="noopener">ftp_with_procmon.py</a> to learn <code>procmon</code> module:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># it is defined  by </span></span><br><span class="line">procmon = ProcessMonitor(target_ip, <span class="number">26002</span>)</span><br><span class="line">procmon.set_options(start_commands=[start_cmd])</span><br><span class="line"><span class="comment"># and add it to `session` inside a `target`</span></span><br><span class="line">session = Session(</span><br><span class="line">    target=Target(</span><br><span class="line">        connection=TCPSocketConnection(target_ip, <span class="number">21</span>),</span><br><span class="line">        monitors=[procmon],</span><br><span class="line">    ),</span><br><span class="line">    sleep_time=<span class="number">1</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>Besides <code>procmon</code>, there are <code>netmon</code> module and <code>vmcontrol</code> module that we can add to <code>session</code> inside <code>target</code>, we can see it in <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/fuzz_trillian_jabber.py" target="_blank" rel="noopener">fuzz_trillian_jabber.py</a>:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_message</span><span class="params">(sock)</span>:</span></span><br><span class="line">    init = <span class="string">'&lt;?xml version="1.0" encoding="UTF-8" ?&gt;\n'</span></span><br><span class="line">    init += <span class="string">'&lt;stream:stream to="152.67.137.126" xmlns="jabber:client" xmlns:stream="http://etherx.jabber.org/streams"&gt;'</span></span><br><span class="line"></span><br><span class="line">    sock.send(init)</span><br><span class="line">    sock.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sess = sessions.Session(session_filename=<span class="string">"audits/trillian.session"</span>)</span><br><span class="line">target = sessions.Target(connection=TCPSocketConnection(<span class="string">"152.67.137.126"</span>, <span class="number">5298</span>))</span><br><span class="line">target.netmon = pedrpc.Client(<span class="string">"152.67.137.126"</span>, <span class="number">26001</span>)</span><br><span class="line">target.procmon = pedrpc.Client(<span class="string">"152.67.137.126"</span>, <span class="number">26002</span>)</span><br><span class="line">target.vmcontrol = pedrpc.Client(<span class="string">"127.0.0.1"</span>, <span class="number">26003</span>)</span><br><span class="line">target.procmon_options = &#123;<span class="string">"proc_name"</span>: <span class="string">"trillian.exe"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># start up the target.</span></span><br><span class="line">target.vmcontrol.restart_target()</span><br><span class="line">print(<span class="string">"virtual machine up and running"</span>)</span><br><span class="line"></span><br><span class="line">sess.add_target(target)</span><br><span class="line">sess.pre_send = init_message</span><br><span class="line">sess.connect(sess.root, s_get(<span class="string">"chat message"</span>))</span><br><span class="line">sess.fuzz()</span><br></pre></td></tr></table></figure></p>
+<p>The <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/fuzz_ssl_client.py" target="_blank" rel="noopener">fuzz_ssl_client.py</a> and <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/fuzz_ssl_server.py" target="_blank" rel="noopener">fuzz_ssl_server.py</a> are about <code>SSL</code>/<code>TLS</code> communacations, communate with certificate.</p>
+<p>As for <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/fuzz_trend_control_manager_20901.py" target="_blank" rel="noopener">fuzz_trend_control_manager_20901.py</a> and <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/fuzz_trend_server_protect_5168.py" target="_blank" rel="noopener">fuzz_trend_server_protect_5168.py</a>, they are just unfinished samples.</p>
+<p>Another great example is <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/http_simple.py" target="_blank" rel="noopener">http_simple.py</a> (perhaps with <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/http_with_body.py" target="_blank" rel="noopener">http_with_body.py</a>). It shows us how to use <code>block</code> and <code>group</code>.<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">define_proto</span><span class="params">(session)</span>:</span></span><br><span class="line">    <span class="comment"># disable Black formatting to keep custom indentation</span></span><br><span class="line">    <span class="comment"># fmt: off</span></span><br><span class="line">    req = Request(<span class="string">"HTTP-Request"</span>, children=(</span><br><span class="line">        Block(<span class="string">"Request-Line"</span>, children=(</span><br><span class="line">            Group(<span class="string">"Method"</span>, values=[<span class="string">"GET"</span>, <span class="string">"HEAD"</span>, <span class="string">"POST"</span>, <span class="string">"PUT"</span>, <span class="string">"DELETE"</span>, <span class="string">"CONNECT"</span>, <span class="string">"OPTIONS"</span>, <span class="string">"TRACE"</span>]),</span><br><span class="line">            Delim(<span class="string">"space-1"</span>, <span class="string">" "</span>),</span><br><span class="line">            String(<span class="string">"URI"</span>, <span class="string">"/index.html"</span>),</span><br><span class="line">            Delim(<span class="string">"space-2"</span>, <span class="string">" "</span>),</span><br><span class="line">            String(<span class="string">"HTTP-Version"</span>, <span class="string">"HTTP/1.1"</span>),</span><br><span class="line">            Static(<span class="string">"CRLF"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">        )),</span><br><span class="line">        Block(<span class="string">"Host-Line"</span>, children=(</span><br><span class="line">            String(<span class="string">"Host-Key"</span>, <span class="string">"Host:"</span>),</span><br><span class="line">            Delim(<span class="string">"space"</span>, <span class="string">" "</span>),</span><br><span class="line">            String(<span class="string">"Host-Value"</span>, <span class="string">"example.com"</span>),</span><br><span class="line">            Static(<span class="string">"CRLF"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">        )),</span><br><span class="line">        Static(<span class="string">"CRLF"</span>, <span class="string">"\r\n"</span>),</span><br><span class="line">    ))</span><br><span class="line">    <span class="comment"># fmt: on</span></span><br><span class="line"></span><br><span class="line">    session.connect(req)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">define_proto_static</span><span class="params">(session)</span>:</span></span><br><span class="line">    s_initialize(name=<span class="string">"Request"</span>)</span><br><span class="line">    <span class="keyword">with</span> s_block(<span class="string">"Request-Line"</span>):</span><br><span class="line">        s_group(<span class="string">"Method"</span>, [<span class="string">"GET"</span>, <span class="string">"HEAD"</span>, <span class="string">"POST"</span>, <span class="string">"PUT"</span>, <span class="string">"DELETE"</span>, <span class="string">"CONNECT"</span>, <span class="string">"OPTIONS"</span>, <span class="string">"TRACE"</span>])</span><br><span class="line">        s_delim(<span class="string">" "</span>, name=<span class="string">"space-1"</span>)</span><br><span class="line">        s_string(<span class="string">"/index.html"</span>, name=<span class="string">"Request-URI"</span>)</span><br><span class="line">        s_delim(<span class="string">" "</span>, name=<span class="string">"space-2"</span>)</span><br><span class="line">        s_string(<span class="string">"HTTP/1.1"</span>, name=<span class="string">"HTTP-Version"</span>)</span><br><span class="line">        s_static(<span class="string">"\r\n"</span>, name=<span class="string">"Request-Line-CRLF"</span>)</span><br><span class="line">        s_string(<span class="string">"Host:"</span>, name=<span class="string">"Host-Line"</span>)</span><br><span class="line">        s_delim(<span class="string">" "</span>, name=<span class="string">"space-3"</span>)</span><br><span class="line">        s_string(<span class="string">"example.com"</span>, name=<span class="string">"Host-Line-Value"</span>)</span><br><span class="line">        s_static(<span class="string">"\r\n"</span>, name=<span class="string">"Host-Line-CRLF"</span>)</span><br><span class="line">    s_static(<span class="string">"\r\n"</span>, <span class="string">"Request-CRLF"</span>)</span><br><span class="line"></span><br><span class="line">    session.connect(s_get(<span class="string">"Request"</span>))</span><br></pre></td></tr></table></figure></p>
+<p>A <code>block</code> combines several <code>primitives</code> which change values randomly, however a <code>group</code> provides the range of values to a variable.</p>
+<p>Then we move to <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/iso8385.py" target="_blank" rel="noopener">iso8385.py</a>, it provides us with <code>s_random</code> which defines the length of a <code>primitive</code> to change:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">s_random(</span><br><span class="line">    <span class="string">"30 33 32 37 49 53 4F 37 30 31 30 30 30 30 30 31 31 31 30 F6 F3 00 21 8E E1 A0 08 00 00 00 00 00 00 00 01 31 "</span></span><br><span class="line">    <span class="string">"36 34 32 36 30 30 30 30 30 30 31 35 31 30 33 33 35 31 37 30 30 30 30 30 30 30 30 30 30 30 30 31 30 30 30 30 "</span></span><br><span class="line">    <span class="string">"30 30 30 30 30 30 30 31 30 30 30 31 37 30 39 32 37 32 31 35 33 30 30 30 30 30 30 30 31 30 30 30 30 30 30 30 "</span></span><br><span class="line">    <span class="string">"31 30 30 30 39 32 37 31 39 31 31 31 35 31 32 30 30 30 30 31 36 30 34 30 31 31 31 32 31 36 30 36 35 30 30 30 "</span></span><br><span class="line">    <span class="string">"32 30 30 36 30 30 30 30 30 31 30 32 30 36 38 37 30 31 39 31 31 39 31 35 38 34 30 31 39 30 39 32 30 30 31 30 "</span></span><br><span class="line">    <span class="string">"30 30 33 32 30 30 30 30 30 31 35 30 30 30 30 30 30 33 34 30 42 41 4E 41 4E 41 20 52 45 50 55 42 4C 49 43 20 "</span></span><br><span class="line">    <span class="string">"20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 54 59 20 50 52 30 36 32 50 38 37 30 30 31 34 50 32 "</span></span><br><span class="line">    <span class="string">"35 30 30 31 33 50 38 38 30 30 31 34 50 35 34 30 30 31 52 50 39 35 30 30 32 30 31 50 36 38 30 32 30 30 33 30 "</span></span><br><span class="line">    <span class="string">"30 30 39 32 37 30 32 30 36 38 37 30 31 39 31 31 39 38 34 30 38 34 30 30 30 39 30 33 39 30 30 33 39 30 39 36 "</span></span><br><span class="line">    <span class="string">"30 43 30 46 31 31 39"</span>,</span><br><span class="line">    min_length=<span class="number">331</span>,</span><br><span class="line">    max_length=<span class="number">350</span>,</span><br><span class="line">    fuzzable=<span class="keyword">True</span>,</span><br><span class="line">    num_mutations=<span class="number">500</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>And <a href="https://github.com/jtpereyda/boofuzz/blob/master/examples/mdns.py" target="_blank" rel="noopener">mdns.py</a> provides us with <code>s_word</code>, <code>s_size</code> and <code>s_repeat</code>:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ######## Queries ################</span></span><br><span class="line"><span class="keyword">if</span> s_block_start(<span class="string">"query"</span>):</span><br><span class="line">    <span class="keyword">if</span> s_block_start(<span class="string">"name_chunk"</span>):</span><br><span class="line">        s_size(<span class="string">"string"</span>, length=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> s_block_start(<span class="string">"string"</span>):</span><br><span class="line">            s_string(<span class="string">"A"</span> * <span class="number">10</span>)</span><br><span class="line">        s_block_end()</span><br><span class="line">    s_block_end()</span><br><span class="line">    s_repeat(<span class="string">"name_chunk"</span>, min_reps=<span class="number">2</span>, max_reps=<span class="number">4</span>, step=<span class="number">1</span>, fuzzable=<span class="keyword">True</span>, name=<span class="string">"aName"</span>)</span><br><span class="line"></span><br><span class="line">    s_group(<span class="string">"end"</span>, values=[<span class="string">"\x00"</span>, <span class="string">"\xc0\xb0"</span>])  <span class="comment"># very limited pointer fuzzing</span></span><br><span class="line">    s_word(<span class="number">0xC</span>, name=<span class="string">"Type"</span>, endian=<span class="string">"&gt;"</span>)</span><br><span class="line">    s_word(<span class="number">0x8001</span>, name=<span class="string">"Class"</span>, endian=<span class="string">"&gt;"</span>)</span><br><span class="line">s_block_end()</span><br><span class="line">s_repeat(<span class="string">"query"</span>, <span class="number">0</span>, <span class="number">1000</span>, <span class="number">40</span>, name=<span class="string">"queries"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>More important, it teaches us how to write <code>callback</code> function:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_questions</span><span class="params">(target, fuzz_data_logger, session, node, edge, *args, **kwargs)</span>:</span></span><br><span class="line">    node.names[<span class="string">"Questions"</span>].value = <span class="number">1</span> + node.names[<span class="string">"queries"</span>].current_reps</span><br><span class="line">    node.names[<span class="string">"Authority"</span>].value = <span class="number">1</span> + node.names[<span class="string">"auth_nameservers"</span>].current_reps</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">sess = Session(target=Target(connection=UDPSocketConnection(<span class="string">"224.0.0.251"</span>, <span class="number">5353</span>)))</span><br><span class="line">sess.connect(s_get(<span class="string">"query"</span>), callback=insert_questions)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>To fuzz network protocol, we need to choose a suitable target: <a href="https://github.com/stephenbradshaw/vulnserver" target="_blank" rel="noopener">vulnserver</a>, a simple and buggy server program, so it could be a good test target, while not so realworld.</p>
+<p>After running, it will listen port 9999.<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; .\vulnserver.exe</span><br><span class="line">Starting vulnserver version <span class="number">1.00</span></span><br><span class="line">Called essential <span class="keyword">function</span> dll version <span class="number">1.00</span></span><br><span class="line"></span><br><span class="line">This is vulnerable software!</span><br><span class="line"><span class="keyword">Do</span> not allow access from untrusted systems or networks!</span><br><span class="line"></span><br><span class="line">Waiting <span class="keyword">for</span> client connections...</span><br></pre></td></tr></table></figure></p>
+<p>Then we try to connect with <code>nc</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ nc 192.168.100.79 9999</span><br><span class="line">Welcome to Vulnerable Server! Enter HELP for help.</span><br><span class="line">HELP</span><br><span class="line">Valid Commands:</span><br><span class="line">HELP</span><br><span class="line">STATS [stat_value]</span><br><span class="line">RTIME [rtime_value]</span><br><span class="line">LTIME [ltime_value]</span><br><span class="line">SRUN [srun_value]</span><br><span class="line">TRUN [trun_value]</span><br><span class="line">GMON [gmon_value]</span><br><span class="line">GDOG [gdog_value]</span><br><span class="line">KSTET [kstet_value]</span><br><span class="line">GTER [gter_value]</span><br><span class="line">HTER [hter_value]</span><br><span class="line">LTER [lter_value]</span><br><span class="line">KSTAN [lstan_value]</span><br><span class="line">EXIT</span><br></pre></td></tr></table></figure></p>
+<p>updating…</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">2.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intro-to-Sulley"><span class="toc-number">3.</span> <span class="toc-text">Intro to Sulley</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Usages-of-Boofuzz"><span class="toc-number">4.</span> <span class="toc-text">Usages of Boofuzz</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-number">5.</span> <span class="toc-text">Examples</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
