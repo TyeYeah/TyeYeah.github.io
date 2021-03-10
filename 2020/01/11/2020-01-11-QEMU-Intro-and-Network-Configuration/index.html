@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QEMU Intro and Network Configuration - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,To analyse firmwares or apps from different architectures on your Linux PC, you have to use emulato,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">QEMU Intro and Network Configuration</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">QEMU Intro and Network Configuration</h1>
+        <div class="stuff">
+            <span>January 11, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/arm/">arm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mips/">mips</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pwn/">pwn</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/qemu/">qemu</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>To analyse firmwares or apps from different architectures on your Linux PC, you have to use emulator to run them.<br>Here I introduce QEMU to you.</p>
+<h2 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h2><p>QEMU is a generic and open source machine emulator and virtualizer.<br>QEMU has two operating modes:</p>
+<ul>
+<li><p>Full system emulation<br>In this mode, QEMU emulates a full system (for example a PC), including a processor and various peripherals. It can be used to launch different Operating Systems without rebooting the PC or to debug system code.</p>
+</li>
+<li><p>User mode emulation (Linux host only)<br>In this mode, QEMU can launch Linux processes compiled for one CPU on another CPU. For example, it can be used to launch Wine or to ease cross-compilation and cross-debugging. </p>
+</li>
+</ul>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Full system emulation:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-system <span class="comment"># install many qemu's platform emulators</span></span><br></pre></td></tr></table></figure></p>
+<p>User mode emulation:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-user <span class="comment"># to run apps with dynamic linked libs</span></span><br><span class="line">$ apt install qemu-user-binfmt <span class="comment"># installed along with qemu-user</span></span><br><span class="line">$ apt install binfmt-support</span><br><span class="line">$ apt install qemu-user-static <span class="comment"># to run apps with static linked libs</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Create-Virtual-Disk"><a href="#Create-Virtual-Disk" class="headerlink" title="Create Virtual Disk"></a>Create Virtual Disk</h3><p>It prepares for installation of virtual machine.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-img create -f qcow2 OS.img 20G</span><br><span class="line"><span class="comment"># 'create' means to create vm disk</span></span><br><span class="line"><span class="comment"># '-f qcow2' assigns its format. vmdk and qcow are ok.</span></span><br><span class="line"><span class="comment"># 'OS.img' names the vm disk</span></span><br><span class="line"><span class="comment"># '20G' means the size</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Install-Run-Virtual-Machine"><a href="#Install-Run-Virtual-Machine" class="headerlink" title="Install/Run Virtual Machine"></a>Install/Run Virtual Machine</h3><p>To install virtual machine<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-x86_64 -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br><span class="line"><span class="comment"># 'qemu-system-xxx' depends on what platform you want to use</span></span><br><span class="line"><span class="comment"># '-boot d' means boot from cdrom</span></span><br><span class="line"><span class="comment"># '-cdrom ubuntu-xxx' assigns the image to install</span></span><br><span class="line"><span class="comment"># '-hda OS.img' assigns the vm disk to use</span></span><br><span class="line"><span class="comment"># '-m 2048' means using 2048MB memory</span></span><br><span class="line"><span class="comment"># '-bios OVMF.fd' assigns bios (default bios is seabios)</span></span><br></pre></td></tr></table></figure></p>
+<p>To accelerate (use kvm)<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-kvm </span><br><span class="line"></span><br><span class="line">$ kvm -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br></pre></td></tr></table></figure></p>
+<p>To run virtual machine<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-mips -M malta -nographic -no-reboot -kernel <span class="string">"zImage-mips"</span> -hda <span class="string">"image-mips.ext2"</span> -append <span class="string">"root=/dev/hda rw init=/usr/sbin/init.sh panic=1 PATH=/usr/bin console=ttyS0"</span> -net nic -net tap -drive file=/tmp/share.img</span><br><span class="line"><span class="comment"># '-M malta' assigns developing board/platform</span></span><br><span class="line"><span class="comment"># '-kernel "zImage-mips"' assigns kernel</span></span><br><span class="line"><span class="comment"># '-append "xxx"' gives boot arguments of kernel</span></span><br><span class="line"><span class="comment"># '-net nic -net tap' gives network configuration</span></span><br><span class="line"><span class="comment"># '-drive file=/tmp/share.img' defines a new drive. </span></span><br><span class="line"><span class="comment"># '-L' assigns dynamic lib location</span></span><br></pre></td></tr></table></figure></p>
+<p>Other examples:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-mipsel -kernel openwrt-malta-le-vmlinux-initramfs.elf -M malta  -drive file=/tmp/share.img -net nic -net tap -nographic</span><br><span class="line"> </span><br><span class="line">$ qemu-system-mips -M malta -kernel vmlinux-2.6.32-5-4kc-malta -hda debian_squeeze_mips_standard.qcow2 -append <span class="string">"root=/dev/sda1 console=tty0"</span> -net nic -net tap -nographic</span><br><span class="line"></span><br><span class="line"><span class="comment"># run dynamic linked program, not whole system</span></span><br><span class="line">$ qemu-mipsel -L Path/to/dynamic/linked/libs hello</span><br></pre></td></tr></table></figure></p>
+<p>Note: images and kernel modules can be found <a href="https://people.debian.org/~aurel32/qemu/" target="_blank" rel="noopener">Here</a>, in which the <code>README.txt</code> provides QEMU using scripts.</p>
+<h3 id="Debug-Programs"><a href="#Debug-Programs" class="headerlink" title="Debug Programs"></a>Debug Programs</h3><p>Since <code>QEMU</code> implements <code>gdbserver</code>, dynamic analysis can be performed by adding <code>-g</code> and <code>gdb</code> attach to it. </p>
+<p>First install necessary libs. Take <code>ARM</code> as example.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt install -y gcc-arm-linux-gnueabi        <span class="comment">#32-bit</span></span><br><span class="line">$ apt install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu      <span class="comment">#64-bit</span></span><br></pre></td></tr></table></figure></p>
+<p>Here we have:<br>64-bit:<br><code>gcc-aarch64-linux-gnu</code>    <code>g++-aarch64-linux-gnu</code><br>32-bit:<br><code>gcc-arm-linux-gnueabi</code>    <code>gcc-arm-linux-gnueabihf</code><br><code>g++-arm-linux-gnueabi</code>    <code>g++-arm-linux-gnueabihf</code> </p>
+<ul>
+<li><p>Let’s distinguish the two:<br><code>gcc-arm-linux-gnueabi</code> – The GNU C compiler for <code>armel</code> architecture<br><code>gcc-arm-linux-gnueabihf</code> – The GNU C compiler for <code>armhf</code> architecture<br>The only difference is, they means differnet value of ‘-mfloat-abi’ option of gcc</p>
+<p>  There are 3 values to choose for ‘-mfloat-abi’:</p>
+<ol>
+<li>soft: do float caculation without <code>fpu</code>(floating-point unit), but using software method.</li>
+<li>softfp: default method that <code>armel</code> arch uses (default value <code>gcc-arm-linux-gnueabi</code> uses), which means using <code>fpu</code> to calculate, but save arguments in general registors.</li>
+<li>hard: default method that <code>armhf</code> arch uses (default value <code>gcc-arm-linux-gnueabihf</code> uses), which means using <code>fpu</code> to calculate, and save arguments in <code>fpu</code> registors.</li>
+</ol>
+</li>
+<li><p>Let’s distinguish <code>gcc</code> and <code>g++</code><br>GCC: GNU Compiler Collection, Referrers to all the different languages that are supported by the GNU compiler.<br><code>gcc</code>: GNU C Compiler<br><code>g++</code>: GNU C++ Compiler</p>
+<p>  The main differences:</p>
+<ol>
+<li><code>gcc</code> will compile: .c/.cpp files as C and C++ respectively.</li>
+<li><code>g++</code> will compile: .c/.cpp files but they will all be treated as C++ files.<br>Also if you use <code>g++</code> to link the object files it automatically links in the std C++ libraries (<code>gcc</code> does not do this).</li>
+<li><code>gcc</code> compiling C files has less predefined macros.</li>
+<li><code>gcc</code> compiling .cpp and g++ compiling *.c/.cpp files has a few extra macros.</li>
+</ol>
+</li>
+</ul>
+<p>Run apps with dynamic libs<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-arm -L /usr/arm-linux-gnueabi ./filename       <span class="comment">#32-bit</span></span><br><span class="line">$ qemu-aarch64 -L /usr/aarch64-linux-gnu ./filename   <span class="comment">#64-bit</span></span><br></pre></td></tr></table></figure></p>
+<p>Install gdb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install git gdb gdb-multiarch</span><br></pre></td></tr></table></figure></p>
+<p>Debug 32-bit apps<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># term window 1</span></span><br><span class="line">$ qemu-arm -g 1234 -L /usr/arm-linux-gnueabi ./file</span><br><span class="line"><span class="comment"># term window 2</span></span><br><span class="line">$ gdb-multiarch ./file</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br></pre></td></tr></table></figure></p>
+<p>Debug 64-bit apps<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># term window 1</span></span><br><span class="line">$ qemu-aarch64 -g 1234 -L /usr/aarch64-linux-gnu ./file</span><br><span class="line"><span class="comment"># term window 2</span></span><br><span class="line">$ gdb-multiarch ./file</span><br><span class="line">pwndbg&gt; target remote :1234</span><br><span class="line">pwndbg&gt; b *0x8bb0</span><br></pre></td></tr></table></figure></p>
+<h2 id="Network-Configuration"><a href="#Network-Configuration" class="headerlink" title="Network Configuration"></a>Network Configuration</h2><p>QEMU provides 4 network communication methods, which are:</p>
+<ol>
+<li>User mode stack: to implement a protocol stack in the QEMU process. Work like NAT server.</li>
+<li>Socket: Create a socket for a VLAN and connect multiple VLANs together.</li>
+<li>TAP / bridge: The most important communication method, we need to use this method if we want to apply QEMU virtual machine’s external communication.</li>
+<li>VDE: also used for connecting VLAN</li>
+</ol>
+<p>TAP mode works like VMWare’s network bridge.<br>Essentially implements network card virtually (not physically)</p>
+<h3 id="Software-Preparations"><a href="#Software-Preparations" class="headerlink" title="Software Preparations"></a>Software Preparations</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install bridge-utils        <span class="comment"># virtual bridge utils</span></span><br><span class="line">$ apt-get install uml-utilities       <span class="comment"># UML（User-mode linux） utils</span></span><br></pre></td></tr></table></figure>
+<h3 id="Build-a-network-bridge"><a href="#Build-a-network-bridge" class="headerlink" title="Build a network bridge"></a>Build a network bridge</h3><p>At first your network is:<br><img src="/imghost/rpp/1.png" alt="original ifconfig result"><br>Build the bridge<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig your-net-int down           <span class="comment"># stop network interface</span></span><br><span class="line">$ brctl addbr br0                     <span class="comment"># add a bridge br0</span></span><br><span class="line">$ brctl addif br0 your-net-int         <span class="comment"># add an interface in br0</span></span><br><span class="line">$ brctl stp br0 off                   <span class="comment"># spanning-tree-protocol can be closed</span></span><br><span class="line">$ brctl setfd br0 1                   <span class="comment"># set br0 forwarding delay</span></span><br><span class="line">$ brctl sethello br0 1                <span class="comment"># set br0 hello time</span></span><br><span class="line">$ ifconfig br0 0.0.0.0 promisc up     <span class="comment"># start br0 interface</span></span><br><span class="line">$ ifconfig your-net-int 0.0.0.0 promisc up    <span class="comment"># start network interface</span></span><br><span class="line">$ dhclient br0                        <span class="comment"># get br0 ip from dhcp server</span></span><br><span class="line">$ brctl show br0                      <span class="comment"># see br0 list</span></span><br><span class="line">$ brctl showstp br0                   <span class="comment"># see br0 interfaces</span></span><br></pre></td></tr></table></figure></p>
+<p>Type <code>ifconfig</code> to see result:<br><img src="/imghost/rpp/2.jpg" alt="ifconfig result 1"></p>
+<p>The brief picture of network (bridge and internet):<br><img src="/imghost/rpp/3.jpg" alt="bridge 1"></p>
+<h3 id="Create-a-TAP-device"><a href="#Create-a-TAP-device" class="headerlink" title="Create a TAP device"></a>Create a TAP device</h3><p>Create a TAP device to be an interface on the bridge, which QEMU can use<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tunctl -t tap0 -u root              <span class="comment"># create a tap0 interface, only accessed by root</span></span><br><span class="line">$ brctl addif br0 tap0                <span class="comment"># add tap0 to br0</span></span><br><span class="line">$ ifconfig tap0 0.0.0.0 promisc up    <span class="comment"># start tap0 interface</span></span><br><span class="line">$ brctl showstp br0                   <span class="comment"># show br0 interfaces</span></span><br></pre></td></tr></table></figure></p>
+<p>Type <code>ifconfig</code> to see result:<br><img src="/imghost/rpp/4.jpg" alt="ifconfig result 2"></p>
+<p>Now the picture of network (bridge and internet)<br><img src="/imghost/rpp/5.jpg" alt="bridge 2"></p>
+<p>Well, if other device or interface is needed…<br>Existence of more than 2 interfaces is permitted in the bridge:<br><img src="/imghost/rpp/6.jpg" alt="ifconfig result 3"></p>
+<h3 id="Connect-QEMU-to-tap0"><a href="#Connect-QEMU-to-tap0" class="headerlink" title="Connect QEMU to tap0"></a>Connect QEMU to tap0</h3><p>Now we just need to connect QEMU vm to tap0<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo qemu-system-mipsel -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_squeeze_mipsel_standard.qcow2 -append <span class="string">"root=/dev/sda1 console=tty0"</span> -nographic -net nic -net tap,ifname=tap0,script=no,downscript=no</span><br></pre></td></tr></table></figure></p>
+<p>Finally we get vm connected to internet</p>
+<p>But the problems are:</p>
+<ol>
+<li>sometimes, under special circumstances, QEMU cannot connect to internet. type <code>ifconfig</code> to check network configuration, and use <code>dhclient br0</code> to get dhcp ip again.</li>
+<li>All commands above used by <code>root</code>, so remember to add <code>sudo</code>.</li>
+<li>Once you reboot, all configs disappear. Write a script please.</li>
+</ol>
+<h3 id="Another-Method"><a href="#Another-Method" class="headerlink" title="Another Method"></a>Another Method</h3><p>Edit /etc/network/interfaces<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">auto lo </span><br><span class="line">iface lo inet loopback </span><br><span class="line"></span><br><span class="line">auto eth0 </span><br><span class="line">iface eth0  inet manual </span><br><span class="line">up ifconfig eth0  0.0.0.0 up </span><br><span class="line"></span><br><span class="line">auto br0</span><br><span class="line">iface br0 inet dhcp </span><br><span class="line">bridge_ports eth0 </span><br><span class="line">bridge_stp off </span><br><span class="line">bridge_maxwait 1</span><br></pre></td></tr></table></figure></p>
+<p>Edit /etc/qemu-ifup<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line">echo &quot;Executing /etc/qemu-ifup&quot; </span><br><span class="line">echo &quot;Bringing $1 for bridged mode...&quot; </span><br><span class="line">sudo /sbin/ifconfig $1 0.0.0.0 promisc up </span><br><span class="line">echo &quot;Adding $1 to br0...&quot; </span><br><span class="line">sudo /sbin/brctl addif br0 $1 </span><br><span class="line">sleep 3</span><br></pre></td></tr></table></figure></p>
+<p>Then<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod a+x /etc/qemu-ifup</span><br></pre></td></tr></table></figure></p>
+<p>Restart network<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/networking restart</span><br></pre></td></tr></table></figure></p>
+<p>In this way, there is no need to configure  next time you boot up.</p>
+<h3 id="Method-for-WSL-users"><a href="#Method-for-WSL-users" class="headerlink" title="Method for WSL users"></a>Method for WSL users</h3><p>If you use WSL(Windows Subsystem for Linux), the above network modifying is not recommended, because<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># on WSL 1 Ubuntu we failed to add devices</span></span><br><span class="line">$ tunctl</span><br><span class="line">Failed to open <span class="string">'/dev/net/tun'</span> : No such file or directory</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">add bridge failed: Invalid argument</span><br><span class="line">$ ifconfig  -a  <span class="comment"># no new devices</span></span><br><span class="line">eth1: ...</span><br><span class="line">eth2: ...</span><br><span class="line">...</span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 1500</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0xfe&lt;compat,link,site,host&gt;</span><br><span class="line">        loop  (Local Loopback)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># but normally we get (like on WSL 2 Ubuntu):</span></span><br><span class="line">$ tunctl</span><br><span class="line">Set <span class="string">'tap0'</span> persistent and owned by uid 0</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">$ ifconfig  -a  <span class="comment"># added br0 and tap0</span></span><br><span class="line">...</span><br><span class="line">br0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 12:93:04:50:e6:db  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">...</span><br><span class="line">tap0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 2a:a7:6d:67:b2:00  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></p>
+<p>Well, it doesn’t mean this method works on WSL 2. If continue, we have to disable <code>ethx</code> and enable <code>br0</code> to get <code>ip</code> by<code>DHCP</code>. </p>
+<p>This step is dangerous since <code>br0</code> cannot receive a valid <code>ip</code> via <code>DHCP</code> and your <code>ethx</code> may not be fine as well.</p>
+<p>But We can use available bridge device that <code>docker</code> provides us with – <code>docker0</code>.</p>
+<p>On WSL 2 we can use <code>docker</code> (WSL 1 not supporting), though <code>systemctl</code> not<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ apt install docker.io</span><br><span class="line">$ systemctl start docker    <span class="comment"># systemctl still invalid</span></span><br><span class="line">System has not been booted with systemd as init system (PID 1). Cant operate.</span><br><span class="line">Failed to connect to bus: Host is down</span><br><span class="line">$ service docker start</span><br><span class="line">Starting Docker: docker.</span><br></pre></td></tr></table></figure></p>
+<p>And the bridge <code>docker0</code> is assigned a <code>ip</code>: <code>172.17.10.1</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig  -a</span><br><span class="line">...</span><br><span class="line">docker0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.10.1  netmask 255.255.255.0  broadcast 172.17.10.255</span><br><span class="line">        ether 02:42:69:86:df:1f  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></p>
+<p>Then we add a TAP device <code>tap0</code> and connect it with <code>docker0</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tunctl -t tap0</span><br><span class="line">Set <span class="string">'tap0'</span> persistent and owned by uid 0</span><br><span class="line">$ ifconfig tap0 up</span><br><span class="line">$ brctl addif docker0 tap0</span><br><span class="line">$ brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br0             8000.000000000000       no</span><br><span class="line">docker0         8000.02426986df1f       no              tap0</span><br></pre></td></tr></table></figure></p>
+<p>When starting QEMU we add <code>-net nic -net tap,ifname=tap0,script=no,downscript=no</code> at the tail.</p>
+<p>On QEMU guest we configure <code>ip</code> and <code>gateway</code> and <code>dns</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig eth0 172.17.10.xxx/24</span><br><span class="line">$ route add default gw 172.17.10.1</span><br><span class="line">$ echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
+<p>Then the network configuration is finished.</p>
+<p>But when using docker virtual machines, conflicts may occur, so you can add <code>&quot;bip&quot;: &quot;x.x.x.x/24&quot;</code> to <code>/etc/docker/daemon.json</code> to assign new <code>ip</code> for <code>docker0</code>.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#QEMU"><span class="toc-number">1.</span> <span class="toc-text">QEMU</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">1.1.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Virtual-Disk"><span class="toc-number">1.2.</span> <span class="toc-text">Create Virtual Disk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Run-Virtual-Machine"><span class="toc-number">1.3.</span> <span class="toc-text">Install/Run Virtual Machine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Debug-Programs"><span class="toc-number">1.4.</span> <span class="toc-text">Debug Programs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Configuration"><span class="toc-number">2.</span> <span class="toc-text">Network Configuration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Software-Preparations"><span class="toc-number">2.1.</span> <span class="toc-text">Software Preparations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-a-network-bridge"><span class="toc-number">2.2.</span> <span class="toc-text">Build a network bridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-TAP-device"><span class="toc-number">2.3.</span> <span class="toc-text">Create a TAP device</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connect-QEMU-to-tap0"><span class="toc-number">2.4.</span> <span class="toc-text">Connect QEMU to tap0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Another-Method"><span class="toc-number">2.5.</span> <span class="toc-text">Another Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method-for-WSL-users"><span class="toc-number">2.6.</span> <span class="toc-text">Method for WSL users</span></a></li></ol></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

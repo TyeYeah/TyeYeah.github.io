@@ -60,7 +60,7 @@
         </div>
         <div class="content markdown">
             <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
-<p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a hard way.</p>
+<p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a <del>hard</del> long way.</p>
 <h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares (ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
 <p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
 <p>If you want to know more such as how to install, basic usages, and other stuff, please click <a href="https://docs.microsoft.com/en-us/windows/wsl/about" target="_blank" rel="noopener">Official documents</a></p>
@@ -102,15 +102,23 @@
 <li>NAT network mode cannot be changed now, which means cut the network setting part of this “faster Hyper-v”, and somehow it becomes bit of inconvenient</li>
 <li>no direct browse or access to linux file system, because original roofs dir is replaced by the vm format file : ext4.vhdx. Still can use explorer.exe to open it</li>
 </ul>
-<p>Outlook:<br>The networking applications part and hardware support will be improved.Let’s look forward to it.<br>But WSL seems to be mor useful than WSL2</p>
-<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without VBoxGuestAdditions or VMwareTools, VM in Hyper-v is like ppt playing.</p>
+<p>Outlook:<br>The networking applications part and hardware support will be improved. Let’s look forward to it.<br>But WSL seems to be mor useful than WSL2</p>
+<h3 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h3><p>The whole docs are on <a href="https://docs.microsoft.com/en-us/windows/wsl/" target="_blank" rel="noopener">Windows Subsystem for Linux Documentation</a>.</p>
+<p>First visit <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank" rel="noopener">Windows Subsystem for Linux Installation Guide for Windows 10</a> to know how to install</p>
+<p>Refer to <a href="https://docs.microsoft.com/en-us/windows/wsl/reference" target="_blank" rel="noopener">Command Reference for Windows Subsystem for Linux</a> for WSL commands.</p>
+<p>Here let me review. Check the WSL version assigned to each of the Linux distributions installed<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --list --verbose <span class="comment"># wsl -l -v</span></span><br></pre></td></tr></table></figure></p>
+<p>Set WSL 2/1 as default, so the next distro will be version 2/1 defaultly<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">set</span>-default-version 2/1</span><br></pre></td></tr></table></figure></p>
+<p>To set a distribution to be backed by either version of WSL<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">set</span>-version &lt;distribution name&gt; &lt;versionNumber&gt;</span><br><span class="line">&gt; wsl --<span class="built_in">set</span>-version ubuntu 2</span><br></pre></td></tr></table></figure></p>
+<p>Enter <code>wsl</code>/<code>bash</code> to use default distro, enter <code>debian</code>/<code>ubuntu</code>/… to use other distros<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl</span><br><span class="line">&gt; bash</span><br><span class="line">&gt; debian</span><br></pre></td></tr></table></figure></p>
+<p>Learn more by showing help pages<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">help</span> <span class="comment"># wsl -h</span></span><br><span class="line">&gt; wslconfig <span class="comment"># wslconfig</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without <code>VBoxGuestAdditions</code> or <code>VMwareTools</code>, VM in Hyper-v is like ppt playing.</p>
 <p>Actually No.1 rival/<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
 <p>So my answer is NO, and be careful to try it cz after installing and uninstalling, VMs sometimes still disabled.</p>
 <p>Uninstall Solutions:</p>
 <ol>
 <li><p>When canceled the check mark, sometimes VMs not work yet</p>
 </li>
-<li><p>Then open cmd as Administrator and input<code>bcdedit /set hypervisorlaunchtype off</code> and then check VMs</p>
+<li><p>Then open cmd as Administrator and input <code>bcdedit /set hypervisorlaunchtype off</code> and then check VMs</p>
 </li>
 <li><p>The ultimate solution is this script in cmd</p>
 </li>
@@ -120,7 +128,7 @@
 <h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated  system(seriously???) and few apps in it.</p>
 <p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own need.</p>
-<p>Consult <a href="https://docs.microsoft.com" target="_blank" rel="noopener">official documents</a> and <a href="https://devblogs.microsoft.com" target="_blank" rel="noopener">devblog</a> is always the right way to know and learn<br>For developers click <a href="https://developer.microsoft.com" target="_blank" rel="noopener">here</a>, and Windows API in <a href="https://msdn.microsoft.com" target="_blank" rel="noopener">here</a></p>
+<p>Consult <a href="https://docs.microsoft.com" target="_blank" rel="noopener">official documents</a> and <a href="https://devblogs.microsoft.com" target="_blank" rel="noopener">devblog</a> is always the right way to know and learn.<br>For developers click <a href="https://developer.microsoft.com" target="_blank" rel="noopener">here</a>, and Windows API references <a href="https://msdn.microsoft.com" target="_blank" rel="noopener">here</a>.</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -167,7 +175,7 @@
     </div>
     
         <div class="side">
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Subsystem-for-Linux"><span class="toc-number">1.</span> <span class="toc-text">Windows Subsystem for Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL"><span class="toc-number">1.1.</span> <span class="toc-text">WSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL2"><span class="toc-number">1.2.</span> <span class="toc-text">WSL2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyper-V"><span class="toc-number">2.</span> <span class="toc-text">Hyper-V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Sandbox"><span class="toc-number">3.</span> <span class="toc-text">Windows Sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>	
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Subsystem-for-Linux"><span class="toc-number">1.</span> <span class="toc-text">Windows Subsystem for Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL"><span class="toc-number">1.1.</span> <span class="toc-text">WSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WSL2"><span class="toc-number">1.2.</span> <span class="toc-text">WSL2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usages"><span class="toc-number">1.3.</span> <span class="toc-text">Usages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyper-V"><span class="toc-number">2.</span> <span class="toc-text">Hyper-V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Sandbox"><span class="toc-number">3.</span> <span class="toc-text">Windows Sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>	
         </div>
     
 </div>

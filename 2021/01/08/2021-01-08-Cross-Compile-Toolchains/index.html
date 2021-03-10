@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="default" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cross Compile Toolchains - TyeYeah&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="TyeYeah, CS,"> 
+    <meta name="description" content="blog on Hexo,Just now I found the site toolchains.bootlin.com to download suitable prebuilt toolchain, it provid,"> 
+    <meta name="author" content="TyeYeah"> 
+    <link rel="alternative" href="atom.xml" title="TyeYeah&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">TyeYeah&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="../../../.."></a>
+    <div title="Play/Stop" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Cross Compile Toolchains</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="QR Code" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Cross Compile Toolchains</h1>
+        <div class="stuff">
+            <span>January 08, 2021</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/arm/">arm</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/buildroot/">buildroot</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/cross-compile/">cross-compile</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/crosstool-ng/">crosstool-ng</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/gcc/">gcc</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/gdb/">gdb</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/linux/">linux</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/mips/">mips</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>Just now I found the site <a href="https://toolchains.bootlin.com/" target="_blank" rel="noopener">toolchains.bootlin.com</a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>/<code>GDB</code>/<code>Linux Header</code> versions. </p>
+<p>Before knowing this site, I tried <code>buildroot</code> and <code>crosstool-ng</code> to build my own toolchain, here is to share the experience.</p>
+<p>But to be honest the <a href="https://toolchains.bootlin.com/" target="_blank" rel="noopener">toolchains.bootlin.com</a> seems better, because it built tools for us, and you can choose version of <code>GCC</code> and <code>GDB</code>, while <code>buildroot</code> and <code>crosstool-ng</code> can’t.</p>
+<h2 id="Buildroot"><a href="#Buildroot" class="headerlink" title="Buildroot"></a>Buildroot</h2><p><a href="https://buildroot.org/" target="_blank" rel="noopener">Buildroot</a> is a framework to build embedded Linux software on Linux. It is made up of <code>makefile</code> and <code>Kconfig</code> configuration files. L</p>
+<p>ike compiling Linux kernel, configure <code>buildroot</code> and edit <code>menuconfig</code> to compile a complete Linux system software (including boot, kernel, rootfs and libs) that can be directly burned and run on the machine.</p>
+<p>Download <code>buildroot</code>.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://buildroot.uclibc.org/downloads/snapshots/buildroot-snapshot.tar.bz2</span><br><span class="line">$ tar -jxvf buildroot-snapshot.tar.bz2</span><br><span class="line">$ <span class="built_in">cd</span> buildroot</span><br></pre></td></tr></table></figure></p>
+<p>Configure <code>buildroot</code>.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libncurses-dev patch</span><br><span class="line">$ make clean</span><br><span class="line">$ make menuconfig</span><br></pre></td></tr></table></figure></p>
+<p>When interface shows up like this,<br><img src="/imghost/rpp/7.jpg" alt="Target Option"><br>Set <code>Target Architecture</code> as <code>MIPS (little endian)</code> (depending on your target);<br><img src="/imghost/rpp/8.jpg" alt="Target Architecture"><br>Set <code>Kernel Headers</code> as your host Linux version,because it will run on your pc.<br><img src="/imghost/rpp/9.jpg" alt="Kernel Headers"></p>
+<p>Install it.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install texinfo</span><br><span class="line">$ sudo apt-get install bison</span><br><span class="line">$ sudo apt-get install flex</span><br><span class="line">$ sudo make</span><br></pre></td></tr></table></figure></p>
+<p>Compiled files will be found in directory <code>output</code>. Cross compile utils will be in <code>buildroot/output/host/usr/bin</code>, and the compiler is <code>mips-linux-gcc</code>.</p>
+<p>Configure environment variables and test.<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gedit ~/.bashrc</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:Path/to/buildroot/output/host/usr/bin</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">$ mips-linux-gcc -o <span class="built_in">test</span> test.c -static</span><br></pre></td></tr></table></figure></p>
+<h2 id="Crosstool-NG"><a href="#Crosstool-NG" class="headerlink" title="Crosstool-NG"></a>Crosstool-NG</h2><p>You can visit <a href="http://crosstool-ng.github.io/" target="_blank" rel="noopener">official site</a> for its introduction and documentation.</p>
+<p>I installed it by source code<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/crosstool-ng/crosstool-ng</span><br><span class="line">$ ./bootstrap   <span class="comment"># needed before running ./configure</span></span><br><span class="line">$ ./configure --prefix=/some/place</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$&#123;PATH&#125;</span>:/some/place/bin"</span></span><br></pre></td></tr></table></figure></p>
+<p>If you are <code>root</code> user, you’ll get<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng build</span><br><span class="line">[ERROR]  You must NOT be root to run crosstool-NG</span><br><span class="line">[00:00] / gmake: *** [ct-ng:262: build] Error 1</span><br></pre></td></tr></table></figure></p>
+<p>To solve it, add things to <code>./ct-ng</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim ./ct-ng</span><br><span class="line">... <span class="comment"># add the following</span></span><br><span class="line"><span class="built_in">export</span> CT_EXPERIMENTAL:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT_SURE:=Y</span><br></pre></td></tr></table></figure></p>
+<p>It can be operated like <code>buildroot</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /some/place/bin</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  ct-ng</span><br><span class="line">$ ./ct-ng menuconfig</span><br></pre></td></tr></table></figure></p>
+<p>Or a more convenient way, use the templates/samples<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng list-samples      <span class="comment"># show templates</span></span><br><span class="line">Status  Sample name</span><br><span class="line">[G..X]   aarch64-ol7u9-linux-gnu</span><br><span class="line">[G..X]   aarch64-rpi3-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-android</span><br><span class="line">[G..X]   aarch64-unknown-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-uclibc</span><br><span class="line">...</span><br><span class="line">$ ./ct-ng mips-malta-linux-gnu  <span class="comment"># choose one</span></span><br><span class="line">  CONF  mips-malta-linux-gnu</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># configuration written to .config</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Initially reported by: Antony Pavlov</span><br><span class="line">URL:</span><br><span class="line"></span><br><span class="line">Comment:</span><br><span class="line">Experimental toolchain <span class="keyword">for</span> MIPS32r2</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Now configured <span class="keyword">for</span> <span class="string">"mips-malta-linux-gnu"</span></span><br><span class="line">$ ./ct-ng build</span><br><span class="line">[INFO ]  Performing some trivial sanity checks</span><br><span class="line">[WARN ]  Number of open files 1024 may not be sufficient to build the toolchain; increasing to 2048</span><br><span class="line">...</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  .build  build.log  .config  .config.old  ct-ng</span><br><span class="line">$ ls .build/</span><br><span class="line">mips-malta-linux-gnu  src  tarballs  tools</span><br></pre></td></tr></table></figure></p>
+<p>Now the <code>ct-ng</code> downloads what it needs to <code>.build</code> dir according to <code>.config</code> (made automatically).<br>However these are not what produced. Check your home dir u will find <code>x-tools</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">mips-malta-linux-gnu</span><br><span class="line">$ ls mips-malta-linux-gnu/</span><br><span class="line">bin  build.log.bz2  include  lib  libexec  mips-malta-linux-gnu  share</span><br></pre></td></tr></table></figure></p>
+<p>These are the built toolchain.</p>
+<p>The truth is, the binarys compiled by it cannot run on old kernels (encounter <code>FATAL:kernel too old</code> in <code>QEMU</code>), that might because the libs (<code>~/x-tools/mips-malta-linux-gnu/mips-malta-linux-gnu/sysroot/lib/ld-2.32.so</code>) it use are latest.</p>
+<p>So for old devices or <code>QEMU</code>, better use <a href="https://buildroot.org/" target="_blank" rel="noopener">buildroot</a>, or try <a href="https://toolchains.bootlin.com/" target="_blank" rel="noopener">toolchains.bootlin.com</a>.</p>
+<h2 id="Compile-GDB-amp-GDBserver"><a href="#Compile-GDB-amp-GDBserver" class="headerlink" title="Compile GDB&amp;GDBserver"></a>Compile GDB&amp;GDBserver</h2><p>It is for dynamic analysis, and I almost messed up by this. Get source code on <a href="http://ftp.gnu.org/gnu/gdb/" target="_blank" rel="noopener">FTP</a></p>
+<p>First see how to set configuration<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --target=mipsel-linux --host=mipsel-linux --program-prefix=mipsel-linux  --prefix=`<span class="built_in">echo</span> <span class="variable">$PWD</span>`/bin CC=/path/to/buildroot/output/host/bin/mipsel-linux-gcc CXX=/path/to/buildroot/output/host/bin/mipsel-linux-g++  AR=/path/to/buildroot/output/host/bin/mipsel-linux-ar LD=/path/to/buildroot/output/host/bin/mipsel-linux-ld RANLIB=/path/to/buildroot/output/host/bin/mipsel-linux-ranlib  STRIP=/path/to/buildroot/output/host/bin/mipsel-linux-strip CFLAGS=<span class="string">"-w -static"</span> CXXFLAGS=<span class="string">"-w -static"</span> LDFLAGS=<span class="string">"-static"</span></span><br><span class="line">...   <span class="comment"># make sure paths are absolute</span></span><br><span class="line">$ sudo make -j8</span><br><span class="line">...</span><br><span class="line">$ make install</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>Recommended versions includes <code>7.10</code> …<br>Versions too high cause <code>configure: error: ***A compiler with support for c++11 language features is required</code>, while lower versions gives <code>configure: error: no termcap library found</code>.</p>
+<p>However problems still come out, if your toolchain is so latest, or if some other libraries are required. </p>
+<p>The <a href="https://github.com/rapid7/embedded-tools/tree/master/binaries/gdbserver" target="_blank" rel="noopener">built gdbservers</a> are off the shelf, you can use them or things built by others directly.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="https://link.hhtjim.com/163/514216257.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="https://link.hhtjim.com/163/514213582.mp3"></li>
+                        
+                    
+                        
+                            <li title="2" data-url="https://link.hhtjim.com/163/514216237.mp3"></li>
+                        
+                    
+                        
+                            <li title="3" data-url="https://link.hhtjim.com/163/36664350.mp3"></li>
+                        
+                    
+                        
+                            <li title="4" data-url="https://link.hhtjim.com/163/401722197.mp3"></li>
+                        
+                    
+                        
+                            <li title="5" data-url="https://link.hhtjim.com/163/34228815.mp3"></li>
+                        
+                    
+                        
+                            <li title="6" data-url="https://link.hhtjim.com/163/401723178.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">View Comments</div>
+
+
+    </div>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Buildroot"><span class="toc-number">1.</span> <span class="toc-text">Buildroot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crosstool-NG"><span class="toc-number">2.</span> <span class="toc-text">Crosstool-NG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compile-GDB-amp-GDBserver"><span class="toc-number">3.</span> <span class="toc-text">Compile GDB&amp;GDBserver</span></a></li></ol>	
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
