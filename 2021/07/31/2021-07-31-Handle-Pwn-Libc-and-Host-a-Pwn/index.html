@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Handle Pwn Libc and Host a Pwn |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Handle Pwn Libc and Host a Pwn</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-07-31 15:53:56
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/gdb/">gdb</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/libc/">libc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>This blog introduces tools to deal with <code>libc</code> problems in <code>pwn</code> and to host <code>pwn</code> challenges.</p>
+<h2 id="Pwn-Libc-Part"><a href="#Pwn-Libc-Part" class="headerlink" title="Pwn Libc Part"></a>Pwn Libc Part</h2><p>The <code>libc</code> version matters in <code>Linux</code> pwn challenges. Using different <code>libc</code> means having different gadgets, different heap mechanisms and maybe totally differrnt program behaviors.</p>
+<p>Ubuntu 16.04 gets <code>libc 2.23</code>, Ubuntu 18.04 gets <code>libc 2.27</code>, the newer versions gets <code>libc 2.29</code>, <code>libc 2.30</code> and even <code>libc 2.31</code>. This is always the reason why some newcomers cannot test the exploit scripts on their own machine, or they may not even run program successfully. All due to the wrong <code>libc</code> using.</p>
+<p>This part provides you with some <code>libc</code> related tools.</p>
+<h3 id="LibcSearcher"><a href="#LibcSearcher" class="headerlink" title="LibcSearcher"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/lieanu/LibcSearcher" >LibcSearcher<i class="fas fa-external-link-alt"></i></a></h3><p>It is a tool on <a class="link"   target="_blank" rel="noopener" href="https://github.com/lieanu/LibcSearcher" >github<i class="fas fa-external-link-alt"></i></a>, helps determine which  <code>libc</code> the remote server is using (according to function addresses you leaked, like some online searching sites)</p>
+<p>To install</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/lieanu/LibcSearcher.git</span><br><span class="line">$ <span class="built_in">cd</span> LibcSearcher</span><br><span class="line">$ python setup.py develop</span><br></pre></td></tr></table></figure>
+<p>Usage</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># the 2rd arg should be address you leaked</span></span><br><span class="line">obj = LibcSearcher(<span class="string">&quot;fgets&quot;</span>, <span class="number">0X7ff39014bd90</span>)</span><br><span class="line"><span class="comment"># if it&#x27;s not unique, it will prompt you to choose manually, or u can try `add_condition(leaked_func, leaked_address)`</span></span><br><span class="line"></span><br><span class="line">obj.dump(<span class="string">&quot;system&quot;</span>)        <span class="comment"># offset of &#x27;system()&#x27; in libc</span></span><br><span class="line">obj.dump(<span class="string">&quot;str_bin_sh&quot;</span>)    <span class="comment"># offset of &#x27;/bin/sh&#x27; string in libc</span></span><br><span class="line">obj.dump(<span class="string">&quot;__libc_start_main_ret&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<p>With this you can not only know the remote <code>libc</code></p>
+<h3 id="pwn-debug"><a href="#pwn-debug" class="headerlink" title="pwn_debug"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/ray-cp/pwn_debug" >pwn_debug<i class="fas fa-external-link-alt"></i></a></h3><p>It’s like an advanced <a target="_blank" rel="noopener" href="https://github.com/Gallopsled/pwntools"><code>pwntools</code></a>, with the ability to run different <code>libc</code>on one host machine.</p>
+<p>Start with installation</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/ray-cp/pwn_debug.git</span><br><span class="line">$ <span class="built_in">cd</span> pwn_debug</span><br><span class="line">$ sudo python setup.py install </span><br><span class="line"><span class="comment"># or python setup.py install --user</span></span><br></pre></td></tr></table></figure>
+<p>Then download and compile <code>glibc</code> with debug symbols</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># compile specific version</span></span><br><span class="line"><span class="comment"># ./build.sh $(version)</span></span><br><span class="line">$ ./build.sh 2.23</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile all versions in &#x27;./build.sh&#x27;</span></span><br><span class="line">$ ./build.sh</span><br></pre></td></tr></table></figure>
+<p>They are all located in <code>/glibc/*</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls /glibc/</span><br><span class="line">$ <span class="built_in">source</span>  x64  x86</span><br></pre></td></tr></table></figure>
+<p>And the normal usage is divided into 3 steps:</p>
+<ol>
+<li>Import and declare object</li>
+<li>Set the mode parameters, three mode in total: <code>debug</code>, <code>local</code> and <code>remote</code>.</li>
+<li>Run the mode and interactive like using <code>pwntools</code><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn_debug <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">## step 1</span></span><br><span class="line">pdbg=pwn_debug(<span class="string">&quot;binary&quot;</span>)        <span class="comment"># specific the binary filename</span></span><br><span class="line">pdbg.context.terminal=[<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]  <span class="comment"># set terminal</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## step 2</span></span><br><span class="line">pdbg.local(<span class="string">&quot;libc.so.6&quot;</span>)     <span class="comment"># local libc file</span></span><br><span class="line">pdbg.debug(<span class="string">&quot;2.23&quot;</span>)          <span class="comment"># libc in /glibc/*</span></span><br><span class="line">pdbg.remote(<span class="string">&#x27;host&#x27;</span>,<span class="string">&#x27;port&#x27;</span>)  <span class="comment"># remote address</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## step 3</span></span><br><span class="line"><span class="comment">#p=pdbg.run(&quot;local&quot;)</span></span><br><span class="line"><span class="comment">#p=pdbg.run(&quot;debug&quot;)</span></span><br><span class="line">p=pdbg.run(<span class="string">&quot;remote&quot;</span>)    <span class="comment"># choose mode</span></span><br><span class="line"></span><br><span class="line">pdbg.bp([<span class="number">0x9aa</span>])        <span class="comment"># easy to set breakpoint, regardless of PIE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># the followings are pwntools functions</span></span><br><span class="line">elf=pdbg.elf</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(elf.got[<span class="string">&#x27;printf&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(elf.plt[<span class="string">&#x27;printf&#x27;</span>])</span><br><span class="line"></span><br><span class="line">libc=pdbg.libc</span><br><span class="line"><span class="built_in">print</span> libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+More usages on <a class="link"   target="_blank" rel="noopener" href="https://github.com/ray-cp/pwn_debug/wiki/Usage" >github wiki<i class="fas fa-external-link-alt"></i></a>, btw this is for <code>Python2</code>, <code>Python3</code> users need to modify <code>print</code> formats and some <code>import</code> parts to make it work.</li>
+</ol>
+<h3 id="glibc-all-in-one-and-libc-database"><a href="#glibc-all-in-one-and-libc-database" class="headerlink" title="glibc-all-in-one and libc-database"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/matrix1001/glibc-all-in-one" >glibc-all-in-one<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/niklasb/libc-database" >libc-database<i class="fas fa-external-link-alt"></i></a></h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/matrix1001/glibc-all-in-one" >glibc-all-in-one<i class="fas fa-external-link-alt"></i></a> is just for debugging different version <code>libc</code> with symbols (it can assist <code>pwn_debug</code>), and <a class="link"   target="_blank" rel="noopener" href="https://github.com/niklasb/libc-database" >libc-database<i class="fas fa-external-link-alt"></i></a> is for ctfers to get the version of remote server responding to leaked information (the engine of <code>LibcSearcher</code>). </p>
+<ul>
+<li><code>glibc-all-in-one</code></li>
+</ul>
+<p>You can update the libc list</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ ./update_list</span><br><span class="line">[+] Common list has been save to &quot;list&quot;</span><br><span class="line">[+] Old-release list has been save to &quot;old_list&quot;</span><br><span class="line"></span><br><span class="line">$ cat old_list</span><br><span class="line">2.21-0ubuntu4.3_amd64</span><br><span class="line">2.21-0ubuntu4.3_i386</span><br><span class="line">...</span><br><span class="line">2.30-0ubuntu2_amd64</span><br><span class="line">2.30-0ubuntu2_i386</span><br><span class="line"></span><br><span class="line">$ cat list</span><br><span class="line">2.23-0ubuntu11.3_amd64</span><br><span class="line">2.23-0ubuntu11.3_i386</span><br><span class="line">...</span><br><span class="line">2.33-0ubuntu9_amd64</span><br><span class="line">2.33-0ubuntu9_i386</span><br></pre></td></tr></table></figure>
+<p>use <code>download</code> for packages in the <code>list</code>; use <code>download_old</code> for packages in the <code>old_list</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ glibc-all-in-one ./download 2.23-0ubuntu10_i386</span><br><span class="line">Getting 2.23-0ubuntu10_i386</span><br><span class="line">  -&gt; Location: https://mirror.tuna.tsinghua.edu.cn/ubuntu/pool/main/g/glibc/libc6_2.23-0ubuntu10_i386.deb</span><br><span class="line">  -&gt; Downloading libc binary package</span><br><span class="line">  -&gt; Extracting libc binary package</span><br><span class="line">  -&gt; Package saved to libs/2.23-0ubuntu10_i386</span><br><span class="line">  -&gt; Location: https://mirror.tuna.tsinghua.edu.cn/ubuntu/pool/main/g/glibc/libc6-dbg_2.23-0ubuntu10_i386.deb</span><br><span class="line">  -&gt; Downloading libc debug package</span><br><span class="line">  -&gt; Extracting libc debug package</span><br><span class="line">  -&gt; Package saved to libs/2.23-0ubuntu10_i386/dbg</span><br><span class="line">$ ls libs/2.23-0ubuntu10_i386</span><br><span class="line">. .. .debug  ld-2.23.so  libc-2.23.so  libpthread.so.0   ......</span><br><span class="line">$ ls libs/2.23-0ubuntu10_i386/.debug</span><br><span class="line">ld-2.23.so  libc-2.23.so   ......</span><br></pre></td></tr></table></figure>
+<p>Need additional libc packages, use <code>extract</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./extract</span><br><span class="line">Usage: ./extract deb output</span><br><span class="line">$ ./extract ~/libc6_2.26-0ubuntu2_i386.deb /tmp/test</span><br><span class="line">$ ./extract ~/libc6-dbg_2.26-0ubuntu2_i386.deb /tmp/test_dbg</span><br></pre></td></tr></table></figure>
+<p>Then build as</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$  ./build</span><br><span class="line">Usage: ./build version arch</span><br><span class="line">Supported version:2.19, 2.23-2.29</span><br><span class="line">Supported arch: i686, amd64</span><br><span class="line">$ ./build 2.29 i686</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>libc-database</code></li>
+</ul>
+<p>First install some dependencies:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install -y \</span><br><span class="line">  binutils file \</span><br><span class="line">  wget \</span><br><span class="line">  rpm2cpio cpio \</span><br><span class="line">  zstd jq</span><br></pre></td></tr></table></figure>
+
+<p>The <a class="link"   target="_blank" rel="noopener" href="https://libc.rip/" >online version<i class="fas fa-external-link-alt"></i></a> is available and you can build one using <a class="link"   target="_blank" rel="noopener" href="https://github.com/niklasb/libc-database/tree/master/searchengine" >libc-database/searchengine<i class="fas fa-external-link-alt"></i></a>.<br>Fetch the desired libc categories and extract the symbol offsets, and update database:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./get  # List categories</span><br><span class="line">$ ./get ubuntu debian  # Download Ubuntu&#x27;s and Debian&#x27;s libc, old default behavior</span><br><span class="line">$ ./get all  # Download all categories. Can take a while!</span><br></pre></td></tr></table></figure>
+<p>Add a custom libc: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./add /usr/lib/libc-2.21.so</span><br></pre></td></tr></table></figure>
+<p>Find the libc you want using leaking addresses. Only the last 12 bits are checked, because randomization usually works on page size level.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./find printf 260 puts f30</span><br><span class="line">archive-glibc (libc6_2.19-10ubuntu2_i386)</span><br></pre></td></tr></table></figure>
+<p>Dump some useful offsets</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./dump libc6_2.19-0ubuntu6.6_i386</span><br><span class="line">offset___libc_start_main_ret = 0x19a83</span><br><span class="line">offset_system = 0x00040190</span><br><span class="line">offset_dup2 = 0x000db590</span><br><span class="line">offset_recv = 0x000ed2d0</span><br><span class="line">offset_str_bin_sh = 0x160a24</span><br></pre></td></tr></table></figure>
+<p>And check whether a library is already in the database</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./identify /usr/lib/libc.so.6</span><br><span class="line">local-f706181f06104ef6c7008c066290ea47aa4a82c5</span><br></pre></td></tr></table></figure>
+
+<h3 id="patchelf"><a href="#patchelf" class="headerlink" title="patchelf"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/NixOS/patchelf" >patchelf<i class="fas fa-external-link-alt"></i></a></h3><p>PatchELF is a simple utility for modifying existing ELF executables and libraries. It helps program run on own library path <code>RPATH</code> and cunstom <code>libc</code> like <code>pwn_debug</code>, and so on.</p>
+<p>Installation</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># apt </span><br><span class="line">$ sudo apt install patchelf </span><br><span class="line"></span><br><span class="line"># or compile by yourself </span><br><span class="line">$ ./bootstrap.sh</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ make check</span><br><span class="line">$ sudo make install</span><br></pre></td></tr></table></figure>
+<p>Choose the dynamic loader (“ELF interpreter”) of executables</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ patchelf --set-interpreter /lib/my-ld-linux.so.2 my-program</span><br></pre></td></tr></table></figure>
+<p>Change (or shrink) the <code>RPATH</code> of executables and libraries</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># set `RPATH`</span><br><span class="line">$ patchelf --set-rpath /opt/my-libs/lib:/other-libs my-program</span><br><span class="line"># shrink `RPATH`: get rid of useless `RPATH`</span><br><span class="line">$ patchelf --shrink-rpath my-program</span><br><span class="line"># cooperate with `--allowed-rpath-prefixes`</span><br><span class="line">$ patchelf --shrink-rpath --allowed-rpath-prefixes /usr/lib:/foo/lib my-program</span><br></pre></td></tr></table></figure>
+<p>More on <a class="link"   target="_blank" rel="noopener" href="https://github.com/NixOS/patchelf/blob/master/README.md" >README.md<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Host-Pwn-Challenges"><a href="#Host-Pwn-Challenges" class="headerlink" title="Host Pwn Challenges"></a>Host Pwn Challenges</h2><p>Most of the time we debug locally due too the speed and other facters, but the exploit scripts sometimes goes wrong when testing on remote dur to details in interaction. </p>
+<p>Here introduces several ways to host the <code>pwn</code> challenges, not only for <code>CTF</code> competition organizers but facilitate <code>CTFers</code> to test <code>remote</code> on <code>local</code>.</p>
+<h3 id="One-Command"><a href="#One-Command" class="headerlink" title="One Command"></a>One Command</h3><p>In real challenge we are given an <code>ip</code> and a <code>port</code>, therefore the easiest way is to do port forwarding using <code>socat</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ socat tcp-l:8080,fork exec:/root/pwn_to_run,reuseaddr</span><br></pre></td></tr></table></figure>
+<p>Then you can <code>nc</code> to interact. </p>
+<p>Add <code>nohup</code>, even combine with <code>screen</code>/<code>&amp;</code> will helps.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nohup socat tcp-l:8080,fork exec:/root/pwn_to_run,reuseaddr</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="ctf-xinetd"><a href="#ctf-xinetd" class="headerlink" title="ctf_xinetd"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/Eadom/ctf_xinetd" >ctf_xinetd<i class="fas fa-external-link-alt"></i></a></h3><blockquote>
+<p>A docker repository for deploying CTF challenges</p>
+</blockquote>
+<p><code>xinetd</code> - the extended Internet services daemon. It starts programs that provide Internet services.<br><code>xinetd</code> is the only daemon process started and it listens on all service ports for the services listed in its configuration file.<br><code>ctf_xinetd</code> uses <code>docker</code> to run <code>xinetd</code> and host the pwn challenge. </p>
+<p>The brief <a target="_blank" rel="noopener" href="https://github.com/Eadom/ctf_xinetd/blob/master/README.md"><code>README.md</code></a> comes</p>
+<hr>
+<ul>
+<li>Configuration</li>
+</ul>
+<p>Put files to floder <code>bin</code>. They’ll be copied to /home/ctf. <strong>Update the flag</strong> at the same time.</p>
+<p>Edit <code>ctf.xinetd</code>. replace <code>./helloworld</code> to your command.</p>
+<p>You can also edit <code>Dockerfile, ctf.xinetd, start.sh</code> to custom your environment.</p>
+<ul>
+<li>Build</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t <span class="string">&quot;helloworld&quot;</span> .</span><br></pre></td></tr></table></figure>
+
+<p>DO NOT use <em>bin</em> as challenge’s name</p>
+<ul>
+<li>Run</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p <span class="string">&quot;0.0.0.0:pub_port:9999&quot;</span> -h <span class="string">&quot;helloworld&quot;</span> --name=<span class="string">&quot;helloworld&quot;</span> $ helloworld</span><br></pre></td></tr></table></figure>
+
+<p><code>pub_port</code> is the port you want to expose to the public network.</p>
+<ul>
+<li>Capture traffic</li>
+</ul>
+<p>If you want to capture challenge traffic, just run <code>tcpdump</code> on the host. Here is an example.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tcpdump -w helloworld.pcap -i eth0 port pub_port</span><br></pre></td></tr></table></figure>
+
+<h3 id="pwn-deploy-chroot"><a href="#pwn-deploy-chroot" class="headerlink" title="pwn_deploy_chroot"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/giantbranch/pwn_deploy_chroot" >pwn_deploy_chroot<i class="fas fa-external-link-alt"></i></a></h3><blockquote>
+<p>A project for deploying ctf pwn challenge use chroot</p>
+</blockquote>
+<p>Since <a target="_blank" rel="noopener" href="https://github.com/Eadom/ctf_xinetd"><code>ctf_xinetd</code></a> needs to modify <code>flag</code>, <code>ctf.xinetd</code>, and only deploys one challenge a time, another convenient tool <a target="_blank" rel="noopener" href="https://github.com/giantbranch/pwn_deploy_chroot"><code>pwn_deploy_chroot</code></a> comes.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/giantbranch/pwn_deploy_chroot"><code>pwn_deploy_chroot</code></a> is able to deploy multiple challenges in one <code>docker</code> machine, and generate <code>flag</code> &amp; configurations automatically.<br>Replacing <code>/bin/sh</code> in <code>chroot</code> with statically linked <code>catflag</code> gives users no chance to use <code>sh</code> fork bombs. Ports starts from <code>10000</code>, +1 for each additional program.</p>
+<p>Come the brief <a target="_blank" rel="noopener" href="https://github.com/giantbranch/pwn_deploy_chroot/blob/master/README.md"><code>README.md</code></a></p>
+<hr>
+<ul>
+<li>Before</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Install the latest version docker</span><br><span class="line">$ curl -s https://get.docker.com/ | sh</span><br><span class="line"># Install docker compose</span><br><span class="line">$ apt install docker-compose</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>How to use</li>
+</ul>
+<ol>
+<li>Put your pwn program to ./bin （Note that the filename should not contain special characters.）</li>
+<li>python initialize.py</li>
+<li>docker-compose up –build -d     # please run as root</li>
+</ol>
+<p>You can edit <code>config.py</code> to decide whether to replace <code>/bin/sh</code> with <code>catflag</code></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Whether to replace /bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## replace</span></span><br><span class="line">REPLACE_BINSH = <span class="literal">True</span></span><br><span class="line"><span class="comment">## not replace(default)</span></span><br><span class="line">REPLACE_BINSH = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Attention</li>
+</ul>
+<p>The flag will be generated by the <code>initialize.py</code> and it store in <code>flags.txt</code></p>
+<p>The port information of the pwn program is also inside the <code>flags.txt</code>.</p>
+<ul>
+<li>Update</li>
+</ul>
+<p>2018.09.17 version v1</p>
+<p>2018.09.23 version v2：Use the catflag program instead of /bin/sh, which is more secure</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Bypass Anti-Virus</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ARM &amp; MIPS PWN Intro</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pwn-Libc-Part"><span class="nav-number">1.</span> <span class="nav-text">Pwn Libc Part</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LibcSearcher"><span class="nav-number">1.1.</span> <span class="nav-text">LibcSearcher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwn-debug"><span class="nav-number">1.2.</span> <span class="nav-text">pwn_debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#glibc-all-in-one-and-libc-database"><span class="nav-number">1.3.</span> <span class="nav-text">glibc-all-in-one and libc-database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patchelf"><span class="nav-number">1.4.</span> <span class="nav-text">patchelf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Host-Pwn-Challenges"><span class="nav-number">2.</span> <span class="nav-text">Host Pwn Challenges</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#One-Command"><span class="nav-number">2.1.</span> <span class="nav-text">One Command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ctf-xinetd"><span class="nav-number">2.2.</span> <span class="nav-text">ctf_xinetd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwn-deploy-chroot"><span class="nav-number">2.3.</span> <span class="nav-text">pwn_deploy_chroot</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

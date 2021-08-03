@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            A Brief History of Fuzzing |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">A Brief History of Fuzzing</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2020-10-02 12:03:31
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Fuzzing/">Fuzzing</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/list/">list</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/fuzzing/">fuzzing</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/symbolic-execution/">symbolic-execution</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>A supplement for <a href="/2020/02/14/2020-02-14-AFL-Fuzzing-Intro/">AFL Fuzzing Intro</a>.</p>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>From the blog of <a class="link"   target="_blank" rel="noopener" href="https://github.com/riusksk" >riusksk<i class="fas fa-external-link-alt"></i></a>.<br>It has been around 30 years since <code>fuzzing</code> was born.</p>
+<h3 id="Origin"><a href="#Origin" class="headerlink" title="Origin"></a>Origin</h3><p>In 1988, on the <a class="link"   target="_blank" rel="noopener" href="http://pages.cs.wisc.edu/~bart/fuzz/CS736-Projects-f1988.pdf" >computer science class<i class="fas fa-external-link-alt"></i></a> of <em>Barton Miller</em> from <em>UW-Madison</em>, it first proposed the concept of Fuzz Generator to test the robustness of Unix programs, which uses random data to test till it crashes.  </p>
+<p>Therefore <em>Barton Miller</em> is regarded as “<em>the Father of Fuzzing</em>“. But at that time <code>fuzzing</code> just aims at checking code quality and program stability, instead of finding vulnerabilities.</p>
+<h3 id="From-Academia-to-Industry"><a href="#From-Academia-to-Industry" class="headerlink" title="From Academia to Industry"></a>From Academia to Industry</h3><p>In 2001, <em>the University of Oulu</em> announced their <a target="_blank" rel="noopener" href="https://rd.springer.com/content/pdf/10.1007%2F978-0-387-35413-2_16.pdf">results of the <code>PROTOS</code> project</a>, which first implement <code>fuzzing</code> in network protocol security testing, you can still find <a class="link"   target="_blank" rel="noopener" href="https://www.ee.oulu.fi/research/ouspg/Protos" >testing set<i class="fas fa-external-link-alt"></i></a> for different network protocol.<br>In 2002, the <code>PROTOS</code> gradually improved and <em>Microsoft</em> starts to provide financial support for it. In 2003, company called <code>Codenomicon</code> was set up by project members, they start to apply Fuzzing to commercial products and did find many security issues like <code>Heartbleed</code>.</p>
+<p>In 2002 <em>BlackHat</em> USA, <em>Dave Aitel</em> from <a class="link"   target="_blank" rel="noopener" href="http://www.immunitysec.com/" >Immunity<i class="fas fa-external-link-alt"></i></a> (they got <a class="link"   target="_blank" rel="noopener" href="http://www.immunityinc.com/products/debugger/" >Immunity Debugger<i class="fas fa-external-link-alt"></i></a>) published: <a class="link"   target="_blank" rel="noopener" href="http://www.immunitysec.com/downloads/usingspike3.ppt" >“An Introduction to SPIKE, the Fuzzer Creation Kit”<i class="fas fa-external-link-alt"></i></a>. That’s <code>SPIKE</code>, a network protocol fuzzer based on block template. The strength of it is to support customizing block with variable length; besides random data, it provides some boundary value to increase crashing possibility. The born of <code>SPIKE</code> let users customize their own network protocol fuzzer, and it plays a huge role in promoting the popularization of <code>fuzzing</code>.</p>
+<p>From <code>PROTOS</code> to <code>SPIKE</code> the academia and industry give proof of <code>fuzzing</code> application in commercial and security field.</p>
+<h3 id="File-Format-Fuzzing"><a href="#File-Format-Fuzzing" class="headerlink" title="File Format Fuzzing"></a>File Format Fuzzing</h3><p>In 2004, the release of <code>Peach</code> framework is the symbol of file format <code>fuzzing</code>. It used to be developed in <code>Python</code>, while after being acquired in 2007 it got rewritten in <code>C#</code>, and divided into <a class="link"   target="_blank" rel="noopener" href="https://www.peach.tech/resources/peachcommunity/" >community<i class="fas fa-external-link-alt"></i></a> edition and <a class="link"   target="_blank" rel="noopener" href="https://www.peachfuzzer.com/products/" >commercial<i class="fas fa-external-link-alt"></i></a> version.<br>It supports file format, network protocol and ActiveX controller. By writing <code>pit</code> file (xml) to define data format.</p>
+<p>The <code>Peach</code> is still being used and even some people released <a class="link"   target="_blank" rel="noopener" href="https://github.com/aflsmart/aflsmart" >aflsmart<i class="fas fa-external-link-alt"></i></a> to combine <code>Peach</code> and <code>AFL</code>. </p>
+<p>File <code>fuzzing</code> can also be used in network protocol <code>fuzzing</code>, by instrumenting source code and printing Log, then calling API to write a <code>harness</code> and test on <code>AFL</code>/<code>libfuzzer</code>, then it turns to be file <code>fuzzing</code>.</p>
+<h3 id="Grammar-Template-Fuzzing"><a href="#Grammar-Template-Fuzzing" class="headerlink" title="Grammar Template Fuzzing"></a>Grammar Template Fuzzing</h3><p>In 2008, <em>Mozilla</em> security team published <code>jsfunfuzz</code> and <code>DOMfuzz</code>, they produce test cases based on JS grammar template to discovery browser vulnerabilities. Later they are combined as open source <a target="_blank" rel="noopener" href="https://github.com/MozillaSecurity/funfuzz"><code>funfuzz</code></a>, but it has a bad extensionof its grammar template (<a class="link"   target="_blank" rel="noopener" href="https://github.com/MozillaSecurity/dharma" >dharma<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/domato" >Domato<i class="fas fa-external-link-alt"></i></a> are better). </p>
+<p>After <code>funfuzz</code>, there are also many <code>JS</code> grammar <code>fuzzing</code> tools like <code>grinder</code>, <code>nduja</code>, <code>crossfuzz</code> and so on.</p>
+<p>Browser is always the spot of cyber attacks. Rendering engine and JS engine have always been the main attack surface. Grammar <code>fuzzing</code> aiming at <code>html</code>, <code>js</code>, <code>vbs</code> and <code>WebSQL</code> like <code>sqlite</code> came out natually.</p>
+<p>Except browser, <code>JS</code> in <code>PDF</code> and <code>Action Script</code> in <code>Flash</code> has always been the entry of <code>Adobe Reader</code> and <code>Adobe Flash</code>.</p>
+<h3 id="Symbolic-Execution-Academia-VS-Industry"><a href="#Symbolic-Execution-Academia-VS-Industry" class="headerlink" title="Symbolic Execution: Academia VS Industry"></a>Symbolic Execution: Academia VS Industry</h3><p>In 2008, the <code>symbolic execution</code> engine <code>KLEE</code> based on <code>LLVM</code> was released, leading a new wave of program analysis. Later the <code>symbolic execution</code> was implemented in <code>fuzzing</code> to solve <code>CTF</code> challenges, to finding keys and deobfuscating or so.<br>The <a class="link"   target="_blank" rel="noopener" href="https://github.com/shellphish/driller" >driller<i class="fas fa-external-link-alt"></i></a> is a combination of <code>AFL</code> and <code>angr</code> and was used in <code>CGC</code> (Cyber Grand Challenge). There is also a combination of <code>AFL</code> and <code>KLEE</code>: <a class="link"   target="_blank" rel="noopener" href="https://github.com/julieeen/kleefl" >kleefl<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>The <code>symbolic execution</code> is used more in academia than in industry. Applying <code>se</code> to <code>fuzzing</code>, increasing code coverage by solving the condition of new path through constraints, can somehow make up for brutal mutation. The main challenge for <code>se</code> is path explosion, limitation of constraint solving capability, and performance issue. It’s good for small program, like using <code>angr</code> in <code>CTF</code>, while not that good for realworld. A new wave of technology for <code>fuzzing</code> is started not by <code>se</code> but by code coverage guided technology.</p>
+<h3 id="Code-Coverage-Guided"><a href="#Code-Coverage-Guided" class="headerlink" title="Code Coverage Guided"></a>Code Coverage Guided</h3><p>In the end of 2013, <a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/" >afl-fuzz<i class="fas fa-external-link-alt"></i></a> was released, and it is the first time to instrument in source code and <code>QEMU</code> to achieve code coverage guided <code>fuzzing</code> (it must be the milestone in development). <code>AFL</code> wasn’t that famous until many researchers tweeted their <code>0day</code> finding on Twitter in 2014-2015.</p>
+<p>Then we got <code>winafl</code>, <code>libfuzzer</code>, <code>AFLFast</code>, <code>Vuzzer</code>… and editions for different programming language: <code>go</code>, <code>python</code>, <code>js</code>, <code>ruby</code>… Some well known fuzzer followed the lead, like kernel fuzzer <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/syzkaller" >syzkaller<i class="fas fa-external-link-alt"></i></a>, it adds code coverage guiding ability. </p>
+<p>In the same time the whole industry is trying to move it to new platform(<code>windows</code>, <code>android</code>, <code>IoT</code>) and to support closed source softwares. That is the hot topic of recent years’ research, like dynamic and static instrumentation, virtual machine simulated execution, and some hardware characteristics.</p>
+<h3 id="Syscall-Template"><a href="#Syscall-Template" class="headerlink" title="Syscall Template"></a>Syscall Template</h3><p>in 2015, <em>Google</em> opened source the <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/syzkaller" >syzkaller<i class="fas fa-external-link-alt"></i></a>, which is a kernel fuzzer and still being used. It works by defining system function call template, defining parameters’ type in template, and dealing with order/value dependencies. <em>Project Zero</em> has written <a class="link"   target="_blank" rel="noopener" href="https://googleprojectzero.blogspot.com/2017/05/exploiting-linux-kernel-via-packet.html" >“Exploiting the Linux kernel via packet sockets(syzkaller usage)”<i class="fas fa-external-link-alt"></i></a> about how to write template and how to use <code>syzkaller</code>, to discover <code>Linux</code> kernel vulns.</p>
+<p>In <code>windows</code> kernel <code>fuzzing</code>, the GUI API calling template is always used; in <code>macOS</code> kernel <code>fuzzing</code>, that’s IOKit function. They all based on syscall template method.</p>
+<p>In 2016, <em>Google</em> proposed “Structure-Aware Fuzzing”, and applied <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/libprotobuf-mutator" >libprotobuf-mutator<i class="fas fa-external-link-alt"></i></a> based on <code>libfuzzer</code> and <code>protobuf</code>. It has the similar idea with <code>syzkaller</code>, with coverage guided which <code>Peach</code> dont has, and deals with <code>AFL</code> and <code>libfuzzer</code>‘s inefficient mutation for complicated input types. Now <em>Project Zero</em> uses <code>libprotobuf-mutator</code> to fuzz IOS kernel (<a class="link"   target="_blank" rel="noopener" href="https://googleprojectzero.blogspot.com/2019/12/sockpuppet-walkthrough-of-kernel.html" >“SockPuppet: A Walkthrough of a Kernel Exploit for iOS 12.4”<i class="fas fa-external-link-alt"></i></a>).</p>
+<p>Structure-Aware Fuzzing is not sth new, it’s like <code>Peach</code> idea to define a template for input data type, to improve the accuracy of mutation.</p>
+<h3 id="Open-Source"><a href="#Open-Source" class="headerlink" title="Open Source"></a>Open Source</h3><p>In industry the most famous <code>fuzzing</code> platform should be <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/clusterfuzz" >clusterfuzz<i class="fas fa-external-link-alt"></i></a>, running on 25000+ machines, having found 16000+ chrome bugs, 11000+ open source project bugs. This combines <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/oss-fuzz" >OSS-Fuzz<i class="fas fa-external-link-alt"></i></a>, supports code coverage guidance like <code>libfuzzer</code> and <code>AFL</code>, and supports Balck-Box Fuzzing. <code>OSS-Fuzz</code> and <code>clusterfuzz</code> were opened source in 2016 and 2019, and <em>Google</em> let every research involve in working on it, set prizes for contributers. <em>Google</em> also developed <code>ASan</code>, <code>MSan</code>, <code>TSan</code>, <code>UBSan</code>, <code>LSan</code> (they are all compile-time instrumentation tools) to find bugs, and some vulns only trigger with <code>Sanitizer</code> open, like enable heap page in <code>windows</code>, so it helps to find crashes and analyse.</p>
+<p>In a word, <em>Google</em> did a lot for <code>fuzzing</code> community and ecology.</p>
+<h3 id="Syntax-Tree-mutation-in-Parse-Engine-Vulnerability-Discovery"><a href="#Syntax-Tree-mutation-in-Parse-Engine-Vulnerability-Discovery" class="headerlink" title="Syntax Tree mutation in Parse Engine Vulnerability Discovery"></a>Syntax Tree mutation in Parse Engine Vulnerability Discovery</h3><p>In 2012, the <a class="link"   target="_blank" rel="noopener" href="https://www.usenix.org/system/files/conference/usenixsecurity12/sec12-final73.pdf" >“Fuzzing with Code Fragments”<i class="fas fa-external-link-alt"></i></a> was published in USENIX, and <code>LangFuzz</code> was developed by researchers. They collect <code>JS</code> testing samples from open source browser projects (<code>firefox</code>, <code>webkit</code>, <code>chromium</code>) and the Internet; then use <a class="link"   target="_blank" rel="noopener" href="https://www.antlr.org/" >ANTLR(Another Tool for Language Recognition)<i class="fas fa-external-link-alt"></i></a> to analyse AST syntax tree; next split samples into non-terminal symbols (code fragments) and put into fragment pool; finally mutate (choose fragments of same type to replace/insert) input sample according to the pool.</p>
+<p>Based on <code>LangFuzz</code> someone added genetic algorithm to evaluate input and select better individuals to create new samples, that is open source <a target="_blank" rel="noopener" href="https://download.vusec.net/papers/ifuzzer-esorics16.pdf"><code>IFuzzer</code></a>. However, it is not so complete, and not so many vulns was discovered by it.</p>
+<p>In 2018, <em>Samuel Groß</em> from <em>Project Zero</em> released a <code>JS</code> grammar fuzzer: <a target="_blank" rel="noopener" href="https://github.com/googleprojectzero/fuzzilli"><code>fuzzilli</code></a>. It integrates multiple technologies such as grammar mutation, template generation, and coverage guidance. It use custom intermediate language for grammatical mutation, then convert it to <code>JS</code> code. The <code>fuzzilli</code> achieved a lot in <code>JS</code> vulns discovery and has been used by industry peers for secondary development.</p>
+<p>In 2019, <a class="link"   target="_blank" rel="noopener" href="https://daramg.gift/paper/han-ndss2019.pdf" >“CodeAlchemist: Semantics-Aware Code Generation to Find Vulnerabilities in JavaScript Engines”<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://wcventure.github.io/FuzzingPaper/Paper/ICSE19_Superion.pdf" >“Superion: Grammar-Aware Greybox Fuzzing”<i class="fas fa-external-link-alt"></i></a> are published, and they both cited <a class="link"   target="_blank" rel="noopener" href="https://www.usenix.org/system/files/conference/usenixsecurity12/sec12-final73.pdf" >“Fuzzing with Code Fragments”<i class="fas fa-external-link-alt"></i></a>.<br><code>CodeAlchemist</code> put input to syntax tree analysis and data flow analysis, then set pre &amp; post constraints for splited fragments: pre constraints for variable defination; post constraints for fragment’s result, both for solving undefined variable reference.<br><code>Superion</code> put syntax tree mutation rules into <code>AFL</code>, use <code>AFL</code> to select input. It supports mutiple programming languages and also uses <code>ANTLR</code> for syntax tree analysis, grammatical expansion friendly.</p>
+<p>You can find <a target="_blank" rel="noopener" href="https://github.com/SoftSec-KAIST/CodeAlchemist"><code>CodeAlchemist</code></a> and <a target="_blank" rel="noopener" href="https://github.com/zhunki/Superion"><code>Superion</code></a> on the Github.</p>
+<h3 id="AI-in-Fuzzing"><a href="#AI-in-Fuzzing" class="headerlink" title="AI in Fuzzing"></a>AI in Fuzzing</h3><p>2018 is the Year of Artificial Intelligence.</p>
+<p><code>AI</code> has penetrated into many fields, so will <code>fuzzing</code>. Now people use <code>AI</code> to produce testing inputs. The question is, to obtain desired effect we have to feed the model too much samples, which is definitely inefficient nowadays.</p>
+<p>But that doesn’t mean it is useless, because even if brutal mutation is fast, it needs a good mutating direction to be efficient, that’s part of <code>AI</code> jobs.</p>
+<h2 id="Fuzzer-List"><a href="#Fuzzer-List" class="headerlink" title="Fuzzer List"></a>Fuzzer List</h2><p>From the blog of <a class="link"   target="_blank" rel="noopener" href="https://github.com/riusksk" >riusksk<i class="fas fa-external-link-alt"></i></a>.</p>
+<ol>
+<li><a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/" >AFL<i class="fas fa-external-link-alt"></i></a><br>Code coverage guided fuzzer, a milestone, mutation strategy needs improvement.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/winafl" >WinAFL<i class="fas fa-external-link-alt"></i></a><br>The <code>AFL</code> for <code>windows</code>, use <code>DynamoRIO</code> to instrument closed source softwares, support hardware PT(processor tracing)</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/mboehme/aflfast" >AFLFast<i class="fas fa-external-link-alt"></i></a><br>Faster <code>AFL</code></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/vusec/vuzzer" >Vuzzer<i class="fas fa-external-link-alt"></i></a><br>Coverage guided fuzzer, supports closed source softwares, tracks data flow using pin of LibDFT, get more path by combining static/dynamic analysis. </li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/hunter-ht-2018/ptfuzzer" >PTfuzzer<i class="fas fa-external-link-alt"></i></a><br>Coverage guided fuzzer using Intel PT(processor tracing) on <code>Linux</code>, so it supports closed source softwares.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/tigerpuma/Afl_unicorn" >afl-unicorn<i class="fas fa-external-link-alt"></i></a><br>The <code>AFL</code> using <code>unicorn</code> simulating instructions, supports <code>linux</code> closed source softwares.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/wmliang/pe-afl" >pe-afl<i class="fas fa-external-link-alt"></i></a><br>The <code>AFL</code> for <code>windows</code> closed source softwares using static instrumentation, supports user level apps and kernel driver.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/RUB-SysSec/kAFL/" >kAFL<i class="fas fa-external-link-alt"></i></a><br>The <code>AFL</code> for kernel <code>fuzzing</code> of <code>QEMU</code> VM, supports <code>linux</code>, <code>macOS</code> and <code>windows</code>.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/nccgroup/TriforceAFL" >TriforceAFL<i class="fas fa-external-link-alt"></i></a><br>The <code>AFL</code> based on <code>QEMU</code> whole OS simulation, tracks branch infomation relying on system simulator, supports <code>linux</code> kernel <code>fuzzing</code>.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/google/clusterfuzz" >ClusterFuzzer<i class="fas fa-external-link-alt"></i></a><br>An open source extensive <code>fuzzing</code> infrastructure. </li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://llvm.org/docs/LibFuzzer.html" >LibFuzzer<i class="fas fa-external-link-alt"></i></a><br>A part of <code>llvm</code>, an open source in-process coverage guided fuzz engine library.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/google/oss-fuzz" >OSS-Fuzz<i class="fas fa-external-link-alt"></i></a><br>Open source fuzzer collection based on <code>OSS-Fuzz</code>, can automatically download, compile and run in docker.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/google/honggfuzz" >honggfuzz<i class="fas fa-external-link-alt"></i></a><br>coverage driven fuzzer from Google, based on software/hardware, supports multiple platform (<code>Linux</code>/<code>macOS</code>/<code>Windows</code>/<code>Android</code>). </li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/mwrlabs/KernelFuzzer" >KernelFuzzer<i class="fas fa-external-link-alt"></i></a><br>Cross-platform kernel fuzzing framework, the strategy is not open source (needs to implement by yourself), supports <code>Windows</code>/<code>OSX</code>/<code>QNX</code> (only provides <code>Windows</code> compiling script).</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/mwrlabs/OSXFuzz.git" >OSXFuzzer<i class="fas fa-external-link-alt"></i></a><br><code>MacOS</code> kernel fuzzer based on <code>KernelFuzzer</code>.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/SilverMoonSecurity/PassiveFuzzFrameworkOSX" >PassiveFuzzFrameworkOSX<i class="fas fa-external-link-alt"></i></a><br>Using HOOK to achieve passive <code>OSX</code> kernel fuzzer.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/bochspwn" >Bochspwn<i class="fas fa-external-link-alt"></i></a><br>Based on <code>Boch</code> instrumentation API to detect <code>Double Fetches</code> kernel vulns.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/bochspwn-reloaded" >Bochspwn-reloaded<i class="fas fa-external-link-alt"></i></a><br>Based on <code>Boch</code> instrumentation API to detect info leaking.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/google/syzkaller" >syzkaller<i class="fas fa-external-link-alt"></i></a><br>A <code>linux</code> kernel fuzzer, based on coverage guidance, need to implement API call template based on its template syntax, then provide it for <code>syzkaller</code> to mutatedata.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/MozillaSecurity/dharma" >dharma<i class="fas fa-external-link-alt"></i></a><br>Based on grammar template generated fuzzer, open sourced by Mozilla to fuzz Firefox JS engine.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/domato" >domator<i class="fas fa-external-link-alt"></i></a><br>DOM Fuzzer open sourced by <em>Project Zero</em>, a fuzzer based on template generating in Python.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/googleprojectzero/fuzzilli" >Fuzzilli<i class="fas fa-external-link-alt"></i></a><br>JS engine fuzzer based on grammar mutation, generates testing cases through grammar template, then generate intermediate grammar to mutate, trigger more path combining coverage guidance.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/compsec-snu/razzer" >Razzer<i class="fas fa-external-link-alt"></i></a><br>Fuzzer for kernel race condition vulns.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/mwrlabs/ViridianFuzzer" >ViridianFuzzer<i class="fas fa-external-link-alt"></i></a><br>For fuzzing Hyper-V hypercalls kernel driver, from <code>MWRLabs</code>.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/demi6od/ChromeFuzzer" >ChromeFuzzer<i class="fas fa-external-link-alt"></i></a><br>Chrome fuzzer modified from grinder grammar generator.</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/MozillaSecurity/funfuzz" >funfuzz<i class="fas fa-external-link-alt"></i></a><br>JS fuzzer collection open sourced by Mozilla, mainly to fuzz SpiderMonkey.</li>
+</ol>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Misc)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Unlink)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">1.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Origin"><span class="nav-number">1.1.</span> <span class="nav-text">Origin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#From-Academia-to-Industry"><span class="nav-number">1.2.</span> <span class="nav-text">From Academia to Industry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-Format-Fuzzing"><span class="nav-number">1.3.</span> <span class="nav-text">File Format Fuzzing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grammar-Template-Fuzzing"><span class="nav-number">1.4.</span> <span class="nav-text">Grammar Template Fuzzing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbolic-Execution-Academia-VS-Industry"><span class="nav-number">1.5.</span> <span class="nav-text">Symbolic Execution: Academia VS Industry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Coverage-Guided"><span class="nav-number">1.6.</span> <span class="nav-text">Code Coverage Guided</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Syscall-Template"><span class="nav-number">1.7.</span> <span class="nav-text">Syscall Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-Source"><span class="nav-number">1.8.</span> <span class="nav-text">Open Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Syntax-Tree-mutation-in-Parse-Engine-Vulnerability-Discovery"><span class="nav-number">1.9.</span> <span class="nav-text">Syntax Tree mutation in Parse Engine Vulnerability Discovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AI-in-Fuzzing"><span class="nav-number">1.10.</span> <span class="nav-text">AI in Fuzzing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fuzzer-List"><span class="nav-number">2.</span> <span class="nav-text">Fuzzer List</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

