@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -233,12 +233,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
         </span>
     
     
@@ -323,11 +323,23 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mountvol X: /s</span><br><span class="line"><span class="built_in">copy</span> %WINDIR%\System32\SecConfig.efi X:\EFI\Microsoft\Boot\SecConfig.efi /Y</span><br><span class="line">bcdedit /create &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; /d <span class="string">&quot;DebugTool&quot;</span> /application osloader</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; path <span class="string">&quot;\EFI\Microsoft\Boot\SecConfig.efi&quot;</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;bootmgr&#125; bootsequence &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125;</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; loadoptions <span class="built_in">DISABLE-LSA</span><span class="literal">-ISO</span>,<span class="built_in">DISABLE-VBS</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; device partition=X:</span><br><span class="line">bcdedit /<span class="built_in">set</span> hypervisorlaunchtype off</span><br><span class="line">mountvol X: /d</span><br></pre></td></tr></table></figure>
 
 <p>After this you will find another EFI boot selection added. Actually both new and the old one is definitely ok to run VMs, so feel free to use EasyBCD to delete extra EFI boot selection.</p>
-<h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated  system(seriously???) and few apps in it.</p>
+<h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated system (seriously???) and few apps in it.</p>
 <p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own need.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own needs.</p>
 <p>Consult <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/" >official documents<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/" >devblog<i class="fas fa-external-link-alt"></i></a> is always the right way to know and learn.<br>For developers click <a class="link"   target="_blank" rel="noopener" href="https://developer.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>, and Windows API references <a class="link"   target="_blank" rel="noopener" href="https://msdn.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>.</p>
+<h2 id="Update-Tips"><a href="#Update-Tips" class="headerlink" title="Update (Tips)"></a>Update (Tips)</h2><p>Now it’s 2021/9/6 and I have changed my mind already. </p>
+<p>I’m getting used to <code>WSL 2</code> due to convenience. It is a compact hyper-v vm and I can boot it up in several seconds. Though much slower (booting and file transfering betweene host and guest) than <code>WSL 1</code> but more powerful, it’s a relatively real linux vm.</p>
+<p>Here is just for some Tips.</p>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Since <code>Linux</code> has <code>docker</code> in repo, we can install it directly in <code>WSL 2</code> instead of installing <a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop"><code>Docker Desktop for windows</code></a>.</p>
+<p>But when using <code>kali</code>(<code>debian</code>) some error occurred. Install it by</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install docker.io</span><br><span class="line">$ sudo apt install daemon   <span class="comment"># daemon is needed</span></span><br></pre></td></tr></table></figure>
+<p>While when testing </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ dockerd   <span class="comment"># testing service</span></span><br><span class="line">[INFO] ...</span><br><span class="line">...</span><br><span class="line">[WARN] ...</span><br><span class="line">...</span><br><span class="line">[INFO] ...</span><br><span class="line"></span><br><span class="line">failed to start daemon: Error initializing network controller: error obtaining controller instance: unable to add <span class="built_in">return</span> rule <span class="keyword">in</span> DOCKER-ISOLATION-STAGE-1 chain:  (iptables failed: iptables --<span class="built_in">wait</span> -A DOCKER-ISOLATION-STAGE-1 -j RETURN: iptables v1.8.7 (nf_tables):  RULE_APPEND failed (No such file or directory): rule <span class="keyword">in</span> chain DOCKER-ISOLATION-STAGE-1</span><br><span class="line"> (<span class="built_in">exit</span> status 4))</span><br></pre></td></tr></table></figure>
+<p>That is because in <code>debian</code> based systems using <code>nftables</code> instead of <code>iptables</code>, that’s why the command failed.</p>
+<p>To solve it, use <code>update-alternatives</code> to let <code>debian</code> use <code>iptables</code> rather than <code>nftables</code>. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-alternatives --set iptables /usr/sbin/iptables-legacy</span><br><span class="line"># for ipv6</span><br><span class="line">$ sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service docker start</span><br><span class="line">$ service docker status</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -385,7 +397,7 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>&nbsp;-&nbsp;
+              <span>2018</span>&nbsp;-&nbsp;
             
             2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
@@ -467,7 +479,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Tips"><span class="nav-number">5.</span> <span class="nav-text">Update (Tips)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

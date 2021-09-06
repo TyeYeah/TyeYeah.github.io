@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -261,7 +261,7 @@
 <p>Or visit <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/toolchains.html" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to get ready-built libc files including <code>glib</code>, <code>musl</code> and <code>uclibc</code>.</p>
 <h3 id="Static-Analysis"><a href="#Static-Analysis" class="headerlink" title="Static Analysis"></a>Static Analysis</h3><p>Here I mean IDA. We need plugins for MIPS. The <a class="link"   target="_blank" rel="noopener" href="https://github.com/devttys0/ida/tree/master/plugins/mipsrop" >MIPSROP<i class="fas fa-external-link-alt"></i></a> only supports IDA 6.7 and lower versions, because API changed in IDA, but there’s a researcher wrote <a class="link"   target="_blank" rel="noopener" href="https://github.com/tacnetsol/ida/tree/master/plugins/mipsrop" >this new one<i class="fas fa-external-link-alt"></i></a>.</p>
 <p>Disassembler plugin we use <a class="link"   target="_blank" rel="noopener" href="https://github.com/avast/retdec-idaplugin" >Retdec<i class="fas fa-external-link-alt"></i></a> for IDA, <a class="link"   target="_blank" rel="noopener" href="https://github.com/pnfsoftware/PleaseROP" >Please ROP<i class="fas fa-external-link-alt"></i></a> for <a class="link"   target="_blank" rel="noopener" href="https://www.pnfsoftware.com/jeb2/mips" >jeb2<i class="fas fa-external-link-alt"></i></a>, and <a class="link"   target="_blank" rel="noopener" href="https://binary.ninja/" >Binary Ninja<i class="fas fa-external-link-alt"></i></a>. </p>
-<p>As for ARM, Hex-Rays Decompiler plugin supports ARM, even MIPS now. So IDA Pro 7.5 can disassemble both ARM and MIPS now.</p>
+<p>As for ARM, Hex-Rays Decompiler plugin supports ARM, even MIPS now. So IDA Pro 7.5 can disassemble both ARM and MIPS at this moment.</p>
 <h3 id="Dynamic-Analysis"><a href="#Dynamic-Analysis" class="headerlink" title="Dynamic Analysis"></a>Dynamic Analysis</h3><p>The <code>gdb</code> is what we need.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb-multiarch <span class="comment"># same usage as gdb</span></span><br></pre></td></tr></table></figure>
 <p>With shared library installed, we can assign them to program by <code>-L</code> like</p>
@@ -405,7 +405,7 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>&nbsp;-&nbsp;
+              <span>2018</span>&nbsp;-&nbsp;
             
             2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
