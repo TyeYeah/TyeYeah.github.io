@@ -167,90 +167,99 @@
             <i class="fas fa-folder"></i>&nbsp;Note
         </div>
         <div class="category-post-list">
-            $archive-year-font-size = 1.8rem;
-$archive-year-count-font-size = 1.2rem;
-$article-title-font-size = 1.2rem;
-$article-date-font-size = 1rem;
-
-.archive-list-container {
-
-  .archive-item {
-    margin-bottom: $component-spacing-value;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    .archive-item-header {
-      margin-bottom: 10px;
-
-      .archive-year {
-        font-size: $archive-year-font-size;
-
-        +keep-tablet() {
-          font-size: $archive-year-font-size - 0.2rem;
-        }
-
-        color: var(--second-text-color);
-        font-weight: 600;
-        margin-right: 6px;
-      }
-
-
-      .archive-year-post-count {
-        font-size: $archive-year-count-font-size;
-        font-weight: 500;
-        color: var(--second-text-color);
-
-        +keep-tablet() {
-          font-size: $archive-year-count-font-size * 0.9;
-        }
-      }
-
-    }
-
-
-    .article-list {
-
-      padding-left: 10px;
-
-      +keep-tablet() {
-        padding-left: 0;
-      }
-
-      .article-item {
-        font-size: 1rem;
-        margin-top: 18px;
-
-        +keep-tablet() {
-          margin-top: 16px;
-        }
-
-        +keep-mobile() {
-          margin-top: 14px;
-        }
-
-        &:hover {
-          a.article-title, .article-date {
-            color: var(--primary-color);
-          }
-        }
-
-
-        a.article-title {
-          color: var(--default-text-color);
-        }
-
-        .article-date {
-          font-size: $article-date-font-size;
-          float: right;
-        }
-      }
-    }
-  }
-}
-
-
+            
+<div class="archive-list-container">
+    
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2021</span>
+                <span class="archive-year-post-count">[1]</span>
+            </div>
+            <ul class="article-list">
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2021/01/09/2021-01-09-Some-Assembly-Intro/"
+                        >Some Assembly Intro</a>
+                        <span class="article-date">01-09</span>
+                    </li>
+                
+            </ul>
+        </section>
+    
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2020</span>
+                <span class="archive-year-post-count">[4]</span>
+            </div>
+            <ul class="article-list">
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2020/03/18/2020-03-18-Collection-for-Package-Source/"
+                        >Collection for Package Sources</a>
+                        <span class="article-date">03-18</span>
+                    </li>
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2020/02/18/2020-02-18-Wine-Tips/"
+                        >Wine Tips</a>
+                        <span class="article-date">02-18</span>
+                    </li>
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2020/02/13/2020-02-13-Virtual-Box-Tips/"
+                        >VirtualBox Tips</a>
+                        <span class="article-date">02-13</span>
+                    </li>
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2020/01/05/2020-01-05-Game-Tips/"
+                        >Game Tips</a>
+                        <span class="article-date">01-05</span>
+                    </li>
+                
+            </ul>
+        </section>
+    
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2019</span>
+                <span class="archive-year-post-count">[1]</span>
+            </div>
+            <ul class="article-list">
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2019/08/01/2019-08-01-Try-and-Use-WSL/"
+                        >Try and Use WSL</a>
+                        <span class="article-date">08-01</span>
+                    </li>
+                
+            </ul>
+        </section>
+    
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2018</span>
+                <span class="archive-year-post-count">[1]</span>
+            </div>
+            <ul class="article-list">
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2018/10/21/2018-10-21-First-how-to-do-note/"
+                        >First how-to-do note</a>
+                        <span class="article-date">10-21</span>
+                    </li>
+                
+            </ul>
+        </section>
+    
+</div>
 
         </div>
     </div>
