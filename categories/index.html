@@ -161,16 +161,64 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="category-list-container">
-        <div class="category-list-content">
-            <ul class="all-category-list"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/CTF/">CTF</a><span class="all-category-list-count">12</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Fuzzing/">Fuzzing</a><span class="all-category-list-count">4</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/IoT/">IoT</a><span class="all-category-list-count">3</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Linux/">Linux</a><span class="all-category-list-count">4</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/List/">List</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Note/">Note</a><span class="all-category-list-count">7</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/PWN/">PWN</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Penetration-Testing/">Penetration Testing</a><span class="all-category-list-count">9</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Pwn/">Pwn</a><span class="all-category-list-count">8</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Symbolic-Execution/">Symbolic Execution</a><span class="all-category-list-count">1</span></li></ul>
-        </div>
-        <div class="category-comments">
-            
-        </div>
-    </div>
-</div>
+                    .category-list-container {
+
+  keep-container(false, 0, 0, 30px, 0);
+
+  .category-list-content {
+
+    .all-category-list {
+
+      li.all-category-list-item {
+        font-size: 1rem;
+        margin-bottom: 15px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        span.all-category-list-count {
+          float: right;
+          color: var(--default-text-color);
+
+
+          &::before {
+            content: '[';
+          }
+
+          &::after {
+            content: ']';
+          }
+
+        }
+
+
+        ul.all-category-list-child {
+
+          margin-left: 10px;
+          margin-top: 15px;
+
+          li {
+
+            &::before {
+              content: '- ';
+            }
+
+            margin-bottom: 10px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+          }
+        }
+      }
+
+
+    }
+
+  }
+}
 
 
                 

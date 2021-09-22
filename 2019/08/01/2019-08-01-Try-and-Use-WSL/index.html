@@ -335,11 +335,13 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install docker.io</span><br><span class="line">$ sudo apt install daemon   <span class="comment"># daemon is needed</span></span><br></pre></td></tr></table></figure>
 <p>While when testing </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ dockerd   <span class="comment"># testing service</span></span><br><span class="line">[INFO] ...</span><br><span class="line">...</span><br><span class="line">[WARN] ...</span><br><span class="line">...</span><br><span class="line">[INFO] ...</span><br><span class="line"></span><br><span class="line">failed to start daemon: Error initializing network controller: error obtaining controller instance: unable to add <span class="built_in">return</span> rule <span class="keyword">in</span> DOCKER-ISOLATION-STAGE-1 chain:  (iptables failed: iptables --<span class="built_in">wait</span> -A DOCKER-ISOLATION-STAGE-1 -j RETURN: iptables v1.8.7 (nf_tables):  RULE_APPEND failed (No such file or directory): rule <span class="keyword">in</span> chain DOCKER-ISOLATION-STAGE-1</span><br><span class="line"> (<span class="built_in">exit</span> status 4))</span><br></pre></td></tr></table></figure>
-<p>That is because in <code>debian</code> based systems using <code>nftables</code> instead of <code>iptables</code>, that’s why the command failed.</p>
+<p>That is because <code>debian</code> based systems use <code>nftables</code> instead of <code>iptables</code>, that’s why the command failed.</p>
 <p>To solve it, use <code>update-alternatives</code> to let <code>debian</code> use <code>iptables</code> rather than <code>nftables</code>. </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-alternatives --set iptables /usr/sbin/iptables-legacy</span><br><span class="line"># for ipv6</span><br><span class="line">$ sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy</span><br></pre></td></tr></table></figure>
-
+<p>Then we can start service </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service docker start</span><br><span class="line">$ service docker status</span><br></pre></td></tr></table></figure>
+<p>After testing the <code>ubuntu</code> on <code>WSL 2</code> doesn’t have this problem, but lacking <code>docker</code> service installed.</p>
+
         </div>
 
         

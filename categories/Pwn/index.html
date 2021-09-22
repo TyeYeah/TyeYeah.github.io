@@ -9,7 +9,7 @@
     
     <title>
         
-            Category: Pwn |
+            Category: PWN |
         
         Relish the Moment
     </title>
@@ -161,114 +161,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="category-container">
-        <div class="category-name">
-            <i class="fas fa-folder"></i>&nbsp;Pwn
-        </div>
-        <div class="category-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/"
-                        >Handle Pwn Libc and Host a Pwn</a>
-                        <span class="article-date">07-31</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/"
-                        >Heap Exploit Intro</a>
-                        <span class="article-date">05-12</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[4]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
-                        >Stack Overflow Intro</a>
-                        <span class="article-date">10-15</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/16/2020-07-16-Integer-Overflow-Intro/"
-                        >Integer Overflow Intro</a>
-                        <span class="article-date">07-16</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/"
-                        >Format String Vulnerability Intro</a>
-                        <span class="article-date">07-05</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/23/2020-01-23-Security-Protection-Mechanism/"
-                        >Security Protection Mechanism</a>
-                        <span class="article-date">01-23</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2019</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/10/08/2019-10-08-Python-Sandbox-Challenges/"
-                        >Python Sandbox Challenges</a>
-                        <span class="article-date">10-08</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
-                        >Python Sandbox Escape</a>
-                        <span class="article-date">10-07</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $category-name-font-size = 1.6rem;
 
-        </div>
-    </div>
-    <div class="category-paginator">
-        <div class="paginator">
-    
+.category-container {
 
-    
-</div>
+  keep-container(false, 0, 0, 30px, 30px);
 
-    </div>
-</div>
+  .category-name {
+    color: var(--second-text-color);
+    font-size: $category-name-font-size;
+
+    i {
+      color: var(--second-text-color);
+    }
+
+    +keep-tablet() {
+      font-size: $category-name-font-size * 0.9;
+    }
+
+    +keep-mobile() {
+      font-size: $category-name-font-size * 0.8;
+    }
+
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin-bottom: $component-spacing-value;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
 
 
                 
