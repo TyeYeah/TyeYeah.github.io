@@ -167,6 +167,69 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2020/05/25/2020-05-25-About-Stealing-Credentials/">
+                        About Stealing Credentials
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        This part we discuss about how to steal credentials in Domain pentest.
+Basic KnowledgeBefore running powerfull tools, we have...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 25 2020 14:37:03 GMT+0800">2020-05-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/windows/">windows</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/pentest/">pentest</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/domain/">domain</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2020/05/25/2020-05-25-About-Stealing-Credentials/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2020/03/31/2020-03-31-About-Reverse-Shell/">
                         About Reverse Shell
                     </a>
@@ -754,70 +817,6 @@ Fuzzing IntroWhen performing software vulnerability mining o...
 
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2020/02/13/2020-02-13-Virtual-Box-Tips/">
-                        VirtualBox Tips
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Here are some tips for virtual box.
-Minimize VirtualBox’s VM SpaceDefragLinux guest machine:
-12$ sudo dd if=/dev/zero of=/EMP...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Feb 13 2020 14:37:11 GMT+0800">2020-02-13</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Note/">Note</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/note/">note</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/virtualbox/">virtualbox</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/macOS/">macOS</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2020/02/13/2020-02-13-Virtual-Box-Tips/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
     </ul>
 
     <div class="home-paginator">
@@ -852,7 +851,7 @@ Minimize VirtualBox’s VM SpaceDefragLinux guest machine:
             
               <span>2018</span>&nbsp;-&nbsp;
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
@@ -913,9 +912,43 @@ Minimize VirtualBox’s VM SpaceDefragLinux guest machine:
 
     
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
 
 
     

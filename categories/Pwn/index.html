@@ -161,34 +161,52 @@
             <div class="main-content">
 
                 
-                    $category-name-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="category-container">
+        <div class="category-name">
+            <i class="fas fa-folder"></i>&nbsp;PWN
+        </div>
+        <div class="category-post-list">
+            
+<div class="archive-list-container">
+    
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2021</span>
+                <span class="archive-year-post-count">[2]</span>
+            </div>
+            <ul class="article-list">
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/"
+                        >ARM &amp; MIPS PWN Intro</a>
+                        <span class="article-date">07-30</span>
+                    </li>
+                
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2021/04/20/2021-04-20-Linux-Kernel-Building-Exploit-Preparation/"
+                        >Linux Kernel Building &amp; Exploit Preparation</a>
+                        <span class="article-date">04-20</span>
+                    </li>
+                
+            </ul>
+        </section>
+    
+</div>
 
-.category-container {
+        </div>
+    </div>
+    <div class="category-paginator">
+        <div class="paginator">
+    
 
-  keep-container(false, 0, 0, 30px, 30px);
+    
+</div>
 
-  .category-name {
-    color: var(--second-text-color);
-    font-size: $category-name-font-size;
-
-    i {
-      color: var(--second-text-color);
-    }
-
-    +keep-tablet() {
-      font-size: $category-name-font-size * 0.9;
-    }
-
-    +keep-mobile() {
-      font-size: $category-name-font-size * 0.8;
-    }
-
-    font-weight: 600;
-    padding-bottom: 20px;
-    margin-bottom: $component-spacing-value;
-    border-bottom: 1px solid var(--border-color);
-  }
-}
+    </div>
+</div>
 
 
                 
@@ -204,7 +222,7 @@
             
               <span>2018</span>&nbsp;-&nbsp;
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
@@ -265,9 +283,181 @@
 
     
 
-    <div class="image-viewer-container">
-    <img src="">
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
 </div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
+       <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
 
 
     

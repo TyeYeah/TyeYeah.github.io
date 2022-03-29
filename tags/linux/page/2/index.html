@@ -178,6 +178,13 @@
                 
                     <li class="article-item">
                         <a class="article-title"
+                           href="/2020/12/03/2020-12-03-Build-Mirai-Botnet-and-Try-It/"
+                        >Build Mirai Botnet and Try It</a>
+                        <span class="article-date">12-03</span>
+                    </li>
+                
+                    <li class="article-item">
+                        <a class="article-title"
                            href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
                         >Attack &amp; Defense Tips</a>
                         <span class="article-date">11-20</span>
@@ -239,13 +246,6 @@
                         <span class="article-date">08-14</span>
                     </li>
                 
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/08/10/2020-08-10-ADWorld-PWN-Challenge-Area-Write-ups-Fmtstr/"
-                        >ADWorld PWN Challenge Area Write-ups (Fmtstr)</a>
-                        <span class="article-date">08-10</span>
-                    </li>
-                
             </ul>
         </section>
     
@@ -286,7 +286,7 @@
             
               <span>2018</span>&nbsp;-&nbsp;
             
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
@@ -347,9 +347,43 @@
 
     
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
 
 
     
