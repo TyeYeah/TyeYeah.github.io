@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-01-08 19:28:23
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-01-08 19:28:23</span>
+        <span class="mobile">2021-01-08 19:28</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -207,15 +209,15 @@
                     </li>
                 
                     <li>
+                        | <a href="/tags/gcc/">gcc</a>&nbsp;
+                    </li>
+                
+                    <li>
                         | <a href="/tags/arm/">arm</a>&nbsp;
                     </li>
                 
                     <li>
                         | <a href="/tags/mips/">mips</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/gcc/">gcc</a>&nbsp;
                     </li>
                 
                     <li>
@@ -241,7 +243,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>828 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>831 Words</span>
         </span>
     
     
@@ -258,7 +260,7 @@
         
 
         <div class="article-content markdown-body">
-            <p>Just now I found the site <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>/<code>GDB</code>/<code>Linux Header</code> versions. </p>
+            <p>Just now I found the site <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>&#x2F;<code>GDB</code>&#x2F;<code>Linux Header</code> versions. </p>
 <p>Before knowing this site, I tried <code>buildroot</code> and <code>crosstool-ng</code> to build my own toolchain, here is to share the experience.</p>
 <p>But to be honest the <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> seems better, because it built tools for us, and you can choose version of <code>GCC</code> and <code>GDB</code>, while <code>buildroot</code> and <code>crosstool-ng</code> can’t.</p>
 <h2 id="Buildroot"><a href="#Buildroot" class="headerlink" title="Buildroot"></a>Buildroot</h2><p><a class="link"   target="_blank" rel="noopener" href="https://buildroot.org/" >Buildroot<i class="fas fa-external-link-alt"></i></a> is a framework to build embedded Linux software on Linux. It is made up of <code>makefile</code> and <code>Kconfig</code> configuration files. L</p>
@@ -283,7 +285,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim ./ct-ng</span><br><span class="line">... <span class="comment"># add the following</span></span><br><span class="line"><span class="built_in">export</span> CT_EXPERIMENTAL:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT_SURE:=Y</span><br></pre></td></tr></table></figure>
 <p>It can be operated like <code>buildroot</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /some/place/bin</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  ct-ng</span><br><span class="line">$ ./ct-ng menuconfig</span><br></pre></td></tr></table></figure>
-<p>Or a more convenient way, use the templates/samples</p>
+<p>Or a more convenient way, use the templates&#x2F;samples</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng list-samples      <span class="comment"># show templates</span></span><br><span class="line">Status  Sample name</span><br><span class="line">[G..X]   aarch64-ol7u9-linux-gnu</span><br><span class="line">[G..X]   aarch64-rpi3-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-android</span><br><span class="line">[G..X]   aarch64-unknown-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-uclibc</span><br><span class="line">...</span><br><span class="line">$ ./ct-ng mips-malta-linux-gnu  <span class="comment"># choose one</span></span><br><span class="line">  CONF  mips-malta-linux-gnu</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># configuration written to .config</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Initially reported by: Antony Pavlov</span><br><span class="line">URL:</span><br><span class="line"></span><br><span class="line">Comment:</span><br><span class="line">Experimental toolchain <span class="keyword">for</span> MIPS32r2</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Now configured <span class="keyword">for</span> <span class="string">&quot;mips-malta-linux-gnu&quot;</span></span><br><span class="line">$ ./ct-ng build</span><br><span class="line">[INFO ]  Performing some trivial sanity checks</span><br><span class="line">[WARN ]  Number of open files 1024 may not be sufficient to build the toolchain; increasing to 2048</span><br><span class="line">...</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  .build  build.log  .config  .config.old  ct-ng</span><br><span class="line">$ ls .build/</span><br><span class="line">mips-malta-linux-gnu  src  tarballs  tools</span><br></pre></td></tr></table></figure>
 <p>Now the <code>ct-ng</code> downloads what it needs to <code>.build</code> dir according to <code>.config</code> (made automatically).<br>However these are not what produced. Check your home dir u will find <code>x-tools</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">mips-malta-linux-gnu</span><br><span class="line">$ ls mips-malta-linux-gnu/</span><br><span class="line">bin  build.log.bz2  include  lib  libexec  mips-malta-linux-gnu  share</span><br></pre></td></tr></table></figure>
@@ -299,6 +301,44 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/gcc/">#gcc</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/arm/">#arm</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mips/">#mips</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/buildroot/">#buildroot</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/crosstool-ng/">#crosstool-ng</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/cross-compile/">#cross-compile</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/gdb/">#gdb</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -354,14 +394,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -371,58 +413,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -481,43 +484,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

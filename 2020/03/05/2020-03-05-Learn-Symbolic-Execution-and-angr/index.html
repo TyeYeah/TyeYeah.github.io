@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-03-05 15:49:12
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-03-05 15:49:12</span>
+        <span class="mobile">2020-03-05 15:49</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -256,14 +258,14 @@
 <p>All execution paths of a program can be represented as a tree –&gt; execution tree</p>
 <p>To explore paths, formally, symbolic execution maintains two variables globally:</p>
 <ul>
-<li>&sigma; : maps variable to symbolic expression</li>
+<li>&amp;sigma; : maps variable to symbolic expression</li>
 <li><code>PC</code>: symbolic path constraints</li>
 </ul>
-<p>When symbol execution starts, the &sigma; is empty and the <code>PC</code> is true.</p>
-<p>In <code>main</code> we meet a read statement whose form is <code>var = sym_input()</code>. After execution a <code>var -&gt; s</code> is added to &sigma; . We will get: &sigma;={ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub> }.</p>
-<p>The assignment statement like <code>var = expression</code> is the same, so after line6, we get: &sigma;={ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub>, z-&gt;2y<sub>0</sub> }.</p>
-<p>When we meet conditional statements <code>if(e) S1 else S2</code>, two updates for <code>PC</code>.<br>Update <code>PC</code> –&gt; <code>PC</code> &and; &sigma;(e) to represent <code>then</code> branch.<br>Create <code>PC&#39;</code> –&gt; <code>PC</code> &and; &not; &sigma;(e) to represent <code>else</code> branch.</p>
-<p>After line 7, we get two symbolic execution instances and path constraints are: x<sub>0</sub> = 2y<sub>0</sub>   and  x<sub>0</sub> &ne; 2y<sub>0</sub><br>After line 8, Another two instances and <code>PC</code>: (x<sub>0</sub> = 2y<sub>0</sub>) &and; (x<sub>0</sub> &gt; y<sub>0</sub> + 10)  and  (x<sub>0</sub> = 2y<sub>0</sub>) &and; (x<sub>0</sub> &le; y<sub>0</sub> + 10)</p>
+<p>When symbol execution starts, the &amp;sigma; is empty and the <code>PC</code> is true.</p>
+<p>In <code>main</code> we meet a read statement whose form is <code>var = sym_input()</code>. After execution a <code>var -&gt; s</code> is added to &amp;sigma; . We will get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub> }.</p>
+<p>The assignment statement like <code>var = expression</code> is the same, so after line6, we get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub>, z-&gt;2y<sub>0</sub> }.</p>
+<p>When we meet conditional statements <code>if(e) S1 else S2</code>, two updates for <code>PC</code>.<br>Update <code>PC</code> –&gt; <code>PC</code> &amp;and; &amp;sigma;(e) to represent <code>then</code> branch.<br>Create <code>PC&#39;</code> –&gt; <code>PC</code> &amp;and; &amp;not; &amp;sigma;(e) to represent <code>else</code> branch.</p>
+<p>After line 7, we get two symbolic execution instances and path constraints are: x<sub>0</sub> &#x3D; 2y<sub>0</sub>   and  x<sub>0</sub> &amp;ne; 2y<sub>0</sub><br>After line 8, Another two instances and <code>PC</code>: (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &gt; y<sub>0</sub> + 10)  and  (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &amp;le; y<sub>0</sub> + 10)</p>
 <p>If things satisfy neither of the conditions, or program breaks, instance terminates. We can use constraint solver to generate values which leads to specific path.</p>
 <p>Example above belongs to classical symbolic execution, pure static symbolic execution. There are two tricky problems resulting in its impractical: </p>
 <ul>
@@ -273,9 +275,9 @@
 <h3 id="Concolic-Execution"><a href="#Concolic-Execution" class="headerlink" title="Concolic Execution"></a>Concolic Execution</h3><p>Key element of modern symbolic execution technology is their ability to mix concrete execution with symbolic execution.</p>
 <p><img src="/imghost/lse/4.png" alt="concolic"></p>
 <p>Concolic maintains two states:<br>Concrete State: maps all variables to their concrete values.<br>Symbolic State: only maps variables that have non-concrete values.</p>
-<p>We use the previous example to see this process. Concolic execution first generates some random input: {x = A, y = B}(A &ne; 2B). </p>
-<p>When it goes to the first fork, it adds x<sub>0</sub> &ne; 2y<sub>0</sub> to path constraints. Then reverse conjunction, to solve x<sub>0</sub> = 2y<sub>0<sub>.</p>
-<p>We can get {x = C, y = 2C}. When this input reaches next fork, then it does the same as above. </p>
+<p>We use the previous example to see this process. Concolic execution first generates some random input: {x &#x3D; A, y &#x3D; B}(A &amp;ne; 2B). </p>
+<p>When it goes to the first fork, it adds x<sub>0</sub> &amp;ne; 2y<sub>0</sub> to path constraints. Then reverse conjunction, to solve x<sub>0</sub> &#x3D; 2y<sub>0<sub>.</p>
+<p>We can get {x &#x3D; C, y &#x3D; 2C}. When this input reaches next fork, then it does the same as above. </p>
 <p>To sum up, it’s a process of testing inputs along with generating new inputs using constraint solver. Finally we explore all feasible paths.</p>
 <p>Concolic execution deals problems of classic static symbolic execution  – just replace tricky parts for solver with actual values. Meanwhile you’ll sacrifice the completeness of path exploration.</p>
 <h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><p>Next let’s talk about challenges and solutions.</p>
@@ -319,7 +321,7 @@
 <p>The tool provides binary analysis information such as finding functions and generating function call graphs and it also includes a symbolic solver engine capable of performing symbolic execution. </p>
 <p><code>angr</code> can be a significant part of expanding the field of reverse engineering not only because of its symbolic execution engine, but also because of its strengths as a binary analysis tool. Its ability to find functions and generate function call graphs are important to reverse engineering.</p>
 <p>Documentation as <a class="link"   target="_blank" rel="noopener" href="http://docs.angr.io/" >HTML<i class="fas fa-external-link-alt"></i></a> and as a <a class="link"   target="_blank" rel="noopener" href="https://github.com/angr/angr-doc" >Github repository<i class="fas fa-external-link-alt"></i></a>. They are very helpful.</p>
-<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>It is documented in <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/introductory-errata/install" >docs.angr.io/introductory-errata/install<i class="fas fa-external-link-alt"></i></a>. </p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>It is documented in <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/introductory-errata/install" >docs.angr.io&#x2F;introductory-errata&#x2F;install<i class="fas fa-external-link-alt"></i></a>. </p>
 <p>Though use <code>pip install angr</code> is pretty easy, I still recommend to get it by <code>virtualenv</code> or <code>docker</code>, which is recommended by official. There are old version lib dependencies that will mess your environment up.</p>
 <p>Despite running script, using <code>IPython</code> to run command is also encouraged.</p>
 <h3 id="Symbolic-Execution-Example"><a href="#Symbolic-Execution-Example" class="headerlink" title="Symbolic Execution Example"></a>Symbolic Execution Example</h3><p><img src="/imghost/lse/5.png" alt="flow chart"></p>
@@ -328,7 +330,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">success</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;success\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;here is your flag if it&#x27;s a ctf\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">failed</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;failed\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> check[<span class="number">9</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,check);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(check,<span class="string">&quot;p4ssw0rd&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">success</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">failed</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Main logic is to input specific word to activate success method.<br>Now we use <code>angr</code> to analyse it.</p>
-<p>You should have read <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/core-concepts" >docs.angr.io/core-concepts<i class="fas fa-external-link-alt"></i></a> and known basic properties.<br>Then we follow the flow chart to do.</p>
+<p>You should have read <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/core-concepts" >docs.angr.io&#x2F;core-concepts<i class="fas fa-external-link-alt"></i></a> and known basic properties.<br>Then we follow the flow chart to do.</p>
 <p>First we load the library</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">p = angr.Project(<span class="string">&quot;./check&quot;</span>,auto_load_libs=<span class="literal">False</span>) <span class="comment"># normally False</span></span><br></pre></td></tr></table></figure>
 <p>If you need logging, add this</p>
@@ -369,6 +371,28 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/python/">#python</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/symbolic-execution/">#symbolic-execution</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/angr/">#angr</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -424,14 +448,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -441,58 +467,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -551,43 +538,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

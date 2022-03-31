@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-02-16 11:39:23
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-02-16 11:39:23</span>
+        <span class="mobile">2020-02-16 11:39</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -270,7 +272,7 @@
 <ul>
 <li>queue: stores all testcases with special executive paths.</li>
 <li>crashes: stores cases causing target to receive fatal signal and crash.</li>
-<li>crashes/README.txt： saves command parameters to execute crash cases.</li>
+<li>crashes&#x2F;README.txt： saves command parameters to execute crash cases.</li>
 <li>hangs： cases leading to target timeout.</li>
 <li>fuzzer_stats： afl-fuzz status.</li>
 <li>plot_data： for afl-plot to plot.</li>
@@ -285,7 +287,7 @@
 <h3 id="crashwalk"><a href="#crashwalk" class="headerlink" title="crashwalk"></a>crashwalk</h3><p><code>crashwalk</code> gets you more detailed crashes classification results, and the specific causes of crashes.<br>It is based on <code>exploitable</code> plugin of gdb, install on ubuntu:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb golang</span><br><span class="line">$ mkdir ~/tools</span><br><span class="line">$ <span class="built_in">cd</span> ~/tools</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/jfoote/exploitable.git</span><br><span class="line">$ mkdir go</span><br><span class="line">$ <span class="built_in">export</span> GOPATH=~/tools/go</span><br><span class="line">$ <span class="built_in">export</span> CW_EXPLOITABLE=~/tools/exploitable/exploitable/exploitable.py</span><br><span class="line">$ go get -u -v github.com/bnagy/crashwalk/cmd/...</span><br></pre></td></tr></table></figure>
 <p>Follow the lead, use correct path. You will find three binary files in $GOPATH.</p>
-<p><code>crashwalk</code> has <code>Manual Mode</code> and <code>AFL Mode</code>.<br><code>Manual Mode</code> reads crashes/README.txt to get command.<br><code>AFL Mode</code> set parameters manually.</p>
+<p><code>crashwalk</code> has <code>Manual Mode</code> and <code>AFL Mode</code>.<br><code>Manual Mode</code> reads crashes&#x2F;README.txt to get command.<br><code>AFL Mode</code> set parameters manually.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Manual Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir/fuzzer1/crashes/ -match id -- /path/to/target @@</span><br><span class="line"></span><br><span class="line"><span class="comment">#AFL Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir -afl</span><br></pre></td></tr></table></figure>
 <p><img src="/imghost/aafr/6.jpg" alt="crashwalk e.g."></p>
 <h3 id="afl-collect"><a href="#afl-collect" class="headerlink" title="afl-collect"></a>afl-collect</h3><p>One of <a class="link"   target="_blank" rel="noopener" href="https://gitlab.com/rc0r/afl-utils" >afl-utils<i class="fas fa-external-link-alt"></i></a> suite, also based on <code>exploitable</code> plugin to check availability of crash.<br>It also delete useless or duplicated crash sample </p>
@@ -316,6 +318,24 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/fuzzing/">#fuzzing</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/afl/">#afl</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -371,14 +391,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -388,58 +410,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -498,43 +481,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

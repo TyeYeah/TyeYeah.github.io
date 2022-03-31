@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-01-23 18:47:42
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-01-23 18:47:42</span>
+        <span class="mobile">2020-01-23 18:47</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -260,7 +262,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$  checksec xxxxx</span><br><span class="line">[*] <span class="string">&#x27;/root/xxxxx&#x27;</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE</span><br><span class="line">    FORTIFY:  Enabled</span><br><span class="line"></span><br><span class="line">or </span><br><span class="line"></span><br><span class="line">$  gdb xxxxx</span><br><span class="line">gdb-peda$ checksec </span><br><span class="line">CANARY    : disabled</span><br><span class="line">FORTIFY   : ENABLED</span><br><span class="line">NX        : ENABLED</span><br><span class="line">PIE       : disabled</span><br><span class="line">RELRO     : disabled</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>Now the question is, what are those above means?</p>
 <h3 id="Canary-GS"><a href="#Canary-GS" class="headerlink" title="Canary (GS)"></a>Canary (GS)</h3><p>Attacks caused by stack overflows are very common and very old. A mitigation technique called canary has long appeared in glibc and has been the first line of defense for system security.</p>
-<p>Canary is simple and efficient in both implementation and design. It is to insert a value. At the end of the high-risk area where stack overflow occurs, when the function returns, check if the value of canary has been changed to determine whether stack/buffer overflow is occur.</p>
+<p>Canary is simple and efficient in both implementation and design. It is to insert a value. At the end of the high-risk area where stack overflow occurs, when the function returns, check if the value of canary has been changed to determine whether stack&#x2F;buffer overflow is occur.</p>
 <p>Canary and GS protection under Windows are effective means to prevent stack overflow. Its appearance largely prevents stack overflow, and since it hardly consumes system resources, it has become the standard of protection mechanism under Linux. </p>
 <p>Canary can be set in GCC using the following parameters:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-fstack-protector (default)</span><br><span class="line"><span class="comment"># enables protection, but inserts protection only for functions that contain arrays in local variables</span></span><br><span class="line"></span><br><span class="line">-fstack-protector-all </span><br><span class="line"><span class="comment"># enable protection, insert protection for all functions</span></span><br><span class="line"></span><br><span class="line">-fstack-protector-strong</span><br><span class="line"></span><br><span class="line">-fstack-protector-explicit </span><br><span class="line"><span class="comment"># enables protection only for functions with explicit stack_protect attribute</span></span><br><span class="line"></span><br><span class="line">-fno-stack-protector </span><br><span class="line"><span class="comment"># Disable protection.</span></span><br></pre></td></tr></table></figure>
@@ -283,7 +285,7 @@
 <ul>
 <li>0: off ASLR. no randomization, same base address for stack &amp; heap, and same address for libc.so</li>
 <li>1: normal ASLR. random base address for mmap, stack and libc.so , but not randomize for heap</li>
-<li>2: advanced/enhanced ASLR, random heap address added</li>
+<li>2: advanced&#x2F;enhanced ASLR, random heap address added</li>
 </ul>
 <p>Check ASLR condition</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -n kernel.randomize_va_space</span><br><span class="line">1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ cat /proc/sys/kernel/randomize_va_space</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
@@ -304,12 +306,12 @@
 <p>GCC, GNU linker, and Glibc-dynamic linker work together to implement a technology called RELRO: read only relocation. The approximate implementation is setting the area of the binary specified by the linker after the dynamic linker has processed the relocation as read-only.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-z norelro <span class="comment"># No RELRO</span></span><br><span class="line">-z lazy <span class="comment"># Partial RELRO (default)</span></span><br><span class="line">-z now <span class="comment"># Full RELRO</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Sum-Up"><a href="#Sum-Up" class="headerlink" title="Sum-Up"></a>Sum-Up</h3><p>NX：-z execstack / -z noexecstack (Off / On)<br>Canary：-fno-stack-protector /-fstack-protector / -fstack-protector-all (Off / On / All Func On)<br>PIE：-no-pie / -pie (Off / On)<br>RELRO：-z norelro / -z lazy / -z now (Off / Partial / Full)</p>
+<h3 id="Sum-Up"><a href="#Sum-Up" class="headerlink" title="Sum-Up"></a>Sum-Up</h3><p>NX：-z execstack &#x2F; -z noexecstack (Off &#x2F; On)<br>Canary：-fno-stack-protector &#x2F;-fstack-protector &#x2F; -fstack-protector-all (Off &#x2F; On &#x2F; All Func On)<br>PIE：-no-pie &#x2F; -pie (Off &#x2F; On)<br>RELRO：-z norelro &#x2F; -z lazy &#x2F; -z now (Off &#x2F; Partial &#x2F; Full)</p>
 <h2 id="Windows-Security-Protection-Mechanism"><a href="#Windows-Security-Protection-Mechanism" class="headerlink" title="Windows Security Protection Mechanism"></a>Windows Security Protection Mechanism</h2><p>There’re always many compiling options in Visual Studio when coding.<br>They can be set in Visual Studio before compilation.<br>Some parameters explained as below.</p>
 <h3 id="GS"><a href="#GS" class="headerlink" title="GS"></a>GS</h3><p>Similar to Canary.<br>After the GS option is enabled, a piece of data is saved on the stack at the beginning of the function execution, and the data is checked when the function returns. If it is inconsistent, it is overwritten, so it jumps into the corresponding processing process and no longer returns, so the shellcode cannot be executed, this value is called “Security cookie”. Software calls Check_Security_Cookie () to check whether the stack is covered.</p>
 <h3 id="SafeSEH"><a href="#SafeSEH" class="headerlink" title="SafeSEH"></a>SafeSEH</h3><p>Canary is useful for stack overflow.<br>However, they ignored that the SEH chain of exception handling is also on the stack, so they can overwrite the address of the SEH chain as jmp esp, and then trigger an exception to jump to the esp to execute the shellcode.</p>
 <p>SafeSEH registers all exception handling functions when the program is compiled to a registered list. After an exception is triggered during execution, a check function is performed to check whether the address pointed to by the SEH chain is in the registered list.</p>
-<h3 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h3><p>Similar to NX.<br>However, in the logic of the check function, the execution is prevented only when the SEH chain points/links to the module (exe, dll) address. If the address pointed/linked to by the SEH chain is not in these modules, then it can be executed. Therefore, the program is not a module Find the jmp esp in the data space, such as the resource file with the nls suffix, etc., or in software that supports JS scripts (browser, etc.) bypass by writing shellcode through the script to allocated heap.</p>
+<h3 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h3><p>Similar to NX.<br>However, in the logic of the check function, the execution is prevented only when the SEH chain points&#x2F;links to the module (exe, dll) address. If the address pointed&#x2F;linked to by the SEH chain is not in these modules, then it can be executed. Therefore, the program is not a module Find the jmp esp in the data space, such as the resource file with the nls suffix, etc., or in software that supports JS scripts (browser, etc.) bypass by writing shellcode through the script to allocated heap.</p>
 <p>Data execution protection (DEP) refers to the heap and stack with only read and write permissions and no execute permissions. Therefore no shellcodes can be executed.</p>
 <h3 id="ASLR"><a href="#ASLR" class="headerlink" title="ASLR"></a>ASLR</h3><p>Similar to PIE.<br>Load code to random space to prevent ROP.</p>
 <h3 id="CFG"><a href="#CFG" class="headerlink" title="CFG"></a>CFG</h3><p>CFI stands for Control-Flow Integrity.<br>It mainly adds dynamic security to the binary executable file by dynamically rewriting it.</p>
@@ -320,6 +322,28 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/gcc/">#gcc</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -375,14 +399,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -392,58 +418,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -502,43 +489,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

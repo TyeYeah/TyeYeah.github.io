@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-01-09 22:34:28
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-01-09 22:34:28</span>
+        <span class="mobile">2021-01-09 22:34</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -278,7 +280,7 @@
 <ul>
 <li>just the <code>eax</code> register with a value,</li>
 <li>two values stored into a register</li>
-<li>a register with a value stored into that same register. </li>
+<li>a register with a value stored into that same register.</li>
 </ul>
 <p>The first way only has 1 argument. This means that the <code>eax</code> register is taken and multiplied by that value.<br>The second way shows that the multiplication of the two end arguments are stored  into  the first  argument  register.<br>The  last  way  multiplies  the  value  in  the  first  argument register and the value in the second argument and stores the result in the first argument register.</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mul</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">mul</span> <span class="built_in">edx</span>, <span class="number">3</span>, <span class="number">6</span></span><br><span class="line"><span class="keyword">mul</span> <span class="built_in">ecx</span>, <span class="number">8</span></span><br></pre></td></tr></table></figure>
@@ -298,7 +300,7 @@
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BGE</span>     Branch <span class="meta">if</span> greater than or equal to</span><br><span class="line"><span class="keyword">BLE</span>     Branch <span class="meta">if</span> less than or equal to</span><br><span class="line"><span class="keyword">BLT</span>     Branch <span class="meta">if</span> less than</span><br><span class="line"><span class="keyword">BNE</span>     Branch <span class="meta">if</span> not equal to zero</span><br></pre></td></tr></table></figure>
 
 <h3 id="Addressing"><a href="#Addressing" class="headerlink" title="Addressing"></a>Addressing</h3><ol>
-<li><p>LDMIA R0 , {R1,R2,R3,R4}<br>LDM is: Multi-register &quot;internal access&quot; instruction<br>IA indicates that R0 is incremented by 1 word after each LDM instruction ends.<br>The final result is R1 = [R0], R1 = [R0+#4], R1 = [R0+#8], R1 = [R0+#0xC]</p>
+<li><p>LDMIA R0 , {R1,R2,R3,R4}<br>LDM is: Multi-register &quot;internal access&quot; instruction<br>IA indicates that R0 is incremented by 1 word after each LDM instruction ends.<br>The final result is R1 &#x3D; [R0], R1 &#x3D; [R0+#4], R1 &#x3D; [R0+#8], R1 &#x3D; [R0+#0xC]</p>
 </li>
 <li><p>Stack addressing (FA, EA, FD, ED)<br>STMFD SP! , {R1-R7, LR} @ Push R1<del>R7 and LR onto the stack<br>LDMFD SP! , {R1-R7, LR} @ Pop R1</del>R7 and LR</p>
 </li>
@@ -325,7 +327,8 @@
 </ol>
 <ul>
 <li><p><code>LDR</code><br>Put the data in memory into the register<br>Example of instruction:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LDRH R0, [R1] ; Read halfword data with memory address R1 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, #8] ; Read halfword data with memory address R1+8 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, R2] ; Read halfword data with memory address R1+R2 into register R0 and clear the upper 16 bits of R0.</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LDRH R0, [R1] ; Read halfword data with memory address R1 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, #8] ; Read halfword data with memory address R1+8 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, R2] ; Read halfword data with memory address R1+R2 into register R0 and clear the upper 16 bits of R0.</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><code>STR</code><br>The STR is used to store data to an address. The format is as follows:<br>STR{type}{cond}Rd,label<br>STRD {cond} Rd, Rd2, label<br>The usage is as follows:<br><code>STR R0,[R2,#04]</code> Store the value of R0 at the address of R2+4</p>
 </li>
 <li><p><code>LDM</code></p>
@@ -340,7 +343,7 @@
 </li>
 </ul>
 <ol start="4">
-<li>Data exchange between registers.<br>The format is <code>SWP&#123;B&#125;&#123;cond&#125;Rd,Rm,[Rn]</code><br>B is an optional byte. If there is B, the byte is exchanged. Otherwise, the word is exchanged.<br>Rd is a temporarily stored register, and Rm is the value to be replaced.<br>Rn is the data address of `to be replaced&#39;</li>
+<li>Data exchange between registers.<br>The format is <code>SWP&#123;B&#125;&#123;cond&#125;Rd,Rm,[Rn]</code><br>B is an optional byte. If there is B, the byte is exchanged. Otherwise, the word is exchanged.<br>Rd is a temporarily stored register, and Rm is the value to be replaced.<br>Rn is the data address of &#96;to be replaced&#39;</li>
 </ol>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>The whole list can be found in <a class="link"   target="_blank" rel="noopener" href="https://iitd-plos.github.io/col718/ref/arm-instructionset.pdf" >arm-instructionset.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://pages.cs.wisc.edu/~markhill/restricted/arm_isa_quick_reference.pdf" >arm_isa_quick_reference.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://imrannazar.com/ARM-Opcode-Map" >ARM-Opcode-Map<i class="fas fa-external-link-alt"></i></a>.</p>
 <h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><h3 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h3><p>In  <code>MIPS</code>,  there  are  32  registers  of  size  32-bits  that  are  for  use  with  integer  and  logic instructions.<br>They are labeled <code>$0</code> - <code>$31</code>.<br>Table in the following shows this usage of these 32 registers. There are registers for a dedicated zero value, return values, temporary data, saved registers, etc.</p>
@@ -436,7 +439,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s + $t; advance_pc (4);</td>
+<td>$d &#x3D; $s + $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -457,7 +460,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = $s + imm; advance_pc (4);</td>
+<td>$t &#x3D; $s + imm; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -478,7 +481,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = $s + imm; advance_pc (4);</td>
+<td>$t &#x3D; $s + imm; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -499,7 +502,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s + $t; advance_pc (4);</td>
+<td>$d &#x3D; $s + $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -520,7 +523,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s &amp; $t; advance_pc (4);</td>
+<td>$d &#x3D; $s &amp; $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -541,7 +544,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = $s &amp; imm; advance_pc (4);</td>
+<td>$t &#x3D; $s &amp; imm; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -562,7 +565,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s == $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s &#x3D;&#x3D; $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -583,7 +586,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &gt;= 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s &gt;&#x3D; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -604,7 +607,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &gt;= 0 $31 = PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s &gt;&#x3D; 0 $31 &#x3D; PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -646,7 +649,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt;= 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s &lt;&#x3D; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -688,7 +691,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt; 0 $31 = PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s &lt; 0 $31 &#x3D; PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -709,7 +712,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s != $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+<td>if $s !&#x3D; $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -730,7 +733,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$LO = $s / $t; $HI = $s % $t; advance_pc (4);</td>
+<td>$LO &#x3D; $s &#x2F; $t; $HI &#x3D; $s % $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -751,7 +754,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$LO = $s / $t; $HI = $s % $t; advance_pc (4);</td>
+<td>$LO &#x3D; $s &#x2F; $t; $HI &#x3D; $s % $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -772,7 +775,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>PC = nPC; nPC = (PC &amp; 0xf0000000)</td>
+<td>PC &#x3D; nPC; nPC &#x3D; (PC &amp; 0xf0000000)</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -793,7 +796,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$31 = PC + 8 (or nPC + 4); PC = nPC; nPC = (PC &amp; 0xf0000000)</td>
+<td>$31 &#x3D; PC + 8 (or nPC + 4); PC &#x3D; nPC; nPC &#x3D; (PC &amp; 0xf0000000)</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -814,7 +817,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>PC = nPC; nPC = $s;</td>
+<td>PC &#x3D; nPC; nPC &#x3D; $s;</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -835,7 +838,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = MEM[$s + offset]; advance_pc (4);</td>
+<td>$t &#x3D; MEM[$s + offset]; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -856,7 +859,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = (imm &lt;&lt; 16); advance_pc (4);</td>
+<td>$t &#x3D; (imm &lt;&lt; 16); advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -877,7 +880,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = MEM[$s + offset]; advance_pc (4);</td>
+<td>$t &#x3D; MEM[$s + offset]; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -898,7 +901,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $HI; advance_pc (4);</td>
+<td>$d &#x3D; $HI; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -919,7 +922,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $LO; advance_pc (4);</td>
+<td>$d &#x3D; $LO; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -940,7 +943,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$LO = $s * $t; advance_pc (4);</td>
+<td>$LO &#x3D; $s * $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -961,7 +964,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$LO = $s * $t; advance_pc (4);</td>
+<td>$LO &#x3D; $s * $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1004,7 +1007,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s</td>
+<td>$d &#x3D; $s</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1025,7 +1028,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = $s</td>
+<td>$t &#x3D; $s</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1046,7 +1049,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>MEM[$s + offset] = (0xff &amp; $t); advance_pc (4);</td>
+<td>MEM[$s + offset] &#x3D; (0xff &amp; $t); advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1067,7 +1070,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $t &lt;&lt; h; advance_pc (4);</td>
+<td>$d &#x3D; $t &lt;&lt; h; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1088,7 +1091,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $t &lt;&lt; $s; advance_pc (4);</td>
+<td>$d &#x3D; $t &lt;&lt; $s; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1109,7 +1112,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt; $t $d = 1; advance_pc (4); else $d = 0; advance_pc (4);</td>
+<td>if $s &lt; $t $d &#x3D; 1; advance_pc (4); else $d &#x3D; 0; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1130,7 +1133,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt; imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);</td>
+<td>if $s &lt; imm $t &#x3D; 1; advance_pc (4); else $t &#x3D; 0; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1151,7 +1154,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt; imm $t = 1; advance_pc (4); else $t = 0; advance_pc (4);</td>
+<td>if $s &lt; imm $t &#x3D; 1; advance_pc (4); else $t &#x3D; 0; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1172,7 +1175,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>if $s &lt; $t $d = 1; advance_pc (4); else $d = 0; advance_pc (4);</td>
+<td>if $s &lt; $t $d &#x3D; 1; advance_pc (4); else $d &#x3D; 0; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1193,7 +1196,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $t &gt;&gt; h; advance_pc (4);</td>
+<td>$d &#x3D; $t &gt;&gt; h; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1214,7 +1217,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $t &gt;&gt; h; advance_pc (4);</td>
+<td>$d &#x3D; $t &gt;&gt; h; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1235,7 +1238,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $t &gt;&gt; $s; advance_pc (4);</td>
+<td>$d &#x3D; $t &gt;&gt; $s; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1256,7 +1259,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s - $t; advance_pc (4);</td>
+<td>$d &#x3D; $s - $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1277,7 +1280,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s - $t; advance_pc (4);</td>
+<td>$d &#x3D; $s - $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1298,7 +1301,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>MEM[$s + offset] = $t; advance_pc (4);</td>
+<td>MEM[$s + offset] &#x3D; $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1340,7 +1343,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$d = $s ^ $t; advance_pc (4);</td>
+<td>$d &#x3D; $s ^ $t; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1361,7 +1364,7 @@
 </thead>
 <tbody><tr>
 <td>Operation:</td>
-<td>$t = $s ^ imm; advance_pc (4);</td>
+<td>$t &#x3D; $s ^ imm; advance_pc (4);</td>
 </tr>
 <tr>
 <td>Syntax:</td>
@@ -1376,6 +1379,32 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/arm/">#arm</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mips/">#mips</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/x86/">#x86</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/cisc/">#cisc</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/risc/">#risc</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -1431,14 +1460,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -1448,58 +1479,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -1558,43 +1550,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

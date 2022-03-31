@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-08-02 22:20:10
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-02 22:20:10</span>
+        <span class="mobile">2021-08-02 22:20</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -238,7 +240,7 @@
         
 
         <div class="article-content markdown-body">
-            <p>Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools/tips.</p>
+            <p>Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools&#x2F;tips.</p>
 <h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><p>Actually years age just modifying some special strings or add rubbish paddings at the end makes antivirus confused about the sample, but for now only encryption and obfuscation works, sometimes we even need to explore more native APIs to bypass and this can be still temporary.</p>
 <p>What I want to show here is not about detailed information, but some easy-to-use tools which help red teaming. For some hardcore learners, check <a class="link"   target="_blank" rel="noopener" href="https://github.com/Ascotbe/virus/tree/master/ShellCode" >this<i class="fas fa-external-link-alt"></i></a> out.</p>
 <h3 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/rapid7/metasploit-framework" >Metasploit<i class="fas fa-external-link-alt"></i></a></h3><p>In <a href="/2020/03/17/2020-03-17-MSF-Pentest-Route/">MSF Pentest Route</a> I introduced pretty much about metasploit framework penetration testing, only to forget the <code>Evasion</code> module which updated in Metasploit 5.0.</p>
@@ -249,9 +251,9 @@
 <h3 id="Veil"><a href="#Veil" class="headerlink" title="Veil"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/Veil-Framework/Veil/" >Veil<i class="fas fa-external-link-alt"></i></a></h3><p>As this installation requires <code>wine</code> and part of graph GUI, so remember to install a desktop environment (I’m talking to <code>WSL</code> users).</p>
 <p>As for usages, follow the lead in banner and the parameters are similar to <code>msf</code>.</p>
 <h3 id="charlotte"><a href="#charlotte" class="headerlink" title="charlotte"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/9emin1/charlotte" >charlotte<i class="fas fa-external-link-alt"></i></a></h3><blockquote>
-<p>13/05/2021:</p>
+<p>13&#x2F;05&#x2F;2021:</p>
 <ol>
-<li>c++ shellcode launcher, fully undetected 0/26 as of 13th May 2021.</li>
+<li>c++ shellcode launcher, fully undetected 0&#x2F;26 as of 13th May 2021.</li>
 <li>dynamic invoking of win32 api functions</li>
 <li>XOR encryption of shellcode and function names</li>
 <li>randomised XOR keys and variables per run</li>
@@ -311,11 +313,11 @@
 
 <h3 id="Bypass-UAC"><a href="#Bypass-UAC" class="headerlink" title="Bypass UAC"></a>Bypass <code>UAC</code></h3><p>Check <a class="link"   target="_blank" rel="noopener" href="https://github.com/hfiref0x/UACME" >UACME<i class="fas fa-external-link-alt"></i></a> for rich <code>UAC</code> bypassing materials.<br>Under <code>Source</code> folder there are:</p>
 <ul>
-<li><code>Akagi</code>, x64/x86-32 main executable file, contain payload/data units.</li>
+<li><code>Akagi</code>, x64&#x2F;x86-32 main executable file, contain payload&#x2F;data units.</li>
 <li><code>Akatsuki</code>, x64 payload, WOW64 logger.</li>
-<li><code>Fubuki</code>, x64/x86-32 payload, general purpose.</li>
+<li><code>Fubuki</code>, x64&#x2F;x86-32 payload, general purpose.</li>
 <li><code>Kamikaze</code>, data, MMC snap-in.</li>
-<li><code>Naka</code>, x64/x86-32 compressor for other payload/data units.</li>
+<li><code>Naka</code>, x64&#x2F;x86-32 compressor for other payload&#x2F;data units.</li>
 <li><code>Yuubari</code>, x64 UAC info data dumper.</li>
 </ul>
 <h2 id="Multiple-Programming-Language"><a href="#Multiple-Programming-Language" class="headerlink" title="Multiple Programming Language"></a>Multiple Programming Language</h2><h3 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h3><p><code>Powershell</code> has 6 execution policies:</p>
@@ -358,9 +360,9 @@
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/danielbohannon/Invoke-Obfuscation" >Invoke-Obfuscation<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 <p>This is a powershell obfuscation framework on <a class="link"   target="_blank" rel="noopener" href="https://github.com/danielbohannon/Invoke-Obfuscation" >github<i class="fas fa-external-link-alt"></i></a> and often used by APT32.</p>
-<p>Load/import it and run:</p>
+<p>Load&#x2F;import it and run:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">Import-Module</span> ./<span class="built_in">Invoke-Obfuscation</span>.psd1 </span><br><span class="line">&gt; <span class="built_in">Invoke-Obfuscation</span></span><br></pre></td></tr></table></figure>
-<p>We can see the banner<br>![Invoke-Obfuscation](/imghost/bav/Invoke-Obfuscation Screenshot.png)</p>
+<p>We can see the banner<br>![Invoke-Obfuscation](&#x2F;imghost&#x2F;bav&#x2F;Invoke-Obfuscation Screenshot.png)</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set target first</span></span><br><span class="line"><span class="built_in">Invoke-Obfuscation</span>\Encoding&gt; <span class="built_in">SET</span> SCRIPTPATH <span class="built_in">Invoke-Obfuscation</span>/<span class="built_in">Out-SecureStringCommand</span>.ps1</span><br><span class="line"></span><br><span class="line">Successfully <span class="built_in">set</span> ScriptPath:</span><br><span class="line"><span class="built_in">Invoke-Obfuscation</span>/<span class="built_in">Out-SecureStringCommand</span>.ps1</span><br><span class="line"></span><br><span class="line"><span class="built_in">Invoke-Obfuscation</span>&gt; encoding</span><br><span class="line"></span><br><span class="line">Choose one of the below Encoding options to APPLY to current payload:</span><br><span class="line"></span><br><span class="line">[*] ENCODING\<span class="number">1</span>          Encode entire command as ASCII</span><br><span class="line">[*] ENCODING\<span class="number">2</span>          Encode entire command as Hex</span><br><span class="line">[*] ENCODING\<span class="number">3</span>          Encode entire command as Octal</span><br><span class="line">[*] ENCODING\<span class="number">4</span>          Encode entire command as Binary</span><br><span class="line">[*] ENCODING\<span class="number">5</span>          Encrypt entire command as SecureString (AES)</span><br><span class="line">[*] ENCODING\<span class="number">6</span>          Encode entire command as BXOR</span><br><span class="line">[*] ENCODING\<span class="number">7</span>          Encode entire command as Special Characters</span><br><span class="line">[*] ENCODING\<span class="number">8</span>          Encode entire command as Whitespace</span><br><span class="line"></span><br><span class="line"><span class="built_in">Invoke-Obfuscation</span>\Encoding&gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line">Executed:</span><br><span class="line">  <span class="built_in">CLI</span>:  Encoding\<span class="number">1</span></span><br><span class="line">  FULL: <span class="built_in">Out-EncodedAsciiCommand</span> <span class="literal">-ScriptBlock</span> <span class="variable">$ScriptBlock</span> <span class="literal">-PassThru</span></span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line"> <span class="operator">-JOin</span> ( <span class="string">&#x27;35z32h32M32X84f104f105f115;32z102;</span></span><br><span class="line"><span class="string"> ...</span></span><br><span class="line"><span class="string"> 101z119p83f99p114-105p112M116M13h10X125&#x27;</span> <span class="operator">-SPlIT</span><span class="string">&#x27;z&#x27;</span> <span class="operator">-SpLit</span> <span class="string">&#x27;;&#x27;</span><span class="operator">-spLit</span><span class="string">&#x27;M&#x27;</span><span class="operator">-spLIT</span><span class="string">&#x27;B&#x27;</span> <span class="operator">-spLIT</span><span class="string">&#x27;h&#x27;</span> <span class="operator">-Split</span><span class="string">&#x27;-&#x27;</span> <span class="operator">-SpLIT</span> <span class="string">&#x27;s&#x27;</span><span class="operator">-split</span><span class="string">&#x27;X&#x27;</span> <span class="operator">-SpLIT</span> <span class="string">&#x27;p&#x27;</span> <span class="operator">-SPlit</span><span class="string">&#x27;f&#x27;</span>| <span class="built_in">FoReaCh-OBjECt</span> &#123; ([<span class="built_in">CHAr</span>] [<span class="built_in">INT</span>]<span class="variable">$_</span>) &#125;)| <span class="built_in">IEx</span></span><br><span class="line"></span><br><span class="line">WARNING: This command exceeds the cmd.exe maximum length of <span class="number">8190</span>.</span><br><span class="line">         Its length is <span class="number">87052</span> characters.</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="built_in">Invoke-Obfuscation</span>\Encoding&gt; out <span class="number">2</span>.ps1</span><br><span class="line"></span><br><span class="line">Successfully output ObfuscatedCommand to C:\path\to\<span class="built_in">Invoke-Obfuscation</span>\<span class="number">2</span>.ps1.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>After that the <code>2.ps1</code> is anti-AV.</p>
 <p>Normally we get <code>powershell</code> reverse shell by </p>
@@ -395,7 +397,7 @@
 <h3 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h3><blockquote>
 <p>Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.</p>
 </blockquote>
-<p>The <code>Go</code> programing language (<code>golang</code>) was published by <code>Google</code> in 2009, having great performance like <code>C</code>/<code>C++</code> and garbage collection (GC) like <code>Java</code>, but without dependence on vm.</p>
+<p>The <code>Go</code> programing language (<code>golang</code>) was published by <code>Google</code> in 2009, having great performance like <code>C</code>&#x2F;<code>C++</code> and garbage collection (GC) like <code>Java</code>, but without dependence on vm.</p>
 <p>However the <code>Go</code> binaries are always not so small, with a statically linked <code>runtime</code> library, and maybe that’s why most antivirus engines on the market have relatively weak detection capabilities for them.</p>
 <ul>
 <li>Main Idea</li>
@@ -445,6 +447,24 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/pentest/">#pentest</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -500,14 +520,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -517,58 +539,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -627,43 +610,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

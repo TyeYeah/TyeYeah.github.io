@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-02-14 09:25:47
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-02-14 09:25:47</span>
+        <span class="mobile">2020-02-14 09:25</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -274,10 +276,10 @@
 <h3 id="Increase-coverage"><a href="#Increase-coverage" class="headerlink" title="Increase coverage"></a>Increase coverage</h3><p>The essence of Fuzz is to use the input to detect whether the execution path corresponding to the current input will generate a possible vulnerability. Therefore, if more paths are covered, it means that more vulnerabilities may be detected. Increasing coverage is more like a fundamental issue. The solution to the first two issues is actually improving coverage.</p>
 <h2 id="AFL"><a href="#AFL" class="headerlink" title="AFL"></a>AFL</h2><p>“American fuzzy lop is a security-oriented fuzzer that employs a novel type of compile-time<br>instrumentation and genetic algorithms to automatically discover clean, interesting test cases<br>that trigger new internal states in the targeted binary.<br>This substantially improves the functional coverage for the fuzzed code. The compact synthesized<br>corpora produced by the tool are also useful for seeding other, more labor- or resource-intensive<br>testing regimes down the road.”</p>
 <p>Ok nice … but what does this actually mean? (even native speakers are confused)</p>
-<h3 id="Binary-Instrumentation"><a href="#Binary-Instrumentation" class="headerlink" title="Binary Instrumentation"></a>Binary Instrumentation</h3><p>The first component of AFL is a wrapper for GCC/CLang compilers that will inject during compilation its own assembly code into the target software.<br>The fuzzer will use this code to trace execution paths while feeding the system with new inputs and to determine if a new mutation of the input is able to trigger known or unkown (new) execution paths.</p>
+<h3 id="Binary-Instrumentation"><a href="#Binary-Instrumentation" class="headerlink" title="Binary Instrumentation"></a>Binary Instrumentation</h3><p>The first component of AFL is a wrapper for GCC&#x2F;CLang compilers that will inject during compilation its own assembly code into the target software.<br>The fuzzer will use this code to trace execution paths while feeding the system with new inputs and to determine if a new mutation of the input is able to trigger known or unkown (new) execution paths.</p>
 <p>In compliation, we get the binary program from the source code. First turn source code to assembly code, then from assembly code to machine code.<br><code>gcc</code> (specifically the gcc compiler) is able to turn source code into assembly code, while <code>as</code> (also part of the GNU compiler suite) turns assembly code into machine code. </p>
 <p><code>afl-gcc</code> is a wrapper for the gcc compiler. It calls the <code>gcc</code> compiler for compilation on the one hand, and specifies <code>afl-as</code> instead of <code>as</code> for assembly. <code>afl-as</code> is also a package of <code>as</code>. It analyzes the assembly code and performs instrumentation on the one hand, and calls <code>as</code> to change the assembly code after instrumentation to machine code.</p>
-<p>If you can’t/don’t want to recompile the source code of the target program, AFL also supports a QEMU mode, an extension that leverages the QEMU “user emulation” mode and allows callers to obtain instrumentation output for black-box, closed-source binaries. This mechanism can be then used by afl-fuzz to stress-test targets that couldn’t be built with afl-gcc.</p>
+<p>If you can’t&#x2F;don’t want to recompile the source code of the target program, AFL also supports a QEMU mode, an extension that leverages the QEMU “user emulation” mode and allows callers to obtain instrumentation output for black-box, closed-source binaries. This mechanism can be then used by afl-fuzz to stress-test targets that couldn’t be built with afl-gcc.</p>
 <h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Download the <a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz" >latest version<i class="fas fa-external-link-alt"></i></a> of the source code (<a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/" >older releases<i class="fas fa-external-link-alt"></i></a>), extract it and do the usual:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make </span><br><span class="line">$ sudo make install </span><br></pre></td></tr></table></figure>
 
@@ -290,13 +292,13 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure CC=<span class="string">&quot;afl-gcc&quot;</span> CXX=<span class="string">&quot;afl-g++&quot;</span></span><br><span class="line"><span class="comment"># CC=&quot;afl-clang&quot; to use clang</span></span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
 <p>The following command will instruct the system to output coredumps as files instead of sending them to a specific crash handler app</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> core &gt; /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
-<p>Create an input folder to put ELF file, which AFL will use as a base template.<br>Create an output folder for fuzzer to store its state and all the generated samples that make the application crash or hang.<br>This time we give /bin/sh a chance.</p>
+<p>Create an input folder to put ELF file, which AFL will use as a base template.<br>Create an output folder for fuzzer to store its state and all the generated samples that make the application crash or hang.<br>This time we give &#x2F;bin&#x2F;sh a chance.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir afl_in afl_out</span><br><span class="line">$ cp /bin/sh afl_in/</span><br></pre></td></tr></table></figure>
 <p>Run the fuzzer</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -i afl_in -o afl_out ./binutils/objdump -d @@</span><br><span class="line"><span class="comment"># &#x27;-i&#x27; to choose input files&#x27; dir</span></span><br><span class="line"><span class="comment"># &#x27;-o&#x27; to choose output files&#x27; dir</span></span><br><span class="line"><span class="comment"># then the following should be usage of target elf file</span></span><br><span class="line"><span class="comment"># &#x27;@@&#x27; will be replaced by input files when running</span></span><br></pre></td></tr></table></figure>
 <p>And we see</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[+] All <span class="built_in">set</span> and ready to roll!</span><br><span class="line"></span><br><span class="line">                       american fuzzy lop 2.52b (objdump)</span><br><span class="line"></span><br><span class="line">┌─ process timing ─────────────────────────────────────┬─ overall results ─────┐</span><br><span class="line">│        run time : 0 days, 0 hrs, 0 min, 54 sec       │  cycles <span class="keyword">done</span> : 0      │</span><br><span class="line">│   last new path : 0 days, 0 hrs, 0 min, 24 sec       │  total paths : 40     │</span><br><span class="line">│ last uniq crash : none seen yet                      │ uniq crashes : 0      │</span><br><span class="line">│  last uniq hang : none seen yet                      │   uniq hangs : 0      │</span><br><span class="line">├─ cycle progress ────────────────────┬─ map coverage ─┴───────────────────────┤</span><br><span class="line">│  now processing : 0 (0.00%)         │    map density : 3.75% / 4.37%         │</span><br><span class="line">│ paths timed out : 0 (0.00%)         │ count coverage : 1.28 bits/tuple       │</span><br><span class="line">├─ stage progress ────────────────────┼─ findings <span class="keyword">in</span> depth ────────────────────┤</span><br><span class="line">│  now trying : bitflip 1/1           │ favored paths : 1 (2.50%)              │</span><br><span class="line">│ stage execs : 848/971k (0.09%)      │  new edges on : 31 (77.50%)            │</span><br><span class="line">│ total execs : 3048                  │ total crashes : 0 (0 unique)           │</span><br><span class="line">│  <span class="built_in">exec</span> speed : 12.54/sec (zzzz...)   │  total tmouts : 0 (0 unique)           │</span><br><span class="line">├─ fuzzing strategy yields ───────────┴───────────────┬─ path geometry ────────┤</span><br><span class="line">│   bit flips : 0/0, 0/0, 0/0                         │    levels : 2          │</span><br><span class="line">│  byte flips : 0/0, 0/0, 0/0                         │   pending : 40         │</span><br><span class="line">│ arithmetics : 0/0, 0/0, 0/0                         │  pend fav : 1          │</span><br><span class="line">│  known ints : 0/0, 0/0, 0/0                         │ own finds : 39         │</span><br><span class="line">│  dictionary : 0/0, 0/0, 0/0                         │  imported : n/a        │</span><br><span class="line">│       havoc : 0/0, 0/0                              │ stability : 100.00%    │</span><br><span class="line">│        trim : 0.00%/1879, n/a                       ├────────────────────────┘</span><br><span class="line">^C────────────────────────────────────────────────────┘          [cpu000: 53%]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In the afl_out/crashes folder you will find the files that made objdump crash, and you can run crash samples to see what happens.</p>
+<p>In the afl_out&#x2F;crashes folder you will find the files that made objdump crash, and you can run crash samples to see what happens.</p>
 <h3 id="Corpus-Distillation"><a href="#Corpus-Distillation" class="headerlink" title="Corpus Distillation"></a>Corpus Distillation</h3><p>After finding input samples, we have to trim them to make them efficient and smaller size.<br>AFL provides two utils for us to do so: <code>afl-cmin</code> and <code>afl-tmin</code>.</p>
 <p>(1) Remove files that executes same code – <code>afl-cmin</code></p>
 <p><code>afl-cmin</code> aims to find the smallest subset with the same coverage as the full corpus.<br>For example: Suppose there are multiple files that all cover the same code, then the extra files are discarded. </p>
@@ -366,6 +368,24 @@
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/fuzzing/">#fuzzing</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/afl/">#afl</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
             <div class="article-nav">
                 
                     <div class="article-prev">
@@ -418,14 +438,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -435,58 +457,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -545,43 +528,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-08-29 13:20:11
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-08-29 13:20:11</span>
+        <span class="mobile">2020-08-29 13:20</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -223,11 +225,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/got/">got</a>&nbsp;
+                        | <a href="/tags/uaf/">uaf</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/uaf/">uaf</a>&nbsp;
+                        | <a href="/tags/got/">got</a>&nbsp;
                     </li>
                 
             </ul>
@@ -303,7 +305,7 @@
 <p>The basic structure of <code>chunks</code> in heap is:</p>
 <table><thead><tr><th>Chunk </th><th>Content</th><th>Length</th></tr></thead><tbody><tr><td rowspan="6">Chunk 0</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td rowspan="3">Content 0<br>old fd</td><td rowspan="3">0x8 bytes</td></tr><tr></tr><tr></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td rowspan="6">Chunk 1</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td rowspan="3">Content 1<br>old fd</td><td rowspan="3">0x8 bytes</td></tr><tr></tr><tr></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td>Chunk 2</td><td>...</td><td>...</td></tr></tbody></table>
 
-<p>However after we write 8 bytes as content to old <code>fd</code>, there is still 8-byte old <code>bk</code> behind, let alone the <code>prev_size</code> and <code>size</code>.<br>We have to use <code>jmp</code> (2 bytes long) for linking shellcode pieces from the former chunk to the next (they are adjacent if allocated in order), and remember the 8th byte is set <code>0</code> by program, so it is about 1+8+8+8=25 bytes away:</p>
+<p>However after we write 8 bytes as content to old <code>fd</code>, there is still 8-byte old <code>bk</code> behind, let alone the <code>prev_size</code> and <code>size</code>.<br>We have to use <code>jmp</code> (2 bytes long) for linking shellcode pieces from the former chunk to the next (they are adjacent if allocated in order), and remember the 8th byte is set <code>0</code> by program, so it is about 1+8+8+8&#x3D;25 bytes away:</p>
 <table><thead><tr><th>Chunk </th><th>Content</th><th>Length</th></tr></thead><tbody><tr><td rowspan="6">Chunk 0</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td>0x5 bytes codes</td><td rowspan="3">0x8 bytes</td></tr><tr><td>0x2 bytes jmp</td></tr><tr><td>0x1 bytes "0"</td></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td rowspan="6">Chunk 1</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td>0x5 bytes codes</td><td rowspan="3">0x8 bytes</td></tr><tr><td>0x2 bytes jmp</td></tr><tr><td>0x1 bytes "0"</td></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td>Chunk 2</td><td>...</td><td>...</td></tr></tbody></table>
 
 <p>We use <code>jmp short xxx</code> to jump to a target address and the relation between them is: <code>xxx = target_addr - current_addr - 2</code> (calculated from existing cases), so here <code>xxx</code> should be <code>2+1+8+8+8-0-2=25=0x19</code> (<code>jmp short 0x19</code>).</p>
@@ -350,6 +352,40 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/heap/">#heap</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/uaf/">#uaf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/got/">#got</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -405,14 +441,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -422,58 +460,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -532,43 +531,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

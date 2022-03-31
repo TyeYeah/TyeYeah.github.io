@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2019-05-07 18:40:48
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-05-07 18:40:48</span>
+        <span class="mobile">2019-05-07 18:40</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -245,7 +247,7 @@
 <h3 id="port-and-process"><a href="#port-and-process" class="headerlink" title="port and process"></a>port and process</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># netstat used for port info</span></span><br><span class="line"><span class="comment"># ps used for process info</span></span><br><span class="line"><span class="comment"># lsof used for connection info between process and port</span></span><br><span class="line">$ netstat -antlp|more</span><br><span class="line">$ netstat -pantu|grep port</span><br><span class="line">$ ps aux[f]|grep pid</span><br><span class="line">$ ps -p port</span><br><span class="line">$ lsof [-i] |grep port</span><br><span class="line">$ lsof -i :port</span><br><span class="line">$ lsof -p pid</span><br><span class="line"></span><br><span class="line"><span class="comment"># ss used for port info</span></span><br><span class="line"><span class="comment"># fuser used for process info</span></span><br><span class="line">$ ss [-t] |grep port</span><br><span class="line">$ ss -pantul</span><br><span class="line">$ sudo apt install psmisc   <span class="comment"># install fuser</span></span><br><span class="line">$ sudo fuser -v port/protocol <span class="comment"># like 80/tcp</span></span><br></pre></td></tr></table></figure>
 <h3 id="startup-item-and-timed-tasks"><a href="#startup-item-and-timed-tasks" class="headerlink" title="startup item and timed tasks"></a>startup item and timed tasks</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ more /etc/rc.local</span><br><span class="line">$ more /etc/rc.d/rc[0~6].d</span><br><span class="line"></span><br><span class="line">$ crontab -l 	<span class="comment"># list cron services</span></span><br><span class="line">$ crontab -e 	<span class="comment"># edit</span></span><br><span class="line">$ crontab -r 	<span class="comment"># remove</span></span><br><span class="line">/var/spool/cron/user 	default crontab filedir</span><br><span class="line"></span><br><span class="line">suspicious <span class="built_in">dirs</span>:</span><br><span class="line">/var/spool/cron/* </span><br><span class="line">/etc/crontab</span><br><span class="line">/etc/cron.d/*</span><br><span class="line">/etc/cron.daily/* </span><br><span class="line">/etc/cron.hourly/* </span><br><span class="line">/etc/cron.monthly/*</span><br><span class="line">/etc/cron.weekly/</span><br><span class="line">/etc/anacrontab</span><br><span class="line">/var/spool/anacron/*</span><br><span class="line"></span><br><span class="line">used to be:</span><br><span class="line">$ chkconfig --list</span><br><span class="line">$ chkconfig –-level  2345 httpd on/off</span><br><span class="line">now is:</span><br><span class="line">$ systemctl list-unit-files</span><br><span class="line">$ systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">$ systemctl <span class="built_in">disable</span> httpd</span><br></pre></td></tr></table></figure>
 <h3 id="log-check"><a href="#log-check" class="headerlink" title="log check"></a>log check</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># locate IP which brute force root password:     </span></span><br><span class="line">$ journalctl -xa|grep <span class="string">&quot;Failed password for root&quot;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | sort | uniq -c | sort -nr | more</span><br><span class="line">​</span><br><span class="line"><span class="comment"># similar to above:</span></span><br><span class="line">$ journalctl -xa|grep <span class="string">&quot;Failed password&quot;</span>|grep -E -o <span class="string">&quot;(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;</span>|uniq -c</span><br><span class="line">​</span><br><span class="line"><span class="comment"># brute force password dict is:</span></span><br><span class="line">$ grep <span class="string">&quot;Failed password&quot;</span> /var/<span class="built_in">log</span>/secure|perl -e <span class="string">&#x27;while($_=&lt;&gt;)&#123; /for(.*?) from/; print &quot;$1\n&quot;;&#125;&#x27;</span>|uniq -c|sort -nr</span><br><span class="line"> </span><br><span class="line"><span class="comment"># success logins IP:   </span></span><br><span class="line">$ grep <span class="string">&quot;Accepted &quot;</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | sort | uniq -c | sort -nr | more</span><br><span class="line">​</span><br><span class="line"><span class="comment"># similar to above:</span></span><br><span class="line">$ grep <span class="string">&quot;Accepted &quot;</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">&#x27;&#123;print $1,$2,$3,$9,$11&#125;&#x27;</span> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>and as you can see, both /var/log/auth.log(replace the /vat/log/secure) and the command “journalctl -xa”, can be used to check logs</p>
+<p>and as you can see, both &#x2F;var&#x2F;log&#x2F;auth.log(replace the &#x2F;vat&#x2F;log&#x2F;secure) and the command “journalctl -xa”, can be used to check logs</p>
 <ul>
 <li>add user log e.g.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Jul 10 00:12:15 localhost useradd[2382]: new group: name=user, GID=1001</span><br><span class="line">Jul 10 00:12:15 localhost useradd[2382]: new user: name=user, UID=1001, GID=1001, home=/home/user</span><br><span class="line">, shell=/bin/bash</span><br><span class="line">Jul 10 00:12:58 localhost passwd: pam_unix(passwd:chauthtok): password changed <span class="keyword">for</span> user</span><br><span class="line"><span class="comment">#grep &quot;useradd&quot; /var/log/auth.log</span></span><br><span class="line">​```</span><br><span class="line">- delete user <span class="built_in">log</span> e.g.</span><br><span class="line">```bash</span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: delete user <span class="string">&#x27;user&#x27;</span></span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: removed group <span class="string">&#x27;user&#x27;</span> owned by <span class="string">&#x27;user&#x27;</span></span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: removed shadow group <span class="string">&#x27;user&#x27;</span> owned by <span class="string">&#x27;user&#x27;</span></span><br><span class="line"><span class="comment"># grep &quot;userdel&quot; /var/log/auth.log</span></span><br><span class="line">​```</span><br><span class="line">- su switch user <span class="built_in">log</span> e.g.</span><br><span class="line">```bash</span><br><span class="line">Jul 10 00:38:13 localhost su: pam_unix(su-l:session): session opened <span class="keyword">for</span> user good by root(uid=0)</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -254,15 +256,15 @@
 <h3 id="Commands-Summary"><a href="#Commands-Summary" class="headerlink" title="Commands Summary"></a>Commands Summary</h3><h2 id="Files-Recovery"><a href="#Files-Recovery" class="headerlink" title="Files Recovery"></a>Files Recovery</h2><p>if an important file were deleted, while a process which opens this file is alive, this process can still be read or written through it’s file descriptor.</p>
 <p>e.g.</p>
 <ul>
-<li><p>see /var/log/secure, only to find it was deleted<br><img src="/imghost/lsr/1.jpg" alt="pic 1"></p>
+<li><p>see &#x2F;var&#x2F;log&#x2F;secure, only to find it was deleted<br><img src="/imghost/lsr/1.jpg" alt="pic 1"></p>
 </li>
 <li><p>use “lsof” to see process that opens it<br><img src="/imghost/lsr/2.jpg" alt="pic 2"></p>
 </li>
-<li><p>as we can see, pid is 1264, and fd (file descriptor) is 4. so we can find info in /proc/1264/fd/4<br><img src="/imghost/lsr/3.jpg" alt="pic 3"></p>
+<li><p>as we can see, pid is 1264, and fd (file descriptor) is 4. so we can find info in &#x2F;proc&#x2F;1264&#x2F;fd&#x2F;4<br><img src="/imghost/lsr/3.jpg" alt="pic 3"></p>
 </li>
-<li><p>use I/O redirection to redirect it to file<br><img src="/imghost/lsr/4.jpg" alt="pic 4"></p>
+<li><p>use I&#x2F;O redirection to redirect it to file<br><img src="/imghost/lsr/4.jpg" alt="pic 4"></p>
 </li>
-<li><p>see /var/log/secure, and now we recovered the deleted file<br><img src="/imghost/lsr/5.jpg" alt="pic 5"></p>
+<li><p>see &#x2F;var&#x2F;log&#x2F;secure, and now we recovered the deleted file<br><img src="/imghost/lsr/5.jpg" alt="pic 5"></p>
 </li>
 </ul>
 <h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>The <code>ext3grep</code> is to recovery file deleted by <code>rm - rf</code> on <code>ext3</code> disk.<br>First <code>unmount</code> that disk to stop writting, and then install <code>ext3grep</code>. You can find it in <code>apt</code> repo, or compile <a class="link"   target="_blank" rel="noopener" href="https://code.google.com/archive/p/ext3grep/downloads" >it<i class="fas fa-external-link-alt"></i></a> on your own.</p>
@@ -321,6 +323,20 @@ Use <code>getfacl</code> to see things about ACL (Access Control List)</li>
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/security-response/">#security-response</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
             <div class="article-nav">
                 
                     <div class="article-prev">
@@ -373,14 +389,16 @@ Use <code>getfacl</code> to see things about ACL (Access Control List)</li>
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -390,58 +408,19 @@ Use <code>getfacl</code> to see things about ACL (Access Control List)</li>
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -500,43 +479,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

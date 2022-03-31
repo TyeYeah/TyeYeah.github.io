@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-03-15 21:25:58
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-03-15 21:25:58</span>
+        <span class="mobile">2020-03-15 21:25</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -262,7 +264,7 @@
 <ul>
 <li>Attacker pc</li>
 <li>VPS with public ip</li>
-<li>Target/Victim pc </li>
+<li>Target&#x2F;Victim pc</li>
 </ul>
 <p>The situation is, VPS is allowd to connect target while attacker isn’t.</p>
 <p>If attacker want to connect target’s 3389 to use rdp, on attacker pc we do</p>
@@ -279,8 +281,8 @@
 <ul>
 <li>Attacker pc</li>
 <li>VPS with public ip</li>
-<li>Target/Victim pc 1, allow internet</li>
-<li>Target/Victim pc 2, disallow internet</li>
+<li>Target&#x2F;Victim pc 1, allow internet</li>
+<li>Target&#x2F;Victim pc 2, disallow internet</li>
 </ul>
 <p>The situation is, only victim 1 is allowed to connect victim 2, and victim 1 can be controlled through internet.</p>
 <p>If attacker want to connect victim 2, on victim 1 (controlled) we do</p>
@@ -295,7 +297,7 @@
 <p>note: it default listens on <code>127.0.0.1</code> rather than <code>0.0.0.0</code>, so we use <code>rinetd</code> to do local port forwarding</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ apt install rinetd -y</span><br><span class="line">$ vim /etc/rinetd.conf <span class="comment"># add policy </span></span><br><span class="line">...</span><br><span class="line">0.0.0.0 3389 127.0.0.1 33389 <span class="comment"># forwarding policy</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ service rinetd start <span class="comment"># start service</span></span><br><span class="line">$ netstat -an |egrep <span class="string">&quot;3389|33389&quot;</span> <span class="comment"># check listening status </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="Dynamic-Forwarding"><a href="#Dynamic-Forwarding" class="headerlink" title="Dynamic Forwarding"></a>Dynamic Forwarding</h3><p>It is exactly building a <code>SSH</code> encrypted socks4/5 proxy tunnel. </p>
+<h3 id="Dynamic-Forwarding"><a href="#Dynamic-Forwarding" class="headerlink" title="Dynamic Forwarding"></a>Dynamic Forwarding</h3><p>It is exactly building a <code>SSH</code> encrypted socks4&#x2F;5 proxy tunnel. </p>
 <p>If we are in the same situation as Local Forwarding part gives, but attackers have no information or no target ports of victims, a proxy is needed for infomation gathering.</p>
 <p>On attacker pc, we build a ssh tunnel to VPS</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -C -f -N -g -D listen_port user@Tunnel_Host</span><br><span class="line"><span class="comment"># forward localhost:listen_port to ssh VPS</span></span><br><span class="line"><span class="comment"># no ports specified</span></span><br><span class="line"><span class="comment"># just set up a proxy (part of local forwarding)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ ssh -C -f -N -g -D 10080 user@VPS_ip -p 22 </span><br><span class="line"><span class="comment"># listen 127.0.0.1</span></span><br><span class="line">$ ssh -C -f -N -g -D 0.0.0.0:10080 user@VPS_ip -p 22 </span><br><span class="line"><span class="comment"># listen 0.0.0.0</span></span><br></pre></td></tr></table></figure>
@@ -357,7 +359,7 @@ Now we use client to control server.</li>
 <ul>
 <li>Attacker pc</li>
 <li>VPS with public ip</li>
-<li>Target/Victim pc in intranet</li>
+<li>Target&#x2F;Victim pc in intranet</li>
 </ul>
 <p>Still VPS is allowd to connect target while attacker isn’t.</p>
 <p>On controlled victim pc in intranet</p>
@@ -369,7 +371,7 @@ Now we use client to control server.</li>
 <p>Finally on attacker pc</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mstsc /v:VPS_ip:connect_port</span><br></pre></td></tr></table></figure>
 
-<h2 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h2><p>Which is called EW/ew as well, EarthWorm is capable for SOCKS v5 service setup and port forwarding.<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=ew&type=" >Search ew on Github<i class="fas fa-external-link-alt"></i></a> to get download.</p>
+<h2 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h2><p>Which is called EW&#x2F;ew as well, EarthWorm is capable for SOCKS v5 service setup and port forwarding.<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=ew&type=" >Search ew on Github<i class="fas fa-external-link-alt"></i></a> to get download.</p>
 <p>The newest edition is <a class="link"   target="_blank" rel="noopener" href="https://github.com/rootkiter/Termite" >Termite on Github<i class="fas fa-external-link-alt"></i></a> (<a class="link"   target="_blank" rel="noopener" href="http://rootkiter.com/Termite/" >Official Site Here<i class="fas fa-external-link-alt"></i></a>)</p>
 <h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>EarthWorm has 6 command formats （ssocksd、rcsocks、rssocks、lcx_slave、lcx_listen、lcx_tran）.</p>
 <p>socks type tunnel:</p>
@@ -461,6 +463,24 @@ lcx_listen -- like lcx -listen
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/pentest/">#pentest</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
             <div class="article-nav">
                 
                     <div class="article-prev">
@@ -513,14 +533,16 @@ lcx_listen -- like lcx -listen
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -530,58 +552,19 @@ lcx_listen -- like lcx -listen
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -640,43 +623,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

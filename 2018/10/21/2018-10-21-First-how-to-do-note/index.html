@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2018-10-21 22:04:22
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2018-10-21 22:04:22</span>
+        <span class="mobile">2018-10-21 22:04</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -276,14 +278,14 @@ $ hexo s -g
 <h3 id="GitHub-Part"><a href="#GitHub-Part" class="headerlink" title="GitHub Part"></a>GitHub Part</h3><ol>
 <li><p>first you need a <code>github</code> account</p>
 </li>
-<li><p>then create a repository named : <code>xxx.github.io</code> (xxx =&gt; <code>github</code> username)</p>
+<li><p>then create a repository named : <code>xxx.github.io</code> (xxx &#x3D;&gt; <code>github</code> username)</p>
 </li>
 <li><p>configure your ssh public-key to login <code>github</code> without password (necessary for windows git)</p>
 </li>
 </ol>
 <ul>
 <li>configure git’s username &amp; email (ensure your updates show on the wall)<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;your GitHub username&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;your GitHub mailaddress&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li>check out whether you have public/private keys<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure></li>
+<li>check out whether you have public&#x2F;private keys<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure></li>
 <li>if you can see <code>xxx</code> and <code>xxx.pub</code>, it means u got a keypair</li>
 <li>if not, generate by yourself<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;xx@xx.com&quot;</span></span><br><span class="line"><span class="comment"># &#x27;-t&#x27; have encryption method followed, and &#x27;rsa&#x27; can be replaced</span></span><br><span class="line"><span class="comment"># no need to bother other args </span></span><br></pre></td></tr></table></figure></li>
 <li>type some password once, and you have a keypair now</li>
@@ -293,11 +295,11 @@ $ hexo s -g
 <li>configure hexo</li>
 </ol>
 <ul>
-<li>   in _config.yml (xxx=&gt;<code>github</code> username):<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if only deploy to one repo</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line"><span class="comment"># deploy to two or more repos</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: </span><br><span class="line">    github: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    gitlab: git@gitlab.com:xxx/xxx.gitlab.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure></li>
-<li>   install plugin<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># $ npm install hexo-generator-search  --save</span></span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure></li>
-<li>   deploy blog on github<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure></li>
-<li>  sticky post<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &#x27;top: true&#x27; in &#x27;Front-matter&#x27; to use it</span><br></pre></td></tr></table></figure>
-<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3>Replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> //maybe not necessary</li>
+<li>in _config.yml (xxx&#x3D;&gt;<code>github</code> username):<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if only deploy to one repo</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line"><span class="comment"># deploy to two or more repos</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: </span><br><span class="line">    github: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    gitlab: git@gitlab.com:xxx/xxx.gitlab.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure></li>
+<li>install plugin<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># $ npm install hexo-generator-search  --save</span></span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure></li>
+<li>deploy blog on github<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure></li>
+<li>sticky post<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &#x27;top: true&#x27; in &#x27;Front-matter&#x27; to use it</span><br></pre></td></tr></table></figure>
+<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3>Replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> &#x2F;&#x2F;maybe not necessary</li>
 </ul>
 <p>When using <code>{something...}</code>, add {% raw %} at the front and {% endraw %} as the tail,and finally it looks like <code>{% raw %}{something...}{% endraw %}</code>in your text to escape <code>&#123;</code> and<code>&#125;</code><br>but in the code block sorrounded by three `, you can input whatever u want.</p>
 <p>As for multiple tags in hexo articles writing, use tags:[tag1, tag2, …]</p>
@@ -305,6 +307,32 @@ $ hexo s -g
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/note/">#note</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/hexo/">#hexo</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/docker/">#docker</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/github/">#github</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -329,10 +357,10 @@ $ hexo s -g
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2018/10/01/2018-09-31-Resource-Lists/"
+                           href="/2018/10/01/2018-09-31-IoT-Resources/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Resource Lists</span>
+                                <span class="post-nav-title-item">IoT Resources</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -360,14 +388,16 @@ $ hexo s -g
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -377,58 +407,19 @@ $ hexo s -g
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -487,43 +478,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

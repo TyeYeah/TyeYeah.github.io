@@ -197,7 +197,10 @@ KEEP.initUtils = () => {
       const innerHeight = window.innerHeight;
       const pb_dom = document.querySelector('.page-main-content-bottom');
       if (allDomHeight < innerHeight) {
-        pb_dom.style.marginTop = (innerHeight - allDomHeight) + 'px';
+        const marginTopValue = Math.floor(innerHeight - allDomHeight);
+        if (marginTopValue > 0) {
+          pb_dom.style.marginTop = `${marginTopValue - 2}px`;
+        }
       }
     },
 
@@ -242,10 +245,7 @@ KEEP.initUtils = () => {
     },
 
     getHowLongAgo(timestamp) {
-
-      let l = KEEP.language_ago;
-
-      timestamp /= 1000;
+      const l = KEEP.language_ago;
 
       const __Y = Math.floor(timestamp / (60 * 60 * 24 * 30) / 12);
       const __M = Math.floor(timestamp / (60 * 60 * 24 * 30));
@@ -281,8 +281,10 @@ KEEP.initUtils = () => {
     setHowLongAgoInHome() {
       const post = document.querySelectorAll('.home-article-meta-info .home-article-date');
       post && post.forEach(v => {
-        v.innerHTML = this.getHowLongAgo(Date.now() - new Date(v.dataset.date).getTime())
-      })
+        const nowDate = Date.now();
+        const postDate = new Date(v.dataset.date.split(' GMT')[0]).getTime();
+        v.innerHTML = this.getHowLongAgo(Math.floor((nowDate - postDate) / 1000));
+      });
     },
 
     // loading progress bar start
