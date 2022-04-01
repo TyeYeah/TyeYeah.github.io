@@ -274,6 +274,7 @@
 </table>
 <p>Propose to learn the cross-architecture instruction embedding through a <em><strong>joint learning</strong></em> approach, utilizes both the <strong>context concurrence information</strong> present in the instruction sequences from the same architecture, and the <strong>semantically-equivalent signals</strong> exhibited in the instruction sequence pairs from different architectures. </p>
 <p>By jointly learning these two types of information, can achieve both the mono-architecture and cross-architecture objectives, and generate high-quality cross-architecture instruction embeddings that capture not only the semantics of instructions within an architecture, but also their semantic relationships across architectures. as a showcase, apply the model to resolving semantics-based basic block similarity comparison.</p>
+<p><img src="/./imghost/bcsdp/across.png" alt="A cross-architecture instruction embedding model"></p>
 <p><em><strong>System Overview</strong></em>:<br>The approach consists of a <em><strong>mono-architecture</strong></em> component and a <em><strong>multi-architecture</strong></em> component.</p>
 <ul>
 <li>The <em><strong>mono-architecture</strong></em> component utilizes the <em>context concurrence information</em> present in the input instruction sequences from the same architecture;<br>(an instruction sequence here means a basic block)<br>  <em>CBOW</em> model (<em>word2vec</em>) is adopted due to better performance than <em>skip-gram</em>, predicts current <em>instruction</em> based on its context.</li>
@@ -300,6 +301,7 @@
 </table>
 <p>First to employ representation learning, develop Asm2Vec for assembly code syntax and control flow graph, and is is more resilient to code obfuscation and compiler optimizations.</p>
 <p>Asm2Vec uses PV-DM neural network (an extension of word2vec), models the control flow grapg as multiple sequences, treats <em>opcodes(operations)</em> and <em>oprands</em> as tokens.</p>
+<p><img src="/./imghost/bcsdp/asm2vec.png" alt="The proposed Asm2Vec neural network model for assembly code"></p>
 <h2 id="Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection"><a href="#Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection" class="headerlink" title="Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection"></a>Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection</h2><table>
 <thead>
 <tr>
@@ -313,6 +315,7 @@
 </table>
 <p>Propose a deep learning-based AST-encoding method, leveraging <em>Tree-LSTM</em> network.</p>
 <p>Given a binary, first extract ASTs by decompiling its functions, then preprocess ASTs and encode them into representation vectors using <em>Tree-LSTM</em>, finally combine them as <em>Siamese Network</em> and calculate similarity score.</p>
+<p><img src="/./imghost/bcsdp/asteria1.png" alt="System Overview"><br><img src="/./imghost/bcsdp/asteria2.png" alt="Similarity Calculation"></p>
 <h2 id="CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching"><a href="#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching" class="headerlink" title="CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching"></a>CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching</h2><table>
 <thead>
 <tr>
@@ -325,6 +328,7 @@
 </thead>
 </table>
 <p>Propose an end-to-end cross-model retrieval network for binary source code matching, adopt <em>Deep Pyramid Convolutional Neural Network (DPCNN)</em> for source code feature extraction and <em>Graph Neural Network (GNN)</em> for binary code feature extraction, use neural network-based models to capture code literals, including strings and integers, implement “norm weighted sampling” for negative sampling.</p>
+<p><img src="/./imghost/bcsdp/codecmr1.png" alt="The overall framework of CodeCMR"><br><img src="/./imghost/bcsdp/codecmr2.png" alt="Models for embedding"></p>
 <h2 id="Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search"><a href="#Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search" class="headerlink" title="Codee: A Tensor Embedding Scheme for Binary Code Search"></a>Codee: A Tensor Embedding Scheme for Binary Code Search</h2><table>
 <thead>
 <tr>
@@ -338,11 +342,12 @@
 </table>
 <p>Focus on cross-platform and cross-optimization.</p>
 <ol>
-<li>modify a skip-gram model with negative sampling to extract <strong>token (opcodes and oprands) representation</strong>.<br>analyze instructions in <em>inter-procedural control flow graph (ICFG)</em>, and use <em>Node2vecWalk</em> to scale the processing time, cz ICFG is much larger than CFG.</li>
+<li>modify a skip-gram model with negative sampling to extract <strong>token (opcodes and oprands) representation</strong>.<br><img src="/./imghost/bcsdp/codee3.png" alt="Overview of the token embedding generation scheme"><br>analyze instructions in <em>inter-procedural control flow graph (ICFG)</em>, and use <em>Node2vecWalk</em> to scale the processing time, cz ICFG is much larger than CFG.</li>
 <li><strong>basic block embedding</strong> generation is based on 2 network embedding algorithms – <em>AANE</em>, <em>LINE</em>.<br>feed basic block feature vectors and function control flow contextual information, design loss function and use ADMM algorithm.</li>
-<li>feed <strong>block embeddings</strong> into tensor to generate <strong>function embeddings</strong>.<br>to facilitate efficient search, use <em>tensor singular value decomposition althorithm (tSVD)</em> to compress <strong>basic block embeddings</strong> into a compact function embedding, and use <em>locality sensitive hash (LSH)</em> to search.<br>If two vectors have the most same values, consider these two vectors to be similar.</li>
+<li>feed <strong>block embeddings</strong> into tensor to generate <strong>function embeddings</strong>.<br>to facilitate efficient search, use <em>tensor singular value decomposition althorithm (tSVD)</em> to compress <strong>basic block embeddings</strong> into a compact function embedding, and use <em>locality sensitive hash (LSH)</em> to search.<br><img src="/./imghost/bcsdp/codee2.png" alt="Function embedding generation process using tSVD algorithm"><br>If two vectors have the most same values, consider these two vectors to be similar.</li>
 </ol>
-<p>Tooo much formulas.</p>
+<p>Tooo much formulas, finally the overview:</p>
+<p><img src="/./imghost/bcsdp/codee1.png" alt="Overview of the tensor embedding-based scheme"></p>
 <h2 id="DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing"><a href="#DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing" class="headerlink" title="DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing"></a>DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing</h2><table>
 <thead>
 <tr>
@@ -374,6 +379,7 @@
 <li>finally present a k-hop greedy matching algorithm to match basic blocks.<br> explore neighbors of already matched pairs (or initial pairs&#x2F;set), add basic blocks (nodes) having highest similarity with a threshold of 0.6.<br> then use Hungarian algorithm (linear alignment) to find optimal matching.</li>
 </ol>
 <p>It could be extended to handle cross-architecture using IR …</p>
+<p><img src="/./imghost/bcsdp/deepbindiff.png" alt="Overview of DEEPBINDIFF"></p>
 <h2 id="How-could-Neural-Networks-understand-Programs"><a href="#How-could-Neural-Networks-understand-Programs" class="headerlink" title="How could Neural Networks understand Programs?"></a>How could Neural Networks understand Programs?</h2><table>
 <thead>
 <tr>
@@ -391,6 +397,7 @@
 <li>the <strong>information of environment transition</strong>, which is indispensable for program understanding.</li>
 </ol>
 <p>Present a hierarchical Transformer-based pre-training model called <strong>OSCAR</strong>, learns from IR and encoded representation derived from static analysis.</p>
+<p><img src="/./imghost/bcsdp/howcould.png" alt="An illustration of the model architecture of OSCAR"></p>
 <p>hard for me to understand … to be continued …</p>
 <h2 id="Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities"><a href="#Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities" class="headerlink" title="Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities"></a>Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities</h2><table>
 <thead>
@@ -416,6 +423,7 @@
 </li>
 </ol>
 <p>The analyses use the extracted static and dynamic features of <em>vulnerable</em> and <em>patched</em> functions, comparing similarity between them respectively, to identify whether the candidate vulnerability function has been patched.</p>
+<p><img src="/./imghost/bcsdp/hybrid.png" alt="PATCHECKO vulnerability and patch search workflow"></p>
 <h2 id="In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-–-ASE-2017"><a href="#In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-–-ASE-2017" class="headerlink" title="In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017"></a>In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017</h2><table>
 <thead>
 <tr>
@@ -454,6 +462,7 @@
 <li><p>machine learning module<br>  for a given <code>f1</code> in <code>bin1</code>, find its matched function(<code>f2</code>) in <code>bin2</code><br>  tree-based model (e.g. Extra-Trees)</p>
 </li>
 </ul>
+<p><img src="/./imghost/bcsdp/inmemory.png" alt="The workflow of IMF-SIM"></p>
 <h2 id="Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs"><a href="#Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs" class="headerlink" title="Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs"></a>Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</h2><table>
 <thead>
 <tr>
@@ -478,6 +487,7 @@
 <li>CFG paths: use <em>LCS</em> to compare paths’ semantic similarity</li>
 <li>code components: explore multiple path pairs to collectively calculate a similarity score</li>
 </ul>
+<p><img src="/./imghost/bcsdp/neuralmachine.png" alt="System architecture"></p>
 <p>rich in evaluation and experiments, to be continued …</p>
 <h2 id="Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection"><a href="#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection" class="headerlink" title="Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection"></a>Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection</h2><table>
 <thead>
@@ -491,6 +501,7 @@
 </thead>
 </table>
 <p>Propose <em><strong>Gemini</strong></em>, statistical (manually selected) features as basic block representation to buile ACFG for each function, use struc2vec (graph embedding) to combine a Siamese architecture (calculating similarity).</p>
+<p><img src="/./imghost/bcsdp/neuralnetwork2.png" alt="An example of a code graph on Function `dtls1_process_heartbeat` (Heartbleed vulnerability)"><br><img src="/./imghost/bcsdp/neuralnetwork1.png" alt="Graph Embedding Network"><br><img src="/./imghost/bcsdp/neuralnetwork3.png" alt="Siamese Architecture"></p>
 <h2 id="Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection"><a href="#Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection" class="headerlink" title="Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection"></a>Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection</h2><table>
 <thead>
 <tr>
@@ -503,9 +514,12 @@
 </thead>
 </table>
 <p>Propose an overall framework with three components: <strong>semantic-aware modeling</strong>, <strong>structural-aware modeling</strong>, and <strong>order-aware modeling</strong>.</p>
+<p><img src="/./imghost/bcsdp/order1.png" alt="Overall structure of our model"></p>
 <p>Semantic-aware Modeling:<br>    - propose a <em>BERT</em> pretraining model with 4 tasks for dealing with CFGs<br>    - have one <em>token-level</em> task(<strong>Masked language model, MLM</strong>), one <em>block-level</em> task(<strong>Adjacency node prediction, ANP</strong>) and two <em>graph-level</em> tasks(<strong>block inside graph task, BIG</strong>, and <strong>graph classification task, GC</strong>).<br>    the inputs are block-level, dont know the seperator between instruction.</p>
+<p><img src="/./imghost/bcsdp/order2.png" alt="Bert with 4 tasks: MLM, ANP, BIG and GC"></p>
 <p>Structural-aware Modeling:<br>    - use <em>MPNN</em> (message passing neural network) to compute <strong>graph semantic &amp; structural embedding</strong> of each CFG</p>
 <p>Order-aware Modeling:<br>    - use CNN<br>    - use a 11-layer <em>Resnet</em> with 3 residual blocks.<br>    - use a global max pooling layer (last layer) to compute the <strong>graph order embedding</strong>.</p>
+<p><img src="/./imghost/bcsdp/order3.png" alt="Example graphs and their adjacency matrices"></p>
 <h2 id="PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding"><a href="#PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding" class="headerlink" title="PalmTree: Learning an Assembly Language Model for Instruction Embedding"></a>PalmTree: Learning an Assembly Language Model for Instruction Embedding</h2><table>
 <thead>
 <tr>
@@ -518,6 +532,7 @@
 </thead>
 </table>
 <p>Propose PalmTree model, Modify <em>BERT</em>, create <strong>(x86) assembly tokenization method</strong>, design <strong>Masked Language Model (MLM)</strong>, <strong>Context Window Prediction (CWP)</strong> and <strong>Figure 5: Def-Use Prediction (DUP)</strong>.<br>Try downstream tasks about <em>Binary code similarity detection</em>, <em>Function type signature analysis</em>, and <em>Value set analysis</em>.</p>
+<p><img src="/./imghost/bcsdp/palmtree.png" alt="System design of PalmTree"></p>
 <h2 id="Patch-Based-Vulnerability-Matching-for-Binary-Programs"><a href="#Patch-Based-Vulnerability-Matching-for-Binary-Programs" class="headerlink" title="Patch Based Vulnerability Matching for Binary Programs"></a>Patch Based Vulnerability Matching for Binary Programs</h2><table>
 <thead>
 <tr>
@@ -539,6 +554,7 @@
 </li>
 <li>patch presence identification<br> compare <strong>target</strong> func with <strong>vulnerable</strong> func and <strong>patched</strong> func and check which one is closer.</li>
 </ol>
+<p><img src="/./imghost/bcsdp/patchbased.png" alt="Overview of BinXray"></p>
 <h2 id="SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity"><a href="#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity" class="headerlink" title="SAFE: Self-Attentive Function Embeddings for Binary Similarity"></a>SAFE: Self-Attentive Function Embeddings for Binary Similarity</h2><table>
 <thead>
 <tr>
@@ -555,6 +571,8 @@
 <li>Assembly instruction embedding (i2v)</li>
 <li>Self-attention neural network (GRU RNN)</li>
 </ol>
+<p><img src="/./imghost/bcsdp/safe1.png" alt="Architecture of SAFE"></p>
+<p>Self-Attentive Network: detailed architecture<br><img src="/./imghost/bcsdp/safe2.png" alt="Self-Attentive Network: detailed architecture"><br><img src="/./imghost/bcsdp/safe3.png" alt="Siamese network"></p>
 <h2 id="Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture"><a href="#Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture" class="headerlink" title="Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture"></a>Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture</h2><table>
 <thead>
 <tr>
@@ -568,6 +586,9 @@
 </table>
 <p>Propose a cross-ISA oriented solution for basic block embedding, specify <em>x86</em> and <em>ARM</em> for the sake of description.<br>The <em>NMT</em> model used is not limited to <em>Transformer</em> only, but any <em>NMT</em> models of <em>seq2seq</em> architecture.</p>
 <p>To map <em>x86</em> and <em>ARM</em> basic blocks into same embedding vector space, first train an <em>NMT</em> model which translates <em>x86</em> basic blocks into the corresponding ARM basic blocks. </p>
+<p><img src="/./imghost/bcsdp/similaritymetric1.png" alt="The idealized solution of the embedding neural network"></p>
+<p>However the idealized model is almost impossible in practice, therefore futher fine-tune.</p>
+<p><img src="/./imghost/bcsdp/similaritymetric2.png" alt="Illustration of the two training phases of the practical solution"></p>
 <ul>
 <li>The encoder of the trained <em>NMT</em> model is served as <strong>x86-encoder</strong>.</li>
 <li>Then fix the <strong>x86-encoder</strong> and train an <strong>ARM-encoder</strong> to map <em>ARM</em> basic blocks close to the <strong>same vector space</strong> of x86 basic block embeddings.</li>
@@ -585,6 +606,7 @@
 </thead>
 </table>
 <p>Propose a scalable binary-level patch analysis framework, named <strong>SPAIN</strong>, which can automatically identify security patches and summarize patch patterns and their corresponding vulnerability patterns. </p>
+<p><img src="/./imghost/bcsdp/spain1.png" alt="Framework Overview of SPAIN"></p>
 <p>Specifically, given the original and patched versions of a binary program, </p>
 <ol>
 <li>we <strong>locate the patched functions and identify the changed traces</strong> (i.e., a sequence of basic blocks) that may contain security or non-security patches. <ul>
@@ -592,11 +614,17 @@
 <li>Function Filtering: remove function with no changes to reduce analysis size, merge blocks with single successor&#x2F;predecessor and normalize basic blocks</li>
 </ul>
 </li>
+</ol>
+<p><img src="/./imghost/bcsdp/spain2.png" alt="An Example of the Original and Patched Functions"></p>
+<ol start="2">
 <li>Then we <strong>identify security patches</strong> through a semantic analysis of these traces and <em>summarize the patterns</em> through a taint analysis on the patched functions. <ul>
 <li>identify by pairwise basic block matching</li>
 <li>if a bb is not matched in another func, it is patched</li>
 </ul>
 </li>
+</ol>
+<p><img src="/./imghost/bcsdp/spain3.png" alt="Abstract Vulnerability and Security Patch Pattern"></p>
+<ol start="3">
 <li>The summarized patterns can be used to <strong>search similar patches or vulnerabilities</strong> in binary programs.<ul>
 <li>perform a semantic analysis on both the <strong>patched partial trace</strong> and the set of <strong>original partial traces</strong></li>
 <li>see whether it’s security related</li>
@@ -615,6 +643,7 @@
 </thead>
 </table>
 <p>TREX (TRansfer-learning EXecution semantics)<br>use pre-train model (hierarchical Transformer) to learn dynamic micro-trace (including sequences of executed instruction), then get execution semantics.</p>
+<p><img src="/./imghost/bcsdp/trex1.png" alt="The workflow of TREX"></p>
 <p>inputs to Transformer include 5 kinds of token sequence with same length:</p>
 <ol>
 <li>micro-trace code sequence (only opcode)</li>
@@ -623,6 +652,7 @@
 <li>Architecture sequence</li>
 <li>Encoding numeric values (using bi-LSTM to reduce vocabulary size, processing micro-trace value sequence)</li>
 </ol>
+<p><img src="/./imghost/bcsdp/trex2.png" alt="Model architecture with input-output example"></p>
 <h2 id="VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature"><a href="#VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature" class="headerlink" title="VIVA: Binary Level Vulnerability Identification via Partial Signature"></a>VIVA: Binary Level Vulnerability Identification via Partial Signature</h2><table>
 <thead>
 <tr>
@@ -635,6 +665,7 @@
 </thead>
 </table>
 <p>Propose <em><strong>VIVA</strong></em>, a <em>binary level</em> <em>vulnerability and patch</em> semantic summarization and matching tool for accurate recurring vulnerability detection.</p>
+<p><img src="/./imghost/bcsdp/viva.png" alt="Overview of VIVA"></p>
 <p>Use novel <strong>binary program slicing techniques</strong> with the aid of <strong>pseudo-code trace refinement</strong> to generate <strong>partial vulnerability and patch signatures</strong>, which capture the semantics.<br>It matches the signatures between <strong>partial program traces</strong> (instead of <strong>binary functions</strong>) with <strong>pre-filtering</strong> to efficiently detect 1-day and recurring vulnerabilities.</p>
 <p>signatures and traces are also instruction sequences.</p>
 <h2 id="VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary"><a href="#VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary" class="headerlink" title="VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary"></a>VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary</h2><table>
@@ -649,6 +680,7 @@
 </thead>
 </table>
 <p>Improve Gemini, using <em>LSFG</em>(<em>CFG</em> + <em>DFG</em>) to replace <em>ACFG</em>.</p>
+<p><img src="/./imghost/bcsdp/vulseeker1.png" alt="VulSeeker design"><br><img src="/./imghost/bcsdp/vulseeker2.png" alt="The DNN model of VulSeeker"></p>
 <h2 id="VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation"><a href="#VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation" class="headerlink" title="VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation"></a>VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation</h2><table>
 <thead>
 <tr>
@@ -676,6 +708,7 @@
 <li>Reordering Calculation<br>use Jaccard similarity coefficient</li>
 </ul>
 <p>but what exactly is the sequence, and how Jaccard similarity coefficient calculate (with character sequence or number seq.?)</p>
+<p><img src="/./imghost/bcsdp/vulseekerpro1.png" alt="Overall workflow of VulSeeker-Pro"><br><img src="/./imghost/bcsdp/vulseekerpro2.png" alt="The semantic learning model of VulSeeker-Pro"></p>
 <h2 id="Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker"><a href="#Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker" class="headerlink" title="Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker"></a>Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker</h2><table>
 <thead>
 <tr>
@@ -688,6 +721,7 @@
 </thead>
 </table>
 <p>Same as VulSeeker-Pro, but extend to support other architectures (right?)</p>
+<p><img src="/./imghost/bcsdp/binseeker.png" alt="Overall workflow of BinSeeker"></p>
 
         </div>
 
