@@ -161,122 +161,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;windows
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[3]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
-                        >Bypass Anti-Virus</a>
-                        <span class="article-date">08-02</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/02/19/2021-02-19-About-Privilege-Escalation/"
-                        >About Privilege Escalation</a>
-                        <span class="article-date">02-19</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/02/18/2021-02-18-About-Pentest-Persistence/"
-                        >About Pentest Persistence</a>
-                        <span class="article-date">02-18</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[7]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
-                        >Stack Overflow Intro</a>
-                        <span class="article-date">10-15</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/05/25/2020-05-25-About-Stealing-Credentials/"
-                        >About Stealing Credentials</a>
-                        <span class="article-date">05-25</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
-                        >About Reverse Shell</a>
-                        <span class="article-date">03-31</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
-                        >MSF Pentest Route</a>
-                        <span class="article-date">03-17</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/15/2020-03-15-About-Port-Forwarding/"
-                        >About Port Forwarding</a>
-                        <span class="article-date">03-15</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/"
-                        >Domain Pentest Intro</a>
-                        <span class="article-date">03-12</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/23/2020-01-23-Security-Protection-Mechanism/"
-                        >Security Protection Mechanism</a>
-                        <span class="article-date">01-23</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem;
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-        <a class="next btn"
-           href="/tags/windows/page/2/"
-        >Next</a>
-    
-</div>
+  .tag-name {
+    color: var(--second-text-color);
+    font-size: $tag-name-font-size;
 
-    </div>
-</div>
+    i {
+      color: var(--second-text-color);
+    }
+
+    +keep-tablet() {
+      font-size: $tag-name-font-size * 0.9;
+    }
+
+    +keep-mobile() {
+      font-size: $tag-name-font-size * 0.8;
+    }
+
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin-bottom: $component-spacing-value;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
 
 
                 

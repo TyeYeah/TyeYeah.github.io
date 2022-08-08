@@ -161,45 +161,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;rand
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/"
-                        >ADWorld PWN Challenge Area Write-ups (Misc)</a>
-                        <span class="article-date">10-05</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem;
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-</div>
+  .tag-name {
+    color: var(--second-text-color);
+    font-size: $tag-name-font-size;
 
-    </div>
-</div>
+    i {
+      color: var(--second-text-color);
+    }
+
+    +keep-tablet() {
+      font-size: $tag-name-font-size * 0.9;
+    }
+
+    +keep-mobile() {
+      font-size: $tag-name-font-size * 0.8;
+    }
+
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin-bottom: $component-spacing-value;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
 
 
                 

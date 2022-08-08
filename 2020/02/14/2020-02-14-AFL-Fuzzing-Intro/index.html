@@ -161,270 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">AFL Fuzzing Intro</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-02-14 09:25:47</span>
-        <span class="mobile">2020-02-14 09:25</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Fuzzing/">Fuzzing</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/fuzzing/">fuzzing</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/afl/">afl</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>It’s not too late to learn fuzzing which is booming in this age.</p>
-<h2 id="Fuzzing-Intro"><a href="#Fuzzing-Intro" class="headerlink" title="Fuzzing Intro"></a>Fuzzing Intro</h2><p>When performing software vulnerability mining or discovery, there are several technical methods includes: static analysis, dynamic analysis, symbolic execution and fuzzing.</p>
-<ul>
-<li>Static Analysis:<br>  Through its analysis of various syntax, semantics, data flow, etc., to carry out vulnerability discovery.</li>
-<li>Dynamic Analysis:<br>  Step by step analysis of program execution. Normal way to track program’s action is to debug.</li>
-<li>Symbolic Execution:<br>  Try to find out what input corresponds to what kind of running state, to cover all execution paths.</li>
-<li>Fuzzing:<br>  Use a large amount of input data to automatically execute the program, so as to find out which inputs can make the program abnormal, and then analyze possible vulnerabilities.</li>
-</ul>
-<p>As for fuzzing, there’re still several types of it:</p>
-<ol>
-<li>Generation Based: generate test cases from scratch</li>
-<li>Mutation Based: mutated from existing data samples based on some rules</li>
-<li>Evolutionary: Contains both of the above, and mutates based on feedback from code coverage.</li>
-</ol>
-<h2 id="Brief-History"><a href="#Brief-History" class="headerlink" title="Brief History"></a>Brief History</h2><p>Not so brief, check it in <a href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/">A Brief History of Fuzzing</a></p>
-<h2 id="Fuzzing-Process"><a href="#Fuzzing-Process" class="headerlink" title="Fuzzing Process"></a>Fuzzing Process</h2><p>Take AFL as an example.<br>(Remember it’s a model only for afl-fuzz, not for every fuzzer)<br><img src="/imghost/afi/1.jpg" alt="AFL fuzzing process"><br>Do source code instrumentation before compilation, to record code coverage.</p>
-<p>The debugger provides some input for the program, the leftmost testcases, which are put into a queue after the AFL is loaded.</p>
-<p>For each iteration, AFL first takes a testcase from the queue, and then trims it to remove unnecessary data to improve the operation efficiency. </p>
-<p>Then it performs mutation operations on the input. There are many modes of mutation, which can generate many new testcases. </p>
-<p>Send these newly generated inputs to the target program to run. If it can generate a new execution path or cause the program to crash, put it in the queue. </p>
-<p>Throughout the process, every program crash is recorded, which may represent a hidden vulnerability.</p>
-<h2 id="Fuzzing-Technical-Points"><a href="#Fuzzing-Technical-Points" class="headerlink" title="Fuzzing Technical Points"></a>Fuzzing Technical Points</h2><h3 id="Input-data"><a href="#Input-data" class="headerlink" title="Input data"></a>Input data</h3><p>Because the input data is used to automatically execute the program, it is obvious that the generation of data will greatly affect the efficiency. </p>
-<ol>
-<li>If the input format of the target program is a pdf file, then files that do not meet the format will be difficult to enter the target program for running tests. </li>
-<li>Even if the data meets the input requirements, maybe data A and data B trigger the same execution path, so running both A and B is a waste of resources. </li>
-<li>For individual data A, maybe only a small part of it really controls the execution path, then trims for rest parts are a waste of resources.</li>
-</ol>
-<h3 id="Mutation-operation"><a href="#Mutation-operation" class="headerlink" title="Mutation operation"></a>Mutation operation</h3><p>The data given by the user is limited, but a lot of data is required to perform the fuzz test, so the fuzzer will generate new data based on the data given by the user. This process is called a mutation operation. </p>
-<ol>
-<li>So what mutation operators to define in the mutation process (choose what operations to change the original input data)? </li>
-<li>Which one to choose when facing multiple mutation operators in one mutation? </li>
-<li>Which input data can be used for mutation?</li>
-</ol>
-<h3 id="Increase-coverage"><a href="#Increase-coverage" class="headerlink" title="Increase coverage"></a>Increase coverage</h3><p>The essence of Fuzz is to use the input to detect whether the execution path corresponding to the current input will generate a possible vulnerability. Therefore, if more paths are covered, it means that more vulnerabilities may be detected. Increasing coverage is more like a fundamental issue. The solution to the first two issues is actually improving coverage.</p>
-<h2 id="AFL"><a href="#AFL" class="headerlink" title="AFL"></a>AFL</h2><p>“American fuzzy lop is a security-oriented fuzzer that employs a novel type of compile-time<br>instrumentation and genetic algorithms to automatically discover clean, interesting test cases<br>that trigger new internal states in the targeted binary.<br>This substantially improves the functional coverage for the fuzzed code. The compact synthesized<br>corpora produced by the tool are also useful for seeding other, more labor- or resource-intensive<br>testing regimes down the road.”</p>
-<p>Ok nice … but what does this actually mean? (even native speakers are confused)</p>
-<h3 id="Binary-Instrumentation"><a href="#Binary-Instrumentation" class="headerlink" title="Binary Instrumentation"></a>Binary Instrumentation</h3><p>The first component of AFL is a wrapper for GCC&#x2F;CLang compilers that will inject during compilation its own assembly code into the target software.<br>The fuzzer will use this code to trace execution paths while feeding the system with new inputs and to determine if a new mutation of the input is able to trigger known or unkown (new) execution paths.</p>
-<p>In compliation, we get the binary program from the source code. First turn source code to assembly code, then from assembly code to machine code.<br><code>gcc</code> (specifically the gcc compiler) is able to turn source code into assembly code, while <code>as</code> (also part of the GNU compiler suite) turns assembly code into machine code. </p>
-<p><code>afl-gcc</code> is a wrapper for the gcc compiler. It calls the <code>gcc</code> compiler for compilation on the one hand, and specifies <code>afl-as</code> instead of <code>as</code> for assembly. <code>afl-as</code> is also a package of <code>as</code>. It analyzes the assembly code and performs instrumentation on the one hand, and calls <code>as</code> to change the assembly code after instrumentation to machine code.</p>
-<p>If you can’t&#x2F;don’t want to recompile the source code of the target program, AFL also supports a QEMU mode, an extension that leverages the QEMU “user emulation” mode and allows callers to obtain instrumentation output for black-box, closed-source binaries. This mechanism can be then used by afl-fuzz to stress-test targets that couldn’t be built with afl-gcc.</p>
-<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Download the <a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz" >latest version<i class="fas fa-external-link-alt"></i></a> of the source code (<a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/" >older releases<i class="fas fa-external-link-alt"></i></a>), extract it and do the usual:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make </span><br><span class="line">$ sudo make install </span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<p>You have to set CPU to <code>performance mode</code> so that <code>afl-fuzz</code> can normally run.<br>Install CPU frequency management software and set</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install cpufrequtils</span><br><span class="line">$ cpufreq-info</span><br><span class="line">$ cpufreq-set -g performance</span><br></pre></td></tr></table></figure>
-<p>Edit default mode so it won’t get back after reboot (not necessary)</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install sysfsutils</span><br><span class="line">$ vim /etc/sysfs.conf</span><br><span class="line"><span class="comment"># add this line</span></span><br><span class="line">devices/system/cpu/cpu0/cpufreq/scaling_governor = performance</span><br></pre></td></tr></table></figure>
-<p>Then it will be <code>performance mode</code> after next boot up.</p>
-<h3 id="Run-an-Example-Reference"><a href="#Run-an-Example-Reference" class="headerlink" title="Run an Example ( Reference )"></a>Run an Example ( <a class="link"   target="_blank" rel="noopener" href="https://www.evilsocket.net/2015/04/30/fuzzing-with-afl-fuzz-a-practical-example-afl-vs-binutils/" >Reference<i class="fas fa-external-link-alt"></i></a> )</h3><p>A relatively simple choice to fuzz is <a class="link"   target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/binutils/" >binutils<i class="fas fa-external-link-alt"></i></a> (including readelf, objdump, etc.).<br>Finish binary instrumentation:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure CC=<span class="string">&quot;afl-gcc&quot;</span> CXX=<span class="string">&quot;afl-g++&quot;</span></span><br><span class="line"><span class="comment"># CC=&quot;afl-clang&quot; to use clang</span></span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
-<p>The following command will instruct the system to output coredumps as files instead of sending them to a specific crash handler app</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> core &gt; /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
-<p>Create an input folder to put ELF file, which AFL will use as a base template.<br>Create an output folder for fuzzer to store its state and all the generated samples that make the application crash or hang.<br>This time we give &#x2F;bin&#x2F;sh a chance.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir afl_in afl_out</span><br><span class="line">$ cp /bin/sh afl_in/</span><br></pre></td></tr></table></figure>
-<p>Run the fuzzer</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -i afl_in -o afl_out ./binutils/objdump -d @@</span><br><span class="line"><span class="comment"># &#x27;-i&#x27; to choose input files&#x27; dir</span></span><br><span class="line"><span class="comment"># &#x27;-o&#x27; to choose output files&#x27; dir</span></span><br><span class="line"><span class="comment"># then the following should be usage of target elf file</span></span><br><span class="line"><span class="comment"># &#x27;@@&#x27; will be replaced by input files when running</span></span><br></pre></td></tr></table></figure>
-<p>And we see</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[+] All <span class="built_in">set</span> and ready to roll!</span><br><span class="line"></span><br><span class="line">                       american fuzzy lop 2.52b (objdump)</span><br><span class="line"></span><br><span class="line">┌─ process timing ─────────────────────────────────────┬─ overall results ─────┐</span><br><span class="line">│        run time : 0 days, 0 hrs, 0 min, 54 sec       │  cycles <span class="keyword">done</span> : 0      │</span><br><span class="line">│   last new path : 0 days, 0 hrs, 0 min, 24 sec       │  total paths : 40     │</span><br><span class="line">│ last uniq crash : none seen yet                      │ uniq crashes : 0      │</span><br><span class="line">│  last uniq hang : none seen yet                      │   uniq hangs : 0      │</span><br><span class="line">├─ cycle progress ────────────────────┬─ map coverage ─┴───────────────────────┤</span><br><span class="line">│  now processing : 0 (0.00%)         │    map density : 3.75% / 4.37%         │</span><br><span class="line">│ paths timed out : 0 (0.00%)         │ count coverage : 1.28 bits/tuple       │</span><br><span class="line">├─ stage progress ────────────────────┼─ findings <span class="keyword">in</span> depth ────────────────────┤</span><br><span class="line">│  now trying : bitflip 1/1           │ favored paths : 1 (2.50%)              │</span><br><span class="line">│ stage execs : 848/971k (0.09%)      │  new edges on : 31 (77.50%)            │</span><br><span class="line">│ total execs : 3048                  │ total crashes : 0 (0 unique)           │</span><br><span class="line">│  <span class="built_in">exec</span> speed : 12.54/sec (zzzz...)   │  total tmouts : 0 (0 unique)           │</span><br><span class="line">├─ fuzzing strategy yields ───────────┴───────────────┬─ path geometry ────────┤</span><br><span class="line">│   bit flips : 0/0, 0/0, 0/0                         │    levels : 2          │</span><br><span class="line">│  byte flips : 0/0, 0/0, 0/0                         │   pending : 40         │</span><br><span class="line">│ arithmetics : 0/0, 0/0, 0/0                         │  pend fav : 1          │</span><br><span class="line">│  known ints : 0/0, 0/0, 0/0                         │ own finds : 39         │</span><br><span class="line">│  dictionary : 0/0, 0/0, 0/0                         │  imported : n/a        │</span><br><span class="line">│       havoc : 0/0, 0/0                              │ stability : 100.00%    │</span><br><span class="line">│        trim : 0.00%/1879, n/a                       ├────────────────────────┘</span><br><span class="line">^C────────────────────────────────────────────────────┘          [cpu000: 53%]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In the afl_out&#x2F;crashes folder you will find the files that made objdump crash, and you can run crash samples to see what happens.</p>
-<h3 id="Corpus-Distillation"><a href="#Corpus-Distillation" class="headerlink" title="Corpus Distillation"></a>Corpus Distillation</h3><p>After finding input samples, we have to trim them to make them efficient and smaller size.<br>AFL provides two utils for us to do so: <code>afl-cmin</code> and <code>afl-tmin</code>.</p>
-<p>(1) Remove files that executes same code – <code>afl-cmin</code></p>
-<p><code>afl-cmin</code> aims to find the smallest subset with the same coverage as the full corpus.<br>For example: Suppose there are multiple files that all cover the same code, then the extra files are discarded. </p>
-<p>It is used as follows:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ afl-cmin -i input_dir -o output_dir -- /path/to/tested/program [params]</span><br><span class="line"><span class="comment"># if program requires input from stdin, the contents of testcase will be that</span></span><br><span class="line"><span class="comment"># always needs a &#x27;-f&#x27; parameter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">$ afl-cmin -i input_dir -o output_dir -- /path/to/tested/program [params] @@</span><br><span class="line"><span class="comment"># if program requires input file in command line, use &#x27;@@&#x27;, which the real file name will replace in runtime</span></span><br></pre></td></tr></table></figure>
 
-<p>(2) Reduce size of single input file – <code>afl-tmin</code></p>
-<p>After decreasing of overall size, use <code>afl-tmin</code> to reduce single file’s size.</p>
-<p>It has similar usage to <code>afl-cmin</code>, but still has two another working mode: <code>instrumented mode</code> (default) and <code>crash mode</code> (get rid of files causing abnormal exit.).</p>
-<p>It is used as follows:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instrumentation mode</span></span><br><span class="line">$ afl-tmin -i input_file -o output_file -- /path/to/tested/program [params] @@</span><br><span class="line"></span><br><span class="line"><span class="comment"># crash mode</span></span><br><span class="line">$ afl-tmin -x -i input_file -o output_file -- /path/to/tested/program [params] @@</span><br><span class="line"><span class="comment"># &#x27;-x&#x27; to work under crash mode</span></span><br></pre></td></tr></table></figure>
-<p>Batch processing with a simple shell script</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">for</span> i <span class="keyword">in</span> *; <span class="keyword">do</span> afl-tmin -i <span class="variable">$i</span> -o tmin-<span class="variable">$i</span> -- /path/to/tested/program [params] @@; <span class="keyword">done</span>;</span><br></pre></td></tr></table></figure>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-<h3 id="Perform-Instrumentation"><a href="#Perform-Instrumentation" class="headerlink" title="Perform Instrumentation"></a>Perform Instrumentation</h3><h4 id="Normal-Mode"><a href="#Normal-Mode" class="headerlink" title="Normal Mode"></a>Normal Mode</h4><p>Replace <code>gcc</code> and <code>g++</code> with <code>afl-gcc</code> and <code>afl-g++</code> in <code>Makefile</code><br>or<br>If built by autoconf, use</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure CC=<span class="string">&quot;afl-gcc&quot;</span> CXX=<span class="string">&quot;afl-g++&quot;</span></span><br></pre></td></tr></table></figure>
-<p>To load shared lib instrumented by AFL, complie statically </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --disable-shared CC=<span class="string">&quot;afl-gcc&quot;</span> CXX=<span class="string">&quot;afl-g++&quot;</span>` </span><br></pre></td></tr></table></figure>
-<h4 id="LLVM-Mode"><a href="#LLVM-Mode" class="headerlink" title="LLVM Mode"></a>LLVM Mode</h4><p>Under LLVM mode, you’ll obtain higher speed of fuzzing.<br>Not the newest but lower version (like 3.x.x) of clang and llvm are needed</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> llvm_mode</span><br><span class="line">$ apt-get install clang</span><br><span class="line">$ <span class="built_in">export</span> LLVM_CONFIG=`<span class="built_in">which</span> llvm-config` &amp;&amp; make &amp;&amp; <span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
-<p>Then use</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --disable-shared CC=<span class="string">&quot;afl-clang-fast&quot;</span> CXX=<span class="string">&quot;afl-clang-fast++&quot;</span> </span><br></pre></td></tr></table></figure>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-<h3 id="Start-Fuzzing"><a href="#Start-Fuzzing" class="headerlink" title="Start Fuzzing"></a>Start Fuzzing</h3><h4 id="Fuzzing-Mode"><a href="#Fuzzing-Mode" class="headerlink" title="Fuzzing Mode"></a>Fuzzing Mode</h4><p>Generally <code>afl-fuzz</code> provides 4 fuzzing modes that differ in how the program execution between different fuzzing inputs behaves:</p>
-<ul>
-<li><code>Dumb mode</code> that just executes the program by doing <code>fork()</code> and <code>execv()</code>. This is the slowest mode that does not rely on any fancy tricks to speed up program execution and also does not provide any insights how the program behaves with different inputs.</li>
-<li>Basic <a target="_blank" rel="noopener" href="http://lcamtuf.blogspot.com/2014/10/fuzzing-binaries-without-execve.html"><code>fork server mode</code></a> where the fuzzed binary does all the initialization steps that happen before calling the <code>main()</code> function and then program is repeatedly forked from that point on. This also includes instrumentation that is compiled in to the program so there already is some insight on what is happening inside the program when a specific input is processed. There exists <code>QEMU</code> mode for <code>afl-fuzz</code> that technically enables fork server mode for uninstrumented binaries, but with some performance penalty.</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mirrorer/afl/tree/master/llvm_mode"><code>Deferred instrumentation</code></a> that works in similar fashion as the basic fork server mode. Instead forking just before calling <code>main()</code> function, this enables to move the fork point further down the line and enables heavy program initialization steps to be avoided if they can be executed independently of the input.</li>
-<li><a target="_blank" rel="noopener" href="https://lcamtuf.blogspot.fi/2015/06/new-in-afl-persistent-mode.html"><code>Persistent mode</code></a> where the fuzzable part of the program is repeatedly executed without resetting the program memory every time the program is called. This only works in practice if the program does not have a modifiable global state that can not be reset to the previous state.</li>
-</ul>
-<p><code>afl-fuzz</code> generates new inputs and analyzes the program execution results roughly at the same speed regardless of the mode. So these modes are in the order of efficiency in a sense that how much overhead there is for fuzzing one input. They are also in the order of complexity on how easy they are to integrate into an existing program that has not been made to be fuzzed. Especially as the fastest modes require <code>clang</code> to be available as a compiler and the fuzzable program needs to be able to be compiled and linked with it.</p>
-<h4 id="White-Box-Testing"><a href="#White-Box-Testing" class="headerlink" title="White Box Testing"></a>White Box Testing</h4><p>(1) Test instrumented program</p>
-<p>After compilation, use <code>afl-showmap</code> to run a test ( track execution path ) and see whether instrumentation is useful.</p>
-<p>It prints output and captured tuples, which is for getting branch information </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ afl-showmap -o output_dir /path/to/tested/program [params] </span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line"></span><br><span class="line">$ afl-showmap -m none -o /dev/null -- ./build/bin/imagew 23.bmp out.png</span><br><span class="line">[*] Executing <span class="string">&#x27;./build/bin/imagew&#x27;</span>...</span><br><span class="line">-- Program output begins --</span><br><span class="line">23.bmp -&gt; out.png</span><br><span class="line">Processing: 13x32</span><br><span class="line">-- Program output ends --</span><br><span class="line">[+] Captured 1012 tuples <span class="keyword">in</span> <span class="string">&#x27;/dev/null&#x27;</span>.</span><br><span class="line"><span class="comment"># &#x27;-m&#x27; to set cache memory</span></span><br><span class="line"><span class="comment"># &#x27;-o&#x27; to set output directory</span></span><br><span class="line"></span><br><span class="line">$ afl-showmap -m none -o /dev/null -- ./build/bin/imagew 111.pgm out.png</span><br><span class="line">[*] Executing <span class="string">&#x27;./build/bin/imagew&#x27;</span>...</span><br><span class="line">-- Program output begins --</span><br><span class="line">111.pgm -&gt; out.png</span><br><span class="line">Processing: 7x7</span><br><span class="line">-- Program output ends --</span><br><span class="line">[+] Captured 970 tuples <span class="keyword">in</span> <span class="string">&#x27;/dev/null&#x27;</span>.</span><br><span class="line"><span class="comment"># different input gets different tuples</span></span><br></pre></td></tr></table></figure>
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-<p>(2) Run fuzzer</p>
-<p>We have mentioned before:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params]</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br></pre></td></tr></table></figure>
+    }
 
-<p>(3) Use screen</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ screen -S fuzzer1</span><br><span class="line"><span class="comment"># start a new screen</span></span><br><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br><span class="line"><span class="comment"># run fuzzer and use ctrl+d to detach</span></span><br><span class="line">$ screen -ls</span><br><span class="line"><span class="comment"># list screen </span></span><br><span class="line">$ screen -r fuzzer1</span><br><span class="line"><span class="comment"># recovery screen</span></span><br><span class="line"><span class="comment"># if cannot recovery [attached] screen</span></span><br><span class="line"><span class="comment"># add &#x27;-D&#x27; parameter to kick former user</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="Black-Box-Testing"><a href="#Black-Box-Testing" class="headerlink" title="Black Box Testing"></a>Black Box Testing</h4><p>Without source code, instrumentation won’t be finished.</p>
-<p>It’s time for QEMU mode, which you should compile first as LLVM mode does.</p>
-<p>Nevertheless, AFL’s QEMU version is also old enough, so follow the lead please</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install libini-config-dev libtool-bin automake bison libglib2.0-dev -y</span><br><span class="line">$ <span class="built_in">cd</span> qemu_mode</span><br><span class="line">$ build_qemu_support.sh</span><br><span class="line">$ <span class="built_in">cd</span> .. &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
 
-<p>Start QEMU mode fuzzing</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -Q -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br><span class="line"><span class="comment"># &#x27;-Q&#x27; means QEMU mode</span></span><br></pre></td></tr></table></figure>
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
 
-<h4 id="Parallel-Testing"><a href="#Parallel-Testing" class="headerlink" title="Parallel Testing"></a>Parallel Testing</h4><p>(1) Sole-system parallel testing</p>
-<p>In theory, you can run fuzzing instance according to your computer’s core number, since one one instance is bound to one corresponding core.<br>Check core number in this way:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/cpuinfo| grep <span class="string">&quot;cpu cores&quot;</span>| uniq</span><br></pre></td></tr></table></figure>
+        .name {
+          color: var(--default-text-color);
+        }
 
-<p>Use afl-fuzz to do parallel fuzzing, you have to use <code>-M</code> parameter to assign a <code>Master Fuzzer</code>, use <code>-S</code> to assign multiple <code>Slave Fuzzer</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -M fuzzer1 -- ./program</span><br><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -S fuzzer2 -- ./program</span><br><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -S fuzzer3 -- ./program</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
 
-<p>These two kinds have different fuzzing strategies.<br><code>Master Fuzzer</code> does deterministic testing – special rather than random mutations are performed on input files.<br><code>Slave Fuzzer</code> performs completely random mutations.</p>
-<p><code>afl-gotcpu</code> helps checking status of every core.</p>
-<p><img src="/imghost/afi/2.jpg" alt="afl-gotcpu e.g."></p>
-<p>(2) Multi-system parallel testing</p>
-<p>I Bet I’ll Hardly Use This. See You Next Time.</p>
+      }
+    }
 
-        </div>
+  }
 
-        
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/fuzzing/">#fuzzing</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/afl/">#afl</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/02/16/2020-02-16-Analyse-AFL-Fuzzing-Result/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Analyse AFL Fuzzing Result</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/02/13/2020-02-13-Virtual-Box-Tips/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">VirtualBox Tips</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
 
-        
-    </div>
-</div>
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -520,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fuzzing-Intro"><span class="nav-number">1.</span> <span class="nav-text">Fuzzing Intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Brief-History"><span class="nav-number">2.</span> <span class="nav-text">Brief History</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fuzzing-Process"><span class="nav-number">3.</span> <span class="nav-text">Fuzzing Process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fuzzing-Technical-Points"><span class="nav-number">4.</span> <span class="nav-text">Fuzzing Technical Points</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Input-data"><span class="nav-number">4.1.</span> <span class="nav-text">Input data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutation-operation"><span class="nav-number">4.2.</span> <span class="nav-text">Mutation operation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Increase-coverage"><span class="nav-number">4.3.</span> <span class="nav-text">Increase coverage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AFL"><span class="nav-number">5.</span> <span class="nav-text">AFL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Instrumentation"><span class="nav-number">5.1.</span> <span class="nav-text">Binary Instrumentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">5.2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-an-Example-Reference"><span class="nav-number">5.3.</span> <span class="nav-text">Run an Example ( Reference )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Corpus-Distillation"><span class="nav-number">5.4.</span> <span class="nav-text">Corpus Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perform-Instrumentation"><span class="nav-number">5.5.</span> <span class="nav-text">Perform Instrumentation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Normal-Mode"><span class="nav-number">5.5.1.</span> <span class="nav-text">Normal Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LLVM-Mode"><span class="nav-number">5.5.2.</span> <span class="nav-text">LLVM Mode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-Fuzzing"><span class="nav-number">5.6.</span> <span class="nav-text">Start Fuzzing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fuzzing-Mode"><span class="nav-number">5.6.1.</span> <span class="nav-text">Fuzzing Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#White-Box-Testing"><span class="nav-number">5.6.2.</span> <span class="nav-text">White Box Testing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Black-Box-Testing"><span class="nav-number">5.6.3.</span> <span class="nav-text">Black Box Testing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Testing"><span class="nav-number">5.6.4.</span> <span class="nav-text">Parallel Testing</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

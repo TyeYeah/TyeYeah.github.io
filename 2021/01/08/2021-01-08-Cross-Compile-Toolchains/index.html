@@ -161,226 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Cross Compile Toolchains</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-01-08 19:28:23</span>
-        <span class="mobile">2021-01-08 19:28</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Linux/">Linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/gcc/">gcc</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/arm/">arm</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/mips/">mips</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/buildroot/">buildroot</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/crosstool-ng/">crosstool-ng</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/cross-compile/">cross-compile</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/gdb/">gdb</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>831 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Just now I found the site <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>&#x2F;<code>GDB</code>&#x2F;<code>Linux Header</code> versions. </p>
-<p>Before knowing this site, I tried <code>buildroot</code> and <code>crosstool-ng</code> to build my own toolchain, here is to share the experience.</p>
-<p>But to be honest the <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> seems better, because it built tools for us, and you can choose version of <code>GCC</code> and <code>GDB</code>, while <code>buildroot</code> and <code>crosstool-ng</code> can’t.</p>
-<h2 id="Buildroot"><a href="#Buildroot" class="headerlink" title="Buildroot"></a>Buildroot</h2><p><a class="link"   target="_blank" rel="noopener" href="https://buildroot.org/" >Buildroot<i class="fas fa-external-link-alt"></i></a> is a framework to build embedded Linux software on Linux. It is made up of <code>makefile</code> and <code>Kconfig</code> configuration files. L</p>
-<p>ike compiling Linux kernel, configure <code>buildroot</code> and edit <code>menuconfig</code> to compile a complete Linux system software (including boot, kernel, rootfs and libs) that can be directly burned and run on the machine.</p>
-<p>Download <code>buildroot</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://buildroot.uclibc.org/downloads/snapshots/buildroot-snapshot.tar.bz2</span><br><span class="line">$ tar -jxvf buildroot-snapshot.tar.bz2</span><br><span class="line">$ <span class="built_in">cd</span> buildroot</span><br></pre></td></tr></table></figure>
-<p>Configure <code>buildroot</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libncurses-dev patch</span><br><span class="line">$ make clean</span><br><span class="line">$ make menuconfig</span><br></pre></td></tr></table></figure>
-<p>When interface shows up like this,<br><img src="/imghost/rpp/7.jpg" alt="Target Option"><br>Set <code>Target Architecture</code> as <code>MIPS (little endian)</code> (depending on your target);<br><img src="/imghost/rpp/8.jpg" alt="Target Architecture"><br>Set <code>Kernel Headers</code> as your host Linux version,because it will run on your pc.<br><img src="/imghost/rpp/9.jpg" alt="Kernel Headers"></p>
-<p>Install it. </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install texinfo</span><br><span class="line">$ sudo apt-get install bison</span><br><span class="line">$ sudo apt-get install flex</span><br><span class="line">$ sudo make</span><br></pre></td></tr></table></figure>
-<p>Compiled files will be found in directory <code>output</code>. Cross compile utils will be in <code>buildroot/output/host/usr/bin</code>, and the compiler is <code>mips-linux-gcc</code>.</p>
-<p>Configure environment variables and test.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gedit ~/.bashrc</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:Path/to/buildroot/output/host/usr/bin</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">$ mips-linux-gcc -o <span class="built_in">test</span> test.c -static</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<h2 id="Crosstool-NG"><a href="#Crosstool-NG" class="headerlink" title="Crosstool-NG"></a>Crosstool-NG</h2><p>You can visit <a class="link"   target="_blank" rel="noopener" href="http://crosstool-ng.github.io/" >official site<i class="fas fa-external-link-alt"></i></a> for its introduction and documentation.</p>
-<p>I installed it by source code</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/crosstool-ng/crosstool-ng</span><br><span class="line">$ ./bootstrap   <span class="comment"># needed before running ./configure</span></span><br><span class="line">$ ./configure --prefix=/some/place</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="built_in">export</span> PATH=<span class="string">&quot;<span class="variable">$&#123;PATH&#125;</span>:/some/place/bin&quot;</span></span><br></pre></td></tr></table></figure>
-<p>If you are <code>root</code> user, you’ll get </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng build</span><br><span class="line">[ERROR]  You must NOT be root to run crosstool-NG</span><br><span class="line">[00:00] / gmake: *** [ct-ng:262: build] Error 1</span><br></pre></td></tr></table></figure>
-<p>To solve it, add things to <code>./ct-ng</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim ./ct-ng</span><br><span class="line">... <span class="comment"># add the following</span></span><br><span class="line"><span class="built_in">export</span> CT_EXPERIMENTAL:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT_SURE:=Y</span><br></pre></td></tr></table></figure>
-<p>It can be operated like <code>buildroot</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /some/place/bin</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  ct-ng</span><br><span class="line">$ ./ct-ng menuconfig</span><br></pre></td></tr></table></figure>
-<p>Or a more convenient way, use the templates&#x2F;samples</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng list-samples      <span class="comment"># show templates</span></span><br><span class="line">Status  Sample name</span><br><span class="line">[G..X]   aarch64-ol7u9-linux-gnu</span><br><span class="line">[G..X]   aarch64-rpi3-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-android</span><br><span class="line">[G..X]   aarch64-unknown-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-uclibc</span><br><span class="line">...</span><br><span class="line">$ ./ct-ng mips-malta-linux-gnu  <span class="comment"># choose one</span></span><br><span class="line">  CONF  mips-malta-linux-gnu</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># configuration written to .config</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Initially reported by: Antony Pavlov</span><br><span class="line">URL:</span><br><span class="line"></span><br><span class="line">Comment:</span><br><span class="line">Experimental toolchain <span class="keyword">for</span> MIPS32r2</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Now configured <span class="keyword">for</span> <span class="string">&quot;mips-malta-linux-gnu&quot;</span></span><br><span class="line">$ ./ct-ng build</span><br><span class="line">[INFO ]  Performing some trivial sanity checks</span><br><span class="line">[WARN ]  Number of open files 1024 may not be sufficient to build the toolchain; increasing to 2048</span><br><span class="line">...</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  .build  build.log  .config  .config.old  ct-ng</span><br><span class="line">$ ls .build/</span><br><span class="line">mips-malta-linux-gnu  src  tarballs  tools</span><br></pre></td></tr></table></figure>
-<p>Now the <code>ct-ng</code> downloads what it needs to <code>.build</code> dir according to <code>.config</code> (made automatically).<br>However these are not what produced. Check your home dir u will find <code>x-tools</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">mips-malta-linux-gnu</span><br><span class="line">$ ls mips-malta-linux-gnu/</span><br><span class="line">bin  build.log.bz2  include  lib  libexec  mips-malta-linux-gnu  share</span><br></pre></td></tr></table></figure>
-<p>These are the built toolchain.</p>
-<p>The truth is, the binarys compiled by it cannot run on old kernels (encounter <code>FATAL:kernel too old</code> in <code>QEMU</code>), that might because the libs (<code>~/x-tools/mips-malta-linux-gnu/mips-malta-linux-gnu/sysroot/lib/ld-2.32.so</code>) it use are latest.</p>
-<p>So for old devices or <code>QEMU</code>, better use <a class="link"   target="_blank" rel="noopener" href="https://buildroot.org/" >buildroot<i class="fas fa-external-link-alt"></i></a>, or try <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Compile-GDB-amp-GDBserver"><a href="#Compile-GDB-amp-GDBserver" class="headerlink" title="Compile GDB&amp;GDBserver"></a>Compile GDB&amp;GDBserver</h2><p>It is for dynamic analysis, and I almost messed up by this. Get source code on <a class="link"   target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gdb/" >FTP<i class="fas fa-external-link-alt"></i></a></p>
-<p>First see how to set configuration</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --target=mipsel-linux --host=mipsel-linux --program-prefix=mipsel-linux  --prefix=`<span class="built_in">echo</span> <span class="variable">$PWD</span>`/bin CC=/path/to/buildroot/output/host/bin/mipsel-linux-gcc CXX=/path/to/buildroot/output/host/bin/mipsel-linux-g++  AR=/path/to/buildroot/output/host/bin/mipsel-linux-ar LD=/path/to/buildroot/output/host/bin/mipsel-linux-ld RANLIB=/path/to/buildroot/output/host/bin/mipsel-linux-ranlib  STRIP=/path/to/buildroot/output/host/bin/mipsel-linux-strip CFLAGS=<span class="string">&quot;-w -static&quot;</span> CXXFLAGS=<span class="string">&quot;-w -static&quot;</span> LDFLAGS=<span class="string">&quot;-static&quot;</span></span><br><span class="line">...   <span class="comment"># make sure paths are absolute</span></span><br><span class="line">$ sudo make -j8</span><br><span class="line">...</span><br><span class="line">$ make install</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>Recommended versions includes <code>7.10</code> …<br>Versions too high cause <code>configure: error: ***A compiler with support for c++11 language features is required</code>, while lower versions gives <code>configure: error: no termcap library found</code>.</p>
-<p>However problems still come out, if your toolchain is so latest, or if some other libraries are required. </p>
-<p>The <a class="link"   target="_blank" rel="noopener" href="https://github.com/rapid7/embedded-tools/tree/master/binaries/gdbserver" >built gdbservers<i class="fas fa-external-link-alt"></i></a> are off the shelf, you can use them or things built by others directly.</p>
 
-        </div>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/gcc/">#gcc</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/arm/">#arm</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/mips/">#mips</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/buildroot/">#buildroot</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/crosstool-ng/">#crosstool-ng</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/cross-compile/">#cross-compile</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/gdb/">#gdb</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/09/2021-01-09-Some-Assembly-Intro/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Some Assembly Intro</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/12/13/2020-12-13-Firmadyne-and-FirmAE/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Firmadyne and FirmAE</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+    }
 
-        
-    </div>
-</div>
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -476,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buildroot"><span class="nav-number">1.</span> <span class="nav-text">Buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crosstool-NG"><span class="nav-number">2.</span> <span class="nav-text">Crosstool-NG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-GDB-amp-GDBserver"><span class="nav-number">3.</span> <span class="nav-text">Compile GDB&amp;GDBserver</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

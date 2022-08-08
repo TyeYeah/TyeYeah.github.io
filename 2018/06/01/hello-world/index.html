@@ -161,100 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Hello World</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2018-06-01 00:00:00</span>
-        <span class="mobile">2018-06-01 00:00</span>
-    </span>
-    
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>75 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Welcome to <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        </div>
+    }
 
-        
 
-        
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2018/10/01/2018-09-31-Resource-Lists/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Resource Lists</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-            </div>
-        
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
 
-        
-    </div>
-</div>
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -350,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

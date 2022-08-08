@@ -161,179 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">VirtualBox Tips</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-02-13 14:37:11</span>
-        <span class="mobile">2020-02-13 14:37</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Note/">Note</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/note/">note</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/virtualbox/">virtualbox</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/macOS/">macOS</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>468 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Here are some tips for virtual box.</p>
-<h2 id="Minimize-VirtualBox’s-VM-Space"><a href="#Minimize-VirtualBox’s-VM-Space" class="headerlink" title="Minimize VirtualBox’s VM Space"></a>Minimize VirtualBox’s VM Space</h2><h3 id="Defrag"><a href="#Defrag" class="headerlink" title="Defrag"></a>Defrag</h3><p>Linux guest machine:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd <span class="keyword">if</span>=/dev/zero of=/EMPTY bs=1M</span><br><span class="line">$ sudo rm -f /EMPTY</span><br></pre></td></tr></table></figure>
-<p>Windows guest os (using Sysinternals Suite):</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sdelete –z c: % or other drive %</span><br></pre></td></tr></table></figure>
-<h3 id="Compress-Disk"><a href="#Compress-Disk" class="headerlink" title="Compress Disk"></a>Compress Disk</h3><p>for VDI file:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ VBoxManage modifyhd xxx.vdi --compact</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<p>but for Vmware’s VMDK file:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ VBoxManage clonehd &quot;source.vmdk&quot; &quot;cloned.vdi&quot; --format vdi</span><br><span class="line">$ VBoxManage modifyhd cloned.vdi --compact</span><br><span class="line">$ VBoxManage clonehd &quot;cloned.vdi&quot; &quot;compressed.vmdk&quot; --format vmdk</span><br><span class="line"># after transforming vmdk to vdi, you will find size reduced largely</span><br><span class="line"># so you can neglect step 2</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -k disk.vmdk</span><br></pre></td></tr></table></figure>
 
-<h2 id="Install-MacOS-Virtual-Machine"><a href="#Install-MacOS-Virtual-Machine" class="headerlink" title="Install MacOS Virtual Machine"></a>Install MacOS Virtual Machine</h2><p>See <a class="link"   target="_blank" rel="noopener" href="https://www.dev2qa.com/how-to-install-macos-on-virtualbox-in-windows-10/" >Here<i class="fas fa-external-link-alt"></i></a> to  get the complete process of operation.</p>
-<p>Download the ISO image of macOS first.<br>Contact me if you want ISO of macOS High Sierra.</p>
-<h3 id="Create-a-Machine"><a href="#Create-a-Machine" class="headerlink" title="Create a Machine"></a>Create a Machine</h3><p>Create a new macOS virtual machine, which is supported in VirtualBox by default.</p>
-<p><img src="/imghost/vbt/1.png" alt="even supports mojave"></p>
-<p>Bigger video memory, more processor cores and larger storage are needed. </p>
-<p><img src="/imghost/vbt/2.png" alt="larger is better"></p>
-<h3 id="After-the-Creation"><a href="#After-the-Creation" class="headerlink" title="After the Creation"></a>After the Creation</h3><p>After creating virtual disk, run VBoxManage commands before booting macOS virtual machine</p>
-<p>High Sierra:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#x27;macOS&#x27; is your vm&#x27;s name</span></span><br><span class="line"><span class="comment"># use VBoxManage.exe on Windows</span></span><br><span class="line">$ VBoxManage.exe modifyvm <span class="string">&quot;macOS&quot;</span> --cpuidset 00000001 000306a9 04100800 7fbae3ff bfebfbff</span><br><span class="line">$ VBoxManage setextradata <span class="string">&quot;macOS&quot;</span> <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiSystemProduct&quot;</span> <span class="string">&quot;MacBookPro11,3&quot;</span></span><br><span class="line">$ VBoxManage setextradata <span class="string">&quot;macOS&quot;</span> <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiSystemVersion&quot;</span> <span class="string">&quot;1.0&quot;</span></span><br><span class="line">$ VBoxManage setextradata <span class="string">&quot;macOS&quot;</span> <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiBoardProduct&quot;</span> <span class="string">&quot;Mac-2BD1B31983FE1663&quot;</span></span><br><span class="line">$ VBoxManage setextradata <span class="string">&quot;macOS&quot;</span> <span class="string">&quot;VBoxInternal/Devices/smc/0/Config/DeviceKey&quot;</span> <span class="string">&quot;ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc&quot;</span></span><br><span class="line">$ VBoxManage setextradata <span class="string">&quot;macOS&quot;</span> <span class="string">&quot;VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC&quot;</span> 1</span><br></pre></td></tr></table></figure>
-<p>Mojave:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ VBoxManage modifyvm macOS --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff</span><br><span class="line">$ VBoxManage setextradata macOS <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiSystemProduct&quot;</span> <span class="string">&quot;iMac11,3&quot;</span></span><br><span class="line">$ VBoxManage setextradata macOS <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiSystemVersion&quot;</span> <span class="string">&quot;1.0&quot;</span></span><br><span class="line">$ VBoxManage setextradata macOS <span class="string">&quot;VBoxInternal/Devices/efi/0/Config/DmiBoardProduct&quot;</span> <span class="string">&quot;Iloveapple&quot;</span></span><br><span class="line">$ VBoxManage setextradata macOS <span class="string">&quot;VBoxInternal/Devices/smc/0/Config/DeviceKey&quot;</span> <span class="string">&quot;ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc&quot;</span></span><br><span class="line">$ VBoxManage setextradata macOS <span class="string">&quot;VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC&quot;</span> 1</span><br></pre></td></tr></table></figure>
-<h3 id="Resolution-Configuration"><a href="#Resolution-Configuration" class="headerlink" title="Resolution Configuration"></a>Resolution Configuration</h3><p>When booting up, you will find the resolution not fitting.</p>
-<p>Configure resolution:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ VBoxManage setextradata macOS CustomVideoMode1 1366x768x32</span><br><span class="line">$ VBoxManage setextradata macOS VBoxInternal2/EfiGraphicsResolution 1366x768</span><br><span class="line"></span><br><span class="line">$ VBoxManage setextradata macOS VBoxInternal2/EfiHorizontalResolution 1366</span><br><span class="line">$ VBoxManage setextradata macOS VBoxInternal2/EfiVerticalResolution 768</span><br></pre></td></tr></table></figure>
-<p>More in <a class="link"   target="_blank" rel="noopener" href="https://www.wikigain.com/fix-virtualbox-macos-high-sierra-screen-resolution-1920x1080-4k-5k/" >Fix VirtualBox macOS High Sierra Screen Resolution (1920×1080 – 4K – 5K)<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://www.wikigain.com/fix-macos-sierra-screen-resolution-virtualbox/" >How to Fix macOS Sierra Screen Resolution on VirtualBox?<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>In Mac OS some <code>root</code> users are still limited to do some operations. Reboot to enter <code>recovery</code> mode (command + r) and:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil <span class="built_in">disable</span>   <span class="comment"># `csrutil enable` to recovery</span></span><br></pre></td></tr></table></figure>
-<p>to let users edit some key files.</p>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        </div>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/note/">#note</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/virtualbox/">#virtualbox</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/macOS/">#macOS</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+    }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/02/14/2020-02-14-AFL-Fuzzing-Intro/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">AFL Fuzzing Intro</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/01/23/2020-01-23-Security-Protection-Mechanism/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Security Protection Mechanism</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
 
-        
-    </div>
-</div>
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -429,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Minimize-VirtualBox%E2%80%99s-VM-Space"><span class="nav-number">1.</span> <span class="nav-text">Minimize VirtualBox’s VM Space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Defrag"><span class="nav-number">1.1.</span> <span class="nav-text">Defrag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compress-Disk"><span class="nav-number">1.2.</span> <span class="nav-text">Compress Disk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-MacOS-Virtual-Machine"><span class="nav-number">2.</span> <span class="nav-text">Install MacOS Virtual Machine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-Machine"><span class="nav-number">2.1.</span> <span class="nav-text">Create a Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#After-the-Creation"><span class="nav-number">2.2.</span> <span class="nav-text">After the Creation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resolution-Configuration"><span class="nav-number">2.3.</span> <span class="nav-text">Resolution Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">2.4.</span> <span class="nav-text">Others</span></a></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

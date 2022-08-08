@@ -161,201 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Customize New Featured Kali 2019.4</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2019-12-30 18:43:20</span>
-        <span class="mobile">2019-12-30 18:43</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Linux/">Linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/note/">note</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/kali/">kali</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>934 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Since Kali has a new release with a lot of changes, a note for figuring problems and personal customizing is needed.</p>
-<h2 id="New-Features-of-Kali-2019-4"><a href="#New-Features-of-Kali-2019-4" class="headerlink" title="New Features of Kali 2019.4"></a>New Features of Kali 2019.4</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.kali.org/news/kali-linux-2019-4-release/" >Kali Linux 2019.4 Release<i class="fas fa-external-link-alt"></i></a></p>
-<p>2019.4 includes some exciting new updates:</p>
-<ul>
-<li>A new default desktop environment, Xfce</li>
-<li>New GTK3 theme (for Gnome and Xfce)</li>
-<li>Introduction of “Kali Undercover” mode</li>
-<li>Kali Documentation has a new home and is now Git powered</li>
-<li>Public Packaging – getting your tools into Kali</li>
-<li>Kali NetHunter KeX – Full Kali desktop on Android</li>
-<li>BTRFS during setup</li>
-<li>Added PowerShell</li>
-<li>The kernel is upgraded to version 5.3.9</li>
-</ul>
-<p>… Plus the normal bugs fixes and updates.</p>
-<h2 id="Problems-With-Chinese"><a href="#Problems-With-Chinese" class="headerlink" title="Problems With Chinese"></a>Problems With Chinese</h2><p>After First Installation, You will see errors when displaying chinese characters.<br>I’m here to tell the solution.</p>
-<h3 id="Choose-Language"><a href="#Choose-Language" class="headerlink" title="Choose Language"></a>Choose Language</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ apt install locales</span><br><span class="line"></span><br><span class="line">$ dpkg-reconfigure locales # choose zh_CN GB2312 zh_CN.GBK GBK ;zh_CN.UTF-8 UTF-8  ; en_US.UTF8 (or whatever u want)</span><br><span class="line"></span><br><span class="line">$ vim /etc/default/locale # set LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
-<h3 id="Install-Fonts"><a href="#Install-Fonts" class="headerlink" title="Install Fonts"></a>Install Fonts</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update  </span><br><span class="line">$ apt-get upgrade -y </span><br><span class="line">$ apt-get dist-upgrade -y  </span><br><span class="line"></span><br><span class="line">$ apt-get install xfonts-intl-chinese -y  # get language support</span><br><span class="line"></span><br><span class="line">$ apt-get install ttf-wqy-microhei -y # install right font</span><br><span class="line">reboot # make it effective  </span><br></pre></td></tr></table></figure>
-<h2 id="Time-Display-Error"><a href="#Time-Display-Error" class="headerlink" title="Time Display Error"></a>Time Display Error</h2><p>Dual system users may meet question that Windows and Linux have different time.<br>It’s easy to change or correct time on Windows 10. On Linux you can refer to <a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/aguncn/p/4316093.html" >this<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36737934/article/details/90233406" >this<i class="fas fa-external-link-alt"></i></a>.<br>To be brief, install ntp server (yum, dnf or apt) and run this command: <code>ntpdate cn.pool.ntp.org</code>, then you will get time right (only for those living in China).</p>
-<h2 id="Change-Repo-Source-Edit-Source-List"><a href="#Change-Repo-Source-Edit-Source-List" class="headerlink" title="Change Repo Source (Edit Source List)"></a>Change Repo Source (Edit Source List)</h2><h3 id="Change-Kali-Source"><a href="#Change-Kali-Source" class="headerlink" title="Change Kali Source"></a>Change Kali Source</h3><p>Also suitable for Ubuntu users adding kali to source.list</p>
-<h4 id="Recommend-Sources"><a href="#Recommend-Sources" class="headerlink" title="Recommend Sources"></a>Recommend Sources</h4><p>aliyun kali source:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
-<p>ustc kali source:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib  </span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib </span><br></pre></td></tr></table></figure>
-<p>tuna kali source</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br></pre></td></tr></table></figure>
-<h4 id="Add-Pub-Key"><a href="#Add-Pub-Key" class="headerlink" title="Add Pub Key"></a>Add Pub Key</h4><p>Deal with public key error.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7D8D0BF6</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget archive.kali.org/archive-key.asc</span><br><span class="line">$ apt-key add archive-key.asc</span><br></pre></td></tr></table></figure>
-<h3 id="Add-Deepin-Source"><a href="#Add-Deepin-Source" class="headerlink" title="Add Deepin Source"></a>Add Deepin Source</h3><p>Create a new file like <code>/etc/apt/sources.list.d/deepin-ubuntu-dde-bionic.list</code>, then write deepin source in it.</p>
-<h4 id="Recommend-Sources-1"><a href="#Recommend-Sources-1" class="headerlink" title="Recommend Sources"></a>Recommend Sources</h4><p>official deepin source:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb [by-hash=force] http://packages.deepin.com/deepin stable main contrib non-free</span><br><span class="line">#deb-src http://packages.deepin.com/deepin stable main contrib non-free</span><br></pre></td></tr></table></figure>
-<p>aliyun deepin source:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.aliyun.com/deepin/ panda main contrib non-free</span><br><span class="line">deb-src https://mirrors.aliyun.com/deepin/ panda main contrib non-free</span><br></pre></td></tr></table></figure>
-<h4 id="Add-Pub-Key-1"><a href="#Add-Pub-Key-1" class="headerlink" title="Add Pub Key"></a>Add Pub Key</h4><p>Deal with public key error.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://mirrors.aliyun.com/deepin/project/deepin-keyring.gpg</span><br><span class="line">$ gpg --import deepin-keyring.gpg</span><br><span class="line">$ sudo gpg --export --armor 209088E7 | sudo apt-key add -</span><br><span class="line">$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51</span><br></pre></td></tr></table></figure>
-<p>You can update after that. </p>
-<h4 id="Don’t-Upgrade-Just-Install"><a href="#Don’t-Upgrade-Just-Install" class="headerlink" title="Don’t Upgrade, Just Install"></a>Don’t Upgrade, Just Install</h4><p>Install most featured deepin-wine, and deepin-wine apps (qq &amp; wechat cannot function due to old version)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ apt install deepin-wine</span><br><span class="line"></span><br><span class="line">$ apt install deepin.xxx</span><br><span class="line">deepin.cn.360.yasuo                  deepin.com.qq.office</span><br><span class="line">deepin.cn.com.winrar                 deepin.com.qq.rtx2015</span><br><span class="line">deepin.com.95579.cjsc                deepin.com.taobao.aliclient.qianniu</span><br><span class="line">deepin.com.aaa-logo                  deepin.com.taobao.wangwang</span><br><span class="line">deepin.com.baidu.pan                 deepin.com.thunderspeed</span><br><span class="line">deepin.com.cmbchina                  deepin.com.wechat</span><br><span class="line">deepin.com.foxmail                   deepin.com.wechat.devtools</span><br><span class="line">deepin.com.gtja.fuyi                 deepin.com.weixin.work</span><br><span class="line">deepin.com.qq.b.crm                  deepin.net.cnki.cajviewer</span><br><span class="line">deepin.com.qq.b.eim                  deepin.org.7-zip</span><br><span class="line">deepin.com.qq.im                     deepin.org.foobar2000</span><br><span class="line">deepin.com.qq.im.light               </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="New-Undercover-Mode"><a href="#New-Undercover-Mode" class="headerlink" title="New Undercover Mode"></a>New Undercover Mode</h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Use a script to switch to the theme like windows 10. Same way to switch back.</p>
-<p><img src="/imghost/cnfk/1.gif" alt="kali undercover mode"></p>
-<h3 id="More-Customization"><a href="#More-Customization" class="headerlink" title="More Customization"></a>More Customization</h3><p>Use own pic to hide dragon symbol or customize your background-pic </p>
-<h4 id="Grub-Background"><a href="#Grub-Background" class="headerlink" title="Grub Background"></a>Grub Background</h4><p><a class="link"   target="_blank" rel="noopener" href="https://linux.cn/article-8359-1.html" >Reference for old editions<i class="fas fa-external-link-alt"></i></a><br>use update-grub to see</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$  update-grub</span><br><span class="line">Generating grub configuration file ...</span><br><span class="line">Found theme: /boot/grub/themes/kali/theme.txt</span><br><span class="line">Found background image: /usr/share/images/desktop-base/desktop-grub.png</span><br><span class="line">Found linux image: /boot/vmlinuz-5.3.0-kali3-amd64</span><br><span class="line">Found initrd image: /boot/initrd.img-5.3.0-kali3-amd64</span><br><span class="line">Found linux image: /boot/vmlinuz-5.3.0-kali2-amd64</span><br><span class="line">Found initrd image: /boot/initrd.img-5.3.0-kali2-amd64</span><br><span class="line">Adding boot menu entry for EFI firmware configuration</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>Kali Linux 2019.4 is xfce desktop environment, so the output is different from former editions. </p>
-<p>Here you can see <code>/usr/share/images/desktop-base/desktop-grub.png</code> is the default pic for background. It is set by <code>/boot/grub/themes/kali/grub_background.sh</code> But this background is no grub background, is the pic shows after you do grub choice.</p>
-<p>As for the grub background, the default pic path is <code>/boot/grub/themes/kali/grub-16x9.png</code></p>
-<p>check <code>/boot/grub/themes/kali/theme.txt</code> to do more.</p>
-<h4 id="Login-Background"><a href="#Login-Background" class="headerlink" title="Login Background"></a>Login Background</h4><p>After setting the grub background, we can then change login background to get more customization<br>The path is <code>/usr/share/backgrounds/kali/kali-light-16x9.png</code></p>
-<p>check <code>/etc/lightdm/lightdm-gtk-greeter.conf</code> and you will see why.</p>
-<h4 id="Undercover-Mode-Background"><a href="#Undercover-Mode-Background" class="headerlink" title="Undercover Mode Background"></a>Undercover Mode Background</h4><p>The path of default background is <code>/usr/share/kali-undercover/backgrounds/Windows-10.jpg</code>, and if you change it, immediately desktop image will change.<br>The path of config file remains to be seen…</p>
-<h3 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h3><p>All the above paths can be found if you keep searching, and different PC or distributions may have different results, so don’t forget to do your own customization.</p>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-        </div>
 
-        
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/note/">#note</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/kali/">#kali</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/01/05/2020-01-05-Game-Tips/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Game Tips</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2019/10/08/2019-10-08-Python-Sandbox-Challenges/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Python Sandbox Challenges</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-    </div>
-</div>
+    }
+
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -451,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Features-of-Kali-2019-4"><span class="nav-number">1.</span> <span class="nav-text">New Features of Kali 2019.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-With-Chinese"><span class="nav-number">2.</span> <span class="nav-text">Problems With Chinese</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-Language"><span class="nav-number">2.1.</span> <span class="nav-text">Choose Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Fonts"><span class="nav-number">2.2.</span> <span class="nav-text">Install Fonts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time-Display-Error"><span class="nav-number">3.</span> <span class="nav-text">Time Display Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Repo-Source-Edit-Source-List"><span class="nav-number">4.</span> <span class="nav-text">Change Repo Source (Edit Source List)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-Kali-Source"><span class="nav-number">4.1.</span> <span class="nav-text">Change Kali Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources"><span class="nav-number">4.1.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key"><span class="nav-number">4.1.2.</span> <span class="nav-text">Add Pub Key</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Deepin-Source"><span class="nav-number">4.2.</span> <span class="nav-text">Add Deepin Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Add Pub Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Don%E2%80%99t-Upgrade-Just-Install"><span class="nav-number">4.2.3.</span> <span class="nav-text">Don’t Upgrade, Just Install</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Undercover-Mode"><span class="nav-number">5.</span> <span class="nav-text">New Undercover Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">5.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-Customization"><span class="nav-number">5.2.</span> <span class="nav-text">More Customization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Grub-Background"><span class="nav-number">5.2.1.</span> <span class="nav-text">Grub Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login-Background"><span class="nav-number">5.2.2.</span> <span class="nav-text">Login Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Undercover-Mode-Background"><span class="nav-number">5.2.3.</span> <span class="nav-text">Undercover Mode Background</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Last"><span class="nav-number">5.3.</span> <span class="nav-text">Last</span></a></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

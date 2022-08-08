@@ -161,259 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Linux Reverse Gadgets</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2019-04-07 21:24:19</span>
-        <span class="mobile">2019-04-07 21:24</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Linux/">Linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/pwn/">pwn</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/gdb/">gdb</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/binutils/">binutils</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/pwntools/">pwntools</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.8k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>17 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Before doing Linux binary analysis, utils which are easy to use are essential.<br>Here are some utils when analysing ELF files or doing analysis on Linux, including ‘-h’ to search and some common usages</p>
-<h2 id="Readelf-Usages"><a href="#Readelf-Usages" class="headerlink" title="Readelf Usages"></a>Readelf Usages</h2><p>Install <code>binutils</code> to use.</p>
-<h3 id="Help-Page"><a href="#Help-Page" class="headerlink" title="Help Page"></a>Help Page</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Usage: readelf &lt;option(s)&gt; elf-file(s)</span><br><span class="line"> Display information about the contents of ELF format files</span><br><span class="line"> Options are:</span><br><span class="line">  -a --all               Equivalent to: -h -l -S -s -r -d -V -A -I</span><br><span class="line">  -h --file-header       Display the ELF file header</span><br><span class="line">  -l --program-headers   Display the program headers</span><br><span class="line">     --segments          An <span class="built_in">alias</span> <span class="keyword">for</span> --program-headers</span><br><span class="line">  -S --section-headers   Display the section header</span><br><span class="line">     --sections          An <span class="built_in">alias</span> <span class="keyword">for</span> --section-headers</span><br><span class="line">  -g --section-groups    Display the section groups</span><br><span class="line">  -t --section-details   Display the section details</span><br><span class="line">  -e --headers           Equivalent to: -h -l -S</span><br><span class="line">  -s --syms              Display the symbol table</span><br><span class="line">     --symbols           An <span class="built_in">alias</span> <span class="keyword">for</span> --syms</span><br><span class="line">  --dyn-syms             Display the dynamic symbol table</span><br><span class="line">  -n --notes             Display the core notes (<span class="keyword">if</span> present)</span><br><span class="line">  -r --relocs            Display the relocations (<span class="keyword">if</span> present)</span><br><span class="line">  -u --unwind            Display the unwind info (<span class="keyword">if</span> present)</span><br><span class="line">  -d --dynamic           Display the dynamic section (<span class="keyword">if</span> present)</span><br><span class="line">  -V --version-info      Display the version sections (<span class="keyword">if</span> present)</span><br><span class="line">  -A --arch-specific     Display architecture specific information (<span class="keyword">if</span> any)</span><br><span class="line">  -c --archive-index     Display the symbol/file index <span class="keyword">in</span> an archive</span><br><span class="line">  -D --use-dynamic       Use the dynamic section info when displaying symbols</span><br><span class="line">  -x --hex-dump=&lt;number|name&gt;</span><br><span class="line">                         Dump the contents of section &lt;number|name&gt; as bytes</span><br><span class="line">  -p --string-dump=&lt;number|name&gt;</span><br><span class="line">                         Dump the contents of section &lt;number|name&gt; as strings</span><br><span class="line">  -R --relocated-dump=&lt;number|name&gt;</span><br><span class="line">                         Dump the contents of section &lt;number|name&gt; as relocated bytes</span><br><span class="line">  -z --decompress        Decompress section before dumping it</span><br><span class="line">  -w[lLiaprmfFsoRtUuTgAckK] or</span><br><span class="line">  --debug-dump[=rawline,=decodedline,=info,=abbrev,=pubnames,=aranges,=macro,=frames,</span><br><span class="line">               =frames-interp,=str,=loc,=Ranges,=pubtypes,</span><br><span class="line">               =gdb_index,=trace_info,=trace_abbrev,=trace_aranges,</span><br><span class="line">               =addr,=cu_index,=links,=follow-links]</span><br><span class="line">                         Display the contents of DWARF debug sections</span><br><span class="line">  --dwarf-depth=N        Do not display DIEs at depth N or greater</span><br><span class="line">  --dwarf-start=N        Display DIEs starting with N, at the same depth</span><br><span class="line">                         or deeper</span><br><span class="line">  -I --histogram         Display histogram of bucket list lengths</span><br><span class="line">  -W --wide              Allow output width to exceed 80 characters</span><br><span class="line">  @&lt;file&gt;                Read options from &lt;file&gt;</span><br><span class="line">  -H --<span class="built_in">help</span>              Display this information</span><br><span class="line">  -v --version           Display the version number of readelf</span><br></pre></td></tr></table></figure>
-<h3 id="Common-Usages"><a href="#Common-Usages" class="headerlink" title="Common Usages"></a>Common Usages</h3><p>-h –file-header       Display the ELF file header</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$  readelf -h /lib/x86_64-linux-gnu/libc.so.6 </span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 02 01 01 03 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF64</span><br><span class="line">  Data:                              2 s complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - GNU</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              DYN (Shared object file)</span><br><span class="line">  Machine:                           Advanced Micro Devices X86-64</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x21ba0</span><br><span class="line">  Start of program headers:          64 (bytes into file)</span><br><span class="line">  Start of section headers:          1795704 (bytes into file)</span><br><span class="line">  Flags:                             0x0</span><br><span class="line">  Size of this header:               64 (bytes)</span><br><span class="line">  Size of program headers:           56 (bytes)</span><br><span class="line">  Number of program headers:         10</span><br><span class="line">  Size of section headers:           64 (bytes)</span><br><span class="line">  Number of section headers:         71</span><br><span class="line">  Section header string table index: 70</span><br></pre></td></tr></table></figure>
-<p>-l –program-headers   Display the program headers</p>
-<p>-S –section-headers   Display the sections’ header</p>
-<p>-s –syms              Display the symbol table<br>(useful when want to search some syms, but just check, not locate)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$  readelf -s /lib/x86_64-linux-gnu/libc.so.6 </span><br><span class="line"></span><br><span class="line">Symbol table <span class="string">&#x27;.dynsym&#x27;</span> contains 2335 entries:</span><br><span class="line">   Num:    Value          Size Type    Bind   Vis      Ndx Name</span><br><span class="line">     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND </span><br><span class="line">     1: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  UND _rtld_global@GLIBC_PRIVATE (30)</span><br><span class="line">     2: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  UND __libc_enable_secure@GLIBC_PRIVATE (30)</span><br><span class="line">     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __tls_get_addr@GLIBC_2.3 (31)</span><br><span class="line">     4: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND _dl_exception_create@GLIBC_PRIVATE (30)</span><br><span class="line">     5: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  UND _rtld_global_ro@GLIBC_PRIVATE (30)</span><br><span class="line">     6: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __tunable_get_val@GLIBC_PRIVATE (30)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<h2 id="Objdump-Usages"><a href="#Objdump-Usages" class="headerlink" title="Objdump Usages"></a>Objdump Usages</h2><p>Install <code>binutils</code> to use.</p>
-<h3 id="Help-Page-1"><a href="#Help-Page-1" class="headerlink" title="Help Page"></a>Help Page</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Usage: objdump &lt;option(s)&gt; &lt;file(s)&gt;</span><br><span class="line"> Display information from object &lt;file(s)&gt;.</span><br><span class="line"> At least one of the following switches must be given:</span><br><span class="line">  -a, --archive-headers    Display archive header information</span><br><span class="line">  -f, --file-headers       Display the contents of the overall file header</span><br><span class="line">  -p, --private-headers    Display object format specific file header contents</span><br><span class="line">  -P, --private=OPT,OPT... Display object format specific contents</span><br><span class="line">  -h, --[section-]headers  Display the contents of the section headers</span><br><span class="line">  -x, --all-headers        Display the contents of all headers</span><br><span class="line">  -d, --disassemble        Display assembler contents of executable sections</span><br><span class="line">  -D, --disassemble-all    Display assembler contents of all sections</span><br><span class="line">  -S, --<span class="built_in">source</span>             Intermix <span class="built_in">source</span> code with disassembly</span><br><span class="line">  -s, --full-contents      Display the full contents of all sections requested</span><br><span class="line">  -g, --debugging          Display debug information <span class="keyword">in</span> object file</span><br><span class="line">  -e, --debugging-tags     Display debug information using ctags style</span><br><span class="line">  -G, --stabs              Display (<span class="keyword">in</span> raw form) any STABS info <span class="keyword">in</span> the file</span><br><span class="line">  -W[lLiaprmfFsoRtUuTgAckK] or</span><br><span class="line">  --dwarf[=rawline,=decodedline,=info,=abbrev,=pubnames,=aranges,=macro,=frames,</span><br><span class="line">          =frames-interp,=str,=loc,=Ranges,=pubtypes,</span><br><span class="line">          =gdb_index,=trace_info,=trace_abbrev,=trace_aranges,</span><br><span class="line">          =addr,=cu_index,=links,=follow-links]</span><br><span class="line">                           Display DWARF info <span class="keyword">in</span> the file</span><br><span class="line">  -t, --syms               Display the contents of the symbol table(s)</span><br><span class="line">  -T, --dynamic-syms       Display the contents of the dynamic symbol table</span><br><span class="line">  -r, --reloc              Display the relocation entries <span class="keyword">in</span> the file</span><br><span class="line">  -R, --dynamic-reloc      Display the dynamic relocation entries <span class="keyword">in</span> the file</span><br><span class="line">  @&lt;file&gt;                  Read options from &lt;file&gt;</span><br><span class="line">  -v, --version            Display this program<span class="string">&#x27;s version number</span></span><br><span class="line"><span class="string">  -i, --info               List object formats and architectures supported</span></span><br><span class="line"><span class="string">  -H, --help               Display this information</span></span><br></pre></td></tr></table></figure>
-<h3 id="Common-Usages-1"><a href="#Common-Usages-1" class="headerlink" title="Common Usages"></a>Common Usages</h3><p>-d, –disassemble        Display assembler contents of executable sections</p>
-<p>-f, –file-headers       Display the contents of the overall file header</p>
-<p>objdump -d -j .plt xxx     Display the PLT table (read only)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$  objdump -d -j .plt /lib/x86_64-linux-gnu/libc.so.6 </span><br><span class="line"></span><br><span class="line">/lib/x86_64-linux-gnu/libc.so.6:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line">Disassembly of section .plt:</span><br><span class="line"></span><br><span class="line">0000000000020fd0 &lt;*ABS*+0x86fa0@plt-0x10&gt;:</span><br><span class="line">   20fd0:	ff 35 32 30 39 00    	pushq  0x393032(%rip)        <span class="comment"># 3b4008 &lt;h_errlist@@GLIBC_2.2.5+0xf68&gt;</span></span><br><span class="line">   20fd6:	ff 25 34 30 39 00    	jmpq   *0x393034(%rip)        <span class="comment"># 3b4010 &lt;h_errlist@@GLIBC_2.2.5+0xf70&gt;</span></span><br><span class="line">   20fdc:	0f 1f 40 00          	nopl   0x0(%rax)</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 
-<p>objdump -R xxx           Display the GOT table (read and write)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$  objdump -R /lib/x86_64-linux-gnu/libc.so.6 </span><br><span class="line"></span><br><span class="line">/lib/x86_64-linux-gnu/libc.so.6:     file format elf64-x86-64</span><br><span class="line"></span><br><span class="line">DYNAMIC RELOCATION RECORDS</span><br><span class="line">OFFSET           TYPE              VALUE </span><br><span class="line">00000000003b0620 R_X86_64_RELATIVE  *ABS*+0x00000000003b5560</span><br><span class="line">00000000003b0630 R_X86_64_RELATIVE  *ABS*+0x0000000000021360</span><br><span class="line">00000000003b0638 R_X86_64_RELATIVE  *ABS*+0x0000000000164e50</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">sometimes like:</span><br><span class="line"></span><br><span class="line">DYNAMIC RELOCATION RECORDS</span><br><span class="line">OFFSET   TYPE              VALUE </span><br><span class="line">08049ff0 R_386_GLOB_DAT    __gmon_start__</span><br><span class="line">0804a000 R_386_JUMP_SLOT   <span class="built_in">read</span></span><br><span class="line">0804a004 R_386_JUMP_SLOT   __gmon_start__</span><br><span class="line">0804a008 R_386_JUMP_SLOT   __libc_start_main</span><br><span class="line">0804a00c R_386_JUMP_SLOT   write</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-<h2 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h2><h3 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h3><p>Normally we use <code>gdb</code> to open file by:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gdb -q --args program_name program_args</span><br></pre></td></tr></table></figure>
-<p>After loading the program into <code>gdb</code>, you will have lots of commands to use.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">run/r/start: to run the program</span><br><span class="line">The difference is: &#x27;run&#x27; is just load the program and run, but &#x27;start&#x27; means pause at the front of &#x27;main function&#x27; </span><br><span class="line">&#x27;show args&#x27; and &#x27;set args&#x27; to modify args</span><br><span class="line"></span><br><span class="line">break/b: to set breakpoint</span><br><span class="line"></span><br><span class="line">continue/c: to continue the rest program</span><br><span class="line"></span><br><span class="line">next/n: to get to the next line of source code but not step into the function </span><br><span class="line">ni: get to next instruction.</span><br><span class="line"></span><br><span class="line">step/s: to get next and step into the func </span><br><span class="line">si: step to next instruction.</span><br><span class="line"></span><br><span class="line">ni&amp;si: to run next instruction, and the difference is same as next&amp;step</span><br><span class="line"></span><br><span class="line">finish/fini: to run until return of this stack or func</span><br><span class="line"></span><br><span class="line">print/p: to print the value of variables</span><br><span class="line"></span><br><span class="line">list/l: to show 10 lines of codes, use list[m,n] and get codes from line m to line n</span><br><span class="line"></span><br><span class="line">backtrace/bt: to list stack called</span><br><span class="line"></span><br><span class="line">display,undisplay: track the value of the variable</span><br><span class="line"></span><br><span class="line">info/i: show information of &quot;args&quot;,&quot;locals&quot;,&quot;break&quot;,&quot;all-registers&quot; and so on</span><br><span class="line">info proc mapping(s): show memory mapped address</span><br><span class="line">info all-registers: show regs</span><br><span class="line"></span><br><span class="line">set: set values</span><br><span class="line">set *addr = val</span><br><span class="line">set args ...</span><br><span class="line">set environment LD_PRELOAD=./libx.so</span><br></pre></td></tr></table></figure>
-<p>And </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">def hook-stop: </span><br><span class="line">$ gdb ./linux_server -q</span><br><span class="line">Reading symbols from ./linux_server...</span><br><span class="line">(No debugging symbols found in ./linux_server)</span><br><span class="line">(gdb) define hook-stop</span><br><span class="line">Type commands for definition of &quot;hook-stop&quot;.</span><br><span class="line">End with a line saying just &quot;end&quot;.</span><br><span class="line">&gt;x/10i $pc</span><br><span class="line">&gt;end</span><br><span class="line">(gdb) r</span><br><span class="line">Starting program: /root/linux_server</span><br><span class="line">[Thread debugging using libthread_db enabled]</span><br><span class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</span><br><span class="line">IDA Linux 32-bit remote debug server(ST) v1.22. Hex-Rays (c) 2004-2017</span><br><span class="line">Listening on 0.0.0.0:23946...</span><br><span class="line">^C</span><br><span class="line">Program received signal SIGINT, Interrupt.</span><br><span class="line">=&gt; 0xf7fd1ef9 &lt;__kernel_vsyscall+9&gt;:    pop    %ebp</span><br><span class="line">   0xf7fd1efa &lt;__kernel_vsyscall+10&gt;:   pop    %edx</span><br><span class="line">   0xf7fd1efb &lt;__kernel_vsyscall+11&gt;:   pop    %ecx</span><br><span class="line">   0xf7fd1efc &lt;__kernel_vsyscall+12&gt;:   ret</span><br><span class="line">   0xf7fd1efd:  nop</span><br><span class="line">   0xf7fd1efe:  nop</span><br><span class="line">   0xf7fd1eff:  nop</span><br><span class="line">   0xf7fd1f00:  nop</span><br><span class="line">   0xf7fd1f01:  lea    0x0(%esi,%eiz,1),%esi</span><br><span class="line">   0xf7fd1f08:  lea    0x0(%esi,%eiz,1),%esi</span><br><span class="line">0xf7fd1ef9 in __kernel_vsyscall ()</span><br><span class="line">(gdb)</span><br><span class="line"></span><br><span class="line">shell:</span><br><span class="line">(gdb) shell</span><br><span class="line">$ cd /</span><br><span class="line">$ ls</span><br><span class="line">bin   dev  home  lib    lib64   lost+found  mnt  proc  run   srv  tmp  var</span><br><span class="line">boot  etc  init  lib32  libx32  media       opt  root  sbin  sys  usr</span><br><span class="line">$ exit</span><br><span class="line">exit</span><br><span class="line">(gdb)</span><br><span class="line"></span><br><span class="line">set follow-fork-mode [parent|child]: determining which process (thread) to attach, when encountering `fork` actions.</span><br><span class="line"></span><br><span class="line">set scheduler-locking [on|off|step]: only execute debugging thread and block others.</span><br></pre></td></tr></table></figure>
-<h3 id="X-Commands"><a href="#X-Commands" class="headerlink" title="X Commands"></a>X Commands</h3><p>When discovering the memory, use <code>x</code> command to check.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">examine/x: to show memory</span><br><span class="line">usage: x /nfu &amp;lt;addr&amp;gt;</span><br><span class="line"></span><br><span class="line">n demonstrate number of memory units</span><br><span class="line"></span><br><span class="line">f demonstrate the method to display, can be:</span><br><span class="line">x Display variables in hexadecimal format.</span><br><span class="line">d Display variables in decimal format.</span><br><span class="line">u Display unsigned integers in decimal format.</span><br><span class="line">o Display variables in octal format.</span><br><span class="line">t Display variables in binary format.</span><br><span class="line">a Display variables in hexadecimal format.</span><br><span class="line">i instruction address format</span><br><span class="line">c Display variables in character format.</span><br><span class="line">f Display variables in floating point format.</span><br><span class="line"></span><br><span class="line">u represents the length of an address unit, can be:</span><br><span class="line">b means single byte,</span><br><span class="line">h means double-byte,</span><br><span class="line">w represents four bytes,</span><br><span class="line">g means eight bytes</span><br><span class="line"></span><br><span class="line">To sum up:</span><br><span class="line">Format letters are o(octal), x(hex), d(decimal), u(unsigneddecimal),</span><br><span class="line">t(binary), f(float), a(address), i(instruction), c(char) and s(string).</span><br><span class="line">Size letters are b(byte), h(halfword), w(word), g(giant, 8bytes)</span><br></pre></td></tr></table></figure>
-<p>So what is commonly used?</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x /100wx addr     --    show memory for x86</span><br><span class="line">x /20gx addr      --    show memory for x64</span><br><span class="line">x /10i addr       --    display memory as instructions</span><br><span class="line">... </span><br></pre></td></tr></table></figure>
-<h3 id="Debug-Running-Process"><a href="#Debug-Running-Process" class="headerlink" title="Debug Running Process"></a>Debug Running Process</h3><p>Debug local process dynamically<br>First, find the pid of xxx</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ax | grep xxx</span><br></pre></td></tr></table></figure>
-<p>If return the pid nnn, use</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gdb xxx nnn</span><br></pre></td></tr></table></figure>
-<p>or go into gdb to use</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) file /path/to/xxx</span><br></pre></td></tr></table></figure>
-<p>and</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) attach nnn</span><br></pre></td></tr></table></figure>
-<p>to attach gdb to the process</p>
-<h3 id="gdb-gdbserver-Debug"><a href="#gdb-gdbserver-Debug" class="headerlink" title="gdb+gdbserver Debug"></a>gdb+gdbserver Debug</h3><p>Use <code>gdb</code> to connect to the stub, which <code>gdbserver</code> creates on the remote host.</p>
-<p>First, build the <code>gdbserver</code> for target platform (take <code>arm</code> for e.g.)</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> gdb/</span><br><span class="line">$ ./configure --target=arm-linux --program-prefix=arm-linux- --prefix=/opt/arm-linux-gdb/</span><br><span class="line">$ make <span class="comment"># build gdb</span></span><br><span class="line">$ make install <span class="comment"># install gdb</span></span><br><span class="line"><span class="comment"># if error occurs, google to solve it</span></span><br><span class="line">$ <span class="built_in">cd</span> gdb/gdbserver/</span><br><span class="line">$ ./configure --target=arm-linux --host=arm-linux-gnueabi</span><br><span class="line"><span class="comment"># &#x27;--host&#x27; assigns cross compilation toolchain</span></span><br><span class="line">$ make <span class="comment"># build gdbserver</span></span><br></pre></td></tr></table></figure>
-<p>Allow program to be debugged</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ arm-linux-gnueabi-gcc -g test.c -o <span class="built_in">test</span></span><br><span class="line"><span class="comment"># &#x27;-g&#x27; is essential</span></span><br></pre></td></tr></table></figure>
-<p>Copy gdbserver to target machine, and run it</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gdbserver IP:PORT xxx [--attach PID]</span><br><span class="line"><span class="comment"># this IP is your host IP</span></span><br></pre></td></tr></table></figure>
-<p>At your host</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ arm-linux-gdb xxx</span><br><span class="line">......</span><br><span class="line">(gdb) target remote IP:PORT</span><br><span class="line"><span class="comment"># this IP is your target IP</span></span><br></pre></td></tr></table></figure>
-<h3 id="peda"><a href="#peda" class="headerlink" title="peda"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/longld/peda" >peda<i class="fas fa-external-link-alt"></i></a></h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/longld/peda" >PEDA<i class="fas fa-external-link-alt"></i></a> - Python Exploit Development Assistance for GDB<br>Key Features:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Enhance the display of gdb: colorize and display disassembly codes, registers, memory information during debugging.</span><br><span class="line">Add commands to support debugging and exploit development (for a full list of commands use peda help):</span><br><span class="line">    aslr -- Show/set ASLR setting of GDB</span><br><span class="line">    checksec -- Check for various security options of binary</span><br><span class="line">    dumpargs -- Display arguments passed to a function when stopped at a call instruction</span><br><span class="line">    dumprop -- Dump all ROP gadgets in specific memory range</span><br><span class="line">    elfheader -- Get headers information from debugged ELF file</span><br><span class="line">    elfsymbol -- Get non-debugging symbol information from an ELF file</span><br><span class="line">    lookup -- Search for all addresses/references to addresses which belong to a memory range</span><br><span class="line">    patch -- Patch memory start at an address with string/hexstring/int</span><br><span class="line">    pattern -- Generate, search, or write a cyclic pattern to memory</span><br><span class="line">    procinfo -- Display various info from /proc/pid/</span><br><span class="line">    pshow -- Show various PEDA options and other settings</span><br><span class="line">    pset -- Set various PEDA options and other settings</span><br><span class="line">    readelf -- Get headers information from an ELF file</span><br><span class="line">    ropgadget -- Get common ROP gadgets of binary or library</span><br><span class="line">    ropsearch -- Search for ROP gadgets in memory</span><br><span class="line">    searchmem|find -- Search for a pattern in memory; support regex search</span><br><span class="line">    shellcode -- Generate or download common shellcodes.</span><br><span class="line">    skeleton -- Generate python exploit code template</span><br><span class="line">    vmmap -- Get virtual mapping address ranges of section(s) in debugged process</span><br><span class="line">    xormem -- XOR a memory region with a key</span><br></pre></td></tr></table></figure>
-<p>Installation</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/longld/peda.git ~/peda</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;source ~/peda/peda.py&quot;</span> &gt;&gt; ~/.gdbinit   <span class="comment"># if using pwndbg, gef or other plugins, just change contents in ~/.gdbinit</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;DONE! debug your program with gdb and enjoy&quot;</span></span><br></pre></td></tr></table></figure>
-<p>Other plugins include: <a target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg"><code>pwndbg</code></a>, <a target="_blank" rel="noopener" href="https://github.com/hugsy/gef"><code>gef</code></a>, you can also write one by yourself.</p>
-<h3 id="pwndbg"><a href="#pwndbg" class="headerlink" title="pwndbg"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg" >pwndbg<i class="fas fa-external-link-alt"></i></a></h3><p>It is <a class="link"   target="_blank" rel="noopener" href="https://github.com/pwndbg/pwndbg" >pwndbg<i class="fas fa-external-link-alt"></i></a>, not <a class="link"   target="_blank" rel="noopener" href="https://github.com/scwuaptx/Pwngdb" >Pwngdb<i class="fas fa-external-link-alt"></i></a>.</p>
-<p>Comparing to <code>gef</code>, both <code>peda</code> and <code>pwndbg</code> are better for heap analysis.</p>
-<p>Installation</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/pwndbg/pwndbg</span><br><span class="line">$ cd pwndbg</span><br><span class="line">$ ./setup.sh</span><br></pre></td></tr></table></figure>
-<p>Useful commands:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">heap</span><br><span class="line">bins</span><br><span class="line">arena</span><br><span class="line">context</span><br><span class="line">retaddr</span><br><span class="line">checksec</span><br><span class="line">cyclic</span><br><span class="line">hexdump [addr]</span><br><span class="line">search --[writable|executable] --[qword|string] [0x1/bin/sh]</span><br><span class="line">dump memory copy start_addr end_addr</span><br><span class="line">bd/be n -- disable/enable breakpoint n (`info b` to see)</span><br><span class="line">aslr [blank/on/off]</span><br></pre></td></tr></table></figure>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-<h2 id="GCC"><a href="#GCC" class="headerlink" title="GCC"></a>GCC</h2><p>e.g.: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -fno-stack-protector -z execstack -no-pie -mpreferred-stack-boundary=4 -o pwn1 pwn1.c</span><br></pre></td></tr></table></figure>
-<p>remove canary, NX, PIE, and What a stack boundary&#x3D;2&#x2F;4 does<br> is to ensure that the stack is set up into dword-size&#x2F;qword-size increments,<br> this prevents your machine from optimizing the stack.</p>
-<p>Compile shared library:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -shared -fPIC -0 libx.so libx.c</span><br><span class="line"># $ LD_PRELOAD=./libx.so ./pwn2</span><br></pre></td></tr></table></figure>
-<h2 id="strace-ltrace-ftrace-ptrace"><a href="#strace-ltrace-ftrace-ptrace" class="headerlink" title="strace, ltrace, ftrace, ptrace"></a>strace, ltrace, ftrace, ptrace</h2><p>They are used to tracking system calls and signals for user space processes</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ strace ./cpptest </span><br><span class="line">execve(&quot;./cpptest&quot;, [&quot;./cpptest&quot;], 0x7fffcd553000 /* 46 vars */) = 0</span><br><span class="line">brk(NULL)                               = 0x55ac0a57c000</span><br><span class="line">access(&quot;/etc/ld.so.nohwcap&quot;, F_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">...</span><br><span class="line">write(1, &quot;Hello world!\n&quot;, 13Hello world!</span><br><span class="line">)          = 13</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-<p>show details and exit code</p>
-<h2 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h2><p>Cannot function on Windows because quite a few modules are Linux only</p>
-<p>Install in python2</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pwntools</span><br></pre></td></tr></table></figure>
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-<p>Install in python3</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install git+https://github.com/arthaud/python3-pwntools.git</span><br></pre></td></tr></table></figure>
+    }
 
-<p>Here is <a class="link"   target="_blank" rel="noopener" href="http://docs.pwntools.com/en/stable/" >pwntools official docs<i class="fas fa-external-link-alt"></i></a>. Better deploy it at localhost to avoid network delay</p>
-<p>Along with <code>pwn</code> Python library, we have other gadgets installed like: <code>ROPgadget</code>, <code>cyclic</code>, <code>checksec</code> and</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pwn</span><br><span class="line">usage: pwn [-h]</span><br><span class="line">           &#123;asm,checksec,constgrep,cyclic,debug,disasm,disablenx,elfdiff,elfpatch,errno,hex,phd,pwnstrip,scramble,shellcraft,template,unhex,update&#125;</span><br></pre></td></tr></table></figure>
-<p>Template:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment"># arch in [&#x27;aarch64&#x27;, &#x27;alpha&#x27;, &#x27;amd64&#x27;, &#x27;arm&#x27;, &#x27;avr&#x27;, &#x27;cris&#x27;, &#x27;i386&#x27;, &#x27;ia64&#x27;, &#x27;m68k&#x27;, &#x27;mips&#x27;, &#x27;mips64&#x27;, &#x27;msp430&#x27;, &#x27;none&#x27;, &#x27;powerpc&#x27;, &#x27;powerpc64&#x27;, &#x27;s390&#x27;, &#x27;sparc&#x27;, &#x27;sparc64&#x27;, &#x27;thumb&#x27;, &#x27;vax&#x27;]</span></span><br><span class="line"><span class="comment"># os in [&#x27;android&#x27;, &#x27;cgc&#x27;, &#x27;freebsd&#x27;, &#x27;linux&#x27;, &#x27;windows&#x27;]</span></span><br><span class="line"><span class="comment"># log_level in [&#x27;CRITICAL&#x27;, &#x27;DEBUG&#x27;, &#x27;ERROR&#x27;, &#x27;INFO&#x27;, &#x27;NOTSET&#x27;, &#x27;WARN&#x27;, &#x27;WARNING&#x27;]</span></span><br><span class="line">sh = process(<span class="string">&#x27;file&#x27;</span>, level=<span class="string">&#x27;debug&#x27;</span>) </span><br><span class="line"><span class="comment"># sh = remote(&#x27;ip&#x27;,port)</span></span><br><span class="line"></span><br><span class="line">shelf = ELF(<span class="string">&#x27;file&#x27;</span>)</span><br><span class="line">libcelf = ELF(<span class="string">&#x27;xxx.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line">shell_addr = <span class="number">0xdeadbeef</span></span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># recvuntil, recvline, ...</span></span><br><span class="line">sh.sendline(p64(shell_addr)) <span class="comment"># send, sendafter, ...</span></span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
-<p>About <code>gdb</code> debug, you can attach in script:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>] <span class="comment"># need to run &#x27;tmux&#x27; first</span></span><br><span class="line">gdb.attach(sh)</span><br></pre></td></tr></table></figure>
-<p>or print <code>pid</code> in script and attach in another terminal:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in python2</span></span><br><span class="line"><span class="built_in">print</span> pidof(sh)</span><br><span class="line"><span class="comment"># get: [pid]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># in term</span></span><br><span class="line">$ gdb -q</span><br><span class="line">(gdb) attach [pid]</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>When running program you can add parameters:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh = process(<span class="string">&#x27;file&#x27;</span>, level=<span class="string">&#x27;info&#x27;</span>, aslr=<span class="string">&#x27;True&#x27;</span>)</span><br><span class="line"><span class="comment"># &#x27;level&#x27; is like &#x27;log_level&#x27;</span></span><br><span class="line"><span class="comment"># if &#x27;aslr&#x27; is &#x27;False&#x27;, program will have a fixed base address  </span></span><br></pre></td></tr></table></figure>
-<p>And other functions</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pause()     </span><br><span class="line">cyclic() and cyclic_find()</span><br><span class="line">struct.pack/unpack()</span><br><span class="line">ljust/rjust()</span><br><span class="line">\xcc: SIGTRAP</span><br></pre></td></tr></table></figure>
-<h2 id="other-commands"><a href="#other-commands" class="headerlink" title="other commands"></a>other commands</h2><p>file xxx    to recognize file type by magic bytes</p>
-<p>checksec xxx   to see protection</p>
-<p>ldd xxx     to show share library</p>
-<p>strings [-n16] [-el&#x2F;eb] -tx&#x2F;to&#x2F;td xxx     to show strings</p>
-<p>hexdump -C xxx    to see hex</p>
-<p>fdisk -l xxx   to see disk</p>
-<p>dd if&#x3D;xxx of&#x3D;xxx  to extract from firmware </p>
 
-        </div>
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
 
-        
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/gdb/">#gdb</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/binutils/">#binutils</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwntools/">#pwntools</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+        .name {
+          color: var(--default-text-color);
+        }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux Security Response</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2018/10/21/2018-10-21-First-how-to-do-note/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">First how-to-do note</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
 
-        
-    </div>
-</div>
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -509,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Readelf-Usages"><span class="nav-number">1.</span> <span class="nav-text">Readelf Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Page"><span class="nav-number">1.1.</span> <span class="nav-text">Help Page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Usages"><span class="nav-number">1.2.</span> <span class="nav-text">Common Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objdump-Usages"><span class="nav-number">2.</span> <span class="nav-text">Objdump Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Page-1"><span class="nav-number">2.1.</span> <span class="nav-text">Help Page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Usages-1"><span class="nav-number">2.2.</span> <span class="nav-text">Common Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GDB"><span class="nav-number">3.</span> <span class="nav-text">GDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Commands"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X-Commands"><span class="nav-number">3.2.</span> <span class="nav-text">X Commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-Running-Process"><span class="nav-number">3.3.</span> <span class="nav-text">Debug Running Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb-gdbserver-Debug"><span class="nav-number">3.4.</span> <span class="nav-text">gdb+gdbserver Debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#peda"><span class="nav-number">3.5.</span> <span class="nav-text">peda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwndbg"><span class="nav-number">3.6.</span> <span class="nav-text">pwndbg</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCC"><span class="nav-number">4.</span> <span class="nav-text">GCC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strace-ltrace-ftrace-ptrace"><span class="nav-number">5.</span> <span class="nav-text">strace, ltrace, ftrace, ptrace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwntools"><span class="nav-number">6.</span> <span class="nav-text">pwntools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-commands"><span class="nav-number">7.</span> <span class="nav-text">other commands</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

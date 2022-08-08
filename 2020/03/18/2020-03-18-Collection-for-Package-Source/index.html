@@ -161,210 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Collection for Package Sources</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-03-18 11:27:53</span>
-        <span class="mobile">2020-03-18 11:27</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Note/">Note</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/note/">note</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/docker/">docker</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/pip/">pip</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/gem/">gem</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/npm/">npm</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>721 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>This is for programers in China, where people are a bit inconvenient to go online (off the G^<em>F</em>^W).<br>After changing to the native source, obtaining updates gets faster. </p>
-<h2 id="Change-Linux-Repository-Mirror-Sources"><a href="#Change-Linux-Repository-Mirror-Sources" class="headerlink" title="Change Linux Repository Mirror Sources"></a>Change Linux Repository Mirror Sources</h2><p>Sources can be edited in <code>/etc/apt/sources.list</code>, and you have the following sources (take kali for example) as alternatives to write in this file.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># USTC</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># Aliyun</span><br><span class="line">#deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># TUNA</span><br><span class="line">#deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">#deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line"># ZJU</span><br><span class="line">#deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">#deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line"># SJTU</span><br><span class="line">#deb https://mirrors.sjtug.sjtu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.sjtug.sjtu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># Neusoft</span><br><span class="line">#deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">#deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"></span><br><span class="line"># NWAFU</span><br><span class="line">#deb https://mirrors.nwafu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.nwafu.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
-<p>Recently we encounter “E: Some index files failed to download. They have been ignored, or old ones used instead.”.<br>Change source and delete everything under <code>/var/lib/apt/lists/</code>, then update.</p>
-<p>Deal with problems about public key:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add</span><br></pre></td></tr></table></figure>
-<h2 id="Change-pip-Sources"><a href="#Change-pip-Sources" class="headerlink" title="Change pip Sources"></a>Change <code>pip</code> Sources</h2><p>Temporary Way</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple <span class="comment"># use it for once</span></span><br></pre></td></tr></table></figure>
-<p>Long-term Way</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ vim  ~/.pip/pip.conf  <span class="comment"># edit or create it</span></span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<p>Some other sources</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">aliyun: http://mirrors.aliyun.com/pypi/simple/ </span><br><span class="line">ustc: https://pypi.mirrors.ustc.edu.cn/simple/ </span><br><span class="line">douban: http://pypi.douban.com/simple/ </span><br><span class="line">hust: http://pypi.hustunique.com/</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>For windows this file is in <code>C:\Users\-YourUserName-\pip\pip.ini</code></p>
-<p>On some latest released <code>Linux</code> like <code>Ubuntu 20.xx</code>, the <code>pip</code> of <code>Python2</code> (<code>python2-pip</code>) is not included in the official repo, so we install it by <code>get-pip.py</code>:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update </span><br><span class="line">$ sudo apt install python2</span><br><span class="line">$ curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py</span><br><span class="line">$ sudo python2 get-pip.py       <span class="comment"># no `sudo` if install only for u</span></span><br><span class="line">$ pip2 --version                <span class="comment"># check </span></span><br></pre></td></tr></table></figure>
-<h2 id="Change-Docker-Registry"><a href="#Change-Docker-Registry" class="headerlink" title="Change Docker Registry"></a>Change <code>Docker</code> Registry</h2><p>Just edit the file</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://9cpn8tt6.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Some others</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">netease: http://hub-mirror.c.163.com</span><br><span class="line">ustc: https://docker.mirrors.ustc.edu.cn</span><br><span class="line">aliyun: https://pee6w651.mirror.aliyuncs.com</span><br><span class="line">        https://kfwkfulq.mirror.aliyuncs.com</span><br><span class="line">        https://2lqq34jg.mirror.aliyuncs.com</span><br><span class="line">        http://&lt;personal ID&gt;.mirror.aliyuncs.com</span><br><span class="line">Visit `https://cr.console.aliyun.com/` to get your own aliyun accelerate ID</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>Then we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl  daemon-reload</span><br><span class="line">$ systemctl  restart  docker</span><br></pre></td></tr></table></figure>
-<p>If you run docker on windows, I highly recommend you to use virtualbox to be the host, which is convenient to update, storage expansion and network configuration.</p>
-<h2 id="Change-gem-Sources"><a href="#Change-gem-Sources" class="headerlink" title="Change gem Sources"></a>Change <code>gem</code> Sources</h2><p>Update first(<code>ruby</code> developer does)</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gem update --system  <span class="comment"># oh this step needs to climb off the G F W</span></span><br><span class="line">$ gem -v</span><br><span class="line">2.6.3</span><br></pre></td></tr></table></figure>
-<p>Then change sources</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/</span><br><span class="line">$ gem sources -l</span><br><span class="line">https://gems.ruby-china.com</span><br><span class="line"><span class="comment"># make sure there is only &#x27;gems.ruby-china.com&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>If you are using <code>Gemfile</code> or <code>Bundler</code><br>Edit <code>Gemfile</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="string">&#x27;https://gems.ruby-china.com/&#x27;</span></span><br><span class="line">gem <span class="string">&#x27;rails&#x27;</span>, <span class="string">&#x27;4.2.5&#x27;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>or just</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle config mirror.https://rubygems.org https://gems.ruby-china.com</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<h2 id="Change-npm-Registry"><a href="#Change-npm-Registry" class="headerlink" title="Change npm Registry"></a>Change <code>npm</code> Registry</h2><p>You can replace <code>npm</code> with <code>cnpm</code>, then use <code>cnpm</code> to install packages. </p>
-<p>Install the <code>cnpm</code> by </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
 
-<p>Or, change package source can be conducted by</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>Then see the result</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config list</span><br></pre></td></tr></table></figure>
-        </div>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/note/">#note</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/docker/">#docker</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/pip/">#pip</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/gem/">#gem</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/npm/">#npm</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">About Reverse Shell</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">MSF Pentest Route</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+    }
 
-        
-    </div>
-</div>
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -460,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Linux-Repository-Mirror-Sources"><span class="nav-number">1.</span> <span class="nav-text">Change Linux Repository Mirror Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-pip-Sources"><span class="nav-number">2.</span> <span class="nav-text">Change pip Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Docker-Registry"><span class="nav-number">3.</span> <span class="nav-text">Change Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-gem-Sources"><span class="nav-number">4.</span> <span class="nav-text">Change gem Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-npm-Registry"><span class="nav-number">5.</span> <span class="nav-text">Change npm Registry</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

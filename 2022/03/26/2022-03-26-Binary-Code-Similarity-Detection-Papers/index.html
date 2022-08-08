@@ -9,7 +9,7 @@
     
     <title>
         
-            Binary-Code-Similarity-Detection-Papers |
+            Binary Code Similarity Detection Papers |
         
         Relish the Moment
     </title>
@@ -161,659 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Binary-Code-Similarity-Detection-Papers</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-03-26 10:00:21</span>
-        <span class="mobile">2022-03-26 10:00</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Papers/">Papers</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/paper/">paper</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/bcsd/">bcsd</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>3.2k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>20 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>There is a repo called <a class="link"   target="_blank" rel="noopener" href="https://github.com/SystemSecurityStorm/Awesome-Binary-Similarity" >Awesome Binary Similarity<i class="fas fa-external-link-alt"></i></a> that helps collecting papers.</p>
-<p>Here comes my list (including what I’ve read) in alphabetical order.</p>
-<h2 id="A-Survey-of-Binary-Code-Similarity"><a href="#A-Survey-of-Binary-Code-Similarity" class="headerlink" title="A Survey of Binary Code Similarity"></a>A Survey of Binary Code Similarity</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/1909.11424.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>ACM Computing Survey 2021</th>
-</tr>
-</thead>
-</table>
-<p>A survey is sometimes all you need at first.</p>
-<p>It analyzes 61 binary code similarity approaches on four aspects: </p>
-<ol>
-<li>the applications they enable, </li>
-<li>their approach characteristics, </li>
-<li>how the approaches are implemented, and </li>
-<li>the benchmarks and methodologies used to evaluate them.</li>
-</ol>
-<h2 id="A-Cross-Architecture-Instruction-Embedding-Model-for-Natural-Language-Processing-Inspired-Binary-Code-Analysis"><a href="#A-Cross-Architecture-Instruction-Embedding-Model-for-Natural-Language-Processing-Inspired-Binary-Code-Analysis" class="headerlink" title="A Cross-Architecture Instruction Embedding Model for Natural Language Processing-Inspired Binary Code Analysis"></a>A Cross-Architecture Instruction Embedding Model for Natural Language Processing-Inspired Binary Code Analysis</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/1812.09652.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://cse.sc.edu/~lluo/papers/bar-2019.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/nlp-code-analysis/cross-arch-instr-model" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>NDSS Workshop of BAR 2019</th>
-</tr>
-</thead>
-</table>
-<p>Propose to learn the cross-architecture instruction embedding through a <em><strong>joint learning</strong></em> approach, utilizes both the <strong>context concurrence information</strong> present in the instruction sequences from the same architecture, and the <strong>semantically-equivalent signals</strong> exhibited in the instruction sequence pairs from different architectures. </p>
-<p>By jointly learning these two types of information, can achieve both the mono-architecture and cross-architecture objectives, and generate high-quality cross-architecture instruction embeddings that capture not only the semantics of instructions within an architecture, but also their semantic relationships across architectures. as a showcase, apply the model to resolving semantics-based basic block similarity comparison.</p>
-<p><img src="/./imghost/bcsdp/across.png" alt="A cross-architecture instruction embedding model"></p>
-<p><em><strong>System Overview</strong></em>:<br>The approach consists of a <em><strong>mono-architecture</strong></em> component and a <em><strong>multi-architecture</strong></em> component.</p>
-<ul>
-<li>The <em><strong>mono-architecture</strong></em> component utilizes the <em>context concurrence information</em> present in the input instruction sequences from the same architecture;<br>(an instruction sequence here means a basic block)<br>  <em>CBOW</em> model (<em>word2vec</em>) is adopted due to better performance than <em>skip-gram</em>, predicts current <em>instruction</em> based on its context.</li>
-<li>and the <em><strong>multi-architecture</strong></em> component learns the <em>semantically-equivalent signals</em> exhibited in the <em>equivalent instruction sequence pairs</em> from varying architectures.<br>  Still <em>CBOW</em>, while use one arch inst context (<code>ARM</code> insts), to predict target equavilent inst in another arch.</li>
-<li>Handle <em>OOV</em> insts: <ul>
-<li>replace constant values with <code>0</code>, keep the minus signs.</li>
-<li>string literals -&gt; <code>&lt;STR&gt;</code></li>
-<li>function names -&gt; <code>FOO</code></li>
-<li>other symbol constants -&gt; <code>&lt;TAG&gt;</code></li>
-</ul>
-</li>
-<li>Joint object function: *&amp;)%#%&amp;$@!</li>
-</ul>
-<h2 id="Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization"><a href="#Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization" class="headerlink" title="Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization"></a>Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.computer.org/csdl/proceedings-article/sp/2019/666000a038/19skfc3ZfKo" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/38ae/cd9be307867e375b17597499e3e8be2d4930.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6ethsho5uJA&feature=emb_title" >video<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/McGill-DMaS/Kam1n0-Community" >repo<i class="fas fa-external-link-alt"></i></a> (<a class="link"   target="_blank" rel="noopener" href="https://github.com/oalieno/asm2vec-pytorch" >unofficial<i class="fas fa-external-link-alt"></i></a>)</th>
-<th>S&amp;P 2019</th>
-</tr>
-</thead>
-</table>
-<p>First to employ representation learning, develop Asm2Vec for assembly code syntax and control flow graph, and is is more resilient to code obfuscation and compiler optimizations.</p>
-<p>Asm2Vec uses PV-DM neural network (an extension of word2vec), models the control flow grapg as multiple sequences, treats <em>opcodes(operations)</em> and <em>oprands</em> as tokens.</p>
-<p><img src="/./imghost/bcsdp/asm2vec.png" alt="The proposed Asm2Vec neural network model for assembly code"></p>
-<h2 id="Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection"><a href="#Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection" class="headerlink" title="Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection"></a>Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/2108.06082v1.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/Asteria-BCSD/Asteria" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>DSN 2021</th>
-</tr>
-</thead>
-</table>
-<p>Propose a deep learning-based AST-encoding method, leveraging <em>Tree-LSTM</em> network.</p>
-<p>Given a binary, first extract ASTs by decompiling its functions, then preprocess ASTs and encode them into representation vectors using <em>Tree-LSTM</em>, finally combine them as <em>Siamese Network</em> and calculate similarity score.</p>
-<p><img src="/./imghost/bcsdp/asteria1.png" alt="System Overview"><br><img src="/./imghost/bcsdp/asteria2.png" alt="Similarity Calculation"></p>
-<h2 id="CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching"><a href="#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching" class="headerlink" title="CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching"></a>CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://keenlab.tencent.com/zh/whitepapers/neurips-2020-cameraready.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="http://github.com/binaryai/sdk" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>NeurIPS 2020</th>
-</tr>
-</thead>
-</table>
-<p>Propose an end-to-end cross-model retrieval network for binary source code matching, adopt <em>Deep Pyramid Convolutional Neural Network (DPCNN)</em> for source code feature extraction and <em>Graph Neural Network (GNN)</em> for binary code feature extraction, use neural network-based models to capture code literals, including strings and integers, implement “norm weighted sampling” for negative sampling.</p>
-<p><img src="/./imghost/bcsdp/codecmr1.png" alt="The overall framework of CodeCMR"><br><img src="/./imghost/bcsdp/codecmr2.png" alt="Models for embedding"></p>
-<h2 id="Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search"><a href="#Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search" class="headerlink" title="Codee: A Tensor Embedding Scheme for Binary Code Search"></a>Codee: A Tensor Embedding Scheme for Binary Code Search</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9345532" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://tensorworkshop.github.io/NeurIPS2021/accepted_papers/Codee_Poster_Jia_Yang_26.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/ycachy/Codee" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>TSE 2021</th>
-</tr>
-</thead>
-</table>
-<p>Focus on cross-platform and cross-optimization.</p>
-<ol>
-<li>modify a skip-gram model with negative sampling to extract <strong>token (opcodes and oprands) representation</strong>.<br><img src="/./imghost/bcsdp/codee3.png" alt="Overview of the token embedding generation scheme"><br>analyze instructions in <em>inter-procedural control flow graph (ICFG)</em>, and use <em>Node2vecWalk</em> to scale the processing time, cz ICFG is much larger than CFG.</li>
-<li><strong>basic block embedding</strong> generation is based on 2 network embedding algorithms – <em>AANE</em>, <em>LINE</em>.<br>feed basic block feature vectors and function control flow contextual information, design loss function and use ADMM algorithm.</li>
-<li>feed <strong>block embeddings</strong> into tensor to generate <strong>function embeddings</strong>.<br>to facilitate efficient search, use <em>tensor singular value decomposition althorithm (tSVD)</em> to compress <strong>basic block embeddings</strong> into a compact function embedding, and use <em>locality sensitive hash (LSH)</em> to search.<br><img src="/./imghost/bcsdp/codee2.png" alt="Function embedding generation process using tSVD algorithm"><br>If two vectors have the most same values, consider these two vectors to be similar.</li>
-</ol>
-<p>Tooo much formulas, finally the overview:</p>
-<p><img src="/./imghost/bcsdp/codee1.png" alt="Overview of the tensor embedding-based scheme"></p>
-<h2 id="DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing"><a href="#DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing" class="headerlink" title="DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing"></a>DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://par.nsf.gov/servlets/purl/10198294" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TB50csOprMs" >video<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/ycachy/Codee" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>NDSS 2020</th>
-</tr>
-</thead>
-</table>
-<p>Propose an unsupervised program-wide code representation learning technique.<br>Rely on both the <strong>code semantic information</strong> and the <strong>program-wide control flow information</strong> to generate basic block embeddings, and propose a <strong>k-hop greedy matching algorithm</strong> to find the optimal diffing results using the generated block embeddings.</p>
-<ol>
-<li>modify <em>Word2Vec</em> to extract semantic information for <strong>tokens</strong> (opcode and operands), eliminating OOV problem, further assemble basic block level feature vectors which contain <strong>(basic block level) semantic information</strong>.<br>actually <strong>token embedding</strong> belongs to <em>pre-processing</em>, which also includes <strong><em>ICFG</em> extracting</strong>.<br>there are 3 normalization rules:<ul>
-<li>numeric const values -&gt; <code>im</code></li>
-<li>registers renamed according to length</li>
-<li>pointers -&gt; <code>ptr</code><br>use <em>RandomWalk</em> to generate <em>sentence</em> for <em>Word2Vec (CBOW)</em>, then get <strong>opcodes&amp;oprands embeddings</strong> and:</li>
-<li>calculate the average of the operand embeddings (maybe within an inst?)</li>
-<li>concatenate with the opcode embedding to generate instruction embedding</li>
-<li>sum up the instructions within the block to formulate the block feature vector</li>
-<li>considering opcodes’ importance, using <em>TF-IDF</em> to learn weights (more weights for ops with stable quantity, this may change due to optimization)</li>
-</ul>
-</li>
-<li>then feed feature vectors into <em>Text-associated DeepWalk algorithm (TADW)</em> to generate basic block embeddings that contain <strong>program-wide control flow contextual information</strong>.<ul>
-<li>first do graph merging (but why there’re 2 ICFGs ??? cannot understand so far), creating virtual nodes for strings &amp; libcalls</li>
-<li>feed merged graph and bb fea vectors into <em>TADW</em></li>
-</ul>
-</li>
-<li>finally present a k-hop greedy matching algorithm to match basic blocks.<br> explore neighbors of already matched pairs (or initial pairs&#x2F;set), add basic blocks (nodes) having highest similarity with a threshold of 0.6.<br> then use Hungarian algorithm (linear alignment) to find optimal matching.</li>
-</ol>
-<p>It could be extended to handle cross-architecture using IR …</p>
-<p><img src="/./imghost/bcsdp/deepbindiff.png" alt="Overview of DEEPBINDIFF"></p>
-<h2 id="Graph-matching-networks-for-learning-the-similarity-of-graph-structured-objects"><a href="#Graph-matching-networks-for-learning-the-similarity-of-graph-structured-objects" class="headerlink" title="Graph matching networks for learning the similarity of graph structured objects"></a>Graph matching networks for learning the similarity of graph structured objects</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/1904.12787.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/Lin-Yijie/Graph-Matching-Networks" >repo (unofficial)<i class="fas fa-external-link-alt"></i></a></th>
-<th>ICML 2019</th>
-</tr>
-</thead>
-</table>
-<p>To be continued …</p>
-<h2 id="How-could-Neural-Networks-understand-Programs"><a href="#How-could-Neural-Networks-understand-Programs" class="headerlink" title="How could Neural Networks understand Programs?"></a>How could Neural Networks understand Programs?</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/2105.04297.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/pdlan/OSCAR" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>ICML 2021</th>
-</tr>
-</thead>
-</table>
-<p>Propose a novel program semantics learning paradigm: model should learn information composed of </p>
-<ol>
-<li>the <strong>representations</strong> which align well with the <em>fundamental operations</em> in <em>operational semantics</em>,</li>
-<li>the <strong>information of environment transition</strong>, which is indispensable for program understanding.</li>
-</ol>
-<p>Present a hierarchical Transformer-based pre-training model called <strong>OSCAR</strong>, learns from IR and encoded representation derived from static analysis.</p>
-<p><img src="/./imghost/bcsdp/howcould.png" alt="An illustration of the model architecture of OSCAR"></p>
-<p>hard for me to understand … to be continued …</p>
-<h2 id="How-Machine-Learning-Is-Solving-the-Binary-Function-Similarity-Problem"><a href="#How-Machine-Learning-Is-Solving-the-Binary-Function-Similarity-Problem" class="headerlink" title="How Machine Learning Is Solving the Binary Function Similarity Problem"></a>How Machine Learning Is Solving the Binary Function Similarity Problem</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.eurecom.fr/publication/6847/download/sec-publi-6847.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/Cisco-Talos/binary_function_similarity" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>USENIX 2022</th>
-</tr>
-</thead>
-</table>
-<p>A systematic measurement study on the state of the art of this research area. </p>
-<p>We first explore existing research and group each solution based on the adopted approach, with a particular focus on recent successful techniques based on machine learning.</p>
-<p>We then select, compare, and implement the ten most representative approaches and their possible variants.</p>
-<p>Based on our analysis, we identified 30 techniques, out of which we then selected ten representative solutions for our study.</p>
-<p>The approaches are clustered according to their respective research group.<br><img src="/./imghost/bcsdp/howmachine1.png" alt="approaches clustered according to their respective research group"></p>
-<p>The next figure shows instead the timeline of publication on the Y axis, and the different types of input data on the X axis. The approaches are then clustered in three main groups based on the different ways of computing the similarity.<br><img src="/./imghost/bcsdp/howmachine2.png" alt="timeline on the Y axis, and the different types of input data on the X axis"></p>
-<p>Briefly describe the ten selected solutions:</p>
-<ol>
-<li><a class="link"   target="_blank" rel="noopener" href="https://www.xorpd.net/pages/fcatalog.html" >Catalog1<i class="fas fa-external-link-alt"></i></a> based on bytes fuzzy hashing.</li>
-<li><a class="link"   target="_blank" rel="noopener" href="https://googleprojectzero.blogspot.com/2018/12/searching-statically-linked-vulnerable.html" >FunctionSimSearching<i class="fas fa-external-link-alt"></i></a> based on CFG fuzzy hashing.</li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection">Gemini</a>:Neural network-based graph embedding for cross-platform binary code similarity detection, CCS 2017. based on attributed CFG and GNN.</li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#Graph-matching-networks-for-learning-the-similarity-of-graph-structured-objects">Li et al. 2019</a>: Graph matching networks for learning the similarity of graph structured objects, PMLR 2019. based on attributed CFG, GNN and GMN.</li>
-<li><a class="link"   target="_blank" rel="noopener" href="https://papers.put.as/papers/ml/2018/zeek.pdf" >Zeek<i class="fas fa-external-link-alt"></i></a>: Binary Similarity Detection Using Machine Learning, PLAS 2018. based on IR, data ﬂow analysis and neural network.</li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization">Asm2Vec</a>: Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization, IEEE S&amp;P 2019. based on assembly code embedding.</li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity">SAFE</a>: Safe: Self-attentive function embeddings for binary similarity, DIMVA 2019. based on ssembly code embedding and self-attentive encoder.</li>
-<li><a class="link"   target="_blank" rel="noopener" href="https://ruoyuwang.me/bar2019/pdfs/bar2019-paper20.pdf" >Massarelli et al. 2019<i class="fas fa-external-link-alt"></i></a>: Investigating Graph Embedding Neural Networks with Unsupervised Features Extraction for Binary Analysis, BAR（workshop of NDSS）2019. based on Assembly code embedding, CFG and GNN.</li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching">CodeCMR</a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://github.com/binaryai/sdk" >BinaryAI<i class="fas fa-external-link-alt"></i></a> </li>
-<li><a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/#TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity">Trex</a>: Trex: Learning execution semantics from micro-traces for binary similarity, arXiv 2020.</li>
-</ol>
-<p>Using unified dataset to evaluate and compare, results show that one machine-learning model, the Graph Matching Networks (<code>GMN</code>) outperforms all the other variants in the six evaluated tasks, achieving performances similar to the less-scalable <code>GMN</code> version.<br><code>Zeek</code>, which is a direct-comparison approach, has higher AUC on large functions. <code>Asm2Vec</code> does not perform any better than other models, and fuzzy hashing approaches are not effective when multiple compilation variables change at the same time.</p>
-<p>Show some figures of vulnerability tests.<br><img src="/./imghost/bcsdp/howmachine3.png" alt="Vulnerability test ranks."><br><img src="/./imghost/bcsdp/howmachine4.png" alt="Vulnerability test"></p>
-<h2 id="Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities"><a href="#Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities" class="headerlink" title="Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities"></a>Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://par.nsf.gov/servlets/purl/10211514" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>DSN 2021</th>
-</tr>
-</thead>
-</table>
-<p>A hybrid, <em>cross-platform</em> binary code similarity analysis that combines deep learning-based static binary analysis with dynamic binary analysis.</p>
-<p>Approach – implemented in three steps:</p>
-<ol>
-<li>deep learning is used to train the vulnerability detector;<br> including 48 features.<br> adapt a sequential model that is composed of a linear stack of layers(6-layer).</li>
-<li>the vulnerability detector is used to statically analyze the target mobile&#x2F;IoT firmware; </li>
-<li>the identified vulnerable subroutines are run for in-depth dynamic analysis and verification of the existence of a vulnerability.<br> extract 21 dynamic features from execution traces, and use Minkowski distance as similarity measures.<ul>
-<li>use fuzzing to generate multiple inputs (use DLL binary injection to create execution environment) for target function to boost coverage</li>
-<li>remove executions with system exceptions or sth. else</li>
-<li>instrument (DLL binary injection) and remote debugging</li>
-</ul>
-</li>
-</ol>
-<p>The analyses use the extracted static and dynamic features of <em>vulnerable</em> and <em>patched</em> functions, comparing similarity between them respectively, to identify whether the candidate vulnerability function has been patched.</p>
-<p><img src="/./imghost/bcsdp/hybrid.png" alt="PATCHECKO vulnerability and patch search workflow"></p>
-<h2 id="In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-–-ASE-2017"><a href="#In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-–-ASE-2017" class="headerlink" title="In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017"></a>In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://faculty.ist.psu.edu/wu/papers/IMF.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>ASE 2017</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li><p>fuzzing module<br>  in-memory fuzzing to execute and record behaviors<br>  behaviors&#x2F;features:</p>
-<ol>
-<li>value of heap reads&#x2F;writes</li>
-<li>memory address offsets for reading <code>.plt.got</code>        </li>
-<li>memory address offsets for reading <code>.rodata</code></li>
-<li>memory address offsets for reading&#x2F;writing <code>.data</code></li>
-<li>memory address offsets for reading&#x2F;writing <code>.bss</code></li>
-<li>system calls</li>
-<li>memory address offsets for accesing <code>v_mem1</code> and <code>v_mem2</code>(they are created for reducing pointer related memory access errors)</li>
-<li>function return value<br>  actually <code>12</code> features (<code>8</code> types)</li>
-</ol>
-<p>  heap value is better than offset, for different allocation strategies<br>  memory value might be less important (many zero bytes) than memory address offset</p>
-</li>
-<li><p>taint analysis module<br>  but. lack of data type info (data or pointer), so using <code>backward taint analysis</code> to recover pointer errors (figure out <code>root</code> of a pointer data flow)</p>
-<p>  not like “in-place” strategy, just update memory access through an illegal adress with a valid address, without finding the root cause.<br>  if update <code>root</code> with valid pointer, then no need for later replacement,and it can record useful behavior.</p>
-<p>  whole process starts from a given pointer reference error, first locate registers which should return valid value (using Pin API get_base_register), then backwarding to closest taint reg&#x2F;memory unit to source as sink.</p>
-</li>
-<li><p>similarity analysis module<br>  concatenate behavior traces by kinds, and for a trace consisting of same kind of behaviors, calculate jaccard index rate</p>
-<ol>
-<li>We note that since Longest Common Subsequence (LCS) allows skipping non-matching elements, it naturally tolerates diverse or noise on the behavior traces due to program optimizations or even obfuscations.</li>
-<li>a Jaccard index(s) is derived from the LCS(s) of two traces – many Jaccard indexes compose a vector.</li>
-</ol>
-</li>
-<li><p>machine learning module<br>  for a given <code>f1</code> in <code>bin1</code>, find its matched function(<code>f2</code>) in <code>bin2</code><br>  tree-based model (e.g. Extra-Trees)</p>
-</li>
-</ul>
-<p><img src="/./imghost/bcsdp/inmemory.png" alt="The workflow of IMF-SIM"></p>
-<h2 id="Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs"><a href="#Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs" class="headerlink" title="Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs"></a>Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_11-4_Zuo_paper.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.ndss-symposium.org/wp-content/uploads/ndss2019_11-4_Zuo_slides.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=-BeqwMPQNrw&list=PLfUWWM-POgQvnPOa9Bo1AyKplMkOGfHUT&index=5&t=1s" >video<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://nmt4binaries.github.io/" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>NDSS 2019</th>
-</tr>
-</thead>
-</table>
-<p>This work thus borrows ideas from NLP to address two important code similarity comparison problems:</p>
-<ol>
-<li>given a pair of basic blocks of different instruction set architectures(ISA), determining whether their semantic is similar (<strong>equivalence</strong>)</li>
-<li>given a piece of code of interest, determining if it is contained in another piece of code of a different ISA (<strong>containment</strong>), propose <em><strong>INNEREYE</strong></em></li>
-</ol>
-<p>Inspired by neural machine translation, regard instructions as words and basic blocks as sentences, propose a cross-(assembly)-lingual deep learning approach, do <em>basic block embedding</em>.</p>
-<p>Solution to prob.1:     use NMT idea to do embedding, then measure distance<br>Solution to prob.2:     decompose CFG into multiple paths – sequences of blocks, and apply <em>LCS</em></p>
-<p>examine code component semantics at three layers:</p>
-<ul>
-<li>basic blocks: design the <strong>neural network-based cross-lingual basic-block embedding model</strong> to represent a basic block as an embedding, store in <em>LSH database</em> for searching.<br>  adopt a <em>Siamese arch with each side employing LSTM</em><br>  as for <em>instruction embedding</em>, using <em>skip-gram</em></li>
-<li>CFG paths: use <em>LCS</em> to compare paths’ semantic similarity</li>
-<li>code components: explore multiple path pairs to collectively calculate a similarity score</li>
-</ul>
-<p><img src="/./imghost/bcsdp/neuralmachine.png" alt="System architecture"></p>
-<p>rich in evaluation and experiments, to be continued …</p>
-<h2 id="Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection"><a href="#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection" class="headerlink" title="Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection"></a>Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/1708.06525.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/Yunlongs/Genimi" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>CCS 2017</th>
-</tr>
-</thead>
-</table>
-<p>Propose <em><strong>Gemini</strong></em>, statistical (manually selected) features as basic block representation to buile ACFG for each function, use struc2vec (graph embedding) to combine a Siamese architecture (calculating similarity).</p>
-<p><img src="/./imghost/bcsdp/neuralnetwork2.png" alt="An example of a code graph on Function `dtls1_process_heartbeat` (Heartbleed vulnerability)"><br><img src="/./imghost/bcsdp/neuralnetwork1.png" alt="Graph Embedding Network"><br><img src="/./imghost/bcsdp/neuralnetwork3.png" alt="Siamese Architecture"></p>
-<h2 id="Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection"><a href="#Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection" class="headerlink" title="Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection"></a>Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://keenlab.tencent.com/en/whitepapers/Ordermatters.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>AAAi 2020</th>
-</tr>
-</thead>
-</table>
-<p>Propose an overall framework with three components: <strong>semantic-aware modeling</strong>, <strong>structural-aware modeling</strong>, and <strong>order-aware modeling</strong>.</p>
-<p><img src="/./imghost/bcsdp/order1.png" alt="Overall structure of our model"></p>
-<p>Semantic-aware Modeling:<br>    - propose a <em>BERT</em> pretraining model with 4 tasks for dealing with CFGs<br>    - have one <em>token-level</em> task(<strong>Masked language model, MLM</strong>), one <em>block-level</em> task(<strong>Adjacency node prediction, ANP</strong>) and two <em>graph-level</em> tasks(<strong>block inside graph task, BIG</strong>, and <strong>graph classification task, GC</strong>).<br>    the inputs are block-level, dont know the seperator between instruction.</p>
-<p><img src="/./imghost/bcsdp/order2.png" alt="Bert with 4 tasks: MLM, ANP, BIG and GC"></p>
-<p>Structural-aware Modeling:<br>    - use <em>MPNN</em> (message passing neural network) to compute <strong>graph semantic &amp; structural embedding</strong> of each CFG</p>
-<p>Order-aware Modeling:<br>    - use CNN<br>    - use a 11-layer <em>Resnet</em> with 3 residual blocks.<br>    - use a global max pooling layer (last layer) to compute the <strong>graph order embedding</strong>.</p>
-<p><img src="/./imghost/bcsdp/order3.png" alt="Example graphs and their adjacency matrices"></p>
-<h2 id="PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding"><a href="#PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding" class="headerlink" title="PalmTree: Learning an Assembly Language Model for Instruction Embedding"></a>PalmTree: Learning an Assembly Language Model for Instruction Embedding</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3460120.3484587" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.inforsec.org/wp/wp-content/uploads/2021/07/qy.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/palmtreemodel/PalmTree" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>CCS 2021</th>
-</tr>
-</thead>
-</table>
-<p>Propose PalmTree model, Modify <em>BERT</em>, create <strong>(x86) assembly tokenization method</strong>, design <strong>Masked Language Model (MLM)</strong>, <strong>Context Window Prediction (CWP)</strong> and <strong>Figure 5: Def-Use Prediction (DUP)</strong>.<br>Try downstream tasks about <em>Binary code similarity detection</em>, <em>Function type signature analysis</em>, and <em>Value set analysis</em>.</p>
-<p><img src="/./imghost/bcsdp/palmtree.png" alt="System design of PalmTree"></p>
-<h2 id="Patch-Based-Vulnerability-Matching-for-Binary-Programs"><a href="#Patch-Based-Vulnerability-Matching-for-Binary-Programs" class="headerlink" title="Patch Based Vulnerability Matching for Binary Programs"></a>Patch Based Vulnerability Matching for Binary Programs</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://faculty.sist.shanghaitech.edu.cn/faculty/songfu/publications/ISSTA20.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>ISSTA 2020</th>
-</tr>
-</thead>
-</table>
-<p>Propose the Binary X-Ray (BinXray), a patch based vulnerability matching approach.</p>
-<ol>
-<li>target function matching<br> use synatic and structural info, not the contribution, similar to other existing approaches</li>
-<li>patch signature generation<ul>
-<li>propose a <strong>basic block mapping algorithm</strong> to generate patch signatures, represented as <strong>sets of basic block traces</strong> – sequences of consecutive bbs.</li>
-<li>create mapping between basic blocks of 2 funcs (vulnerable and patched), two trace sets are regarded as a patch signature.</li>
-</ul>
-</li>
-<li>patch presence identification<br> compare <strong>target</strong> func with <strong>vulnerable</strong> func and <strong>patched</strong> func and check which one is closer.</li>
-</ol>
-<p><img src="/./imghost/bcsdp/patchbased.png" alt="Overview of BinXray"></p>
-<h2 id="SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity"><a href="#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity" class="headerlink" title="SAFE: Self-Attentive Function Embeddings for Binary Similarity"></a>SAFE: Self-Attentive Function Embeddings for Binary Similarity</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/1811.05296.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.dimva2019.org/wp-content/uploads/sites/31/2019/06/DIMVA19-Slides-22.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
-<th>video</th>
-<th>repo</th>
-<th>DIMVA 2019</th>
-</tr>
-</thead>
-</table>
-<p>2 perids:</p>
-<ol>
-<li>Assembly instruction embedding (i2v)</li>
-<li>Self-attention neural network (GRU RNN)</li>
-</ol>
-<p><img src="/./imghost/bcsdp/safe1.png" alt="Architecture of SAFE"></p>
-<p>Self-Attentive Network: detailed architecture<br><img src="/./imghost/bcsdp/safe2.png" alt="Self-Attentive Network: detailed architecture"><br><img src="/./imghost/bcsdp/safe3.png" alt="Siamese network"></p>
-<h2 id="Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture"><a href="#Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture" class="headerlink" title="Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture"></a>Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.ndss-symposium.org/wp-content/uploads/bar2020-23002.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/zhangxiaochuan/MIRROR" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>NDSS Workshop of BAR 2020</th>
-</tr>
-</thead>
-</table>
-<p>Propose a cross-ISA oriented solution for basic block embedding, specify <em>x86</em> and <em>ARM</em> for the sake of description.<br>The <em>NMT</em> model used is not limited to <em>Transformer</em> only, but any <em>NMT</em> models of <em>seq2seq</em> architecture.</p>
-<p>To map <em>x86</em> and <em>ARM</em> basic blocks into same embedding vector space, first train an <em>NMT</em> model which translates <em>x86</em> basic blocks into the corresponding ARM basic blocks. </p>
-<p><img src="/./imghost/bcsdp/similaritymetric1.png" alt="The idealized solution of the embedding neural network"></p>
-<p>However the idealized model is almost impossible in practice, therefore futher fine-tune.</p>
-<p><img src="/./imghost/bcsdp/similaritymetric2.png" alt="Illustration of the two training phases of the practical solution"></p>
-<ul>
-<li>The encoder of the trained <em>NMT</em> model is served as <strong>x86-encoder</strong>.</li>
-<li>Then fix the <strong>x86-encoder</strong> and train an <strong>ARM-encoder</strong> to map <em>ARM</em> basic blocks close to the <strong>same vector space</strong> of x86 basic block embeddings.</li>
-<li>Since the <strong>x86-encoder</strong> trained in the translation phase is definitely biased, further fine-tune the <strong>x86-encoder</strong> during the <strong>ARM-encoder</strong> training.</li>
-</ul>
-<h2 id="SPAIN-Security-Patch-Analysis-for-Binaries-Towards-Understanding-the-Pain-and-Pills"><a href="#SPAIN-Security-Patch-Analysis-for-Binaries-Towards-Understanding-the-Pain-and-Pills" class="headerlink" title="SPAIN: Security Patch Analysis for Binaries Towards Understanding the Pain and Pills"></a>SPAIN: Security Patch Analysis for Binaries Towards Understanding the Pain and Pills</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://faculty.sist.shanghaitech.edu.cn/faculty/songfu/publications/icse17.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>ICSE 2017</th>
-</tr>
-</thead>
-</table>
-<p>Propose a scalable binary-level patch analysis framework, named <strong>SPAIN</strong>, which can automatically identify security patches and summarize patch patterns and their corresponding vulnerability patterns. </p>
-<p><img src="/./imghost/bcsdp/spain1.png" alt="Framework Overview of SPAIN"></p>
-<p>Specifically, given the original and patched versions of a binary program, </p>
-<ol>
-<li>we <strong>locate the patched functions and identify the changed traces</strong> (i.e., a sequence of basic blocks) that may contain security or non-security patches. <ul>
-<li>Function Matching: IDA Pro and BinDiff </li>
-<li>Function Filtering: remove function with no changes to reduce analysis size, merge blocks with single successor&#x2F;predecessor and normalize basic blocks</li>
-</ul>
-</li>
-</ol>
-<p><img src="/./imghost/bcsdp/spain2.png" alt="An Example of the Original and Patched Functions"></p>
-<ol start="2">
-<li>Then we <strong>identify security patches</strong> through a semantic analysis of these traces and <em>summarize the patterns</em> through a taint analysis on the patched functions. <ul>
-<li>identify by pairwise basic block matching</li>
-<li>if a bb is not matched in another func, it is patched</li>
-</ul>
-</li>
-</ol>
-<p><img src="/./imghost/bcsdp/spain3.png" alt="Abstract Vulnerability and Security Patch Pattern"></p>
-<ol start="3">
-<li>The summarized patterns can be used to <strong>search similar patches or vulnerabilities</strong> in binary programs.<ul>
-<li>perform a semantic analysis on both the <strong>patched partial trace</strong> and the set of <strong>original partial traces</strong></li>
-<li>see whether it’s security related</li>
-</ul>
-</li>
-</ol>
-<h2 id="TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity"><a href="#TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity" class="headerlink" title="TREX: Learning Execution Semantics from Micro-Traces for Binary Similarity"></a>TREX: Learning Execution Semantics from Micro-Traces for Binary Similarity</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://www.cs.columbia.edu/~suman/docs/trex_final.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/2012.08680.pdf" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>Arxiv 2020</th>
-</tr>
-</thead>
-</table>
-<p>TREX (TRansfer-learning EXecution semantics)<br>use pre-train model (hierarchical Transformer) to learn dynamic micro-trace (including sequences of executed instruction), then get execution semantics.</p>
-<p><img src="/./imghost/bcsdp/trex1.png" alt="The workflow of TREX"></p>
-<p>inputs to Transformer include 5 kinds of token sequence with same length:</p>
-<ol>
-<li>micro-trace code sequence (only opcode)</li>
-<li>micro-trace value sequence (only explicit value,but dynamic)</li>
-<li>Position sequence (instruction and opcode&#x2F;oprand position sequence)</li>
-<li>Architecture sequence</li>
-<li>Encoding numeric values (using bi-LSTM to reduce vocabulary size, processing micro-trace value sequence)</li>
-</ol>
-<p><img src="/./imghost/bcsdp/trex2.png" alt="Model architecture with input-output example"></p>
-<h2 id="VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature"><a href="#VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature" class="headerlink" title="VIVA: Binary Level Vulnerability Identification via Partial Signature"></a>VIVA: Binary Level Vulnerability Identification via Partial Signature</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="https://sci-hub.ru/10.1109/SANER50967.2021.00028" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>SANER 2021</th>
-</tr>
-</thead>
-</table>
-<p>Propose <em><strong>VIVA</strong></em>, a <em>binary level</em> <em>vulnerability and patch</em> semantic summarization and matching tool for accurate recurring vulnerability detection.</p>
-<p><img src="/./imghost/bcsdp/viva.png" alt="Overview of VIVA"></p>
-<p>Use novel <strong>binary program slicing techniques</strong> with the aid of <strong>pseudo-code trace refinement</strong> to generate <strong>partial vulnerability and patch signatures</strong>, which capture the semantics.<br>It matches the signatures between <strong>partial program traces</strong> (instead of <strong>binary functions</strong>) with <strong>pre-filtering</strong> to efficiently detect 1-day and recurring vulnerabilities.</p>
-<p>signatures and traces are also instruction sequences.</p>
-<h2 id="VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary"><a href="#VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary" class="headerlink" title="VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary"></a>VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="http://wingtecher.com/themes/WingTecherResearch/assets/papers/ase18-vulseeker.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/buptsseGJ/VulSeeker" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>ASE 2018</th>
-</tr>
-</thead>
-</table>
-<p>Improve <em><strong>Gemini</strong></em>, using <em>LSFG</em>(<em>CFG</em> + <em>DFG</em>) to replace <em>ACFG</em>.</p>
-<p><img src="/./imghost/bcsdp/vulseeker1.png" alt="VulSeeker design"><br><img src="/./imghost/bcsdp/vulseeker2.png" alt="The DNN model of VulSeeker"></p>
-<h2 id="VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation"><a href="#VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation" class="headerlink" title="VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation"></a>VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="http://wingtecher.com/themes/WingTecherResearch/assets/papers/fse18-vulseeker-pro.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th>repo</th>
-<th>ESEC&#x2F;FSE 2018</th>
-</tr>
-</thead>
-</table>
-<p>In addition to <em><strong>VulSeeker</strong></em> …</p>
-<p>Emulation Engine:</p>
-<ul>
-<li>Argument Recognition<br>first needs to recognize the arguments of the function </li>
-<li>Function Emulation<br>use pyvex to perform function emulation, and records dynamic execution trace<br>features&#x2F; semantic signature x4:</li>
-</ul>
-<ol>
-<li>input values</li>
-<li>output values</li>
-<li>comparison opcodes&#x2F;oprands</li>
-<li>library function calls</li>
-</ol>
-<ul>
-<li>Reordering Calculation<br>use Jaccard similarity coefficient</li>
-</ul>
-<p>but what exactly is the sequence, and how Jaccard similarity coefficient calculate (with character sequence or number seq.?)</p>
-<p><img src="/./imghost/bcsdp/vulseekerpro1.png" alt="Overall workflow of VulSeeker-Pro"><br><img src="/./imghost/bcsdp/vulseekerpro2.png" alt="The semantic learning model of VulSeeker-Pro"></p>
-<h2 id="Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker"><a href="#Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker" class="headerlink" title="Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker"></a>Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker</h2><table>
-<thead>
-<tr>
-<th><a class="link"   target="_blank" rel="noopener" href="http://wingtecher.com/themes/WingTecherResearch/assets/papers/TSE19.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
-<th>slide</th>
-<th>video</th>
-<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/buptsseGJ/BinSeeker" >repo<i class="fas fa-external-link-alt"></i></a></th>
-<th>TSE 2019</th>
-</tr>
-</thead>
-</table>
-<p>Same as <em><strong>VulSeeker-Pro</strong></em>, but extend to support other architectures (right?)</p>
-<p><img src="/./imghost/bcsdp/binseeker.png" alt="Overall workflow of BinSeeker"></p>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-        </div>
 
-        
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/paper/">#paper</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/bcsd/">#bcsd</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-            <div class="article-nav">
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Bypass Anti-Virus</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-    </div>
-</div>
+    }
+
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -909,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Survey-of-Binary-Code-Similarity"><span class="nav-number">1.</span> <span class="nav-text">A Survey of Binary Code Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Cross-Architecture-Instruction-Embedding-Model-for-Natural-Language-Processing-Inspired-Binary-Code-Analysis"><span class="nav-number">2.</span> <span class="nav-text">A Cross-Architecture Instruction Embedding Model for Natural Language Processing-Inspired Binary Code Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization"><span class="nav-number">3.</span> <span class="nav-text">Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection"><span class="nav-number">4.</span> <span class="nav-text">Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching"><span class="nav-number">5.</span> <span class="nav-text">CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search"><span class="nav-number">6.</span> <span class="nav-text">Codee: A Tensor Embedding Scheme for Binary Code Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing"><span class="nav-number">7.</span> <span class="nav-text">DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-matching-networks-for-learning-the-similarity-of-graph-structured-objects"><span class="nav-number">8.</span> <span class="nav-text">Graph matching networks for learning the similarity of graph structured objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-could-Neural-Networks-understand-Programs"><span class="nav-number">9.</span> <span class="nav-text">How could Neural Networks understand Programs?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Machine-Learning-Is-Solving-the-Binary-Function-Similarity-Problem"><span class="nav-number">10.</span> <span class="nav-text">How Machine Learning Is Solving the Binary Function Similarity Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities"><span class="nav-number">11.</span> <span class="nav-text">Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-%E2%80%93-ASE-2017"><span class="nav-number">12.</span> <span class="nav-text">In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs"><span class="nav-number">13.</span> <span class="nav-text">Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection"><span class="nav-number">14.</span> <span class="nav-text">Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection"><span class="nav-number">15.</span> <span class="nav-text">Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding"><span class="nav-number">16.</span> <span class="nav-text">PalmTree: Learning an Assembly Language Model for Instruction Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patch-Based-Vulnerability-Matching-for-Binary-Programs"><span class="nav-number">17.</span> <span class="nav-text">Patch Based Vulnerability Matching for Binary Programs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity"><span class="nav-number">18.</span> <span class="nav-text">SAFE: Self-Attentive Function Embeddings for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture"><span class="nav-number">19.</span> <span class="nav-text">Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPAIN-Security-Patch-Analysis-for-Binaries-Towards-Understanding-the-Pain-and-Pills"><span class="nav-number">20.</span> <span class="nav-text">SPAIN: Security Patch Analysis for Binaries Towards Understanding the Pain and Pills</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity"><span class="nav-number">21.</span> <span class="nav-text">TREX: Learning Execution Semantics from Micro-Traces for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature"><span class="nav-number">22.</span> <span class="nav-text">VIVA: Binary Level Vulnerability Identification via Partial Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary"><span class="nav-number">23.</span> <span class="nav-text">VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation"><span class="nav-number">24.</span> <span class="nav-text">VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker"><span class="nav-number">25.</span> <span class="nav-text">Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

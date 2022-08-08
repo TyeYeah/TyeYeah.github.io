@@ -161,221 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">Linux Security Response</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2019-05-07 18:40:48</span>
-        <span class="mobile">2019-05-07 18:40</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Linux/">Linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/security-response/">security-response</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>Learn how to master Linux commands, the Security Response will be a good entry cz it involves many Linux commands related to user management, privilege control, and task monitoring which are useful when using Linux </p>
-<h2 id="Linux-Reinforce"><a href="#Linux-Reinforce" class="headerlink" title="Linux Reinforce"></a>Linux Reinforce</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chattr +a xxx	--only appendable</span><br><span class="line">$ chattr +i xxx	--cannot be deleted</span><br><span class="line">$ touch /etc/nologin	--normal user cannot login</span><br><span class="line">$ vi /etc/ssh/sshd_config -&gt; banner NONE		--hide banner info</span><br><span class="line">$ authconfig --passalgo=sha512 --update	--replace md5 with SHA512</span><br><span class="line">$ auth required pam_tally2.so deny=3 unlock_time=5</span><br><span class="line">$ even_deny_root root_unlock_time=120		--<span class="built_in">limit</span> login <span class="built_in">times</span> (lock 2mins every 3 logins)</span><br><span class="line">$ vi /etc/profile -&gt; HISTSIZE=5 HISTFILESIZE=20</span><br></pre></td></tr></table></figure>
-
-<h2 id="Security-Response"><a href="#Security-Response" class="headerlink" title="Security Response"></a>Security Response</h2><ul>
-<li>PDCERF: Perparation, Detection, Containment, Eradication, Recovery, Follow-up</li>
-<li>Confirm attacking time, IP address, and the evil file (process or rootkit) last</li>
-</ul>
-<h3 id="check-suspicious-users"><a href="#check-suspicious-users" class="headerlink" title="check suspicious users"></a>check suspicious users</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># search privileged users</span></span><br><span class="line">$ awk -F: <span class="string">&#x27;$3==0&#123;print $1&#125;&#x27;</span> /etc/passwd</span><br><span class="line">$ grep :0 /etc/passwd</span><br><span class="line"><span class="comment"># search users able to login remotely</span></span><br><span class="line">$ awk <span class="string">&#x27;/\$1|\$6/&#123;print $1&#125;&#x27;</span> /etc/shadow</span><br><span class="line"><span class="comment"># search users with sudo privilege</span></span><br><span class="line">$ more /etc/sudoers | grep -v <span class="string">&quot;^#\|^$&quot;</span> | grep <span class="string">&quot;ALL=(ALL)&quot;</span></span><br><span class="line"><span class="comment"># disable or delete users</span></span><br><span class="line">    usermod -L user    unable to login</span><br><span class="line">    userdel user       delete user</span><br><span class="line">    userdel -r user    delete user and his homedir</span><br><span class="line"></span><br><span class="line"><span class="comment"># check new users</span></span><br><span class="line">$ less /etc/passwd</span><br><span class="line"><span class="comment"># check last time of modification</span></span><br><span class="line">$ ll -l /etc/passwd</span><br></pre></td></tr></table></figure>
-<h3 id="port-and-process"><a href="#port-and-process" class="headerlink" title="port and process"></a>port and process</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># netstat used for port info</span></span><br><span class="line"><span class="comment"># ps used for process info</span></span><br><span class="line"><span class="comment"># lsof used for connection info between process and port</span></span><br><span class="line">$ netstat -antlp|more</span><br><span class="line">$ netstat -pantu|grep port</span><br><span class="line">$ ps aux[f]|grep pid</span><br><span class="line">$ ps -p port</span><br><span class="line">$ lsof [-i] |grep port</span><br><span class="line">$ lsof -i :port</span><br><span class="line">$ lsof -p pid</span><br><span class="line"></span><br><span class="line"><span class="comment"># ss used for port info</span></span><br><span class="line"><span class="comment"># fuser used for process info</span></span><br><span class="line">$ ss [-t] |grep port</span><br><span class="line">$ ss -pantul</span><br><span class="line">$ sudo apt install psmisc   <span class="comment"># install fuser</span></span><br><span class="line">$ sudo fuser -v port/protocol <span class="comment"># like 80/tcp</span></span><br></pre></td></tr></table></figure>
-<h3 id="startup-item-and-timed-tasks"><a href="#startup-item-and-timed-tasks" class="headerlink" title="startup item and timed tasks"></a>startup item and timed tasks</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ more /etc/rc.local</span><br><span class="line">$ more /etc/rc.d/rc[0~6].d</span><br><span class="line"></span><br><span class="line">$ crontab -l 	<span class="comment"># list cron services</span></span><br><span class="line">$ crontab -e 	<span class="comment"># edit</span></span><br><span class="line">$ crontab -r 	<span class="comment"># remove</span></span><br><span class="line">/var/spool/cron/user 	default crontab filedir</span><br><span class="line"></span><br><span class="line">suspicious <span class="built_in">dirs</span>:</span><br><span class="line">/var/spool/cron/* </span><br><span class="line">/etc/crontab</span><br><span class="line">/etc/cron.d/*</span><br><span class="line">/etc/cron.daily/* </span><br><span class="line">/etc/cron.hourly/* </span><br><span class="line">/etc/cron.monthly/*</span><br><span class="line">/etc/cron.weekly/</span><br><span class="line">/etc/anacrontab</span><br><span class="line">/var/spool/anacron/*</span><br><span class="line"></span><br><span class="line">used to be:</span><br><span class="line">$ chkconfig --list</span><br><span class="line">$ chkconfig –-level  2345 httpd on/off</span><br><span class="line">now is:</span><br><span class="line">$ systemctl list-unit-files</span><br><span class="line">$ systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">$ systemctl <span class="built_in">disable</span> httpd</span><br></pre></td></tr></table></figure>
-<h3 id="log-check"><a href="#log-check" class="headerlink" title="log check"></a>log check</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># locate IP which brute force root password:     </span></span><br><span class="line">$ journalctl -xa|grep <span class="string">&quot;Failed password for root&quot;</span> | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | sort | uniq -c | sort -nr | more</span><br><span class="line">​</span><br><span class="line"><span class="comment"># similar to above:</span></span><br><span class="line">$ journalctl -xa|grep <span class="string">&quot;Failed password&quot;</span>|grep -E -o <span class="string">&quot;(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;</span>|uniq -c</span><br><span class="line">​</span><br><span class="line"><span class="comment"># brute force password dict is:</span></span><br><span class="line">$ grep <span class="string">&quot;Failed password&quot;</span> /var/<span class="built_in">log</span>/secure|perl -e <span class="string">&#x27;while($_=&lt;&gt;)&#123; /for(.*?) from/; print &quot;$1\n&quot;;&#125;&#x27;</span>|uniq -c|sort -nr</span><br><span class="line"> </span><br><span class="line"><span class="comment"># success logins IP:   </span></span><br><span class="line">$ grep <span class="string">&quot;Accepted &quot;</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | sort | uniq -c | sort -nr | more</span><br><span class="line">​</span><br><span class="line"><span class="comment"># similar to above:</span></span><br><span class="line">$ grep <span class="string">&quot;Accepted &quot;</span> /var/<span class="built_in">log</span>/secure | awk <span class="string">&#x27;&#123;print $1,$2,$3,$9,$11&#125;&#x27;</span> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>and as you can see, both &#x2F;var&#x2F;log&#x2F;auth.log(replace the &#x2F;vat&#x2F;log&#x2F;secure) and the command “journalctl -xa”, can be used to check logs</p>
-<ul>
-<li>add user log e.g.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Jul 10 00:12:15 localhost useradd[2382]: new group: name=user, GID=1001</span><br><span class="line">Jul 10 00:12:15 localhost useradd[2382]: new user: name=user, UID=1001, GID=1001, home=/home/user</span><br><span class="line">, shell=/bin/bash</span><br><span class="line">Jul 10 00:12:58 localhost passwd: pam_unix(passwd:chauthtok): password changed <span class="keyword">for</span> user</span><br><span class="line"><span class="comment">#grep &quot;useradd&quot; /var/log/auth.log</span></span><br><span class="line">​```</span><br><span class="line">- delete user <span class="built_in">log</span> e.g.</span><br><span class="line">```bash</span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: delete user <span class="string">&#x27;user&#x27;</span></span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: removed group <span class="string">&#x27;user&#x27;</span> owned by <span class="string">&#x27;user&#x27;</span></span><br><span class="line">Jul 10 00:14:17 localhost userdel[2393]: removed shadow group <span class="string">&#x27;user&#x27;</span> owned by <span class="string">&#x27;user&#x27;</span></span><br><span class="line"><span class="comment"># grep &quot;userdel&quot; /var/log/auth.log</span></span><br><span class="line">​```</span><br><span class="line">- su switch user <span class="built_in">log</span> e.g.</span><br><span class="line">```bash</span><br><span class="line">Jul 10 00:38:13 localhost su: pam_unix(su-l:session): session opened <span class="keyword">for</span> user good by root(uid=0)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="view-hidden-processes"><a href="#view-hidden-processes" class="headerlink" title="view hidden processes"></a>view hidden processes</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef | awk<span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|sort -n| uniq &gt; tasklist1.txt</span><br><span class="line">$ ls /proc | sort -n | uniq &gt; tasklist2.txt</span><br><span class="line">$ diff tasklist1.txt tasklist2.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="Commands-Summary"><a href="#Commands-Summary" class="headerlink" title="Commands Summary"></a>Commands Summary</h3><h2 id="Files-Recovery"><a href="#Files-Recovery" class="headerlink" title="Files Recovery"></a>Files Recovery</h2><p>if an important file were deleted, while a process which opens this file is alive, this process can still be read or written through it’s file descriptor.</p>
-<p>e.g.</p>
-<ul>
-<li><p>see &#x2F;var&#x2F;log&#x2F;secure, only to find it was deleted<br><img src="/imghost/lsr/1.jpg" alt="pic 1"></p>
-</li>
-<li><p>use “lsof” to see process that opens it<br><img src="/imghost/lsr/2.jpg" alt="pic 2"></p>
-</li>
-<li><p>as we can see, pid is 1264, and fd (file descriptor) is 4. so we can find info in &#x2F;proc&#x2F;1264&#x2F;fd&#x2F;4<br><img src="/imghost/lsr/3.jpg" alt="pic 3"></p>
-</li>
-<li><p>use I&#x2F;O redirection to redirect it to file<br><img src="/imghost/lsr/4.jpg" alt="pic 4"></p>
-</li>
-<li><p>see &#x2F;var&#x2F;log&#x2F;secure, and now we recovered the deleted file<br><img src="/imghost/lsr/5.jpg" alt="pic 5"></p>
-</li>
-</ul>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>The <code>ext3grep</code> is to recovery file deleted by <code>rm - rf</code> on <code>ext3</code> disk.<br>First <code>unmount</code> that disk to stop writting, and then install <code>ext3grep</code>. You can find it in <code>apt</code> repo, or compile <a class="link"   target="_blank" rel="noopener" href="https://code.google.com/archive/p/ext3grep/downloads" >it<i class="fas fa-external-link-alt"></i></a> on your own.</p>
-<p>Installation:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install e2fslibs-dev</span><br><span class="line">$ tar xvf ext3grep-0.10.1.tar.gz </span><br><span class="line">$ <span class="built_in">cd</span> ext3grep-0.10.1</span><br><span class="line">$ ./configuremake &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>Scan file name:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ext3grep /dev/sdbx --dump-names</span><br></pre></td></tr></table></figure>
-<p>And recover all:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ext3grep /dev/sdbx --restore-all</span><br></pre></td></tr></table></figure>
-<p>Or recover someone:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ext3grep /dev/sdbx --restore-file var/lib/mysql/aqsh/tb_b_attench.MYD</span><br></pre></td></tr></table></figure>
-<p>Another tool is <code>extundelete</code>, you can install it through <code>apt</code> or get it on <a class="link"   target="_blank" rel="noopener" href="https://sourceforge.net/projects/extundelete/files/extundelete/" >sourceforge<i class="fas fa-external-link-alt"></i></a>.</p>
-<p>Installation:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nchc.dl.sourceforge.net/project/extundelete/extundelete/0.2.4/extundelete-0.2.4.tar.bz2 </span><br><span class="line">$ apt install e2fsprogs e2fslibs-dev build-essential </span><br><span class="line">$ tar -jxvf extundelete-0.2.4.tar.bz2 </span><br><span class="line">$ <span class="built_in">cd</span> extundelete-0.2.4 </span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/extundelete </span><br><span class="line">$ make &amp;&amp; make install </span><br><span class="line"><span class="comment"># check installation</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/extundelete/bin </span><br><span class="line">$ ./extundelete -v </span><br></pre></td></tr></table></figure>
-
-<p>The usage of it is similar to <code>ext3grep</code>, and it can recover by directory</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./extundelete --restore-file var/lib/mysql/aqsh/tb_b_attench.MYD /dev/sdbx  </span><br><span class="line">$ ./extundelete --restore-all /dev/sdbx </span><br><span class="line">$ date -d <span class="string">&quot;May 7 18:40 2019&quot;</span> +%s</span><br><span class="line">1557225600</span><br><span class="line">$ ./extundelete --restore-all --after <span class="string">&quot;1557225600&quot;</span> /dev/sdbx</span><br><span class="line"><span class="comment"># by directory</span></span><br><span class="line">$ extundelete /dev/sdbx --restore-directory var/lib/mysql/aqsh</span><br></pre></td></tr></table></figure>
-
-<h2 id="Useful-Scripts"><a href="#Useful-Scripts" class="headerlink" title="Useful Scripts"></a>Useful Scripts</h2><h3 id="Normal"><a href="#Normal" class="headerlink" title="Normal"></a>Normal</h3><p>get <code>busybox</code> to analysis</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /bin/</span><br><span class="line">$ wget https://busybox.net/downloads/binaries/1.30.0-i686/busybox</span><br><span class="line">$ chmod 755 busybox</span><br></pre></td></tr></table></figure>
-<p>show malicious processes</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ perf top -s pid,comm,dso,symbol</span><br></pre></td></tr></table></figure>
-<p>delete ddos trojans or mining scripts, can be used directly(from a SRC event)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ps auxf | grep -v grep | grep hwlh3wlh44lh | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep Circle_MI | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep get.bi-chi.com | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep hashvault.pro | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep nanopool.org | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep /usr/bin/.sshd | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf | grep -v grep | grep /usr/bin/bsd-port | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;xmr&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;xig&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;ddgs&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;qW3xT&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;wnTKYg&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;t00ls.ru&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;sustes&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;thisxxs&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;hashfish&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps auxf|grep -v grep|grep <span class="string">&quot;kworkerds&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br></pre></td></tr></table></figure>
-
-<p>Operations related:</p>
-<p>find zombie process</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef | grep defunct</span><br></pre></td></tr></table></figure>
-
-<p>count</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># simply use the top to see things like ...</span></span><br><span class="line">...</span><br><span class="line">Tasks:   4 total,   1 running,   3 sleeping,   0 stopped,   0 zombie</span><br><span class="line">...</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">ps -ef | grep defunct | grep -v grep | wc -l</span><br></pre></td></tr></table></figure>
-
-<p>kill zombie process</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ps -e -o ppid,<span class="built_in">stat</span> | grep Z | cut –d<span class="string">&quot; &quot;</span> -f2 | xargs <span class="built_in">kill</span> -9</span><br><span class="line">$ <span class="built_in">kill</span> -HUP `ps -A -ostat,ppid | grep -e <span class="string">&#x27;^[Zz]&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
 
-<h3 id="Tide-sec-team’s-auto-script-in-Chinese"><a href="#Tide-sec-team’s-auto-script-in-Chinese" class="headerlink" title="Tide sec team’s auto script( in Chinese)"></a>Tide sec team’s auto script( in Chinese)</h3><p>It is an automatic script written in pithon2, and is useful in linux security response.<br>It gather system information and service log, then generate a log file to save results.<br>This script can be found <a href="/filehost/lsr/tidesec.py">Here</a></p>
-<h3 id="A-miner-cleaner"><a href="#A-miner-cleaner" class="headerlink" title="A miner cleaner"></a>A miner cleaner</h3><p>This was extracted from a mining trojan, to get rid of every competitors on the victim.<br>Get it <a href="/filehost/lsr/minecleaner.sh">Here</a> to clear mainstream mining trojans.</p>
-<h3 id="Clean-your-ass-finally"><a href="#Clean-your-ass-finally" class="headerlink" title="Clean your ass finally"></a>Clean your ass finally</h3><p>After the attack, you better get your ass cleaned to be untraceable.<br>We have a simple cleaner <a href="/filehost/lsr/logtamper.py">Here</a>. Another better script is <a href="/filehost/lsr/fake_login_log.py">Here</a> in Chinese, which could even fake log info.</p>
-<h2 id="Key-Files"><a href="#Key-Files" class="headerlink" title="Key Files"></a>Key Files</h2><p>“Key” here means important</p>
-<p>Use <code>lsattr</code> to see hidden attribution</p>
-<ul>
-<li>About hidden attribution<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-a 　show all files and directories including  .(current dir) and ..(parent dir)</span><br><span class="line">-d 　show <span class="built_in">dirs</span><span class="string">&#x27; names</span></span><br><span class="line"><span class="string">-l 　just list</span></span><br><span class="line"><span class="string">-R 　Recursive processing, which processes all files and subdirectories in the specified directory together.</span></span><br><span class="line"><span class="string">-v 　show versions of files and dirs</span></span><br><span class="line"><span class="string">-V 　show versions</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-Use <code>getfacl</code> to see things about ACL (Access Control List)</li>
-<li>About ACL attribution<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-a, --access: only displays file access control lists</span><br><span class="line">-d, --default: only displays the default access control list</span><br><span class="line">-c, --omit-header: not display comment headers</span><br><span class="line">-e, --all-effective: show all valid permissions</span><br><span class="line">-E, --no-effective: show invalid permissions</span><br><span class="line">-s, --skip-base: skip files with only base entries</span><br><span class="line">-R, --recursive: recursively display subdirs</span><br><span class="line">-L, --logical: logical traversal (follow the symbolic link)</span><br><span class="line">-P, --physical: physical traversal (does not follow symbolic links)</span><br><span class="line">-t, --tabular: Use tab-delimited output format</span><br><span class="line">-n, --numeric: show the user/group ID of the number</span><br><span class="line">-p, --absolute-names: not remove the <span class="string">&#x27;/&#x27;</span> symbol before the path</span><br><span class="line">-v, --version: display version and <span class="built_in">exit</span></span><br><span class="line">-h, --<span class="built_in">help</span>: display this <span class="built_in">help</span> information</span><br></pre></td></tr></table></figure>
-<h2 id="Tools-1"><a href="#Tools-1" class="headerlink" title="Tools"></a>Tools</h2></li>
-</ul>
-<ul>
-<li>chkrootkit<br>later…</li>
-<li>rkhunter<br>later…</li>
-<li>clamav<br>later…</li>
-</ul>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        </div>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/security-response/">#security-response</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+    }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2019/08/01/2019-08-01-Try-and-Use-WSL/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Try and Use WSL</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2019/04/07/2019-04-07-Linux-Reverse-Gadgets/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux Reverse Gadgets</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
 
-        
-    </div>
-</div>
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -471,11 +475,80 @@ Use <code>getfacl</code> to see things about ACL (Access Control List)</li>
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Reinforce"><span class="nav-number">1.</span> <span class="nav-text">Linux Reinforce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security-Response"><span class="nav-number">2.</span> <span class="nav-text">Security Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#check-suspicious-users"><span class="nav-number">2.1.</span> <span class="nav-text">check suspicious users</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#port-and-process"><span class="nav-number">2.2.</span> <span class="nav-text">port and process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startup-item-and-timed-tasks"><span class="nav-number">2.3.</span> <span class="nav-text">startup item and timed tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-check"><span class="nav-number">2.4.</span> <span class="nav-text">log check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-hidden-processes"><span class="nav-number">2.5.</span> <span class="nav-text">view hidden processes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commands-Summary"><span class="nav-number">2.6.</span> <span class="nav-text">Commands Summary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files-Recovery"><span class="nav-number">3.</span> <span class="nav-text">Files Recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">3.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Useful-Scripts"><span class="nav-number">4.</span> <span class="nav-text">Useful Scripts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal"><span class="nav-number">4.1.</span> <span class="nav-text">Normal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tide-sec-team%E2%80%99s-auto-script-in-Chinese"><span class="nav-number">4.2.</span> <span class="nav-text">Tide sec team’s auto script( in Chinese)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-miner-cleaner"><span class="nav-number">4.3.</span> <span class="nav-text">A miner cleaner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-your-ass-finally"><span class="nav-number">4.4.</span> <span class="nav-text">Clean your ass finally</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Files"><span class="nav-number">5.</span> <span class="nav-text">Key Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.</span> <span class="nav-text">Tools</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

