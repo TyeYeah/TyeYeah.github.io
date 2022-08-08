@@ -161,225 +161,263 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Try and Use WSL</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-08-01 21:25:59</span>
+        <span class="mobile">2019-08-01 21:25</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/docker/">docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/wsl/">wsl</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/hyper-v/">hyper-v</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
+<p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a <del>hard</del> long way.</p>
+<h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares (ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
+<p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/about" >Official documents<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h3><p>WSL is a collection of components that enables native Linux ELF64 binaries to run on Windows. It contains both user mode and kernel mode components. It is primarily comprised of:</p>
+<ul>
+<li>User mode session manager service that handles the Linux instance life cycle</li>
+<li>Pico provider drivers (lxss.sys, lxcore.sys) that emulate a Linux kernel by translating Linux syscalls</li>
+<li>Pico processes that host the unmodified user mode Linux (e.g. &#x2F;bin&#x2F;bash)</li>
+</ul>
+<p>It is the space between the user mode Linux binaries and the Windows kernel components where the magic happens. By placing unmodified Linux binaries in Pico processes we enable Linux system calls to be directed into the Windows kernel. The lxss.sys and lxcore.sys drivers translate the Linux system calls into NT APIs and emulate the Linux kernel.</p>
+<p><img src="/imghost/tuw/2.jpg" alt="pic 2 Architecture"></p>
+<p>Now we can see the subsystem does not contain a real Linux Kernel, but it can satisfied lots of users.</p>
+<p>Pros:</p>
+<ul>
+<li>fast bootup, much faster than VirtualMachine in VM and Vbox</li>
+<li>almost perfect Linux Architecture simulation, and ELF support which means possible and convenient for running &amp; debugging ELF files when using Windows</li>
+<li>wsl’s linux file system can be directly browsed and accessed on Windows, though it’s not recommended, may be harmful. All files in rootfs directory :)</li>
+<li>same network configuration as host Windows, use 127.0.0.1 to access files on wsl server</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>no raw_socket using, which leads to many network-softwares (using socket) invalid</li>
+<li>some functions like systemd are also invalid</li>
+</ul>
+<p>Outlook:from official<br>What will happen to WSL 1? Will it be abandoned?<br>We currently have no plans to deprecate WSL 1. You can run WSL 1 and WSL 2 distros side by side, and can upgrade and downgrade any distro at any time. Adding WSL 2 as a new architecture presents a better platform for the WSL team to deliver features that make WSL an amazing way to run a Linux environment in Windows.</p>
+<h3 id="WSL2"><a href="#WSL2" class="headerlink" title="WSL2"></a>WSL2</h3><p>WSL 2 is a new version of the architecture that powers the Windows Subsystem for Linux to run ELF64 Linux binaries on Windows. This new architecture changes how these Linux binaries interact with Windows and your computer’s hardware, but still provides the same user experience as in WSL 1 (the current widely available version). Individual Linux distros can be run either as a WSL 1 distro, or as a WSL 2 distro, can be upgraded or downgraded at any time, and you can run WSL 1 and WSL 2 distros side by side. WSL 2 uses an entirely new architecture that uses a real Linux kernel.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/commandline/announcing-wsl-2/" >Announcing WSL 2<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/commandline/wsl-2-is-now-available-in-windows-insiders/" >WSL 2 is now available in Windows Insiders<i class="fas fa-external-link-alt"></i></a></p>
+<p>If you want to know more such as how to install, basic usages, and other stuff, please click <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-index" >Official documents<i class="fas fa-external-link-alt"></i></a></p>
+<p>WSL2 requires Insider Preview. And this time, after reading all above, we know WSL2 is really based on Hyper-v.</p>
+<p>Pros:</p>
+<ul>
+<li>A more realistic Linux with systemd now and raw_socket allowed (maybe all this thanks to Hyper-v)</li>
+<li>High levels of integration between Windows and Linux, extremely fast boot times, small resource footprint, and best of all will require no VM configuration or management</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Hyper-v means no other VMs except VirtualBox for 32 bits vm images as is said (test 64 bits vm images and NO)</li>
+<li>NAT network mode cannot be changed now, which means cut the network setting part of this “faster Hyper-v”, and somehow it becomes bit of inconvenient</li>
+<li>no direct browse or access to linux file system, because original roofs dir is replaced by the vm format file : ext4.vhdx. Still can use explorer.exe to open it</li>
+</ul>
+<p>Outlook:<br>The networking applications part and hardware support will be improved. Let’s look forward to it.<br>But WSL seems to be mor useful than WSL2</p>
+<h3 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h3><p>The whole docs are on <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/" >Windows Subsystem for Linux Documentation<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>First visit <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" >Windows Subsystem for Linux Installation Guide for Windows 10<i class="fas fa-external-link-alt"></i></a> to know how to install</p>
+<p>Refer to <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/reference" >Command Reference for Windows Subsystem for Linux<i class="fas fa-external-link-alt"></i></a> for WSL commands.</p>
+<p>Here let me review. Check the WSL version assigned to each of the Linux distributions installed</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --list --verbose <span class="comment"># wsl -l -v</span></span><br></pre></td></tr></table></figure>
+<p>Set WSL 2&#x2F;1 as default, so the next distro will be version 2&#x2F;1 defaultly</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-default-version 2/1</span><br></pre></td></tr></table></figure>
+<p>To set a distribution to be backed by either version of WSL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --set-version &lt;distribution name&gt; &lt;versionNumber&gt;</span><br><span class="line">&gt; wsl --set-version ubuntu 2</span><br></pre></td></tr></table></figure>
+<p>Enter <code>wsl</code>&#x2F;<code>bash</code> to use default distro, enter <code>debian</code>&#x2F;<code>ubuntu</code>&#x2F;… to use other distros</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl</span><br><span class="line">&gt; bash</span><br><span class="line">&gt; debian</span><br></pre></td></tr></table></figure>
+<p>Learn more by showing help pages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; wsl --<span class="built_in">help</span> <span class="comment"># wsl -h</span></span><br><span class="line">&gt; wslconfig <span class="comment"># wslconfig </span></span><br></pre></td></tr></table></figure>
 
+<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>It you are a multi-platform dev, or a normal user of vm, instead of an advanced windows developer, of a virtualization architect, you don’t need Hyper-v at all. Because without <code>VBoxGuestAdditions</code> or <code>VMwareTools</code>, VM in Hyper-v is like ppt playing.</p>
+<p>Actually No.1 rival&#x2F;<del>competitor</del> of Hyper-v is VMware vSphere, and apparently in our using level, we can’t experience full potential of vitualizition tech, but in the future, maybe we will.</p>
+<p>So my answer is NO, and be careful to try it cz after installing and uninstalling, VMs sometimes still disabled.</p>
+<p>Uninstall Solutions:</p>
+<ol>
+<li><p>When canceled the check mark, sometimes VMs not work yet</p>
+</li>
+<li><p>Then open cmd as Administrator and input <code>bcdedit /set hypervisorlaunchtype off</code> and then check VMs</p>
+</li>
+<li><p>The ultimate solution is this script in cmd</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mountvol X: /s</span><br><span class="line"><span class="built_in">copy</span> %WINDIR%\System32\SecConfig.efi X:\EFI\Microsoft\Boot\SecConfig.efi /Y</span><br><span class="line">bcdedit /create &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; /d <span class="string">&quot;DebugTool&quot;</span> /application osloader</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; path <span class="string">&quot;\EFI\Microsoft\Boot\SecConfig.efi&quot;</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;bootmgr&#125; bootsequence &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125;</span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; loadoptions <span class="built_in">DISABLE-LSA</span><span class="literal">-ISO</span>,<span class="built_in">DISABLE-VBS</span></span><br><span class="line">bcdedit /<span class="built_in">set</span> &#123;<span class="number">0</span>cb3b571<span class="literal">-2f2e</span><span class="literal">-4343</span><span class="literal">-a879</span><span class="literal">-d86a476d7215</span>&#125; device partition=X:</span><br><span class="line">bcdedit /<span class="built_in">set</span> hypervisorlaunchtype off</span><br><span class="line">mountvol X: /d</span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<p>After this you will find another EFI boot selection added. Actually both new and the old one is definitely ok to run VMs, so feel free to use EasyBCD to delete extra EFI boot selection.</p>
+<h2 id="Windows-Sandbox"><a href="#Windows-Sandbox" class="headerlink" title="Windows Sandbox"></a>Windows Sandbox</h2><p>A similar hyper-v vm, but with slower bootup and an inactivated system (seriously???) and few apps in it.</p>
+<p>So why not a hyper-v vm with snapshot? Why not vmware or vbox with snapshot?</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The conclusion is : Try and even deeply use WSL 1 to develop but don’t use or even try WSL 2 &#x2F; Hyper-v<br>But your choice always depends on your own needs.</p>
+<p>Consult <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/" >official documents<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://devblogs.microsoft.com/" >devblog<i class="fas fa-external-link-alt"></i></a> is always the right way to know and learn.<br>For developers click <a class="link"   target="_blank" rel="noopener" href="https://developer.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>, and Windows API references <a class="link"   target="_blank" rel="noopener" href="https://msdn.microsoft.com/" >here<i class="fas fa-external-link-alt"></i></a>.</p>
+<h2 id="Update-Tips"><a href="#Update-Tips" class="headerlink" title="Update (Tips)"></a>Update (Tips)</h2><p>Now it’s 2021&#x2F;9&#x2F;6 and I have changed my mind already. </p>
+<p>I’m getting used to <code>WSL 2</code> due to convenience. It is a compact hyper-v vm and I can boot it up in several seconds. Though much slower (booting and file transfering betweene host and guest) than <code>WSL 1</code> but more powerful, it’s a relatively real linux vm.</p>
+<p>Here is just for some Tips.</p>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Since <code>Linux</code> has <code>docker</code> in repo, we can install it directly in <code>WSL 2</code> instead of installing <a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop"><code>Docker Desktop for windows</code></a>.</p>
+<p>But when using <code>kali</code>(<code>debian</code>) some error occurred. Install it by</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install docker.io</span><br><span class="line">$ sudo apt install daemon   <span class="comment"># daemon is needed</span></span><br></pre></td></tr></table></figure>
+<p>While when testing </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ dockerd   <span class="comment"># testing service</span></span><br><span class="line">[INFO] ...</span><br><span class="line">...</span><br><span class="line">[WARN] ...</span><br><span class="line">...</span><br><span class="line">[INFO] ...</span><br><span class="line"></span><br><span class="line">failed to start daemon: Error initializing network controller: error obtaining controller instance: unable to add <span class="built_in">return</span> rule <span class="keyword">in</span> DOCKER-ISOLATION-STAGE-1 chain:  (iptables failed: iptables --<span class="built_in">wait</span> -A DOCKER-ISOLATION-STAGE-1 -j RETURN: iptables v1.8.7 (nf_tables):  RULE_APPEND failed (No such file or directory): rule <span class="keyword">in</span> chain DOCKER-ISOLATION-STAGE-1</span><br><span class="line"> (<span class="built_in">exit</span> status 4))</span><br></pre></td></tr></table></figure>
+<p>That is because <code>debian</code> based systems use <code>nftables</code> instead of <code>iptables</code>, that’s why the command failed.</p>
+<p>To solve it, use <code>update-alternatives</code> to let <code>debian</code> use <code>iptables</code> rather than <code>nftables</code>. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-alternatives --set iptables /usr/sbin/iptables-legacy</span><br><span class="line"># for ipv6</span><br><span class="line">$ sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy</span><br></pre></td></tr></table></figure>
+<p>Then we can start service </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service docker start</span><br><span class="line">$ service docker status</span><br></pre></td></tr></table></figure>
+<p>After testing the <code>ubuntu</code> on <code>WSL 2</code> doesn’t have this problem, but lacking <code>docker</code> service installed.</p>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        </div>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+        
 
-    }
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/note/">#note</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/docker/">#docker</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/wsl/">#wsl</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/hyper-v/">#hyper-v</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Python Sandbox Escape</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux Security Response</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +513,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Tips"><span class="nav-number">5.</span> <span class="nav-text">Update (Tips)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

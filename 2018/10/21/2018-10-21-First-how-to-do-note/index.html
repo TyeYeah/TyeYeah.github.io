@@ -161,225 +161,220 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">First how-to-do note</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2018-10-21 22:04:22</span>
+        <span class="mobile">2018-10-21 22:04</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/hexo/">hexo</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/docker/">docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mysql/">mysql</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/github/">github</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>This is the first note. It’s about how to use mysql in docker, how to use hexo to build blog and post it on Github using Pages.</p>
+<h2 id="First-how-to-do-note（mysql-with-docker、hexo）"><a href="#First-how-to-do-note（mysql-with-docker、hexo）" class="headerlink" title="First how-to-do note（mysql with docker、hexo）"></a>First how-to-do note（mysql with docker、hexo）</h2><p>Due to my project in college, I have to migrate the <code>MYSQL 5.5</code> environment to <code>MYSQL 8.0</code> version on my cloud hosting, but with a problem that I ccouldn’t start my <code>mysql.service</code> correctly ,I decided to deploy <code>mysql</code> with <code>docker</code> and learning basic <code>docker</code> using skills in the meantime.<br>By the way I have forgotten how to build my GitHub Pages with <code>hexo</code>, and this time I will give it a summary.</p>
+<h2 id="Basic-Steps-for-MySQL-Server-Deployment-with-Docker"><a href="#Basic-Steps-for-MySQL-Server-Deployment-with-Docker" class="headerlink" title="Basic Steps for MySQL Server Deployment with Docker"></a>Basic Steps for MySQL Server Deployment with Docker</h2><h3 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h3><p>first you need to install <code>docker</code> and test it (using root on debian)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ apt update </span><br><span class="line">$ apt install docker <span class="comment"># &quot;wget -qO- https://get.docker.com/ | sh&quot;, to get the newest </span></span><br><span class="line">$ apt install docker.io <span class="comment"># turns out to be useful, while the one above does not...</span></span><br><span class="line">$ systemctl start docker <span class="comment"># or service docker start, to start service</span></span><br><span class="line">$ docker run hello-world <span class="comment"># docker-style hello-world to check your install</span></span><br></pre></td></tr></table></figure>
+<p>some usages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show help</span></span><br><span class="line">$ docker / docker xxx --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># show images on localhost </span></span><br><span class="line">$ docker images / docker image ls</span><br><span class="line"><span class="comment"># show running containers </span></span><br><span class="line">$ docker ps [-a] / docker container ls</span><br><span class="line"><span class="comment"># search images xxx</span></span><br><span class="line">$ docker search xxx</span><br><span class="line"><span class="comment"># get what you want</span></span><br><span class="line">$ docker pull xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you have a specific target like me, only one step to get the image</span></span><br><span class="line">$ docker run --name=mysqlxxx -p 33060:3306 -d mysql/mysql-server:tag</span><br><span class="line"><span class="comment"># &#x27;--name=mysqlxxx&#x27; means name it &amp; call it by name, rather than by calling its long random id string</span></span><br><span class="line"><span class="comment"># &#x27;-d&#x27; means run it in the background</span></span><br><span class="line"><span class="comment"># &#x27;-p 33060:3306&#x27; to bind local port 33060 with docker&#x27;s 3306 port</span></span><br><span class="line"><span class="comment"># notice:tag should be replaced with 5.5/5.6/5.7/8.0/8.0.x(x-&gt;latest)...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile usage</span></span><br><span class="line"><span class="comment"># to build your own docker image</span></span><br><span class="line"><span class="comment"># please search how to write Dockerfile, then</span></span><br><span class="line">$ docker build -t xxx .</span><br><span class="line"><span class="comment"># &#x27;-t&#x27; to assign name of image </span></span><br><span class="line"><span class="comment"># the &#x27;.&#x27; at the tail indicate location of Dockerfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#to delete</span></span><br><span class="line">$ docker stop containerID</span><br><span class="line">$ docker rm containerID</span><br><span class="line">$ docker rmi imageID</span><br></pre></td></tr></table></figure>
+<h3 id="About-MYSQL"><a href="#About-MYSQL" class="headerlink" title="About MYSQL"></a>About MYSQL</h3><p>then we have a mysql docker, can be accessed by localhost:33060, but some configurations are needed</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this step is to see original password </span></span><br><span class="line">$ docker logs mysqlxxx 2&gt;&amp;1 | grep GENERATED <span class="comment"># logs to see logs</span></span><br><span class="line"><span class="comment"># outputs like ↓</span></span><br><span class="line">GENERATED ROOT PASSWORD: Axegh3kAJyDLaRuBemecis&amp;EShOs</span><br><span class="line"></span><br><span class="line"><span class="comment"># login mysql first</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it mysqlxxx mysql -uroot -p </span><br><span class="line"><span class="comment"># &#x27;-it&#x27; usually combined to get interact with dockers, with commands follow</span></span><br><span class="line"><span class="comment"># &#x27;mysql -uroot -p&#x27; is the example</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># change password</span></span><br><span class="line">mysql&gt; ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line"><span class="comment"># or commands in docker shell</span></span><br><span class="line">$ docker -it mysqlxxx /bin/bash </span><br><span class="line">$ mysqladmin -uroot -p password newpassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># then open remote connection permit</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> host = <span class="string">&#x27;%&#x27;</span> <span class="built_in">where</span> user = <span class="string">&#x27;root&#x27;</span>; </span><br></pre></td></tr></table></figure>
+<p>Now we have a mysql docker which can be accessed remotely</p>
+<h2 id="GitHub-Pages-with-Hexo"><a href="#GitHub-Pages-with-Hexo" class="headerlink" title="GitHub Pages with Hexo"></a>GitHub Pages with Hexo</h2><h3 id="Using-Hexo"><a href="#Using-Hexo" class="headerlink" title="Using Hexo"></a>Using Hexo</h3><p>Node.js is required, and Git is required on Windows</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g <span class="comment"># use npm </span></span><br><span class="line">$ hexo init blogname <span class="comment"># initial blog</span></span><br><span class="line">$ <span class="built_in">cd</span> blogname <span class="comment"># enter blog directory</span></span><br><span class="line">$ hexo server <span class="comment"># start hexo as a server and you&#x27;ll see hexo-style hello-world</span></span><br></pre></td></tr></table></figure>
+<p>directory structure</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── .deploy</span><br><span class="line">├── public  //to publish your html </span><br><span class="line">├── scaffolds</span><br><span class="line">├── scripts</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts  </span><br><span class="line">|   └── _posts  //md files to be generated as html</span><br><span class="line">├── themes  //themes&#x27; conf is _config.yml in this dir</span><br><span class="line">├── _config.yml  //blog&#x27;s configure</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+<p>common usages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new passagename <span class="comment"># create passagename.md in source/_posts/</span></span><br><span class="line">$ hexo new page pagename <span class="comment"># create pagename.html maybe</span></span><br><span class="line">$ hexo generate <span class="comment"># *.md are generated to be *.html</span></span><br><span class="line">$ hexo deploy <span class="comment"># deploy your blog on github</span></span><br></pre></td></tr></table></figure>
+<p>simplify:</p>
+<pre><code>hexo n == hexo new
+hexo g == hexo generate
+hexo s == hexo server
+hexo d == hexo deploy
+</code></pre>
+<p>combine:</p>
+<pre><code>$ hexo deploy -g
+$ hexo server -g
+$ hexo d -g
+$ hexo s -g
+</code></pre>
+<h3 id="GitHub-Part"><a href="#GitHub-Part" class="headerlink" title="GitHub Part"></a>GitHub Part</h3><ol>
+<li><p>first you need a <code>github</code> account</p>
+</li>
+<li><p>then create a repository named : <code>xxx.github.io</code> (xxx &#x3D;&gt; <code>github</code> username)</p>
+</li>
+<li><p>configure your ssh public-key to login <code>github</code> without password (necessary for windows git)</p>
+</li>
+</ol>
+<ul>
+<li>configure git’s username &amp; email (ensure your updates show on the wall)<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;your GitHub username&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;your GitHub mailaddress&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>check out whether you have public&#x2F;private keys<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure></li>
+<li>if you can see <code>xxx</code> and <code>xxx.pub</code>, it means u got a keypair</li>
+<li>if not, generate by yourself<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;xx@xx.com&quot;</span></span><br><span class="line"><span class="comment"># &#x27;-t&#x27; have encryption method followed, and &#x27;rsa&#x27; can be replaced</span></span><br><span class="line"><span class="comment"># no need to bother other args </span></span><br></pre></td></tr></table></figure></li>
+<li>type some password once, and you have a keypair now</li>
+<li>then paste strings in <code>xxx.pub</code> to : <code>github</code> index -&gt; ur head portrait -&gt; Settings -&gt; SSH and GPG keys<br> and now you can login <code>github</code> without typing password in ssh or git bash</li>
+</ul>
+<ol start="4">
+<li>configure hexo</li>
+</ol>
+<ul>
+<li>in _config.yml (xxx&#x3D;&gt;<code>github</code> username):<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if only deploy to one repo</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line"><span class="comment"># deploy to two or more repos</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: </span><br><span class="line">    github: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    gitlab: git@gitlab.com:xxx/xxx.gitlab.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure></li>
+<li>install plugin<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># $ npm install hexo-generator-search  --save</span></span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure></li>
+<li>deploy blog on github<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure></li>
+<li>sticky post<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &#x27;top: true&#x27; in &#x27;Front-matter&#x27; to use it</span><br></pre></td></tr></table></figure>
+<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3>Replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> &#x2F;&#x2F;maybe not necessary</li>
+</ul>
+<p>When using <code>{something...}</code>, add {% raw %} at the front and {% endraw %} as the tail,and finally it looks like <code>{% raw %}{something...}{% endraw %}</code>in your text to escape <code>&#123;</code> and<code>&#125;</code><br>but in the code block sorrounded by three `, you can input whatever u want.</p>
+<p>As for multiple tags in hexo articles writing, use tags:[tag1, tag2, …]</p>
+<p>image hosting<br><a class="link"   target="_blank" rel="noopener" href="https://sm.ms/" >https://sm.ms/<i class="fas fa-external-link-alt"></i></a><br>tables generator<br><a class="link"   target="_blank" rel="noopener" href="http://www.tablesgenerator.com/" >http://www.tablesgenerator.com/<i class="fas fa-external-link-alt"></i></a></p>
 
+        </div>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+        
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/note/">#note</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/hexo/">#hexo</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/docker/">#docker</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/github/">#github</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/04/07/2019-04-07-Linux-Reverse-Gadgets/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux Reverse Gadgets</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/10/01/2018-09-31-IoT-Resources/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">IoT Resources</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-    }
-
-
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +470,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#First-how-to-do-note%EF%BC%88mysql-with-docker%E3%80%81hexo%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">First how-to-do note（mysql with docker、hexo）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Steps-for-MySQL-Server-Deployment-with-Docker"><span class="nav-number">2.</span> <span class="nav-text">Basic Steps for MySQL Server Deployment with Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Usage"><span class="nav-number">2.1.</span> <span class="nav-text">Basic Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#About-MYSQL"><span class="nav-number">2.2.</span> <span class="nav-text">About MYSQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-Pages-with-Hexo"><span class="nav-number">3.</span> <span class="nav-text">GitHub Pages with Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Hexo"><span class="nav-number">3.1.</span> <span class="nav-text">Using Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Part"><span class="nav-number">3.2.</span> <span class="nav-text">GitHub Part</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Notes-for-Markdown-in-Hexo"><span class="nav-number">3.3.</span> <span class="nav-text">Notes for Markdown in Hexo</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

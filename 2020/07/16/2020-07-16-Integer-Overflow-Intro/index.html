@@ -161,225 +161,234 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Integer Overflow Intro</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-07-16 21:37:40</span>
+        <span class="mobile">2020-07-16 21:37</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/integer-overflow/">integer-overflow</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Here we experiment integer overflow on <code>Linux</code>.</p>
+<h2 id="Integer-Overflow-Introduction"><a href="#Integer-Overflow-Introduction" class="headerlink" title="Integer Overflow Introduction"></a>Integer Overflow Introduction</h2><p>In C language, the basic data types of integers are divided into short (short), integer (int), and long (long). These three data types are also divided into signed and unsigned, each data type. They all have their own size ranges (because the size range of the data type is determined by the compiler, so the default is to use gcc-5.4 under 64 bits), as shown below:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Type</th>
+<th align="center">Byte</th>
+<th align="center">Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">short int</td>
+<td align="center">2byte(word)</td>
+<td align="center">0~32767(0~0x7fff) <br> -32768~-1(0x8000~0xffff)</td>
+</tr>
+<tr>
+<td align="center">unsigned short int</td>
+<td align="center">2byte(word)</td>
+<td align="center">0~65535(0~0xffff)</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">4byte(dword)</td>
+<td align="center">0~2147483647(0~0x7fffffff) <br> -2147483648~-1(0x80000000~0xffffffff)</td>
+</tr>
+<tr>
+<td align="center">unsigned int</td>
+<td align="center">4byte(dword)</td>
+<td align="center">0~4294967295(0~0xffffffff)</td>
+</tr>
+<tr>
+<td align="center">long int</td>
+<td align="center">8byte(qword)</td>
+<td align="center">Positive: 0~0x7fffffffffffffff <br> Negative: 0x8000000000000000~0xffffffffffffffff</td>
+</tr>
+<tr>
+<td align="center">unsigned long int</td>
+<td align="center">8byte(qword)</td>
+<td align="center">0~0xffffffffffffffff</td>
+</tr>
+</tbody></table>
+<p>When the data in the program exceeds the range of its data type, it will cause an overflow, and the overflow of the integer type is called integer overflow.</p>
+<h2 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h2><p>Here briefly explains the principle of integer overflow.</p>
+<h3 id="Upper-Bound-Overflow"><a href="#Upper-Bound-Overflow" class="headerlink" title="Upper Bound Overflow"></a>Upper Bound Overflow</h3><p>There are two cases of upper bound overflow, <code>0x7fff + 1</code> and <code>0xffff + 1</code>.</p>
+<p>That is because the low-level instructions of the computer are not distinguishable between signed and unsigned, and all data is stored in binary (in compiler level, it distinguishes between signed and unsigned, and produces different assembly instructions).</p>
+<p>So <code>add 0x7fff, 1 == 0x8000</code>, this kind of upper bound overflow has no effect on unsigned integers, but in signed short integers, <code>0x7fff</code> means <code>32767</code>, but <code>0x8000</code> It is <code>-32768</code>, which is represented by a mathematical expression in the signed short integer <code>32767+1 == -32768</code>.</p>
+<p>The second case is <code>add 0xffff, 1</code>. In this case, the first operand is to be considered.</p>
+<p>For example, the assembly code for the signed addition above is <code>add eax, 1</code>, because <code>eax=0xffff</code>, so <code>add eax, 1 == 0x10000</code>, but the unsigned assembly code is to do <code>add Word ptr [rbp - 0x1a], 1 == 0x0000</code>.</p>
+<p>In the signed addition, although the result of <code>eax</code> is <code>0x10000</code>, only the value of <code>ax=0x0000</code> is stored in the memory, and the result is the same as the unsigned.</p>
+<p>In the signed short integer, <code>0xffff==-1, -1 + 1 == 0</code>, this calculation is no problem from a signed one. In an unsigned short, <code>0xffff == 65535, 65535 + 1 == 0</code>.</p>
+<p>assembly instructions of signed and unsigned addition:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># pseudocode</span></span><br><span class="line"><span class="keyword">short</span> <span class="keyword">int</span> a;</span><br><span class="line">a = a + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta"># corresponding assembly</span></span><br><span class="line">movzx eax, word ptr [rbp - <span class="number">0x1c</span>]</span><br><span class="line">add    eax, <span class="number">1</span></span><br><span class="line">mov word ptr [rbp - <span class="number">0x1c</span>], ax</span><br><span class="line"></span><br><span class="line"><span class="meta"># and </span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> b;</span><br><span class="line">b = b + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta"># assembly code</span></span><br><span class="line">add    word ptr [rbp - <span class="number">0x1a</span>], <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="Lower-Bound-Overflow"><a href="#Lower-Bound-Overflow" class="headerlink" title="Lower Bound Overflow"></a>Lower Bound Overflow</h3><p>Lower bound overflow is similar to the upper bound overflow. In the assembly, just need to replace <code>add</code> with <code>sub</code>.</p>
+<p>There are two cases as well:</p>
+<p>The first case  is <code>sub 0x0000, 1 == 0xffff</code>, which is ok for signed <code>0 - 1 == -1</code>, but for unsigned it becomes <code>0 - 1 == 65535</code>.</p>
+<p>The second case is <code>sub 0x8000, 1 == 0x7fff</code>, for unsigned it is <code>32768 - 1 == 32767</code> is correct, but for signed it becomes <code>-32768 - 1 == 32767</code> .</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>It can be summarized in two cases.</p>
+<h3 id="Unrestricted-Range"><a href="#Unrestricted-Range" class="headerlink" title="Unrestricted Range"></a>Unrestricted Range</h3><p>This situation is easy to understand. A thing of a fixed size, if not constrained well, will cause unpredictable consequences.</p>
+<p>Here we write a sample <code>intof.c</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="keyword">int</span> data_len;</span><br><span class="line">    <span class="keyword">int</span> header_len;</span><br><span class="line">    <span class="keyword">char</span> *buf;</span><br><span class="line"></span><br><span class="line">    header_len = <span class="number">0x10</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%uld&quot;</span>, &amp;data_len);</span><br><span class="line"></span><br><span class="line">    len = data_len+header_len</span><br><span class="line">    buf = <span class="built_in">malloc</span>(len);</span><br><span class="line">    <span class="built_in">read</span>(<span class="number">0</span>, buf, data_len);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile and run it:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o intof intof.c</span><br><span class="line">intof.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">intof.c:17:2: warning: implicit declaration of <span class="keyword">function</span> ‘<span class="built_in">read</span>’; did you mean ‘fread’? [-Wimplicit-function-declaration]</span><br><span class="line">   17 |  <span class="built_in">read</span>(0, buf, data_len);</span><br><span class="line">      |  ^~~~</span><br><span class="line">      |  fread</span><br><span class="line">$ ./intof</span><br><span class="line">3                           <span class="comment"># input len</span></span><br><span class="line">abcdefg                     <span class="comment"># input string</span></span><br><span class="line">$ defg</span><br><span class="line">-bash: defg: <span class="built_in">command</span> not found</span><br><span class="line"><span class="comment"># it only reads 3 chars</span></span><br><span class="line">$</span><br><span class="line">$ ./intof</span><br><span class="line">-1                          <span class="comment"># input len</span></span><br><span class="line">qwertyuiopasdfghjklzxcvbnm  <span class="comment"># input string</span></span><br><span class="line"><span class="comment"># it reads all chars</span></span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>What happened? We use <code>gdb</code> to see.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ gdb intof -q</span><br><span class="line">GEF <span class="keyword">for</span> linux ready, <span class="built_in">type</span> `gef` to start, `gef config` to configure</span><br><span class="line">88 commands loaded <span class="keyword">for</span> GDB 9.2 using Python engine 3.8</span><br><span class="line">Reading symbols from intof...</span><br><span class="line">(No debugging symbols found <span class="keyword">in</span> intof)</span><br><span class="line">gef➤  b malloc</span><br><span class="line">Breakpoint 1 at 0x1040</span><br><span class="line">gef➤r</span><br><span class="line">...</span><br><span class="line">gef➤c</span><br><span class="line">Continuing.</span><br><span class="line">-1                          <span class="comment"># input data length</span></span><br><span class="line">qwertyuiopasdfghjklzxcvbnm  <span class="comment"># string to read</span></span><br><span class="line">...</span><br><span class="line">─────────────────── trace ────</span><br><span class="line">[<span class="comment">#0] 0x7ffff7e89a40 → __GI___libc_malloc(bytes=0xf)     </span></span><br><span class="line">[<span class="comment">#1] 0x555555555194 → main()</span></span><br><span class="line">──────────────────────────────</span><br><span class="line">gef➤</span><br></pre></td></tr></table></figure>
+<p>We input <code>-1</code> to apply, only to apply <code>0x20</code> size heap, while we can input a string of <code>0xffffffff</code> size. (from integer overflow to heap overflow)</p>
+<h3 id="Wrong-Type-Conversion"><a href="#Wrong-Type-Conversion" class="headerlink" title="Wrong Type Conversion"></a>Wrong Type Conversion</h3><p>Even if the correct constraints on the variables, there is still the possibility of integer overflow vulnerabilities, I think it can be summarized as the wrong type conversion, if you continue to subdivide, it can be divided into:</p>
+<ol>
+<li>A large range variable is assigned to a small range variable.</li>
+</ol>
+<p>Example <code>intof2.c</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!n)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;vuln&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;OK&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">int</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%ld&quot;</span>, &amp;a);</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Bad&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">check</span>(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile it and run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o intof2 intof2.c</span><br><span class="line">$ ./intof2</span><br><span class="line">4294967296</span><br><span class="line">vuln</span><br></pre></td></tr></table></figure>
+<p>The above is to copy a large variable (long integer a) to a variable with a small range (integer variable n) and causing an integer overflow.</p>
+<p>The <code>long integer</code> occupies 8 bytes of memory space, while the <code>integer</code> has only 4 bytes of memory space, so when <code>long</code> is converted to <code>int</code>, it will cause truncation, and only the low 4 bytes of the long integer will be passed to the integer variable.</p>
+<p>In this example, it converts <code>long: 0x100000000</code> to <code>int: 0x00000000</code>.</p>
+<p>But when passing a smaller variable value to a larger variable, it causes no data loss.</p>
+<ol start="2">
+<li>Only Unilateral Restrictions.</li>
+</ol>
+<p>This case is only for signed types<br>Example <code>intof3.c</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> len, l;</span><br><span class="line">            <span class="keyword">char</span> buf[<span class="number">11</span>];</span><br><span class="line"></span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;len);</span><br><span class="line">            <span class="keyword">if</span> (len &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                    l = <span class="built_in">read</span>(<span class="number">0</span>, buf, len);</span><br><span class="line">                    *(buf+l) = <span class="number">0</span>;</span><br><span class="line">                    <span class="built_in">puts</span>(buf);</span><br><span class="line">            &#125; <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;Please len &lt; 10&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Compile and run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ gcc intof3.c  -o intof3</span><br><span class="line">intof3.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">intof3.c:10:11: warning: implicit declaration of <span class="keyword">function</span> ‘<span class="built_in">read</span>’; did you mean ‘fread’? [-Wimplicit-function-declaration]</span><br><span class="line">   10 |       l = <span class="built_in">read</span>(0, buf, len);</span><br><span class="line">      |           ^~~~</span><br><span class="line">      |           fread</span><br><span class="line">$ ./intof3</span><br><span class="line">20                      <span class="comment"># first input 20</span></span><br><span class="line">Please len &lt; 10</span><br><span class="line">$ ./intof3</span><br><span class="line">5                       <span class="comment"># then input 5</span></span><br><span class="line">1234567890</span><br><span class="line">12345</span><br><span class="line">$ 67890</span><br><span class="line">-bash: 67890: <span class="built_in">command</span> not found</span><br><span class="line">$ ./intof3</span><br><span class="line">-1                      <span class="comment"># last input -1</span></span><br><span class="line">12345678901234567890</span><br><span class="line">123456789012345</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>It seems that we restrict <code>len</code> to be smaller than <code>10</code>, but when <code>len</code> is negative, in <code>read</code> function <code>len</code> will be regarded as <code>unsigned long int</code>.</p>
+<p>The two cases in the above examples have a commonality, that is, the formal parameters of the function and the arguments are different, so I think it can be summarized as the wrong type conversion.</p>
 
+        </div>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+        
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/integer-overflow/">#integer-overflow</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Exercise Area Write-ups</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Format String Vulnerability Intro</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-    }
-
-
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +484,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Integer-Overflow-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Integer Overflow Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Principle"><span class="nav-number">2.</span> <span class="nav-text">Principle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Upper-Bound-Overflow"><span class="nav-number">2.1.</span> <span class="nav-text">Upper Bound Overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lower-Bound-Overflow"><span class="nav-number">2.2.</span> <span class="nav-text">Lower Bound Overflow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unrestricted-Range"><span class="nav-number">3.1.</span> <span class="nav-text">Unrestricted Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wrong-Type-Conversion"><span class="nav-number">3.2.</span> <span class="nav-text">Wrong Type Conversion</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

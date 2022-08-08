@@ -161,225 +161,231 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Security Protection Mechanism</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-01-23 18:47:42</span>
+        <span class="mobile">2020-01-23 18:47</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/gcc/">gcc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Binary vulnerabilities are executable files (PE, ELF files, etc.) that are not properly considered when encoding, causing softwares to perform unexpected functions.<br>Binary vulnerabilities include: </p>
+<ul>
+<li>buffer(stack, bss or heap) overflow</li>
+<li>integer overflow</li>
+<li>format string vulnerability</li>
+<li>use after free</li>
+<li>race condition</li>
+<li>sandbox escape</li>
+<li>IO flie related</li>
+<li>…</li>
+</ul>
+<p>Security Protection Mechanism is needed for software security.</p>
+<h2 id="Linux-Security-Protection-Mechanism"><a href="#Linux-Security-Protection-Mechanism" class="headerlink" title="Linux Security Protection Mechanism"></a>Linux Security Protection Mechanism</h2><p>To pwn, the initial step to check file’s format is:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ file xxxxx</span><br><span class="line">xxxxx: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 2.6.32, BuildID[sha1]=294d1f19a085a730da19a6c55788ec08c2187039, stripped</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">xxxxx: PE32+ executable (GUI) x86-64, <span class="keyword">for</span> MS Windows</span><br></pre></td></tr></table></figure>
+<p>The next and important step is:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$  checksec xxxxx</span><br><span class="line">[*] <span class="string">&#x27;/root/xxxxx&#x27;</span></span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE</span><br><span class="line">    FORTIFY:  Enabled</span><br><span class="line"></span><br><span class="line">or </span><br><span class="line"></span><br><span class="line">$  gdb xxxxx</span><br><span class="line">gdb-peda$ checksec </span><br><span class="line">CANARY    : disabled</span><br><span class="line">FORTIFY   : ENABLED</span><br><span class="line">NX        : ENABLED</span><br><span class="line">PIE       : disabled</span><br><span class="line">RELRO     : disabled</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Now the question is, what are those above means?</p>
+<h3 id="Canary-GS"><a href="#Canary-GS" class="headerlink" title="Canary (GS)"></a>Canary (GS)</h3><p>Attacks caused by stack overflows are very common and very old. A mitigation technique called canary has long appeared in glibc and has been the first line of defense for system security.</p>
+<p>Canary is simple and efficient in both implementation and design. It is to insert a value. At the end of the high-risk area where stack overflow occurs, when the function returns, check if the value of canary has been changed to determine whether stack&#x2F;buffer overflow is occur.</p>
+<p>Canary and GS protection under Windows are effective means to prevent stack overflow. Its appearance largely prevents stack overflow, and since it hardly consumes system resources, it has become the standard of protection mechanism under Linux. </p>
+<p>Canary can be set in GCC using the following parameters:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-fstack-protector (default)</span><br><span class="line"><span class="comment"># enables protection, but inserts protection only for functions that contain arrays in local variables</span></span><br><span class="line"></span><br><span class="line">-fstack-protector-all </span><br><span class="line"><span class="comment"># enable protection, insert protection for all functions</span></span><br><span class="line"></span><br><span class="line">-fstack-protector-strong</span><br><span class="line"></span><br><span class="line">-fstack-protector-explicit </span><br><span class="line"><span class="comment"># enables protection only for functions with explicit stack_protect attribute</span></span><br><span class="line"></span><br><span class="line">-fno-stack-protector </span><br><span class="line"><span class="comment"># Disable protection.</span></span><br></pre></td></tr></table></figure>
+<h3 id="Fortify"><a href="#Fortify" class="headerlink" title="Fortify"></a>Fortify</h3><p>This has something to do with a macro: <code>_FORTIFY_SOURCE</code></p>
+<p>Defining this macro causes some lightweight checks to be performed to detect some buffer overflow errors when employing various string and memory manipulation functions (for example, memcpy, memset, stpcpy, strcpy, strncpy, strcat, strncat, sprintf, snprintf, vsprintf, vsnprintf, gets, and wide character variants thereof). </p>
+<p>For some functions, argument consistency is checked; for example, a check is made that open has been supplied with a mode argument when the specified flags include <code>O_CREAT</code>. For <code>printf</code> the <code>%n</code> is forbidden and <code>%num$s</code> can only exist when <code>%num-1$s</code>, <code>%num-2$s</code>, … <code>%2$s</code> and <code>%1$s</code>(<code>%s</code>) all exist.  Not all problems are detected, just some common cases.</p>
+<p>Some of the checks can be performed at compile time (via macros logic implemented in header files), and result in compiler warnings; other checks take place at run time, and result in a run-time error if the check fails.</p>
+<p>Use of this macro requires compiler support, available with gcc since version 4.0.</p>
+<p>Fortify can be set in GCC using the following parameters:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-U_FORTIFY_SOURCE </span><br><span class="line"><span class="comment"># Disable protection (default)</span></span><br><span class="line"></span><br><span class="line">-D_FORTIFY_SOURCE=1</span><br><span class="line"><span class="comment"># level 1</span></span><br><span class="line"><span class="comment"># If _FORTIFY_SOURCE is set to 1, with compiler optimization level 1 (gcc -O1) and above, checks that shouldn&#x27;t change the behavior of conforming programs are performed.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># As for &#x27;compiler optimization&#x27;, it&#x27;s for producing better machine codes.</span></span><br><span class="line"><span class="comment"># to be brief, this level only protect codes without optimization.</span></span><br><span class="line"></span><br><span class="line">-D_FORTIFY_SOURCE=2</span><br><span class="line"><span class="comment"># level 2</span></span><br><span class="line"><span class="comment"># With _FORTIFY_SOURCE set to 2, some more checking is added, but some conforming programs might fail.</span></span><br><span class="line"><span class="comment"># This level protects codes anyway.</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="NX-DEP"><a href="#NX-DEP" class="headerlink" title="NX (DEP)"></a>NX (DEP)</h3><p>The basic principle of NX (No-eXecute) is to identify the memory page where the data is located as non-executable.</p>
+<p>When the program overflows and transfers to shellcode successfully, the program will try to execute instructions on the data page, and the CPU will throw an exception instead of executing malicious instructions. </p>
+<p>The principle is the same as DEP under windows.</p>
+<p>NX can be set in GCC using the following parameters:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-z execstack </span><br><span class="line"><span class="comment"># Disable protection</span></span><br><span class="line"></span><br><span class="line">-z noexecstack </span><br><span class="line"><span class="comment"># Enable protection (default)</span></span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<h3 id="PIE-ASLR"><a href="#PIE-ASLR" class="headerlink" title="PIE (ASLR)"></a>PIE (ASLR)</h3><p>In general, NX (called DEP on Windows platforms) and Address Space Distribution Randomization (ASLR) will work simultaneously.</p>
+<p>Memory address randomization mechanism (address space layout randomization) has three levels</p>
+<ul>
+<li>0: off ASLR. no randomization, same base address for stack &amp; heap, and same address for libc.so</li>
+<li>1: normal ASLR. random base address for mmap, stack and libc.so , but not randomize for heap</li>
+<li>2: advanced&#x2F;enhanced ASLR, random heap address added</li>
+</ul>
+<p>Check ASLR condition</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -n kernel.randomize_va_space</span><br><span class="line">1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ cat /proc/sys/kernel/randomize_va_space</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>Off ASLR (same way as changing level)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -w kernel.randomize_va_space=0</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ <span class="built_in">echo</span> 0 &gt; /proc/sys/kernel/randomize_va_space</span><br></pre></td></tr></table></figure>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+<p>As for PIE : Position-Independent-Executable<br>It’s the name for ASLR on Linux.</p>
+<p>Difference:</p>
+<ul>
+<li>PIE (on executable) is a power giver. It enables program to randomize address or not.</li>
+<li>ASLR (on process) is the power user. It tells operating system to do program address randomization.</li>
+</ul>
+<p>PIE can be set in GCC using the following parameters:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-no-pie <span class="comment"># Disable PIE (default)</span></span><br><span class="line">-fpie -pie <span class="comment"># Enable PIE, level 1</span></span><br><span class="line">-fPIE -pie <span class="comment"># Enable PIE, level 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x27;-fpie&#x27; and &#x27;-fPIE&#x27; used for compilation, and &#x27;-pie&#x27; used for linking</span></span><br><span class="line"><span class="comment"># &#x27;-pie&#x27; is necessary for &#x27;-fpie&#x27; and &#x27;-fPIE&#x27;</span></span><br><span class="line"></span><br><span class="line">-fpic <span class="comment"># Enable PIC, level 1, but disable PIE</span></span><br><span class="line">-fPIC <span class="comment"># Enable PIC, level 2, but disable PIE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x27;-fpic&#x27;        </span></span><br><span class="line"><span class="comment"># If the GOT size for the linked executable exceeds a machine-specific maximum size, you get an error message from the linker indicating that -fpic does not work; in that case, recompile with -fPIC instead. (These maximums are 8k on the SPARC and 32k on the m68k and RS/6000. The 386 has no such limit.)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x27;-fPIC&#x27;</span></span><br><span class="line"><span class="comment"># If supported for the target machine, emit position-independent code, suitable for dynamic linking and avoiding any limit on the size of the global offset table. This option makes a difference on the m68k, PowerPC and SPARC. Position-independent code requires special support, and therefore works only on certain machines.</span></span><br></pre></td></tr></table></figure>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+<p>As for PIC : Position-Independent Code<br>The difference between PIE and PIC:<br>PIE parameter is for executable files<br>PIC parameter is for shared library</p>
+<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h3><p>In the area of Linux system security, the data storage area that can be written will be the target of the attack, especially the area where function pointers are stored. So from the perspective of security protection, minimizing the writable storage area will be of great benefit to security.</p>
+<p>GCC, GNU linker, and Glibc-dynamic linker work together to implement a technology called RELRO: read only relocation. The approximate implementation is setting the area of the binary specified by the linker after the dynamic linker has processed the relocation as read-only.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-z norelro <span class="comment"># No RELRO</span></span><br><span class="line">-z lazy <span class="comment"># Partial RELRO (default)</span></span><br><span class="line">-z now <span class="comment"># Full RELRO</span></span><br></pre></td></tr></table></figure>
 
-    }
+<h3 id="Sum-Up"><a href="#Sum-Up" class="headerlink" title="Sum-Up"></a>Sum-Up</h3><p>NX：-z execstack &#x2F; -z noexecstack (Off &#x2F; On)<br>Canary：-fno-stack-protector &#x2F;-fstack-protector &#x2F; -fstack-protector-all (Off &#x2F; On &#x2F; All Func On)<br>PIE：-no-pie &#x2F; -pie (Off &#x2F; On)<br>RELRO：-z norelro &#x2F; -z lazy &#x2F; -z now (Off &#x2F; Partial &#x2F; Full)</p>
+<h2 id="Windows-Security-Protection-Mechanism"><a href="#Windows-Security-Protection-Mechanism" class="headerlink" title="Windows Security Protection Mechanism"></a>Windows Security Protection Mechanism</h2><p>There’re always many compiling options in Visual Studio when coding.<br>They can be set in Visual Studio before compilation.<br>Some parameters explained as below.</p>
+<h3 id="GS"><a href="#GS" class="headerlink" title="GS"></a>GS</h3><p>Similar to Canary.<br>After the GS option is enabled, a piece of data is saved on the stack at the beginning of the function execution, and the data is checked when the function returns. If it is inconsistent, it is overwritten, so it jumps into the corresponding processing process and no longer returns, so the shellcode cannot be executed, this value is called “Security cookie”. Software calls Check_Security_Cookie () to check whether the stack is covered.</p>
+<h3 id="SafeSEH"><a href="#SafeSEH" class="headerlink" title="SafeSEH"></a>SafeSEH</h3><p>Canary is useful for stack overflow.<br>However, they ignored that the SEH chain of exception handling is also on the stack, so they can overwrite the address of the SEH chain as jmp esp, and then trigger an exception to jump to the esp to execute the shellcode.</p>
+<p>SafeSEH registers all exception handling functions when the program is compiled to a registered list. After an exception is triggered during execution, a check function is performed to check whether the address pointed to by the SEH chain is in the registered list.</p>
+<h3 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h3><p>Similar to NX.<br>However, in the logic of the check function, the execution is prevented only when the SEH chain points&#x2F;links to the module (exe, dll) address. If the address pointed&#x2F;linked to by the SEH chain is not in these modules, then it can be executed. Therefore, the program is not a module Find the jmp esp in the data space, such as the resource file with the nls suffix, etc., or in software that supports JS scripts (browser, etc.) bypass by writing shellcode through the script to allocated heap.</p>
+<p>Data execution protection (DEP) refers to the heap and stack with only read and write permissions and no execute permissions. Therefore no shellcodes can be executed.</p>
+<h3 id="ASLR"><a href="#ASLR" class="headerlink" title="ASLR"></a>ASLR</h3><p>Similar to PIE.<br>Load code to random space to prevent ROP.</p>
+<h3 id="CFG"><a href="#CFG" class="headerlink" title="CFG"></a>CFG</h3><p>CFI stands for Control-Flow Integrity.<br>It mainly adds dynamic security to the binary executable file by dynamically rewriting it.</p>
+<p>e.g.<br>Insert a check ID agreed in the rewrite before the destination address of jmp, and check if the data in front of the destination address is the agreed check ID in jmp. If not, enter the error processing flow.<br><img src="/imghost/spm/1.png" alt="example1"><br>Insert the check ID before the destination address of the call and the return address of ret, and then the check of the check ID is added to the rewritten call and ret. If it does not meet the expectations, enter the error processing flow.<br><img src="/imghost/spm/2.png" alt="example2"></p>
+<p>The implementation of CFI requires that when jmp, or call to a register (or use register indirect addressing), the destination address must sometimes be obtained dynamically, and the overhead of rewriting is very large, which has caused certain difficulties in the practical application of CFI.</p>
+<p>CFG is the abbreviation of Control Flow Guard, which is a control flow protection. It is a combination of compiler and operating system protection, the purpose is to prevent untrusted indirect calls.</p>
+<p>In the course of the vulnerability attack, a common exploitation method is to overwrite or directly tamper with the value of a register, tamper with the address of the indirect call, and then control the program execution flow. CFG records all indirect call information during compilation and linking, and records them in the final executable file, and inserts additional checks before all indirect calls. When the address of the indirect call is tampered, An exception is triggered and the operating system intervenes.</p>
 
+        </div>
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
+        
 
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/windows/">#windows</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/gcc/">#gcc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-        .name {
-          color: var(--default-text-color);
-        }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/02/13/2020-02-13-Virtual-Box-Tips/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">VirtualBox Tips</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">QEMU Intro and Network Configuration</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +481,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Security-Protection-Mechanism"><span class="nav-number">1.</span> <span class="nav-text">Linux Security Protection Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Canary-GS"><span class="nav-number">1.1.</span> <span class="nav-text">Canary (GS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fortify"><span class="nav-number">1.2.</span> <span class="nav-text">Fortify</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NX-DEP"><span class="nav-number">1.3.</span> <span class="nav-text">NX (DEP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PIE-ASLR"><span class="nav-number">1.4.</span> <span class="nav-text">PIE (ASLR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RELRO"><span class="nav-number">1.5.</span> <span class="nav-text">RELRO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sum-Up"><span class="nav-number">1.6.</span> <span class="nav-text">Sum-Up</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Security-Protection-Mechanism"><span class="nav-number">2.</span> <span class="nav-text">Windows Security Protection Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GS"><span class="nav-number">2.1.</span> <span class="nav-text">GS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SafeSEH"><span class="nav-number">2.2.</span> <span class="nav-text">SafeSEH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEP"><span class="nav-number">2.3.</span> <span class="nav-text">DEP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ASLR"><span class="nav-number">2.4.</span> <span class="nav-text">ASLR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CFG"><span class="nav-number">2.5.</span> <span class="nav-text">CFG</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

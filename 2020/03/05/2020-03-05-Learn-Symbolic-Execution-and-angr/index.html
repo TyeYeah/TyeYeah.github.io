@@ -161,225 +161,280 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Learn Symbolic Execution and angr</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-03-05 15:49:12</span>
+        <span class="mobile">2020-03-05 15:49</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Symbolic-Execution/">Symbolic Execution</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/python/">python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/symbolic-execution/">symbolic-execution</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/angr/">angr</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Besides Fuzzing, Symbolic Execution is another choice to approach reverse engineering and binary analysis. </p>
+<h2 id="Symbolic-Execution-Intro"><a href="#Symbolic-Execution-Intro" class="headerlink" title="Symbolic Execution Intro"></a>Symbolic Execution Intro</h2><p><img src="/imghost/lse/1.png" alt="reverse engineering concept diagram"></p>
+<p>This is a general reverse engineering concept diagram. </p>
+<p>The second layer shows that there are multiple reverse engineering methods that fall under different categories. </p>
+<p>Symbolic execution is a method that falls between static analysis and dynamic analysis.</p>
+<h3 id="Basic-principle"><a href="#Basic-principle" class="headerlink" title="Basic principle"></a>Basic principle</h3><p><img src="/imghost/lse/2.png" alt="symbolic execution flow chart"></p>
+<p>This is a flow chart for general symbolic execution. </p>
+<p>The execution starts by creating symbolic inputs from the original binary. </p>
+<p>From the inputs, paths can be deduced and each path will carry certain constraints. </p>
+<p>The inputs from these constraints will then be executed upon until all paths are found.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><img src="/imghost/lse/3.png" alt="eg"></p>
+<p>All execution paths of a program can be represented as a tree –&gt; execution tree</p>
+<p>To explore paths, formally, symbolic execution maintains two variables globally:</p>
+<ul>
+<li>&amp;sigma; : maps variable to symbolic expression</li>
+<li><code>PC</code>: symbolic path constraints</li>
+</ul>
+<p>When symbol execution starts, the &amp;sigma; is empty and the <code>PC</code> is true.</p>
+<p>In <code>main</code> we meet a read statement whose form is <code>var = sym_input()</code>. After execution a <code>var -&gt; s</code> is added to &amp;sigma; . We will get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub> }.</p>
+<p>The assignment statement like <code>var = expression</code> is the same, so after line6, we get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub>, z-&gt;2y<sub>0</sub> }.</p>
+<p>When we meet conditional statements <code>if(e) S1 else S2</code>, two updates for <code>PC</code>.<br>Update <code>PC</code> –&gt; <code>PC</code> &amp;and; &amp;sigma;(e) to represent <code>then</code> branch.<br>Create <code>PC&#39;</code> –&gt; <code>PC</code> &amp;and; &amp;not; &amp;sigma;(e) to represent <code>else</code> branch.</p>
+<p>After line 7, we get two symbolic execution instances and path constraints are: x<sub>0</sub> &#x3D; 2y<sub>0</sub>   and  x<sub>0</sub> &amp;ne; 2y<sub>0</sub><br>After line 8, Another two instances and <code>PC</code>: (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &gt; y<sub>0</sub> + 10)  and  (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &amp;le; y<sub>0</sub> + 10)</p>
+<p>If things satisfy neither of the conditions, or program breaks, instance terminates. We can use constraint solver to generate values which leads to specific path.</p>
+<p>Example above belongs to classical symbolic execution, pure static symbolic execution. There are two tricky problems resulting in its impractical: </p>
+<ul>
+<li>what if loop occurs?</li>
+<li>what if constraint solver cannot solve?</li>
+</ul>
+<h3 id="Concolic-Execution"><a href="#Concolic-Execution" class="headerlink" title="Concolic Execution"></a>Concolic Execution</h3><p>Key element of modern symbolic execution technology is their ability to mix concrete execution with symbolic execution.</p>
+<p><img src="/imghost/lse/4.png" alt="concolic"></p>
+<p>Concolic maintains two states:<br>Concrete State: maps all variables to their concrete values.<br>Symbolic State: only maps variables that have non-concrete values.</p>
+<p>We use the previous example to see this process. Concolic execution first generates some random input: {x &#x3D; A, y &#x3D; B}(A &amp;ne; 2B). </p>
+<p>When it goes to the first fork, it adds x<sub>0</sub> &amp;ne; 2y<sub>0</sub> to path constraints. Then reverse conjunction, to solve x<sub>0</sub> &#x3D; 2y<sub>0<sub>.</p>
+<p>We can get {x &#x3D; C, y &#x3D; 2C}. When this input reaches next fork, then it does the same as above. </p>
+<p>To sum up, it’s a process of testing inputs along with generating new inputs using constraint solver. Finally we explore all feasible paths.</p>
+<p>Concolic execution deals problems of classic static symbolic execution  – just replace tricky parts for solver with actual values. Meanwhile you’ll sacrifice the completeness of path exploration.</p>
+<h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><p>Next let’s talk about challenges and solutions.</p>
+<h4 id="Path-Explosion"><a href="#Path-Explosion" class="headerlink" title="Path Explosion"></a>Path Explosion</h4><p>Symbolic execution implicitly filtering two paths:</p>
+<ul>
+<li>Paths not depending on symbolic input</li>
+<li>Paths without solutions for current path constraint.</li>
+</ul>
+<p>Though it is, path explosion is still the biggest chanllenge. There’re also two solutions:</p>
+<ul>
+<li>Heuristics for path-finding (heuristic search) to increase code coverage<ul>
+<li>Interleave random testing (choose randomly)</li>
+<li>Guided by CFG (control flow graph)</li>
+<li>Combine with evolutionary search (fitness functionfor driving the exploration of the input space)</li>
+</ul>
+</li>
+<li>Reduce execution time by parallelizing independent pathsor by merging similar paths  <ul>
+<li>Merge paths statically, then feed solver</li>
+<li>Record and reuse results of low-level functions</li>
+<li>Pruning redundant paths</li>
+</ul>
+</li>
+</ul>
+<h4 id="Constraint-Solving"><a href="#Constraint-Solving" class="headerlink" title="Constraint Solving"></a>Constraint Solving</h4><p>It is a bottleneck in symbolic execution. The optimization of the solver (improving solving ability) has become a method to solve it.</p>
+<p>Two solutions for it:</p>
+<ul>
+<li>Irrelevant constraint elimination</li>
+<li>Incremental solution: Caching constraints that have been solved to reuse</li>
+</ul>
+<h4 id="Memory-Modeling"><a href="#Memory-Modeling" class="headerlink" title="Memory Modeling"></a>Memory Modeling</h4><p>Precision of translation from statements to constraints, has a significant impact on the coverage obtained by symbolic execution.</p>
+<p>When accessing memory and referencing a memory unit, whose reference comes from user input, the memory address becomes an expression.</p>
+<p>Sometimes it’s a question about when to set this reference a concrete value, or whether use values to approximate some variables. </p>
+<p>Precision or scalability, it’s a trade-off.</p>
+<p>You have to consider:</p>
+<ul>
+<li>Whether application code from high level, or system code from low-level</li>
+<li>Practical effects of different constraint solvers</li>
+</ul>
+<h4 id="Handling-Concurrency"><a href="#Handling-Concurrency" class="headerlink" title="Handling Concurrency"></a>Handling Concurrency</h4><p>Large programs are usually concurrent. Because of the inherent nature of such programs, dynamic symbolic execution systems can be used to efficiently test concurrent programs, including applications for complex data entry, distributed systems, and GPGPU programs.</p>
+<h2 id="angr-Intro"><a href="#angr-Intro" class="headerlink" title="angr Intro"></a>angr Intro</h2><p><code>angr</code> is a binary analysis framework developed by researchers from the Computer Security Lab at UC Santa Barbara. </p>
+<p>The tool provides binary analysis information such as finding functions and generating function call graphs and it also includes a symbolic solver engine capable of performing symbolic execution. </p>
+<p><code>angr</code> can be a significant part of expanding the field of reverse engineering not only because of its symbolic execution engine, but also because of its strengths as a binary analysis tool. Its ability to find functions and generate function call graphs are important to reverse engineering.</p>
+<p>Documentation as <a class="link"   target="_blank" rel="noopener" href="http://docs.angr.io/" >HTML<i class="fas fa-external-link-alt"></i></a> and as a <a class="link"   target="_blank" rel="noopener" href="https://github.com/angr/angr-doc" >Github repository<i class="fas fa-external-link-alt"></i></a>. They are very helpful.</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>It is documented in <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/introductory-errata/install" >docs.angr.io&#x2F;introductory-errata&#x2F;install<i class="fas fa-external-link-alt"></i></a>. </p>
+<p>Though use <code>pip install angr</code> is pretty easy, I still recommend to get it by <code>virtualenv</code> or <code>docker</code>, which is recommended by official. There are old version lib dependencies that will mess your environment up.</p>
+<p>Despite running script, using <code>IPython</code> to run command is also encouraged.</p>
+<h3 id="Symbolic-Execution-Example"><a href="#Symbolic-Execution-Example" class="headerlink" title="Symbolic Execution Example"></a>Symbolic Execution Example</h3><p><img src="/imghost/lse/5.png" alt="flow chart"></p>
+<p>This is a general flow chart for symbolic execution with <code>angr</code>. Begin by loading the binary with parameters, set the program state to begin at, then create the path and pathgroup to explore on.</p>
+<h4 id="Simple-Solution-0x00"><a href="#Simple-Solution-0x00" class="headerlink" title="Simple Solution 0x00"></a>Simple Solution 0x00</h4><p>Here we write demo <code>check.c</code> ourselves. It contains a simple fork when guessing the string.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">success</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;success\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;here is your flag if it&#x27;s a ctf\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">failed</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;failed\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> check[<span class="number">9</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,check);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(check,<span class="string">&quot;p4ssw0rd&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">success</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">failed</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>Main logic is to input specific word to activate success method.<br>Now we use <code>angr</code> to analyse it.</p>
+<p>You should have read <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/core-concepts" >docs.angr.io&#x2F;core-concepts<i class="fas fa-external-link-alt"></i></a> and known basic properties.<br>Then we follow the flow chart to do.</p>
+<p>First we load the library</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">p = angr.Project(<span class="string">&quot;./check&quot;</span>,auto_load_libs=<span class="literal">False</span>) <span class="comment"># normally False</span></span><br></pre></td></tr></table></figure>
+<p>If you need logging, add this</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&#x27;angr.manager&#x27;</span>).setLevel(logging.DEBUG) </span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<p>Then set the program state to start</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">state=p.factory.entry_state()           <span class="comment"># if Project is an &quot;initialization image&quot;, here is &#x27;simulated program state&#x27;</span></span><br><span class="line">sm=p.factory.simulation_manager(state)  <span class="comment"># simulation_manager is like a simulator</span></span><br></pre></td></tr></table></figure>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+<p>After that we begin to explore</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">res = sm.explore(find=<span class="keyword">lambda</span> s: <span class="string">b&quot;flag&quot;</span> <span class="keyword">in</span> s.posix.dumps(<span class="number">1</span>))    <span class="comment"># explore to find path where b&#x27;flag&#x27; appears</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">len</span>(res.found))                                          <span class="comment"># see if there&#x27;s a result</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(res.found) &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Your input should be: &#x27;</span>,res.found[<span class="number">0</span>].posix.dumps(<span class="number">0</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;And result looks like: &#x27;</span>,res.found[<span class="number">0</span>].posix.dumps(<span class="number">1</span>))</span><br><span class="line"><span class="comment"># the output may be messed by random bytes, because it&#x27;s a memory dump</span></span><br><span class="line"><span class="comment"># but key info exists, and in this way we find a flag </span></span><br></pre></td></tr></table></figure>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+<p>Here is the final script</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> angr <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&#x27;angr.manager&#x27;</span>).setLevel(logging.DEBUG) </span><br><span class="line">p = Project(<span class="string">&quot;./check&quot;</span>,auto_load_libs=<span class="literal">False</span>)</span><br><span class="line">state=p.factory.entry_state()</span><br><span class="line">sm=p.factory.simulation_manager(state)</span><br><span class="line">res = sm.explore(find=<span class="keyword">lambda</span> s: <span class="string">b&quot;flag&quot;</span> <span class="keyword">in</span> s.posix.dumps(<span class="number">1</span>))        <span class="comment"># change b&quot;flag&quot; to bytes you want </span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">len</span>(res.found))                                              <span class="comment"># angr has an engine to help you</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(res.found) &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Your input should be: &#x27;</span>,res.found[<span class="number">0</span>].posix.dumps(<span class="number">0</span>)) </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;And result looks like: &#x27;</span>,res.found[<span class="number">0</span>].posix.dumps(<span class="number">1</span>))</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>Output is like</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">Your input should be:  b<span class="string">&#x27;p4ssw0rd\x00J\x00\x08\x00\x02\x02\x08I\x02)\x00\x89\x06I\x02\x00\x01\x02\x01\x08\x01\x02\x00\x01\x00\x01\x00\x01\x02\x00\x08\x00\x01\x00\x02\x00\x00\x00\x00\x00\x02\x00\x02\x04\x89\x89\x00\x00\x00\x00\x00&#x27;</span></span><br><span class="line">And result looks like:  b<span class="string">&quot;success\nhere is your flag if it&#x27;s a ctf\n&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Simulation-Execution-0x01"><a href="#Simulation-Execution-0x01" class="headerlink" title="Simulation Execution 0x01"></a>Simulation Execution 0x01</h4><p>We have the same <code>check</code> to analyse, with different script</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">proj = angr.Project(<span class="string">&#x27;./check&#x27;</span>)</span><br><span class="line">state = proj.factory.entry_state() </span><br><span class="line">forknum = <span class="number">2</span>                                     <span class="comment"># normally is path number when encounter a fork</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    succ = state.step()                         <span class="comment"># &#x27;state&#x27; is used like a simulator. kind of like &#x27;unicorn&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(succ.successors) == forknum:         <span class="comment"># if we meet a fork, having specific number paths to go</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    state = succ.successors[<span class="number">0</span>]                  <span class="comment"># we break the point and check state</span></span><br><span class="line"></span><br><span class="line">state1, state2 = succ.successors</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Fork 1 dump is:&#x27;</span>,state1.posix.dumps(<span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Fork 2 dump is:&#x27;</span>,state2.posix.dumps(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<p>Then we can have</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fork 1 dump is: b<span class="string">&#x27;p4ssw0rd\x00\x00\x02\x00\x02\x00\x00\x00\x00\x02\x02\x02I\x00\x02\x00\x00\x01\x02\x02\x01\x01\x02\x08\x00\x08\x00\x01\x00\x00\x00\x01\x00\x00\x19\x01\xa0\x00\x00\x00\x08\x00\x00\x00\x00\x00\x80\x08\x00\x00\x00\x01&#x27;</span></span><br><span class="line">Fork 2 dump is: b<span class="string">&#x27;\x01\x0e\x00\x00\x89\x00\x04&quot;IJ\x00\x08\x89\x00\x19\xa4I\x0e\x8a\x01\x03\x02I*J\x00\x89II\x02\x00@\x8a@\x02\x89\x89\x02\x02I\x00\x01\x08\x89\x82\x89\x00\x0f\xd9*\x19\x89\x02\x02\x01@\x02\x02\x02\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 
-    }
+<h4 id="Pass-Arguments-0x02"><a href="#Pass-Arguments-0x02" class="headerlink" title="Pass Arguments 0x02"></a>Pass Arguments 0x02</h4><p>We write another demo <code>check2.c</code> to learn about passing args.<br>And we compile without <code>PIE</code> to try another way of exploring.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">1</span>], <span class="string">&quot;hello args test&quot;</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you win!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you lose!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>Solver engine of <code>angr</code> is called Claripy.<br>The way we pass command line arguments is </p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">args = claripy.BVS(<span class="string">&quot;args&quot;</span>, <span class="number">8</span> * <span class="number">16</span>)                      </span><br><span class="line"><span class="comment"># create a bitvector symbol named &quot;args&quot; of length 8 * 16 bits</span></span><br><span class="line"><span class="comment"># state.solver.BVV(num, size) is used to set value with exact number and size</span></span><br><span class="line">state = p.factory.entry_state(args=[<span class="string">&#x27;./check2&#x27;</span>, args])  </span><br><span class="line"><span class="comment"># in this way we pass args</span></span><br></pre></td></tr></table></figure>
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
+<p>Because we remove <code>PIE</code>, no randomization for address.<br>Use objdump to disassemble</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ objdump -D check2</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">  401153:       48 89 c7                mov    %rax,%rdi</span><br><span class="line">  401156:       e8 e5 fe ff ff          callq  401040 &lt;strcmp@plt&gt;     <span class="comment"># Here is &#x27;strcmp&#x27; call</span></span><br><span class="line">  40115b:       85 c0                   <span class="built_in">test</span>   %eax,%eax</span><br><span class="line">  40115d:       75 13                   jne    401172 &lt;main+0x40&gt;      <span class="comment"># a jump for not equal</span></span><br><span class="line">  40115f:       48 8d 3d a7 0e 00 00    lea    0xea7(%rip),%rdi        <span class="comment"># i guess it&#x27;sfor equal</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>So we can use absolute address to explore</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sm = p.factory.simgr(state)             <span class="comment"># another way for simulation</span></span><br><span class="line">sm.explore(find=<span class="number">0x40115f</span>)               <span class="comment"># use address(when no PIE)</span></span><br><span class="line">st = sm.found[<span class="number">0</span>]                        <span class="comment"># store the result(state)</span></span><br></pre></td></tr></table></figure>
 
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
+<p>And final script is</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> claripy</span><br><span class="line">p = angr.Project(<span class="string">&quot;./check2&quot;</span>)</span><br><span class="line">args = claripy.BVS(<span class="string">&quot;args&quot;</span>, <span class="number">8</span> * <span class="number">16</span>)</span><br><span class="line">state = p.factory.entry_state(args=[<span class="string">&#x27;./check2&#x27;</span>, args])</span><br><span class="line">sm = p.factory.simgr(state)</span><br><span class="line">sm.explore(find=<span class="number">0x40115f</span>)</span><br><span class="line">st = sm.found[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span> st.se.<span class="built_in">eval</span>(args,cast_to=<span class="built_in">str</span>)      <span class="comment"># solve the constraint</span></span><br></pre></td></tr></table></figure>
+<p>Output is </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g3t fl4g���</span><br></pre></td></tr></table></figure>
+<p>Then we guess the key word is “g3t fl4g”</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p><code>angr</code> is not only a gadget for symbolic execution but a tool for reverse engineering.<br>What I show you here is simple implementation for simple puzzles related with symbolic execution.<br>See <a class="link"   target="_blank" rel="noopener" href="https://github.com/angr/angr-doc/tree/master/examples/" >angr examples<i class="fas fa-external-link-alt"></i></a> to learn advanced techniques of <code>angr</code>.</p>
 
-        .name {
-          color: var(--default-text-color);
-        }
+        </div>
 
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
+        
 
-      }
-    }
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/python/">#python</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/symbolic-execution/">#symbolic-execution</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/angr/">#angr</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-  }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Domain Pentest Intro</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/02/18/2020-02-18-Wine-Tips/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Wine Tips</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +530,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbolic-Execution-Intro"><span class="nav-number">1.</span> <span class="nav-text">Symbolic Execution Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-principle"><span class="nav-number">1.1.</span> <span class="nav-text">Basic principle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Concolic-Execution"><span class="nav-number">1.3.</span> <span class="nav-text">Concolic Execution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges"><span class="nav-number">1.4.</span> <span class="nav-text">Challenges</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Explosion"><span class="nav-number">1.4.1.</span> <span class="nav-text">Path Explosion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Constraint-Solving"><span class="nav-number">1.4.2.</span> <span class="nav-text">Constraint Solving</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory-Modeling"><span class="nav-number">1.4.3.</span> <span class="nav-text">Memory Modeling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Handling-Concurrency"><span class="nav-number">1.4.4.</span> <span class="nav-text">Handling Concurrency</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#angr-Intro"><span class="nav-number">2.</span> <span class="nav-text">angr Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">2.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbolic-Execution-Example"><span class="nav-number">2.2.</span> <span class="nav-text">Symbolic Execution Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-Solution-0x00"><span class="nav-number">2.2.1.</span> <span class="nav-text">Simple Solution 0x00</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simulation-Execution-0x01"><span class="nav-number">2.2.2.</span> <span class="nav-text">Simulation Execution 0x01</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pass-Arguments-0x02"><span class="nav-number">2.2.3.</span> <span class="nav-text">Pass Arguments 0x02</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary"><span class="nav-number">2.3.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

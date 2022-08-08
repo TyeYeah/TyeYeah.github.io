@@ -161,225 +161,1292 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Some Assembly Intro</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-01-09 22:34:28</span>
+        <span class="mobile">2021-01-09 22:34</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/arm/">arm</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mips/">mips</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/x86/">x86</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cisc/">cisc</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/risc/">risc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>27 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <h2 id="CISC-and-RISC"><a href="#CISC-and-RISC" class="headerlink" title="CISC and RISC"></a>CISC and RISC</h2><p>There are two main types of computer architectures that will be covered in this project: Complex Instruction Set Computing (<code>CISC</code>) and Reduced Instruction Set Computing (<code>RISC</code>).<br>An example of <code>CISC</code> is the <code>x86</code> architecture. Examples of <code>RISC</code> are the <code>ARM</code>, the <code>MIPS</code>, and the <code>PowerPC</code> architectures.<br>The differences between <code>CISC</code> and <code>RISC</code> is their  behaviors in how they execute instructions. </p>
+<h3 id="CISC"><a href="#CISC" class="headerlink" title="CISC"></a>CISC</h3><p>The <code>CISC</code> architecture aims to complete a task in as few assembly instructions as possible. This is done with an emphasis on building rich instruction sets with an emphasis on complex hardware.<br>The hardware in a <code>CISC</code> system must have the ability to interpret several series of operations at a given time.<br>The <code>CISC</code> architecture uses microcode,which is the interpreter between the hardware of a computer and the architectural level of a computer.<br>Characteristics of the <code>CISC</code> instruction set include:</p>
+<ul>
+<li>2-operand format: instructions have a source and destination</li>
+<li>Multiple addressing modes for memory</li>
+<li>Instructions that take multiple clock cycles to execute</li>
+</ul>
+<p>An example of a <code>CISC</code> instruction would be one that performs multiple jobs at once. There could be an instruction called <code>MULT</code> that will load two values into registers, multiply them, and then store the result in another register.</p>
+<p>There  are drawbacks  to  <code>CISC</code>  as  well.<br>These  include  the  increased  complexity  of  an instruction  set, as each  new  chip  hardware  generation  must  maintain  the  same  properties  of  the previous generation.<br>Since <code>CISC</code> attempts to execute code in as few instructions as possible, the compensation is that the instructions will take more clock cycles to execute.<br>The complexity of <code>CISC</code> can be shown in the flow diagram below. </p>
+<p><img src="/imghost/rpp/10.png" alt="CISC flow graph"></p>
+<p><code>CISC</code> starts with the machine instructions, converts them to microcode, then converts to microinstructions, which is then executed.</p>
+<h3 id="RISC"><a href="#RISC" class="headerlink" title="RISC"></a>RISC</h3><p>The <code>RISC</code> instruction set focuses on using more  simple instructions that can each be executed in just one clock cycle.<br>From the <code>CISC</code> example shown above, the <code>RISC</code> equivalent would split up the <code>MULT</code> instruction into  three different instructions: <code>LOAD</code>, <code>MULT</code>, and <code>STORE</code>.<br>The <code>RISC</code> instruction set is more emphasized on software. Separating commands into multiple instructions allows for pipelining and more efficient use of hardware.<br>Characteristics of the <code>RISC</code> instruction set include:</p>
+<ul>
+<li>More optimized register usage with 32 or more registers</li>
+<li>Simplified compiler design by using general purpose registers</li>
+<li>Use registers instead of the stack to pass arguments and hold variables</li>
+<li>Reduced number of instructions (compared with <code>CISC</code>)</li>
+</ul>
+<p>The main drawback to <code>RISC</code> is increased instruction size from having more instructions.<br>Since <code>RISC</code> processors depend on compilers to explicitly emit each instruction, the compilers will determine the performance of the program.<br>The flow diagram of <code>RISC</code> is shown below, which is much less complex than <code>CISC</code>.</p>
+<p><img src="/imghost/rpp/11.png" alt="RISC flow graph"></p>
+<p>The machine instruction is executed immediately. There are no conversions that need to be made.</p>
+<h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p>This section will give a brief overview on how to interpret <code>x86</code> assembly code.<br>The <code>x86</code> architecture has eight general purpose registers, each 32-bits in size which can be seen below</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">EAX</span> –Extended Accumulator Register</span><br><span class="line"><span class="built_in">EBX</span> –Extended Base Register</span><br><span class="line">ECD –Extended Counter Register</span><br><span class="line"><span class="built_in">EDX</span> –Extended Data Register</span><br><span class="line"><span class="built_in">ESI</span> –Extended Source Index</span><br><span class="line"><span class="built_in">EDI</span> –Extended Destination index</span><br><span class="line"><span class="built_in">EBP</span> –Extended Base Pointer</span><br><span class="line"><span class="built_in">ESP</span> –Extended Stack Pointer</span><br></pre></td></tr></table></figure>
 
+<p>The <code>x86</code> architecture uses  the  stack  as  the  part  of  memory  to  store  local  variables  and function arguments.<br>The stack has a Last In First Out (LIFO) structure. The <code>ESP</code> and <code>EBP</code> registers are associated with the stack, where the <code>ESP</code> (stack pointer) always points to the top of the stack.<br>The <code>EBP</code> (base pointer) is the reference on the stack that never changes. The <code>ESP</code> register is the pointer to the top of the stack when the function is first called. </p>
+<p>Arithmetic  operations  follow  the  same  general  syntax.<br>For  addition  and  subtraction, the syntax is <code>ADD/SUB dest, src</code>. Where <code>ADD/SUB</code> is the operation and <code>dest</code> is the destination register and <code>src</code> is the source register.<br>Example instructions are shown below.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add</span> <span class="built_in">eax</span>, <span class="number">7</span></span><br><span class="line"><span class="keyword">sub</span> <span class="built_in">eax</span>, <span class="number">4</span></span><br></pre></td></tr></table></figure>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<p>There are three possible ways to perform multiplication.<br>There is multiplication of </p>
+<ul>
+<li>just the <code>eax</code> register with a value,</li>
+<li>two values stored into a register</li>
+<li>a register with a value stored into that same register.</li>
+</ul>
+<p>The first way only has 1 argument. This means that the <code>eax</code> register is taken and multiplied by that value.<br>The second way shows that the multiplication of the two end arguments are stored  into  the first  argument  register.<br>The  last  way  multiplies  the  value  in  the  first  argument register and the value in the second argument and stores the result in the first argument register.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mul</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">mul</span> <span class="built_in">edx</span>, <span class="number">3</span>, <span class="number">6</span></span><br><span class="line"><span class="keyword">mul</span> <span class="built_in">ecx</span>, <span class="number">8</span></span><br></pre></td></tr></table></figure>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+<p>For division the instructions are split up into multiple steps using the <code>eax</code> and <code>ecx</code> register.<br>The <code>eax</code> register stores the dividend while the <code>ecx</code> register stores the divisor.<br>The resulting answer is stored in <code>eax</code> with the remainder in <code>edx</code>.<br>In following codes, the first line stores 16 in register <code>eax</code>. The second line stores 5 in <code>ecx</code>. The last instruction divides 16 by 5. It then stores the result, 3, in <code>eax</code>. The remainder, 1, is stored in <code>edx</code>.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">eax</span>, <span class="number">16</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">ecx</span>, <span class="number">5</span></span><br><span class="line"><span class="keyword">div</span> <span class="built_in">ecx</span></span><br></pre></td></tr></table></figure>
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+<p>Branching is an important aspect to understand in any assembly language. <code>x86</code> uses jumps to denote branches. A few jump commands are shown below.<br>These command include a jump if values are equal to each other, not equal to each other, or greater than or less than zero.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">JMP</span>     jump</span><br><span class="line"><span class="keyword">JE</span>      jump if equal to</span><br><span class="line"><span class="keyword">JLE</span>     jumpif less than <span class="keyword">or</span> equal to</span><br><span class="line"><span class="keyword">JNZ</span>     jump if <span class="keyword">not</span> <span class="meta">zero</span></span><br><span class="line"><span class="keyword">JZ</span>      jump if <span class="meta">zero</span></span><br><span class="line"><span class="keyword">JBE</span>     jump if below <span class="keyword">or</span> equal to</span><br><span class="line"><span class="keyword">JGE</span>     jump if greater than <span class="keyword">or</span> equal to</span><br></pre></td></tr></table></figure>
 
-    }
+<h2 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h2><h3 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h3><p><code>ARM</code> has 37 registers each of size 32-bits.<br>The general purpose registers  are labeled <code>r0</code>-<code>r12</code>.<br>There is a stack pointer (<code>SP</code>) register, link register (<code>LR</code>), and program counter (<code>PC</code>) register.<br><code>SP</code> is also known as <code>r13</code>, <code>LR</code> is known as <code>r14</code>, and <code>PC</code> is known as <code>r15</code>.</p>
+<p>The syntax for addition,subtraction, multiplication, and division operations are all similar for Intel syntax, with the operation coming first, the destination coming second, and the two values being operated on coming last.<br><code>AT&amp;T</code> syntax is the other way around,with the destination address coming last. However, these examples will all use the Intel syntax. Examples are shown below.</p>
+<p>The first line shows the addition of the value in register <code>r1</code> and 7 stored into the <code>r0</code> register. The second line subtracts 8 from the value in <code>r3</code> and stores the result in the <code>r0</code> register. The third line multiplies 5 and 6 and stores the answer in the <code>r0</code> register. The final line divides 12 by 4 and stores the result in the <code>r0</code> register.</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ADD</span> <span class="built_in">r0</span>, <span class="built_in">r1</span>, <span class="number">7</span></span><br><span class="line"><span class="keyword">SUB</span> <span class="built_in">r0</span>, <span class="built_in">r3</span>, <span class="number">8</span></span><br><span class="line"><span class="keyword">MUL</span> <span class="built_in">r0</span>, <span class="number">5</span>, <span class="number">6</span></span><br><span class="line"><span class="symbol">SDIV</span> <span class="built_in">r0</span>, <span class="number">12</span>, <span class="number">4</span></span><br></pre></td></tr></table></figure>
 
+<p><code>ARM</code> uses branches to transition code. The syntax is similar to the jumping as shown in the <code>x86</code> architecture. Example <code>ARM</code> branch operations are shown below.<br>There are branches for if a value is greater than or equal to another value or less than or equal to another value.</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BGE</span>     Branch <span class="meta">if</span> greater than or equal to</span><br><span class="line"><span class="keyword">BLE</span>     Branch <span class="meta">if</span> less than or equal to</span><br><span class="line"><span class="keyword">BLT</span>     Branch <span class="meta">if</span> less than</span><br><span class="line"><span class="keyword">BNE</span>     Branch <span class="meta">if</span> not equal to zero</span><br></pre></td></tr></table></figure>
 
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
+<h3 id="Addressing"><a href="#Addressing" class="headerlink" title="Addressing"></a>Addressing</h3><ol>
+<li><p>LDMIA R0 , {R1,R2,R3,R4}<br>LDM is: Multi-register &quot;internal access&quot; instruction<br>IA indicates that R0 is incremented by 1 word after each LDM instruction ends.<br>The final result is R1 &#x3D; [R0], R1 &#x3D; [R0+#4], R1 &#x3D; [R0+#8], R1 &#x3D; [R0+#0xC]</p>
+</li>
+<li><p>Stack addressing (FA, EA, FD, ED)<br>STMFD SP! , {R1-R7, LR} @ Push R1<del>R7 and LR onto the stack<br>LDMFD SP! , {R1-R7, LR} @ Pop R1</del>R7 and LR</p>
+</li>
+<li><p>Block copy addressing<br>LDM and STM are instruction prefixes, indicating multi-register addressing, instruction suffixes (IA, DA, IB, DB).<br>LDMIA R0!, {R1-R3} @Retrieve 3 words from the memory address pointed to by R0 to the R1, R2, R3 registers<br>STMIA R0!, {R1-R3} @ Stores the contents stored by R1, R2, and R3 in the memory pointed to by R0.</p>
+</li>
+<li><p>Relative addressing<br>With the current value of the current program counter PC as the base address, the label mark position is offset, and the two are added together.<br>To a valid address.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BL NEXT</span><br><span class="line">    ...        </span><br><span class="line">NEXT:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Instruction-set"><a href="#Instruction-set" class="headerlink" title="Instruction set"></a>Instruction set</h3><ol>
+<li><p>Since the arm chip is updated very quickly, there are many instruction sets. The most common ones are the arm instruction set and the Thumb instruction set.</p>
+</li>
+<li><p>Jump instruction<br>Arm implements two types of jumps, one is to use jump instructions directly, and the other is to directly assign values to PC registers.</p>
+</li>
+</ol>
+<ul>
+<li>B jump instruction<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure B&#123;cond&#125; label</span><br><span class="line">Jump directly, such as `BNE LABEL`</span><br></pre></td></tr></table></figure></li>
+<li>BL jump instruction<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Structure BL&#123;cond&#125; label</span><br><span class="line">When the BL instruction is executed, if the condition is satisfied, the address of the next instruction of the current instruction is first assigned to the R14 register (LR).</span><br><span class="line">Then jump to the address marked by the label to continue execution. Generally used in process calls, after the process is over, return via `MOV PC, LR`</span><br></pre></td></tr></table></figure></li>
+<li>BX jump instruction with state switching<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BX&#123;cond&#125;Rm</span><br><span class="line">When the BX instruction is executed, if the condition is satisfied, it will judge whether the bit [0] of the Rm register is 1, and if it is 1, the T flag of the CPSR register is automatically set to 1 at the time of the jump, and the instruction at the target position is Resolved as a Thumb instruction. Conversely, if bit [0] of the Rm register is 0, the T flag of the CPSR register is reset and the instruction at the target position is interpreted as an arm instruction.</span><br></pre></td></tr></table></figure></li>
+<li>as follows:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ADR R0, thumbcode + 1</span><br><span class="line">BX R0 @ Jump to thumbcode. And the processor runs in thumb mode</span><br><span class="line">thumbcode:</span><br><span class="line">.code 16</span><br></pre></td></tr></table></figure></li>
+<li>BLX jump instruction with link and state switch<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BLX&#123;cond&#125;Rm</span><br><span class="line">The BLX instruction aggregates the functions of BL and BX, and simultaneously saves the return address to R14 (LR) on the function of BX.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3">
+<li>Register access instruction<br>Memory access instruction operations include loading data from a memory area, storing data to a memory, exchanging data between registers and memory, and the like.</li>
+</ol>
+<ul>
+<li><p><code>LDR</code><br>Put the data in memory into the register<br>Example of instruction:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LDRH R0, [R1] ; Read halfword data with memory address R1 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, #8] ; Read halfword data with memory address R1+8 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, R2] ; Read halfword data with memory address R1+R2 into register R0 and clear the upper 16 bits of R0.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>STR</code><br>The STR is used to store data to an address. The format is as follows:<br>STR{type}{cond}Rd,label<br>STRD {cond} Rd, Rd2, label<br>The usage is as follows:<br><code>STR R0,[R2,#04]</code> Store the value of R0 at the address of R2+4</p>
+</li>
+<li><p><code>LDM</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LDM&#123;addr_mode&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure></li>
+<li><p>This instruction is to allocate the data in the stack in memory to the register in batches, that is, the pop operation.<br>&gt; Special note, ! is an optional suffix. If there is! Then the final address will be written back to the Rn register.</p>
+</li>
+<li><p><code>STM</code><br>The STM stores the data of a register list into a specified address location. Format is as follows</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STM&#123;addr_mod&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure></li>
+<li><p><code>PUSH&amp;&amp;POP</code><br>The format is as follows:<br>PUSH {cond} reglist<br>POP {cond}<br>Stack operation instruction</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUSH &#123;r0,r4-r7&#125;</span><br><span class="line">POP &#123;r0,r4-r7&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>SWP</code></p>
+</li>
+</ul>
+<ol start="4">
+<li>Data exchange between registers.<br>The format is <code>SWP&#123;B&#125;&#123;cond&#125;Rd,Rm,[Rn]</code><br>B is an optional byte. If there is B, the byte is exchanged. Otherwise, the word is exchanged.<br>Rd is a temporarily stored register, and Rm is the value to be replaced.<br>Rn is the data address of &#96;to be replaced&#39;</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>The whole list can be found in <a class="link"   target="_blank" rel="noopener" href="https://iitd-plos.github.io/col718/ref/arm-instructionset.pdf" >arm-instructionset.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://pages.cs.wisc.edu/~markhill/restricted/arm_isa_quick_reference.pdf" >arm_isa_quick_reference.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://imrannazar.com/ARM-Opcode-Map" >ARM-Opcode-Map<i class="fas fa-external-link-alt"></i></a>.</p>
+<h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><h3 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h3><p>In  <code>MIPS</code>,  there  are  32  registers  of  size  32-bits  that  are  for  use  with  integer  and  logic instructions.<br>They are labeled <code>$0</code> - <code>$31</code>.<br>Table in the following shows this usage of these 32 registers. There are registers for a dedicated zero value, return values, temporary data, saved registers, etc.</p>
+<table>
+<thead>
+<tr>
+<th>Register Number</th>
+<th>Conventional Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$0</td>
+<td>$zero</td>
+<td>Hard-wired to 0</td>
+</tr>
+<tr>
+<td>$1</td>
+<td>$at</td>
+<td>Reserved for pseudo-instructions</td>
+</tr>
+<tr>
+<td>$2 - $3</td>
+<td>$v0 - $v1</td>
+<td>Return values from functions</td>
+</tr>
+<tr>
+<td>$4 - $7</td>
+<td>$a0 - $a3</td>
+<td>Arguments to functions, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$8 - $15</td>
+<td>$t0 - $t7</td>
+<td>Temporary data, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$16 - $23</td>
+<td>$s0 - $s7</td>
+<td>Saved registers, preserved by subprograms</td>
+</tr>
+<tr>
+<td>$24 - $25</td>
+<td>$t8 - $t9</td>
+<td>More temporary registers, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$26 - $27</td>
+<td>$k0 - $k1</td>
+<td>Reserved for kernel</td>
+</tr>
+<tr>
+<td>$28</td>
+<td>$gp</td>
+<td>Global Area Pointer</td>
+</tr>
+<tr>
+<td>$29</td>
+<td>$sp</td>
+<td>Stack Pointer</td>
+</tr>
+<tr>
+<td>$30</td>
+<td>$fp</td>
+<td>Frame Pointer</td>
+</tr>
+<tr>
+<td>$31</td>
+<td>$ra</td>
+<td>Return Address</td>
+</tr>
+</tbody></table>
+<p>MIPS as a load-store architecture means that when we want to access memory we must access it through load and store instructions. All other instructions (add, sub, mul, div, and so on) must fetch their operands from the register and store their results in registers. For example, the following example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum = x + y</span><br></pre></td></tr></table></figure>
+<p>We assume that sum and x , y are variables in the program, and their MIPS assembly is expressed as:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># sum = x + y</span><br><span class="line"></span><br><span class="line">lw      $t0, x          # Load x from memory into a CPU register</span><br><span class="line">lw      $t1, y          # Load y from memory into a CPU register</span><br><span class="line">add     $t0, $t0, $t1   # Add x and y</span><br><span class="line">sw      $t0, sum        # Store the result from the CPU register to memory</span><br></pre></td></tr></table></figure>
 
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
+<p>The MIPS32 architecture also defines three special registers, <code>PC</code> (program counter), <code>HI</code> (multiply and divide result high register), and <code>LO</code> (multiply and divide result low register). When multiplying, <code>HI</code> and <code>LO</code> hold the result of the multiplication, where <code>HI</code> holds the upper 32 bits and <code>LO</code> holds the lower 32 bits. In the division operation, <code>HI</code> saves the remainder and the <code>LO</code> saves the quotient.</p>
+<h3 id="Instructions"><a href="#Instructions" class="headerlink" title="Instructions"></a>Instructions</h3><p>Arithmetic syntax for <code>MIPS</code> is similar to that of <code>ARM</code>. Examples for addition, subtraction, multiplication,  and  division  are  shown below.<br>The  results  for  division  and  multiplication  are stored in the special register <code>$LO</code></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="built_in">t0</span>, $<span class="built_in">s1</span>, $<span class="built_in">s2</span></span><br><span class="line"><span class="keyword">sub </span>$<span class="built_in">s4</span>, $<span class="built_in">s5</span>, $<span class="built_in">s0</span></span><br><span class="line"><span class="keyword">mult </span>$<span class="built_in">s3</span>, %<span class="built_in">t4</span></span><br><span class="line"><span class="keyword">div </span>$<span class="built_in">s2</span>, $<span class="built_in">t0</span></span><br></pre></td></tr></table></figure>
+<p>In <code>MIPS</code>, there are branches to move around code, similar to <code>ARM</code>. Following part shows some common branch instructions. <code>MIPS</code> is different from the other referenced architectures in that it utilizes the branch delay slot.<br>The branch delay slot means that after a branch operation is reached, the  instruction  after  the  branch  will  be  executed  before  the  branch  itself  is  taken.</p>
+<p>The  <code>BEQ</code> instruction will compare two values. If the values are equal to each other, then the branch will be taken.<br>Similarly, <code>BNE</code> will compare two values and if the values are not equal, the branch will be taken.<br><code>BGEZ</code> will compare a register to 0. If the value is greater than zero, the branch will be taken.<br>The opposite is true for <code>BLTZ</code>, where the branch will be taken if the value being compared is less than zero.</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEQ </span>    <span class="keyword">Branch </span>if equal to</span><br><span class="line"><span class="keyword">BNE </span>    <span class="keyword">Branch </span>if not equal</span><br><span class="line"><span class="keyword">BGEZ </span>   <span class="keyword">Branch </span>if greater than <span class="keyword">or </span>equal to <span class="built_in">zero</span></span><br><span class="line"><span class="keyword">BLTZ </span>   <span class="keyword">Branch </span>if less than <span class="built_in">zero</span></span><br></pre></td></tr></table></figure>
 
-        .name {
-          color: var(--default-text-color);
-        }
+<p>Detailed part:</p>
+<p><strong>ADD – Add (with overflow)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Adds two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s + $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>add $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssh tttt dddd d000 0010 0000</code></td>
+</tr>
+</tbody></table>
+<p><strong>ADDI – Add immediate (with overflow)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Adds a register and a sign-extended immediate value and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; $s + imm; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>addi $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0010 00ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>ADDIU – Add immediate unsigned (no overflow)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Adds a register and a sign-extended immediate value and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; $s + imm; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>add $ t, $ s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0010 01ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>ADDU – Add unsigned (no overflow)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Adds two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s + $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>addu $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 0001</code></td>
+</tr>
+</tbody></table>
+<p><strong>AND – Bitwise and</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Bitwise ands two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s &amp; $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>and $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 0100</code></td>
+</tr>
+</tbody></table>
+<p><strong>ANDI – Bitwise and immediate</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Bitwise ands a register and an immediate value and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; $s &amp; imm; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>andi $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0011 00ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BEQ – Branch on equal</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the two registers are equal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &#x3D;&#x3D; $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>beq $s, $t, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0001 00ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BGEZ – Branch on greater than or equal to zero</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is greater than or equal to zero</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &gt;&#x3D; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bgez $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 01ss sss0 0001 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BGEZAL – Branch on greater than or equal to zero and link</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is greater than or equal to zero and saves the return address in $31</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &gt;&#x3D; 0 $31 &#x3D; PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bgezal $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 01ss sss1 0001 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BGTZ – Branch on greater than zero</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is greater than zero</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &gt; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bgtz $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0001 11ss sss0 0000 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BLEZ – Branch on less than or equal to zero</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is less than or equal to zero</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt;&#x3D; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>blez $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0001 10ss sss0 0000 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BLTZ – Branch on less than zero</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is less than zero</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; 0 advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bltz $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 01ss sss0 0000 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BLTZAL – Branch on less than zero and link</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the register is less than zero and saves the return address in $31</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; 0 $31 &#x3D; PC + 8 (or nPC + 4); advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bltzal $s, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 01ss sss1 0000 iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>BNE – Branch on not equal</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Branches if the two registers are not equal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s !&#x3D; $t advance_pc (offset &lt;&lt; 2)); else advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>bne $s, $t, offset</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0001 01ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>DIV – Divide</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Divides $s by $t and stores the quotient in $LO and the remainder in $HI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$LO &#x3D; $s &#x2F; $t; $HI &#x3D; $s % $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>div $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt 0000 0000 0001 1010</code></td>
+</tr>
+</tbody></table>
+<p><strong>DIVU - Divide unsigned</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Divides $s by $t and stores the quotient in $LO and the remainder in $HI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$LO &#x3D; $s &#x2F; $t; $HI &#x3D; $s % $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>divu $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt 0000 0000 0001 1011</code></td>
+</tr>
+</tbody></table>
+<p><strong>J – Jump</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Jumps to the calculated address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>PC &#x3D; nPC; nPC &#x3D; (PC &amp; 0xf0000000)</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>j target</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 10ii iiii iiii iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>JAL – Jump and link</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Jumps to the calculated address and stores the return address in $31</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$31 &#x3D; PC + 8 (or nPC + 4); PC &#x3D; nPC; nPC &#x3D; (PC &amp; 0xf0000000)</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>jal target</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 11ii iiii iiii iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>JR – Jump register</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Jump to the address contained in register $s</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>PC &#x3D; nPC; nPC &#x3D; $s;</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>jr $s</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss sss0 0000 0000 0000 0000 1000</code></td>
+</tr>
+</tbody></table>
+<p><strong>LB – Load byte</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>A byte is loaded into a register from the specified address.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; MEM[$s + offset]; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>lb $t, offset($s)</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>1000 00ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>LUI – Load upper immediate</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>The immediate value is shifted left 16 bits and stored in the register. The lower 16 bits are zeroes.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; (imm &lt;&lt; 16); advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>lui $t, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0011 11-- ---t tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>LW – Load word</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>A word is loaded into a register from the specified address.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; MEM[$s + offset]; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>lw $t, offset($s)</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>1000 11ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>MFHI – Move from HI</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>The contents of register HI are moved to the specified register.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $HI; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>mfhi $d</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 0000 0000 0000 dddd d000 0001 0000</code></td>
+</tr>
+</tbody></table>
+<p><strong>MFLO – Move from LO</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>The contents of register LO are moved to the specified register.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $LO; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>mflo $d</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 0000 0000 0000 dddd d000 0001 0010</code></td>
+</tr>
+</tbody></table>
+<p><strong>MULT - Multiply</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Multiplies $s by $t and stores the result in $LO.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$LO &#x3D; $s * $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>mult $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt 0000 0000 0001 1000</code></td>
+</tr>
+</tbody></table>
+<p><strong>MULTU - Multiply unsigned</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Multiplies $s by $t and stores the result in $LO.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$LO &#x3D; $s * $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>multu $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt 0000 0000 0001 1001</code></td>
+</tr>
+</tbody></table>
+<p><strong>NOOP – no operation</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Performs no operation.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>noop</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 0000 0000 0000 0000 0000 0000 0000</code></td>
+</tr>
+</tbody></table>
+<p>Note: The encoding for a NOOP represents the instruction SLL $0, $0, 0 which has no side effects. In fact, nearly every instruction that has $0 as its destination register will have no side effect and can thus be considered a NOOP instruction.</p>
+<p> <strong>OR – Bitwise or</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Bitwise logical ors two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>or $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 0101</code></td>
+</tr>
+</tbody></table>
+<p><strong>ORI – Bitwise or immediate</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Bitwise ors a register and an immediate value and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; $s</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>ori $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0011 01ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>SB – Store byte</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>The least significant byte of $t is stored at the specified address.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>MEM[$s + offset] &#x3D; (0xff &amp; $t); advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sb $t, offset($s)</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>1010 00ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLL – Shift left logical</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Shifts a register value left by the shift amount listed in the instruction and places the result in a third register. Zeroes are shifted in.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $t &lt;&lt; h; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sll $d, $t, h</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd dhhh hh00 0000</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLLV – Shift left logical variable</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Shifts a register value left by the value in a second register and places the result in a third register. Zeroes are shifted in.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $t &lt;&lt; $s; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sllv $d, $t, $s</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d--- --00 0100</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLT – Set on less than (signed)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>If $s is less than $t, $d is set to one. It gets zero otherwise.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; $t $d &#x3D; 1; advance_pc (4); else $d &#x3D; 0; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>slt $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 1010</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLTI – Set on less than immediate (signed)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>If $s is less than immediate, $t is set to one. It gets zero otherwise.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; imm $t &#x3D; 1; advance_pc (4); else $t &#x3D; 0; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>slti $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0010 10ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLTIU – Set on less than immediate unsigned</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>If $s is less than the unsigned immediate, $t is set to one. It gets zero otherwise.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; imm $t &#x3D; 1; advance_pc (4); else $t &#x3D; 0; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sltiu $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0010 11ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>SLTU – Set on less than unsigned</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>If $s is less than $t, $d is set to one. It gets zero otherwise.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>if $s &lt; $t $d &#x3D; 1; advance_pc (4); else $d &#x3D; 0; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sltu $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 1011</code></td>
+</tr>
+</tbody></table>
+<p><strong>SRA – Shift right arithmetic</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Shifts a register value right by the shift amount (shamt) and places the value in the destination register. The sign bit is shifted in.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $t &gt;&gt; h; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sra $d, $t, h</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00-- ---t tttt dddd dhhh hh00 0011</code></td>
+</tr>
+</tbody></table>
+<p><strong>SRL – Shift right logical</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Shifts a register value right by the shift amount (shamt) and places the value in the destination register. Zeroes are shifted in.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $t &gt;&gt; h; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>srl $d, $t, h</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00-- ---t tttt dddd dhhh hh00 0010</code></td>
+</tr>
+</tbody></table>
+<p><strong>SRLV – Shift right logical variable</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Shifts a register value right by the amount specified in $s and places the value in the destination register. Zeroes are shifted in.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $t &gt;&gt; $s; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>srlv $d, $t, $s</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0000 0110</code></td>
+</tr>
+</tbody></table>
+<p><strong>SUB – Subtract</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Subtracts two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s - $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sub $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 0010</code></td>
+</tr>
+</tbody></table>
+<p><strong>SUBU – Subtract unsigned</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Subtracts two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s - $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>subu $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d000 0010 0011</code></td>
+</tr>
+</tbody></table>
+<p><strong>SW – Store word</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>The contents of $t is stored at the specified address.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>MEM[$s + offset] &#x3D; $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>sw $t, offset($s)</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>1010 11ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<p><strong>SYSCALL – System call</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Generates a software interrupt.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>syscall</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00-- ---- ---- ---- ---- --00 1100</code></td>
+</tr>
+</tbody></table>
+<p><strong>XOR – Bitwise exclusive or</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Exclusive ors two registers and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$d &#x3D; $s ^ $t; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>xor $d, $s, $t</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0000 00ss ssst tttt dddd d--- --10 0110</code></td>
+</tr>
+</tbody></table>
+<p><strong>XORI – Bitwise exclusive or immediate</strong></p>
+<table>
+<thead>
+<tr>
+<th>Description:</th>
+<th>Bitwise exclusive ors a register and an immediate value and stores the result in a register</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operation:</td>
+<td>$t &#x3D; $s ^ imm; advance_pc (4);</td>
+</tr>
+<tr>
+<td>Syntax:</td>
+<td>xori $t, $s, imm</td>
+</tr>
+<tr>
+<td>Encoding:</td>
+<td><code>0011 10ss ssst tttt iiii iiii iiii iiii</code></td>
+</tr>
+</tbody></table>
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><p>The whole list is in <a class="link"   target="_blank" rel="noopener" href="https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf" >MIPS_Instruction_Set.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://uweb.engr.arizona.edu/~ece369/Resources/spim/MIPSReference.pdf" >MIPSReference.pdf<i class="fas fa-external-link-alt"></i></a>.</p>
 
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
+        </div>
 
-      }
-    }
+        
 
-  }
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/arm/">#arm</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mips/">#mips</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/x86/">#x86</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/cisc/">#cisc</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/risc/">#risc</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/02/18/2021-02-18-About-Pentest-Persistence/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">About Pentest Persistence</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/08/2021-01-08-Cross-Compile-Toolchains/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Cross Compile Toolchains</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +1542,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CISC-and-RISC"><span class="nav-number">1.</span> <span class="nav-text">CISC and RISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CISC"><span class="nav-number">1.1.</span> <span class="nav-text">CISC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RISC"><span class="nav-number">1.2.</span> <span class="nav-text">RISC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x86"><span class="nav-number">2.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM"><span class="nav-number">3.</span> <span class="nav-text">ARM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basis"><span class="nav-number">3.1.</span> <span class="nav-text">Basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Addressing"><span class="nav-number">3.2.</span> <span class="nav-text">Addressing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instruction-set"><span class="nav-number">3.3.</span> <span class="nav-text">Instruction set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">3.4.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS"><span class="nav-number">4.</span> <span class="nav-text">MIPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Registers"><span class="nav-number">4.1.</span> <span class="nav-text">Registers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instructions"><span class="nav-number">4.2.</span> <span class="nav-text">Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-1"><span class="nav-number">4.3.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

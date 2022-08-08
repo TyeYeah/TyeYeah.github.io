@@ -161,225 +161,360 @@
             <div class="main-content">
 
                 
-                    $avatarWidth = 46px;
-$arrow-icon-width = 16px;
-$post-nav-max-width = 220px;
-$article-title-font-size = 1.6rem;
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
-.article-content-container {
+        <div class="article-title">
+            <span class="title-hover-animation">Firmadyne and FirmAE</span>
+        </div>
 
-  keep-container(false, 0, 0, 30px, 30px);
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/img/aliwangwang.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">TyeYeah</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-12-13 10:20:01</span>
+        <span class="mobile">2020-12-13 10:20</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/IoT/">IoT</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/qemu/">qemu</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/arm/">arm</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mips/">mips</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/emulator/">emulator</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/firmadyne/">firmadyne</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/firmae/">firmae</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
 
-  .article-title {
-    color: var(--second-text-color);
-    font-weight: 600;
-    font-size: $article-title-font-size;
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>15 Mins</span>
+        </span>
+    
+    
+</div>
 
-    +keep-tablet() {
-      font-size: $article-title-font-size * 0.9;
-    }
+                    </div>
+                </div>
+            </div>
+        
 
-    +keep-mobile() {
-      font-size: $article-title-font-size * 0.8;
-    }
-  }
+        <div class="article-content markdown-body">
+            <p>Since IoT researches are facing analysing problems due to the discrepancy in the real and virtual environment, the full-system emulation is proved to be a trade-off, between the cost of obtaining physical hardwares&#x2F;devices, and the insufficient of static or traditional dynamic analysis.<br>Here we talk about two full-system emulators: <code>Firmadyne</code> and its successor <code>FirmAE</code> which improves the <code>Firmadyne</code>, based on their papers and usages.</p>
+<h2 id="Firmadyne"><a href="#Firmadyne" class="headerlink" title="Firmadyne"></a>Firmadyne</h2><p>You can find <a class="link"   target="_blank" rel="noopener" href="https://github.com/firmadyne/firmadyne" >source code<i class="fas fa-external-link-alt"></i></a> and the paper:<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/firmadyne/firmadyne/blob/master/paper/paper.pdf" >Towards Automated Dynamic Analysis for Linux-based Embedded Firmware<i class="fas fa-external-link-alt"></i></a> on <a class="link"   target="_blank" rel="noopener" href="https://github.com/firmadyne/firmadyne" >Github<i class="fas fa-external-link-alt"></i></a> </p>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><p>It is their 2016 <a class="link"   target="_blank" rel="noopener" href="http://www.internetsociety.org/events/ndss-symposium" >Network and Distributed System Security Symposium (NDSS)<i class="fas fa-external-link-alt"></i></a> paper, titled <a class="link"   target="_blank" rel="noopener" href="https://github.com/firmadyne/firmadyne/blob/master/paper/paper.pdf" >Towards Automated Dynamic Analysis for Linux-based Embedded Firmware<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>They present <code>FIRMADYNE</code>, their implementation of an automated and scalable dynamic analysis technique specifically designed to accurately identify vulnerabilities in Linux-based embedded firmware.<br>It addresses characteristic challenges of embedded systems, such as the presence of hardware-specific peripherals, usage of non-volatile memory (NVRAM), and creation of dynamically generated files.<br><img src="/imghost/ff/firmadyne-arch.png" alt="firmdyne architecture"></p>
+<center>Architectural diagram of `FIRMADYNE` showing the emulation life-cycle for an example firmware image, as described</center>
 
+<p>As depicted above, <code>FIRMADYNE</code> consists of four major components.</p>
+<h4 id="Acquisition"><a href="#Acquisition" class="headerlink" title="Acquisition"></a>Acquisition</h4><p>This part is about Crawling Firmware.</p>
+<p>The web crawler is the first and largely independent component, developed using the <code>Scrapy</code> framework, which downloads firmware images from vendor websites. </p>
+<p>Authors manually wrote parsing templates (smart parsers) for each of these websites, allowing to distinguish between firmware images and other undesired binary content. </p>
+<p>For dynamic websites that were difficult to crawl automatically, it instead crawled the vendor’s FTP site or collected manually, at the expense of no metadata. </p>
+<h4 id="Extraction"><a href="#Extraction" class="headerlink" title="Extraction"></a>Extraction</h4><p>This part is about Extracting Firmware Filesystem.</p>
+<p><code>FIRMADYNE</code> uses a custom-written extraction utility built around the <code>binwalk</code> API to extract the kernel (optional) and the root filesystem contained within a firmware image.<br>These were normalized by storing them as compressed <code>TAR</code> archives within the firmware repository.</p>
+<p>The built-in recursive extraction mechanism (“Matryoshka”) within <code>binwalk</code> was vulnerable to path explosion, so <code>FIRMADYNE</code> implemented detection of non-firmware files, including blacklisting input files that were any type of structured binary, and extract sequentially in the order of priority-ranked signatures confidence which was corresponding to file types.</p>
+<h4 id="Emulation"><a href="#Emulation" class="headerlink" title="Emulation"></a>Emulation</h4><p>This part is about Initial Emulation.<br><img src="/imghost/ff/firmadyne-initial-emu.png" alt="firmdyne initial emulation"><br>Once a filesystem is extracted, <code>FIRMADYNE</code> identifies the hardware architecture of the firmware image. Then, our system uses a pre-built Linux kernel in an instance of the <code>QEMU</code> full system emulator that matches the architecture, endianness, and word-width of the target firmware image. Currently three combinations are supported: <code>little-endian ARM</code>, <code>little-endian MIPS</code>, and <code>big-endian MIPS</code>. </p>
+<p>An initial emulation is performed to infer the system and network configuration, achieved by intercepting system calls to the filesystem, networking, and other relevant kernel subsystems.</p>
+<p>After collecting information, <code>FIRMADYNE</code> enters the actual emulation phase, in which a matching network environment is configured to communicate with the emulated firmware. A series of network connectivity checks will verify successful network configuration.</p>
+<ul>
+<li><code>NVRAM</code></li>
+</ul>
+<p>At least 52.6% of all their extracted images access a hardware non-volatile memory (<code>NVRAM</code>) using a shared library named <code>libnvram.so</code> to persist device-specific configuration parameters. </p>
+<p>Since this peripheral is typically abstracted as a key-value store, <code>FIRMADYNE</code> implements a custom <code>NVRAM</code> library to emulate NVRAM-related functions. This custom library is loaded in advance by <code>LD_PRELOAD</code> and intercepts NVRAM-related functions such as <code>const char*nvram_get(const char*key)</code> and <code>int nvram_set(const char*key, char*val)</code>, and emulates an <code>NVRAM</code> without physical access. <code>FIRMADYNE</code> initializes key-value pairs using default files in the given firmware, which typically exist for the factory reset functionality of a device, and it has a list of few hardcoded paths of default files to extract key-value pairs like <code>/etc/nvram.default</code>, <code>/etc/nvram.conf</code> or <code>/var/etc/nvram.default</code>, or symbol <code>router_defaults</code> or <code>Nvrams</code> of type <code>char *[]</code> within built-in libraries such as <code>libnvram.so</code> or <code>libshared.so</code>.</p>
+<p>However it does not work if images call un-emulated functions, or they implement <code>NVRAM</code> as a custom data structure on a <code>MTD</code> partition, so the further emulation improvements still require manual process.</p>
+<ul>
+<li>Kernel</li>
+</ul>
+<p>It uses custom pre-built kernels instead of extracted kernel.</p>
+<p>By hooking 20 system calls using the kernel dynamic probes (<code>kprobes</code>) framework, <code>FIRMADYNE</code> intercepts calls that alter the execution environment, includes operations such as assigning MAC addresses, creating a network bridge, rebooting the system, and executing a program, all of which are monitored by our framework to properly configure the emulated networking environment. This functionality can also be used to provide automatic confirmation of vulnerabilities, especially in conjunction with predefined poison values (e.g., 0xDEADBEEF, 0x41414141).</p>
+<p>It also uses <code>rdinit</code> to run custom scripts mounting <code>/dev</code>, <code>/proc</code> etc. at booting, and it loads <code>nandsim</code> kernel module at startup to emulate memory technology device (<code>MTD</code>) partitions accessed via <code>/dev/mtdX</code>.</p>
+<ul>
+<li>System Configuration</li>
+</ul>
+<p>It is mainly about network configuration. System initially emulated firmware in a “learning” phase to gather expected network configuration.<br>Then it instantiate a <code>TAP</code> device on the host to associate with emulated network interfaces, sometimes a <code>VLAN</code>.</p>
+<ul>
+<li>QEMU</li>
+</ul>
+<p>Since some hardware-specific peripherals (watchdog timers, additional flash storage devices) functionalities are implemented in userspace, instead of kernelspace which can be cleanly emulated with custom kernel module.</p>
+<p>So authors modified the appropriate sixteen bytes in QEMU’s source code for the emulated platform flash device to respond with known good values.</p>
+<h4 id="Automated-Analysis"><a href="#Automated-Analysis" class="headerlink" title="Automated Analysis"></a>Automated Analysis</h4><p>This part is about Dynamic Analysis.</p>
+<p><code>FIRMADYNE</code> implements 3 dynamic analysis passes, each is registered as a callback, such that when a firmware image enters the network inferred state, registered callbacks are triggered sequentially.</p>
+<ul>
+<li>Accessible Webpages</li>
+</ul>
+<p>To help detect various information disclosure, buffer overflow, and command injection vulnerabilities, they wrote a <code>Python</code> test harness to verify static resource in the image, and try to access pages via web interface. Then mark pages according to the HTTP response and prioritize for further analysis.</p>
+<ul>
+<li>SNMP Information</li>
+</ul>
+<p>A basic analysis out of their curiousity.</p>
+<ul>
+<li>Vulnerabilities</li>
+</ul>
+<p>Using 60 known expploits from <code>MSF</code> to check known security vulnerabilities. For new vulnerabilities, they manually developed <code>POC</code> leveraging predefined poisoned args like <code>0xDEADBEEF</code> and set verification condition for check. </p>
+<h4 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h4><p>It requires additional manual effort to:</p>
+<ul>
+<li>fix extraction failures</li>
+<li>add support for additional hardware architectures</li>
+<li>correct emulation failures</li>
+<li>even implement a new analysis pass</li>
+</ul>
+<p>Since <code>FIRMADYNE</code> uses custom pre-built kernels, which do not load out-of-tree kernel modules from the filesystem. As a result, it cannot confirm vulnerabilities in kernels or kernel modules shipped by venders.</p>
+<p>Besides it has problems identifying uplink (or WAN) port and downlink (or LAN) port, preventing us from determining whether detected vulnerabilities are exploitable from the Internet.</p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><p>The <code>Firmadyne</code> is powerful, however is cubersome to use. </p>
+<p>A new <a class="link"   target="_blank" rel="noopener" href="https://github.com/attify/firmware-analysis-toolkit" >repo<i class="fas fa-external-link-alt"></i></a> called <code>Firmware Analysis Toolkit</code> (aka <code>FAT</code>) provides more tools (<code>binwalk</code>, <code>Firmadyne</code>) and easier ways for analysing IoT devices. </p>
+<p>First of all you have to set up it by:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/attify/firmware-analysis-toolkit</span><br><span class="line">$ cd firmware-analysis-toolkit</span><br><span class="line">$ ./setup.sh</span><br></pre></td></tr></table></figure>
+<p>After installation remember to edit <code>fat.config</code> and provide <code>sudo</code> password for <code>Firmadyne</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[DEFAULT]</span><br><span class="line">sudo_password=attify123</span><br><span class="line">firmadyne_path=/home/attify/firmadyne</span><br></pre></td></tr></table></figure>
+<p>Get the firmware image and emulate by: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./fat.py &lt;imagename&gt;</span><br></pre></td></tr></table></figure>
+<p>Remove analyzed firmware images:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./reset.py</span><br></pre></td></tr></table></figure>
+<p>Here is an example (needs to open in a new tab):<br><a target="_blank" rel="noopener" href="https://asciinema.org/a/5VryIC2ec1j9SEIfGQ0qAWjoH"><img src="https://asciinema.org/a/5VryIC2ec1j9SEIfGQ0qAWjoH.svg" alt="asciicast"></a><br>As the above shows, we should fix some network errors when using it.</p>
+<h2 id="FirmAE"><a href="#FirmAE" class="headerlink" title="FirmAE"></a>FirmAE</h2><p>It releases <a class="link"   target="_blank" rel="noopener" href="https://github.com/pr0v3rbs/FirmAE" >source code<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/pr0v3rbs/FirmAE/releases/tag/v1.0" >cross-compiled utils<i class="fas fa-external-link-alt"></i></a>, and the paper:<br><a class="link"   target="_blank" rel="noopener" href="https://syssec.kaist.ac.kr/pub/2020/kim_acsac2020.pdf" >FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Paper-1"><a href="#Paper-1" class="headerlink" title="Paper"></a>Paper</h3><p>It is titled <a class="link"   target="_blank" rel="noopener" href="https://syssec.kaist.ac.kr/pub/2020/kim_acsac2020.pdf" >FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis<i class="fas fa-external-link-alt"></i></a></p>
+<p>We can observe that a slight change in a configuration or device settings, which is easy to apply, may let firmware emulation run without suffering emulation discrepancy problem, which is difficult to handle. </p>
+<p>In this regard, authors believe that <code>FIRMADYNE</code> misses many chances of emulating and analyzing IoT firmware images not because of fundamental problems in emulation but because of device setup failures, although these can be easily handled. </p>
+<p>To address this issue, they aim at systematizing such heuristics via analyzing many emulation failure cases, and conclude that failure cases in each category can be resolved by applying simple heuristics even though they originate from different root causes.</p>
+<p>Most failure cases fall into the following five categories of problems: </p>
+<ol>
+<li>boot-related problems, such as an incorrect boot sequence or absence of files, </li>
+<li>network-related problems, such as mismatches of network interface or improper configuration, </li>
+<li>non-volatile RAM (NVRAM)-related problems, such as missing library functions or customized formats, </li>
+<li>kernel-related problems, such as unsupported hardware or functions, and </li>
+<li>minor problems, such as unsupported commands or timing issues.</li>
+</ol>
+<p>The architecture of it:<br><img src="/imghost/ff/firmae-arch.png" alt="firmdyne architecture"></p>
+<center>FirmAE architecture overview</center>
 
-  .article-header {
-    position: relative;
-    padding-left: $avatarWidth;
-    width: 100%;
-    height: $avatarWidth;
-    box-sizing: border-box;
+<p>For the emulation, They specifically focus on emulating web services of wireless routers and IP cameras.</p>
+<h4 id="Arbitrated-emulation"><a href="#Arbitrated-emulation" class="headerlink" title="Arbitrated emulation"></a>Arbitrated emulation</h4><p>They systemize the heuristics as arbitrated emulation to bypass the failure cases.</p>
+<p>Instead of strictly following the execution behavior of the firmware as is, arbitrated emulation arbitrates between following the original behavior or injecting proper interventions, i.e., intentional operations.<br>Thereby, it may slightly alter the original behavior of the firmware. However, the goal is not to build an environment identical to the physical device, but to create an environment conducive to the dynamic analysis.</p>
+<p>The key idea behind arbitrated emulation is that ensuring high-level behavior is sufficient to perform dynamic analysis on internal programs, which is relatively easy to do, rather than finding and fixing the exact root causes of emulation failures.</p>
+<p>To solve corresponding failures of <code>Firmadyne</code>, They proposed some arbitrations.</p>
+<h4 id="Boot-Arbitrations"><a href="#Boot-Arbitrations" class="headerlink" title="Boot Arbitrations"></a>Boot Arbitrations</h4><ul>
+<li>improper booting sequence</li>
+</ul>
+<p>Firmware has custom paths for initializing program.</p>
+<p><code>Firmadyne</code> built a script that searches and executes a hard-coded list of files frequently accessed for initializing programs. </p>
+<p><code>FirmAE</code> extracts useful information in the kernel of the image. Specifically, it utilizes a kernel’s command line string, which is used for default configuration of the kernel in the booting procedure.</p>
+<ul>
+<li>missing filesystem structure</li>
+</ul>
+<p>Failure cases occur due to the absence of files or directories.</p>
+<p><code>Firmadyne</code> attempted to address this by creating and mounting hard-coded paths such as proc, dev, sys, or root at the beginning of the custom booting script.</p>
+<p>Similar to the previous case, but <code>FirmAE</code> extracted all strings from executable binaries in its filesystem ranther kernel, before emulating a given image. Then, it filtered them to obtain strings that are highly likely to indicate paths and prepared the file structure based on the paths.</p>
+<h4 id="Network-Arbitrations"><a href="#Network-Arbitrations" class="headerlink" title="Network Arbitrations"></a>Network Arbitrations</h4><ul>
+<li>invalid IP alias handling</li>
+</ul>
+<p>IP aliasing is assigning multiple IP addresses to a network interface. </p>
+<p><code>Firmadyne</code> implements by adding static routing rules to <code>TAP</code> in the host, which makes network collide.</p>
+<p><code>FirmAE</code> lets the host use its default routing rule, because packets can be routed to any devices connected to <code>TAP</code> without interventions.</p>
+<ul>
+<li>no network information</li>
+</ul>
+<p>This is beacuse some firmwares rely on <code>DHCP</code> server, others may rely on peripherals.</p>
+<p><code>FirmAE</code> arbitrates these cases with an intervention that forcibly configures the network with a default setting. Specifically, we set an Ethernet interface, <code>eth0</code>, with an IP address of <code>192.168.0.1</code>.</p>
+<ul>
+<li>multiple network interfaces in <code>ARM</code></li>
+</ul>
+<p>On <code>ARM</code> handling multiple network interfaces will meet errors that dont exist on other platforms.</p>
+<p>Nevertheless, we could address the failure with a high-level intervention that forcibly sets up only one Ethernet interface, <code>eth0</code>, and avoids setting the other interfaces. </p>
+<ul>
+<li>insufficient VLAN setup</li>
+</ul>
+<p><code>Firmadyne</code> attempts to address it by running a command when setting host <code>TAP</code> interface, however it forgets to set host’s <code>VLAN</code> id (sometimes it should be the same as guests’) , which causes errors. <code>FirmAE</code> arbitrates this by properly configuring <code>VLAN</code>.</p>
+<ul>
+<li>filtering rules in iptables</li>
+</ul>
+<p>Since many devices are wrongly configured to be accessible publicly, <code>FirmAE</code> choose to remove existing filtering rules, by flushing all <code>iptables</code> policies and setting the default to accept all incoming packets.</p>
+<h4 id="NVRAM-Arbitrations"><a href="#NVRAM-Arbitrations" class="headerlink" title="NVRAM Arbitrations"></a>NVRAM Arbitrations</h4><ul>
+<li>supporting custom <code>NVRAM</code> default files</li>
+</ul>
+<p><code>FirmAE</code> records all the key-value pairs accessed with the <code>nvram_get()</code> and <code>nvram_set()</code> functions during the pre-emulation. Then for key names whose values are unknown, it scans the filesystem of the target firmware and searches files that contain them. <code>FirmAE</code> extracts the key-value pairs from the files (if they exist) and utilizes them in the final emulation.</p>
+<ul>
+<li>no <code>NVRAM</code> default file</li>
+</ul>
+<p><code>Firmadyne</code> addresses this issue by returning the <code>NULL</code> value for uninitialized keys.</p>
+<p><code>FirmAE</code> handles this by arbitrating the behavior of the <code>nvram_get()</code> function. Instead of returning the <code>NULL</code> value when accessing uninitialized keys, <code>FirmAE</code> returns a pointer to an empty string.</p>
+<h4 id="Kernel-Arbitrations"><a href="#Kernel-Arbitrations" class="headerlink" title="Kernel Arbitrations"></a>Kernel Arbitrations</h4><ul>
+<li>insufficient support of kernel module</li>
+</ul>
+<p>Since <code>Firmadyne</code> implemented dummy modules with hard-coded device names and <code>ioctl</code> commands, some programs fail when accessing kernel modules with a different configuration.</p>
+<p>As numerous kernel modules are accessed through shared libraries, <code>FirmAE</code> intercepts library function calls similarly to handling NVRAM issues. Every lib func call gets a pre-defined value returned.</p>
+<ul>
+<li>Improper kernel version</li>
+</ul>
+<p><code>Firmadyne</code> customized Linux kernel v2.6.32 in the firmware emulation. However, recent embedded devices use a newer version of the kernel.</p>
+<p><code>FirmAE</code> tested Linux kernel v4.1.17, finding that the <code>ASLR</code> is not compatible with old versions of libc, so authors used compatibility option (set <code>CONFIG_COMPAT_BRT</code>, excluding randomizing <code>brk</code> area in heap memory) when compiling new kernel.</p>
+<h4 id="Other-arbitrations"><a href="#Other-arbitrations" class="headerlink" title="Other arbitrations"></a>Other arbitrations</h4><ul>
+<li>unexecuted web servers</li>
+</ul>
+<p>It will search for widely used web servers like <code>httpd</code>, <code>lighttpd</code>, <code>boa</code> and <code>goahead</code> and their configs, then forcibly executes them.</p>
+<ul>
+<li>timeout issues</li>
+</ul>
+<p><code>Firmadyne</code> use a 60 s timeout, then the program will be forcibly stopped.</p>
+<p><code>FirmAE</code> investigated such cases and empirically found a suitable timeout of 240 s.</p>
+<ul>
+<li>lack of tools for emulation</li>
+</ul>
+<p>It adds latest version of <code>busybox</code> into the filesystem of the target firmware, which enables essential commands, and leads to successful emulation.</p>
+<h4 id="Automated-Analysis-1"><a href="#Automated-Analysis-1" class="headerlink" title="Automated Analysis"></a>Automated Analysis</h4><p>The analysis engine consists of two parts: it automatically initializes and logs into web pages if necessary, and identifies vulnerabilities including memory corruption bugs. </p>
+<ul>
+<li>initializing web services</li>
+</ul>
+<p>A large portion of the web services in our dataset require a network and security configuration. It leveraged Selenium to automate the process.</p>
+<ul>
+<li>evaluating vulnerability discovery performance</li>
+</ul>
+<p>To find 1-day vulnerabilities it utilized <code>RouterSploit</code> and the customized PoC codes.</p>
+<p>To find 0-day vulnerabilities, it extracts information from filesystem and constructs a valid request template for fuzzing. By searching filesystem, it could also check web services that are not reachable by crawling.</p>
+<h3 id="Usage-1"><a href="#Usage-1" class="headerlink" title="Usage"></a>Usage</h3><p>Install it first:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone --recursive https://github.com/pr0v3rbs/FirmAE</span><br><span class="line">$ ./download.sh</span><br><span class="line">$ ./install.sh</span><br></pre></td></tr></table></figure>
+<p>Initialize before emulation:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./init.sh</span><br></pre></td></tr></table></figure>
+<p>Then check emulation, like the pre-emulation:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./run.sh -c &lt;brand&gt; &lt;firmware&gt;</span><br></pre></td></tr></table></figure>
+<p>Finally run analysis:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./run.sh -a &lt;brand&gt; &lt;firmware&gt;</span><br></pre></td></tr></table></figure>
+<p>There are four modes to emulate:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./run.sh</span><br><span class="line">Usage: ./run.sh [mode]... [brand] [firmware|firmware_directory]</span><br><span class="line">mode: use one option at once</span><br><span class="line">      -r, --run     : run mode     - run emulation (no quit)</span><br><span class="line">      -c, --check   : check mode   - check network reachable and web access (quit)</span><br><span class="line">      -a, --analyze : analyze mode - analyze vulnerability (quit)</span><br><span class="line">      -d, --debug   : debug mode   - debugging emulation (no quit)</span><br></pre></td></tr></table></figure>
+        </div>
 
-    .avatar {
-      position: absolute;
-      top: 0
-      left: 0;
-      width: $avatarWidth;
-      height: $avatarWidth;
-      padding: 1px;
-      box-sizing: border-box;
-      border: 1px solid var(--border-color);
-      border-radius: 50%;
+        
 
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-        background: var(--avatar-background-color);
-      }
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/qemu/">#qemu</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/arm/">#arm</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/mips/">#mips</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/emulator/">#emulator</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/firmadyne/">#firmadyne</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/firmae/">#firmae</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
-    }
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/08/2021-01-08-Cross-Compile-Toolchains/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Cross Compile Toolchains</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/12/03/2020-12-03-Build-Mirai-Botnet-and-Try-It/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Build Mirai Botnet and Try It</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
 
-
-    .info {
-      padding: 2px 0;
-      margin-left: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100%;
-      height: 100%;
-
-      .author {
-        font-weight: 600;
-        font-size: 1.18rem;
-        display: flex;
-        align-items: center;
-
-        .name {
-          color: var(--default-text-color);
-        }
-
-        .author-label {
-          margin-left: 10px;
-          font-size: 0.8rem;
-          font-weight: 500;
-          padding: 0 5px;
-          border-radius: 5px;
-          color: #fff;
-          background: var(--selection-color);
-        }
-
-      }
-    }
-
-  }
-
-
-  .article-header, .article-header-meta-info {
-    margin-top: 16px;
-    +keep-tablet() {
-      transform: scale(0.9);
-      transform-origin: left top;
-    }
-  }
-
-
-  .article-content {
-    margin-top: $component-spacing-value;
-    padding-bottom: 10px;
-    word-wrap: break-word;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--default-text-color);
-  }
-
-
-  .post-tags-box {
-    display: none;
-    margin-top: 1.6rem;
-    justify-content: center;
-    font-size: 1.1rem;
-
-    +keep-tablet() {
-      display: flex;
-    }
-
-    +keep-mobile() {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-    }
-
-
-    .tag-item {
-      margin: 0 0.25rem;
-    }
-  }
-
-  .post-copyright-info {
-    margin-top: $component-spacing-value;
-    width: 100%;
-
-    +keep-tablet() {
-      margin-top: $component-spacing-value * 0.8;
-    }
-  }
-
-
-  .article-nav {
-    height: 40px;
-    margin-top: $component-spacing-value;
-
-    .article-prev, .article-next {
-      max-width: $post-nav-max-width;
-      height: 100%;
-      box-sizing: border-box;
-
-      keep-container(true, 1.03, 1.03, 10px, 0);
-
-      a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        &.prev {
-          padding-left: $arrow-icon-width;
-        }
-
-        &.next {
-          padding-right: $arrow-icon-width;
-        }
-
-        .arrow-icon {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          width: $arrow-icon-width;
-
-          &.left {
-            left: 0;
-          }
-
-          &.right {
-            right: 0;
-          }
-        }
-
-        .title {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-    }
-
-    .article-prev {
-      float: left;
-    }
-
-    .article-next {
-      float: right;
-    }
-
-    .post-nav-item {
-      display: none;
-
-      +keep-tablet() {
-        display: inline-block;
-      }
-
-    }
-
-
-    .post-nav-title-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      +keep-tablet() {
-        display: none;
-      }
-    }
-
-  }
-
-
-}
-
+        
+    </div>
+</div>
 
 
                 
@@ -475,80 +610,11 @@ $article-title-font-size = 1.6rem;
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Firmadyne"><span class="nav-number">1.</span> <span class="nav-text">Firmadyne</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-number">1.1.</span> <span class="nav-text">Paper</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Acquisition"><span class="nav-number">1.1.1.</span> <span class="nav-text">Acquisition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extraction"><span class="nav-number">1.1.2.</span> <span class="nav-text">Extraction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Emulation"><span class="nav-number">1.1.3.</span> <span class="nav-text">Emulation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Automated-Analysis"><span class="nav-number">1.1.4.</span> <span class="nav-text">Automated Analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Limitations"><span class="nav-number">1.1.5.</span> <span class="nav-text">Limitations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FirmAE"><span class="nav-number">2.</span> <span class="nav-text">FirmAE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper-1"><span class="nav-number">2.1.</span> <span class="nav-text">Paper</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Arbitrated-emulation"><span class="nav-number">2.1.1.</span> <span class="nav-text">Arbitrated emulation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boot-Arbitrations"><span class="nav-number">2.1.2.</span> <span class="nav-text">Boot Arbitrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Network-Arbitrations"><span class="nav-number">2.1.3.</span> <span class="nav-text">Network Arbitrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NVRAM-Arbitrations"><span class="nav-number">2.1.4.</span> <span class="nav-text">NVRAM Arbitrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kernel-Arbitrations"><span class="nav-number">2.1.5.</span> <span class="nav-text">Kernel Arbitrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-arbitrations"><span class="nav-number">2.1.6.</span> <span class="nav-text">Other arbitrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Automated-Analysis-1"><span class="nav-number">2.1.7.</span> <span class="nav-text">Automated Analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage-1"><span class="nav-number">2.2.</span> <span class="nav-text">Usage</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 
