@@ -16,46 +16,130 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
     
-        <div class="first-screen-container flex-center fade-in-down-animation">
+        
+<div class="first-screen-container flex-center fade-in-down-animation">
     <div class="content flex-center">
-        <div class="description">
-            Keep writing and Keep loving.
-        </div>
+        
+            <div class="description hitokoto">
+                
+                    <div class="desc-item">Keep writing and Keep loving.</div>
+                
+            </div>
+        
+        
         
             <div class="s-icon-list">
                 
                     
                         
-                            <span class="s-icon-item github">
-                                <a target="_blank" href="https://github.com/tyeyeah">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </span>
-                        
+                        <div class="tooltip s-icon-item "
+                             data-content="GitHub"
+                             data-name="github"
+                             
+                        >
+                            
+                                
+                                    <a target="_blank" href="https://github.com/tyeyeah">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                
+                            
+                        </div>
                     
                 
                     
@@ -79,16 +163,21 @@
 
     
 
-    <div class="page-main-content">
+    <div class="page-main-content is-home">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content has-first-screen">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -205,20 +294,95 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2022/11/20/2022-11-20-LLVM-Commands/">
+                        LLVM Commands
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        Here are collections of LLVM commands about compilation using clang and some graph structure geneartion.
+LLVM CompilationTo w...
+                    
+                </div>
+
+                
+<div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Nov 20 2022 22:12:34 GMT+0800">
+                2022-11-20
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Note/">Note</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/linux/">linux</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/note/">note</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/llvm/">llvm</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2022/11/20/2022-11-20-LLVM-Commands/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2022/08/06/2022-08-06-Go-Phishing/">
                         Go Phishing!
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This article shows methods of phishing, including setting up a phishing mail server, preparing malware (PE) which deceives th...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Aug 06 2022 17:05:01 GMT+0800">2022-08-06</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Nov 20 2022 16:09:47 GMT+0800">
+                2022-11-20
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -257,7 +421,7 @@
         
     </div>
 
-    <a href="/2022/08/06/2022-08-06-Go-Phishing/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2022/08/06/2022-08-06-Go-Phishing/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -272,16 +436,22 @@
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         There is a repo called Awesome Binary Similarity that helps collecting papers.
 Here comes my list (including what I’ve read) ...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Mar 26 2022 10:00:21 GMT+0800">2022-03-26</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Jun 22 2022 15:36:46 GMT+0800">
+                2022-06-22
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -320,7 +490,7 @@ Here comes my list (including what I’ve read) ...
         
     </div>
 
-    <a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -335,16 +505,22 @@ Here comes my list (including what I’ve read) ...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools&#x2F;tips.
 GeneralActua...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Aug 02 2021 22:20:10 GMT+0800">2021-08-02</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Aug 07 2022 22:30:34 GMT+0800">
+                2022-08-07
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -383,7 +559,7 @@ GeneralActua...
         
     </div>
 
-    <a href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -398,16 +574,22 @@ GeneralActua...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This blog introduces tools to deal with libc problems in pwn and to host pwn challenges.
 Pwn Libc PartThe libc version matter...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jul 31 2021 15:53:56 GMT+0800">2021-07-31</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Aug 19 2021 14:54:20 GMT+0800">
+                2021-08-19
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -446,7 +628,7 @@ Pwn Libc PartThe libc version matter...
         
     </div>
 
-    <a href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -461,16 +643,22 @@ Pwn Libc PartThe libc version matter...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This paragraph is to pwn ARM and MIPS binaries, with some examples. 
 Environment SetupBasically binaries are executed by QEMU...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Jul 30 2021 21:57:23 GMT+0800">2021-07-30</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Mar 31 2022 20:50:14 GMT+0800">
+                2022-03-31
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -514,12 +702,17 @@ Environment SetupBasically binaries are executed by QEMU...
                             <a href="/tags/mips/">mips</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/rop/">rop</a>&nbsp;
+                        </li>
+                    
                 </ul>
             </span>
         
     </div>
 
-    <a href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -534,16 +727,22 @@ Environment SetupBasically binaries are executed by QEMU...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Succinct Challenge-Oriented heap exploit introduction. Here we talk about the heap on Linux.
 ImplementationYou can visit GNU ...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed May 12 2021 08:21:19 GMT+0800">2021-05-12</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed May 12 2021 09:08:04 GMT+0800">
+                2021-05-12
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -592,7 +791,7 @@ ImplementationYou can visit GNU ...
         
     </div>
 
-    <a href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -607,16 +806,22 @@ ImplementationYou can visit GNU ...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Linux Kernel BuildTo learn kernel, we should know how to compile it and how it works.
 Source code can be found online and all...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 20 2021 22:16:23 GMT+0800">2021-04-20</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Mar 31 2022 20:50:15 GMT+0800">
+                2022-03-31
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -660,7 +865,7 @@ Source code can be found online and all...
         
     </div>
 
-    <a href="/2021/04/20/2021-04-20-Linux-Kernel-Building-Exploit-Preparation/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/04/20/2021-04-20-Linux-Kernel-Building-Exploit-Preparation/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -675,15 +880,21 @@ Source code can be found online and all...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Recently I get some time to collect materials about privilege escalation, provide you with useful tools and some basic knowle...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Feb 19 2021 10:01:30 GMT+0800">2021-02-19</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Jul 29 2021 14:33:57 GMT+0800">
+                2021-07-29
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -722,7 +933,7 @@ Source code can be found online and all...
         
     </div>
 
-    <a href="/2021/02/19/2021-02-19-About-Privilege-Escalation/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/02/19/2021-02-19-About-Privilege-Escalation/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -737,16 +948,22 @@ Source code can be found online and all...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Persistence is to maintain your privilege after breaking into a  system.
 WindowsYou can learn persistence methodologies&#x2F;...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Feb 18 2021 08:00:29 GMT+0800">2021-02-18</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Mar 05 2021 22:33:46 GMT+0800">
+                2021-03-05
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -785,79 +1002,7 @@ WindowsYou can learn persistence methodologies&#x2F;...
         
     </div>
 
-    <a href="/2021/02/18/2021-02-18-About-Pentest-Persistence/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/09/2021-01-09-Some-Assembly-Intro/">
-                        Some Assembly Intro
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        CISC and RISCThere are two main types of computer architectures that will be covered in this project: Complex Instruction Set...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jan 09 2021 22:34:28 GMT+0800">2021-01-09</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Note/">Note</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/arm/">arm</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/mips/">mips</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/x86/">x86</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/cisc/">cisc</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/risc/">risc</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/09/2021-01-09-Some-Assembly-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2021/02/18/2021-02-18-About-Pentest-Persistence/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -885,19 +1030,23 @@ WindowsYou can learn persistence methodologies&#x2F;...
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -918,10 +1067,6 @@ WindowsYou can learn persistence methodologies&#x2F;...
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -953,10 +1098,8 @@ WindowsYou can learn persistence methodologies&#x2F;...
 
     </div>
 
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -977,7 +1120,7 @@ WindowsYou can learn persistence methodologies&#x2F;...
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -1009,14 +1152,12 @@ WindowsYou can learn persistence methodologies&#x2F;...
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 

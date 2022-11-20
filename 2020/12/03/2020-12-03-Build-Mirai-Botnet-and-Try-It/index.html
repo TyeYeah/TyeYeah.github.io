@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">Build Mirai Botnet and Try It</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">Build Mirai Botnet and Try It</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-12-03 08:00:38</span>
         <span class="mobile">2020-12-03 08:00</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2020-12-07 20:44:35</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -238,13 +324,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p>Mirai is a self-spreading botnet virus. The Mirai botnet code contaminates inadequately secured web gadgets by utilizing telnet to discover those that are as yet utilizing their default username and password. The success of Mirai is because of its capacity to contaminate a huge number of these insecure gadgets and coordinate them to mount a DDOS attack against a picked unfortunate victim.<br><img src="/imghost/bmbti/botnet.jpg" alt="IoT botnet"><br>Mirai took advantage of these vulnerable IoT devices in a simple but brilliant way. Rather than trying to use complicated techniques to monitor IoT devices, it examined each bot for open Telnet slots, then tried to log in using 61 random username&#x2F;password combinations that are frequently used as the standard for these devices. In this way, it was able to generate a military of impacted closed-circuit TV digital cameras and routers, prepared to do its bidding.</p>
+            <div class="article-content keep-markdown-body">
+                <p>Mirai is a self-spreading botnet virus. The Mirai botnet code contaminates inadequately secured web gadgets by utilizing telnet to discover those that are as yet utilizing their default username and password. The success of Mirai is because of its capacity to contaminate a huge number of these insecure gadgets and coordinate them to mount a DDOS attack against a picked unfortunate victim.<br><img src="/imghost/bmbti/botnet.jpg" alt="IoT botnet"><br>Mirai took advantage of these vulnerable IoT devices in a simple but brilliant way. Rather than trying to use complicated techniques to monitor IoT devices, it examined each bot for open Telnet slots, then tried to log in using 61 random username&#x2F;password combinations that are frequently used as the standard for these devices. In this way, it was able to generate a military of impacted closed-circuit TV digital cameras and routers, prepared to do its bidding.</p>
 <p>As a famous and well constructed IoT botnet, It is analysed by many security researchers like the <a class="link"   target="_blank" rel="noopener" href="https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-antonakakis.pdf" >paper<i class="fas fa-external-link-alt"></i></a> from Usenix, and the structure of <code>Mirai</code>:<br><img src="/imghost/bmbti/arch.png" alt="architecture"></p>
 <p>The source code of <code>Mirai</code> has been released on <a class="link"   target="_blank" rel="noopener" href="https://github.com/jgamblin/Mirai-Source-Code" >Github<i class="fas fa-external-link-alt"></i></a> by <a class="link"   target="_blank" rel="noopener" href="https://hackforums.net/showthread.php?tid=5420472" >Anna-senpai<i class="fas fa-external-link-alt"></i></a>, which provides us a good tutorial for building our own botnet.<br>Here we follow the lead to compile and run it.</p>
 <h2 id="Compile-Mirai-Source"><a href="#Compile-Mirai-Source" class="headerlink" title="Compile Mirai Source"></a>Compile Mirai Source</h2><p>The “official” installation guide has been given in a <a class="link"   target="_blank" rel="noopener" href="https://github.com/jgamblin/Mirai-Source-Code/blob/master/ForumPost.md" >ForumPost<i class="fas fa-external-link-alt"></i></a> of the <a target="_blank" rel="noopener" href="https://hackforums.net/"><code>hackforum</code></a> (<a class="link"   target="_blank" rel="noopener" href="https://github.com/jgamblin/Mirai-Source-Code/blob/master/ForumPost.txt" >See original archived post<i class="fas fa-external-link-alt"></i></a>).</p>
@@ -305,69 +391,81 @@
 <p>In source code it scan totally randomly, we can control the range by editing <code>Mirai-Source-Code/mirai/bot/scanner.c</code> starting from line 674.</p>
 <h3 id="scanListen"><a href="#scanListen" class="headerlink" title="scanListen"></a>scanListen</h3><p>It is a <code>user:pass</code> receiver, run it by:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo Mirai-Source-Code/mirai/debug/scanListen</span><br><span class="line"></span><br><span class="line">xxx.xxx.xxx.xxx:xx  username:password</span><br></pre></td></tr></table></figure>
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/arm/">#arm</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/mips/">#mips</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/botnet/">#botnet</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/arm/">#arm</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/mips/">#mips</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/botnet/">#botnet</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/12/13/2020-12-13-Firmadyne-and-FirmAE/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/12/13/2020-12-13-Firmadyne-and-FirmAE/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">Firmadyne and FirmAE</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Attack &amp; Defense Tips</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-Mirai-Source"><span class="nav-number">1.</span> <span class="nav-text">Compile Mirai Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Requirements"><span class="nav-number">1.1.</span> <span class="nav-text">Install Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-Bot"><span class="nav-number">1.2.</span> <span class="nav-text">Configure Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-CNC"><span class="nav-number">1.3.</span> <span class="nav-text">Configure CNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Compile"><span class="nav-number">1.4.</span> <span class="nav-text">Cross Compile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attack-with-Mirai"><span class="nav-number">2.</span> <span class="nav-text">Attack with Mirai</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CNC-Server"><span class="nav-number">2.1.</span> <span class="nav-text">CNC Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loader"><span class="nav-number">2.2.</span> <span class="nav-text">Loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mirai-Bot"><span class="nav-number">2.3.</span> <span class="nav-text">Mirai Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scanListen"><span class="nav-number">2.4.</span> <span class="nav-text">scanListen</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -379,19 +477,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -407,8 +509,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -429,10 +531,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -464,18 +562,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-Mirai-Source"><span class="nav-number">1.</span> <span class="nav-text">Compile Mirai Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Requirements"><span class="nav-number">1.1.</span> <span class="nav-text">Install Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-Bot"><span class="nav-number">1.2.</span> <span class="nav-text">Configure Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-CNC"><span class="nav-number">1.3.</span> <span class="nav-text">Configure CNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Compile"><span class="nav-number">1.4.</span> <span class="nav-text">Cross Compile</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attack-with-Mirai"><span class="nav-number">2.</span> <span class="nav-text">Attack with Mirai</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CNC-Server"><span class="nav-number">2.1.</span> <span class="nav-text">CNC Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loader"><span class="nav-number">2.2.</span> <span class="nav-text">Loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mirai-Bot"><span class="nav-number">2.3.</span> <span class="nav-text">Mirai Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scanListen"><span class="nav-number">2.4.</span> <span class="nav-text">scanListen</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -496,7 +584,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -527,14 +615,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -543,12 +629,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

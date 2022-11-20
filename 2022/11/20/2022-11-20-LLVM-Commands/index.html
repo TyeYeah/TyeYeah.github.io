@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            LLVM Commands |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
+
+  if (hexo-config('pjax.enable') == true) {
+
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">LLVM Commands</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2022-11-20 20:43:38</span>
+        <span class="mobile">2022-11-20 20:43</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2022-11-20 22:12:34</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/llvm/">llvm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>824 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <p>Here are collections of LLVM commands about compilation using <code>clang</code> and some graph structure geneartion.</p>
+<h2 id="LLVM-Compilation"><a href="#LLVM-Compilation" class="headerlink" title="LLVM Compilation"></a>LLVM Compilation</h2><p>To walk through the whole compilation using <code>clang</code>, first take the source <code>a.c</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> a = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">int</span> b = <span class="number">200</span>;</span><br><span class="line">   <span class="keyword">int</span> ret;</span><br><span class="line"></span><br><span class="line">   ret = <span class="built_in">max</span>(a, b);</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">printf</span>( <span class="string">&quot;Max value is : %d\n&quot;</span>, ret );</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> result;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">if</span> (num1 &gt; num2)</span><br><span class="line">      result = num1;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      result = num2;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">return</span> result; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And start to compile:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ clang -E a.c -o a.i   # pre-processing</span><br><span class="line">$ clang -S a.i -o a.s   # compiling</span><br><span class="line">$ clang -c a.s -o a.o   # assemble</span><br><span class="line">$ clang a.o             # linking</span><br><span class="line">$ ./a.out               </span><br><span class="line">Max value is : 200</span><br><span class="line"># or </span><br><span class="line">$ clang -save-temps a.c -o a.out    # save all intermediate temp files</span><br><span class="line">$ ls </span><br><span class="line">a.bc  a.c  a.i  a.o  a.out  a.s</span><br></pre></td></tr></table></figure>
+
+<p>Here we can find an extra <code>a.bc</code>, which cannot be produced by <code>gcc</code>.<br>Actually LLVM compilation process includes following file formats:</p>
+<ol>
+<li><code>xxx.c</code>, Source code.</li>
+<li><code>xxx.bc</code>, Assembly LLVM bitcode</li>
+<li><code>xxx.ll</code>, Textual LLVM bitcode</li>
+<li><code>xxx.s</code>, Assembly code</li>
+<li><code>xxx.out</code>, Executable</li>
+</ol>
+<p>Like the image:<br><img src="/imghost/lc/format-cycle.png" alt="LLVM file formats"></p>
+<p>From <code>a.c</code> we go through the whole file format converting cycle. To get <code>a.bc</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ clang -emit-llvm -c a.c -o a.bc</span><br></pre></td></tr></table></figure>
+<p>And to get <code>a.ll</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ clang -emit-llvm -S a.c -o a.ll</span><br></pre></td></tr></table></figure>
+<p>They can convert to each other by:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ llvm-dis a.bc -o a.ll     # a.bc -&gt; a.ll</span><br><span class="line">$ llvm-as a.ll -o a.bc      # a.ll -&gt; a.bc </span><br></pre></td></tr></table></figure>
+<p>We can use <code>llc</code> to convert <code>a.bc</code> to <code>a.s</code>, and even visualize SelectionDAG on LLVM debug version:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ llc a.bc -o a.s</span><br><span class="line">$ llc -view-xxxxxx-dags a.ll    </span><br><span class="line"># &quot;--help&quot; to see all DAG generation options, </span><br><span class="line"># and the graph saved in &quot;dot&quot;</span><br></pre></td></tr></table></figure>
+<p>And to execute <code>a.bc</code> directly:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ lli a.bc</span><br><span class="line">Max value is : 200 </span><br></pre></td></tr></table></figure>
+<p>Actually the intermediate files can be converted to exetuable <code>a.out</code> by using <code>clang</code> directly:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ clang a.s/a.c/a.xxx a.out</span><br></pre></td></tr></table></figure>
+
+<h2 id="LLVM-Graph-Structure-Generation"><a href="#LLVM-Graph-Structure-Generation" class="headerlink" title="LLVM Graph Structure Generation"></a>LLVM Graph Structure Generation</h2><p>LLVM framework is so powerful, that it can automatically generate control flow graph, and we can visualize it easily.<br>First we generate CFG using <code>opt</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ opt -enable-new-pm=0 -analyze -dot-cfg-only a.ll</span><br><span class="line">Writing &#x27;.main.dot&#x27;...</span><br><span class="line">Printing analysis &#x27;Print CFG of function to &#x27;dot&#x27; file (with no function bodies)&#x27; for function &#x27;main&#x27;:</span><br><span class="line">Writing &#x27;.max.dot&#x27;...</span><br><span class="line">Printing analysis &#x27;Print CFG of function to &#x27;dot&#x27; file (with no function bodies)&#x27; for function &#x27;max&#x27;:</span><br></pre></td></tr></table></figure>
+<p>And we get <code>.main.dot</code> and <code>.max.dot</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ cat .main.dot</span><br><span class="line">digraph &quot;CFG for &#x27;main&#x27; function&quot; &#123;</span><br><span class="line">        label=&quot;CFG for &#x27;main&#x27; function&quot;;</span><br><span class="line"></span><br><span class="line">        Node0xe3b210 [shape=record,color=&quot;#b70d28ff&quot;, style=filled, fillcolor=&quot;#b70d2870&quot;,label=&quot;&#123;%0&#125;&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ cat .max.dot</span><br><span class="line">digraph &quot;CFG for &#x27;max&#x27; function&quot; &#123;</span><br><span class="line">        label=&quot;CFG for &#x27;max&#x27; function&quot;;</span><br><span class="line"></span><br><span class="line">        Node0xe3c470 [shape=record,color=&quot;#b70d28ff&quot;, style=filled, fillcolor=&quot;#b70d2870&quot;,label=&quot;&#123;%2|&#123;&lt;s0&gt;T|&lt;s1&gt;F&#125;&#125;&quot;];</span><br><span class="line">        Node0xe3c470:s0 -&gt; Node0xe3c5e0;</span><br><span class="line">        Node0xe3c470:s1 -&gt; Node0xe3c930;</span><br><span class="line">        Node0xe3c5e0 [shape=record,color=&quot;#3d50c3ff&quot;, style=filled, fillcolor=&quot;#f59c7d70&quot;,label=&quot;&#123;%9&#125;&quot;];</span><br><span class="line">        Node0xe3c5e0 -&gt; Node0xe3cb70;</span><br><span class="line">        Node0xe3c930 [shape=record,color=&quot;#3d50c3ff&quot;, style=filled, fillcolor=&quot;#f59c7d70&quot;,label=&quot;&#123;%11&#125;&quot;];</span><br><span class="line">        Node0xe3c930 -&gt; Node0xe3cb70;</span><br><span class="line">        Node0xe3cb70 [shape=record,color=&quot;#b70d28ff&quot;, style=filled, fillcolor=&quot;#b70d2870&quot;,label=&quot;&#123;%13&#125;&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To visualize, install libraries first:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install graphviz</span><br></pre></td></tr></table></figure>
+<p>And then use <code>dot</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dot .main.dot -T png -o main.cfg.png</span><br><span class="line">$ dot .max.dot -T jpeg -o max.cfg.jpg</span><br></pre></td></tr></table></figure>
+<p>And the results:<br><img src="/imghost/lc/main.cfg.png" alt="main.cfg.png"><br><img src="/imghost/lc/max.cfg.jpg" alt="max.cfg.jpg"></p>
+<p>Some other options:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ opt -h|grep &quot;\-cfg&quot;</span><br><span class="line">  --cfg-hide-cold-paths=&lt;number&gt;                                        - Hide blocks with relative frequency below the given value</span><br><span class="line">  --cfg-hide-deoptimize-paths                                           -</span><br><span class="line">  --cfg-hide-unreachable-paths                                          -</span><br><span class="line">  --dot-cfg-mssa=&lt;file name for generated dot file&gt;                     - file name for generated dot file</span><br><span class="line">      --dot-cfg                                                            - Print CFG of function to &#x27;dot&#x27; file</span><br><span class="line">      --dot-cfg-only                                                       - Print CFG of function to &#x27;dot&#x27; file (with no function bodies)</span><br><span class="line">      --print-cfg-sccs                                                     - Print SCCs of each function CFG</span><br><span class="line">      --view-cfg                                                           - View CFG of function</span><br><span class="line">      --view-cfg-only                                                      - View CFG of function (with no function bodies)</span><br><span class="line">      --wasm-cfg-sort                                                      - Reorders blocks in topological order</span><br><span class="line">      --wasm-cfg-stackify                                                  - Insert BLOCK/LOOP/TRY markers for WebAssembly scopes</span><br><span class="line"></span><br><span class="line">$ opt -h|grep callgraph</span><br><span class="line">      --dot-callgraph                                                      - Print call graph to &#x27;dot&#x27; file</span><br><span class="line">      --print-callgraph                                                    - Print a call graph</span><br><span class="line">      --print-callgraph-sccs                                               - Print SCCs of the Call Graph</span><br><span class="line">      --view-callgraph                                                     - View call graph</span><br></pre></td></tr></table></figure>
+
+<h2 id="LLVM-Grammar"><a href="#LLVM-Grammar" class="headerlink" title="LLVM Grammar"></a>LLVM Grammar</h2><p>stay tuned …</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/note/">#note</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/llvm/">#llvm</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2022/08/06/2022-08-06-Go-Phishing/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Go Phishing!</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LLVM-Compilation"><span class="nav-number">1.</span> <span class="nav-text">LLVM Compilation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLVM-Graph-Structure-Generation"><span class="nav-number">2.</span> <span class="nav-text">LLVM Graph Structure Generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLVM-Grammar"><span class="nav-number">3.</span> <span class="nav-text">LLVM Grammar</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>

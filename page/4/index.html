@@ -16,41 +16,117 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
     
 
-    <div class="page-main-content">
+    <div class="page-main-content is-home">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -167,12 +243,80 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">
+                        Format String Vulnerability Intro
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        The format string in many programming languages, refers to a control parameter used by a class of functions. It helps to outp...
+                    
+                </div>
+
+                
+<div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Oct 18 2020 20:40:36 GMT+0800">
+                2020-10-18
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Pwn/">Pwn</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/pwn/">pwn</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/linux/">linux</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/format-string/">format-string</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2020/05/29/2020-05-29-Some-Network-File-Sharing-Services/">
                         Some Network File Sharing Services
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         StorageThere are three storage types: 
 
@@ -182,9 +326,15 @@ Storage Area Network (SA...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri May 29 2020 15:24:37 GMT+0800">2020-05-29</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Jul 30 2020 07:57:29 GMT+0800">
+                2020-07-30
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -228,12 +378,17 @@ Storage Area Network (SA...
                             <a href="/tags/samba/">samba</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/nfs/">nfs</a>&nbsp;
+                        </li>
+                    
                 </ul>
             </span>
         
     </div>
 
-    <a href="/2020/05/29/2020-05-29-Some-Network-File-Sharing-Services/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/05/29/2020-05-29-Some-Network-File-Sharing-Services/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -248,16 +403,22 @@ Storage Area Network (SA...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This part we discuss about how to steal credentials in Domain pentest.
 Basic KnowledgeBefore running powerfull tools, we have...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 25 2020 14:37:03 GMT+0800">2020-05-25</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Jul 01 2020 11:33:01 GMT+0800">
+                2020-07-01
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -296,7 +457,7 @@ Basic KnowledgeBefore running powerfull tools, we have...
         
     </div>
 
-    <a href="/2020/05/25/2020-05-25-About-Stealing-Credentials/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/05/25/2020-05-25-About-Stealing-Credentials/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -311,15 +472,21 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Reverse Shell is normal used for its advantages in avoiding being detected.Attacker’s machine (which has a public IP and is r...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Mar 31 2020 19:49:59 GMT+0800">2020-03-31</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Apr 01 2020 21:56:44 GMT+0800">
+                2020-04-01
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -368,7 +535,7 @@ Basic KnowledgeBefore running powerfull tools, we have...
         
     </div>
 
-    <a href="/2020/03/31/2020-03-31-About-Reverse-Shell/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/31/2020-03-31-About-Reverse-Shell/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -383,15 +550,21 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This is for programers in China, where people are a bit inconvenient to go online (off the G^F^W).After changing to the nativ...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 18 2020 11:27:53 GMT+0800">2020-03-18</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Aug 31 2022 20:56:45 GMT+0800">
+                2022-08-31
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -412,17 +585,17 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     
                         <li>
                             
+                            <a href="/tags/linux/">linux</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
                             <a href="/tags/note/">note</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
                             <a href="/tags/docker/">docker</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/linux/">linux</a>&nbsp;
                         </li>
                     
                         <li>
@@ -435,12 +608,17 @@ Basic KnowledgeBefore running powerfull tools, we have...
                             <a href="/tags/gem/">gem</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/npm/">npm</a>&nbsp;
+                        </li>
+                    
                 </ul>
             </span>
         
     </div>
 
-    <a href="/2020/03/18/2020-03-18-Collection-for-Package-Source/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/18/2020-03-18-Collection-for-Package-Source/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -455,15 +633,21 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Nowadays we have plenty of mature pentest framework that can benefit us from information gathering to penetration testing per...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Mar 17 2020 09:54:57 GMT+0800">2020-03-17</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Tue Feb 16 2021 16:13:30 GMT+0800">
+                2021-02-16
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -507,7 +691,7 @@ Basic KnowledgeBefore running powerfull tools, we have...
         
     </div>
 
-    <a href="/2020/03/17/2020-03-17-MSF-Pentest-Route/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/17/2020-03-17-MSF-Pentest-Route/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -522,15 +706,21 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         When performing penetration testing, there are always network connection limits.Port forwarding can bypass them and provide o...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Mar 15 2020 21:25:58 GMT+0800">2020-03-15</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sat Nov 05 2022 10:32:24 GMT+0800">
+                2022-11-05
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -569,7 +759,7 @@ Basic KnowledgeBefore running powerfull tools, we have...
         
     </div>
 
-    <a href="/2020/03/15/2020-03-15-About-Port-Forwarding/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/15/2020-03-15-About-Port-Forwarding/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -584,15 +774,21 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Penetration testing is always a hot and attractive technology, and perform penetration testing in the windows domain is a fai...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 12 2020 16:12:52 GMT+0800">2020-03-12</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Apr 04 2021 22:44:09 GMT+0800">
+                2021-04-04
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -631,7 +827,7 @@ Basic KnowledgeBefore running powerfull tools, we have...
         
     </div>
 
-    <a href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -646,16 +842,22 @@ Basic KnowledgeBefore running powerfull tools, we have...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Besides Fuzzing, Symbolic Execution is another choice to approach reverse engineering and binary analysis. 
 Symbolic Executio...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 05 2020 15:49:12 GMT+0800">2020-03-05</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Nov 12 2020 21:23:52 GMT+0800">
+                2020-11-12
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -699,7 +901,7 @@ Symbolic Executio...
         
     </div>
 
-    <a href="/2020/03/05/2020-03-05-Learn-Symbolic-Execution-and-angr/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/03/05/2020-03-05-Learn-Symbolic-Execution-and-angr/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -714,16 +916,22 @@ Symbolic Executio...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Tips for dealing wine font or encoding problems.
 Solve Garbled TextInterfaceAfter installation of Wine, the execution and con...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Feb 18 2020 21:24:13 GMT+0800">2020-02-18</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Mar 16 2020 21:52:18 GMT+0800">
+                2020-03-16
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -744,12 +952,12 @@ Solve Garbled TextInterfaceAfter installation of Wine, the execution and con...
                     
                         <li>
                             
-                            <a href="/tags/note/">note</a>&nbsp;
+                            <a href="/tags/linux/">linux</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
-                            <a href="/tags/linux/">linux</a>&nbsp;
+                            <a href="/tags/note/">note</a>&nbsp;
                         </li>
                     
                         <li>
@@ -762,70 +970,7 @@ Solve Garbled TextInterfaceAfter installation of Wine, the execution and con...
         
     </div>
 
-    <a href="/2020/02/18/2020-02-18-Wine-Tips/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2020/02/16/2020-02-16-Analyse-AFL-Fuzzing-Result/">
-                        Analyse AFL Fuzzing Result
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        After doing fuzzing, we concentrate on result analysis.
-Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Feb 16 2020 11:39:23 GMT+0800">2020-02-16</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Fuzzing/">Fuzzing</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/linux/">linux</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/fuzzing/">fuzzing</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/afl/">afl</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2020/02/16/2020-02-16-Analyse-AFL-Fuzzing-Result/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/02/18/2020-02-18-Wine-Tips/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -857,19 +1002,23 @@ Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -890,10 +1039,6 @@ Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -925,10 +1070,8 @@ Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
 
     </div>
 
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -949,7 +1092,7 @@ Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -981,14 +1124,12 @@ Check Fuzzer Statusafl-whatsupIt helps showing the running status and...
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 

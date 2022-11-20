@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">Fuzz with Boofuzz (the Successor to Sulley)</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">Fuzz with Boofuzz (the Successor to Sulley)</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-10-21 20:27:01</span>
         <span class="mobile">2020-10-21 20:27</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2020-10-22 21:36:12</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -234,13 +320,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jtpereyda/boofuzz" >Boofuzz<i class="fas fa-external-link-alt"></i></a> is a fork of and the successor to the venerable <a class="link"   target="_blank" rel="noopener" href="https://github.com/OpenRCE/sulley" >Sulley<i class="fas fa-external-link-alt"></i></a> fuzzing framework.</p>
+            <div class="article-content keep-markdown-body">
+                <p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jtpereyda/boofuzz" >Boofuzz<i class="fas fa-external-link-alt"></i></a> is a fork of and the successor to the venerable <a class="link"   target="_blank" rel="noopener" href="https://github.com/OpenRCE/sulley" >Sulley<i class="fas fa-external-link-alt"></i></a> fuzzing framework.</p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Comparing to <a class="link"   target="_blank" rel="noopener" href="https://github.com/google/AFL" >AFL<i class="fas fa-external-link-alt"></i></a>, a code coverage guided fuzzer aiming at binary programs, <code>boofuzz</code> is based on <code>Sulley</code>, a network protocol fuzzer.<br>As it is for fuzzing network protocols, users should pay more attention to the details of the protocol, so an analysis of a network protocol is really needed, because it determines how users write fuzzing scripts and whether they can find specific bugs. </p>
 <p>And:</p>
 <p>Like <code>Sulley</code>, <code>boofuzz</code> incorporates all the critical elements of a fuzzer:</p>
@@ -376,65 +462,77 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> boofuzz <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    port = <span class="number">9999</span></span><br><span class="line">    host = <span class="string">&#x27;192.168.100.79&#x27;</span></span><br><span class="line">    protocol = <span class="string">&#x27;tcp&#x27;</span></span><br><span class="line"></span><br><span class="line">    s_initialize(<span class="string">&quot;trun&quot;</span>)</span><br><span class="line">    s_group(<span class="string">&quot;verbs&quot;</span>, values=[<span class="string">&quot;TRUN&quot;</span>,<span class="string">&quot;GMON&quot;</span>,<span class="string">&quot;KSTET&quot;</span>])</span><br><span class="line">    <span class="comment"># s_group(&quot;verbs&quot;, values=[&quot;STATS&quot;, &quot;RTIME&quot;, &quot;LTIME&quot;, &quot;SRUN&quot;, &quot;TRUN&quot;, &quot;GMON&quot;, &quot;GDOG&quot;, &quot;KSTET&quot;, &quot;GTER&quot;, &quot;HTER&quot;, &quot;LTER&quot;, &quot;KSTAN&quot;])</span></span><br><span class="line">    <span class="keyword">if</span> s_block_start(<span class="string">&quot;body&quot;</span>, group=<span class="string">&quot;verbs&quot;</span>):</span><br><span class="line">        s_delim(<span class="string">&quot; &quot;</span>, fuzzable=<span class="literal">False</span>)</span><br><span class="line">        s_string(<span class="string">&quot;FUZZ&quot;</span>)</span><br><span class="line">        s_static(<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">    s_block_end()</span><br><span class="line">    </span><br><span class="line">    csv_log = <span class="built_in">open</span>(<span class="string">&#x27;fuzz_results.csv&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) </span><br><span class="line">    my_logger = [FuzzLoggerCsv(file_handle=csv_log)]   </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;------------------------------------------------&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(my_logger))</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">dir</span>(my_logger))</span><br><span class="line">    session = Session(</span><br><span class="line">            target=Target(</span><br><span class="line">                connection = SocketConnection(host, port, proto=protocol),</span><br><span class="line">                procmon=pedrpc.Client(host, <span class="number">26002</span>),</span><br><span class="line">                procmon_options = &#123;</span><br><span class="line">                        <span class="string">&quot;proc_name&quot;</span> : <span class="string">&quot;vulnserver.exe&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;stop_commands&quot;</span> : [<span class="string">&#x27;wmic process where (name=&quot;vulnserver&quot;) delete&#x27;</span>],</span><br><span class="line">                        <span class="string">&quot;start_commands&quot;</span> : [<span class="string">&#x27;vulnserver.exe&#x27;</span>],</span><br><span class="line">                &#125;</span><br><span class="line">            ),</span><br><span class="line">            <span class="comment"># fuzz_loggers=my_logger, </span></span><br><span class="line">                <span class="comment"># Well, this statement doesn&#x27;t work fine on Python3</span></span><br><span class="line">                <span class="comment"># Perhaps it is deprecated, or perhaps I wrongly used it</span></span><br><span class="line">                <span class="comment"># Need you guys help !!!</span></span><br><span class="line">            crash_threshold_element= <span class="number">1</span>,<span class="comment"># Crash how much times until stop</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    session.connect(s_get(<span class="string">&quot;trun&quot;</span>), callback=get_banner)</span><br><span class="line">    session.fuzz()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_banner</span>(<span class="params">target, my_logger, session, *args, **kwargs</span>):</span></span><br><span class="line">    banner_template = <span class="string">&quot;Welcome to Vulnerable Server! Enter HELP for help.&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        banner = target.recv(<span class="number">10000</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Unable to connect. Target is down. Exiting.&quot;</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    my_logger.log_check(<span class="string">&#x27;Receiving banner..&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> banner_template <span class="keyword">in</span> <span class="built_in">str</span>(banner):</span><br><span class="line">        my_logger.log_pass(<span class="string">&#x27;banner received&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        my_logger.log_fail(<span class="string">&#x27;No banner received&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>( <span class="string">&quot;No banner received, exiting..&quot;</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p><a class="link"   target="_blank" rel="noopener" href="https://zeroaptitude.com/zerodetail/fuzzing-with-boofuzz/" >Boofuzz – A helpful guide (OSCE – CTP)<i class="fas fa-external-link-alt"></i></a> is the reference of the codes.</p>
 
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/fuzzing/">#fuzzing</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/boofuzz/">#boofuzz</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/sulley/">#sulley</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/fuzzing/">#fuzzing</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/boofuzz/">#boofuzz</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/sulley/">#sulley</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-IO-FILE-related/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-IO-FILE-related/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Stack Overflow Intro</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-to-Sulley"><span class="nav-number">3.</span> <span class="nav-text">Intro to Sulley</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages-of-Boofuzz"><span class="nav-number">4.</span> <span class="nav-text">Usages of Boofuzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">5.</span> <span class="nav-text">Examples</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -446,19 +544,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -474,8 +576,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -496,10 +598,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -531,18 +629,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-to-Sulley"><span class="nav-number">3.</span> <span class="nav-text">Intro to Sulley</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages-of-Boofuzz"><span class="nav-number">4.</span> <span class="nav-text">Usages of Boofuzz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">5.</span> <span class="nav-text">Examples</span></a></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -563,7 +651,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -594,14 +682,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -610,12 +696,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

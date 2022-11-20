@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">Stack Overflow Intro</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">Stack Overflow Intro</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-10-15 08:21:01</span>
         <span class="mobile">2020-10-15 08:21</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2020-10-18 20:47:07</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -242,13 +328,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p>Concise Challenge-Oriented <code>stack</code> overflow introduction.</p>
+            <div class="article-content keep-markdown-body">
+                <p>Concise Challenge-Oriented <code>stack</code> overflow introduction.</p>
 <h2 id="Stack-Introduction"><a href="#Stack-Introduction" class="headerlink" title="Stack Introduction"></a>Stack Introduction</h2><p>It is a LIFO (Last in First Out) data structure, and basic operations include <code>pop</code> and <code>push</code>.<br><img src="/imghost/soi/Data_stack.png" alt="Data_stack"><br>There are more kinds of complex stack in data structure, the operations are more than just <code>pop</code> and <code>push</code>. But neither of them is the stack of operating system, <code>OS</code> uses the basic one. BTW  <code>stack</code> grows from high address to low address.</p>
 <p>Besides <code>stack</code>, <code>OS</code> has <code>register</code> to store things<br><img src="/imghost/soi/register.png" alt="register"></p>
 <p>The <code>stack</code> serves for storing variables and function frames, can be called <code>call stack</code> as well. When storing function frames, program has to consider storing function parameters, variables and their order; old <code>ebp</code>&#x2F;<code>rbp</code> for recovering previous frame; <code>return addr</code> to return after exiting current function.</p>
@@ -377,73 +463,85 @@
 <p>Related challenge collections of mine (ADWorld series):<br><a href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/#ROP-Part">ADWorld PWN Exercise Area Write-ups (ROP Part)</a><br><a href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text-Part/">ADWorld PWN Challenge Area Write-ups (ret2text Part)</a><br><a href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc-Part/">ADWorld PWN Challenge Area Write-ups (ret2libc Part)</a><br><a href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</a></p>
 <p>There are also JOP(Jump-oriented programming) and COP(Call-oriented programming), which have similar feature to control program flow.</p>
 
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/windows/">#windows</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/rop/">#rop</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/pwn/">#pwn</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/windows/">#windows</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/rop/">#rop</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">Fuzz with Boofuzz (the Successor to Sulley)</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Advanced ROP)</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Stack Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Overflow"><span class="nav-number">2.</span> <span class="nav-text">Stack Overflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-number">3.</span> <span class="nav-text">ROP</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -455,19 +553,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -483,8 +585,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -505,10 +607,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -540,18 +638,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Stack Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-Overflow"><span class="nav-number">2.</span> <span class="nav-text">Stack Overflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-number">3.</span> <span class="nav-text">ROP</span></a></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -572,7 +660,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -603,14 +691,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -619,12 +705,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

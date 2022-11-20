@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">Collection for Package Sources</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">Collection for Package Sources</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2020-03-18 11:27:53</span>
         <span class="mobile">2020-03-18 11:27</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2022-08-31 20:56:45</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -205,15 +291,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/note/">note</a>&nbsp;
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/note/">note</a>&nbsp;
                     </li>
                 
                     <li>
                         | <a href="/tags/docker/">docker</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
@@ -235,7 +321,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>721 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>750 Words</span>
         </span>
     
     
@@ -246,13 +332,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p>This is for programers in China, where people are a bit inconvenient to go online (off the G^<em>F</em>^W).<br>After changing to the native source, obtaining updates gets faster. </p>
+            <div class="article-content keep-markdown-body">
+                <p>This is for programers in China, where people are a bit inconvenient to go online (off the G^<em>F</em>^W).<br>After changing to the native source, obtaining updates gets faster. </p>
 <h2 id="Change-Linux-Repository-Mirror-Sources"><a href="#Change-Linux-Repository-Mirror-Sources" class="headerlink" title="Change Linux Repository Mirror Sources"></a>Change Linux Repository Mirror Sources</h2><p>Sources can be edited in <code>/etc/apt/sources.list</code>, and you have the following sources (take kali for example) as alternatives to write in this file.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># USTC</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># Aliyun</span><br><span class="line">#deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># TUNA</span><br><span class="line">#deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">#deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line"># ZJU</span><br><span class="line">#deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">#deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"></span><br><span class="line"># SJTU</span><br><span class="line">#deb https://mirrors.sjtug.sjtu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.sjtug.sjtu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"></span><br><span class="line"># Neusoft</span><br><span class="line">#deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">#deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"></span><br><span class="line"># NWAFU</span><br><span class="line">#deb https://mirrors.nwafu.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">#deb-src https://mirrors.nwafu.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
 <p>Recently we encounter “E: Some index files failed to download. They have been ignored, or old ones used instead.”.<br>Change source and delete everything under <code>/var/lib/apt/lists/</code>, then update.</p>
@@ -291,77 +377,94 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
 <p>Then see the result</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config list</span><br></pre></td></tr></table></figure>
-        </div>
 
-        
+<h2 id="Change-go-Sources"><a href="#Change-go-Sources" class="headerlink" title="Change go Sources"></a>Change <code>go</code> Sources</h2><p>Execute</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go env -w GO111MODULE=on</span><br><span class="line">$ go env -w GOPROXY=https://goproxy.cn</span><br></pre></td></tr></table></figure>
+<p>or change envs</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> GO111MODULE=on</span><br><span class="line">$ <span class="built_in">export</span> GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
+            </div>
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/note/">#note</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/docker/">#docker</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/pip/">#pip</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/gem/">#gem</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/npm/">#npm</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
-                        >
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/note/">#note</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/docker/">#docker</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/pip/">#pip</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/gem/">#gem</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/npm/">#npm</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">About Reverse Shell</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">MSF Pentest Route</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Linux-Repository-Mirror-Sources"><span class="nav-number">1.</span> <span class="nav-text">Change Linux Repository Mirror Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-pip-Sources"><span class="nav-number">2.</span> <span class="nav-text">Change pip Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Docker-Registry"><span class="nav-number">3.</span> <span class="nav-text">Change Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-gem-Sources"><span class="nav-number">4.</span> <span class="nav-text">Change gem Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-npm-Registry"><span class="nav-number">5.</span> <span class="nav-text">Change npm Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-go-Sources"><span class="nav-number">6.</span> <span class="nav-text">Change go Sources</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -373,19 +476,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -401,8 +508,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -423,10 +530,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -458,18 +561,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Linux-Repository-Mirror-Sources"><span class="nav-number">1.</span> <span class="nav-text">Change Linux Repository Mirror Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-pip-Sources"><span class="nav-number">2.</span> <span class="nav-text">Change pip Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Docker-Registry"><span class="nav-number">3.</span> <span class="nav-text">Change Docker Registry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-gem-Sources"><span class="nav-number">4.</span> <span class="nav-text">Change gem Sources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-npm-Registry"><span class="nav-number">5.</span> <span class="nav-text">Change npm Registry</span></a></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -490,7 +583,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -521,14 +614,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -537,12 +628,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

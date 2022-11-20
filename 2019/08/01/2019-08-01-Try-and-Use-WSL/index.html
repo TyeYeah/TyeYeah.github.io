@@ -18,26 +18,97 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
@@ -46,13 +117,18 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -162,31 +238,41 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
+    <div class="post-page-container">
+        <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">Try and Use WSL</span>
-        </div>
+            <div class="article-title">
+                <span class="title-hover-animation">Try and Use WSL</span>
+            </div>
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/img/aliwangwang.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">TyeYeah</span>
-                        
-                            <span class="author-label">Lv4</span>
-                        
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
                     </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
         <span class="pc">2019-08-01 21:25:59</span>
         <span class="mobile">2019-08-01 21:25</span>
     </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2021-09-22 10:40:35</span>
+    </span>
+    
     
         <span class="article-categories article-meta-item">
             <i class="fas fa-folder"></i>&nbsp;
@@ -205,15 +291,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/note/">note</a>&nbsp;
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/note/">note</a>&nbsp;
                     </li>
                 
                     <li>
                         | <a href="/tags/docker/">docker</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
@@ -246,13 +332,13 @@
     
 </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        
+            
 
-        <div class="article-content markdown-body">
-            <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
+            <div class="article-content keep-markdown-body">
+                <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
 <p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a <del>hard</del> long way.</p>
 <h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares (ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
 <p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
@@ -344,77 +430,89 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service docker start</span><br><span class="line">$ service docker status</span><br></pre></td></tr></table></figure>
 <p>After testing the <code>ubuntu</code> on <code>WSL 2</code> doesn’t have this problem, but lacking <code>docker</code> service installed.</p>
 
-        </div>
+            </div>
 
-        
+            
 
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/note/">#note</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/docker/">#docker</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/wsl/">#wsl</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/hyper-v/">#hyper-v</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/windows/">#windows</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/note/">#note</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/docker/">#docker</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/wsl/">#wsl</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/hyper-v/">#hyper-v</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/windows/">#windows</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
-                        >
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
+                            >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
-                            <span class="title flex-center">
+                                <span class="title flex-center">
                                 <span class="post-nav-title-item">Python Sandbox Escape</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
-                        >
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/05/07/2019-05-07-Linux-Security-Response/"
+                            >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Linux Security Response</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
-                            <span class="right arrow-icon flex-center">
+                                <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
                             </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
+                            </a>
+                        </div>
+                    
+                </div>
+            
 
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Tips"><span class="nav-number">5.</span> <span class="nav-text">Update (Tips)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
         
     </div>
 </div>
@@ -426,19 +524,23 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -454,8 +556,8 @@
     <ul class="tools-list">
         <!-- TOC aside toggle -->
         
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
             </li>
         
 
@@ -476,10 +578,6 @@
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -511,18 +609,8 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Subsystem-for-Linux"><span class="nav-number">1.</span> <span class="nav-text">Windows Subsystem for Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL"><span class="nav-number">1.1.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WSL2"><span class="nav-number">1.2.</span> <span class="nav-text">WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-V"><span class="nav-number">2.</span> <span class="nav-text">Hyper-V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Sandbox"><span class="nav-number">3.</span> <span class="nav-text">Windows Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Update-Tips"><span class="nav-number">5.</span> <span class="nav-text">Update (Tips)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -543,7 +631,7 @@
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -574,14 +662,12 @@
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
@@ -590,12 +676,18 @@
 <div class="post-scripts">
     
         
-<script src="/js/left-side-toggle.js"></script>
+<script src="/js/post-helper.js"></script>
 
+        
+            
 <script src="/js/libs/anime.min.js"></script>
 
+        
+        
+            
 <script src="/js/toc.js"></script>
 
+        
     
 </div>
 

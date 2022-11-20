@@ -16,41 +16,117 @@
 
     <link rel="shortcut icon" href="/img/wang.svg">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/img/aliwangwang.svg","favicon":"/img/wang.svg","article_img_align":"center","left_side_width":"300px","content_max_width":"1200px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.5.2"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('style.scroll.progress_bar') == true) {
+
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height $scroll-progress-bar-height
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 <main class="page-container">
 
     
 
-    <div class="page-main-content">
+    <div class="page-main-content is-home">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            
+<header class="header-wrapper">
 
     <div class="header-content">
         <div class="left">
             
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
             <a class="logo-title" href="/">
-                Relish the Moment
+               Relish the Moment
             </a>
         </div>
 
@@ -167,12 +243,91 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/">
+                        ADWorld PWN Challenge Area Write-ups (Misc)
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        dice gameAttachment: dice_game.zipDescription: None. 
+The dice game is similar but harder than guess num which in ADworld PWN...
+                    
+                </div>
+
+                
+<div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Oct 14 2020 19:00:52 GMT+0800">
+                2020-10-14
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/CTF/">CTF</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/pwn/">pwn</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/linux/">linux</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/ctf/">ctf</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/rand/">rand</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/js/">js</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a class="read-more" href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/">
                         A Brief History of Fuzzing
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         A supplement for AFL Fuzzing Intro.
 HistoryFrom the blog of riusksk.It has been around 30 years since fuzzing was born.
@@ -180,9 +335,15 @@ Origi...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Oct 02 2020 12:03:31 GMT+0800">2020-10-02</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Fri Oct 23 2020 20:32:48 GMT+0800">
+                2020-10-23
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -208,12 +369,12 @@ Origi...
                     
                         <li>
                             | 
-                            <a href="/tags/fuzzing/">fuzzing</a>&nbsp;
+                            <a href="/tags/symbolic-execution/">symbolic-execution</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
-                            <a href="/tags/symbolic-execution/">symbolic-execution</a>&nbsp;
+                            <a href="/tags/fuzzing/">fuzzing</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -221,7 +382,7 @@ Origi...
         
     </div>
 
-    <a href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -236,16 +397,22 @@ Origi...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         4-ReeHY-main-100Attachment: 4-ReeHY-main-100.zipDescription: None
 This challenge can be solved by using stack overflow, GOT h...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Sep 20 2020 18:54:52 GMT+0800">2020-09-20</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Oct 14 2020 20:08:05 GMT+0800">
+                2020-10-14
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -289,12 +456,17 @@ This challenge can be solved by using stack overflow, GOT h...
                             <a href="/tags/heap/">heap</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/unlink/">unlink</a>&nbsp;
+                        </li>
+                    
                 </ul>
             </span>
         
     </div>
 
-    <a href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/09/20/2020-09-20-ADWorld-PWN-Challenge-Area-Write-ups-Unlink/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -309,7 +481,7 @@ This challenge can be solved by using stack overflow, GOT h...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Challenges here need to hijack GOT.
 RechoAttachment: rechoDescription: None
@@ -318,9 +490,15 @@ In...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Aug 29 2020 13:20:11 GMT+0800">2020-08-29</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Oct 26 2020 08:44:44 GMT+0800">
+                2020-10-26
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -361,6 +539,11 @@ In...
                     
                         <li>
                             | 
+                            <a href="/tags/got/">got</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
                             <a href="/tags/heap/">heap</a>&nbsp;
                         </li>
                     
@@ -369,7 +552,7 @@ In...
         
     </div>
 
-    <a href="/2020/08/29/2020-08-29-ADWorld-PWN-Challenge-Area-Write-ups-GOT-Hijacking/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/08/29/2020-08-29-ADWorld-PWN-Challenge-Area-Write-ups-GOT-Hijacking/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -384,16 +567,22 @@ In...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This part is about UAF (Use After Free).
 time formatterAttachment: time_formatterDescription: It is difficult to convert UNIX...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Aug 14 2020 20:13:35 GMT+0800">2020-08-14</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Sep 22 2021 17:05:15 GMT+0800">
+                2021-09-22
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -442,7 +631,7 @@ time formatterAttachment: time_formatterDescription: It is difficult to convert 
         
     </div>
 
-    <a href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -457,16 +646,22 @@ time formatterAttachment: time_formatterDescription: It is difficult to convert 
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This part is for format string challenges.
 realtime data monitorAttachment: realtime-data-monitorDescription: When Xiao A was...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Aug 10 2020 21:42:09 GMT+0800">2020-08-10</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Apr 11 2021 19:33:21 GMT+0800">
+                2021-04-11
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -497,12 +692,17 @@ realtime data monitorAttachment: realtime-data-monitorDescription: When Xiao A w
                     
                         <li>
                             | 
-                            <a href="/tags/format-string/">format-string</a>&nbsp;
+                            <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
-                            <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
+                            <a href="/tags/ctf/">ctf</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/format-string/">format-string</a>&nbsp;
                         </li>
                     
                         <li>
@@ -515,7 +715,7 @@ realtime data monitorAttachment: realtime-data-monitorDescription: When Xiao A w
         
     </div>
 
-    <a href="/2020/08/10/2020-08-10-ADWorld-PWN-Challenge-Area-Write-ups-Fmtstr/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/08/10/2020-08-10-ADWorld-PWN-Challenge-Area-Write-ups-Fmtstr/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -530,7 +730,7 @@ realtime data monitorAttachment: realtime-data-monitorDescription: When Xiao A w
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         This part is for ret2libc tasks, building ROP chain is a necessary skill.
 pwn1Attachment: pwn1.zipDescription: None
@@ -538,9 +738,15 @@ About Can...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Aug 07 2020 21:22:24 GMT+0800">2020-08-07</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Oct 26 2020 09:10:46 GMT+0800">
+                2020-10-26
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -576,12 +782,17 @@ About Can...
                     
                         <li>
                             | 
+                            <a href="/tags/ctf/">ctf</a>&nbsp;
+                        </li>
+                    
+                        <li>
+                            | 
                             <a href="/tags/canary/">canary</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
-                            <a href="/tags/ctf/">ctf</a>&nbsp;
+                            <a href="/tags/rop/">rop</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -589,7 +800,7 @@ About Can...
         
     </div>
 
-    <a href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -604,7 +815,7 @@ About Can...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         There are some easy ret2text challenges in challenge area.
 warmupAttachment: warmupDescription: None
@@ -612,9 +823,15 @@ Dont know what is this f...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 29 2020 20:12:33 GMT+0800">2020-07-29</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Oct 26 2020 09:10:50 GMT+0800">
+                2020-10-26
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -658,7 +875,7 @@ Dont know what is this f...
         
     </div>
 
-    <a href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -673,15 +890,21 @@ Dont know what is this f...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         You can find all the following challenges on World of Attack &amp; Defense (ADWorld), which is a CN CTF platform and not so i...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Jul 24 2020 22:37:54 GMT+0800">2020-07-24</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Oct 14 2020 19:11:10 GMT+0800">
+                2020-10-14
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -712,11 +935,6 @@ Dont know what is this f...
                     
                         <li>
                             | 
-                            <a href="/tags/format-string/">format-string</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
                             <a href="/tags/stack-overflow/">stack-overflow</a>&nbsp;
                         </li>
                     
@@ -725,12 +943,17 @@ Dont know what is this f...
                             <a href="/tags/ctf/">ctf</a>&nbsp;
                         </li>
                     
+                        <li>
+                            | 
+                            <a href="/tags/format-string/">format-string</a>&nbsp;
+                        </li>
+                    
                 </ul>
             </span>
         
     </div>
 
-    <a href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -745,16 +968,22 @@ Dont know what is this f...
                     </a>
                 </h3>
 
-                <div class="home-article-content markdown-body">
+                <div class="home-article-content keep-markdown-body">
                     
                         Here we experiment integer overflow on Linux.
 Integer Overflow IntroductionIn C language, the basic data types of integers ar...
                     
                 </div>
 
-                <div class="home-article-meta-info-container">
+                
+<div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jul 16 2020 21:37:40 GMT+0800">2020-07-16</span></span>
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-date="Sun Oct 18 2020 20:40:18 GMT+0800">
+                2020-10-18
+            </span>
+        </span>
         
             <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
                 <ul>
@@ -793,69 +1022,7 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
         
     </div>
 
-    <a href="/2020/07/16/2020-07-16-Integer-Overflow-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">
-                        Format String Vulnerability Intro
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        The format string in many programming languages, refers to a control parameter used by a class of functions. It helps to outp...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 05 2020 21:57:09 GMT+0800">2020-07-05</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Pwn/">Pwn</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/pwn/">pwn</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/linux/">linux</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/format-string/">format-string</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2020/07/16/2020-07-16-Integer-Overflow-Intro/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -887,19 +1054,23 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
+            
+<footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>
-              -
+                <span>2020</span> -
             
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">TyeYeah</a>
+            2022
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
         </div>
         
         
@@ -920,10 +1091,6 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
 
         <li class="tools-item tool-font-adjust-minus flex-center">
             <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
         </li>
 
         <li class="tools-item tool-dark-light-toggle flex-center">
@@ -955,10 +1122,8 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
 
     </div>
 
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
@@ -979,7 +1144,7 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
                        class="search-input"
                 >
             </div>
-            <span class="popup-btn-close">
+            <span class="close-popup-btn">
                 <i class="fas fa-times"></i>
             </span>
         </div>
@@ -1011,14 +1176,12 @@ Integer Overflow IntroductionIn C language, the basic data types of integers ar.
 
 
 
+
+
     
 <script src="/js/local-search.js"></script>
 
 
-
-
-    
-<script src="/js/code-copy.js"></script>
 
 
 
