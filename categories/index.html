@@ -40,75 +40,14 @@
 
 
 <body>
-.progress-bar-container {
-  position fixed
-  top 0
-  left 0
-  z-index $z-index-9
-  width 100%
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
-  if (hexo-config('pjax.enable') == true) {
+    
+</div>
 
-    .pjax-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-8
-      width 0
-      height 2px
-      background var(--pjax-progress-bar-color)
-      visibility hidden
-      opacity 0
-      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
-
-
-      &.show {
-        visibility visible
-        opacity 1
-      }
-    }
-
-
-    .pjax-progress-icon {
-      position absolute
-      top 0.4rem
-      right 0.3rem
-      z-index $z-index-8
-      color var(--text-color-3)
-      font-size 1.1rem
-      visibility hidden
-
-      +keep-tablet() {
-        top 0.3rem
-        right 0.2rem
-        font-size 1rem
-      }
-
-      &.show {
-        visibility visible
-      }
-    }
-  }
-
-  if (hexo-config('style.scroll.progress_bar') == true) {
-
-    .scroll-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-7
-      width 0
-      height $scroll-progress-bar-height
-      background var(--primary-color)
-      visibility hidden
-      transition-t("width", "0", "0.1", "linear")
-
-      &.hide {
-        display none !important
-      }
-    }
-  }
-}
 
 <main class="page-container">
 
@@ -237,16 +176,63 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="category-list-container">
-        <div class="category-list-content">
-            <ul class="all-category-list"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/CTF/">CTF</a><span class="all-category-list-count">12</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Fuzzing/">Fuzzing</a><span class="all-category-list-count">4</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/IoT/">IoT</a><span class="all-category-list-count">3</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Linux/">Linux</a><span class="all-category-list-count">4</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/List/">List</a><span class="all-category-list-count">2</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Note/">Note</a><span class="all-category-list-count">8</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Papers/">Papers</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Penetration-Testing/">Penetration Testing</a><span class="all-category-list-count">10</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Pwn/">Pwn</a><span class="all-category-list-count">10</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/Symbolic-Execution/">Symbolic Execution</a><span class="all-category-list-count">1</span></li></ul>
-        </div>
-        <div class="category-comments">
-            
-        </div>
-    </div>
-</div>
+                    .category-list-container {
+
+  keep-container(false, 0, 0, 2rem, 0)
+
+  .category-list-content {
+
+    .all-category-list {
+
+      & > .all-category-list-item > .all-category-list-link {
+        font-size 1.1rem
+      }
+
+      li.all-category-list-item {
+        margin-bottom 1rem
+        font-size 1rem
+
+        &:last-child {
+          margin-bottom 0
+        }
+
+        span.all-category-list-count {
+          float right
+          color var(--text-color-3)
+
+
+          &::before {
+            content '['
+          }
+
+          &::after {
+            content ']'
+          }
+        }
+
+
+        ul.all-category-list-child {
+          margin-top 1rem
+
+          margin-left 0.9rem
+
+          li {
+
+            &::before {
+              content '- '
+            }
+
+            margin-bottom 0.9rem
+
+            &:last-child {
+              margin-bottom 0
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 
                 
