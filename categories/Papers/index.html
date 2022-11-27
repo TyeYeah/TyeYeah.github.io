@@ -36,7 +36,7 @@
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -176,45 +176,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="category-container">
-        <div class="category-name">
-            <i class="fas fa-folder"></i>&nbsp;Papers
-        </div>
-        <div class="category-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/"
-                        >Binary Code Similarity Detection Papers</a>
-                        <span class="article-date">03-26</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $category-name-font-size = 1.6rem
 
-        </div>
-    </div>
-    <div class="category-paginator">
-        <div class="paginator">
-    
+.category-container {
 
-    
-</div>
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    </div>
-</div>
+  .category-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
+
+    font-weight 600
+    font-size $category-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $category-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $category-name-font-size * 0.8
+    }
+  }
+}
 
 
                 

@@ -36,7 +36,7 @@
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"};
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -176,76 +176,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="category-container">
-        <div class="category-name">
-            <i class="fas fa-folder"></i>&nbsp;Linux
-        </div>
-        <div class="category-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/01/08/2021-01-08-Cross-Compile-Toolchains/"
-                        >Cross Compile Toolchains</a>
-                        <span class="article-date">01-08</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2019</span>
-                <span class="archive-year-post-count">[3]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/12/30/2019-12-30-Customize-New-Featured-Kali-2019-4/"
-                        >Customize New Featured Kali 2019.4</a>
-                        <span class="article-date">12-30</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/05/07/2019-05-07-Linux-Security-Response/"
-                        >Linux Security Response</a>
-                        <span class="article-date">05-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/04/07/2019-04-07-Linux-Reverse-Gadgets/"
-                        >Linux Reverse Gadgets</a>
-                        <span class="article-date">04-07</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $category-name-font-size = 1.6rem
 
-        </div>
-    </div>
-    <div class="category-paginator">
-        <div class="paginator">
-    
+.category-container {
 
-    
-</div>
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    </div>
-</div>
+  .category-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
+
+    font-weight 600
+    font-size $category-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $category-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $category-name-font-size * 0.8
+    }
+  }
+}
 
 
                 
