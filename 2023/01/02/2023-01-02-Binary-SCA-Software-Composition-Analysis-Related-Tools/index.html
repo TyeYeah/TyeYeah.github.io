@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Binary SCA (Software Composition Analysis) Related Tools |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.6.0"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">Binary SCA (Software Composition Analysis) Related Tools</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-01-02 10:28:26</span>
+        <span class="mobile">2023-01-02 10:28</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-01-11 13:34:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Note/">Note</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/note/">note</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/windows/">windows</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/SCA/">SCA</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
+        </span>
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>Software Composition Analysis (SCA) for binary helps a lot for vulnerability discovery and program analysis, related fields include: stripped binary symbols recovery, and open-source components detection.</p>
+<h2 id="Recover-Symbols-for-Stripped-Binaries"><a href="#Recover-Symbols-for-Stripped-Binaries" class="headerlink" title="Recover Symbols for Stripped Binaries"></a>Recover Symbols for Stripped Binaries</h2><p>Stripping symbols is a good way to reduce size of binaries, and to hide program information.</p>
+<p>Use <code>strip</code> or <code>sstrip</code> in <a class="link"   target="_blank" rel="noopener" href="http://www.muppetlabs.com/~breadbox/software/elfkickers.html" >Kickers of ELF<i class="fas fa-external-link-alt"></i></a> to remove symbols and sections.</p>
+<p>But for program analysts, recovering binary symbols helps a lot.</p>
+<h3 id="IDA-Pro-FLIRT"><a href="#IDA-Pro-FLIRT" class="headerlink" title="IDA Pro FLIRT"></a>IDA Pro FLIRT</h3><p>The traditional technique <code>FLIRT</code> (Fast Library Identification and Recognition Technology) using signatures to match binary functions if they are stripped library functions linked statically.</p>
+<h4 id="Prepare-Sig-Files"><a href="#Prepare-Sig-Files" class="headerlink" title="Prepare Sig Files"></a>Prepare Sig Files</h4><p>In <code>/path/to/IDA/ida_plugin/</code> there is a <code>flair70.zip</code> (for IDA 7.0 version, backup <a href="/filehost/bsrt/flair70.zip">here</a>), unzip for binaries we want to use (e.g. in linux), and remember to give them executable permission:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/path/to/flair70/bin/linux</span><br><span class="line">$ ls</span><br><span class="line">dumpsig  pcf  pelf  pelf.rtb  plb  pmacho  pomf166  ppsx  ptmobj  sigmake  zipsig</span><br><span class="line">$ chmod +x pelf sigmake </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>To prepare signature database, first choose materials (compiled archived libraries, like <code>libc.a</code>), then use <code>pelf</code>(it’s for linux <code>ELF</code> format, <code>pcf</code> for windows <code>COFF</code> format) and <code>sigmake</code> to generate <code>sig</code> file:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># choose one small lib as an example, not *.so but *.a format </span></span><br><span class="line">$ file /lib/libsupp.a   </span><br><span class="line">/lib/libsupp.a: current ar archive</span><br><span class="line"><span class="comment"># copy to flair bins&#x27; dir</span></span><br><span class="line">$ cp /lib/libsupp.a /path/to/flair70/bin/linux</span><br><span class="line">$ <span class="built_in">cd</span> /path/to/flair70/bin/linux</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate pattern (intermediate) file</span></span><br><span class="line">$ ./pelf libsupp.a libsupp.pat</span><br><span class="line">/path/to/flair70/bin/linux/libsupp.a: skipped 0, total 1    </span><br><span class="line"><span class="comment"># it goes smoothly, while sometimes goes wrong:</span></span><br><span class="line">$  ./pelf libcurl.a libcurl.ptn</span><br><span class="line">Fatal [libcurl.a] (libcurl_la-file.o): Unknown relocation <span class="built_in">type</span> 42 (offset <span class="keyword">in</span> section=0x14).     </span><br><span class="line"><span class="comment"># to deal with it, : -rN:O:L     support relocation type N (mark as variable L bytes at offset O from the relocation address). can be specified multiple times</span></span><br><span class="line">$  ./pelf -r42:0:0 libcurl.a libcurl.ptn</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate signature file</span></span><br><span class="line">$ ./sigmake libsupp.pat libsupp.sig</span><br><span class="line"><span class="comment"># still smoothly, while not always when meeting big libraries:</span></span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line">libboost_thread-1.63.sig: modules/leaves: 95/146, COLLISIONS: 4</span><br><span class="line"><span class="comment"># when collisions occur, edit XXX.exc and make again</span></span><br><span class="line">$ vim libboost_thread.exc</span><br><span class="line">...</span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line"></span><br><span class="line"><span class="comment"># finally copy `sig` files to `/path/to/IDA/sig/pc` </span></span><br><span class="line"><span class="comment"># (`pc` or `arm` or `ppc` or `mips` at the tail indicates ISA)</span></span><br><span class="line">$ cp *.sig /path/to/IDA/sig/pc</span><br></pre></td></tr></table></figure>
+
+<p>There are databases for matching already: </p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/Maktm/FLIRTDB" >FLIRT Signature File Database<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/push0ebp/sig-database" >sig-database<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h4 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h4><p><code>shift</code> + <code>F5</code> and right button to choose <code>Apply new signature</code>,<br><img src="/imghost/bsrt/shift+f5.png" alt="shift + f5"><br><img src="/imghost/bsrt/sigs-win.png" alt="sig list"></p>
+<p>or <code>File</code> -&gt; <code>Load file</code> -&gt; <code>FLIRT signature file</code> to add <code>sig</code> file,<br><img src="/imghost/bsrt/sigs-linux.png" alt="sig list"></p>
+<p>After added sig, we can see matched results like:<br><img src="/imghost/bsrt/sigs-res.png" alt="sig result"></p>
+<p>To make a comparison, before and after:<br><img src="/imghost/bsrt/sigs-before.png" alt="before sig match"><br><img src="/imghost/bsrt/sigs-after.png" alt="signature matched"></p>
+<p>While <code>sig</code> files may be too much, so how to quickly locate which <code>sig</code> to use? </p>
+<ul>
+<li>Use <code>file</code> or <code>strings</code> to match version information first.</li>
+<li>Use <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan" >lscan<i class="fas fa-external-link-alt"></i></a> <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pyelftools pefile</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br><span class="line">$ <span class="built_in">cd</span> lscan</span><br><span class="line">$ python lscan.py -S amd64/sig -f stripped</span><br><span class="line">No symbol table found bin binary</span><br><span class="line">amd64/sig/libm-2.13.sig 6/445 (1.35%)</span><br><span class="line">amd64/sig/libpthread-2.13.sig 18/319 (5.64%)</span><br><span class="line">amd64/sig/libc-2.23.sig 447/2869 (15.58%)</span><br><span class="line">amd64/sig/libc-2.22.sig 420/2859 (14.69%)</span><br><span class="line">amd64/sig/libssl-1.0.2h.sig 0/665 (0.00%)</span><br><span class="line">amd64/sig/libm-2.23.sig 5/600 (0.83%)</span><br><span class="line">amd64/sig/libc-2.13.sig 133/3369 (3.95%)</span><br><span class="line">amd64/sig/libm-2.22.sig 5/582 (0.86%)</span><br><span class="line">amd64/sig/libpthread-2.22.sig 18/262 (6.87%)</span><br><span class="line">amd64/sig/libcrypto-1.0.2h.sig 3375/5057 (66.74%)</span><br><span class="line">amd64/sig/libpcre-8.38.sig 1/150 (0.67%)</span><br><span class="line">amd64/sig/libpthread-2.23.sig 19/258 (7.36%)</span><br></pre></td></tr></table></figure>
+check <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan/wiki/Reverse-Engineer-a-stripped-binary-with-lscan-and-IDApro" >This DEMO<i class="fas fa-external-link-alt"></i></a> out</li>
+</ul>
+<h3 id="Finger"><a href="#Finger" class="headerlink" title="Finger"></a>Finger</h3><p>The Best by far<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/aliyunav/Finger" >Finger<i class="fas fa-external-link-alt"></i></a>, a tool for recognizing function symbol, developed by Alibaba Cloud · Cloud Security Technology Lab.<br>Let’s take a look at the before-and-after comparison:<br><img src="/imghost/bsrt/Finger-before.png" alt="before Finger match"><br><img src="/imghost/bsrt/Finger-after.png" alt="Finger matched"></p>
+<h3 id="Rizzo"><a href="#Rizzo" class="headerlink" title="Rizzo"></a>Rizzo</h3><p>It also generate signatures to match, like <code>FLIRT</code>.</p>
+<p>While, “Formal” signatures, “Fuzzy” signatures, String-based signatures and Immediate-based signatures can be generated separately, to face scenarios requiring different accuracy.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/Reverier-Xu/Rizzo-IDA" >Rizzo-IDA<i class="fas fa-external-link-alt"></i></a> for IDA 7.4+, and <a class="link"   target="_blank" rel="noopener" href="https://github.com/fireundubh/IDA7-Rizzo" >IDA7-Rizzo<i class="fas fa-external-link-alt"></i></a> for IDA 7.0, and easy to find in <a class="link"   target="_blank" rel="noopener" href="https://github.com/tacnetsol/ida/tree/master/plugins/rizzo" >tacnetsol&#x2F;ida<i class="fas fa-external-link-alt"></i></a></p>
+<p>To generate signatures for functions in your current IDB:<br><img src="/imghost/bsrt/rizzo_generate.png" alt="Generating Rizzo signatures"></p>
+<p>To apply generated signatures to your current IDB:<br><img src="/imghost/bsrt/rizzo_apply.png" alt="Applying Rizzo signatures"></p>
+<h3 id="BinDiff-and-Diaphora"><a href="#BinDiff-and-Diaphora" class="headerlink" title="BinDiff and Diaphora"></a><a class="link"   target="_blank" rel="noopener" href="https://www.zynamics.com/software.html" >BinDiff<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://diaphora.re/" >Diaphora<i class="fas fa-external-link-alt"></i></a></h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.zynamics.com/software.html" >BinDiff<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://diaphora.re/" >Diaphora<i class="fas fa-external-link-alt"></i></a> are both binary code similarity detection tools, using hashing to do signature matching.</p>
+<p>Actually all these tools need is a complete hash&#x2F;signature database.</p>
+<h3 id="BinaryAI"><a href="#BinaryAI" class="headerlink" title="BinaryAI"></a>BinaryAI</h3><p>BinaryAI: The Neural Search Engine for Binaries.<br>It used to be a IDA Pro plugin for binary-source matching, with a fairly good performance, opensourced at <a class="link"   target="_blank" rel="noopener" href="https://github.com/binaryai/sdk" >binaryai&#x2F;sdk<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>Researchers could install and register by referring to <a class="link"   target="_blank" rel="noopener" href="https://binaryai.readthedocs.io/en/stable/" >BinaryAI Docs<i class="fas fa-external-link-alt"></i></a>, on which got installation steps, usages, and a video demo.</p>
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;"><iframe src="//player.bilibili.com/player.html?aid=413193735&bvid=BV1XV411k7km&cid=192841620&page=1" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; 
+height: 100%; left: 0; top: 0;"> </iframe></div>
+
+<p>However for now BinaryAI aims at SCA, let users upload binary files, BinaryAI provides users with detailed and clear online reports, which include basic file information, software composition analysis, string information, etc., helping users to find the starting point for security analysis and improve efficiency of security analysis.</p>
+<p>Try this at <a class="link"   target="_blank" rel="noopener" href="https://www.binaryai.cn/" >BinaryAI Binary Analysis Platform<i class="fas fa-external-link-alt"></i></a>. See more docs at <a class="link"   target="_blank" rel="noopener" href="https://doc.binaryai.cn/en/" >BinaryAI Documents<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="SCA-Software-Composition-Analysis-Tools"><a href="#SCA-Software-Composition-Analysis-Tools" class="headerlink" title="SCA (Software Composition Analysis) Tools"></a>SCA (Software Composition Analysis) Tools</h2><p>Software composition analysis (SCA) is a process of identifying the third party and open source components in the applications of an organization. This analysis leads to the discovery of security risk, quality of code and license compliance of the components.  </p>
+<h3 id="Karta"><a href="#Karta" class="headerlink" title="Karta"></a>Karta</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/CheckPointSW/Karta" >“Karta”<i class="fas fa-external-link-alt"></i></a> (Russian for “Map”) is an IDA Python plugin that identifies and matches open-sourced libraries in a given binary.</p>
+<p>See <a class="link"   target="_blank" rel="noopener" href="https://karta.readthedocs.io/en/latest/index.html" >RTD<i class="fas fa-external-link-alt"></i></a> for its document.</p>
+<p>Installation:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pip install elementals sark</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/CheckPointSW/Karta</span><br><span class="line">$ <span class="built_in">cd</span> Karta</span><br><span class="line">$ python setup.py install</span><br></pre></td></tr></table></figure>
+<p>Usage:</p>
+<ul>
+<li><code>File</code> -&gt; <code>Script File...</code> to choose scripts in <code>https://github.com/CheckPointSW/Karta/tree/master/src</code></li>
+<li><code>thumbs_up/thumbs_up_firmware.py</code> and <code>thumbs_up/thumbs_up_ELF.py</code> for analysis on ARM code&#x2F;data segments (dealing with ARM&#x2F;THUMB code transitions), needs <code>scikit-learn</code> library</li>
+<li><code>karta_identifier.py</code> identifies the existence of supported open source projects and fingerprints the exact library version, like:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Karta Identifier - printer_firmware.bin:</span><br><span class="line">========================================</span><br><span class="line"></span><br><span class="line">Identified Open Sources:</span><br><span class="line">------------------------</span><br><span class="line">libpng: 1.2.29</span><br><span class="line">zlib: 1.2.3</span><br><span class="line">OpenSSL: 1.0.1j</span><br><span class="line">gSOAP: 2.7</span><br><span class="line">mDNSResponder: unknown</span><br><span class="line"></span><br><span class="line">Identified Closed Sources:</span><br><span class="line">--------------------------</span><br><span class="line">Treck: unknown</span><br><span class="line"></span><br><span class="line">Missing Open Sources:</span><br><span class="line">---------------------</span><br><span class="line">OpenSSH: Was not found</span><br><span class="line">net-snmp: Was not found</span><br><span class="line">libxml2: Was not found</span><br><span class="line">libtiff: Was not found</span><br><span class="line">MAC-Telnet: Was not found</span><br><span class="line"></span><br><span class="line">Final Note - Karta</span><br><span class="line">------------------</span><br><span class="line">If you encountered any bug, or wanted to add a new extension / feature, don&#x27;t hesitate to contact us on GitHub:</span><br><span class="line">https://github.com/CheckPointSW/Karta</span><br></pre></td></tr></table></figure></li>
+<li><code>karta_manual_anchor.py</code> for defining “manual anchors”:  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ python karta_manual_anchor.py --<span class="built_in">help</span></span><br><span class="line">usage: karta_manual_anchor.py [-h] [-D] [-W] bin lib-name lib-version configs</span><br><span class="line"></span><br><span class="line">Enables the user to manually defined matches, acting as manual anchors, later</span><br><span class="line">to be used by Karta<span class="string">&#x27;s Matcher.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">positional arguments:</span></span><br><span class="line"><span class="string">bin            path to the disassembler&#x27;</span>s database <span class="keyword">for</span> the wanted binary</span><br><span class="line">lib-name       name (<span class="keyword">case</span> sensitive) of the relevant open <span class="built_in">source</span> library</span><br><span class="line">lib-version    version string (<span class="keyword">case</span> sensitive) as used by the identifier</span><br><span class="line">configs        path to the *.json <span class="string">&quot;configs&quot;</span> directory</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">-h, --<span class="built_in">help</span>     show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">-D, --debug    <span class="built_in">set</span> logging level to logging.DEBUG</span><br><span class="line">-W, --windows  signals that the binary was compiled <span class="keyword">for</span> Windows</span><br></pre></td></tr></table></figure></li>
+<li>other scripts: <code>karta_manual_identifier.py</code>, <code>karta_matcher.py</code>, …</li>
+</ul>
+<h3 id="OpenSCA-Cli"><a href="#OpenSCA-Cli" class="headerlink" title="OpenSCA-Cli"></a>OpenSCA-Cli</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/XmirrorSecurity/OpenSCA-cli" >OpenSCA<i class="fas fa-external-link-alt"></i></a> is intended for scanning the third-party component dependencies and vulnerabilities.</p>
+<p>Download <a class="link"   target="_blank" rel="noopener" href="https://github.com/XmirrorSecurity/OpenSCA-cli/releases" >github releases<i class="fas fa-external-link-alt"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://gitee.com/XmirrorSecurity/OpenSCA-cli/releases" >gitee releases<i class="fas fa-external-link-alt"></i></a> to use.<br>For detecting the component information only:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ opensca-cli -path <span class="variable">$&#123;project_path&#125;</span></span><br></pre></td></tr></table></figure>
+<p>For connecting to the cloud platform (visit <a class="link"   target="_blank" rel="noopener" href="https://opensca.xmirror.cn/" >opensca.xmirror.cn<i class="fas fa-external-link-alt"></i></a> for token first):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ opensca-cli -url <span class="variable">$&#123;url&#125;</span> -token <span class="variable">$&#123;token&#125;</span> -path <span class="variable">$&#123;project_path&#125;</span></span><br><span class="line">$ opensca-cli -url https://opensca.xmirror.cn -token <span class="variable">$&#123;token&#125;</span> -path <span class="variable">$&#123;project_path&#125;</span> -out output.json</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Or for using the local vulnerability database:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ opensca-cli -db db.json -path <span class="variable">$&#123;project_path&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Pigaios"><a href="#Pigaios" class="headerlink" title="Pigaios"></a>Pigaios</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/joxeankoret/pigaios" >Pigaios<i class="fas fa-external-link-alt"></i></a> (‘πηγαίος’, Greek for ‘source’ as in ‘source code’) is a tool for diffing&#x2F;matching source codes directly against binaries.</p>
+<p>It can match binaries with source regardless of it being compilable or not, using Python CLang bindings to match, and import IDA symbols . However if source can be compiled easily, <a class="link"   target="_blank" rel="noopener" href="https://github.com/joxeankoret/diaphora" >Diaphora<i class="fas fa-external-link-alt"></i></a> might be preferred.</p>
+<p>Install requirements first (my env: kali-rolling, python 3.10, LLVM-14, IDA 7.7):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install clang python3-clang libclang-dev python-colorama python-sklearn</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ pip install clang</span><br><span class="line">$ pip install colorama</span><br><span class="line">$ pip install scikit-learn</span><br></pre></td></tr></table></figure>
+<p>Choose <a class="link"   target="_blank" rel="noopener" href="https://zlib.net/zlib-1.2.13.tar.gz" >Zlib 1.2.13<i class="fas fa-external-link-alt"></i></a> as an example, first generate code signature database.</p>
+<p>Step 1: generate project file <code>sbd.project</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://zlib.net/zlib-1.2.13.tar.gz</span><br><span class="line">$ tar -xzf zlib-1.2.13.tar.gz </span><br><span class="line">$ <span class="built_in">cd</span> zlib-1.2.13</span><br><span class="line"></span><br><span class="line">$ python /path/to/srcbindiff.py -create</span><br><span class="line">Project file <span class="string">&#x27;sbd.project&#x27;</span> created.</span><br><span class="line"></span><br><span class="line">$ cat sbd.project</span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line"><span class="comment"># Default Source-Binary-Differ project configuration</span></span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line">[GENERAL]</span><br><span class="line">includes = /usr/lib/llvm-14/lib/clang/14.0.6/include</span><br><span class="line">inlines = 0</span><br><span class="line"></span><br><span class="line">[PROJECT]</span><br><span class="line">cflags = -I. -I./include</span><br><span class="line">cxxflags = -I. -I./include</span><br><span class="line">export-file = zlib-1.2.13.sqlite</span><br><span class="line">export-header = zlib-1.2.13-exported.h</span><br><span class="line">export-indent = clang-format -i</span><br><span class="line"></span><br><span class="line">[FILES]</span><br><span class="line">contrib/blast/blast.c = 1</span><br><span class="line">contrib/infback9/infback9.c = 1</span><br><span class="line">contrib/infback9/inftree9.c = 1</span><br><span class="line">contrib/iostream/test.cpp = 1</span><br><span class="line">contrib/iostream/zfstream.cpp = 1</span><br><span class="line">contrib/iostream2/zstream_test.cpp = 1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Step 2: generate sqlite database <code>zlib-1.2.13.sqlite</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">$ python /path/to/srcbindiff.py --no-parallel -<span class="built_in">export</span>    <span class="comment"># parallel also work</span></span><br><span class="line">[i] Removing existing file zlib-1.2.13.sqlite</span><br><span class="line">[+] CC contrib/blast/blast.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">[+] CC contrib/infback9/infback9.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">[+] CC contrib/infback9/inftree9.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">[+] CXX contrib/iostream/test.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6/include ..</span><br><span class="line">contrib/iostream/zfstream.h:5,10: fatal: <span class="string">&#x27;fstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream/zfstream.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6/incl..</span><br><span class="line">contrib/iostream/zfstream.h:5,10: fatal: <span class="string">&#x27;fstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream2/zstream_test.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6..</span><br><span class="line">contrib/iostream2/zstream.h:27,10: fatal: <span class="string">&#x27;strstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream3/test.cc -I/usr/lib/llvm-14/lib/clang/14.0.6/include ..</span><br><span class="line">[+] CXX contrib/iostream3/zfstream.cc -I/usr/lib/llvm-14/lib/clang/14.0.6/incl..</span><br><span class="line">[+] CC contrib/minizip/ioapi.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/minizip/iowin32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">contrib/minizip/iowin32.h:14,10: fatal: <span class="string">&#x27;windows.h&#x27;</span> file not found</span><br><span class="line">[+] CC contrib/minizip/miniunz.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/minizip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/mztools.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/unzip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/minizip/zip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">[+] CC contrib/puff/puff.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I...</span><br><span class="line">[+] CC contrib/puff/pufftest.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/testzlib/testzlib.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">contrib/testzlib/testzlib.c:3,10: fatal: <span class="string">&#x27;windows.h&#x27;</span> file not found</span><br><span class="line">[+] CC contrib/untgz/untgz.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">contrib/untgz/untgz.c:277,7: warning: implicit declaration of <span class="keyword">function</span> <span class="string">&#x27;chmod&#x27;</span>..</span><br><span class="line">contrib/untgz/untgz.c:341,7: warning: implicit declaration of <span class="keyword">function</span> <span class="string">&#x27;mkdir&#x27;</span>..</span><br><span class="line">contrib/untgz/untgz.c:659,11: warning: incompatible pointer types assigning to..</span><br><span class="line">contrib/untgz/untgz.c:665,18: warning: incompatible pointer types passing <span class="string">&#x27;gzF..</span></span><br><span class="line"><span class="string">[+] CC examples/enough.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/fitblk.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/gun.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./incl..</span></span><br><span class="line"><span class="string">[+] CC examples/gzappend.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I...</span></span><br><span class="line"><span class="string">[+] CC examples/gzjoin.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/gzlog.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./in..</span></span><br><span class="line"><span class="string">[+] CC examples/gznorm.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/zpipe.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./in..</span></span><br><span class="line"><span class="string">[+] CC examples/zran.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC test/example.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./incl..</span></span><br><span class="line"><span class="string">[+] CC test/infcover.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC test/minigzip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC adler32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC compress.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC crc32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC deflate.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzclose.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzlib.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzread.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzwrite.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC infback.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inffast.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inflate.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inftrees.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC trees.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC uncompr.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC ztest19.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC zutil.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] Building definitions...</span></span><br><span class="line"><span class="string">[+] Building the callgraphs...</span></span><br><span class="line"><span class="string">[+] Building the constants table...</span></span><br><span class="line"><span class="string">[+] Creating indexes...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">4 warning(s), 0 error(s), 5 fatal error(s)</span></span><br></pre></td></tr></table></figure>
+<p>We can open this sqlite db file</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sqlite3 zlib-1.2.13.sqlite</span><br><span class="line">SQLite version 3.40.0 2022-11-16 12:10:08</span><br><span class="line">Enter <span class="string">&quot;.help&quot;</span> <span class="keyword">for</span> usage hints.</span><br><span class="line">sqlite&gt; select name from <span class="built_in">functions</span> <span class="built_in">limit</span> 5;</span><br><span class="line">BeginCountPerfCounter</span><br><span class="line">BeginCountRdtsc</span><br><span class="line">Display64BitsSize</span><br><span class="line">ExprMatch</span><br><span class="line">ExprMatch</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure>
+<p>Finally use IDA to match binary with source. Take busybox installed from kali-rolling apt repo as an example, as it uses functions in zlib.<br><code>File</code> -&gt; <code>Script File...</code> to choose script <code>sourceimp_ida.py</code><br><img src="/imghost/bsrt/pigaios1.jpg" alt="pigaios sourceimp_ida.py panel"></p>
+<p>choose right sqlite file, and we can see the result<br><img src="/imghost/bsrt/pigaios2.jpg" alt="pigaios match result"></p>
+<p>We can even visually diffing the pseudo-code of functions, like function <code>gzopen</code><br><img src="/imghost/bsrt/pigaios3.jpg" alt="pigaios pseudo-code diffing"></p>
+<p>We can also see match reasons<br><img src="/imghost/bsrt/pigaios4.jpg" alt="pigaios match reasons"></p>
+<p>…</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/note/">#note</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/windows/">#windows</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/SCA/">#SCA</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2022/11/20/2022-11-20-LLVM-Commands/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">LLVM Commands</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recover-Symbols-for-Stripped-Binaries"><span class="nav-number">1.</span> <span class="nav-text">Recover Symbols for Stripped Binaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-Pro-FLIRT"><span class="nav-number">1.1.</span> <span class="nav-text">IDA Pro FLIRT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepare-Sig-Files"><span class="nav-number">1.1.1.</span> <span class="nav-text">Prepare Sig Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">1.1.2.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finger"><span class="nav-number">1.2.</span> <span class="nav-text">Finger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rizzo"><span class="nav-number">1.3.</span> <span class="nav-text">Rizzo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinDiff-and-Diaphora"><span class="nav-number">1.4.</span> <span class="nav-text">BinDiff and Diaphora</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinaryAI"><span class="nav-number">1.5.</span> <span class="nav-text">BinaryAI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCA-Software-Composition-Analysis-Tools"><span class="nav-number">2.</span> <span class="nav-text">SCA (Software Composition Analysis) Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Karta"><span class="nav-number">2.1.</span> <span class="nav-text">Karta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSCA-Cli"><span class="nav-number">2.2.</span> <span class="nav-text">OpenSCA-Cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pigaios"><span class="nav-number">2.3.</span> <span class="nav-text">Pigaios</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.0</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        $icon-size = 1.2rem
+$search-header-height = 3rem
+
+.search-pop-overlay {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-8
+  display flex
+  width 100%
+  height 100%
+  background rgba(0, 0, 0, 0)
+  visibility hidden
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease")
+
+  &.active {
+    background rgba(0, 0, 0, 0.35)
+    visibility visible
+
+    .search-popup {
+      transform scale(1)
+    }
+  }
+
+
+  .search-popup {
+    z-index $z-index-6
+    width 70%
+    height 80%
+    margin auto
+    background var(--background-color-1)
+    border-radius 0.4rem
+    transform scale(0)
+    transition-t("transform", "0", "0.3", "ease")
+
+    +keep-tablet() {
+      width 80%
+    }
+
+    +keep-mobile() {
+      width 90%
+    }
+
+    .search-header {
+      display flex
+      align-items center
+      height $search-header-height
+      padding 0 1rem
+      background var(--text-color-6)
+      border-top-left-radius 0.2rem
+      border-top-right-radius 0.2rem
+
+      .search-input-field-pre {
+        margin-right 0.2rem
+        color var(--text-color-3)
+        font-size 1.3rem
+        cursor pointer
+      }
+
+      .search-input-container {
+        flex-grow 1
+        padding 0.2rem
+
+        .search-input {
+          width 100%
+          color var(--text-color-3)
+          font-size 1.2rem
+          background transparent
+          border 0
+          outline 0
+
+          &::-webkit-search-cancel-button {
+            display none
+          }
+
+          &::-webkit-input-placeholder {
+            color var(--text-color-4)
+            font-size 1rem
+          }
+        }
+      }
+
+
+      .close-popup-btn {
+        color var(--text-color-3)
+        font-size $icon-size
+        cursor pointer
+
+        &:hover {
+          color var(--text-color-1)
+        }
+      }
+    }
+
+
+    #search-result {
+      position relative
+      display flex
+      box-sizing border-box
+      height 'calc(100% - %s)' % $search-header-height
+      padding 0.3rem 1.5rem
+      overflow auto
+
+      .search-result-list {
+        width 100%
+        height 100%
+        font-size 1rem
+
+        li {
+          box-sizing border-box
+          margin 0.8rem 0
+          padding 0.8rem 0
+          border-bottom 0.1rem dashed var(--border-color)
+
+          &:last-child {
+            border-bottom none
+          }
+
+
+          .search-result-title {
+            position relative
+            display flex
+            align-items center
+            margin-bottom 0.8rem
+            padding-left 1rem
+            font-weight bold
+
+            &::after {
+              position absolute
+              top 50%
+              left 0
+              width 0.4rem
+              height 0.4rem
+              background var(--text-color-3)
+              border-radius 50%
+              transform translateY(-50%)
+              content ''
+            }
+          }
+
+
+          .search-result {
+            margin 0
+            padding-left 1rem
+            line-height 2rem
+            word-wrap break-word
+          }
+
+          a {
+            &:hover {
+              color var(--text-color-3)
+            }
+          }
+
+          .search-keyword {
+            color var(--primary-color)
+            font-weight bold
+            border-bottom 0.1rem dashed var(--primary-color)
+          }
+        }
+      }
+
+
+      #no-result {
+        margin auto
+        color var(--text-color-4)
+      }
+    }
+  }
+}
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>
