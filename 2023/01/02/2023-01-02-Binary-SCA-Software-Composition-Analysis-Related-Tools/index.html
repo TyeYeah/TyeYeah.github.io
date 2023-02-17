@@ -210,7 +210,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-01-11 13:34:07</span>
+        <span class="pc">2023-02-17 08:00:39</span>
     </span>
     
     
@@ -231,11 +231,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
+                        <a href="/tags/note/">note</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/note/">note</a>&nbsp;
+                        | <a href="/tags/linux/">linux</a>&nbsp;
                     </li>
                 
                     <li>
@@ -253,12 +253,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>3k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>18 Mins</span>
         </span>
     
     
@@ -348,7 +348,21 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 <p>choose right sqlite file, and we can see the result<br><img src="/imghost/bsrt/pigaios2.jpg" alt="pigaios match result"></p>
 <p>We can even visually diffing the pseudo-code of functions, like function <code>gzopen</code><br><img src="/imghost/bsrt/pigaios3.jpg" alt="pigaios pseudo-code diffing"></p>
 <p>We can also see match reasons<br><img src="/imghost/bsrt/pigaios4.jpg" alt="pigaios match reasons"></p>
-<p>…</p>
+<h3 id="CycloneDX-Dependency-Track-not-for-Binary-but-Open-source"><a href="#CycloneDX-Dependency-Track-not-for-Binary-but-Open-source" class="headerlink" title="CycloneDX + Dependency-Track, not for Binary but Open source"></a>CycloneDX + Dependency-Track, not for Binary but Open source</h3><p>Nowadays SCA tools are mostly commercial and not free open source, but we can get support from community and OWASP.</p>
+<p>As companies use multiple languages to develop, SCA tools should cover multi-langs like <code>Java</code>, <code>Golang</code>, <code>Python</code> and  <code>NodeJS</code>.<br>By analysing files like <code>pom.xml</code>, <code>go.mod</code>, <code>requirements.txt</code> and <code>yarn.lock</code> to extract name&#x2F;version of third parties from key parameters, we can achieve software composition analysis.<br>SCA tools should also be convenient to embed in existing <code>DevOps</code> process, and an updating vuln database is needed, which crawling <code>OSSIndex</code>, <code>NVD</code>, <code>NPM</code> and <code>CPE</code>.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://cyclonedx.org/" >CycloneDX<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://dependencytrack.org/" >Dependency-Track<i class="fas fa-external-link-alt"></i></a> are both from OWASP.<br>OWASP <code>CycloneDX</code> is a full-stack Bill of Materials (BOM) standard that provides advanced supply chain capabilities for cyber risk reduction, in a word, it creates BOM for projects.<br>OWASP <code>Dependency-Track</code> is a continuous SBOM analysis platform that allows organizations to identify and reduce risk in the software supply chain, it accepts BOM and does vulnerability analysis.</p>
+<h4 id="CycloneDX"><a href="#CycloneDX" class="headerlink" title="CycloneDX"></a>CycloneDX</h4><p><code>CycloneDX</code> has its own <a class="link"   target="_blank" rel="noopener" href="https://github.com/CycloneDX" >github repos<i class="fas fa-external-link-alt"></i></a> and various plugins for different language projects, like <a class="link"   target="_blank" rel="noopener" href="https://github.com/CycloneDX/cyclonedx-maven-plugin" >CycloneDX Maven Plugin<i class="fas fa-external-link-alt"></i></a> for <code>Java</code> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/CycloneDX/cyclonedx-gomod" >cyclonedx-gomod<i class="fas fa-external-link-alt"></i></a> for <code>Golang</code>, usages can be found in <code>README</code> and all their results are SBOM for the project.</p>
+<h4 id="Dependency-Track"><a href="#Dependency-Track" class="headerlink" title="Dependency-Track"></a>Dependency-Track</h4><p><code>Dependency-Track</code> also has its own <a class="link"   target="_blank" rel="noopener" href="https://github.com/DependencyTrack" >github repos<i class="fas fa-external-link-alt"></i></a> and we can setup according to <a class="link"   target="_blank" rel="noopener" href="https://docs.dependencytrack.org/getting-started/deploy-docker/" >docs<i class="fas fa-external-link-alt"></i></a>. Deploying with docker container and executable war are both available, here I use <code>jar</code> bundle to run.</p>
+<p>First download in <a class="link"   target="_blank" rel="noopener" href="https://github.com/DependencyTrack/dependency-track/releases" >releases page<i class="fas fa-external-link-alt"></i></a>. The <code>dependency-track-apiserver.jar</code> should be used with <a class="link"   target="_blank" rel="noopener" href="https://github.com/DependencyTrack/frontend" >frontend<i class="fas fa-external-link-alt"></i></a>, and I use <code>dependency-track-bundled.jar</code> which can be used independently. </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar  dependency-track-bundled.jar</span><br><span class="line"><span class="comment"># visit on http://localhost:8080</span></span><br><span class="line"><span class="comment"># admin/admin to login, change passwd first</span></span><br></pre></td></tr></table></figure>
+<p><img src="/imghost/bsrt/dependency-track1.jpg" alt="dependency-track login"></p>
+<p>After login, setup a project for testing<br><img src="/imghost/bsrt/dependency-track2.jpg" alt="dependency-track project"></p>
+<p>Upload BOM in <code>Components</code> tab to analyze, here we upload the <code>bom.json</code> in <a class="link"   target="_blank" rel="noopener" href="https://github.com/DependencyTrack/dependency-track/releases" >releases page<i class="fas fa-external-link-alt"></i></a><br><img src="/imghost/bsrt/dependency-track3.jpg" alt="dependency-track upload BOM"></p>
+<p>Finally we get SCA result<br><img src="/imghost/bsrt/dependency-track4.jpg" alt="dependency-track SCA result"></p>
+<p>It includes all recognized components, and indexes their potential vulnerabilities.</p>
+<h4 id="More"><a href="#More" class="headerlink" title="More"></a>More</h4><p>For DevOps, like for <code>Jenkins</code>, it has <a class="link"   target="_blank" rel="noopener" href="https://plugins.jenkins.io/dependency-track/" >dependency-track plugin<i class="fas fa-external-link-alt"></i></a>, and add commands of <code>Cyclonedx</code> to building routine can generate SBOM everytime you build the release.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jeremylong/DependencyCheck" >Dependency-Check<i class="fas fa-external-link-alt"></i></a> is also a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries.<br>It also has <a target="_blank" rel="noopener" href="https://plugins.jenkins.io/dependency-check-jenkins-plugin/"><code>Jenkins</code> plugin</a> to use.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://snyk.io/" >Synk<i class="fas fa-external-link-alt"></i></a> is another SCA scanner, which provides more accurate service than <code>Dependency-Check</code>, but it is not open source and needs token authentication.</p>
 
             </div>
 
@@ -358,11 +372,11 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/linux/">#linux</a>&nbsp;
+                            <a href="/tags/note/">#note</a>&nbsp;
                         </li>
                     
                         <li class="tag-item">
-                            <a href="/tags/note/">#note</a>&nbsp;
+                            <a href="/tags/linux/">#linux</a>&nbsp;
                         </li>
                     
                         <li class="tag-item">
@@ -378,6 +392,21 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 
             
                 <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/02/07/Binary-Code-Similarity-Detection-Papers-Part2/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Binary Code Similarity Detection Papers (Part2)</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
                     
                     
                         <div class="article-next">
@@ -405,7 +434,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recover-Symbols-for-Stripped-Binaries"><span class="nav-number">1.</span> <span class="nav-text">Recover Symbols for Stripped Binaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-Pro-FLIRT"><span class="nav-number">1.1.</span> <span class="nav-text">IDA Pro FLIRT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepare-Sig-Files"><span class="nav-number">1.1.1.</span> <span class="nav-text">Prepare Sig Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">1.1.2.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finger"><span class="nav-number">1.2.</span> <span class="nav-text">Finger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rizzo"><span class="nav-number">1.3.</span> <span class="nav-text">Rizzo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinDiff-and-Diaphora"><span class="nav-number">1.4.</span> <span class="nav-text">BinDiff and Diaphora</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinaryAI"><span class="nav-number">1.5.</span> <span class="nav-text">BinaryAI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCA-Software-Composition-Analysis-Tools"><span class="nav-number">2.</span> <span class="nav-text">SCA (Software Composition Analysis) Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Karta"><span class="nav-number">2.1.</span> <span class="nav-text">Karta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSCA-Cli"><span class="nav-number">2.2.</span> <span class="nav-text">OpenSCA-Cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pigaios"><span class="nav-number">2.3.</span> <span class="nav-text">Pigaios</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Recover-Symbols-for-Stripped-Binaries"><span class="nav-number">1.</span> <span class="nav-text">Recover Symbols for Stripped Binaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-Pro-FLIRT"><span class="nav-number">1.1.</span> <span class="nav-text">IDA Pro FLIRT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prepare-Sig-Files"><span class="nav-number">1.1.1.</span> <span class="nav-text">Prepare Sig Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">1.1.2.</span> <span class="nav-text">Usage</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finger"><span class="nav-number">1.2.</span> <span class="nav-text">Finger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rizzo"><span class="nav-number">1.3.</span> <span class="nav-text">Rizzo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinDiff-and-Diaphora"><span class="nav-number">1.4.</span> <span class="nav-text">BinDiff and Diaphora</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BinaryAI"><span class="nav-number">1.5.</span> <span class="nav-text">BinaryAI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCA-Software-Composition-Analysis-Tools"><span class="nav-number">2.</span> <span class="nav-text">SCA (Software Composition Analysis) Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Karta"><span class="nav-number">2.1.</span> <span class="nav-text">Karta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSCA-Cli"><span class="nav-number">2.2.</span> <span class="nav-text">OpenSCA-Cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pigaios"><span class="nav-number">2.3.</span> <span class="nav-text">Pigaios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CycloneDX-Dependency-Track-not-for-Binary-but-Open-source"><span class="nav-number">2.4.</span> <span class="nav-text">CycloneDX + Dependency-Track, not for Binary but Open source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CycloneDX"><span class="nav-number">2.4.1.</span> <span class="nav-text">CycloneDX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependency-Track"><span class="nav-number">2.4.2.</span> <span class="nav-text">Dependency-Track</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#More"><span class="nav-number">2.4.3.</span> <span class="nav-text">More</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
@@ -512,177 +541,33 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 
 
     
-        $icon-size = 1.2rem
-$search-header-height = 3rem
-
-.search-pop-overlay {
-  position fixed
-  top 0
-  left 0
-  z-index $z-index-8
-  display flex
-  width 100%
-  height 100%
-  background rgba(0, 0, 0, 0)
-  visibility hidden
-  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease")
-
-  &.active {
-    background rgba(0, 0, 0, 0.35)
-    visibility visible
-
-    .search-popup {
-      transform scale(1)
-    }
-  }
-
-
-  .search-popup {
-    z-index $z-index-6
-    width 70%
-    height 80%
-    margin auto
-    background var(--background-color-1)
-    border-radius 0.4rem
-    transform scale(0)
-    transition-t("transform", "0", "0.3", "ease")
-
-    +keep-tablet() {
-      width 80%
-    }
-
-    +keep-mobile() {
-      width 90%
-    }
-
-    .search-header {
-      display flex
-      align-items center
-      height $search-header-height
-      padding 0 1rem
-      background var(--text-color-6)
-      border-top-left-radius 0.2rem
-      border-top-right-radius 0.2rem
-
-      .search-input-field-pre {
-        margin-right 0.2rem
-        color var(--text-color-3)
-        font-size 1.3rem
-        cursor pointer
-      }
-
-      .search-input-container {
-        flex-grow 1
-        padding 0.2rem
-
-        .search-input {
-          width 100%
-          color var(--text-color-3)
-          font-size 1.2rem
-          background transparent
-          border 0
-          outline 0
-
-          &::-webkit-search-cancel-button {
-            display none
-          }
-
-          &::-webkit-input-placeholder {
-            color var(--text-color-4)
-            font-size 1rem
-          }
-        }
-      }
-
-
-      .close-popup-btn {
-        color var(--text-color-3)
-        font-size $icon-size
-        cursor pointer
-
-        &:hover {
-          color var(--text-color-1)
-        }
-      }
-    }
-
-
-    #search-result {
-      position relative
-      display flex
-      box-sizing border-box
-      height 'calc(100% - %s)' % $search-header-height
-      padding 0.3rem 1.5rem
-      overflow auto
-
-      .search-result-list {
-        width 100%
-        height 100%
-        font-size 1rem
-
-        li {
-          box-sizing border-box
-          margin 0.8rem 0
-          padding 0.8rem 0
-          border-bottom 0.1rem dashed var(--border-color)
-
-          &:last-child {
-            border-bottom none
-          }
-
-
-          .search-result-title {
-            position relative
-            display flex
-            align-items center
-            margin-bottom 0.8rem
-            padding-left 1rem
-            font-weight bold
-
-            &::after {
-              position absolute
-              top 50%
-              left 0
-              width 0.4rem
-              height 0.4rem
-              background var(--text-color-3)
-              border-radius 50%
-              transform translateY(-50%)
-              content ''
-            }
-          }
-
-
-          .search-result {
-            margin 0
-            padding-left 1rem
-            line-height 2rem
-            word-wrap break-word
-          }
-
-          a {
-            &:hover {
-              color var(--text-color-3)
-            }
-          }
-
-          .search-keyword {
-            color var(--primary-color)
-            font-weight bold
-            border-bottom 0.1rem dashed var(--primary-color)
-          }
-        }
-      }
-
-
-      #no-result {
-        margin auto
-        color var(--text-color-4)
-      }
-    }
-  }
-}
-
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
     
 
