@@ -210,7 +210,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-02-17 20:09:50</span>
+        <span class="pc">2023-05-09 21:21:07</span>
     </span>
     
     
@@ -249,12 +249,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
         </span>
     
     
@@ -325,6 +325,7 @@
 <li>delay time of TPCs (when to adopt latest TPCs)</li>
 <li>license violations</li>
 </ul>
+<p><img src="/./imghost/bcsdpp/firmsec.jpg" alt="Architecture of FirmSec"></p>
 <h2 id="An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><a href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem" class="headerlink" title="An Investigation of the Android Kernel Patch Ecosystem"></a>An Investigation of the Android Kernel Patch Ecosystem</h2><table>
 <thead>
 <tr>
@@ -343,6 +344,7 @@
 <td></td>
 </tr>
 </tbody></table>
+<p><img src="/./imghost/bcsdpp/androideco.jpg" alt="Android ecosystem for kernel version 4.4"></p>
 <p>improve a state-of-the-art source-to-binary patch presence test tool.</p>
 <p>conduct a large-scale measurement.</p>
 <ul>
@@ -367,6 +369,7 @@
 </ul>
 </li>
 </ul>
+<p><img src="/./imghost/bcsdpp/androidpipe.jpg" alt="Measurement pipeline"></p>
 <p>explain the causes of patch delays, also distill takeaways and potential prescriptive solutions to improve the current situation.<br>knowledge of a security vulnerability is lacking, kernel branch drifted.</p>
 <h2 id="Binary-Code-Similarity-Detection"><a href="#Binary-Code-Similarity-Detection" class="headerlink" title="Binary Code Similarity Detection"></a>Binary Code Similarity Detection</h2><table>
 <thead>
@@ -386,6 +389,7 @@
 <li>Last, it compares the symbolic graph similarity.<br> check node similarity, and context (neighbor nodes) similarity</li>
 <li>also address some problems, including path explosion and loop handling.</li>
 </ol>
+<p><img src="/./imghost/bcsdpp/bcsdkeyir.jpg" alt="Key IR graph comparison"></p>
 <h2 id="Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><a href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation" class="headerlink" title="Binary Diffing as a Network Alignment Problem via Belief Propagation"></a>Binary Diffing as a Network Alignment Problem via Belief Propagation</h2><table>
 <thead>
 <tr>
@@ -398,7 +402,16 @@
 </thead>
 </table>
 <p>leverage a graph edit formulation of binary diffing: find the optimal transformation of two graphs.<br>it is equivalent to a network alignment problem.<br>propose an efficient approximate solver of this problem based on max-product belief propagation.</p>
-<p>compared with Gemini, GraphMatching(Network) and DeepBinDiff</p>
+<p>compared with Gemini, GraphMatching(Network) and DeepBinDiff<br><img src="/./imghost/bcsdpp/binarydiffing.jpg" alt="Binary diffing as an alignment of call graphs"></p>
+<h2 id="COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022"><a href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022" class="headerlink" title="COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022"></a>COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</h2><p>propose a COntrastive learning Model for Binary cOde Analysis, or COMBO, that incorporates source code and comment information into binary code during representation learning.</p>
+<p>Specifically, we present three components in COMBO: </p>
+<ol>
+<li>a primary <code>contrastive learning</code> method for cold-start pre-training, </li>
+<li>a simplex interpolation method to incorporate <code>source</code> code, <code>comments</code>, and <code>binary</code> code, and </li>
+<li>an intermediate representation learning algorithm to provide binary code <code>embeddings</code>.</li>
+</ol>
+<p>what is weird, is that it compared with codebert and graphcodebert (they are source code releated lang model)</p>
+<p><img src="/./imghost/bcsdpp/combo.jpg" alt="Diagram of simplex interpolation and intermediate representation learning in COMBO"></p>
 <h2 id="jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><a href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection" class="headerlink" title="jTrans: Jump-Aware Transformer for Binary Code Similarity Detection"></a>jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</h2><table>
 <thead>
 <tr>
@@ -411,6 +424,7 @@
 </thead>
 </table>
 <p>the first solution that embeds control flow information of binary code into Transformer-based language models, by using a novel jump-aware representation of the analyzed binaries and a newly-designed pre-training task</p>
+<p><img src="/./imghost/bcsdpp/jtrans.jpg" alt="Input representation of jTrans"></p>
 <h2 id="Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><a href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning" class="headerlink" title="Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning"></a>Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</h2><table>
 <thead>
 <tr>
@@ -439,6 +453,10 @@
 <li>Fine-tuner<br> we leverage a Siamese neural network into a classifier, learning a weighted distance<br> defines a loss function as a binary cross entropy for binary classification</li>
 <li>Predictor</li>
 </ol>
+<p><img src="/./imghost/bcsdpp/binshot.jpg" alt="The overall workflow of BinShot that consists of four components"></p>
+<h2 id="Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020"><a href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020" class="headerlink" title="Semantically find similar binary codes with mixed key instruction sequence – IST 2020"></a>Semantically find similar binary codes with mixed key instruction sequence – IST 2020</h2><p>This paper proposes a new binary code similarity comparison method based on the mixed key instruction sequence (<code>MKIS</code>), which contains both <code>API calls</code> and <code>key values</code> (insts that does not change in multiple runs).</p>
+<p>MKIS calculates the <code>similarity</code> between p(plaintiff) and s(suspect) through <code>lcs(Longest common subsequence)</code>, uses the transfer matrix, based on MKIS (executed insts) sequences.</p>
+<p><img src="/./imghost/bcsdpp/mkis.jpg" alt="Mixed key-instruction based similarity comparison flow chart"></p>
 <h2 id="Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><a href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities" class="headerlink" title="Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities"></a>Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</h2><table>
 <thead>
 <tr>
@@ -454,6 +472,43 @@
 <p>For a given set of known vulnerabilities, the <code>taint analysis</code> extracts <code>vulnerable traces</code> and establishes a <code>signature database</code> of them.<br>When a new unseen program is analyzed, Tracer <code>compares</code> all potentially vulnerable traces reported by the analysis with the known vulnerability signatures.<br>Then, Tracer reports a list of potential vulnerabilities ranked by the similarity score.</p>
 <p>While the <code>essence</code> of the vulnerability is still the <code>same</code>, the <code>different</code> code <code>structure</code> of libXcursor fundamentally <code>hinders</code> the detectability of the tools.</p>
 <p>Taint Analysis.<br>    Taint analysis computes <code>potential data flows</code> from untrusted inputs (<code>sources</code>) to sensitive functions (<code>sinks</code>) with a <code>simple abstract domain</code> for tainted values.<br>Traces on Data Dependency Graphs.<br>    Tracer extracts vulnerable traces from the source and sink points, and <code>filter</code> out irrelevent statements by deriving vuln traces on <code>DDG</code>(data dependency graph, or maybe <code>DFG</code>?) rather than CFG. same procedure will be applied to new target programs.<br>Feature Representation.<br>    Next, Tracer encodes each trace as an integer feature vector. feature vector consists of <code>low-level</code> and <code>high-level</code> features.<br>    <code>Low-level</code> features represent the <code>frequencies of primitive operators</code>(<code>NumOfOpX</code>) X (e.g., *, &lt;&lt;) and <code>common APIs</code>(<code>NumOfLibX</code>) X (e.g., strlen) on the trace.<br>    high-level features describe detailed behavior of traces, like <code>IfSmallerThanConst</code> checks whether a trace has a <code>conditional statement</code>. They manually designed <code>5</code> high-level features.<br>Similarity Checking.<br>    Since all the traces are encoded as <code>vectors</code>, we can use any common similarity measures – cosine similarity</p>
+<p><img src="/./imghost/bcsdpp/traceroverview.jpg" alt="System overview of Tracer"><br><img src="/./imghost/bcsdpp/tracerexample.jpg" alt="Vulnerable traces and their feature vectors"></p>
+<h2 id="VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><a href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search" class="headerlink" title="VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search"></a>VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.ndss-symposium.org/wp-content/uploads/2023/02/ndss2023_f415_paper.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th>slide</th>
+<th>video</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/RazorMegrez/VulHawk" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>NDSS2023</th>
+</tr>
+</thead>
+</table>
+<p>In this paper, we propose a novel intermediate representation function model, which is an architecture-agnostic model for cross-architecture binary code search.</p>
+<p>Three components:</p>
+<ol>
+<li>intermediate representation function model:<br>lifts binary code into <code>microcode</code>(IDA’s IR), and <code>complements implicit oprands</code>, and <code>prunes redundant instructions</code>, and use NLP + GNN to get function embeddings.</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/vulhawkmicro.jpg" alt="Detailed steps of the instruction simplification"></p>
+<ol start="2">
+<li>entropy-based adapter:<br>call the combination of a compiler, architecture, and optimization level as a <code>file environment</code>, take a <code>divide-and-conquer strategy</code> to divide a similarity calculation problem of C^2_N cross-file-environment scenarios into N - 1 embedding transferring sub-problems (use <code>ResNet</code> to input features and classify as 8 classes, 2 compilers x 4 optimizations).</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/vulhawkentropy.jpg" alt="The diagram of divide-and-conquer strategy"></p>
+<p>propose an <code>entropy-based adapter</code> to transfer function embeddings from different file environments <code>into the same file environment</code>. didn’t see the entropy, but different <code>adapter</code> weights (associated with file env) for <code>ResNet</code> to cal sim&#x2F;embed.</p>
+<ol start="3">
+<li>progressive search strategy:<br>propose a <code>progressive search strategy</code> to supplement function embeddings with fine-grained features to reduce false positives caused by patched functions</li>
+</ol>
+<p>combines two sub-strategies:</p>
+<ul>
+<li>Function Embedding Search (coarse-grained search)</li>
+<li>Similarity Calibration (pairwise similarity calibration)<ul>
+<li>Block-level Features</li>
+<li>String Features</li>
+<li>Imported Functions</li>
+</ul>
+</li>
+</ul>
+<p><img src="/./imghost/bcsdpp/vulhawk.jpg" alt="The overall workflow of VulHawk"></p>
 
             </div>
 
@@ -479,6 +534,21 @@
 
             
                 <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/05/08/Deploy-Some-LLMs/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Deploy Some LLMs</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
                     
                     
                         <div class="article-next">
@@ -506,7 +576,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><span class="nav-number">1.</span> <span class="nav-text">A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><span class="nav-number">2.</span> <span class="nav-text">An Investigation of the Android Kernel Patch Ecosystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Code-Similarity-Detection"><span class="nav-number">3.</span> <span class="nav-text">Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Binary Diffing as a Network Alignment Problem via Belief Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><span class="nav-number">5.</span> <span class="nav-text">jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><span class="nav-number">6.</span> <span class="nav-text">Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><span class="nav-number">7.</span> <span class="nav-text">Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><span class="nav-number">1.</span> <span class="nav-text">A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><span class="nav-number">2.</span> <span class="nav-text">An Investigation of the Android Kernel Patch Ecosystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Code-Similarity-Detection"><span class="nav-number">3.</span> <span class="nav-text">Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Binary Diffing as a Network Alignment Problem via Belief Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-%E2%80%93-Arxiv-2022"><span class="nav-number">5.</span> <span class="nav-text">COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><span class="nav-number">6.</span> <span class="nav-text">jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><span class="nav-number">7.</span> <span class="nav-text">Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-%E2%80%93-IST-2020"><span class="nav-number">8.</span> <span class="nav-text">Semantically find similar binary codes with mixed key instruction sequence – IST 2020</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><span class="nav-number">9.</span> <span class="nav-text">Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><span class="nav-number">10.</span> <span class="nav-text">VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</span></a></li></ol>
     </div>
 </div>
 
