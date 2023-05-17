@@ -177,52 +177,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;domain
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/05/25/2020-05-25-About-Stealing-Credentials/"
-                        >About Stealing Credentials</a>
-                        <span class="article-date">05-25</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/"
-                        >Domain Pentest Intro</a>
-                        <span class="article-date">03-12</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    
-</div>
+  .tag-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
 
-    </div>
-</div>
+    font-weight 600
+    font-size $tag-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 

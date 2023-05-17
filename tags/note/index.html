@@ -177,142 +177,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;note
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/05/08/Deploy-Some-LLMs/"
-                        >Deploy Some LLMs</a>
-                        <span class="article-date">05-08</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
-                        >Binary SCA (Software Composition Analysis) Related Tools</a>
-                        <span class="article-date">01-02</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/11/20/2022-11-20-LLVM-Commands/"
-                        >LLVM Commands</a>
-                        <span class="article-date">11-20</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[5]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
-                        >Attack &amp; Defense Tips</a>
-                        <span class="article-date">11-20</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/03/18/2020-03-18-Collection-for-Package-Source/"
-                        >Collection for Package Sources</a>
-                        <span class="article-date">03-18</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/02/18/2020-02-18-Wine-Tips/"
-                        >Wine Tips</a>
-                        <span class="article-date">02-18</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/02/13/2020-02-13-Virtual-Box-Tips/"
-                        >VirtualBox Tips</a>
-                        <span class="article-date">02-13</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/05/2020-01-05-Game-Tips/"
-                        >Game Tips</a>
-                        <span class="article-date">01-05</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2019</span>
-                <span class="archive-year-post-count">[2]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/12/30/2019-12-30-Customize-New-Featured-Kali-2019-4/"
-                        >Customize New Featured Kali 2019.4</a>
-                        <span class="article-date">12-30</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/08/01/2019-08-01-Try-and-Use-WSL/"
-                        >Try and Use WSL</a>
-                        <span class="article-date">08-01</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    
-        <a class="next btn"
-           href="/tags/note/page/2/"
-        >Next</a>
-    
-</div>
+  .tag-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
 
-    </div>
-</div>
+    font-weight 600
+    font-size $tag-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 

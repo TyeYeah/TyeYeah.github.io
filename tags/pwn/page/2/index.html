@@ -177,126 +177,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;pwn
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2020</span>
-                <span class="archive-year-post-count">[9]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/08/14/2020-08-14-ADWorld-PWN-Challenge-Area-Write-ups-UAF/"
-                        >ADWorld PWN Challenge Area Write-ups (UAF)</a>
-                        <span class="article-date">08-14</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/08/10/2020-08-10-ADWorld-PWN-Challenge-Area-Write-ups-Fmtstr/"
-                        >ADWorld PWN Challenge Area Write-ups (Fmtstr)</a>
-                        <span class="article-date">08-10</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/08/07/2020-08-07-ADWorld-PWN-Challenge-Area-Write-ups-ret2libc/"
-                        >ADWorld PWN Challenge Area Write-ups (ret2libc)</a>
-                        <span class="article-date">08-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text/"
-                        >ADWorld PWN Challenge Area Write-ups (ret2text)</a>
-                        <span class="article-date">07-29</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/24/2020-07-24-ADWorld-PWN-Exercise-Area-Write-ups/"
-                        >ADWorld PWN Exercise Area Write-ups</a>
-                        <span class="article-date">07-24</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/16/2020-07-16-Integer-Overflow-Intro/"
-                        >Integer Overflow Intro</a>
-                        <span class="article-date">07-16</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/"
-                        >Format String Vulnerability Intro</a>
-                        <span class="article-date">07-05</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/23/2020-01-23-Security-Protection-Mechanism/"
-                        >Security Protection Mechanism</a>
-                        <span class="article-date">01-23</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2020/01/11/2020-01-11-QEMU-Intro-and-Network-Configuration/"
-                        >QEMU Intro and Network Configuration</a>
-                        <span class="article-date">01-11</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2019</span>
-                <span class="archive-year-post-count">[1]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2019/10/08/2019-10-08-Python-Sandbox-Challenges/"
-                        >Python Sandbox Challenges</a>
-                        <span class="article-date">10-08</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/tags/pwn/"
-        >Prev</a>
-    
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    
-        <a class="next btn"
-           href="/tags/pwn/page/3/"
-        >Next</a>
-    
-</div>
+  .tag-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
 
-    </div>
-</div>
+    font-weight 600
+    font-size $tag-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 

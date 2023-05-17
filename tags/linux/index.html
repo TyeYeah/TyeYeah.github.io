@@ -177,132 +177,34 @@
             <div class="main-content">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container">
-        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;linux
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2023</span>
-                <span class="archive-year-post-count">[3]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/05/08/Deploy-Some-LLMs/"
-                        >Deploy Some LLMs</a>
-                        <span class="article-date">05-08</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/"
-                        >Binary Code Similarity Detection Papers (Part2)</a>
-                        <span class="article-date">02-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
-                        >Binary SCA (Software Composition Analysis) Related Tools</a>
-                        <span class="article-date">01-02</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[3]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/11/20/2022-11-20-LLVM-Commands/"
-                        >LLVM Commands</a>
-                        <span class="article-date">11-20</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/08/06/2022-08-06-Go-Phishing/"
-                        >Go Phishing!</a>
-                        <span class="article-date">08-06</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/"
-                        >Binary Code Similarity Detection Papers</a>
-                        <span class="article-date">03-26</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2021</span>
-                <span class="archive-year-post-count">[4]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
-                        >Bypass Anti-Virus</a>
-                        <span class="article-date">08-02</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/"
-                        >Handle Pwn Libc and Host a Pwn</a>
-                        <span class="article-date">07-31</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/"
-                        >ARM &amp; MIPS PWN Intro</a>
-                        <span class="article-date">07-30</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/"
-                        >Heap Exploit Intro</a>
-                        <span class="article-date">05-12</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.6rem
 
-        </div>
-    </div>
+.tag-container {
 
-    <div class="tag-paginator">
-        <div class="paginator">
-    
+  keep-container(false, 0, 0, 2rem, 2rem)
 
-    
-        <a class="next btn"
-           href="/tags/linux/page/2/"
-        >Next</a>
-    
-</div>
+  .tag-name {
+    margin-bottom $component-spacing-value
+    padding-bottom 20px
+    color var(--text-color-2)
 
-    </div>
-</div>
+    font-weight 600
+    font-size $tag-name-font-size
+    border-bottom 1px solid var(--border-color)
+
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 
