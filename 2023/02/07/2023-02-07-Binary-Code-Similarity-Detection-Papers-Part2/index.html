@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Binary Code Similarity Detection Papers (Part2) |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/img/wang.svg">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","font_size":null,"font_family":null,"hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":false},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.6.0"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Relish the Moment
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">Binary Code Similarity Detection Papers (Part2)</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/img/aliwangwang.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">TyeYeah</span>
+                            
+                                <span class="author-label">Lv4</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-07 16:47:10</span>
+        <span class="mobile">2023-02-07 16:47</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-05-09 21:21:07</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Papers/">Papers</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/paper/">paper</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/bcsd/">bcsd</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+        </span>
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>Additional list in alphabetical order, including what I’ve read.</p>
+<h2 id="A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><a href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware" class="headerlink" title="A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware"></a>A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.bbge.org/publication/zhao-2022-issta/zhao-2022-issta.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.bbge.org/publication/zhao-2022-issta/slides.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
+<th>video</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.bbge.org/publication/zhao-2022-issta/" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>ISSTA 2022</th>
+</tr>
+</thead>
+</table>
+<p>Challenges:</p>
+<ol>
+<li>Firmware Dataset Construction</li>
+<li>Firmware Processing<ul>
+<li>limitations on dealing with latest&#x2F;customized fs</li>
+<li>monolithic firmware</li>
+</ul>
+</li>
+<li>TPC Detection and Vulnerability Identification</li>
+</ol>
+<p>Contributions:</p>
+<ol>
+<li>largest firmware dataset</li>
+<li>proposed FirmSec</li>
+<li>conduct first large-scale analysis of the vulnerable TPC problem in firmware. We identify 584 TPCs and detect 429 CVEs in 34, 136 firmware images</li>
+</ol>
+<p>FirmSec mainly contains three components: </p>
+<ol>
+<li>firmware collection,<br> implement a web crawler to collect firmware from three sources: <ol>
+<li>Official website; </li>
+<li>FTP site; </li>
+<li>Community. e.g., Xiaomi, from the community, including the related forums and GitHub repositories; </li>
+<li>Private firmware repository.</li>
+</ol>
+</li>
+<li>firmware preprocessing and<br> will process the collected firmware in three steps: <ol>
+<li>filter out the non-firmware files from the raw dataset;<br> Binary Analysis Next Generation (BANG)</li>
+<li>identify the necessary information of firmware;<br> metadata and binwalk</li>
+<li>unpack and disassemble firmware</li>
+</ol>
+</li>
+<li>firmware analysis.<ul>
+<li>TPC Database Construction</li>
+<li>TPC Detection<br>  use customized Gemini, aggregate similarity of ACFGs to compare TPC<br>  use cyclomatic complexity (CC) to evaluate the complexity of a CFG</li>
+<li>Vulnerability Identification<br>  version chekcs -&gt; potential vul</li>
+</ul>
+</li>
+</ol>
+<p>Evaluation: Gemini, BAT, OSSPolice</p>
+<ul>
+<li>firmware vulnerability</li>
+<li>geographical distribution</li>
+<li>delay time of TPCs (when to adopt latest TPCs)</li>
+<li>license violations</li>
+</ul>
+<p><img src="/./imghost/bcsdpp/firmsec.jpg" alt="Architecture of FirmSec"></p>
+<h2 id="An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><a href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem" class="headerlink" title="An Investigation of the Android Kernel Patch Ecosystem"></a>An Investigation of the Android Kernel Patch Ecosystem</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.usenix.org/system/files/sec21-zhang-zheng.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.usenix.org/system/files/sec21_slides_zhang-zheng.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
+<th>video</th>
+<th>repo</th>
+<th>Usenix Security 2021</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>investigate the unique Android kernel ecosystem that is decentralized and fragmented.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/./imghost/bcsdpp/androideco.jpg" alt="Android ecosystem for kernel version 4.4"></p>
+<p>improve a state-of-the-art source-to-binary patch presence test tool.</p>
+<p>conduct a large-scale measurement.</p>
+<ul>
+<li>three different types of kernels:<ul>
+<li>type 1: repositories (git)</li>
+<li>type 2: source code snapshots (without commit history)</li>
+<li>type 3: binary (most available, firmware images or ROMs)</li>
+</ul>
+</li>
+<li>measurement pipeline<ul>
+<li>crawler -&gt; CVE &amp; patch commit</li>
+<li>patch locator -&gt; for type 1<br>  determine if a given <code>patch</code> exists in a target kernel <code>repository</code>, by:<ol>
+<li>current commit subject&#x2F;commit message</li>
+<li>commit history</li>
+<li>match the added and deleted lines only</li>
+<li>manual search as a last resort (6.8%)<br>  File path&#x2F;name change, Function name change, Patched at initialization time</li>
+</ol>
+</li>
+<li>patch evolution tracker -&gt; for type 2<br>  collect all possible <code>versions</code> of a patched <code>function</code>, Qualcomm repos and  mainline branch</li>
+<li>source-level matcher -&gt; for type 2<br>  tries to match each patched function version, by strict string matching (no false pos, and false negs small&#x2F;low)</li>
+<li>E-FIBER -&gt; for type 3<br>  on top of FIBER, translating each patched function version into a binary signature, and then matching the signature, deal with inline problem.<br>pipeline see figure 2.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/./imghost/bcsdpp/androidpipe.jpg" alt="Measurement pipeline"></p>
+<p>explain the causes of patch delays, also distill takeaways and potential prescriptive solutions to improve the current situation.<br>knowledge of a security vulnerability is lacking, kernel branch drifted.</p>
+<h2 id="Binary-Code-Similarity-Detection"><a href="#Binary-Code-Similarity-Detection" class="headerlink" title="Binary Code Similarity Detection"></a>Binary Code Similarity Detection</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1109/ASE51524.2021.9678518" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th>slide</th>
+<th>video</th>
+<th>repo</th>
+<th>ASE 2021</th>
+</tr>
+</thead>
+</table>
+<p>if we symbolically execute similar binary codes, symbolic values at these key instructions are expected to be similar.</p>
+<ol>
+<li>First, it symbolically executes binary code;<br> execute many times, and select different paths to cover all paths</li>
+<li>Second, it extracts symbolic values at defined key instructions (IR) into a graph;<br> (Key) instructions as nodes (reserve all symbolic values), connect based on control flow</li>
+<li>Last, it compares the symbolic graph similarity.<br> check node similarity, and context (neighbor nodes) similarity</li>
+<li>also address some problems, including path explosion and loop handling.</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/bcsdkeyir.jpg" alt="Key IR graph comparison"></p>
+<h2 id="Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><a href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation" class="headerlink" title="Binary Diffing as a Network Alignment Problem via Belief Propagation"></a>Binary Diffing as a Network Alignment Problem via Belief Propagation</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://basepub.dauphine.psl.eu/bitstream/handle/123456789/22755/menginrossi2021binary-diffing.pdf?sequence=2" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th>slide</th>
+<th>video</th>
+<th>repo</th>
+<th>ASE 2021</th>
+</tr>
+</thead>
+</table>
+<p>leverage a graph edit formulation of binary diffing: find the optimal transformation of two graphs.<br>it is equivalent to a network alignment problem.<br>propose an efficient approximate solver of this problem based on max-product belief propagation.</p>
+<p>compared with Gemini, GraphMatching(Network) and DeepBinDiff<br><img src="/./imghost/bcsdpp/binarydiffing.jpg" alt="Binary diffing as an alignment of call graphs"></p>
+<h2 id="COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022"><a href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022" class="headerlink" title="COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022"></a>COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</h2><p>propose a COntrastive learning Model for Binary cOde Analysis, or COMBO, that incorporates source code and comment information into binary code during representation learning.</p>
+<p>Specifically, we present three components in COMBO: </p>
+<ol>
+<li>a primary <code>contrastive learning</code> method for cold-start pre-training, </li>
+<li>a simplex interpolation method to incorporate <code>source</code> code, <code>comments</code>, and <code>binary</code> code, and </li>
+<li>an intermediate representation learning algorithm to provide binary code <code>embeddings</code>.</li>
+</ol>
+<p>what is weird, is that it compared with codebert and graphcodebert (they are source code releated lang model)</p>
+<p><img src="/./imghost/bcsdpp/combo.jpg" alt="Diagram of simplex interpolation and intermediate representation learning in COMBO"></p>
+<h2 id="jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><a href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection" class="headerlink" title="jTrans: Jump-Aware Transformer for Binary Code Similarity Detection"></a>jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/2205.12713.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th>slide</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rAirmnUsC1k" >video<i class="fas fa-external-link-alt"></i></a></th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/vul337/jTrans/" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>ISSTA 2022</th>
+</tr>
+</thead>
+</table>
+<p>the first solution that embeds control flow information of binary code into Transformer-based language models, by using a novel jump-aware representation of the analyzed binaries and a newly-designed pre-training task</p>
+<p><img src="/./imghost/bcsdpp/jtrans.jpg" alt="Input representation of jTrans"></p>
+<h2 id="Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><a href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning" class="headerlink" title="Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning"></a>Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3564625.3567975" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.acsac.org/2022/program/papers/76-Ahn-Software_Security_I.pdf" >slide<i class="fas fa-external-link-alt"></i></a></th>
+<th>video</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/asw0316/binshot" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>ACSAC 2022</th>
+</tr>
+</thead>
+</table>
+<p>propose <code>BinShot</code>, a BERT-based similarity learning architecture that is highly transferable for effective BCSD</p>
+<p>our finding reveals that both a distance function and a loss function within an architecture highly affect the performance of a model</p>
+<p>use <code>one-shot learning</code>, adopt a <code>weighted distance vector</code> with a <code>binary cross entropy</code> as a loss function on top of <code>BERT</code>.</p>
+<ol>
+<li>Pre-processer<ul>
+<li>disassembly</li>
+<li>inst normalization</li>
+</ul>
+</li>
+<li>Pre-trainer<ul>
+<li>MLM</li>
+<li>Alternatives to an NSP task</li>
+</ul>
+</li>
+<li>Fine-tuner<br> we leverage a Siamese neural network into a classifier, learning a weighted distance<br> defines a loss function as a binary cross entropy for binary classification</li>
+<li>Predictor</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/binshot.jpg" alt="The overall workflow of BinShot that consists of four components"></p>
+<h2 id="Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020"><a href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020" class="headerlink" title="Semantically find similar binary codes with mixed key instruction sequence – IST 2020"></a>Semantically find similar binary codes with mixed key instruction sequence – IST 2020</h2><p>This paper proposes a new binary code similarity comparison method based on the mixed key instruction sequence (<code>MKIS</code>), which contains both <code>API calls</code> and <code>key values</code> (insts that does not change in multiple runs).</p>
+<p>MKIS calculates the <code>similarity</code> between p(plaintiff) and s(suspect) through <code>lcs(Longest common subsequence)</code>, uses the transfer matrix, based on MKIS (executed insts) sequences.</p>
+<p><img src="/./imghost/bcsdpp/mkis.jpg" alt="Mixed key-instruction based similarity comparison flow chart"></p>
+<h2 id="Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><a href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities" class="headerlink" title="Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities"></a>Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://prosys.kaist.ac.kr/publications/ccs22.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://prosys.kaist.ac.kr/tracer/" >slide<i class="fas fa-external-link-alt"></i></a></th>
+<th>video</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/prosyslab/tracer" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>CCS 2022</th>
+</tr>
+</thead>
+</table>
+<p>we present a general analysis framework, called Tracer, for detecting such recurring vulnerabilities.<br>The main idea is to represent vulnerability signatures as traces over interprocedural data dependencies.</p>
+<p>For a given set of known vulnerabilities, the <code>taint analysis</code> extracts <code>vulnerable traces</code> and establishes a <code>signature database</code> of them.<br>When a new unseen program is analyzed, Tracer <code>compares</code> all potentially vulnerable traces reported by the analysis with the known vulnerability signatures.<br>Then, Tracer reports a list of potential vulnerabilities ranked by the similarity score.</p>
+<p>While the <code>essence</code> of the vulnerability is still the <code>same</code>, the <code>different</code> code <code>structure</code> of libXcursor fundamentally <code>hinders</code> the detectability of the tools.</p>
+<p>Taint Analysis.<br>    Taint analysis computes <code>potential data flows</code> from untrusted inputs (<code>sources</code>) to sensitive functions (<code>sinks</code>) with a <code>simple abstract domain</code> for tainted values.<br>Traces on Data Dependency Graphs.<br>    Tracer extracts vulnerable traces from the source and sink points, and <code>filter</code> out irrelevent statements by deriving vuln traces on <code>DDG</code>(data dependency graph, or maybe <code>DFG</code>?) rather than CFG. same procedure will be applied to new target programs.<br>Feature Representation.<br>    Next, Tracer encodes each trace as an integer feature vector. feature vector consists of <code>low-level</code> and <code>high-level</code> features.<br>    <code>Low-level</code> features represent the <code>frequencies of primitive operators</code>(<code>NumOfOpX</code>) X (e.g., *, &lt;&lt;) and <code>common APIs</code>(<code>NumOfLibX</code>) X (e.g., strlen) on the trace.<br>    high-level features describe detailed behavior of traces, like <code>IfSmallerThanConst</code> checks whether a trace has a <code>conditional statement</code>. They manually designed <code>5</code> high-level features.<br>Similarity Checking.<br>    Since all the traces are encoded as <code>vectors</code>, we can use any common similarity measures – cosine similarity</p>
+<p><img src="/./imghost/bcsdpp/traceroverview.jpg" alt="System overview of Tracer"><br><img src="/./imghost/bcsdpp/tracerexample.jpg" alt="Vulnerable traces and their feature vectors"></p>
+<h2 id="VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><a href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search" class="headerlink" title="VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search"></a>VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</h2><table>
+<thead>
+<tr>
+<th><a class="link"   target="_blank" rel="noopener" href="https://www.ndss-symposium.org/wp-content/uploads/2023/02/ndss2023_f415_paper.pdf" >paper<i class="fas fa-external-link-alt"></i></a></th>
+<th>slide</th>
+<th>video</th>
+<th><a class="link"   target="_blank" rel="noopener" href="https://github.com/RazorMegrez/VulHawk" >repo<i class="fas fa-external-link-alt"></i></a></th>
+<th>NDSS2023</th>
+</tr>
+</thead>
+</table>
+<p>In this paper, we propose a novel intermediate representation function model, which is an architecture-agnostic model for cross-architecture binary code search.</p>
+<p>Three components:</p>
+<ol>
+<li>intermediate representation function model:<br>lifts binary code into <code>microcode</code>(IDA’s IR), and <code>complements implicit oprands</code>, and <code>prunes redundant instructions</code>, and use NLP + GNN to get function embeddings.</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/vulhawkmicro.jpg" alt="Detailed steps of the instruction simplification"></p>
+<ol start="2">
+<li>entropy-based adapter:<br>call the combination of a compiler, architecture, and optimization level as a <code>file environment</code>, take a <code>divide-and-conquer strategy</code> to divide a similarity calculation problem of C^2_N cross-file-environment scenarios into N - 1 embedding transferring sub-problems (use <code>ResNet</code> to input features and classify as 8 classes, 2 compilers x 4 optimizations).</li>
+</ol>
+<p><img src="/./imghost/bcsdpp/vulhawkentropy.jpg" alt="The diagram of divide-and-conquer strategy"></p>
+<p>propose an <code>entropy-based adapter</code> to transfer function embeddings from different file environments <code>into the same file environment</code>. didn’t see the entropy, but different <code>adapter</code> weights (associated with file env) for <code>ResNet</code> to cal sim&#x2F;embed.</p>
+<ol start="3">
+<li>progressive search strategy:<br>propose a <code>progressive search strategy</code> to supplement function embeddings with fine-grained features to reduce false positives caused by patched functions</li>
+</ol>
+<p>combines two sub-strategies:</p>
+<ul>
+<li>Function Embedding Search (coarse-grained search)</li>
+<li>Similarity Calibration (pairwise similarity calibration)<ul>
+<li>Block-level Features</li>
+<li>String Features</li>
+<li>Imported Functions</li>
+</ul>
+</li>
+</ul>
+<p><img src="/./imghost/bcsdpp/vulhawk.jpg" alt="The overall workflow of VulHawk"></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/paper/">#paper</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/bcsd/">#bcsd</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/05/08/Deploy-Some-LLMs/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Deploy Some LLMs</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Binary SCA (Software Composition Analysis) Related Tools</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><span class="nav-number">1.</span> <span class="nav-text">A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><span class="nav-number">2.</span> <span class="nav-text">An Investigation of the Android Kernel Patch Ecosystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Code-Similarity-Detection"><span class="nav-number">3.</span> <span class="nav-text">Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Binary Diffing as a Network Alignment Problem via Belief Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-%E2%80%93-Arxiv-2022"><span class="nav-number">5.</span> <span class="nav-text">COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><span class="nav-number">6.</span> <span class="nav-text">jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><span class="nav-number">7.</span> <span class="nav-text">Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-%E2%80%93-IST-2020"><span class="nav-number">8.</span> <span class="nav-text">Semantically find similar binary codes with mixed key instruction sequence – IST 2020</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><span class="nav-number">9.</span> <span class="nav-text">Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><span class="nav-number">10.</span> <span class="nav-text">VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">TyeYeah</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.0</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+            
+<script src="/js/libs/anime.min.js"></script>
+
+        
+        
+            
+<script src="/js/toc.js"></script>
+
+        
+    
+</div>
+
+
+
+</body>
+</html>
