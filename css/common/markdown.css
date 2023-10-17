@@ -2,18 +2,41 @@
   font-size: 1rem;
 }
 .keep-markdown-body blockquote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   box-sizing: border-box;
   margin: 1.4rem 0;
   color: var(--text-color-3);
   background: var(--background-color-2);
   border-left: 0.4rem solid var(--text-color-4);
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
 }
 .keep-markdown-body blockquote p,
 .keep-markdown-body blockquote ul,
-.keep-markdown-body blockquote ol {
-  padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+.keep-markdown-body blockquote ol,
+.keep-markdown-body blockquote footer {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.4rem 0.4rem 0.4rem 0.8rem !important;
+}
+.keep-markdown-body blockquote footer {
+  margin-bottom: 0.6rem;
+  font-style: italic;
+}
+.keep-markdown-body blockquote cite {
+  position: relative;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  color: var(--text-color-4);
+}
+.keep-markdown-body blockquote cite::before {
+  content: '— ';
 }
 .keep-markdown-body p {
+  margin: 0.6rem 0;
   color: var(--text-color-3);
   line-height: 2;
 }
@@ -79,9 +102,60 @@
 .keep-markdown-body h4,
 .keep-markdown-body h5,
 .keep-markdown-body h6 {
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 0.4rem;
+  padding-bottom: 0.2rem;
+  overflow: hidden;
   color: var(--text-color-2);
   line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid var(--post-h-bottom-border-color);
 keep-tablet()
+}
+.keep-markdown-body h1:hover a.headerlink,
+.keep-markdown-body h2:hover a.headerlink,
+.keep-markdown-body h3:hover a.headerlink,
+.keep-markdown-body h4:hover a.headerlink,
+.keep-markdown-body h5:hover a.headerlink,
+.keep-markdown-body h6:hover a.headerlink {
+  visibility: visible;
+}
+.keep-markdown-body h1 a.headerlink,
+.keep-markdown-body h2 a.headerlink,
+.keep-markdown-body h3 a.headerlink,
+.keep-markdown-body h4 a.headerlink,
+.keep-markdown-body h5 a.headerlink,
+.keep-markdown-body h6 a.headerlink {
+  position: relative;
+  float: right;
+  box-sizing: border-box;
+  margin-left: 0.32rem;
+  padding-top: 0.25rem;
+  color: var(--text-color-4);
+  font-size: 1.2rem;
+  text-decoration: none;
+  border: none;
+  visibility: hidden;
+}
+.keep-markdown-body h1 a.headerlink:hover,
+.keep-markdown-body h2 a.headerlink:hover,
+.keep-markdown-body h3 a.headerlink:hover,
+.keep-markdown-body h4 a.headerlink:hover,
+.keep-markdown-body h5 a.headerlink:hover,
+.keep-markdown-body h6 a.headerlink:hover {
+  color: var(--text-color-3);
+}
+.keep-markdown-body h1 a.headerlink::before,
+.keep-markdown-body h2 a.headerlink::before,
+.keep-markdown-body h3 a.headerlink::before,
+.keep-markdown-body h4 a.headerlink::before,
+.keep-markdown-body h5 a.headerlink::before,
+.keep-markdown-body h6 a.headerlink::before {
+  font-weight: 600;
+  font-family: 'Font Awesome 6 Free';
+  content: '\f0c1';
 }
 .keep-markdown-body h1 {
   font-weight: 600;
@@ -119,10 +193,11 @@ keep-tablet()
   display: block;
   box-sizing: border-box;
   max-width: 100%;
+  margin: var(--post-img-align);
+  margin-bottom: 2rem;
   box-shadow: 0 0 0.2rem var(--shadow-color);
   cursor: zoom-in;
   opacity: 1;
-  margin: 0.8rem 0 0.2rem;
 }
 .keep-markdown-body img.hide {
   opacity: 0;
@@ -155,4 +230,8 @@ keep-mobile()
 }
 .keep-markdown-body > table tr:nth-child(2n) {
   background-color: var(--background-color-2);
+}
+.keep-markdown-body .mermaid {
+  background: #f5f5f5 !important;
+  border-radius: 0.3rem;
 }

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            Deploy Some LLMs |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/img/wang.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Relish the Moment
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+
+                
+
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+
+        <div class="article-content-container border-box">
+
+            
+
+            <div class="article-content-bottom border-box">
+                
+                    <div class="article-title">
+                        Deploy Some LLMs
+                    </div>
+                
+
+                
+                    <div class="article-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/img/aliwangwang.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author">
+                                <span class="name">TyeYeah</span>
+                                
+                                    <span class="author-label">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="article-meta-info-container border-box post">
+    <div class="article-meta-info border-box">
+        
+
+
+        
+            <span class="meta-info-item article-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2023-05-08 09:59:26</span>
+                <span class="mobile">2023-05-08 09:59</span>
+            </span>
+
+            <span class="meta-info-item article-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Sat Oct 07 2023 20:50:32 GMT+0800">2023-10-07 20:50:32</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="article-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="article-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="article-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item article-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>3.1k Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item article-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>17 Mins</span>
+            </span>
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="article-content keep-markdown-body">
+                    
+
+                    <p>Large Language Models (<code>LLMs</code>) are neural networks with many parameters (typically billions or more) that are trained on large quantities of text using self-supervised or semi-supervised learning. <code>LLMs</code> can perform well at a wide variety of natural language processing tasks, such as text generation, text classification, question answering, and machine translation. <code>LLMs</code> can also capture the syntax, semantics, and general knowledge of human language, and demonstrate some special abilities that are not present in small-scale language models. Some examples of <code>LLMs</code> are <code>GPT-3</code>, <code>BERT</code>, <code>T5</code>, and <code>ChatGPT</code>.<br>(Powered by New Bing)</p>
+<p>As <code>LLM</code>(especially <code>ChatGPT</code>) is gaining popularity, an overnight sensation, the related technologies grows so fast. We better integrate <code>LLM</code> into our workflow as soon as possible, to keep up with this trend and increase work efficiency in a solid way.</p>
+<p>To do researches, deploying the model locally seems better than just using provided <code>API</code> online. For personal researchers, we can only use consumer-level GPU to do inference, so here I introduce some open-source or lightweight models that I deployed before.</p>
+<h2 id="LLaMA"><a href="#LLaMA" class="headerlink" title="LLaMA"></a>LLaMA</h2><p>Here is the <a class="link"   target="_blank" rel="noopener" href="https://github.com/facebookresearch/llama" >official repo<i class="fas fa-external-link-alt"></i></a> from Facebook (now Meta), the codes and academic paper are open-source, but the models need to fill a <a class="link"   target="_blank" rel="noopener" href="https://forms.gle/jk851eBVbX1m5TAv5" >form<i class="fas fa-external-link-alt"></i></a> to request online.</p>
+<p>Actually the applied models can only be loaded by model source code in official repo above, while the community convert <code>LLaMA</code> original weights to Hugginface format (like <a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/decapoda-research" >Decapoda Research hf page<i class="fas fa-external-link-alt"></i></a>), and there are some universal toolkit like <a class="link"   target="_blank" rel="noopener" href="https://github.com/oobabooga/text-generation-webui" >text-generation-webui<i class="fas fa-external-link-alt"></i></a> to load <code>LLaMA</code> and some other models easily.</p>
+<p>Visit <a class="link"   target="_blank" rel="noopener" href="https://github.com/oobabooga/text-generation-webui/blob/main/docs/LLaMA-model.md" >text-generation-webui&#x2F;docs&#x2F;LLaMA-model.md<i class="fas fa-external-link-alt"></i></a> to see how to load <code>LLaMA</code> in <code>text-generation-webui</code>.</p>
+<p>First of all prepare the <code>Linux</code> environment including <code>Nvidia GPU Driver</code> and <code>Conda</code>.<br>Then prepare textgen conda environment</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ conda create -n textgen python=3.10.9</span><br><span class="line">$ conda activate textgen</span><br></pre></td></tr></table></figure>
+<p>Install the web UI</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/oobabooga/text-generation-webui</span><br><span class="line">$ <span class="built_in">cd</span> text-generation-webui</span><br><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>Download the model</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># `download-model.py` is a good script to download models from hugginface</span></span><br><span class="line"><span class="comment"># use `python download-model.py organization/model` like:</span></span><br><span class="line">$ python download-model.py decapoda-research/llama-7b-hf</span><br><span class="line"><span class="comment"># the target model will be saved in `models/` foder</span></span><br><span class="line">$ ls models/</span><br><span class="line">config.yaml                                   decapoda-research_llama-7b-hf</span><br><span class="line">place-your-models-here.txt</span><br></pre></td></tr></table></figure>
+<p>Start with specific model</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python server.py --model llama-7b</span><br></pre></td></tr></table></figure>
+<p>Note that if you want to load some 4-bit models like <a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/Neko-Institute-of-Science/LLaMA-7B-4bit-128g/tree/main" >Neko-Institute-of-Science&#x2F;LLaMA-7B-4bit-128g<i class="fas fa-external-link-alt"></i></a> from <a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/Neko-Institute-of-Science" >Bonanza Unthread<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/oobabooga/text-generation-webui/blob/main/docs/GPTQ-models-(4-bit-mode).md" >extra steps<i class="fas fa-external-link-alt"></i></a> may need.</p>
+<h3 id="Alpaca"><a href="#Alpaca" class="headerlink" title="Alpaca"></a>Alpaca</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/tatsu-lab/stanford_alpaca" >Stanford Alpaca<i class="fas fa-external-link-alt"></i></a> is an instruction-following language model that is fine-tuned from Meta’s LLaMA 7B model. It is developed by researchers at Stanford CRFM and can perform various tasks based on natural language instructions. </p>
+<p>The current <code>Alpaca</code> model is fine-tuned from a 7B LLaMA model on 52K instruction-following data generated by the Self-Instruct techniques. In a preliminary human evaluation, <code>Alpaca</code> 7B model behaves similarly to the <code>text-davinci-003</code> model on the Self-Instruct instruction-following evaluation suite.</p>
+<p><img src="https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/assets/parse_analysis.png" alt="parse analysis"></p>
+<p>The most valuable part is its fine-tuning script, which for the first time gives us a chance to finetune the LLM. </p>
+<p>First of all prepare the environment</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/tatsu-lab/stanford_alpaca</span><br><span class="line">$ <span class="built_in">cd</span> stanford_alpaca</span><br><span class="line">$ conda create -n stanford python=3.10</span><br><span class="line">$ conda activate stanford</span><br><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>Prepare LLaMA weights, here introduce several ways</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get through `git lfs clone`, but always stuck. Use bwm-ng to monitor.</span></span><br><span class="line">$ git lfs install</span><br><span class="line">$ git <span class="built_in">clone</span> https://huggingface.co/decapoda-research/llama-7b-hf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># pyllama also provides methods</span></span><br><span class="line">$ pip install pyllama -U</span><br><span class="line">$ python -m llama.download --model_size 7B,30B --folder /tmp/pyllama_data</span><br><span class="line"><span class="comment"># more at https://github.com/juncongmoo/pyllama</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># use https://github.com/chenyifanthu/THU-Cloud-Downloader</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/chenyifanthu/THU-Cloud-Downloader</span><br><span class="line">$ <span class="built_in">cd</span> THU-Cloud-Downloader</span><br><span class="line">$ pip install argparse requests tqdm</span><br><span class="line">$ python main.py \ </span><br><span class="line">        --link https://huggingface.co/decapoda-research/llama-7b-hf</span><br><span class="line">        --save /path/to/save/model</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># more universal method is using huggingface_hub</span></span><br><span class="line">$ pip install huggingface_hub</span><br><span class="line">$ ipython</span><br><span class="line">...</span><br><span class="line">In [1]: from huggingface_hub import snapshot_download</span><br><span class="line"></span><br><span class="line">In [2]: snapshot_download(repo_id=<span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span>)</span><br><span class="line">Fetching 42 files: 100%|██████████████████████████████████████████████████████████████████████| 42/42 [00:00&lt;00:00, 8660.38it/s]</span><br><span class="line">Out[3]: <span class="string">&#x27;/path/to/.cache/huggingface/hub/models--decapoda-research--llama-7b-hf/snapshots/5f98eefcc80e437ef68d457ad7bf167c2c6a1348&#x27;</span></span><br><span class="line"><span class="comment"># finally model saved in `~/.cache/huggingface/hub/models--decapoda-research--llama-7b-hf/snapshots/5f98eefcc80e437ef68d457ad7bf167c2c6a1348`</span></span><br><span class="line"><span class="comment"># the `AutoModel.from_pretrained()` is theoretically feasible as well</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">In [4]: snapshot_download(repo_id = <span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span>,</span><br><span class="line">   ...:                   repo_type=<span class="string">&quot;model&quot;</span>,  <span class="comment"># optional [dataset,model]</span></span><br><span class="line">   ...:                    local_dir=<span class="string">&#x27;/path/to/local/folder&#x27;</span>, <span class="comment"># path to store</span></span><br><span class="line">   ...:                      resume_download=True, <span class="comment"># resume after break</span></span><br><span class="line">   ...:                    )</span><br><span class="line"></span><br><span class="line">In [4]: snapshot_download(repo_id = <span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span>,</span><br><span class="line">   ...:                   repo_type=<span class="string">&quot;dataset&quot;</span>,  <span class="comment"># optional [dataset,model]</span></span><br><span class="line">   ...:                    local_dir=<span class="string">&#x27;/path/to/local/folder&#x27;</span>, <span class="comment"># path to store</span></span><br><span class="line">   ...:                      resume_download=True, <span class="comment"># resume after break</span></span><br><span class="line">   ...:                       token=<span class="string">&quot;hf_xxxxxxxxxxxxxx&quot;</span>)  <span class="comment"># not necessary, but required by some</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Then finetune</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### parallel works</span></span><br><span class="line">$ torchrun --nproc_per_node=2 --master_port=12345 train.py \</span><br><span class="line">    --model_name_or_path ~/.cache/huggingface/hub/models--decapoda-research--llama-7b-hf/snapshots/5f98eefcc80e437ef68d457ad7bf167c2c6a1348/ \</span><br><span class="line">    --data_path ./alpaca_data.json \</span><br><span class="line">    --bf16 True \</span><br><span class="line">    --output_dir ./output_model_path \</span><br><span class="line">    --num_train_epochs 1 \</span><br><span class="line">    --per_device_train_batch_size 1 \</span><br><span class="line">    --per_device_eval_batch_size 1 \</span><br><span class="line">    --gradient_accumulation_steps 1 \</span><br><span class="line">    --evaluation_strategy <span class="string">&quot;no&quot;</span> \</span><br><span class="line">    --save_strategy <span class="string">&quot;steps&quot;</span> \</span><br><span class="line">    --save_steps 1 \</span><br><span class="line">    --save_total_limit 1 \</span><br><span class="line">    --learning_rate 2e-5 \</span><br><span class="line">    --weight_decay 0. \</span><br><span class="line">    --warmup_ratio 0.03 \</span><br><span class="line">    --lr_scheduler_type <span class="string">&quot;cosine&quot;</span> \</span><br><span class="line">    --logging_steps 1 \</span><br><span class="line">    --fsdp <span class="string">&quot;full_shard auto_wrap&quot;</span> \</span><br><span class="line">    --fsdp_transformer_layer_cls_to_wrap <span class="string">&#x27;LLaMADecoderLayer&#x27;</span> \</span><br><span class="line">    --tf32 True</span><br><span class="line"></span><br><span class="line"><span class="comment">### single card works</span></span><br><span class="line">$ python train.py \</span><br><span class="line">    --model_name_or_path ~/.cache/huggingface/hub/models--decapoda-research--llama-7b-hf/snapshots/5f98eefcc80e437ef68d457ad7bf167c2c6a1348/ \</span><br><span class="line">    --data_path ./alpaca_data.json \</span><br><span class="line">    --bf16 True \</span><br><span class="line">    --output_dir ./output_model_path \</span><br><span class="line">    --num_train_epochs 1 \</span><br><span class="line">    --per_device_train_batch_size 1 \</span><br><span class="line">    --per_device_eval_batch_size 1 \</span><br><span class="line">    --gradient_accumulation_steps 1 \</span><br><span class="line">    --evaluation_strategy <span class="string">&quot;no&quot;</span> \</span><br><span class="line">    --save_strategy <span class="string">&quot;steps&quot;</span> \</span><br><span class="line">    --save_steps 1 \</span><br><span class="line">    --save_total_limit 1 \</span><br><span class="line">    --learning_rate 2e-5 \</span><br><span class="line">    --weight_decay 0. \</span><br><span class="line">    --warmup_ratio 0.03 \</span><br><span class="line">    --lr_scheduler_type <span class="string">&quot;cosine&quot;</span> \</span><br><span class="line">    --logging_steps 1 \</span><br><span class="line">    --tf32 True</span><br><span class="line"></span><br><span class="line"><span class="comment">### train from scratch</span></span><br><span class="line"><span class="comment"># $ python train.py \</span></span><br><span class="line"><span class="comment">#     --data_path ./alpaca_data.json \</span></span><br><span class="line"><span class="comment">#     --output_dir ./output_model_path </span></span><br></pre></td></tr></table></figure>
+<p>And we will meet <code>ValueError: Tokenizer class LLaMATokenizer does not exist or is not currently imported.</code>, which can be solved by <a class="link"   target="_blank" rel="noopener" href="https://github.com/huggingface/transformers/issues/22222" >huggingface&#x2F;transformers#22222 (comment)<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>To solve it, replace <code>LLaMATokenizer</code> in <code>tokenizer_config.json</code> of <code>decapoda-research/llama-7b-hf</code> with <code>LlamaTokenizer</code><br>Or try another branch of transformers</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install git+https://github.com/mbehm/transformers</span><br></pre></td></tr></table></figure>
+<p>Then we can run this successfully.<br>Sadly it requires <code>more than 40 GB memory</code> of a single graphics card, the consumer GPUs out (even RTX 4090 only gets 24 GB memory for now).</p>
+<h3 id="Alpaca-Lora"><a href="#Alpaca-Lora" class="headerlink" title="Alpaca Lora"></a>Alpaca Lora</h3><p>There are more lightweight ways to run <code>LLaMA</code> or <code>Alpace</code> models like <a class="link"   target="_blank" rel="noopener" href="https://github.com/ggerganov/llama.cpp" >ggerganov&#x2F;llama.cpp<i class="fas fa-external-link-alt"></i></a>, but the <a class="link"   target="_blank" rel="noopener" href="https://github.com/tloen/alpaca-lora" >Alpaca-LoRA<i class="fas fa-external-link-alt"></i></a> brings the capability of training LLM to consumer GPUs for real.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/tloen/alpaca-lora" >This repository<i class="fas fa-external-link-alt"></i></a> contains code for reproducing the Stanford Alpaca results using low-rank adaptation (LoRA). LoRA makes it possible to train and finetune on RTX 3090 and so on, though the finetuned models are just average.</p>
+<p>Prepare the environment</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/tloen/alpaca-lora</span><br><span class="line">$ <span class="built_in">cd</span> alpaca-lora</span><br><span class="line">$ conda create -n lora python=3.10</span><br><span class="line">$ conda activate lora</span><br><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Training</strong> (finetune.py)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ python finetune.py \</span><br><span class="line">    --base_model <span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span> \</span><br><span class="line">    --data_path <span class="string">&#x27;./alpaca_data.json&#x27;</span> \</span><br><span class="line">    --output_dir <span class="string">&#x27;./lora-alpaca&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># even hyperparams</span></span><br><span class="line">$ python finetune.py \</span><br><span class="line">    --base_model <span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span> \</span><br><span class="line">    --data_path <span class="string">&#x27;./alpaca_data.json&#x27;</span> \</span><br><span class="line">    --output_dir <span class="string">&#x27;./lora-alpaca&#x27;</span> \</span><br><span class="line">    --batch_size 128 \</span><br><span class="line">    --micro_batch_size 4 \</span><br><span class="line">    --num_epochs 3 \</span><br><span class="line">    --learning_rate 1e-4 \</span><br><span class="line">    --cutoff_len 512 \</span><br><span class="line">    --val_set_size 2000 \</span><br><span class="line">    --lora_r 8 \</span><br><span class="line">    --lora_alpha 16 \</span><br><span class="line">    --lora_dropout 0.05 \</span><br><span class="line">    --lora_target_modules <span class="string">&#x27;[q_proj,v_proj]&#x27;</span> \</span><br><span class="line">    --train_on_inputs \</span><br><span class="line">    --group_by_length</span><br></pre></td></tr></table></figure>
+<p>Here got two problems, one for loading <code>decapoda-research/llama-7b-hf</code> using newest <code>transformers</code> like above, which can be solved as above.<br>Another is about <code>bitsandbytes</code>, see <a class="link"   target="_blank" rel="noopener" href="https://github.com/tloen/alpaca-lora/issues/46#issuecomment-1474343963" >issue46<i class="fas fa-external-link-alt"></i></a>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># error goes like:</span></span><br><span class="line">AttributeError: /path/to/miniconda3/envs/lora/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so: undefined symbol: cget_col_row_stats</span><br><span class="line"><span class="comment"># to solve it,</span></span><br><span class="line">$ <span class="built_in">cd</span> /path/to/miniconda3/envs/lora/lib/python3.10/site-packages/bitsandbytes/</span><br><span class="line">$ cp libbitsandbytes_cuda117.so libbitsandbytes_cpu.so <span class="comment"># cuda version should bu choose according to detailed error messages</span></span><br></pre></td></tr></table></figure>
+<p>Eventually <code>finetune.py</code> runs.</p>
+<p><strong>Inference</strong> (generate.py)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python generate.py \</span><br><span class="line">    --load_8bit \</span><br><span class="line">    --base_model <span class="string">&#x27;decapoda-research/llama-7b-hf&#x27;</span> \</span><br><span class="line">    --lora_weights <span class="string">&#x27;tloen/alpaca-lora-7b&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>A gradio web page is available. Both the published LoRA weights and the models you finetuned can be hosted.</p>
+<h2 id="ChatGLM-6B"><a href="#ChatGLM-6B" class="headerlink" title="ChatGLM-6B"></a>ChatGLM-6B</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B" >ChatGLM-6B<i class="fas fa-external-link-alt"></i></a> is an open bilingual language model based on <a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/GLM" >General Language Model (GLM)<i class="fas fa-external-link-alt"></i></a> from <code>THUDM</code>. (Now you can check <a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM2-6B" >ChatGLM2-6B<i class="fas fa-external-link-alt"></i></a> for an update)</p>
+<p>The <code>ChatGLM-130B</code> based on <a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/GLM-130B" >GLM-130B<i class="fas fa-external-link-alt"></i></a> has been tested and used by mant commercial companies, and gets fairly good results as <code>GPT-3 175B (davinci)</code>. </p>
+<p>Another cool thing is <a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/CodeGeeX" >CodeGeeX<i class="fas fa-external-link-alt"></i></a> which is a large-scale multilingual code generation model with 13 billion parameters, pre-trained on a large code corpus of more than 20 programming languages. However it is kind of occupying memory, so the vscode&#x2F;jetbrain plugins are recommended.</p>
+<p>Here we try to deploy <a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B" >ChatGLM-6B<i class="fas fa-external-link-alt"></i></a> locally.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/THUDM/ChatGLM-6B</span><br><span class="line">$ <span class="built_in">cd</span> ChatGLM-6B</span><br><span class="line">$ conda create -n chatglm python=3.10</span><br><span class="line">$ conda activate chatglm</span><br><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>Model weights can be seen on <a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/THUDM" >HugginFace&#x2F;THUDM<i class="fas fa-external-link-alt"></i></a>, and we can directly run a demo </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># official `gradio` way</span></span><br><span class="line">$ python web_demo.py</span><br><span class="line"><span class="comment"># or try `streamlit`</span></span><br><span class="line">$ pip install streamlit</span><br><span class="line">$ pip install streamlit-chat</span><br><span class="line">$ streamlit run web_demo2.py --server.port 6006</span><br><span class="line"><span class="comment"># or console interaction</span></span><br><span class="line">$ python cli_demo.py</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/THUDM/ChatGLM-6B/main/resources/web-demo.gif" alt="web demo"><br><img src="https://raw.githubusercontent.com/THUDM/ChatGLM-6B/main/resources/cli-demo.png" alt="cli demo"><br>API deployment</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install dependencies</span></span><br><span class="line">$ pip install fastapi uvicorn</span><br><span class="line"><span class="comment"># then run</span></span><br><span class="line">$ python api.py</span><br><span class="line"><span class="comment"># access, through cli or codes</span></span><br><span class="line">$ curl -X POST <span class="string">&quot;http://127.0.0.1:8000&quot;</span> \</span><br><span class="line">     -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;prompt&quot;: &quot;你好&quot;, &quot;history&quot;: []&#125;&#x27;</span></span><br><span class="line"><span class="comment"># resonse</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;response&quot;</span>:<span class="string">&quot;你好👋！我是人工智能助手 ChatGLM-6B，很高兴见到你，欢迎问我任何问题。&quot;</span>,</span><br><span class="line">  <span class="string">&quot;history&quot;</span>:[[<span class="string">&quot;你好&quot;</span>,<span class="string">&quot;你好👋！我是人工智能助手 ChatGLM-6B，很高兴见到你，欢迎问我任何问题。&quot;</span>]],</span><br><span class="line">  <span class="string">&quot;status&quot;</span>:200,</span><br><span class="line">  <span class="string">&quot;time&quot;</span>:<span class="string">&quot;2023-03-23 21:38:40&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or generate dialogue in python</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm-6b&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm-6b&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().cuda()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>model = model.<span class="built_in">eval</span>()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>response, history = model.chat(tokenizer, <span class="string">&quot;你好&quot;</span>, history=[])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(response)</span><br><span class="line">你好👋!我是人工智能助手 ChatGLM-6B,很高兴见到你,欢迎问我任何问题。</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>response, history = model.chat(tokenizer, <span class="string">&quot;晚上睡不着应该怎么办&quot;</span>, history=history)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(response)</span><br><span class="line">晚上睡不着可能会让你感到焦虑或不舒服,但以下是一些可以帮助你入睡的方法:</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 制定规律的睡眠时间表:保持规律的睡眠时间表可以帮助你建立健康的睡眠习惯,使你更容易入睡。尽量在每天的相同时间上床,并在同一时间起床。</span><br><span class="line"><span class="number">2.</span> 创造一个舒适的睡眠环境:确保睡眠环境舒适,安静,黑暗且温度适宜。可以使用舒适的床上用品,并保持房间通风。</span><br><span class="line"><span class="number">3.</span> 放松身心:在睡前做些放松的活动,例如泡个热水澡,听些轻柔的音乐,阅读一些有趣的书籍等,有助于缓解紧张和焦虑,使你更容易入睡。</span><br><span class="line"><span class="number">4.</span> 避免饮用含有咖啡因的饮料:咖啡因是一种刺激性物质,会影响你的睡眠质量。尽量避免在睡前饮用含有咖啡因的饮料,例如咖啡,茶和可乐。</span><br><span class="line"><span class="number">5.</span> 避免在床上做与睡眠无关的事情:在床上做些与睡眠无关的事情,例如看电影,玩游戏或工作等,可能会干扰你的睡眠。</span><br><span class="line"><span class="number">6.</span> 尝试呼吸技巧:深呼吸是一种放松技巧,可以帮助你缓解紧张和焦虑,使你更容易入睡。试着慢慢吸气,保持几秒钟,然后缓慢呼气。</span><br><span class="line"></span><br><span class="line">如果这些方法无法帮助你入睡,你可以考虑咨询医生或睡眠专家,寻求进一步的建议。</span><br></pre></td></tr></table></figure>
+
+<h2 id="MOSS"><a href="#MOSS" class="headerlink" title="MOSS"></a>MOSS</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/OpenLMLab/MOSS" >MOSS<i class="fas fa-external-link-alt"></i></a> is an open-sourced plugin-augmented conversational language model, another LLM from China.<br>It is also a lightweighted model which can be loaded on consumer GPUs.</p>
+<p>Prepare the environment.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/OpenLMLab/MOSS.git</span><br><span class="line">$ <span class="built_in">cd</span> MOSS</span><br><span class="line">$ conda create --name moss python=3.8</span><br><span class="line">$ conda activate moss</span><br><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>Start a web demo</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># streamlit</span></span><br><span class="line">$ streamlit run moss_web_demo_streamlit.py --server.port 8888</span><br><span class="line"><span class="comment"># gradio</span></span><br><span class="line">$ python moss_web_demo_gradio.py</span><br><span class="line"><span class="comment"># cli</span></span><br><span class="line">$ python moss_cli_demo.py</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/OpenLMLab/MOSS/main/examples/example_moss_search.gif" alt="moss example"><br>API demo</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ python moss_api_demo.py</span><br><span class="line"><span class="comment">## curl moss</span></span><br><span class="line">$ curl -X POST <span class="string">&quot;http://localhost:19324&quot;</span> \</span><br><span class="line">     -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;prompt&quot;: &quot;你是谁？&quot;&#125;&#x27;</span></span><br><span class="line"><span class="comment"># response</span></span><br><span class="line">&#123;<span class="string">&quot;response&quot;</span>:<span class="string">&quot;\n&lt;|Worm|&gt;: 你好，有什么我可以帮助你的吗？&quot;</span>,<span class="string">&quot;history&quot;</span>:[[<span class="string">&quot;你好&quot;</span>,<span class="string">&quot;\n&lt;|Worm|&gt;: 你好，有什么我可以帮助你的吗？&quot;</span>]],<span class="string">&quot;status&quot;</span>:200,<span class="string">&quot;time&quot;</span>:<span class="string">&quot;2023-04-28 09:43:41&quot;</span>,<span class="string">&quot;uid&quot;</span>:<span class="string">&quot;10973cfc-85d4-4b7b-a56a-238f98689d47&quot;</span>&#125;</span><br><span class="line"><span class="comment">## curl moss multi-round, by filling `uid`</span></span><br><span class="line">$ curl -X POST <span class="string">&quot;http://localhost:19324&quot;</span> \</span><br><span class="line">     -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;&quot;prompt&quot;: &quot;你是谁？&quot;, &quot;uid&quot;:&quot;10973cfc-85d4-4b7b-a56a-238f98689d47&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Read <a class="link"   target="_blank" rel="noopener" href="https://github.com/OpenLMLab/MOSS" >README<i class="fas fa-external-link-alt"></i></a> to see how to generate contents in python, and more precise operating parameters.</p>
+<h2 id="RWKV"><a href="#RWKV" class="headerlink" title="RWKV"></a>RWKV</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/BlinkDL/ChatRWKV" >ChatRWKV<i class="fas fa-external-link-alt"></i></a> is like <code>ChatGPT</code> but powered by my <a class="link"   target="_blank" rel="noopener" href="https://github.com/BlinkDL/RWKV-LM" >RWKV<i class="fas fa-external-link-alt"></i></a> (100% <code>RNN</code>) language model, which is the only <code>RNN</code> (as of now) that can match transformers in quality and scaling, while being faster and saves VRAM.</p>
+<p>There is not so much content in <a class="link"   target="_blank" rel="noopener" href="https://github.com/BlinkDL/ChatRWKV/blob/main/README.md" >README.md<i class="fas fa-external-link-alt"></i></a>, while it’s easy to interact with the model.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install dependencies</span></span><br><span class="line">$ conda create --name rwkv python=3.10</span><br><span class="line">$ conda activate rwkv</span><br><span class="line">$ conda install numpy</span><br><span class="line">$ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia</span><br><span class="line">$ pip install prompt_toolkit</span><br><span class="line"></span><br><span class="line"><span class="comment"># run v2/chat.py</span></span><br><span class="line">$ python v2/chat.py</span><br></pre></td></tr></table></figure>
+<p>Models can be found at <a class="link"   target="_blank" rel="noopener" href="https://huggingface.co/BlinkDL" >HuggingFace&#x2F;BlinkDL<i class="fas fa-external-link-alt"></i></a>, different name (raven, pile, novel, …) indicates different training corpus. Download models and modify model paths in <code>v2/chat.py</code> to use.</p>
+<p>The <a class="link"   target="_blank" rel="noopener" href="https://github.com/wenda-LLM/wenda" >https://github.com/l15y/wenda<i class="fas fa-external-link-alt"></i></a> is recommended to host Web pages for interaction (also supports llama, chatglm, moss …).</p>
+<h2 id="Vicuna"><a href="#Vicuna" class="headerlink" title="Vicuna"></a>Vicuna</h2><p><a target="_blank" rel="noopener" href="https://lmsys.org/blog/2023-03-30-vicuna/"><code>Vicuna-13B</code></a>, an open-source chatbot trained by fine-tuning LLaMA on user-shared conversations collected from ShareGPT. Preliminary evaluation (<a class="link"   target="_blank" rel="noopener" href="https://chat.lmsys.org/?arena" >Chatbot Arena<i class="fas fa-external-link-alt"></i></a>) using <code>GPT-4</code> as a judge shows <code>Vicuna-13B</code> achieves more than <code>90%*</code> quality of OpenAI <code>ChatGPT</code> and Google <code>Bard</code> while outperforming other models like <code>LLaMA</code> and Stanford <code>Alpaca</code> in more than <code>90%*</code> of cases.</p>
+<p>So it seems that, as of posting time the <code>Vicuna-13B</code> is the open-source LLM with best performance. We can deploy it using <a class="link"   target="_blank" rel="noopener" href="https://github.com/lm-sys/FastChat" >FastChat<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>First of all install <code>FastChat</code> by <code>pip</code> or from <a class="link"   target="_blank" rel="noopener" href="https://github.com/lm-sys/FastChat" >source<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pip, which is much easier</span></span><br><span class="line">$ pip3 install fschat</span><br><span class="line"></span><br><span class="line"><span class="comment"># from source</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/lm-sys/FastChat.git</span><br><span class="line">$ <span class="built_in">cd</span> FastChat</span><br><span class="line">$ pip3 install --upgrade pip  <span class="comment"># enable PEP 660 support</span></span><br><span class="line">$ pip3 install -e .</span><br></pre></td></tr></table></figure>
+<p><code>Vicuna</code> weights are released as delta weights to comply with the <code>LLaMA</code> model license. We can add our delta to the original <code>LLaMA</code> weights to obtain the <code>Vicuna</code> weights.</p>
+<p>Remember to download <code>LLaMA</code> weights first, we can download using <code>snapshot_download</code> from <code>huggingface_hub</code>. </p>
+<p>Then convert </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.model.apply_delta \</span><br><span class="line">    --base-model-path /path/to/llama-7b \</span><br><span class="line">    --target-model-path /path/to/output/vicuna-7b \</span><br><span class="line">    --delta-path lmsys/vicuna-7b-delta-v1.1</span><br></pre></td></tr></table></figure>
+<p><code>FastChat</code> can run chatting like this:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.serve.cli --model-path lmsys/fastchat-t5-3b-v1.0</span><br></pre></td></tr></table></figure>
+<p>So we can start <code>Vicuna</code> like this. </p>
+<p>To serve using the web UI, we need <code>three</code> main components: <code>web servers</code> that interface with users, <code>model workers</code> that host one or more models, and a <code>controller</code> to coordinate the <code>web server</code> and <code>model workers</code>.<br><img src="https://raw.githubusercontent.com/lm-sys/FastChat/main/assets/server_arch.png" alt="arch"></p>
+<p>Launch the controller</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.serve.controller</span><br></pre></td></tr></table></figure>
+<p>Launch the model worker(s)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.serve.model_worker --model-path /path/to/model/weights</span><br></pre></td></tr></table></figure>
+<p>To ensure that your model worker is connected to your controller properly, send a test message using the following command:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.serve.test_message --model-name vicuna-7b</span><br></pre></td></tr></table></figure>
+<p>You will see a short output.</p>
+<p>Launch the Gradio web server</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python3 -m fastchat.serve.gradio_web_server</span><br></pre></td></tr></table></figure>
+<p>This is the user interface that users will interact with.</p>
+<p><img src="https://raw.githubusercontent.com/lm-sys/FastChat/main/assets/demo_narrow.gif" alt="vicuna demo"></p>
+<p>API access usage visit <a class="link"   target="_blank" rel="noopener" href="https://github.com/lm-sys/FastChat/blob/main/docs/openai_api.md" >OpenAI-Compatible RESTful APIs &amp; SDK<i class="fas fa-external-link-alt"></i></a>, by which we can use openai api to interact</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This blog only includes some of featured models, like the first popular open-source LLM <code>LLaMA</code> and its variants (<code>Alpaca</code>, <code>Vicuna</code>), the low-cost training&#x2F;finetuning method <code>Alpaca-LoRA</code>, and models from China: <code>ChatGLM</code>, <code>MOSS</code> and <code>RWKV</code>.</p>
+<p>See more LLMs that we might be able to deploy at <a class="link"   target="_blank" rel="noopener" href="https://github.com/chenking2020/FindTheChatGPTer" >FindTheChatGPTer<i class="fas fa-external-link-alt"></i></a>.</p>
+<p>More online sites to enjoy models can be found at <a class="link"   target="_blank" rel="noopener" href="https://github.com/xtekky/gpt4free" >gpt4free<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/LiLittleCat/awesome-free-chatgpt" >Awesome Free ChatGPT<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<p>Aside from these Large Lange Models, there are also some other kinds of interesting models, like multi&#x2F;cross modality and Fusion models, that we can give a try.</p>
+<h2 id="LLaVA"><a href="#LLaVA" class="headerlink" title="LLaVA"></a>LLaVA</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/haotian-liu/LLaVA" >https://github.com/haotian-liu/LLaVA<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="MiniGPT-4"><a href="#MiniGPT-4" class="headerlink" title="MiniGPT-4"></a>MiniGPT-4</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/Vision-CAIR/MiniGPT-4" >https://github.com/Vision-CAIR/MiniGPT-4<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://raw.githubusercontent.com/Vision-CAIR/MiniGPT-4/main/figs/overview.png" alt="overview"><br><img src="https://raw.githubusercontent.com/Vision-CAIR/MiniGPT-4/main/figs/online_demo.png" alt="online demo"></p>
+<h2 id="VisualGLM-6B"><a href="#VisualGLM-6B" class="headerlink" title="VisualGLM-6B"></a>VisualGLM-6B</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/THUDM/VisualGLM-6B" >https://github.com/THUDM/VisualGLM-6B<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://raw.githubusercontent.com/THUDM/ChatGLM-6B/main/resources/visualglm.png" alt="visualglm"><br><img src="https://raw.githubusercontent.com/THUDM/VisualGLM-6B/main/examples/chat_example1.jpg" alt="chat example"><br><img src="https://raw.githubusercontent.com/THUDM/VisualGLM-6B/main/examples/web_demo.png" alt="web demo"></p>
+<h2 id="Stable-Diffusion"><a href="#Stable-Diffusion" class="headerlink" title="Stable Diffusion"></a>Stable Diffusion</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/Stability-AI/stablediffusion" >https://github.com/Stability-AI/stablediffusion<i class="fas fa-external-link-alt"></i></a></p>
+<p>See more painting models at <a class="link"   target="_blank" rel="noopener" href="https://github.com/hua1995116/awesome-ai-painting" >https://github.com/hua1995116/awesome-ai-painting<i class="fas fa-external-link-alt"></i></a></p>
+
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/paper/">paper</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/note/">note</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="article-nav">
+                        
+                        
+                            <div class="article-next">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/"
+                                   title="Binary Code Similarity Detection Papers (Part2)"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Binary Code Similarity Detection Papers (Part2)</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                            <span class="right arrow-icon flex-center">
+                                      <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LLaMA"><span class="nav-number">1.</span> <span class="nav-text">LLaMA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpaca"><span class="nav-number">1.1.</span> <span class="nav-text">Alpaca</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpaca-Lora"><span class="nav-number">1.2.</span> <span class="nav-text">Alpaca Lora</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatGLM-6B"><span class="nav-number">2.</span> <span class="nav-text">ChatGLM-6B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MOSS"><span class="nav-number">3.</span> <span class="nav-text">MOSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RWKV"><span class="nav-number">4.</span> <span class="nav-text">RWKV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vicuna"><span class="nav-number">5.</span> <span class="nav-text">Vicuna</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">6.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLaVA"><span class="nav-number">7.</span> <span class="nav-text">LLaVA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniGPT-4"><span class="nav-number">8.</span> <span class="nav-text">MiniGPT-4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VisualGLM-6B"><span class="nav-number">9.</span> <span class="nav-text">VisualGLM-6B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-number">10.</span> <span class="nav-text">Stable Diffusion</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">Total words</span>
+                    <span class="item-value border-box word">129.1k</span>
+                </span>
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            $li-margin-bottom = 0.8rem
+$post-tool-button-width = 2.5rem
+
+.post-tools-container {
+  padding-top var(--components-spacing)
+
+  .tools-list {
+
+    li {
+      position relative
+      box-sizing border-box
+      width $post-tool-button-width
+      height $post-tool-button-width
+      margin-bottom $li-margin-bottom
+      color var(--text-color-3)
+      font-size 1.2rem
+      background var(--background-color-1)
+      border-radius 50%
+      box-shadow 2px 2px 5px var(--shadow-color)
+      cursor pointer
+
+      &:hover {
+        box-shadow 2px 2px 8px var(--shadow-hover-color)
+      }
+
+      i {
+        color var(--text-color-3)
+      }
+
+
+      &:hover {
+        color var(--background-color-1)
+        background var(--primary-color)
+
+        i {
+          color var(--background-color-1)
+        }
+      }
+
+
+      &:last-child {
+        margin-bottom 0
+      }
+
+
+      &.toggle-show-toc {
+        display none
+      }
+
+
+      &.go-to-comments {
+        .post-comments-count {
+          position absolute
+          top 0
+          right -1rem
+          display none
+          align-items center
+          justify-content center
+          box-sizing border-box
+          min-width 1.1rem
+          height 1.1rem
+          padding 0 0.2rem
+          color var(--badge-color)
+          font-size 12px
+          background var(--badge-background-color)
+          border-radius 0.4rem
+
+          +keep-tablet() {
+            display none !important
+          }
+        }
+      }
+    }
+  }
+}
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LLaMA"><span class="nav-number">1.</span> <span class="nav-text">LLaMA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpaca"><span class="nav-number">1.1.</span> <span class="nav-text">Alpaca</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alpaca-Lora"><span class="nav-number">1.2.</span> <span class="nav-text">Alpaca Lora</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChatGLM-6B"><span class="nav-number">2.</span> <span class="nav-text">ChatGLM-6B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MOSS"><span class="nav-number">3.</span> <span class="nav-text">MOSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RWKV"><span class="nav-number">4.</span> <span class="nav-text">RWKV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vicuna"><span class="nav-number">5.</span> <span class="nav-text">Vicuna</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">6.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLaVA"><span class="nav-number">7.</span> <span class="nav-text">LLaVA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniGPT-4"><span class="nav-number">8.</span> <span class="nav-text">MiniGPT-4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VisualGLM-6B"><span class="nav-number">9.</span> <span class="nav-text">VisualGLM-6B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-number">10.</span> <span class="nav-text">Stable Diffusion</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- code-block -->
+
+    
+<script src="/js/code-block.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

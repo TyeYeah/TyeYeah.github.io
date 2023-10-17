@@ -13,7 +13,7 @@
 .highlight-container.mac .code-tools-box {
   justify-content: flex-end;
   padding: 0.4rem 0.6rem 0.7rem 0.4rem;
-  background: #21252b;
+  background: var(--mac-toolbar-background-color);
 }
 .highlight-container.mac .code-tools-box::before {
   position: absolute;
@@ -47,6 +47,7 @@
   position: absolute;
   top: 3rem;
   right: 0.5rem;
+  box-sizing: border-box;
   padding: 0 0.1rem;
   opacity: 0;
 }
@@ -54,6 +55,8 @@
   font-size: 1rem;
 }
 .highlight-container .code-tools-box {
+  position: relative;
+  z-index: $z-index-1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,6 +91,8 @@
   padding: 0 0.4rem 0 0.2rem;
 }
 .highlight-container figure.highlight {
+  position: relative;
+  box-sizing: border-box;
   margin: 0;
 }
 .highlight-container figure.highlight.folded {
