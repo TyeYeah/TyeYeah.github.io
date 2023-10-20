@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Computer, Network, Security">
+    <meta name="description" content="a blog on Hexo">
+    <meta name="author" content="TyeYeah">
+    
+    <title>
+        
+            IDAPython note |
+        
+        Relish the Moment
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/img/wang.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Relish the Moment
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+
+                
+
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+
+        <div class="article-content-container border-box">
+
+            
+
+            <div class="article-content-bottom border-box">
+                
+                    <div class="article-title">
+                        IDAPython note
+                    </div>
+                
+
+                
+                    <div class="article-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/img/aliwangwang.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author">
+                                <span class="name">TyeYeah</span>
+                                
+                                    <span class="author-label">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="article-meta-info-container border-box post">
+    <div class="article-meta-info border-box">
+        
+
+
+        
+            <span class="meta-info-item article-create-date">
+                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
+                <span class="pc">2023-10-17 22:21:33</span>
+                <span class="mobile">2023-10-17 22:21</span>
+            </span>
+
+            <span class="meta-info-item article-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="pc" data-updated="Fri Oct 20 2023 21:03:15 GMT+0800">2023-10-20 21:03:15</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="article-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="article-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="article-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item article-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>480 Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item article-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+            </span>
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="article-content keep-markdown-body">
+                    
+
+                    <p>IDAPython is an IDA plugin which makes it possible to write scripts for IDA in the Python programming language. IDAPython provides full access to both the IDA API and any installed Python module.</p>
+<p>At first it should be downloaded separately, at <a class="link"   target="_blank" rel="noopener" href="https://github.com/idapython" >github<i class="fas fa-external-link-alt"></i></a> to pull its <a class="link"   target="_blank" rel="noopener" href="https://github.com/idapython/src" >src<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://github.com/idapython/bin" >bin<i class="fas fa-external-link-alt"></i></a>, until in IDA Pro 6.8 it was designed to be built-in.</p>
+<h2 id="IDA-Python-API"><a href="#IDA-Python-API" class="headerlink" title="IDA Python API"></a>IDA Python API</h2><p>We can visit <a class="link"   target="_blank" rel="noopener" href="https://www.hex-rays.com/products/ida/support/idapython_docs/" >IDAPython documentation<i class="fas fa-external-link-alt"></i></a> for a complete API document, and IDC APIs at <a class="link"   target="_blank" rel="noopener" href="https://www.hex-rays.com/products/ida/support/idadoc/162.shtml" >IDA Help: Alphabetical list of IDC functions<i class="fas fa-external-link-alt"></i></a><br>(More IDA helps at <a class="link"   target="_blank" rel="noopener" href="https://www.hex-rays.com/products/ida/support/idadoc/" >IDA Help: The Interactive Disassembler Help Index<i class="fas fa-external-link-alt"></i></a>)</p>
+<p>However, there are API changes between different versions of IDA Pro, so 2 solutions:</p>
+<ol>
+<li>Visit <a class="link"   target="_blank" rel="noopener" href="https://www.hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml" >Porting from IDAPython 6.x-7.3, to 7.4<i class="fas fa-external-link-alt"></i></a> to migrate older APIs to the latest Version. [Recommended]</li>
+</ol>
+<ul>
+<li>If you don’t have the latest IDA Pro but version 7.0, <a target="_blank" rel="noopener" href="https://hex-rays.com/products/ida/news/7_0/docs/api70_porting_guide/"><br>IDA 7.0 SDK: Porting from IDA 4.9-6.x API to IDA 7.0 API</a></li>
+</ul>
+<ol start="2">
+<li>Or add <code>from idc_bc695 import *</code> (to replace <code>idc</code> lib with <code>idc_bc695</code> in situ) at the head of idapython script, change the value of <code>AUTOIMPORT_COMPAT_IDA695</code> to be true in <code>/path/to/IDA/cfg/idapython.cfg</code>, then you can still use old APIs.</li>
+</ol>
+<ul>
+<li>See the official page <a class="link"   target="_blank" rel="noopener" href="https://hex-rays.com/products/ida/news/7_0/docs/idapython_backward_compat_695/" >IDA 7.0: IDAPython backward-compatibility with 6.95 APIs<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="Run-in-Command-Line"><a href="#Run-in-Command-Line" class="headerlink" title="Run in Command Line"></a>Run in Command Line</h2><p>As in the doc <a class="link"   target="_blank" rel="noopener" href="https://www.hex-rays.com/products/ida/support/idadoc/417.shtml" >IDA Help: Command line switches<i class="fas fa-external-link-alt"></i></a> writes detailed parameter explaination, here emphasizes some and gives sample usages.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ida -L<span class="string">&quot;/path/to/logfile&quot;</span> -c -A -S<span class="string">&quot;/path/to/script argv[1] argv[2] argv[3]&quot;</span> /path/to/target_file</span><br></pre></td></tr></table></figure>
+<p>In the command above:</p>
+<ul>
+<li><code>-L</code> is important, since you needs error&#x2F;warning report to know whether your script works fine. <ul>
+<li>Note: no space for parameter and value.</li>
+<li>to let script prints in stdout rather than logfile, add this in <code>/path/to/IDA/python/3/init.py</code>:  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys.stdout = sys.stderr = IDAPythonStdOut()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><code>-c</code> to clean the old database.</li>
+<li><code>-A</code> autonomous mode. <ul>
+<li>IDA will not display dialog boxes. (like CLI, but needs X Window)</li>
+<li>Designed to be used together with <code>-S</code> switch.</li>
+</ul>
+</li>
+<li><code>-S</code> to execute a script file when the database is opened.<ul>
+<li>support multi args</li>
+<li>Note: no space for parameter and value.</li>
+</ul>
+</li>
+<li>the <code>target_file</code> is normally the binary to apply the idapython script.</li>
+<li>the <code>-B</code> parameter is often used, batch mode. <ul>
+<li>IDA will generate .IDB and .ASM files automatically</li>
+<li>like <code>-A</code> it will make it silent, without IDA window popping up.</li>
+</ul>
+</li>
+</ul>
+<p>Attention: the <code>ida</code> and <code>ida64</code> are for GUI, and the <code>idat</code> and <code>idat64</code> are for TUI, all of them can be used for idapython scripts. They may behave differently when executing scripts, and from the command line to start GUI requires <code>X Window</code> support (by the terminal software you use), or you get errors like <code>QXcbConnection: Could not connect to display</code> (even just running idapython scripts in silence). Using <code>idat</code> and <code>idat64</code> to run scripts is preferred.</p>
+
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/pwn/">pwn</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/note/">note</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="article-nav">
+                        
+                        
+                            <div class="article-next">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/"
+                                   title="Deploy Some LLMs"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Deploy Some LLMs</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                            <span class="right arrow-icon flex-center">
+                                      <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA-Python-API"><span class="nav-number">1.</span> <span class="nav-text">IDA Python API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-in-Command-Line"><span class="nav-number">2.</span> <span class="nav-text">Run in Command Line</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2023
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">Total words</span>
+                    <span class="item-value border-box word">129.6k</span>
+                </span>
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA-Python-API"><span class="nav-number">1.</span> <span class="nav-text">IDA Python API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-in-Command-Line"><span class="nav-number">2.</span> <span class="nav-text">Run in Command Line</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- code-block -->
+
+    
+<script src="/js/code-block.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

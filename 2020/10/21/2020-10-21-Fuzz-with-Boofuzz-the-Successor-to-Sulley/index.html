@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
@@ -545,7 +545,7 @@
             
                 <span class="count-box border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">129.1k</span>
+                    <span class="item-value border-box word">129.6k</span>
                 </span>
             
 
@@ -562,81 +562,19 @@
     <!-- post tools -->
     
         <div class="post-tools right-toc">
-            $li-margin-bottom = 0.8rem
-$post-tool-button-width = 2.5rem
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
 
-.post-tools-container {
-  padding-top var(--components-spacing)
-
-  .tools-list {
-
-    li {
-      position relative
-      box-sizing border-box
-      width $post-tool-button-width
-      height $post-tool-button-width
-      margin-bottom $li-margin-bottom
-      color var(--text-color-3)
-      font-size 1.2rem
-      background var(--background-color-1)
-      border-radius 50%
-      box-shadow 2px 2px 5px var(--shadow-color)
-      cursor pointer
-
-      &:hover {
-        box-shadow 2px 2px 8px var(--shadow-hover-color)
-      }
-
-      i {
-        color var(--text-color-3)
-      }
-
-
-      &:hover {
-        color var(--background-color-1)
-        background var(--primary-color)
-
-        i {
-          color var(--background-color-1)
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom 0
-      }
-
-
-      &.toggle-show-toc {
-        display none
-      }
-
-
-      &.go-to-comments {
-        .post-comments-count {
-          position absolute
-          top 0
-          right -1rem
-          display none
-          align-items center
-          justify-content center
-          box-sizing border-box
-          min-width 1.1rem
-          height 1.1rem
-          padding 0 0.2rem
-          color var(--badge-color)
-          font-size 12px
-          background var(--badge-background-color)
-          border-radius 0.4rem
-
-          +keep-tablet() {
-            display none !important
-          }
-        }
-      }
-    }
-  }
-}
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
 
         </div>
     
