@@ -180,145 +180,31 @@
 
                 
 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container border-box">
-        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;linux
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container border-box">
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2023</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">05-08</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/"
-                        >Deploy Some LLMs</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-07</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/"
-                        >Binary Code Similarity Detection Papers (Part2)</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">01-02</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
-                        >Binary SCA (Software Composition Analysis) Related Tools</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2022</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">11-20</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2022/11/20/2022-11-20-LLVM-Commands/"
-                        >LLVM Commands</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">08-06</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2022/08/06/2022-08-06-Go-Phishing/"
-                        >Go Phishing!</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">03-26</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/"
-                        >Binary Code Similarity Detection Papers</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2021</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">08-02</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
-                        >Bypass Anti-Virus</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">07-31</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/07/31/2021-07-31-Handle-Pwn-Libc-and-Host-a-Pwn/"
-                        >Handle Pwn Libc and Host a Pwn</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">07-30</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/07/30/2021-07-30-ARM-MIPS-PWN-Intro/"
-                        >ARM &amp; MIPS PWN Intro</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">05-12</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/05/12/2021-05-12-Heap-Exploit-Intro/"
-                        >Heap Exploit Intro</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.5rem
 
-        </div>
-    </div>
-    
-    <div class="paginator border-box flex-center">
-        <div class="btn-wrap">
-            <a class="jump-btn"
-               href="/"
-            ><i class="fa-solid fa-chevron-left"></i></a>
-        </div>
+.tag-container {
 
+  keep-container(1, 2rem, 2rem)
 
-        <div class="page-number-box border-box flex-center">
-            <input class="page-number-input border-box base-color-size"
-                   type="number"
-                   value="1"
-                   min="1"
-                   max="5"
-            ><span class="delimiter base-color-size">/</span><span class="base-color-size">5</span>
-        </div>
+  .tag-name {
+    margin-bottom var(--components-spacing)
+    color var(--text-color-2)
+    font-weight 600
+    font-size $tag-name-font-size
 
+    i {
+      color var(--text-color-2)
+    }
 
-        <div class="btn-wrap allowed">
-            <a class="jump-btn"
-               href="/tags/linux/page/2/"
-            ><i class="fa-solid fa-chevron-right"></i></a>
-        </div>
-    </div>
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
 
-
-
-
-</div>
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 
@@ -332,7 +218,7 @@
     <div class="border-box website-info-box default">
         
             <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2023
+                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2024
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
                 
@@ -351,7 +237,7 @@
             
                 <span class="count-box border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">129.6k</span>
+                    <span class="item-value border-box word">130.4k</span>
                 </span>
             
 

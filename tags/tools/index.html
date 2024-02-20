@@ -180,39 +180,31 @@
 
                 
 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container border-box">
-        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;tools
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container border-box">
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2018</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-01</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2018/10/01/2018-09-31-Resource-Lists/"
-                        >Resource Lists</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.5rem
 
-        </div>
-    </div>
-    
+.tag-container {
 
+  keep-container(1, 2rem, 2rem)
 
+  .tag-name {
+    margin-bottom var(--components-spacing)
+    color var(--text-color-2)
+    font-weight 600
+    font-size $tag-name-font-size
 
-</div>
+    i {
+      color var(--text-color-2)
+    }
+
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
+
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 
@@ -226,7 +218,7 @@
     <div class="border-box website-info-box default">
         
             <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2023
+                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2024
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
                 
@@ -245,7 +237,7 @@
             
                 <span class="count-box border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">129.6k</span>
+                    <span class="item-value border-box word">130.4k</span>
                 </span>
             
 

@@ -180,154 +180,31 @@
 
                 
 
-                    <div class="fade-in-down-animation">
-    <div class="tag-container border-box">
-        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;windows
-        </div>
-        <div class="tag-post-list">
-            
-<div class="archive-list-container border-box">
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2023</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">01-02</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
-                        >Binary SCA (Software Composition Analysis) Related Tools</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2022</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">08-06</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2022/08/06/2022-08-06-Go-Phishing/"
-                        >Go Phishing!</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2021</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">08-02</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/"
-                        >Bypass Anti-Virus</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-19</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/02/19/2021-02-19-About-Privilege-Escalation/"
-                        >About Privilege Escalation</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">02-18</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2021/02/18/2021-02-18-About-Pentest-Persistence/"
-                        >About Pentest Persistence</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-        <section class="archive-item border-box">
-            <div class="archive-item-header border-box">
-                <span class="archive-year">2020</span>
-            </div>
-            <ul class="article-list border-box">
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-15</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
-                        >Stack Overflow Intro</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">05-25</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2020/05/25/2020-05-25-About-Stealing-Credentials/"
-                        >About Stealing Credentials</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">03-31</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2020/03/31/2020-03-31-About-Reverse-Shell/"
-                        >About Reverse Shell</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">03-17</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2020/03/17/2020-03-17-MSF-Pentest-Route/"
-                        >MSF Pentest Route</a>
-                    </li>
-                
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">03-15</span>
-                        <a class="article-title border-box text-ellipsis"
-                           href="/2020/03/15/2020-03-15-About-Port-Forwarding/"
-                        >About Port Forwarding</a>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+                    $tag-name-font-size = 1.5rem
 
-        </div>
-    </div>
-    
-    <div class="paginator border-box flex-center">
-        <div class="btn-wrap">
-            <a class="jump-btn"
-               href="/"
-            ><i class="fa-solid fa-chevron-left"></i></a>
-        </div>
+.tag-container {
 
+  keep-container(1, 2rem, 2rem)
 
-        <div class="page-number-box border-box flex-center">
-            <input class="page-number-input border-box base-color-size"
-                   type="number"
-                   value="1"
-                   min="1"
-                   max="2"
-            ><span class="delimiter base-color-size">/</span><span class="base-color-size">2</span>
-        </div>
+  .tag-name {
+    margin-bottom var(--components-spacing)
+    color var(--text-color-2)
+    font-weight 600
+    font-size $tag-name-font-size
 
+    i {
+      color var(--text-color-2)
+    }
 
-        <div class="btn-wrap allowed">
-            <a class="jump-btn"
-               href="/tags/windows/page/2/"
-            ><i class="fa-solid fa-chevron-right"></i></a>
-        </div>
-    </div>
+    +keep-tablet() {
+      font-size $tag-name-font-size * 0.9
+    }
 
-
-
-
-</div>
+    +keep-mobile() {
+      font-size $tag-name-font-size * 0.8
+    }
+  }
+}
 
 
                 
@@ -341,7 +218,7 @@
     <div class="border-box website-info-box default">
         
             <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2023
+                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2024
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
                 
@@ -360,7 +237,7 @@
             
                 <span class="count-box border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">129.6k</span>
+                    <span class="item-value border-box word">130.4k</span>
                 </span>
             
 
