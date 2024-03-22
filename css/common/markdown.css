@@ -8,6 +8,7 @@
   justify-content: flex-start;
   box-sizing: border-box;
   margin: 1.4rem 0;
+  padding: 0.8rem;
   color: var(--text-color-3);
   background: var(--background-color-2);
   border-left: 0.4rem solid var(--text-color-4);
@@ -20,7 +21,6 @@
 .keep-markdown-body blockquote footer {
   position: relative;
   box-sizing: border-box;
-  padding: 0.4rem 0.4rem 0.4rem 0.8rem !important;
 }
 .keep-markdown-body blockquote footer {
   margin-bottom: 0.6rem;
@@ -43,7 +43,7 @@
 .keep-markdown-body a {
   position: relative;
   box-sizing: border-box;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.1rem;
   text-decoration: none;
   overflow-wrap: break-word;
   border-bottom: 0.1rem solid var(--text-color-4);
@@ -56,7 +56,7 @@
   position: relative;
   margin: 0 0.2rem 0 0.4rem;
   color: var(--text-color-4);
-  font-size: 0.88rem;
+  font-size: 0.8rem;
 }
 .keep-markdown-body a:hover {
   text-decoration: underline;
@@ -72,7 +72,7 @@
 }
 .keep-markdown-body ul li,
 .keep-markdown-body ol li {
-  margin-left: 1rem;
+  margin: 0.3rem 0 0.3rem 1rem;
   line-height: 2rem;
 }
 .keep-markdown-body ul li {
@@ -193,8 +193,6 @@ keep-tablet()
   display: block;
   box-sizing: border-box;
   max-width: 100%;
-  margin: var(--post-img-align);
-  margin-bottom: 2rem;
   box-shadow: 0 0 0.2rem var(--shadow-color);
   cursor: zoom-in;
   opacity: 1;
@@ -204,31 +202,46 @@ keep-tablet()
 }
 .keep-markdown-body img[lazyload] {
   margin: 0.8rem auto 0.2rem;
+  zoom: 1 !important;
 }
-.keep-markdown-body > table {
+.keep-markdown-body > img,
+.keep-markdown-body p > img {
+  margin: var(--post-img-align);
+}
+.keep-markdown-body > .table-container {
+  box-sizing: border-box;
   width: 100%;
+  margin: 1.5rem 0;
   overflow: auto;
+}
+.keep-markdown-body > .table-container table {
+  box-sizing: border-box;
+  width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
 keep-mobile()
 }
-.keep-markdown-body > table td,
-.keep-markdown-body > table th {
+.keep-markdown-body > .table-container table td,
+.keep-markdown-body > .table-container table th {
   padding: 0;
 }
-.keep-markdown-body > table th {
+.keep-markdown-body > .table-container table td {
+  color: var(--text-color-3);
+}
+.keep-markdown-body > .table-container table th {
+  color: var(--text-color-2);
   font-weight: 600;
 }
-.keep-markdown-body > table td,
-.keep-markdown-body > table th {
-  padding: 0.4rem 1rem;
+.keep-markdown-body > .table-container table td,
+.keep-markdown-body > .table-container table th {
+  padding: 0.5rem 1rem;
   border: 0.1rem solid var(--border-color);
 }
-.keep-markdown-body > table tr {
+.keep-markdown-body > .table-container table tr {
   background-color: var(--background-color-1);
-  border: 0.1rem solid var(--text-color-6);
+  border: 0.1rem solid var(--border-color);
 }
-.keep-markdown-body > table tr:nth-child(2n) {
+.keep-markdown-body > .table-container table tr:nth-child(2n) {
   background-color: var(--background-color-2);
 }
 .keep-markdown-body .mermaid {

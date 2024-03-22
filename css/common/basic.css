@@ -6,20 +6,32 @@
   --page-content-width: 80%;
   --page-content-width-tablet: 88%;
   --page-content-width-mobile: 90%;
-  --page-content-max-width: 928px;
+  --page-content-max-width: 960px;
   --page-content-max-width-2: calc(var(--page-content-max-width) * 1.2);
-  --components-spacing: 36px;
+  --component-gap: 36px;
   --box-border-radius: 8px;
   --header-height: 70px;
   --header-shrink-height: calc(var(--header-height) * 0.72);
   --header-backdrop-filter-blur: 4px;
-  --header-scroll-progress-bar-height: 2PX;
+  --header-scroll-progress-bar-height: 2px;
+  --header-title-font-family: var(--base-font-family);
+  --header-title-font-size: 1.8rem;
+  --header-menu-icon: inline-block;
+  --first-screen-display: block;
+  --first-screen-font-family: var(--base-font-family);
   --first-screen-font-size: 2rem;
-  --first-screen-icon-size: 1.8rem;
   --first-screen-font-color-light: #50505c;
   --first-screen-font-color-dark: #adbac5;
+  --first-screen-font-offset: 0;
+  --first-screen-icon-size: 1.8rem;
+  --first-screen-icon-color-light: #50505c;
+  --first-screen-icon-color-dark: #adbac5;
+  --first-screen-header-font-color-light: #50505c;
+  --first-screen-header-font-color-dark: #adbac5;
   --home-post-hover-scale: 1;
+  --post-title-align: left;
   --post-author-avatar: block;
+  --post-author-name: flex;
   --post-create-datetime: flex;
   --post-update-datetime: flex;
   --post-img-align: 0 auto 0 0;
@@ -204,6 +216,74 @@
     opacity: 1;
   }
 }
+@-moz-keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+@-webkit-keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+@-o-keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
 :root {
   --primary-color: #06c;
   --primary-color-light-1: #0075eb;
@@ -228,7 +308,7 @@
   --selection-color: #0075eb;
   --shadow-color: rgba(0,0,0,0.16);
   --shadow-hover-color: rgba(0,0,0,0.22);
-  --scrollbar-color: #60606e;
+  --scrollbar-color: #686877;
   --scrollbar-background-color: #e6e6e6;
   --toc-scrollbar-color: rgba(80,80,92,0.1);
   --copyright-icon-bg-color: rgba(80,80,92,0.12);
@@ -237,9 +317,6 @@
   --header-transparent-background-2: rgba(255,255,255,0.4);
   --pjax-progress-bar-color: linear-gradient(45deg, #f10006, #ef5b00, #e59c01, #19ca05, #00cab5, #0264c8, #c303c3);
   --post-h-bottom-border-color: rgba(80,80,92,0.15);
-  --article-aging-tips-color: $article-aging-tips-color;
-  --article-aging-tips-background-color: $article-aging-tips-background-color;
-  --article-aging-tips-border-color: $article-aging-tips-border-color;
   --keep-info-color: rgba(117,117,122,0.8);
   --keep-info-background-color: rgba(117,117,122,0.1);
   --keep-info-border-color: rgba(117,117,122,0.6);
@@ -281,7 +358,7 @@
     --selection-color: #0075eb;
     --shadow-color: rgba(0,0,0,0.16);
     --shadow-hover-color: rgba(0,0,0,0.22);
-    --scrollbar-color: #60606e;
+    --scrollbar-color: #686877;
     --scrollbar-background-color: #e6e6e6;
     --toc-scrollbar-color: rgba(80,80,92,0.1);
     --copyright-icon-bg-color: rgba(80,80,92,0.12);
@@ -290,9 +367,6 @@
     --header-transparent-background-2: rgba(255,255,255,0.4);
     --pjax-progress-bar-color: linear-gradient(45deg, #f10006, #ef5b00, #e59c01, #19ca05, #00cab5, #0264c8, #c303c3);
     --post-h-bottom-border-color: rgba(80,80,92,0.15);
-    --article-aging-tips-color: $article-aging-tips-color;
-    --article-aging-tips-background-color: $article-aging-tips-background-color;
-    --article-aging-tips-border-color: $article-aging-tips-border-color;
     --keep-info-color: rgba(117,117,122,0.8);
     --keep-info-background-color: rgba(117,117,122,0.1);
     --keep-info-border-color: rgba(117,117,122,0.6);
@@ -335,8 +409,8 @@
     --selection-color: #005ebc;
     --shadow-color: rgba(120,120,120,0.18);
     --shadow-hover-color: rgba(120,120,120,0.24);
-    --scrollbar-color: #1f2329;
-    --scrollbar-background-color: #47515f;
+    --scrollbar-color: #505b6c;
+    --scrollbar-background-color: #1d2127;
     --toc-scrollbar-color: rgba(173,186,197,0.1);
     --copyright-icon-bg-color: rgba(173,186,197,0.12);
     --avatar-background-color: #004a93;
@@ -344,9 +418,6 @@
     --header-transparent-background-2: rgba(34,39,46,0.4);
     --pjax-progress-bar-color: linear-gradient(45deg, #ea404a, #ea722f, #e9a71f, #67e559, #18ecec, #1b85f1, #ee1dee);
     --post-h-bottom-border-color: rgba(173,186,197,0.15);
-    --article-aging-tips-color: $dark-article-aging-tips-color;
-    --article-aging-tips-background-color: $dark-article-aging-tips-background-color;
-    --article-aging-tips-border-color: $dark-article-aging-tips-border-color;
     --keep-info-color: #9999a2;
     --keep-info-background-color: rgba(153,153,162,0.1);
     --keep-info-border-color: rgba(153,153,162,0.5);
@@ -388,7 +459,7 @@
   --selection-color: #0075eb;
   --shadow-color: rgba(0,0,0,0.16);
   --shadow-hover-color: rgba(0,0,0,0.22);
-  --scrollbar-color: #60606e;
+  --scrollbar-color: #686877;
   --scrollbar-background-color: #e6e6e6;
   --toc-scrollbar-color: rgba(80,80,92,0.1);
   --copyright-icon-bg-color: rgba(80,80,92,0.12);
@@ -397,9 +468,6 @@
   --header-transparent-background-2: rgba(255,255,255,0.4);
   --pjax-progress-bar-color: linear-gradient(45deg, #f10006, #ef5b00, #e59c01, #19ca05, #00cab5, #0264c8, #c303c3);
   --post-h-bottom-border-color: rgba(80,80,92,0.15);
-  --article-aging-tips-color: $article-aging-tips-color;
-  --article-aging-tips-background-color: $article-aging-tips-background-color;
-  --article-aging-tips-border-color: $article-aging-tips-border-color;
   --keep-info-color: rgba(117,117,122,0.8);
   --keep-info-background-color: rgba(117,117,122,0.1);
   --keep-info-border-color: rgba(117,117,122,0.6);
@@ -440,8 +508,8 @@
   --selection-color: #005ebc;
   --shadow-color: rgba(120,120,120,0.18);
   --shadow-hover-color: rgba(120,120,120,0.24);
-  --scrollbar-color: #1f2329;
-  --scrollbar-background-color: #47515f;
+  --scrollbar-color: #505b6c;
+  --scrollbar-background-color: #1d2127;
   --toc-scrollbar-color: rgba(173,186,197,0.1);
   --copyright-icon-bg-color: rgba(173,186,197,0.12);
   --avatar-background-color: #004a93;
@@ -449,9 +517,6 @@
   --header-transparent-background-2: rgba(34,39,46,0.4);
   --pjax-progress-bar-color: linear-gradient(45deg, #ea404a, #ea722f, #e9a71f, #67e559, #18ecec, #1b85f1, #ee1dee);
   --post-h-bottom-border-color: rgba(173,186,197,0.15);
-  --article-aging-tips-color: $dark-article-aging-tips-color;
-  --article-aging-tips-background-color: $dark-article-aging-tips-background-color;
-  --article-aging-tips-border-color: $dark-article-aging-tips-border-color;
   --keep-info-color: #9999a2;
   --keep-info-background-color: rgba(153,153,162,0.1);
   --keep-info-border-color: rgba(153,153,162,0.5);
@@ -476,12 +541,12 @@
 }
 *::-webkit-scrollbar {
   width: 0.4rem;
-  height: 0.4rem;
+  height: 0.32rem;
   transition: all 0.2s ease;
 }
 *::-webkit-scrollbar-thumb {
   background: var(--scrollbar-color);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
 }
 *::-webkit-scrollbar-track {
   background: var(--scrollbar-background-color);
@@ -503,28 +568,19 @@ body {
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 0.6rem;
-  height: 0.6rem;
-}
-@media (max-width: 800px) {
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-  }
-}
-@media (max-width: 500px) {
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    width: 0.4rem;
-    height: 0.4rem;
-  }
+  width: 0.56rem;
+  height: 0.56rem;
 }
 @media (max-width: 800px) {
   html,
   body {
     font-size: calc(var(--base-font-size) * 0.95) !important;
     line-height: calc(var(--base-line-height) * 0.95) !important;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0.42rem;
+    height: 0.42rem;
   }
 }
 @media (max-width: 500px) {
@@ -619,6 +675,16 @@ img[lazyload]::after {
   align-items: center;
   justify-content: center;
 }
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .border-box {
   position: relative;
   box-sizing: border-box;
@@ -627,6 +693,15 @@ img[lazyload]::after {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.text-color-2 {
+  color: var(--text-color-2);
+}
+.text-color-3 {
+  color: var(--text-color-3);
+}
+.text-color-4 {
+  color: var(--text-color-4);
 }
 .clear::after {
   display: block;

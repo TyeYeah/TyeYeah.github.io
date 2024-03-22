@@ -17,11 +17,13 @@ KEEP.initUtils = () => {
     isHasScrollProgressBar: false,
     isHasScrollPercent: false,
     isHeaderTransparent: false,
+    isHideHeader: true,
     hasToc: false,
 
     // initialization data
     initData() {
-      const { scroll, first_screen } = KEEP.theme_config?.style || {}
+      const scroll = KEEP.theme_config?.scroll || {}
+      const first_screen = KEEP.theme_config?.first_screen || {}
       this.isHasScrollProgressBar = scroll?.progress_bar === true
       this.isHasScrollPercent = scroll?.percent === true
       this.isHeaderTransparent =
@@ -29,6 +31,7 @@ KEEP.initUtils = () => {
       if (!this.isHeaderTransparent) {
         this.headerWrapperDom.classList.remove('transparent-1', 'transparent-2')
       }
+      this.isHideHeader = scroll?.hide_header !== false
     },
 
     // scroll Style Handle
@@ -72,12 +75,16 @@ KEEP.initUtils = () => {
 
       // hide header handle
       if (scrollTop > this.prevScrollValue && scrollTop > this.innerHeight) {
-        this.pageTopDom.classList.add('hide')
+        if (this.isHideHeader) {
+          this.pageTopDom.classList.add('hide')
+        }
         if (this.isHeaderTransparent) {
           this.headerWrapperDom.classList.remove('transparent-1', 'transparent-2')
         }
       } else {
-        this.pageTopDom.classList.remove('hide')
+        if (this.isHideHeader) {
+          this.pageTopDom.classList.remove('hide')
+        }
         if (this.isHeaderTransparent) {
           if (scrollTop <= this.headerWrapperDom.getBoundingClientRect().height) {
             this.headerWrapperDom.classList.remove('transparent-2')
@@ -85,6 +92,15 @@ KEEP.initUtils = () => {
           } else if (scrollTop < this.innerHeight) {
             this.headerWrapperDom.classList.add('transparent-2')
           }
+        }
+      }
+
+      // header font color handle
+      if (KEEP.theme_config?.first_screen?.enable === true) {
+        if (scrollTop > this.innerHeight - this.pageTopDom.getBoundingClientRect().height) {
+          this.pageTopDom.classList.add('reset-color')
+        } else {
+          this.pageTopDom.classList.remove('reset-color')
         }
       }
 
@@ -147,7 +163,7 @@ KEEP.initUtils = () => {
           `${fs * (1 + fontSizeLevel * 0.05)}px`,
           'important'
         )
-        KEEP.styleStatus.fontSizeLevel = fontSizeLevel
+        KEEP.themeInfo.styleStatus.fontSizeLevel = fontSizeLevel
         KEEP.setStyleStatus()
       }
 
@@ -178,15 +194,24 @@ KEEP.initUtils = () => {
       }
     },
 
+    // get dom zoom value
+    getZoomValueOfDom(dom) {
+      const tmp = Number((dom.style?.zoom || '1').replace('%', ''))
+      return tmp > 1 ? tmp / 100 : tmp
+    },
+
     // zoom in image
     zoomInImage() {
       let SIDE_GAP = 40
       let isZoomIn = false
       let curWinScrollY = 0
       let selectedImgDom = null
-      const imgDomList = document.querySelectorAll('.keep-markdown-body img')
       const zoomInImgMask = document.querySelector('.zoom-in-image-mask')
       const zoomInImg = zoomInImgMask?.querySelector('.zoom-in-image')
+      const imgDomList = [
+        ...document.querySelectorAll('.keep-markdown-body img'),
+        ...document.querySelectorAll('.photo-album-box img')
+      ]
 
       const zoomOut = () => {
         if (isZoomIn) {
@@ -225,16 +250,27 @@ KEEP.initUtils = () => {
       }
 
       if (imgDomList.length) {
+        // Register zoom out events
         zoomOutHandle()
+
         imgDomList.forEach((img) => {
+          // Zoom in handle
           img.addEventListener('click', () => {
             curWinScrollY = window.scrollY
             isZoomIn = !isZoomIn
             setSideGap()
             zoomInImg.setAttribute('src', img.getAttribute('src'))
             selectedImgDom = img
+
             if (isZoomIn) {
               const imgRect = selectedImgDom.getBoundingClientRect()
+
+              const zoom = this.getZoomValueOfDom(selectedImgDom)
+
+              for (let key in imgRect) {
+                imgRect[key] = imgRect[key] * zoom
+              }
+
               const imgW = imgRect.width
               const imgH = imgRect.height
               const imgL = imgRect.left
@@ -249,6 +285,7 @@ KEEP.initUtils = () => {
 
               selectedImgDom.classList.add('hide')
               zoomInImgMask.classList.add('show')
+
               zoomInImg.style.top = imgT + 'px'
               zoomInImg.style.left = imgL + 'px'
               zoomInImg.style.width = imgW + 'px'
@@ -293,9 +330,15 @@ KEEP.initUtils = () => {
       }
     },
 
-    // set how long age in home article block
+    // set how long age in home post block
     setHowLongAgoInHome() {
-      const post = document.querySelectorAll('.article-meta-info .home-article-history')
+      const { post_datetime_format } = KEEP.theme_config?.home || {}
+
+      if (post_datetime_format && post_datetime_format !== 'ago') {
+        return
+      }
+
+      const post = document.querySelectorAll('.post-meta-info .home-post-history')
       post &&
         post.forEach((v) => {
           const nowTimestamp = Date.now()
@@ -349,6 +392,7 @@ KEEP.initUtils = () => {
 
     // insert tooltip content dom
     insertTooltipContent() {
+      const { root } = KEEP.theme_config
       const isLazyLoadImg = KEEP.theme_config?.lazyload?.enable === true
 
       const init = () => {
@@ -429,10 +473,11 @@ KEEP.initUtils = () => {
           if (tooltipImgUrl) {
             const imgDomClass = `tooltip-img-${idx}-${tooltipImgName ? tooltipImgName : Date.now()}`
             const nameIdx = `${tooltipImgName}-${idx}`
+            const tmpSrc = (/^(https?:\/\/)/.test(tooltipImgUrl) ? '' : root) + tooltipImgUrl
 
             const imgDom = `<img class="${imgDomClass}"
                               ${isLazyLoadImg ? 'lazyload' : ''}
-                              ${isLazyLoadImg ? 'data-' : ''}src="${tooltipImgUrl}"
+                              ${isLazyLoadImg ? 'data-' : ''}src="${tmpSrc}"
                               alt="${imgDomClass}"
                             >`
 
@@ -502,7 +547,7 @@ KEEP.initUtils = () => {
             ) {
               const tmpDom1 = document.querySelector('.footer .count-item .uv')
               const tmpDom2 = document.querySelector('.footer .count-item .pv')
-              const tmpDom3 = document.querySelector('.article-meta-info .article-pv')
+              const tmpDom3 = document.querySelector('.post-meta-info .post-pv')
               tmpDom1 && (tmpDom1.style.display = 'flex')
               tmpDom2 && (tmpDom2.style.display = 'flex')
               tmpDom3 && (tmpDom3.style.display = 'inline-block')
@@ -576,7 +621,7 @@ KEEP.initUtils = () => {
 
     // first screen typewriter
     initTypewriter() {
-      const fsc = KEEP.theme_config?.style?.first_screen || {}
+      const fsc = KEEP.theme_config?.first_screen || {}
       const isHitokoto = fsc?.hitokoto === true
 
       if (fsc?.enable !== true) {
@@ -644,10 +689,71 @@ KEEP.initUtils = () => {
       }
     },
     trimPostMetaInfoBar() {
-      this.removeWhitespace(
-        document.querySelector('.article-meta-info-container .article-category-ul')
-      )
-      this.removeWhitespace(document.querySelector('.article-meta-info-container .article-tag-ul'))
+      this.removeWhitespace(document.querySelector('.post-meta-info-container .post-category-ul'))
+      this.removeWhitespace(document.querySelector('.post-meta-info-container .post-tag-ul'))
+    },
+
+    // close website announcement
+    closeWebsiteAnnouncement() {
+      if (KEEP.theme_config?.home?.announcement) {
+        const waDom = document.querySelector('.home-content-container .website-announcement')
+        if (waDom) {
+          const closeDom = waDom.querySelector('.close')
+          closeDom.addEventListener('click', () => {
+            waDom.style.display = 'none'
+          })
+        }
+      }
+    },
+
+    // wrap table dom with div
+    wrapTableWithBox() {
+      document.querySelectorAll('table').forEach((element) => {
+        const box = document.createElement('div')
+        box.className = 'table-container'
+        element.wrap(box)
+      })
+    },
+
+    // H tag title to top
+    title2Top4HTag(a, h, duration, cb) {
+      if (a && h) {
+        a.addEventListener('click', (e) => {
+          e.preventDefault()
+
+          cb && cb()
+
+          let winScrollY = window.scrollY
+          winScrollY = winScrollY <= 1 ? -19 : winScrollY
+          let offset = h.getBoundingClientRect().top + winScrollY
+
+          if (!this.isHideHeader) {
+            offset = offset - this.headerWrapperDom.getBoundingClientRect().height
+          }
+
+          window.anime({
+            targets: document.scrollingElement,
+            duration,
+            easing: 'linear',
+            scrollTop: offset,
+            complete: () => {
+              history.pushState(null, document.title, a.href)
+              if (this.isHideHeader) {
+                setTimeout(() => {
+                  this.pageTopDom.classList.add('hide')
+                }, 160)
+              }
+            }
+          })
+        })
+      }
+    },
+
+    // A tag anchor jump handle
+    aAnchorJump() {
+      document.querySelectorAll('a.headerlink').forEach((a) => {
+        this.title2Top4HTag(a, a.parentNode, 10)
+      })
     }
   }
 
@@ -664,4 +770,7 @@ KEEP.initUtils = () => {
   KEEP.utils.tabsActiveHandle()
   KEEP.utils.initTypewriter()
   KEEP.utils.trimPostMetaInfoBar()
+  KEEP.utils.closeWebsiteAnnouncement()
+  KEEP.utils.wrapTableWithBox()
+  KEEP.utils.aAnchorJump()
 }

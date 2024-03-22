@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         Try and Use WSL
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2019-08-01 21:25:59</span>
-                <span class="mobile">2019-08-01 21:25</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-08-01 21:25:59</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue Nov 14 2023 20:56:37 GMT+0800">2023-11-14 20:56:37</span>
+                <span class="datetime" data-updated="Tue Nov 14 2023 20:56:37 GMT+0800">2023-11-14 20:56:37</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/Note/">Note</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
                         
@@ -269,12 +286,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>11 Mins</span>
             </span>
         
@@ -289,13 +306,13 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>After a medium period of working &amp; studying on Deepin Linux, I experienced the force of deepin technology community including well technology supports, and commercial softwares <del>(cracked)</del>  provided, but there are still things I have to do on Windows only, like Office and my poor amd graphics card’s outdated driver, which cannot be installed on new Linux distributions.</p>
 <p>By the way I want to start studying  Windows OS, so initially planned to experience WSL, Hyper-v, Windows sandbox, Virtual Machine Platform, IIS and other Windows featured functions in order. It’s proved to be a <del>hard</del> long way.</p>
 <h2 id="Windows-Subsystem-for-Linux"><a href="#Windows-Subsystem-for-Linux" class="headerlink" title="Windows Subsystem for Linux"></a>Windows Subsystem for Linux</h2><p>So why WSL?<br>Cygwin, Gow, MSYS2, Git bash and other UNIX-like terminals are suitable for users with Linux cmd habits, but on WSL, you can almost do whatever Linux developers can do. It obeys your Linux developing custom, allows you to run Linux softwares (ELF files), and boots up really fast and so on. But only supported on Win10.<br>Here is its Architecture</p>
-<p><img src="/imghost/tuw/1.png" alt="pic 1 Architecture"></p>
+<p><img   src="/imghost/tuw/1.png"  alt="pic 1 Architecture"></p>
 <p>If you want to know more such as how to install, basic usages, and other stuff, please click <a class="link"   target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/about" >Official documents<i class="fas fa-external-link-alt"></i></a></p>
 <h3 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h3><p>WSL is a collection of components that enables native Linux ELF64 binaries to run on Windows. It contains both user mode and kernel mode components. It is primarily comprised of:</p>
 <ul>
@@ -304,7 +321,7 @@
 <li>Pico processes that host the unmodified user mode Linux (e.g. &#x2F;bin&#x2F;bash)</li>
 </ul>
 <p>It is the space between the user mode Linux binaries and the Windows kernel components where the magic happens. By placing unmodified Linux binaries in Pico processes we enable Linux system calls to be directed into the Windows kernel. The lxss.sys and lxcore.sys drivers translate the Linux system calls into NT APIs and emulate the Linux kernel.</p>
-<p><img src="/imghost/tuw/2.jpg" alt="pic 2 Architecture"></p>
+<p><img   src="/imghost/tuw/2.jpg"  alt="pic 2 Architecture"></p>
 <p>Now we can see the subsystem does not contain a real Linux Kernel, but it can satisfied lots of users.</p>
 <p>Pros:</p>
 <ul>
@@ -392,7 +409,6 @@
 <p>Try commands:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt remove -y kali-win-kex &amp;&amp; sudo apt install -y kali-win-kex</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ sudo mount -o remount,rw /tmp/.X11-unix</span><br><span class="line"><span class="comment"># or delete all .XX-lock files you can find (just do rm .X1-lock, rm .X2-lock ...)</span></span><br><span class="line">$ rm /tmp/.X1-lock /tmp/.X2-lock </span><br><span class="line"><span class="comment"># or delete related socket files</span></span><br><span class="line">$ rm -r /tmp/.X11-unix </span><br><span class="line"><span class="comment"># or ... google it</span></span><br></pre></td></tr></table></figure>
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -435,18 +451,18 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2019/10/07/2019-10-07-Python-Sandbox-Escape/"
                                    title="Python Sandbox Escape"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">Python Sandbox Escape</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -454,7 +470,7 @@
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2019/05/07/2019-05-07-Linux-Security-Response/"
@@ -464,8 +480,8 @@
                                         <span class="post-nav-title-item text-ellipsis">Linux Security Response</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -501,7 +517,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -557,6 +572,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -575,7 +595,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -672,7 +692,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -683,13 +705,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -717,10 +732,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

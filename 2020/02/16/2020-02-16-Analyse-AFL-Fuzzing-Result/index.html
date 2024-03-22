@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         Analyse AFL Fuzzing Result
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2020-02-16 11:39:23</span>
-                <span class="mobile">2020-02-16 11:39</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-02-16 11:39:23</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Thu Sep 24 2020 08:34:02 GMT+0800">2020-09-24 08:34:02</span>
+                <span class="datetime" data-updated="Thu Sep 24 2020 08:34:02 GMT+0800">2020-09-24 08:34:02</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/Fuzzing/">Fuzzing</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
                         
@@ -260,12 +277,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>7 Mins</span>
             </span>
         
@@ -280,17 +297,17 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>After doing fuzzing, we concentrate on result analysis.</p>
 <h2 id="Check-Fuzzer-Status"><a href="#Check-Fuzzer-Status" class="headerlink" title="Check Fuzzer Status"></a>Check Fuzzer Status</h2><h3 id="afl-whatsup"><a href="#afl-whatsup" class="headerlink" title="afl-whatsup"></a>afl-whatsup</h3><p>It helps showing the running status and overall running overview of each fuzzer, where the data is the sum of all fuzzers.<br>Plus the -s option to display only the overview.</p>
 <p>Use:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ afl-whatsup -s syncdir</span><br></pre></td></tr></table></figure>
-<p>To see:<br><img src="/imghost/aafr/1.jpg" alt="afl-whatsup e.g."></p>
+<p>To see:<br><img   src="/imghost/aafr/1.jpg"  alt="afl-whatsup e.g."></p>
 <p>It’s real time status without auto refreshing.<br>People always give it a loop to have updating feedback.</p>
 <h3 id="afl-gotcpu"><a href="#afl-gotcpu" class="headerlink" title="afl-gotcpu"></a>afl-gotcpu</h3><p>It helps checking status of every core.</p>
-<p><img src="/imghost/aafr/2.jpg" alt="afl-gotcpu e.g."></p>
+<p><img   src="/imghost/aafr/2.jpg"  alt="afl-gotcpu e.g."></p>
 <h3 id="afl-stat"><a href="#afl-stat" class="headerlink" title="afl-stat"></a>afl-stat</h3><p>It is one of <a class="link"   target="_blank" rel="noopener" href="https://gitlab.com/rc0r/afl-utils" >afl-utils<i class="fas fa-external-link-alt"></i></a>, the AFL auxiliary tools .This tool is similar to the output of afl-whatsup.</p>
 <p>Before using it, you need a configuration file to set the output directory of each afl-fuzz instance:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set file name as afl-stats.conf</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;fuzz_dirs&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;/root/syncdir/SESSION000&quot;</span>,</span><br><span class="line">      <span class="string">&quot;/root/syncdir/SESSION001&quot;</span>,</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">&quot;/root/syncdir/SESSION00x&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -301,15 +318,15 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install dependency -- gnuplot</span></span><br><span class="line">$ apt install gnuplot</span><br><span class="line">$ afl-plot afl_state_dir graph_output_dir</span><br><span class="line"></span><br><span class="line"><span class="comment"># see outputs</span></span><br><span class="line">$ <span class="built_in">cd</span> graph_output_dir</span><br><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── exec_speed.png</span><br><span class="line">├── high_freq.png</span><br><span class="line">├── index.html</span><br><span class="line">└── low_freq.png</span><br><span class="line"></span><br><span class="line">0 directories, 4 files</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>Click index.html to see graphs.</p>
 <h2 id="When-to-Stop"><a href="#When-to-Stop" class="headerlink" title="When to Stop"></a>When to Stop</h2><p>Normally you should wait as long as you can, until fuzzer get 100% coverage, but it’s hard to judge.</p>
-<p>Look at upper right corner of AFL running panel, you see overall results<br><img src="/imghost/aafr/3.jpg" alt="upper right corner"><br>With cycles num increasing, it’s color turns from red to yellow, bule and eventually green.<br>Green means useless to do further fuzzing. </p>
-<p>There’re some AFL extensions like <code>pythia</code>.<br>It shows status and give estimates of crash and path.<br><img src="/imghost/aafr/4.jpg" alt="pythia 1"></p>
+<p>Look at upper right corner of AFL running panel, you see overall results<br><img   src="/imghost/aafr/3.jpg"  alt="upper right corner"><br>With cycles num increasing, it’s color turns from red to yellow, bule and eventually green.<br>Green means useless to do further fuzzing. </p>
+<p>There’re some AFL extensions like <code>pythia</code>.<br>It shows status and give estimates of crash and path.<br><img   src="/imghost/aafr/4.jpg"  alt="pythia 1"></p>
 <ul>
 <li>correctness: probability of finding a crash leading input.</li>
 <li>fuzzability: difficulty of finding a new path. The higher, the easier to fuzz.</li>
 <li>current paths: the number of paths.<br>currently found.</li>
 <li>path coverag: path coverage.</li>
 </ul>
-<p>Once you have waited for several days,<br><img src="/imghost/aafr/5.jpg" alt="pythia 2"><br>or the path coverage reaches 99%, or correctness decreases to 1e-08, stop the fuzz.</p>
+<p>Once you have waited for several days,<br><img   src="/imghost/aafr/5.jpg"  alt="pythia 2"><br>or the path coverage reaches 99%, or correctness decreases to 1e-08, stop the fuzz.</p>
 <h2 id="Output-Result"><a href="#Output-Result" class="headerlink" title="Output Result"></a>Output Result</h2><p>Contents of multi-fuzzer instance sync dirs</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tree -L 3</span><br><span class="line">.</span><br><span class="line">├── fuzzer1</span><br><span class="line">│   ├── crashes</span><br><span class="line">│   │   ├── id:000000,sig:06,src:000019+000074,op:splice,rep:2</span><br><span class="line">│   │   ├── ...</span><br><span class="line">│   │   ├── id:000002,sig:06,src:000038+000125,op:splice,rep:4</span><br><span class="line">│   │   └── README.txt</span><br><span class="line">│   ├── fuzz_bitmap</span><br><span class="line">│   ├── fuzzer_stats</span><br><span class="line">│   ├── hangs</span><br><span class="line">│   │   └── id:000000,src:000007,op:flip1,pos:55595</span><br><span class="line">│   ├── plot_data</span><br><span class="line">│   └── queue</span><br><span class="line">│       ├── id:000000,orig:1.png</span><br><span class="line">│       ├── ....</span><br><span class="line">│       └── id:000101,sync:fuzzer10,src:000102</span><br><span class="line">└── fuzzer2</span><br><span class="line">        ├── crashes</span><br><span class="line">        ├── ...</span><br></pre></td></tr></table></figure>
 <ul>
@@ -332,17 +349,17 @@
 <p>Follow the lead, use correct path. You will find three binary files in $GOPATH.</p>
 <p><code>crashwalk</code> has <code>Manual Mode</code> and <code>AFL Mode</code>.<br><code>Manual Mode</code> reads crashes&#x2F;README.txt to get command.<br><code>AFL Mode</code> set parameters manually.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Manual Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir/fuzzer1/crashes/ -match id -- /path/to/target @@</span><br><span class="line"></span><br><span class="line"><span class="comment">#AFL Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir -afl</span><br></pre></td></tr></table></figure>
-<p><img src="/imghost/aafr/6.jpg" alt="crashwalk e.g."></p>
+<p><img   src="/imghost/aafr/6.jpg"  alt="crashwalk e.g."></p>
 <h3 id="afl-collect"><a href="#afl-collect" class="headerlink" title="afl-collect"></a>afl-collect</h3><p>One of <a class="link"   target="_blank" rel="noopener" href="https://gitlab.com/rc0r/afl-utils" >afl-utils<i class="fas fa-external-link-alt"></i></a> suite, also based on <code>exploitable</code> plugin to check availability of crash.<br>It also delete useless or duplicated crash sample </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usage: afl-collect [-d DATABASE] [-e|-g GDB_EXPL_SCRIPT_FILE] [-f LIST_FILENAME]</span><br><span class="line"> [-h] [-j THREADS] [-m] [-r [-rt TIMEOUT]] [-rr] sync_dir collection_dir -- target_cmd</span><br><span class="line"></span><br><span class="line">the following arguments are required: </span><br><span class="line">sync_dir, collection_dir, target_cmd</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ afl-collect -j 8 -d crashes.db -e gdb_script ./afl_sync_dir ./collection_dir -- /path/to/target --target-opts</span><br></pre></td></tr></table></figure>
 
-<p><img src="/imghost/aafr/7.jpg" alt="afl-collect e.g."></p>
+<p><img   src="/imghost/aafr/7.jpg"  alt="afl-collect e.g."></p>
 <h2 id="Code-Coverage"><a href="#Code-Coverage" class="headerlink" title="Code Coverage"></a>Code Coverage</h2><p>A method to measure coverage of program, like whether a line of source code has been executed, or whether an instruction in the assembly code has been executed.</p>
 <p>There’re three levels of coverage detections: function, basic-block, edge.</p>
 <h3 id="Basic-Block"><a href="#Basic-Block" class="headerlink" title="Basic Block"></a>Basic Block</h3><p>A set of sequentially executed instructions.<br>Once the first instruction is executed, following instructions must be executed.</p>
 <p>That means, one basic block contains only one entry and only on exit.</p>
-<p>For example:<br><img src="/imghost/aafr/8.jpg" alt="code pic"></p>
-<p>IDA can also divide it into four blocks:<br><img src="/imghost/aafr/9.jpg" alt="IDA view"></p>
+<p>For example:<br><img   src="/imghost/aafr/8.jpg"  alt="code pic"></p>
+<p>IDA can also divide it into four blocks:<br><img   src="/imghost/aafr/9.jpg"  alt="IDA view"></p>
 <h3 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h3><p>Edge is used to represent the jump between basic blocks.<br>Just like the lines between every blocks in IDA view.</p>
 <h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>In the implementation of AFL, a tuple(branch_src, branch_dst) is used to record the information of the current basic block + the previous basic block, to obtain the target execution flow and code coverage.</p>
 <h3 id="Do-Caculation"><a href="#Do-Caculation" class="headerlink" title="Do Caculation"></a>Do Caculation</h3><p><code>GCOV</code> is released with gcc, with same principle of instrumentation by afl-gcc, it generates code coverage info after instrumented by gcc.</p>
@@ -356,11 +373,10 @@
 
 <h4 id="Calculate"><a href="#Calculate" class="headerlink" title="Calculate"></a>Calculate</h4><p>Then we execute <code>afl-cov</code>.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example</span></span><br><span class="line">$ afl-cov -d /path/to/syncdir --live --enable-branch-coverage -c . -e <span class="string">&quot;cat AFL_FILE | LD_LIBRARY_PATH=/path/to/lib /path/to/target AFL_FILE&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x27;-d&#x27; to assign afl-fuzz output dir</span></span><br><span class="line"><span class="comment"># &#x27;--live&#x27; used for one running fuzzer ( updating dir )</span></span><br><span class="line"><span class="comment"># &#x27;--enable-branch-coverage&#x27; used to enable edge coverage (branch coverage) statistics</span></span><br><span class="line"><span class="comment"># &#x27;-c&#x27; to assign source code dir</span></span><br><span class="line"><span class="comment"># &#x27;-e&#x27; to set running command, and in this parameter</span></span><br><span class="line"><span class="comment"># &quot;AFL_FILE&quot; functions same as &quot;@@&quot; for afl-fuzz</span></span><br><span class="line"><span class="comment"># &quot;LD_LIBRARY_PATH&quot; load specific lib</span></span><br></pre></td></tr></table></figure>
-<p><img src="/imghost/aafr/10.jpg" alt="afl-cov e.g."></p>
+<p><img   src="/imghost/aafr/10.jpg"  alt="afl-cov e.g."></p>
 <p>Finally we get a code coverage report in html.</p>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -391,18 +407,18 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2020/02/18/2020-02-18-Wine-Tips/"
                                    title="Wine Tips"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">Wine Tips</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -410,7 +426,7 @@
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2020/02/14/2020-02-14-AFL-Fuzzing-Intro/"
@@ -420,8 +436,8 @@
                                         <span class="post-nav-title-item text-ellipsis">AFL Fuzzing Intro</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -457,7 +473,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -513,6 +528,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -531,7 +551,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -628,7 +648,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -639,13 +661,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -673,10 +688,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

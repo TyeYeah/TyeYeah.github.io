@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         Python Sandbox Escape
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2019-10-07 23:36:20</span>
-                <span class="mobile">2019-10-07 23:36</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-10-07 23:36:20</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Wed Feb 17 2021 10:22:02 GMT+0800">2021-02-17 10:22:02</span>
+                <span class="datetime" data-updated="Wed Feb 17 2021 10:22:02 GMT+0800">2021-02-17 10:22:02</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/Pwn/">Pwn</a></li>
                         
@@ -241,17 +259,16 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/sandbox-escape/">sandbox-escape</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/sandbox-escape/">sandbox-escape</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
                         
                     
                 </ul>
@@ -260,12 +277,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>5.1k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>32 Mins</span>
             </span>
         
@@ -280,7 +297,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>In some OJ providing python sandbox, or web site written in python and using template rendering (<code>ssti</code> appears), your pentest must have something to do with python sandbox escape. </p>
@@ -402,7 +419,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf8 -*-</span></span><br><span class="line"><span class="comment"># &#x27;all_modules_2&#x27; is for python2.x</span></span><br><span class="line"><span class="comment"># &#x27;all_modules_3&#x27; is for python3.x</span></span><br><span class="line">all_modules_2 = [</span><br><span class="line">    <span class="string">&#x27;BaseHTTPServer&#x27;</span>, <span class="string">&#x27;imaplib&#x27;</span>, <span class="string">&#x27;shelve&#x27;</span>, <span class="string">&#x27;Bastion&#x27;</span>, <span class="string">&#x27;anydbm&#x27;</span>, <span class="string">&#x27;imghdr&#x27;</span>, <span class="string">&#x27;shlex&#x27;</span>, <span class="string">&#x27;CDROM&#x27;</span>, <span class="string">&#x27;argparse&#x27;</span>, <span class="string">&#x27;imp&#x27;</span>, <span class="string">&#x27;shutil&#x27;</span>, <span class="string">&#x27;CGIHTTPServer&#x27;</span>, <span class="string">&#x27;array&#x27;</span>, <span class="string">&#x27;importlib&#x27;</span>, <span class="string">&#x27;signal&#x27;</span>, <span class="string">&#x27;Canvas&#x27;</span>, <span class="string">&#x27;ast&#x27;</span>, <span class="string">&#x27;imputil&#x27;</span>, <span class="string">&#x27;site&#x27;</span>, <span class="string">&#x27;ConfigParser&#x27;</span>, <span class="string">&#x27;asynchat&#x27;</span>, <span class="string">&#x27;inspect&#x27;</span>, <span class="string">&#x27;sitecustomize&#x27;</span>, <span class="string">&#x27;Cookie&#x27;</span>, <span class="string">&#x27;asyncore&#x27;</span>, <span class="string">&#x27;io&#x27;</span>, <span class="string">&#x27;smtpd&#x27;</span>, <span class="string">&#x27;DLFCN&#x27;</span>, <span class="string">&#x27;atexit&#x27;</span>, <span class="string">&#x27;itertools&#x27;</span>, <span class="string">&#x27;smtplib&#x27;</span>, <span class="string">&#x27;Dialog&#x27;</span>, <span class="string">&#x27;audiodev&#x27;</span>, <span class="string">&#x27;json&#x27;</span>, <span class="string">&#x27;sndhdr&#x27;</span>, <span class="string">&#x27;DocXMLRPCServer&#x27;</span>, <span class="string">&#x27;audioop&#x27;</span>, <span class="string">&#x27;keyword&#x27;</span>, <span class="string">&#x27;socket&#x27;</span>, <span class="string">&#x27;FileDialog&#x27;</span>, <span class="string">&#x27;base64&#x27;</span>, <span class="string">&#x27;lib2to3&#x27;</span>, <span class="string">&#x27;spwd&#x27;</span>, <span class="string">&#x27;FixTk&#x27;</span>, <span class="string">&#x27;bdb&#x27;</span>, <span class="string">&#x27;linecache&#x27;</span>, <span class="string">&#x27;sqlite3&#x27;</span>, <span class="string">&#x27;HTMLParser&#x27;</span>, <span class="string">&#x27;binascii&#x27;</span>, <span class="string">&#x27;linuxaudiodev&#x27;</span>, <span class="string">&#x27;sre&#x27;</span>, <span class="string">&#x27;IN&#x27;</span>, <span class="string">&#x27;binhex&#x27;</span>, <span class="string">&#x27;locale&#x27;</span>, <span class="string">&#x27;sre_compile&#x27;</span>, <span class="string">&#x27;MimeWriter&#x27;</span>, <span class="string">&#x27;bisect&#x27;</span>, <span class="string">&#x27;logging&#x27;</span>, <span class="string">&#x27;sre_constants&#x27;</span>, <span class="string">&#x27;Queue&#x27;</span>, <span class="string">&#x27;bsddb&#x27;</span>, <span class="string">&#x27;lsb_release&#x27;</span>, <span class="string">&#x27;sre_parse&#x27;</span>, <span class="string">&#x27;ScrolledText&#x27;</span>, <span class="string">&#x27;bz2&#x27;</span>, <span class="string">&#x27;macpath&#x27;</span>, <span class="string">&#x27;ssl&#x27;</span>, <span class="string">&#x27;SimpleDialog&#x27;</span>, <span class="string">&#x27;cPickle&#x27;</span>, <span class="string">&#x27;macurl2path&#x27;</span>, <span class="string">&#x27;stat&#x27;</span>, <span class="string">&#x27;SimpleHTTPServer&#x27;</span>, <span class="string">&#x27;cProfile&#x27;</span>, <span class="string">&#x27;mailbox&#x27;</span>, <span class="string">&#x27;statvfs&#x27;</span>, <span class="string">&#x27;SimpleXMLRPCServer&#x27;</span>, <span class="string">&#x27;cStringIO&#x27;</span>, <span class="string">&#x27;mailcap&#x27;</span>, <span class="string">&#x27;string&#x27;</span>, <span class="string">&#x27;SocketServer&#x27;</span>, <span class="string">&#x27;calendar&#x27;</span>, <span class="string">&#x27;markupbase&#x27;</span>, <span class="string">&#x27;stringold&#x27;</span>, <span class="string">&#x27;StringIO&#x27;</span>, <span class="string">&#x27;cgi&#x27;</span>, <span class="string">&#x27;marshal&#x27;</span>, <span class="string">&#x27;stringprep&#x27;</span>, <span class="string">&#x27;TYPES&#x27;</span>, <span class="string">&#x27;cgitb&#x27;</span>, <span class="string">&#x27;math&#x27;</span>, <span class="string">&#x27;strop&#x27;</span>, <span class="string">&#x27;Tix&#x27;</span>, <span class="string">&#x27;chunk&#x27;</span>, <span class="string">&#x27;md5&#x27;</span>, <span class="string">&#x27;struct&#x27;</span>, <span class="string">&#x27;Tkconstants&#x27;</span>, <span class="string">&#x27;cmath&#x27;</span>, <span class="string">&#x27;mhlib&#x27;</span>, <span class="string">&#x27;subprocess&#x27;</span>, <span class="string">&#x27;Tkdnd&#x27;</span>, <span class="string">&#x27;cmd&#x27;</span>, <span class="string">&#x27;mimetools&#x27;</span>, <span class="string">&#x27;sunau&#x27;</span>, <span class="string">&#x27;Tkinter&#x27;</span>, <span class="string">&#x27;code&#x27;</span>, <span class="string">&#x27;mimetypes&#x27;</span>, <span class="string">&#x27;sunaudio&#x27;</span>, <span class="string">&#x27;UserDict&#x27;</span>, <span class="string">&#x27;codecs&#x27;</span>, <span class="string">&#x27;mimify&#x27;</span>, <span class="string">&#x27;symbol&#x27;</span>, <span class="string">&#x27;UserList&#x27;</span>, <span class="string">&#x27;codeop&#x27;</span>, <span class="string">&#x27;mmap&#x27;</span>, <span class="string">&#x27;symtable&#x27;</span>, <span class="string">&#x27;UserString&#x27;</span>, <span class="string">&#x27;collections&#x27;</span>, <span class="string">&#x27;modulefinder&#x27;</span>, <span class="string">&#x27;sys&#x27;</span>, <span class="string">&#x27;_LWPCookieJar&#x27;</span>, <span class="string">&#x27;colorsys&#x27;</span>, <span class="string">&#x27;multifile&#x27;</span>, <span class="string">&#x27;sysconfig&#x27;</span>, <span class="string">&#x27;_MozillaCookieJar&#x27;</span>, <span class="string">&#x27;commands&#x27;</span>, <span class="string">&#x27;multiprocessing&#x27;</span>, <span class="string">&#x27;syslog&#x27;</span>, <span class="string">&#x27;__builtin__&#x27;</span>, <span class="string">&#x27;compileall&#x27;</span>, <span class="string">&#x27;mutex&#x27;</span>, <span class="string">&#x27;tabnanny&#x27;</span>, <span class="string">&#x27;__future__&#x27;</span>, <span class="string">&#x27;compiler&#x27;</span>, <span class="string">&#x27;netrc&#x27;</span>, <span class="string">&#x27;talloc&#x27;</span>, <span class="string">&#x27;_abcoll&#x27;</span>, <span class="string">&#x27;contextlib&#x27;</span>, <span class="string">&#x27;new&#x27;</span>, <span class="string">&#x27;tarfile&#x27;</span>, <span class="string">&#x27;_ast&#x27;</span>, <span class="string">&#x27;cookielib&#x27;</span>, <span class="string">&#x27;nis&#x27;</span>, <span class="string">&#x27;telnetlib&#x27;</span>, <span class="string">&#x27;_bisect&#x27;</span>, <span class="string">&#x27;copy&#x27;</span>, <span class="string">&#x27;nntplib&#x27;</span>, <span class="string">&#x27;tempfile&#x27;</span>, <span class="string">&#x27;_bsddb&#x27;</span>, <span class="string">&#x27;copy_reg&#x27;</span>, <span class="string">&#x27;ntpath&#x27;</span>, <span class="string">&#x27;termios&#x27;</span>, <span class="string">&#x27;_codecs&#x27;</span>, <span class="string">&#x27;crypt&#x27;</span>, <span class="string">&#x27;nturl2path&#x27;</span>, <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;_codecs_cn&#x27;</span>, <span class="string">&#x27;csv&#x27;</span>, <span class="string">&#x27;numbers&#x27;</span>, <span class="string">&#x27;textwrap&#x27;</span>, <span class="string">&#x27;_codecs_hk&#x27;</span>, <span class="string">&#x27;ctypes&#x27;</span>, <span class="string">&#x27;opcode&#x27;</span>, <span class="string">&#x27;_codecs_iso2022&#x27;</span>, <span class="string">&#x27;curses&#x27;</span>, <span class="string">&#x27;operator&#x27;</span>, <span class="string">&#x27;thread&#x27;</span>, <span class="string">&#x27;_codecs_jp&#x27;</span>, <span class="string">&#x27;datetime&#x27;</span>, <span class="string">&#x27;optparse&#x27;</span>, <span class="string">&#x27;threading&#x27;</span>, <span class="string">&#x27;_codecs_kr&#x27;</span>, <span class="string">&#x27;dbhash&#x27;</span>, <span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;_codecs_tw&#x27;</span>, <span class="string">&#x27;dbm&#x27;</span>, <span class="string">&#x27;os2emxpath&#x27;</span>, <span class="string">&#x27;timeit&#x27;</span>, <span class="string">&#x27;_collections&#x27;</span>, <span class="string">&#x27;decimal&#x27;</span>, <span class="string">&#x27;ossaudiodev&#x27;</span>, <span class="string">&#x27;tkColorChooser&#x27;</span>, <span class="string">&#x27;_csv&#x27;</span>, <span class="string">&#x27;difflib&#x27;</span>, <span class="string">&#x27;parser&#x27;</span>, <span class="string">&#x27;tkCommonDialog&#x27;</span>, <span class="string">&#x27;_ctypes&#x27;</span>, <span class="string">&#x27;dircache&#x27;</span>, <span class="string">&#x27;pdb&#x27;</span>, <span class="string">&#x27;tkFileDialog&#x27;</span>, <span class="string">&#x27;_ctypes_test&#x27;</span>, <span class="string">&#x27;dis&#x27;</span>, <span class="string">&#x27;pickle&#x27;</span>, <span class="string">&#x27;tkFont&#x27;</span>, <span class="string">&#x27;_curses&#x27;</span>, <span class="string">&#x27;distutils&#x27;</span>, <span class="string">&#x27;pickletools&#x27;</span>, <span class="string">&#x27;tkMessageBox&#x27;</span>, <span class="string">&#x27;_curses_panel&#x27;</span>, <span class="string">&#x27;doctest&#x27;</span>, <span class="string">&#x27;pipes&#x27;</span>, <span class="string">&#x27;tkSimpleDialog&#x27;</span>, <span class="string">&#x27;_elementtree&#x27;</span>, <span class="string">&#x27;dumbdbm&#x27;</span>, <span class="string">&#x27;pkgutil&#x27;</span>, <span class="string">&#x27;toaiff&#x27;</span>, <span class="string">&#x27;_functools&#x27;</span>, <span class="string">&#x27;dummy_thread&#x27;</span>, <span class="string">&#x27;platform&#x27;</span>, <span class="string">&#x27;token&#x27;</span>, <span class="string">&#x27;_hashlib&#x27;</span>, <span class="string">&#x27;dummy_threading&#x27;</span>, <span class="string">&#x27;plistlib&#x27;</span>, <span class="string">&#x27;tokenize&#x27;</span>, <span class="string">&#x27;_heapq&#x27;</span>, <span class="string">&#x27;email&#x27;</span>, <span class="string">&#x27;popen2&#x27;</span>, <span class="string">&#x27;trace&#x27;</span>, <span class="string">&#x27;_hotshot&#x27;</span>, <span class="string">&#x27;encodings&#x27;</span>, <span class="string">&#x27;poplib&#x27;</span>, <span class="string">&#x27;traceback&#x27;</span>, <span class="string">&#x27;_io&#x27;</span>, <span class="string">&#x27;ensurepip&#x27;</span>, <span class="string">&#x27;posix&#x27;</span>, <span class="string">&#x27;ttk&#x27;</span>, <span class="string">&#x27;_json&#x27;</span>, <span class="string">&#x27;errno&#x27;</span>, <span class="string">&#x27;posixfile&#x27;</span>, <span class="string">&#x27;tty&#x27;</span>, <span class="string">&#x27;_locale&#x27;</span>, <span class="string">&#x27;exceptions&#x27;</span>, <span class="string">&#x27;posixpath&#x27;</span>, <span class="string">&#x27;turtle&#x27;</span>, <span class="string">&#x27;_lsprof&#x27;</span>, <span class="string">&#x27;fcntl&#x27;</span>, <span class="string">&#x27;pprint&#x27;</span>, <span class="string">&#x27;types&#x27;</span>, <span class="string">&#x27;_md5&#x27;</span>, <span class="string">&#x27;filecmp&#x27;</span>, <span class="string">&#x27;profile&#x27;</span>, <span class="string">&#x27;unicodedata&#x27;</span>, <span class="string">&#x27;_multibytecodec&#x27;</span>, <span class="string">&#x27;fileinput&#x27;</span>, <span class="string">&#x27;pstats&#x27;</span>, <span class="string">&#x27;unittest&#x27;</span>, <span class="string">&#x27;_multiprocessing&#x27;</span>, <span class="string">&#x27;fnmatch&#x27;</span>, <span class="string">&#x27;pty&#x27;</span>, <span class="string">&#x27;urllib&#x27;</span>, <span class="string">&#x27;_osx_support&#x27;</span>, <span class="string">&#x27;formatter&#x27;</span>, <span class="string">&#x27;pwd&#x27;</span>, <span class="string">&#x27;urllib2&#x27;</span>, <span class="string">&#x27;_pyio&#x27;</span>, <span class="string">&#x27;fpformat&#x27;</span>, <span class="string">&#x27;py_compile&#x27;</span>, <span class="string">&#x27;urlparse&#x27;</span>, <span class="string">&#x27;_random&#x27;</span>, <span class="string">&#x27;fractions&#x27;</span>, <span class="string">&#x27;pyclbr&#x27;</span>, <span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;_sha&#x27;</span>, <span class="string">&#x27;ftplib&#x27;</span>, <span class="string">&#x27;pydoc&#x27;</span>, <span class="string">&#x27;uu&#x27;</span>, <span class="string">&#x27;_sha256&#x27;</span>, <span class="string">&#x27;functools&#x27;</span>, <span class="string">&#x27;pydoc_data&#x27;</span>, <span class="string">&#x27;uuid&#x27;</span>, <span class="string">&#x27;_sha512&#x27;</span>, <span class="string">&#x27;future_builtins&#x27;</span>, <span class="string">&#x27;pyexpat&#x27;</span>, <span class="string">&#x27;warnings&#x27;</span>, <span class="string">&#x27;_socket&#x27;</span>, <span class="string">&#x27;gc&#x27;</span>, <span class="string">&#x27;quopri&#x27;</span>, <span class="string">&#x27;wave&#x27;</span>, <span class="string">&#x27;_sqlite3&#x27;</span>, <span class="string">&#x27;genericpath&#x27;</span>, <span class="string">&#x27;random&#x27;</span>, <span class="string">&#x27;weakref&#x27;</span>, <span class="string">&#x27;_sre&#x27;</span>, <span class="string">&#x27;getopt&#x27;</span>, <span class="string">&#x27;re&#x27;</span>, <span class="string">&#x27;webbrowser&#x27;</span>, <span class="string">&#x27;_ssl&#x27;</span>, <span class="string">&#x27;getpass&#x27;</span>, <span class="string">&#x27;readline&#x27;</span>, <span class="string">&#x27;whichdb&#x27;</span>, <span class="string">&#x27;_strptime&#x27;</span>, <span class="string">&#x27;gettext&#x27;</span>, <span class="string">&#x27;repr&#x27;</span>, <span class="string">&#x27;wsgiref&#x27;</span>, <span class="string">&#x27;_struct&#x27;</span>, <span class="string">&#x27;glob&#x27;</span>, <span class="string">&#x27;resource&#x27;</span>, <span class="string">&#x27;xdrlib&#x27;</span>, <span class="string">&#x27;_symtable&#x27;</span>, <span class="string">&#x27;grp&#x27;</span>, <span class="string">&#x27;rexec&#x27;</span>, <span class="string">&#x27;xml&#x27;</span>, <span class="string">&#x27;_sysconfigdata&#x27;</span>, <span class="string">&#x27;gzip&#x27;</span>, <span class="string">&#x27;rfc822&#x27;</span>, <span class="string">&#x27;xmllib&#x27;</span>, <span class="string">&#x27;_sysconfigdata_nd&#x27;</span>, <span class="string">&#x27;hashlib&#x27;</span>, <span class="string">&#x27;rlcompleter&#x27;</span>, <span class="string">&#x27;xmlrpclib&#x27;</span>, <span class="string">&#x27;_testcapi&#x27;</span>, <span class="string">&#x27;heapq&#x27;</span>, <span class="string">&#x27;robotparser&#x27;</span>, <span class="string">&#x27;xxsubtype&#x27;</span>, <span class="string">&#x27;_threading_local&#x27;</span>, <span class="string">&#x27;hmac&#x27;</span>, <span class="string">&#x27;runpy&#x27;</span>, <span class="string">&#x27;zipfile&#x27;</span>, <span class="string">&#x27;_warnings&#x27;</span>, <span class="string">&#x27;hotshot&#x27;</span>, <span class="string">&#x27;sched&#x27;</span>, <span class="string">&#x27;zipimport&#x27;</span>, <span class="string">&#x27;_weakref&#x27;</span>, <span class="string">&#x27;htmlentitydefs&#x27;</span>, <span class="string">&#x27;select&#x27;</span>, <span class="string">&#x27;zlib&#x27;</span>, <span class="string">&#x27;_weakrefset&#x27;</span>, <span class="string">&#x27;htmllib&#x27;</span>, <span class="string">&#x27;sets&#x27;</span>, <span class="string">&#x27;abc&#x27;</span>, <span class="string">&#x27;httplib&#x27;</span>, <span class="string">&#x27;sgmllib&#x27;</span>, <span class="string">&#x27;aifc&#x27;</span>, <span class="string">&#x27;ihooks&#x27;</span>, <span class="string">&#x27;sha&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">all_modules_3 = [</span><br><span class="line">    <span class="string">&#x27;AptUrl&#x27;</span>, <span class="string">&#x27;hmac&#x27;</span>, <span class="string">&#x27;requests_unixsocket&#x27;</span>, <span class="string">&#x27;CommandNotFound&#x27;</span>, <span class="string">&#x27;apport&#x27;</span>, <span class="string">&#x27;hpmudext&#x27;</span>, <span class="string">&#x27;resource&#x27;</span>, <span class="string">&#x27;Crypto&#x27;</span>, <span class="string">&#x27;apport_python_hook&#x27;</span>, <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;rlcompleter&#x27;</span>, <span class="string">&#x27;DistUpgrade&#x27;</span>, <span class="string">&#x27;apt&#x27;</span>, <span class="string">&#x27;http&#x27;</span>, <span class="string">&#x27;runpy&#x27;</span>, <span class="string">&#x27;HweSupportStatus&#x27;</span>, <span class="string">&#x27;apt_inst&#x27;</span>, <span class="string">&#x27;httplib2&#x27;</span>, <span class="string">&#x27;scanext&#x27;</span>, <span class="string">&#x27;LanguageSelector&#x27;</span>, <span class="string">&#x27;apt_pkg&#x27;</span>, <span class="string">&#x27;idna&#x27;</span>, <span class="string">&#x27;sched&#x27;</span>, <span class="string">&#x27;NvidiaDetector&#x27;</span>, <span class="string">&#x27;aptdaemon&#x27;</span>, <span class="string">&#x27;imaplib&#x27;</span>, <span class="string">&#x27;secrets&#x27;</span>, <span class="string">&#x27;PIL&#x27;</span>, <span class="string">&#x27;aptsources&#x27;</span>, <span class="string">&#x27;imghdr&#x27;</span>, <span class="string">&#x27;secretstorage&#x27;</span>, <span class="string">&#x27;Quirks&#x27;</span>, <span class="string">&#x27;argparse&#x27;</span>, <span class="string">&#x27;imp&#x27;</span>, <span class="string">&#x27;select&#x27;</span>, <span class="string">&#x27;UbuntuDrivers&#x27;</span>, <span class="string">&#x27;array&#x27;</span>, <span class="string">&#x27;importlib&#x27;</span>, <span class="string">&#x27;selectors&#x27;</span>, <span class="string">&#x27;UbuntuSystemService&#x27;</span>, <span class="string">&#x27;asn1crypto&#x27;</span>, <span class="string">&#x27;inspect&#x27;</span>, <span class="string">&#x27;shelve&#x27;</span>, <span class="string">&#x27;UpdateManager&#x27;</span>, <span class="string">&#x27;ast&#x27;</span>, <span class="string">&#x27;io&#x27;</span>, <span class="string">&#x27;shlex&#x27;</span>, <span class="string">&#x27;__future__&#x27;</span>, <span class="string">&#x27;asynchat&#x27;</span>, <span class="string">&#x27;ipaddress&#x27;</span>, <span class="string">&#x27;shutil&#x27;</span>, <span class="string">&#x27;_ast&#x27;</span>, <span class="string">&#x27;asyncio&#x27;</span>, <span class="string">&#x27;itertools&#x27;</span>, <span class="string">&#x27;signal&#x27;</span>, <span class="string">&#x27;_asyncio&#x27;</span>, <span class="string">&#x27;asyncore&#x27;</span>, <span class="string">&#x27;janitor&#x27;</span>, <span class="string">&#x27;simplejson&#x27;</span>, <span class="string">&#x27;_bisect&#x27;</span>, <span class="string">&#x27;atexit&#x27;</span>, <span class="string">&#x27;json&#x27;</span>, <span class="string">&#x27;site&#x27;</span>, <span class="string">&#x27;_blake2&#x27;</span>, <span class="string">&#x27;audioop&#x27;</span>, <span class="string">&#x27;keyring&#x27;</span>, <span class="string">&#x27;sitecustomize&#x27;</span>, <span class="string">&#x27;_bootlocale&#x27;</span>, <span class="string">&#x27;base64&#x27;</span>, <span class="string">&#x27;keyword&#x27;</span>, <span class="string">&#x27;six&#x27;</span>, <span class="string">&#x27;_bz2&#x27;</span>, <span class="string">&#x27;bdb&#x27;</span>, <span class="string">&#x27;language_support_pkgs&#x27;</span>, <span class="string">&#x27;smtpd&#x27;</span>, <span class="string">&#x27;_cffi_backend&#x27;</span>, <span class="string">&#x27;binascii&#x27;</span>, <span class="string">&#x27;launchpadlib&#x27;</span>, <span class="string">&#x27;smtplib&#x27;</span>, <span class="string">&#x27;_codecs&#x27;</span>, <span class="string">&#x27;binhex&#x27;</span>, <span class="string">&#x27;linecache&#x27;</span>, <span class="string">&#x27;sndhdr&#x27;</span>, <span class="string">&#x27;_codecs_cn&#x27;</span>, <span class="string">&#x27;bisect&#x27;</span>, <span class="string">&#x27;locale&#x27;</span>, <span class="string">&#x27;socket&#x27;</span>, <span class="string">&#x27;_codecs_hk&#x27;</span>, <span class="string">&#x27;brlapi&#x27;</span>, <span class="string">&#x27;logging&#x27;</span>, <span class="string">&#x27;socketserver&#x27;</span>, <span class="string">&#x27;_codecs_iso2022&#x27;</span>, <span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;louis&#x27;</span>, <span class="string">&#x27;softwareproperties&#x27;</span>, <span class="string">&#x27;_codecs_jp&#x27;</span>, <span class="string">&#x27;bz2&#x27;</span>, <span class="string">&#x27;lsb_release&#x27;</span>, <span class="string">&#x27;speechd&#x27;</span>, <span class="string">&#x27;_codecs_kr&#x27;</span>, <span class="string">&#x27;cProfile&#x27;</span>, <span class="string">&#x27;lzma&#x27;</span>, <span class="string">&#x27;speechd_config&#x27;</span>, <span class="string">&#x27;_codecs_tw&#x27;</span>, <span class="string">&#x27;cairo&#x27;</span>, <span class="string">&#x27;macaroonbakery&#x27;</span>, <span class="string">&#x27;spwd&#x27;</span>, <span class="string">&#x27;_collections&#x27;</span>, <span class="string">&#x27;calendar&#x27;</span>, <span class="string">&#x27;macpath&#x27;</span>, <span class="string">&#x27;sqlite3&#x27;</span>, <span class="string">&#x27;_collections_abc&#x27;</span>, <span class="string">&#x27;certifi&#x27;</span>, <span class="string">&#x27;macurl2path&#x27;</span>, <span class="string">&#x27;sre_compile&#x27;</span>, <span class="string">&#x27;_compat_pickle&#x27;</span>, <span class="string">&#x27;cgi&#x27;</span>, <span class="string">&#x27;mailbox&#x27;</span>, <span class="string">&#x27;sre_constants&#x27;</span>, <span class="string">&#x27;_compression&#x27;</span>, <span class="string">&#x27;cgitb&#x27;</span>, <span class="string">&#x27;mailcap&#x27;</span>, <span class="string">&#x27;sre_parse&#x27;</span>, <span class="string">&#x27;_crypt&#x27;</span>, <span class="string">&#x27;chardet&#x27;</span>, <span class="string">&#x27;mako&#x27;</span>, <span class="string">&#x27;ssl&#x27;</span>, <span class="string">&#x27;_csv&#x27;</span>, <span class="string">&#x27;chunk&#x27;</span>, <span class="string">&#x27;markupsafe&#x27;</span>, <span class="string">&#x27;stat&#x27;</span>, <span class="string">&#x27;_ctypes&#x27;</span>, <span class="string">&#x27;cmath&#x27;</span>, <span class="string">&#x27;marshal&#x27;</span>, <span class="string">&#x27;statistics&#x27;</span>, <span class="string">&#x27;_ctypes_test&#x27;</span>, <span class="string">&#x27;cmd&#x27;</span>, <span class="string">&#x27;math&#x27;</span>, <span class="string">&#x27;string&#x27;</span>, <span class="string">&#x27;_curses&#x27;</span>, <span class="string">&#x27;code&#x27;</span>, <span class="string">&#x27;mimetypes&#x27;</span>, <span class="string">&#x27;stringprep&#x27;</span>, <span class="string">&#x27;_curses_panel&#x27;</span>, <span class="string">&#x27;codecs&#x27;</span>, <span class="string">&#x27;mmap&#x27;</span>, <span class="string">&#x27;struct&#x27;</span>, <span class="string">&#x27;_datetime&#x27;</span>, <span class="string">&#x27;codeop&#x27;</span>, <span class="string">&#x27;modual_test&#x27;</span>, <span class="string">&#x27;subprocess&#x27;</span>, <span class="string">&#x27;_dbm&#x27;</span>, <span class="string">&#x27;collections&#x27;</span>, <span class="string">&#x27;modulefinder&#x27;</span>, <span class="string">&#x27;sunau&#x27;</span>, <span class="string">&#x27;_dbus_bindings&#x27;</span>, <span class="string">&#x27;colorsys&#x27;</span>, <span class="string">&#x27;multiprocessing&#x27;</span>, <span class="string">&#x27;symbol&#x27;</span>, <span class="string">&#x27;_dbus_glib_bindings&#x27;</span>, <span class="string">&#x27;compileall&#x27;</span>, <span class="string">&#x27;nacl&#x27;</span>, <span class="string">&#x27;symtable&#x27;</span>, <span class="string">&#x27;_decimal&#x27;</span>, <span class="string">&#x27;concurrent&#x27;</span>, <span class="string">&#x27;netrc&#x27;</span>, <span class="string">&#x27;sys&#x27;</span>, <span class="string">&#x27;_dummy_thread&#x27;</span>, <span class="string">&#x27;configparser&#x27;</span>, <span class="string">&#x27;nis&#x27;</span>, <span class="string">&#x27;sysconfig&#x27;</span>, <span class="string">&#x27;_elementtree&#x27;</span>, <span class="string">&#x27;contextlib&#x27;</span>, <span class="string">&#x27;nntplib&#x27;</span>, <span class="string">&#x27;syslog&#x27;</span>, <span class="string">&#x27;_functools&#x27;</span>, <span class="string">&#x27;copy&#x27;</span>, <span class="string">&#x27;ntpath&#x27;</span>, <span class="string">&#x27;systemd&#x27;</span>, <span class="string">&#x27;_gdbm&#x27;</span>, <span class="string">&#x27;copyreg&#x27;</span>, <span class="string">&#x27;nturl2path&#x27;</span>, <span class="string">&#x27;tabnanny&#x27;</span>, <span class="string">&#x27;_hashlib&#x27;</span>, <span class="string">&#x27;crypt&#x27;</span>, <span class="string">&#x27;numbers&#x27;</span>, <span class="string">&#x27;tarfile&#x27;</span>, <span class="string">&#x27;_heapq&#x27;</span>, <span class="string">&#x27;cryptography&#x27;</span>, <span class="string">&#x27;oauth&#x27;</span>, <span class="string">&#x27;telnetlib&#x27;</span>, <span class="string">&#x27;_imp&#x27;</span>, <span class="string">&#x27;csv&#x27;</span>, <span class="string">&#x27;olefile&#x27;</span>, <span class="string">&#x27;tempfile&#x27;</span>, <span class="string">&#x27;_io&#x27;</span>, <span class="string">&#x27;ctypes&#x27;</span>, <span class="string">&#x27;opcode&#x27;</span>, <span class="string">&#x27;termios&#x27;</span>, <span class="string">&#x27;_json&#x27;</span>, <span class="string">&#x27;cups&#x27;</span>, <span class="string">&#x27;operator&#x27;</span>, <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;_locale&#x27;</span>, <span class="string">&#x27;cupsext&#x27;</span>, <span class="string">&#x27;optparse&#x27;</span>, <span class="string">&#x27;textwrap&#x27;</span>, <span class="string">&#x27;_lsprof&#x27;</span>, <span class="string">&#x27;cupshelpers&#x27;</span>, <span class="string">&#x27;orca&#x27;</span>, <span class="string">&#x27;_lzma&#x27;</span>, <span class="string">&#x27;curses&#x27;</span>, <span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;threading&#x27;</span>, <span class="string">&#x27;_markupbase&#x27;</span>, <span class="string">&#x27;datetime&#x27;</span>, <span class="string">&#x27;ossaudiodev&#x27;</span>, <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;_md5&#x27;</span>, <span class="string">&#x27;dbm&#x27;</span>, <span class="string">&#x27;parser&#x27;</span>, <span class="string">&#x27;timeit&#x27;</span>, <span class="string">&#x27;_multibytecodec&#x27;</span>, <span class="string">&#x27;dbus&#x27;</span>, <span class="string">&#x27;pathlib&#x27;</span>, <span class="string">&#x27;token&#x27;</span>, <span class="string">&#x27;_multiprocessing&#x27;</span>, <span class="string">&#x27;deb822&#x27;</span>, <span class="string">&#x27;pcardext&#x27;</span>, <span class="string">&#x27;tokenize&#x27;</span>, <span class="string">&#x27;_opcode&#x27;</span>, <span class="string">&#x27;debconf&#x27;</span>, <span class="string">&#x27;pdb&#x27;</span>, <span class="string">&#x27;trace&#x27;</span>, <span class="string">&#x27;_operator&#x27;</span>, <span class="string">&#x27;debian&#x27;</span>, <span class="string">&#x27;pexpect&#x27;</span>, <span class="string">&#x27;traceback&#x27;</span>, <span class="string">&#x27;_osx_support&#x27;</span>, <span class="string">&#x27;debian_bundle&#x27;</span>, <span class="string">&#x27;pickle&#x27;</span>, <span class="string">&#x27;tracemalloc&#x27;</span>, <span class="string">&#x27;_pickle&#x27;</span>, <span class="string">&#x27;decimal&#x27;</span>, <span class="string">&#x27;pickletools&#x27;</span>, <span class="string">&#x27;tty&#x27;</span>, <span class="string">&#x27;_posixsubprocess&#x27;</span>, <span class="string">&#x27;defer&#x27;</span>, <span class="string">&#x27;pipes&#x27;</span>, <span class="string">&#x27;turtle&#x27;</span>, <span class="string">&#x27;_pydecimal&#x27;</span>, <span class="string">&#x27;difflib&#x27;</span>, <span class="string">&#x27;pkg_resources&#x27;</span>, <span class="string">&#x27;types&#x27;</span>, <span class="string">&#x27;_pyio&#x27;</span>, <span class="string">&#x27;dis&#x27;</span>, <span class="string">&#x27;pkgutil&#x27;</span>, <span class="string">&#x27;typing&#x27;</span>, <span class="string">&#x27;_random&#x27;</span>, <span class="string">&#x27;distro_info&#x27;</span>, <span class="string">&#x27;platform&#x27;</span>, <span class="string">&#x27;ufw&#x27;</span>, <span class="string">&#x27;_sha1&#x27;</span>, <span class="string">&#x27;distro_info_test&#x27;</span>, <span class="string">&#x27;plistlib&#x27;</span>, <span class="string">&#x27;unicodedata&#x27;</span>, <span class="string">&#x27;_sha256&#x27;</span>, <span class="string">&#x27;distutils&#x27;</span>, <span class="string">&#x27;poplib&#x27;</span>, <span class="string">&#x27;unittest&#x27;</span>, <span class="string">&#x27;_sha3&#x27;</span>, <span class="string">&#x27;doctest&#x27;</span>, <span class="string">&#x27;posix&#x27;</span>, <span class="string">&#x27;urllib&#x27;</span>, <span class="string">&#x27;_sha512&#x27;</span>, <span class="string">&#x27;dummy_threading&#x27;</span>, <span class="string">&#x27;posixpath&#x27;</span>, <span class="string">&#x27;urllib3&#x27;</span>, <span class="string">&#x27;_signal&#x27;</span>, <span class="string">&#x27;email&#x27;</span>, <span class="string">&#x27;pprint&#x27;</span>, <span class="string">&#x27;usbcreator&#x27;</span>, <span class="string">&#x27;_sitebuiltins&#x27;</span>, <span class="string">&#x27;encodings&#x27;</span>, <span class="string">&#x27;problem_report&#x27;</span>, <span class="string">&#x27;uu&#x27;</span>, <span class="string">&#x27;_socket&#x27;</span>, <span class="string">&#x27;enum&#x27;</span>, <span class="string">&#x27;profile&#x27;</span>, <span class="string">&#x27;uuid&#x27;</span>, <span class="string">&#x27;_sqlite3&#x27;</span>, <span class="string">&#x27;errno&#x27;</span>, <span class="string">&#x27;pstats&#x27;</span>, <span class="string">&#x27;venv&#x27;</span>, <span class="string">&#x27;_sre&#x27;</span>, <span class="string">&#x27;faulthandler&#x27;</span>, <span class="string">&#x27;pty&#x27;</span>, <span class="string">&#x27;wadllib&#x27;</span>, <span class="string">&#x27;_ssl&#x27;</span>, <span class="string">&#x27;fcntl&#x27;</span>, <span class="string">&#x27;ptyprocess&#x27;</span>, <span class="string">&#x27;warnings&#x27;</span>, <span class="string">&#x27;_stat&#x27;</span>, <span class="string">&#x27;filecmp&#x27;</span>, <span class="string">&#x27;pwd&#x27;</span>, <span class="string">&#x27;wave&#x27;</span>, <span class="string">&#x27;_string&#x27;</span>, <span class="string">&#x27;fileinput&#x27;</span>, <span class="string">&#x27;py_compile&#x27;</span>, <span class="string">&#x27;weakref&#x27;</span>, <span class="string">&#x27;_strptime&#x27;</span>, <span class="string">&#x27;fnmatch&#x27;</span>, <span class="string">&#x27;pyatspi&#x27;</span>, <span class="string">&#x27;webbrowser&#x27;</span>, <span class="string">&#x27;_struct&#x27;</span>, <span class="string">&#x27;formatter&#x27;</span>, <span class="string">&#x27;pyclbr&#x27;</span>, <span class="string">&#x27;wsgiref&#x27;</span>, <span class="string">&#x27;_symtable&#x27;</span>, <span class="string">&#x27;fractions&#x27;</span>, <span class="string">&#x27;pydoc&#x27;</span>, <span class="string">&#x27;xdg&#x27;</span>, <span class="string">&#x27;_sysconfigdata_m_linux_x86_64-linux-gnu&#x27;</span>, <span class="string">&#x27;ftplib&#x27;</span>, <span class="string">&#x27;pydoc_data&#x27;</span>, <span class="string">&#x27;xdrlib&#x27;</span>, <span class="string">&#x27;_testbuffer&#x27;</span>, <span class="string">&#x27;functools&#x27;</span>, <span class="string">&#x27;pyexpat&#x27;</span>, <span class="string">&#x27;xkit&#x27;</span>, <span class="string">&#x27;_testcapi&#x27;</span>, <span class="string">&#x27;gc&#x27;</span>, <span class="string">&#x27;pygtkcompat&#x27;</span>, <span class="string">&#x27;xml&#x27;</span>, <span class="string">&#x27;_testimportmultiple&#x27;</span>, <span class="string">&#x27;genericpath&#x27;</span>, <span class="string">&#x27;pymacaroons&#x27;</span>, <span class="string">&#x27;xmlrpc&#x27;</span>, <span class="string">&#x27;_testmultiphase&#x27;</span>, <span class="string">&#x27;getopt&#x27;</span>, <span class="string">&#x27;pyrfc3339&#x27;</span>, <span class="string">&#x27;xxlimited&#x27;</span>, <span class="string">&#x27;_thread&#x27;</span>, <span class="string">&#x27;getpass&#x27;</span>, <span class="string">&#x27;pytz&#x27;</span>, <span class="string">&#x27;xxsubtype&#x27;</span>, <span class="string">&#x27;_threading_local&#x27;</span>, <span class="string">&#x27;gettext&#x27;</span>, <span class="string">&#x27;queue&#x27;</span>, <span class="string">&#x27;yaml&#x27;</span>, <span class="string">&#x27;_tracemalloc&#x27;</span>, <span class="string">&#x27;gi&#x27;</span>, <span class="string">&#x27;quopri&#x27;</span>, <span class="string">&#x27;zipapp&#x27;</span>, <span class="string">&#x27;_warnings&#x27;</span>, <span class="string">&#x27;glob&#x27;</span>, <span class="string">&#x27;random&#x27;</span>, <span class="string">&#x27;zipfile&#x27;</span>, <span class="string">&#x27;_weakref&#x27;</span>, <span class="string">&#x27;grp&#x27;</span>, <span class="string">&#x27;re&#x27;</span>, <span class="string">&#x27;zipimport&#x27;</span>, <span class="string">&#x27;_weakrefset&#x27;</span>, <span class="string">&#x27;gtweak&#x27;</span>, <span class="string">&#x27;readline&#x27;</span>, <span class="string">&#x27;zlib&#x27;</span>, <span class="string">&#x27;_yaml&#x27;</span>, <span class="string">&#x27;gzip&#x27;</span>, <span class="string">&#x27;reportlab&#x27;</span>, <span class="string">&#x27;zope&#x27;</span>, <span class="string">&#x27;abc&#x27;</span>, <span class="string">&#x27;hashlib&#x27;</span>, <span class="string">&#x27;reprlib&#x27;</span>, <span class="string">&#x27;aifc&#x27;</span>, <span class="string">&#x27;heapq&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">methods = [<span class="string">&#x27;os&#x27;</span>, <span class="string">&#x27;sys&#x27;</span>, <span class="string">&#x27;__builtins__&#x27;</span>]</span><br><span class="line"></span><br><span class="line">results = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> module <span class="keyword">in</span> all_modules_3:</span><br><span class="line">    results[module] = &#123;</span><br><span class="line">        <span class="string">&#x27;flag&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&#x27;result&#x27;</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        m = <span class="built_in">__import__</span>(module)</span><br><span class="line">        attrs = <span class="built_in">dir</span>(m)</span><br><span class="line">        <span class="keyword">for</span> method <span class="keyword">in</span> methods:</span><br><span class="line">            <span class="keyword">if</span> method <span class="keyword">in</span> attrs:</span><br><span class="line">                result = <span class="string">&#x27;yes&#x27;</span></span><br><span class="line">                results[module][<span class="string">&#x27;flag&#x27;</span>] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result = <span class="string">&#x27;no&#x27;</span></span><br><span class="line"></span><br><span class="line">            results[module][<span class="string">&#x27;result&#x27;</span>][method] = result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">    <span class="keyword">if</span> results[result][<span class="string">&#x27;flag&#x27;</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[+]&#x27;</span> + result)</span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> results[result][<span class="string">&#x27;result&#x27;</span>]:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;  [-]&#x27;</span> + r + <span class="string">&#x27;: &#x27;</span> + results[result][<span class="string">&#x27;result&#x27;</span>][r])</span><br></pre></td></tr></table></figure>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -415,11 +431,11 @@
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/sandbox-escape/">sandbox-escape</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/sandbox-escape/">sandbox-escape</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
                                     </li>
                                 
                             </ul>
@@ -433,18 +449,18 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2019/10/08/2019-10-08-Python-Sandbox-Challenges/"
                                    title="Python Sandbox Challenges"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">Python Sandbox Challenges</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -452,7 +468,7 @@
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2019/08/01/2019-08-01-Try-and-Use-WSL/"
@@ -462,8 +478,8 @@
                                         <span class="post-nav-title-item text-ellipsis">Try and Use WSL</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -499,7 +515,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -555,6 +570,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -573,7 +593,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -670,7 +690,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -681,13 +703,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -715,10 +730,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

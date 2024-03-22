@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class="active"
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,7 +199,6 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
                     <div class="fade-in-down-animation">
@@ -190,53 +211,53 @@
             <div class="archive-item-header border-box">
                 <span class="archive-year">2020</span>
             </div>
-            <ul class="article-list border-box">
+            <ul class="archive-item-body border-box">
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-26</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-26</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-Tcache/"
                         >ADWorld PWN Challenge Area Write-ups (Tcache)</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-26</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-26</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/26/2020-10-26-ADWorld-PWN-Challenge-Area-Write-ups-IO-FILE-related/"
                         >ADWorld PWN Challenge Area Write-ups (IO_FILE related)</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-21</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-21</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/21/2020-10-21-Fuzz-with-Boofuzz-the-Successor-to-Sulley/"
                         >Fuzz with Boofuzz (the Successor to Sulley)</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-15</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-15</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/15/2020-10-15-Stack-Overflow-Intro/"
                         >Stack Overflow Intro</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-09</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-09</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/09/2020-10-09-ADWorld-PWN-Challenge-Area-Write-ups-Advanced-ROP/"
                         >ADWorld PWN Challenge Area Write-ups (Advanced ROP)</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-05</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-05</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/05/2020-10-05-ADWorld-PWN-Challenge-Area-Write-ups-Misc/"
                         >ADWorld PWN Challenge Area Write-ups (Misc)</a>
                     </li>
                 
-                    <li class="article-item border-box">
-                        <span class="article-date border-box">10-02</span>
-                        <a class="article-title border-box text-ellipsis"
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">10-02</span>
+                        <a class="post-title border-box text-ellipsis"
                            href="/2020/10/02/2020-10-02-A-Brief-History-of-Fuzzing/"
                         >A Brief History of Fuzzing</a>
                     </li>
@@ -257,7 +278,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -314,7 +334,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -396,7 +416,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -410,23 +432,22 @@
 
 
 
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
-
-
-
 <!-- lazyload -->
 
 
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

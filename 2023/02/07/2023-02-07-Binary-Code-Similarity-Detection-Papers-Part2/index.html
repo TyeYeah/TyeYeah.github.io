@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         Binary Code Similarity Detection Papers (Part2)
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-02-07 16:47:10</span>
-                <span class="mobile">2023-02-07 16:47</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2023-02-07 16:47:10</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue May 09 2023 21:21:07 GMT+0800">2023-05-09 21:21:07</span>
+                <span class="datetime" data-updated="Tue May 09 2023 21:21:07 GMT+0800">2023-05-09 21:21:07</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/Papers/">Papers</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
                         
@@ -260,12 +277,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>8 Mins</span>
             </span>
         
@@ -280,7 +297,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>Additional list in alphabetical order, including what I’ve read.</p>
@@ -340,7 +357,7 @@
 <li>delay time of TPCs (when to adopt latest TPCs)</li>
 <li>license violations</li>
 </ul>
-<p><img src="/./imghost/bcsdpp/firmsec.jpg" alt="Architecture of FirmSec"></p>
+<p><img   src="/./imghost/bcsdpp/firmsec.jpg"  alt="Architecture of FirmSec"></p>
 <h2 id="An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><a href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem" class="headerlink" title="An Investigation of the Android Kernel Patch Ecosystem"></a>An Investigation of the Android Kernel Patch Ecosystem</h2><table>
 <thead>
 <tr>
@@ -359,7 +376,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<p><img src="/./imghost/bcsdpp/androideco.jpg" alt="Android ecosystem for kernel version 4.4"></p>
+<p><img   src="/./imghost/bcsdpp/androideco.jpg"  alt="Android ecosystem for kernel version 4.4"></p>
 <p>improve a state-of-the-art source-to-binary patch presence test tool.</p>
 <p>conduct a large-scale measurement.</p>
 <ul>
@@ -384,7 +401,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/./imghost/bcsdpp/androidpipe.jpg" alt="Measurement pipeline"></p>
+<p><img   src="/./imghost/bcsdpp/androidpipe.jpg"  alt="Measurement pipeline"></p>
 <p>explain the causes of patch delays, also distill takeaways and potential prescriptive solutions to improve the current situation.<br>knowledge of a security vulnerability is lacking, kernel branch drifted.</p>
 <h2 id="Binary-Code-Similarity-Detection"><a href="#Binary-Code-Similarity-Detection" class="headerlink" title="Binary Code Similarity Detection"></a>Binary Code Similarity Detection</h2><table>
 <thead>
@@ -404,7 +421,7 @@
 <li>Last, it compares the symbolic graph similarity.<br> check node similarity, and context (neighbor nodes) similarity</li>
 <li>also address some problems, including path explosion and loop handling.</li>
 </ol>
-<p><img src="/./imghost/bcsdpp/bcsdkeyir.jpg" alt="Key IR graph comparison"></p>
+<p><img   src="/./imghost/bcsdpp/bcsdkeyir.jpg"  alt="Key IR graph comparison"></p>
 <h2 id="Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><a href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation" class="headerlink" title="Binary Diffing as a Network Alignment Problem via Belief Propagation"></a>Binary Diffing as a Network Alignment Problem via Belief Propagation</h2><table>
 <thead>
 <tr>
@@ -417,7 +434,7 @@
 </thead>
 </table>
 <p>leverage a graph edit formulation of binary diffing: find the optimal transformation of two graphs.<br>it is equivalent to a network alignment problem.<br>propose an efficient approximate solver of this problem based on max-product belief propagation.</p>
-<p>compared with Gemini, GraphMatching(Network) and DeepBinDiff<br><img src="/./imghost/bcsdpp/binarydiffing.jpg" alt="Binary diffing as an alignment of call graphs"></p>
+<p>compared with Gemini, GraphMatching(Network) and DeepBinDiff<br><img   src="/./imghost/bcsdpp/binarydiffing.jpg"  alt="Binary diffing as an alignment of call graphs"></p>
 <h2 id="COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022"><a href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-–-Arxiv-2022" class="headerlink" title="COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022"></a>COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</h2><p>propose a COntrastive learning Model for Binary cOde Analysis, or COMBO, that incorporates source code and comment information into binary code during representation learning.</p>
 <p>Specifically, we present three components in COMBO: </p>
 <ol>
@@ -426,7 +443,7 @@
 <li>an intermediate representation learning algorithm to provide binary code <code>embeddings</code>.</li>
 </ol>
 <p>what is weird, is that it compared with codebert and graphcodebert (they are source code releated lang model)</p>
-<p><img src="/./imghost/bcsdpp/combo.jpg" alt="Diagram of simplex interpolation and intermediate representation learning in COMBO"></p>
+<p><img   src="/./imghost/bcsdpp/combo.jpg"  alt="Diagram of simplex interpolation and intermediate representation learning in COMBO"></p>
 <h2 id="jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><a href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection" class="headerlink" title="jTrans: Jump-Aware Transformer for Binary Code Similarity Detection"></a>jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</h2><table>
 <thead>
 <tr>
@@ -439,7 +456,7 @@
 </thead>
 </table>
 <p>the first solution that embeds control flow information of binary code into Transformer-based language models, by using a novel jump-aware representation of the analyzed binaries and a newly-designed pre-training task</p>
-<p><img src="/./imghost/bcsdpp/jtrans.jpg" alt="Input representation of jTrans"></p>
+<p><img   src="/./imghost/bcsdpp/jtrans.jpg"  alt="Input representation of jTrans"></p>
 <h2 id="Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><a href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning" class="headerlink" title="Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning"></a>Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</h2><table>
 <thead>
 <tr>
@@ -468,10 +485,10 @@
 <li>Fine-tuner<br> we leverage a Siamese neural network into a classifier, learning a weighted distance<br> defines a loss function as a binary cross entropy for binary classification</li>
 <li>Predictor</li>
 </ol>
-<p><img src="/./imghost/bcsdpp/binshot.jpg" alt="The overall workflow of BinShot that consists of four components"></p>
+<p><img   src="/./imghost/bcsdpp/binshot.jpg"  alt="The overall workflow of BinShot that consists of four components"></p>
 <h2 id="Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020"><a href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-–-IST-2020" class="headerlink" title="Semantically find similar binary codes with mixed key instruction sequence – IST 2020"></a>Semantically find similar binary codes with mixed key instruction sequence – IST 2020</h2><p>This paper proposes a new binary code similarity comparison method based on the mixed key instruction sequence (<code>MKIS</code>), which contains both <code>API calls</code> and <code>key values</code> (insts that does not change in multiple runs).</p>
 <p>MKIS calculates the <code>similarity</code> between p(plaintiff) and s(suspect) through <code>lcs(Longest common subsequence)</code>, uses the transfer matrix, based on MKIS (executed insts) sequences.</p>
-<p><img src="/./imghost/bcsdpp/mkis.jpg" alt="Mixed key-instruction based similarity comparison flow chart"></p>
+<p><img   src="/./imghost/bcsdpp/mkis.jpg"  alt="Mixed key-instruction based similarity comparison flow chart"></p>
 <h2 id="Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><a href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities" class="headerlink" title="Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities"></a>Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</h2><table>
 <thead>
 <tr>
@@ -487,7 +504,7 @@
 <p>For a given set of known vulnerabilities, the <code>taint analysis</code> extracts <code>vulnerable traces</code> and establishes a <code>signature database</code> of them.<br>When a new unseen program is analyzed, Tracer <code>compares</code> all potentially vulnerable traces reported by the analysis with the known vulnerability signatures.<br>Then, Tracer reports a list of potential vulnerabilities ranked by the similarity score.</p>
 <p>While the <code>essence</code> of the vulnerability is still the <code>same</code>, the <code>different</code> code <code>structure</code> of libXcursor fundamentally <code>hinders</code> the detectability of the tools.</p>
 <p>Taint Analysis.<br>    Taint analysis computes <code>potential data flows</code> from untrusted inputs (<code>sources</code>) to sensitive functions (<code>sinks</code>) with a <code>simple abstract domain</code> for tainted values.<br>Traces on Data Dependency Graphs.<br>    Tracer extracts vulnerable traces from the source and sink points, and <code>filter</code> out irrelevent statements by deriving vuln traces on <code>DDG</code>(data dependency graph, or maybe <code>DFG</code>?) rather than CFG. same procedure will be applied to new target programs.<br>Feature Representation.<br>    Next, Tracer encodes each trace as an integer feature vector. feature vector consists of <code>low-level</code> and <code>high-level</code> features.<br>    <code>Low-level</code> features represent the <code>frequencies of primitive operators</code>(<code>NumOfOpX</code>) X (e.g., *, &lt;&lt;) and <code>common APIs</code>(<code>NumOfLibX</code>) X (e.g., strlen) on the trace.<br>    high-level features describe detailed behavior of traces, like <code>IfSmallerThanConst</code> checks whether a trace has a <code>conditional statement</code>. They manually designed <code>5</code> high-level features.<br>Similarity Checking.<br>    Since all the traces are encoded as <code>vectors</code>, we can use any common similarity measures – cosine similarity</p>
-<p><img src="/./imghost/bcsdpp/traceroverview.jpg" alt="System overview of Tracer"><br><img src="/./imghost/bcsdpp/tracerexample.jpg" alt="Vulnerable traces and their feature vectors"></p>
+<p><img   src="/./imghost/bcsdpp/traceroverview.jpg"  alt="System overview of Tracer"><br><img   src="/./imghost/bcsdpp/tracerexample.jpg"  alt="Vulnerable traces and their feature vectors"></p>
 <h2 id="VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><a href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search" class="headerlink" title="VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search"></a>VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</h2><table>
 <thead>
 <tr>
@@ -504,11 +521,11 @@
 <ol>
 <li>intermediate representation function model:<br>lifts binary code into <code>microcode</code>(IDA’s IR), and <code>complements implicit oprands</code>, and <code>prunes redundant instructions</code>, and use NLP + GNN to get function embeddings.</li>
 </ol>
-<p><img src="/./imghost/bcsdpp/vulhawkmicro.jpg" alt="Detailed steps of the instruction simplification"></p>
+<p><img   src="/./imghost/bcsdpp/vulhawkmicro.jpg"  alt="Detailed steps of the instruction simplification"></p>
 <ol start="2">
 <li>entropy-based adapter:<br>call the combination of a compiler, architecture, and optimization level as a <code>file environment</code>, take a <code>divide-and-conquer strategy</code> to divide a similarity calculation problem of C^2_N cross-file-environment scenarios into N - 1 embedding transferring sub-problems (use <code>ResNet</code> to input features and classify as 8 classes, 2 compilers x 4 optimizations).</li>
 </ol>
-<p><img src="/./imghost/bcsdpp/vulhawkentropy.jpg" alt="The diagram of divide-and-conquer strategy"></p>
+<p><img   src="/./imghost/bcsdpp/vulhawkentropy.jpg"  alt="The diagram of divide-and-conquer strategy"></p>
 <p>propose an <code>entropy-based adapter</code> to transfer function embeddings from different file environments <code>into the same file environment</code>. didn’t see the entropy, but different <code>adapter</code> weights (associated with file env) for <code>ResNet</code> to cal sim&#x2F;embed.</p>
 <ol start="3">
 <li>progressive search strategy:<br>propose a <code>progressive search strategy</code> to supplement function embeddings with fine-grained features to reduce false positives caused by patched functions</li>
@@ -523,10 +540,9 @@
 </ul>
 </li>
 </ul>
-<p><img src="/./imghost/bcsdpp/vulhawk.jpg" alt="The overall workflow of VulHawk"></p>
+<p><img   src="/./imghost/bcsdpp/vulhawk.jpg"  alt="The overall workflow of VulHawk"></p>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -557,18 +573,18 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/"
                                    title="Deploy Some LLMs"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">Deploy Some LLMs</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -576,7 +592,7 @@
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/"
@@ -586,8 +602,8 @@
                                         <span class="post-nav-title-item text-ellipsis">Binary SCA (Software Composition Analysis) Related Tools</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -623,7 +639,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -679,6 +694,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -697,7 +717,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -794,7 +814,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -805,13 +827,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -839,10 +854,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

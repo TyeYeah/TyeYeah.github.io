@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         Learn A Lot From Cornucopia (ASE 2022): A Case
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2024-03-13 22:29:13</span>
-                <span class="mobile">2024-03-13 22:29</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-03-13 22:29:13</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Fri Mar 22 2024 10:59:11 GMT+0800">2024-03-22 10:59:11</span>
+                <span class="datetime" data-updated="Fri Mar 22 2024 10:59:11 GMT+0800">2024-03-22 10:59:11</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/Note/">Note</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
                         
@@ -260,12 +277,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>5.1k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>31 Mins</span>
             </span>
         
@@ -280,7 +297,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>This is to inspect the internal part of <a class="link"   target="_blank" rel="noopener" href="https://binarygeneration.github.io/projects/cornucopia" >Cornucopia<i class="fas fa-external-link-alt"></i></a>, from the perspective of code implementation.</p>
@@ -318,7 +335,7 @@
 <p>The generated <code>options_list.txt</code> is the corpus of <code>llc</code> compiling parameter.<br>Since <code>Cornucopia</code> supports <code>x86-64</code>, <code>x86</code>, <code>arm</code> and <code>mips</code>, use <code>python3 optionParser.py options_list.txt mips</code> to see the architecture specific optimization options, which will be outputted in the file <code>option_list.txt</code>.</p>
 <h3 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h3><p>All things in <code>/root</code> can be listed:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">root@b406ed67aeed:~# tree -L 2</span><br><span class="line">.</span><br><span class="line">|-- AFLplusplus            # modified afl++</span><br><span class="line">|   |-- ...</span><br><span class="line">|   `-- ...</span><br><span class="line">|-- Dockerfile</span><br><span class="line">|-- HashEnabledLLVM        # modified LLVM</span><br><span class="line">|   |-- ...</span><br><span class="line">|   `-- ...</span><br><span class="line">|-- LICENSE</span><br><span class="line">|-- Makefile</span><br><span class="line">|-- README.md</span><br><span class="line">|-- afl_sources            # many xx.bc, resources to compile</span><br><span class="line">|   |-- ac.bc</span><br><span class="line">|   |-- ...</span><br><span class="line">|   `-- yes.bc</span><br><span class="line">|-- assembly_folder        # dir to place compiles bins by fuzzer</span><br><span class="line">|   `-- function_hash_iter</span><br><span class="line">|-- automation_scripts     # script and config for fuzzing</span><br><span class="line">|   |-- randollvm.config</span><br><span class="line">|   `-- run_fuzz.py</span><br><span class="line">|-- diff_test              # Differential testing part, haven&#x27;t test it, to be done ...</span><br><span class="line">|   |-- ...</span><br><span class="line">|   `-- ...</span><br><span class="line">|-- fitness_wrapper        # server scripts to receive uploaded bins, store them and calculate fitness score </span><br><span class="line">|   |-- ...</span><br><span class="line">|   `-- ...</span><br><span class="line">|-- gcc_afl_fuzz_crashes   # logs of afl++ when fuzzing, for gcc target</span><br><span class="line">|-- inputs                 # seeds for afl++, generated by &quot;RUN python3 optionMap.py&quot;</span><br><span class="line">|   |-- optionmap0</span><br><span class="line">|   |-- optionmap1</span><br><span class="line">|   |-- optionmap2</span><br><span class="line">|   |-- optionmap3</span><br><span class="line">|   `-- optionmap4</span><br><span class="line">|-- llvm_afl_fuzz_crashes  # logs of afl++ when fuzzing, for llvm target</span><br><span class="line">|   `-- function_hash_iter</span><br><span class="line">|-- optionMap.py           # used in dockerfile, to genearte seeds into &quot;inputs/&quot;</span><br><span class="line">|-- optionParser.py        # to see (determine corpus in the meantime) architecture specific optimization options</span><br><span class="line">|-- option_list.txt        # the generated llc parameters (corpus) to be tested</span><br><span class="line">|-- options_list.txt       # all llc compiling parameters</span><br><span class="line">`-- outputs                # afl++ output</span><br><span class="line">    `-- function_hash_iter</span><br><span class="line"></span><br><span class="line">51 directories, 380 files</span><br></pre></td></tr></table></figure>
-<p><img src="https://binarygeneration.github.io/assets/img/projects/cornucopia.jpg" alt="cornucopia"></p>
+<p><img   src="https://binarygeneration.github.io/assets/img/projects/cornucopia.jpg"  alt="cornucopia"></p>
 <h2 id="What-it-Modified-and-Where-to-Moodify"><a href="#What-it-Modified-and-Where-to-Moodify" class="headerlink" title="What it Modified, and Where to Moodify"></a>What it Modified, and Where to Moodify</h2><p>Three significant parts:</p>
 <ul>
 <li>AFL++<ul>
@@ -338,8 +355,8 @@
 </ul>
 <h3 id="In-AFL"><a href="#In-AFL" class="headerlink" title="In AFL++"></a>In AFL++</h3><h4 id="AFLplusplus-x2F"><a href="#AFLplusplus-x2F" class="headerlink" title="AFLplusplus&#x2F;"></a>AFLplusplus&#x2F;</h4><p>Use version diffing to identify changes.<br>According to the <code>README.md</code> (Im serious) the version should be exactly – a certain commit in <code>tag@3.13c</code>, which is – <code>commit@8b7a7b2</code>.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/AFLplusplus/AFLplusplus.git</span><br><span class="line">$ cd AFLplusplus/</span><br><span class="line">AFLplusplus/$ git checkout 8b7a7b29</span><br></pre></td></tr></table></figure>
-<p>use <code>Beyond Compare 4</code> to diff src:<br><img src="/./imghost/lalfc/diffafl.png" alt="diff in `Beyond Compare 4`"></p>
-<p>In <code>afl-compiler-rt.o.c</code> it adds three function definitions, which is used to make seed interesting according to server feedback, compiled in instrumentation (interesting.)<br><img src="/./imghost/lalfc/diffaflcompilerrt.png" alt="diff afl-compiler-rt.o.c"></p>
+<p>use <code>Beyond Compare 4</code> to diff src:<br><img   src="/./imghost/lalfc/diffafl.png"  alt="diff in `Beyond Compare 4`"></p>
+<p>In <code>afl-compiler-rt.o.c</code> it adds three function definitions, which is used to make seed interesting according to server feedback, compiled in instrumentation (interesting.)<br><img   src="/./imghost/lalfc/diffaflcompilerrt.png"  alt="diff afl-compiler-rt.o.c"></p>
 <p>You can also checkout other diff parts (minor change). As this is a fuzzer, it is less valuable to substitute comparing it to the compilers (<code>LLVM</code> or <code>GCC</code>) that are being tested.</p>
 <h4 id="fitness-wrapper-x2F-xxx-postprocessor-cc"><a href="#fitness-wrapper-x2F-xxx-postprocessor-cc" class="headerlink" title="fitness_wrapper&#x2F;xxx_postprocessor.cc"></a>fitness_wrapper&#x2F;xxx_postprocessor.cc</h4><p>Found them in <code>Makefile</code> in project root path.</p>
 <p>It stores custom mutators: <code>parallel_postprocessor.cc</code> for fuzzing one program parallelly, <code>multiarch_llvm_postprocessor.cc</code> for fuzzing many programs parallelly, <code>aflpostprocessor_bin.cc</code> for fuzzing many programs while not using function hashing diffing, <code>aflpostprocessor.cc</code> and <code>generic_postprocessor.cc</code>(both templates?).</p>
@@ -396,7 +413,6 @@
 <p>Differential testing for binary analysis tools needs to be done…Later…</p>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -427,10 +443,10 @@
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2024/02/20/2024-02-20-Docker-Tips/"
@@ -440,8 +456,8 @@
                                         <span class="post-nav-title-item text-ellipsis">Docker Tips</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -477,7 +493,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -533,6 +548,11 @@
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -551,7 +571,7 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -648,7 +668,9 @@
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -659,13 +681,6 @@
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -693,10 +708,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

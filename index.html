@@ -33,10 +33,10 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/img/wang.svg","avatar":"/img/aliwangwang.svg","first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":true,"preload":true},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["Gamer","Learner"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"version":"3.8.5"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -44,13 +44,15 @@
 <body>
 <div class="progress-bar-container">
     
+        <span class="scroll-progress-bar"></span>
+    
 
     
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
         
@@ -62,30 +64,33 @@
             
                 <div class="description border-box">
                     
-                        
-                            
-                                <div class="desc-item border-box"><span class="desc">Keep writing and Keep loving.</span><span class="cursor">｜</span></div>
-                            
-                        
+                        <div class="desc-item border-box"><span class="desc hitokoto"></span><span class="cursor">｜</span></div>
                     
                 </div>
             
 
             
+                <script async 
+                        src="https://v1.hitokoto.cn/?encode=js"
+                >
+                </script>
+            
         </div>
 
         <div class="bottom-placeholder border-box">
             
-                <div class="sc-icon-list">
+                <div class="sc-icon-list border-box">
+                    <!-- fontawesome icons -->
                     
                         
                             
                             <div class="tooltip sc-icon-item "
                                  data-tooltip-content="GitHub"
-                                 data-tooltip-img-name="github"
-                                    
+                                 
+                                 
                             >
                                 
+                                    
                                     
                                         <a target="_blank" href="https://github.com/tyeyeah">
                                             <i class="fab fa-github"></i>
@@ -108,6 +113,12 @@
                         
                     
                         
+                    
+                        
+                    
+
+                    <!-- custom svg icons -->
+                    
                     
                 </div>
             
@@ -139,49 +150,59 @@
             <div class="pc">
                 <ul class="menu-list">
                     
+                        
                         <li class="menu-item">
                             <a class="active"
                                href="/"
                             >
+                                
                                 HOME
                             </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
                             >
+                                
                                 ARCHIVES
                             </a>
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                CATEGORIES
-                            </a>
-                        </li>
-                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
                             >
+                                
                                 TAGS
                             </a>
                         </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
                             >
+                                
                                 ABOUT
                             </a>
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
+                            <i class="fas search fa-search"></i>
                         </li>
                     
                 </ul>
@@ -200,29 +221,39 @@
     <div class="header-drawer">
         <ul class="drawer-menu-list">
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
-                       href="/">HOME</a>
+                       href="/"
+                    >HOME</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives"
+                    >ARCHIVES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/tags"
+                    >TAGS</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/categories"
+                    >CATEGORIES</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about"
+                    >ABOUT</a>
                 </li>
             
         </ul>
@@ -238,25 +269,25 @@
         <div class="page-main-content-middle border-box">
 
             <div class="main-content border-box">
-
                 
 
                     <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list border-box">
+    
+    <ul class="home-post-list border-box">
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2024/03/13/2024-03-13-Learn-A-Lot-From-Cornucopia-ASE-2022-A-Case/">
                             Learn A Lot From Cornucopia (ASE 2022): A Case
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             This is to inspect the internal part of Cornucopia, from the perspective of code implementation.
 Introduce CornucopiaAs docum...
@@ -265,19 +296,44 @@ Introduce CornucopiaAs docum...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Fri Mar 22 2024 10:59:11 GMT+0800">2024-03-22 10:59:11</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Fri Mar 22 2024 10:59:11 GMT+0800"
+                >2024-03-22 10:59:11</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/compiler/">compiler</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -287,26 +343,26 @@ Introduce CornucopiaAs docum...
     </div>
 
     
-        <a class="home-read-more" href="/2024/03/13/2024-03-13-Learn-A-Lot-From-Cornucopia-ASE-2022-A-Case/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2024/03/13/2024-03-13-Learn-A-Lot-From-Cornucopia-ASE-2022-A-Case/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2024/02/20/2024-02-20-Docker-Tips/">
                             Docker Tips
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Follow this to get a good command of Docker usage.
 Basic CommandsThe Reference documentation | Docker Docs gives the most com...
@@ -315,19 +371,47 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Tue Feb 20 2024 15:41:37 GMT+0800">2024-02-20 15:41:37</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Feb 20 2024 15:41:37 GMT+0800"
+                >2024-02-20 15:41:37</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/docker/">docker</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/nvidia/">nvidia</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/cuda/">cuda</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -337,26 +421,26 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
     </div>
 
     
-        <a class="home-read-more" href="/2024/02/20/2024-02-20-Docker-Tips/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2024/02/20/2024-02-20-Docker-Tips/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2023/10/17/2023-10-17-IDAPython-note/">
                             IDAPython note
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             IDAPython is an IDA plugin which makes it possible to write scripts for IDA in the Python programming language. IDAPython pro...
                         
@@ -364,19 +448,44 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Tue Feb 20 2024 15:42:56 GMT+0800">2024-02-20 15:42:56</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Feb 20 2024 15:42:56 GMT+0800"
+                >2024-02-20 15:42:56</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ida/">ida</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -386,26 +495,26 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
     </div>
 
     
-        <a class="home-read-more" href="/2023/10/17/2023-10-17-IDAPython-note/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2023/10/17/2023-10-17-IDAPython-note/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/">
                             Deploy Some LLMs
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Large Language Models (LLMs) are neural networks with many parameters (typically billions or more) that are trained on large ...
                         
@@ -413,19 +522,44 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Wed Feb 21 2024 20:47:24 GMT+0800">2024-02-21 20:47:24</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Wed Feb 21 2024 20:47:24 GMT+0800"
+                >2024-02-21 20:47:24</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -435,26 +569,26 @@ Basic CommandsThe Reference documentation | Docker Docs gives the most com...
     </div>
 
     
-        <a class="home-read-more" href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2023/05/08/2023-05-08-Deploy-Some-LLMs/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/">
                             Binary Code Similarity Detection Papers (Part2)
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Additional list in alphabetical order, including what I’ve read.
 A Large-Scale Empirical Analysis of the Vulnerabilities Intr...
@@ -463,19 +597,44 @@ A Large-Scale Empirical Analysis of the Vulnerabilities Intr...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Tue May 09 2023 21:21:07 GMT+0800">2023-05-09 21:21:07</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue May 09 2023 21:21:07 GMT+0800"
+                >2023-05-09 21:21:07</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Papers/">Papers</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/bcsd/">bcsd</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -485,26 +644,26 @@ A Large-Scale Empirical Analysis of the Vulnerabilities Intr...
     </div>
 
     
-        <a class="home-read-more" href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2023/02/07/2023-02-07-Binary-Code-Similarity-Detection-Papers-Part2/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/">
                             Binary SCA (Software Composition Analysis) Related Tools
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Software Composition Analysis (SCA) for binary helps a lot for vulnerability discovery and program analysis, related fields i...
                         
@@ -512,19 +671,47 @@ A Large-Scale Empirical Analysis of the Vulnerabilities Intr...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Fri Feb 17 2023 08:00:40 GMT+0800">2023-02-17 08:00:40</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Fri Feb 17 2023 08:00:40 GMT+0800"
+                >2023-02-17 08:00:40</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/windows/">windows</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/SCA/">SCA</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -534,26 +721,26 @@ A Large-Scale Empirical Analysis of the Vulnerabilities Intr...
     </div>
 
     
-        <a class="home-read-more" href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2023/01/02/2023-01-02-Binary-SCA-Software-Composition-Analysis-Related-Tools/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2022/11/20/2022-11-20-LLVM-Commands/">
                             LLVM Commands
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Here are collections of LLVM commands about compilation using clang and some graph structure geneartion.
 LLVM CompilationTo w...
@@ -562,19 +749,44 @@ LLVM CompilationTo w...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Fri Feb 23 2024 11:07:48 GMT+0800">2024-02-23 11:07:48</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Fri Feb 23 2024 11:07:48 GMT+0800"
+                >2024-02-23 11:07:48</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Note/">Note</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/llvm/">llvm</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -584,26 +796,26 @@ LLVM CompilationTo w...
     </div>
 
     
-        <a class="home-read-more" href="/2022/11/20/2022-11-20-LLVM-Commands/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2022/11/20/2022-11-20-LLVM-Commands/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2022/08/06/2022-08-06-Go-Phishing/">
                             Go Phishing!
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             This article shows methods of phishing, including setting up a phishing mail server, preparing malware (PE) which deceives th...
                         
@@ -611,19 +823,44 @@ LLVM CompilationTo w...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Sun Nov 27 2022 16:27:50 GMT+0800">2022-11-27 16:27:50</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sun Nov 27 2022 16:27:50 GMT+0800"
+                >2022-11-27 16:27:50</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Penetration-Testing/">Penetration Testing</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/windows/">windows</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pentest/">pentest</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -633,26 +870,26 @@ LLVM CompilationTo w...
     </div>
 
     
-        <a class="home-read-more" href="/2022/08/06/2022-08-06-Go-Phishing/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2022/08/06/2022-08-06-Go-Phishing/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/">
                             Binary Code Similarity Detection Papers
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             There is a repo called Awesome Binary Similarity that helps collecting papers.
 Here comes my list (including what I’ve read) ...
@@ -661,19 +898,44 @@ Here comes my list (including what I’ve read) ...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Tue Jun 27 2023 14:17:23 GMT+0800">2023-06-27 14:17:23</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Jun 27 2023 14:17:23 GMT+0800"
+                >2023-06-27 14:17:23</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Papers/">Papers</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/bcsd/">bcsd</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -683,26 +945,26 @@ Here comes my list (including what I’ve read) ...
     </div>
 
     
-        <a class="home-read-more" href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2022/03/26/2022-03-26-Binary-Code-Similarity-Detection-Papers/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
                 </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <div class="home-article-item-bottom border-box">
+                <div class="home-post-item-bottom border-box">
                     
-                    <h3 class="home-article-title border-box">
+                    <h3 class="home-post-title border-box">
                         <a href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/">
                             Bypass Anti-Virus
                         </a>
                     </h3>
 
-                    <div class="home-article-content keep-markdown-body">
+                    <div class="home-post-content keep-markdown-body">
                         
                             Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools&#x2F;tips.
 GeneralActua...
@@ -711,19 +973,44 @@ GeneralActua...
 
                     
 
-<div class="article-meta-info-container border-box home">
-    <div class="article-meta-info border-box">
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-article-history" data-updated="Wed Apr 12 2023 20:13:36 GMT+0800">2023-04-12 20:13:36</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Wed Apr 12 2023 20:13:36 GMT+0800"
+                >2023-04-12 20:13:36</span>
             </span>
         
 
-
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Penetration-Testing/">Penetration Testing</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/windows/">windows</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pentest/">pentest</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -733,7 +1020,7 @@ GeneralActua...
     </div>
 
     
-        <a class="home-read-more" href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/">Read more&nbsp;<i class="icon fas fa-angles-right"></i></a>
+        <a class="home-read-more" href="/2021/08/02/2021-08-02-Bypass-Anti-Virus/">Read more&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
@@ -775,7 +1062,6 @@ GeneralActua...
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -832,7 +1118,7 @@ GeneralActua...
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
+        <li class="tools-item tool-toggle-theme-mode flex-center">
             <i class="fas fa-moon"></i>
         </li>
 
@@ -915,7 +1201,9 @@ GeneralActua...
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
 
 <script src="/js/main.js"></script>
 
@@ -929,23 +1217,22 @@ GeneralActua...
 
 
 
-<!-- code-block -->
-
-    
-<script src="/js/code-block.js"></script>
-
-
-
 <!-- lazyload -->
 
 
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 
