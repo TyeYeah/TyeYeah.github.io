@@ -1,88 +1,690 @@
-﻿<!DOCTYPE html>
-<html lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Let's Play a Game</title>
-<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Procrastination Station</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
 
-<link rel="stylesheet" href="css/style.css">
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #00cec9;
+            --danger-color: #ff7675;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #dfe6e9;
+        }
 
+        * { box-sizing: border-box; user-select: none; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Changed for footer alignment */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Glassmorphism Container --- */
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 85vh; /* Reduced slightly to make room for footer */
+            overflow-y: auto;
+            text-align: center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 10; /* Ensure it sits above footer */
+        }
+
+        .container::-webkit-scrollbar { width: 0; }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            z-index: -1;
+            position: absolute; /* Keep hidden elements from taking space */
+        }
+
+        h1 { margin: 0 0 10px 0; font-weight: 700; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        h2 { margin: 10px 0 20px 0; }
+
+        /* --- Buttons --- */
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin: 0 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover { background: rgba(255,255,255,0.4); transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
+        .btn.active { background: var(--primary-color); border-color: var(--primary-color); }
+        
+        .btn-back { position: absolute; top: 20px; left: 20px; font-size: 12px; padding: 6px 12px; text-transform: none; }
+        .controls { margin-bottom: 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 5px;}
+
+        /* --- Menu --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .game-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .game-card:hover {
+            background: rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .game-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+
+        /* --- Status Bar --- */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        /* --- Minesweeper --- */
+        .minesweeper-grid {
+            display: grid;
+            gap: 2px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.3);
+            padding: 5px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+        .ms-cell {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+            font-size: 14px;
+        }
+        .ms-cell:hover { background: #fff; }
+        .ms-cell.revealed { background: rgba(255,255,255,0.2); color: white; cursor: default; }
+        .ms-cell.mine { background: var(--danger-color); }
+        .ms-cell.flag { background: #ffeaa7; }
+        
+        .c1 { color: #74b9ff; } .c2 { color: #55efc4; } .c3 { color: #ff7675; } 
+        .c4 { color: #a29bfe; } .c5 { color: #fd79a8; }
+
+        /* --- Sudoku --- */
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            margin: 0 auto 20px auto;
+            width: fit-content;
+        }
+        .sd-cell {
+            width: 32px;
+            height: 32px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+        }
+        .sd-cell:nth-child(3n) { border-right: 2px solid rgba(255,255,255,0.4); }
+        .sd-cell:nth-child(9n) { border-right: none; }
+        .sd-cell:nth-child(n+19):nth-child(-n+27),
+        .sd-cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid rgba(255,255,255,0.4); }
+        
+        .sd-cell.fixed { font-weight: bold; color: var(--accent-color); cursor: default; }
+        .sd-cell.selected { background: rgba(255,255,255,0.5); color: #333; }
+        .sd-cell.error { background: rgba(255, 118, 117, 0.5); }
+        .sd-cell.highlight { background: rgba(255,255,255,0.15); }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .num-btn {
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .num-btn:hover { background: rgba(255,255,255,0.3); }
+
+        /* --- Footer / Copyright --- */
+        .footer {
+            position: fixed;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 1;
+            pointer-events: none; /* Allows clicking through if needed */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+            pointer-events: auto;
+            transition: color 0.2s;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="ui">
+    <!-- Main Menu -->
+    <div id="menu-view" class="container">
+        <h1>THE ARCADE</h1>
+        <p style="color: var(--text-muted); font-size: 14px;">Pick your poison</p>
+        
+        <div class="menu-grid">
+            <div class="game-card" onclick="GameManager.loadGame('minesweeper')">
+                <span class="game-icon">💣</span>
+                <div class="game-title">Minesweeper</div>
+                <div style="font-size:12px; margin-top:5px; opacity:0.7">Don't go boom.</div>
+            </div>
+            <div class="game-card" onclick="GameManager.loadGame('sudoku')">
+                <span class="game-icon">🧩</span>
+                <div class="game-title">Sudoku</div>
+                <div style="font-size:12px; margin-top:5px; opacity:0.7">Math for people who hate math.</div>
+            </div>
+        </div>
+    </div>
 
-  <div class="ui__background"></div>
+    <!-- Minesweeper View -->
+    <div id="minesweeper-view" class="container hidden">
+        <button class="btn btn-back" onclick="GameManager.showMenu()">← Bail Out</button>
+        <h2>MINESWEEPER</h2>
+        
+        <div class="controls">
+            <button class="btn" onclick="Minesweeper.init('easy')">Chill</button>
+            <button class="btn" onclick="Minesweeper.init('medium')">Sweaty</button>
+            <button class="btn" onclick="Minesweeper.init('hard')">Nightmare</button>
+        </div>
 
-  <div class="ui__game"></div>
+        <div class="status-bar">
+            <span>Danger Noodles: <b id="ms-mines-left" style="color:var(--danger-color)">0</b></span>
+            <span>Wasted Time: <b id="ms-timer">00:00</b></span>
+        </div>
 
-  <div class="ui__texts">
-    <h1 class="text text--title">
-      <span>THE</span>
-      <span>CUBE</span>
-    </h1>
-    <div class="text text--note">
-      Double Click to Start
+        <div id="ms-board" class="minesweeper-grid"></div>
     </div>
-    <div class="text text--timer">
-      0:00
-    </div>
-    <div class="text text--complete">
-      <span>Complete!</span>
-    </div>
-    <div class="text text--best-time">
-      <icon trophy></icon>
-      <span>Best Time!</span>
-    </div>
-  </div>
 
-  <div class="ui__prefs">
-    <range name="flip" title="Flip Type" list="Swift&nbsp;,Smooth,Bounce"></range>
-    <range name="scramble" title="Scramble Length" list="20,25,30"></range>
-    <range name="fov" title="Camera Angle" list="Ortographic,Perspective"></range>
-    <range name="theme" title="Color Scheme" list="Cube,Erno,Dust,Camo,Rain"></range>
-  </div>
+    <!-- Sudoku View -->
+    <div id="sudoku-view" class="container hidden">
+        <button class="btn btn-back" onclick="GameManager.showMenu()">← Rage Quit</button>
+        <h2>SUDOKU</h2>
+        
+        <!-- Difficulty Selection -->
+        <div class="controls">
+            <button class="btn" id="sd-btn-easy" onclick="Sudoku.init('easy')">Noob</button>
+            <button class="btn" id="sd-btn-medium" onclick="Sudoku.init('medium')">Human</button>
+            <button class="btn" id="sd-btn-hard" onclick="Sudoku.init('hard')">God Mode</button>
+        </div>
 
-  <div class="ui__stats">
-    <div class="stats" name="total-solves">
-      <i>Total solves:</i><b>-</b>
-    </div>
-    <div class="stats" name="best-time">
-      <i>Best time:</i><b>-</b>
-    </div>
-    <div class="stats" name="worst-time">
-      <i>Worst time:</i><b>-</b>
-    </div>
-    <div class="stats" name="average-5">
-      <i>Average of 5:</i><b>-</b>
-    </div>
-    <div class="stats" name="average-12">
-      <i>Average of 12:</i><b>-</b>
-    </div>
-    <div class="stats" name="average-25">
-      <i>Average of 25:</i><b>-</b>
-    </div>
-  </div>
+        <div class="status-bar">
+            <span>Pain Level: <b id="sd-difficulty-text">Noob</b></span>
+            <span>Brain Lag: <b id="sd-timer">00:00</b></span>
+        </div>
 
-  <div class="ui__buttons">
-    <button class="btn btn--bl btn--stats">
-      <icon trophy></icon>
-    </button>
-    <button class="btn btn--bl btn--prefs">
-      <icon settings></icon>
-    </button>
-    <button class="btn btn--bl btn--back">
-      <icon back></icon>
-    </button>
-    <button class="btn btn--br btn--pwa">
-    </button>
-  </div>
+        <div id="sd-board" class="sudoku-board"></div>
 
-</div>
+        <div class="numpad">
+            <button class="num-btn" onclick="Sudoku.input(1)">1</button>
+            <button class="num-btn" onclick="Sudoku.input(2)">2</button>
+            <button class="num-btn" onclick="Sudoku.input(3)">3</button>
+            <button class="num-btn" onclick="Sudoku.input(4)">4</button>
+            <button class="num-btn" onclick="Sudoku.input(5)">5</button>
+            <button class="num-btn" onclick="Sudoku.input(6)">6</button>
+            <button class="num-btn" onclick="Sudoku.input(7)">7</button>
+            <button class="num-btn" onclick="Sudoku.input(8)">8</button>
+            <button class="num-btn" onclick="Sudoku.input(9)">9</button>
+            <button class="num-btn" onclick="Sudoku.input(0)" style="color:var(--danger-color); font-size: 12px;">Nah</button>
+        </div>
+        
+        <div style="margin-top:15px;">
+            <button class="btn" onclick="Sudoku.check()">Am I Stupid?</button>
+            <button class="btn" onclick="Sudoku.init(Sudoku.currentDifficulty)">Rage Restart</button>
+        </div>
+    </div>
 
-<script src='js/three.min.js'></script>
-<script src="js/index.js"></script>
-<div style="text-align:center;">
-</div>
+    <!-- Footer / Copyright -->
+    <div class="footer">
+        Crafted with 🤖 & ☕<br>
+        No rights reserved. Steal this code.
+    </div>
+
+<script>
+    // --- Game Manager ---
+    const GameManager = {
+        views: ['menu-view', 'minesweeper-view', 'sudoku-view'],
+        
+        showMenu() {
+            this.switchView('menu-view');
+            Minesweeper.stopTimer();
+            Sudoku.stopTimer();
+        },
+
+        loadGame(game) {
+            if (game === 'minesweeper') {
+                this.switchView('minesweeper-view');
+                Minesweeper.init('easy');
+            } else if (game === 'sudoku') {
+                this.switchView('sudoku-view');
+                Sudoku.init('easy'); 
+            }
+        },
+
+        switchView(targetId) {
+            this.views.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === targetId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+    };
+
+    // --- Timer Utility ---
+    class GameTimer {
+        constructor(elementId) {
+            this.element = document.getElementById(elementId);
+            this.interval = null;
+            this.seconds = 0;
+        }
+        start() {
+            this.stop();
+            this.seconds = 0;
+            this.updateDisplay();
+            this.interval = setInterval(() => {
+                this.seconds++;
+                this.updateDisplay();
+            }, 1000);
+        }
+        stop() {
+            clearInterval(this.interval);
+        }
+        updateDisplay() {
+            const m = Math.floor(this.seconds / 60).toString().padStart(2, '0');
+            const s = (this.seconds % 60).toString().padStart(2, '0');
+            this.element.innerText = `${m}:${s}`;
+        }
+    }
+
+    // ================= Minesweeper Logic =================
+    const Minesweeper = {
+        rows: 0, cols: 0, mines: 0,
+        grid: [],
+        gameOver: false,
+        timer: new GameTimer('ms-timer'),
+        firstClick: true,
+
+        init(difficulty) {
+            const configs = {
+                easy: { r: 9, c: 9, m: 10 },
+                medium: { r: 12, c: 12, m: 20 },
+                hard: { r: 15, c: 15, m: 40 }
+            };
+            const cfg = configs[difficulty];
+            this.rows = cfg.r;
+            this.cols = cfg.c;
+            this.mines = cfg.m;
+            this.grid = [];
+            this.gameOver = false;
+            this.firstClick = true;
+            this.timer.stop();
+            document.getElementById('ms-timer').innerText = "00:00";
+            
+            this.renderBoard();
+            this.updateMineCount(this.mines);
+        },
+        
+        stopTimer() { this.timer.stop(); },
+
+        renderBoard() {
+            const board = document.getElementById('ms-board');
+            board.style.gridTemplateColumns = `repeat(${this.cols}, 1fr)`;
+            board.innerHTML = '';
+
+            for (let r = 0; r < this.rows; r++) {
+                const row = [];
+                for (let c = 0; c < this.cols; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'ms-cell';
+                    cell.onmouseup = (e) => this.handleClick(e, r, c);
+                    cell.oncontextmenu = (e) => { e.preventDefault(); this.handleClick({button:2}, r, c); };
+                    board.appendChild(cell);
+                    row.push({ el: cell, mine: false, revealed: false, flag: false, count: 0 });
+                }
+                this.grid.push(row);
+            }
+        },
+
+        handleClick(e, r, c) {
+            if (this.gameOver) return;
+            const cell = this.grid[r][c];
+
+            if (e.button === 2) {
+                if (!cell.revealed) {
+                    cell.flag = !cell.flag;
+                    cell.el.classList.toggle('flag');
+                    cell.el.innerText = cell.flag ? '🚩' : '';
+                    this.updateMineCount();
+                }
+                return;
+            }
+
+            if (cell.flag) return;
+
+            if (this.firstClick) {
+                this.placeMines(r, c);
+                this.timer.start();
+                this.firstClick = false;
+            }
+
+            this.reveal(r, c);
+        },
+
+        placeMines(excludeR, excludeC) {
+            let placed = 0;
+            while (placed < this.mines) {
+                const r = Math.floor(Math.random() * this.rows);
+                const c = Math.floor(Math.random() * this.cols);
+                if (!this.grid[r][c].mine && (Math.abs(r - excludeR) > 1 || Math.abs(c - excludeC) > 1)) {
+                    this.grid[r][c].mine = true;
+                    placed++;
+                }
+            }
+            for(let r=0; r<this.rows; r++) {
+                for(let c=0; c<this.cols; c++) {
+                    if(!this.grid[r][c].mine) {
+                        this.grid[r][c].count = this.countNeighbors(r, c);
+                    }
+                }
+            }
+        },
+
+        countNeighbors(r, c) {
+            let count = 0;
+            for(let i=-1; i<=1; i++) for(let j=-1; j<=1; j++) {
+                if(r+i >=0 && r+i < this.rows && c+j >=0 && c+j < this.cols && this.grid[r+i][c+j].mine) count++;
+            }
+            return count;
+        },
+
+        reveal(r, c) {
+            const cell = this.grid[r][c];
+            if (cell.revealed || cell.flag) return;
+
+            cell.revealed = true;
+            cell.el.classList.add('revealed');
+
+            if (cell.mine) {
+                cell.el.classList.add('mine');
+                cell.el.innerText = '💀';
+                this.endGame(false);
+                return;
+            }
+
+            if (cell.count > 0) {
+                cell.el.innerText = cell.count;
+                cell.el.classList.add(`c${cell.count}`);
+            } else {
+                for(let i=-1; i<=1; i++) for(let j=-1; j<=1; j++) {
+                    if(r+i >=0 && r+i < this.rows && c+j >=0 && c+j < this.cols) {
+                        this.reveal(r+i, c+j);
+                    }
+                }
+            }
+            this.checkWin();
+        },
+
+        updateMineCount() {
+            const flags = this.grid.flat().filter(c => c.flag).length;
+            document.getElementById('ms-mines-left').innerText = this.mines - flags;
+        },
+
+        checkWin() {
+            const revealed = this.grid.flat().filter(c => c.revealed).length;
+            if (revealed === this.rows * this.cols - this.mines) {
+                this.endGame(true);
+            }
+        },
+
+        endGame(win) {
+            this.gameOver = true;
+            this.timer.stop();
+            if(win) alert("EZ CLAP! You survived.");
+            else {
+                this.grid.flat().forEach(c => {
+                    if(c.mine) {
+                        c.el.classList.add('revealed', 'mine');
+                        c.el.innerText = '💀';
+                    }
+                });
+                setTimeout(() => alert("KABOOM! You're toast."), 100);
+            }
+        }
+    };
+
+    // ================= Sudoku Logic =================
+    const Sudoku = {
+        board: [],
+        solution: [],
+        selectedCell: null,
+        timer: new GameTimer('sd-timer'),
+        currentDifficulty: 'easy',
+
+        init(difficulty) {
+            this.currentDifficulty = difficulty;
+            
+            // Highlight active button
+            ['easy', 'medium', 'hard'].forEach(d => {
+                const btn = document.getElementById(`sd-btn-${d}`);
+                if (d === difficulty) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            // Update text
+            const diffText = { 'easy': 'Noob', 'medium': 'Human', 'hard': 'God Mode' };
+            document.getElementById('sd-difficulty-text').innerText = diffText[difficulty];
+
+            this.newGame();
+        },
+        
+        stopTimer() { this.timer.stop(); },
+
+        newGame() {
+            this.timer.start();
+            this.generateBoard();
+            this.renderBoard();
+            this.selectedCell = null;
+        },
+
+        generateBoard() {
+            const base = [
+                3,6,1, 7,2,5, 9,4,8,
+                5,8,7, 9,6,4, 2,1,3,
+                4,9,2, 8,3,1, 6,5,7,
+                6,3,8, 2,5,9, 4,7,1,
+                1,7,4, 6,8,3, 5,9,2,
+                2,5,9, 1,4,7, 8,3,6,
+                7,4,6, 3,9,2, 1,8,5,
+                9,2,5, 4,1,8, 7,6,3,
+                8,1,3, 5,7,6, 3,2,9
+            ];
+            
+            const map = [1,2,3,4,5,6,7,8,9].sort(() => Math.random() - 0.5);
+            this.solution = base.map(n => map[n-1]);
+
+            let holes = 30;
+            if (this.currentDifficulty === 'medium') holes = 40;
+            if (this.currentDifficulty === 'hard') holes = 50;
+
+            this.board = [...this.solution];
+            while(holes > 0) {
+                const idx = Math.floor(Math.random() * 81);
+                if(this.board[idx] !== 0) {
+                    this.board[idx] = 0;
+                    holes--;
+                }
+            }
+        },
+
+        renderBoard() {
+            const container = document.getElementById('sd-board');
+            container.innerHTML = '';
+            
+            this.board.forEach((val, idx) => {
+                const cell = document.createElement('div');
+                cell.className = 'sd-cell';
+                if (val !== 0) {
+                    cell.innerText = val;
+                    cell.classList.add('fixed');
+                }
+                cell.onclick = () => this.selectCell(cell, idx);
+                container.appendChild(cell);
+            });
+        },
+
+        selectCell(el, idx) {
+            if (el.classList.contains('fixed')) return;
+            
+            document.querySelectorAll('.sd-cell.selected').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.sd-cell.highlight').forEach(c => c.classList.remove('highlight'));
+            
+            el.classList.add('selected');
+            this.selectedCell = { el, idx };
+
+            const currentVal = el.innerText;
+            if(currentVal) {
+                document.querySelectorAll('.sd-cell').forEach(c => {
+                    if(c.innerText === currentVal) c.classList.add('highlight');
+                });
+            }
+        },
+
+        input(num) {
+            if (!this.selectedCell) return;
+            
+            const { el, idx } = this.selectedCell;
+            
+            if (num === 0) {
+                el.innerText = '';
+                this.board[idx] = 0;
+                el.classList.remove('error');
+            } else {
+                el.innerText = num;
+                this.board[idx] = num;
+                if(num !== this.solution[idx]) {
+                    el.classList.add('error');
+                } else {
+                    el.classList.remove('error');
+                }
+            }
+            
+            this.selectCell(el, idx);
+            this.checkWin();
+        },
+
+        check() {
+            const cells = document.querySelectorAll('.sd-cell');
+            let errors = 0;
+            this.board.forEach((val, i) => {
+                if (val !== 0 && val !== this.solution[i]) {
+                    cells[i].classList.add('error');
+                    errors++;
+                }
+            });
+            if(errors === 0 && !this.board.includes(0)) alert("Flawless Victory! (So far)");
+            else if(errors === 0) alert("Looks clean. Don't mess it up.");
+            else alert(`Yikes. Found ${errors} mistakes. Do better.`);
+        },
+
+        checkWin() {
+            if (!this.board.includes(0)) {
+                const isCorrect = this.board.every((v, i) => v === this.solution[i]);
+                if (isCorrect) {
+                    setTimeout(() => {
+                        this.timer.stop();
+                        alert("Big Brain Energy! You did it.");
+                    }, 100);
+                }
+            }
+        }
+    };
+
+</script>
 </body>
 </html>

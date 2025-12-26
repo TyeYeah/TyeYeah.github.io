@@ -243,7 +243,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Dec 25 2025 08:47:30 GMT+0800">2025-12-25 08:47:30</span>
+                <span class="datetime" data-updated="Fri Dec 26 2025 08:40:57 GMT+0800">2025-12-26 08:40:57</span>
             </span>
         
 
@@ -262,13 +262,13 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
-                        
-                    
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
                         
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/fuzzing/">fuzzing</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/paper/">paper</a></li>
                         
                     
                 </ul>
@@ -278,12 +278,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>528 Words</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>7 Mins</span>
             </span>
         
         
@@ -306,17 +306,40 @@
 <p>It is not hard to build the project, but there are some limitations for the installation environment, including running on <code>Ubuntu 20.04</code> and compiling with <code>LLVM-11</code>.</p>
 <p>After building <code>AFLGo</code>, to run directed fuzzing on a real target, you must ensure that ① you can control the entire compilation process (compiler and flags&#x2F;options) and ② instrument the target source code. </p>
 <p>Only if the distance calculation during the first compilation attempt (the second compilation performs the final instrumentation) is successfully conducted can directed fuzzing be performed successfully.</p>
-<h2 id="TransferFuzz"><a href="#TransferFuzz" class="headerlink" title="TransferFuzz"></a>TransferFuzz</h2><p>A state-of-the-art work is <a class="link"   target="_blank" rel="noopener" href="https://github.com/Siyuan-Li201/TransferFuzz" >TransferFuzz<i class="fas fa-external-link-alt"></i></a>, which is built on SelectFuzz and SelectFuzz’s Docker image (its image names anonymous4paper&#x2F;transferfuzz). </p>
+<h2 id="TransferFuzz"><a href="#TransferFuzz" class="headerlink" title="TransferFuzz"></a>TransferFuzz</h2><p>A state-of-the-art work is <a class="link"   target="_blank" rel="noopener" href="https://github.com/Siyuan-Li201/TransferFuzz" >TransferFuzz<i class="fas fa-external-link-alt"></i></a>, which is built on <code>SelectFuzz</code> and <code>SelectFuzz</code>‘s Docker image (its image names anonymous4paper&#x2F;transferfuzz). </p>
 <h3 id="Summarize-It"><a href="#Summarize-It" class="headerlink" title="Summarize It"></a>Summarize It</h3><p>This work targets migrating the PoC from one binary to another binary that reuses exactly the same components or functions (e.g., <code>cxxfilt</code> and <code>objdump</code>, both from the <code>binutils</code> repository).</p>
 <p><code>TransferFuzz</code> uses <code>Nested Simulated Annealing</code> to guide fuzzing along the target trace, function by function, with the help of a state machine model.</p>
 <p>It then employs <code>Key Bytes Guided Mutation</code>, which means it uses specific key bytes for mutation, such as unique sequences of consecutively accessed memory bytes observed when the PoC runs on the basic binary.</p>
 <p>Therefore, from an engineering implementation perspective, it is a directed greybox fuzzing method with a customized seed power scheduling strategy and a customized fuzzing dictionary.</p>
-<h3 id="Run-It"><a href="#Run-It" class="headerlink" title="Run It"></a>Run It</h3><h2 id="ChainFuzz"><a href="#ChainFuzz" class="headerlink" title="ChainFuzz"></a>ChainFuzz</h2><p>Another SOTA work is available at <a class="link"   target="_blank" rel="noopener" href="https://zenodo.org/records/14732712" >Artifact for Paper “ChainFuzz: Exploiting Upstream Vulnerabilities in Open-Source Supply Chains”<i class="fas fa-external-link-alt"></i></a>.</p>
+<h3 id="Run-It"><a href="#Run-It" class="headerlink" title="Run It"></a>Run It</h3><p>Since <code>TransferFuzz</code> is based on <code>SelectFuzz</code>, and <code>SelectFuzz</code> relies on the original version of <code>AFLGo</code> (the older version of <code>AFLGo</code> is a modification of <code>afl-v2.52b</code> and requires <code>LLVM-4</code>, while the newer version of <code>AFLGo</code> is based on <code>afl-v2.57b</code> and uses <code>LLVM-11</code>), the pre-compiled <code>libDFUZZPASS.so</code> must be built with LLVM-4 to successfully compile the entire fuzzer project.</p>
+<p>However, compiling the <code>compiler-rt</code> component of <code>LLVM-4</code> is problematic on <code>Ubuntu 20.04</code>, making it difficult to set it up from source. Therefore, we opt to deploy it using Docker.</p>
+<p>To make the Docker container more convenient to use, we can install the <code>VSCode</code> Server in it and connect to it using the <code>VSCode</code> <a class="link"   target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh" >Remote-SSH extension<i class="fas fa-external-link-alt"></i></a>. However, the <code>TransferFuzz</code> container is based on <code>Ubuntu 16.04</code>, which is too old to support the <code>VSCode</code> Server (starting with <code>VSCode</code> release 1.99 (March 2025), the prebuilt servers distributed by <code>VSCode</code> are only compatible with Linux distributions that are based on <code>glibc</code> 2.28 or later. These include for example, <code>Debian 10</code>, <code>RHEL 8</code>, or <code>Ubuntu 20.04</code>.).</p>
+<ul>
+<li>Solution 1: downgrade <code>VSCode</code> to v1.85<ul>
+<li><strong>Windows</strong>: <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/win32-x64-user/stable" >x64<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/win32-arm64-user/stable" >Arm64<i class="fas fa-external-link-alt"></i></a>  </li>
+<li><strong>Mac</strong>: <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/darwin-universal/stable" >Universal<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/darwin/stable" >Intel<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/darwin-arm64/stable" >Silicon<i class="fas fa-external-link-alt"></i></a>  </li>
+<li><strong>Linux</strong>: <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/linux-deb-x64/stable" >deb<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/linux-rpm-x64/stable" >rpm<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/linux-x64/stable" >tarball<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions" >Arm<i class="fas fa-external-link-alt"></i></a> | <a class="link"   target="_blank" rel="noopener" href="https://update.code.visualstudio.com/1.85.2/linux-snap-x64/stable" >snap<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</li>
+<li>Solution 2: refer to official doc about <a class="link"   target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/remote/faq#_can-i-run-vs-code-server-on-older-linux-distributions" >Can I run VS Code Server on older Linux distributions?<i class="fas fa-external-link-alt"></i></a><ul>
+<li>build <code>crosstool-NG</code>:  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y gcc g++ gperf bison flex texinfo help2man make libncurses5-dev python3-dev autoconf automake libtool libtool-bin gawk wget bzip2 xz-utils unzip patch rsync meson ninja-build</span><br><span class="line">$ wget http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.26.0.tar.bz2</span><br><span class="line">$ tar -xjf crosstool-ng-1.26.0.tar.bz2 &amp;&amp; <span class="built_in">cd</span> crosstool-ng-1.26.0</span><br><span class="line">$ ./configure &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li>
+<li>build <code>sysroot</code> with <code>crosstool-NG</code>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir toolchain-dir &amp;&amp; <span class="built_in">cd</span> toolchain-dir</span><br><span class="line">$ wget https://github.com/microsoft/vscode-linux-build-agent/raw/refs/heads/main/x86_64-gcc-8.5.0-glibc-2.28.config</span><br><span class="line">$ mv x86_64-gcc-8.5.0-glibc-2.28.config .config</span><br><span class="line">$ ct-ng menuconfig <span class="comment"># in `menuconfig`, set `Operating System` -&gt; `Version of linux` to match your Linux kernel version, check it using `uname -a`. Save and Exit.</span></span><br><span class="line">$ ct-ng build</span><br></pre></td></tr></table></figure></li>
+<li>download <code>patchelf</code>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://github.com/NixOS/patchelf/releases/download/0.18.0/patchelf-0.18.0-x86_64.tar.gz</span><br><span class="line">$ sudo tar -zxf patchelf-0.18.0-x86_64.tar.gz -C /</span><br></pre></td></tr></table></figure></li>
+<li>test <code>patchelf</code>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gcc hello_world.c</span><br><span class="line">$ ./a.out</span><br><span class="line">$ patchelf --set-interpreter /path/to/toolchain-dir/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib/ld-linux-x86-64.so.2 --set-rpath /path/to/toolchain-dir/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib64 a.out</span><br><span class="line">$ ./a.out</span><br><span class="line">$ ldd a.out</span><br></pre></td></tr></table></figure></li>
+<li>set env vars, put the following lines to the “head” of <code>~/.bashrc</code>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> VSCODE_SERVER_CUSTOM_GLIBC_LINKER=/path/to/toolchain-dir/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib/ld-linux-x86-64.so.2</span><br><span class="line"><span class="built_in">export</span> VSCODE_SERVER_CUSTOM_GLIBC_PATH=/path/to/toolchain-dir/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib64</span><br><span class="line"><span class="built_in">export</span> VSCODE_SERVER_PATCHELF_PATH=/bin/patchelf</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>After that, you can inspect <code>/transferfuzz/scripts/evaluation/</code> for a quick start.<br>A formal usage process is detailed in the <a class="link"   target="_blank" rel="noopener" href="https://github.com/Siyuan-Li201/TransferFuzz#33-full-process" >README - Full process<i class="fas fa-external-link-alt"></i></a>, and the fuzzing process requires not only the standard inputs needed by <code>AFLGo</code> but also additional artifacts, such as function traces <code>/transferfuzz/scripts/fuzz_functrace/cve-xxxx-xxxx.txt</code> and fuzz dictionaries <code>/transferfuzz/scripts/fuzz_dict/cve-xxxx-xxxx.txt</code>.</p>
+<h2 id="ChainFuzz"><a href="#ChainFuzz" class="headerlink" title="ChainFuzz"></a>ChainFuzz</h2><p>Another SOTA work is available at <a class="link"   target="_blank" rel="noopener" href="https://zenodo.org/records/14732712" >Artifact for Paper “ChainFuzz: Exploiting Upstream Vulnerabilities in Open-Source Supply Chains”<i class="fas fa-external-link-alt"></i></a>.</p>
 <h3 id="Summarize-It-1"><a href="#Summarize-It-1" class="headerlink" title="Summarize It"></a>Summarize It</h3><p>This work targets a more complex scenario, which is the real-world vulnerability propagation from an upstream software to a distinct downstream software, and they are always from different projects.</p>
 <p>The core assumption is also that the same vulnerable functions are reused and already identified, while the functionalities of the two binaries and the paths to the target functions are changed a lot.</p>
 <p><code>ChainFuzz</code> workflow can be divided into 2 parts. First is <code>Cross-layer Differential Directed Fuzzing</code>, which identifies <code>waypoints</code> (functions connecting upstream functionalities and downstream code logic) and does fuzzing to explore and exploit, finally generating PoCs. The second part is <code>Bottom-up Proof-of-Concept Generation</code>, which reverses the synthesis of the exploit path to solve long supply chain conditions.</p>
 <p>This aims to handle a more realistic and practical scenario than <code>TransferFuzz</code>, while the data cannot be reproduced currently as in <code>TransferFuzz</code>, since the PoCs are of large size and hard to fetch using <code>LFS</code>.</p>
-<h3 id="Run-It-1"><a href="#Run-It-1" class="headerlink" title="Run It"></a>Run It</h3><h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p><a class="link"   target="_blank" rel="noopener" href="https://seclab-fudan.github.io/VulScope/" >VulScope<i class="fas fa-external-link-alt"></i></a>: an approach to assessing the under-reported vulnerable versions for a reported vulnerability. (across versions, based on trace comparision)<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/seclab-ucr/SyzBridge" >SyzBridge<i class="fas fa-external-link-alt"></i></a>: a research project that adapts Linux upstream PoCs to downstream distributions. (fixing env for Linux kernel bug reproduction)<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/blbi/OctoPoCs" >OctoPoCs<i class="fas fa-external-link-alt"></i></a>: generates PoC automatically for propagated vulnerability in cloned software. (combine <code>guiding input</code> with <code>crash primitive</code>)</p>
+<h3 id="Run-It-1"><a href="#Run-It-1" class="headerlink" title="Run It"></a>Run It</h3><p>The code and dataset are both publicly available, while we were unable to reproduce the crashes reported in the original PoCs.</p>
+<p>The implementation is based on a newer version of <code>AFLGo</code> (built on <code>afl-2.57b</code> and LLVM-11) along with <code>Rust</code> components, making it relatively straightforward to build on modern operating systems.</p>
+<p>The setup remains somewhat complex (noob alert! send help!), and this part is still a work in progress … no guarantees it’ll actually work.</p>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p><a class="link"   target="_blank" rel="noopener" href="https://seclab-fudan.github.io/VulScope/" >VulScope<i class="fas fa-external-link-alt"></i></a>: an approach to assessing the under-reported vulnerable versions for a reported vulnerability. (across versions, based on trace comparision)<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/seclab-ucr/SyzBridge" >SyzBridge<i class="fas fa-external-link-alt"></i></a>: a research project that adapts Linux upstream PoCs to downstream distributions. (fixing env for Linux kernel bug reproduction)<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/blbi/OctoPoCs" >OctoPoCs<i class="fas fa-external-link-alt"></i></a>: generates PoC automatically for propagated vulnerability in cloned software. (combine <code>guiding input</code> with <code>crash primitive</code>)</p>
 
                 </div>
                 
@@ -327,15 +350,15 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/paper/">paper</a>
-                                    </li>
-                                
-                                    <li class="tag-item border-box">
                                         <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/note/">note</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
                                         <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/fuzzing/">fuzzing</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/paper/">paper</a>
                                     </li>
                                 
                             </ul>
@@ -426,7 +449,7 @@
             
                 <span class="count-box border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">136.3k</span>
+                    <span class="item-value border-box word">137k</span>
                 </span>
             
 
@@ -443,24 +466,81 @@
     <!-- post tools -->
     
         <div class="post-tools right-toc">
-            <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
-        <!-- PC TOC show toggle -->
-        
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
+            $li-margin-bottom = 0.8rem
+$post-tool-button-width = 2.5rem
 
-        <!-- PC go comment -->
-        
+.post-tools-container {
+  padding-top var(--component-gap)
 
-        <!-- PC full screen -->
-        <li class="tools-item flex-center full-screen">
-            <i class="fa-solid fa-expand"></i>
-        </li>
-    </ul>
-</div>
+  .tools-list {
+
+    li {
+      position relative
+      box-sizing border-box
+      width $post-tool-button-width
+      height $post-tool-button-width
+      margin-bottom $li-margin-bottom
+      color var(--text-color-3)
+      font-size 1.2rem
+      background var(--background-color-1)
+      border-radius 50%
+      box-shadow 2px 2px 5px var(--shadow-color)
+      cursor pointer
+
+      &:hover {
+        box-shadow 2px 2px 8px var(--shadow-hover-color)
+      }
+
+      i {
+        color var(--text-color-3)
+      }
+
+
+      &:hover {
+        color var(--background-color-1)
+        background var(--primary-color)
+
+        i {
+          color var(--background-color-1)
+        }
+      }
+
+
+      &:last-child {
+        margin-bottom 0
+      }
+
+
+      &.toggle-show-toc {
+        display none
+      }
+
+
+      &.go-to-comments {
+        .post-comments-count {
+          position absolute
+          top 0
+          right -1rem
+          display none
+          align-items center
+          justify-content center
+          box-sizing border-box
+          min-width 1.1rem
+          height 1.1rem
+          padding 0 0.2rem
+          color var(--badge-color)
+          font-size 12px
+          background var(--badge-background-color)
+          border-radius 0.4rem
+
+          +keep-tablet() {
+            display none !important
+          }
+        }
+      }
+    }
+  }
+}
 
         </div>
     
