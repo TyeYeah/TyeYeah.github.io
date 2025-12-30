@@ -40,7 +40,7 @@
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
   </script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body>
@@ -683,81 +683,24 @@
     <!-- post tools -->
     
         <div class="post-tools right-toc">
-            $li-margin-bottom = 0.8rem
-$post-tool-button-width = 2.5rem
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
 
-.post-tools-container {
-  padding-top var(--component-gap)
+        <!-- PC go comment -->
+        
 
-  .tools-list {
-
-    li {
-      position relative
-      box-sizing border-box
-      width $post-tool-button-width
-      height $post-tool-button-width
-      margin-bottom $li-margin-bottom
-      color var(--text-color-3)
-      font-size 1.2rem
-      background var(--background-color-1)
-      border-radius 50%
-      box-shadow 2px 2px 5px var(--shadow-color)
-      cursor pointer
-
-      &:hover {
-        box-shadow 2px 2px 8px var(--shadow-hover-color)
-      }
-
-      i {
-        color var(--text-color-3)
-      }
-
-
-      &:hover {
-        color var(--background-color-1)
-        background var(--primary-color)
-
-        i {
-          color var(--background-color-1)
-        }
-      }
-
-
-      &:last-child {
-        margin-bottom 0
-      }
-
-
-      &.toggle-show-toc {
-        display none
-      }
-
-
-      &.go-to-comments {
-        .post-comments-count {
-          position absolute
-          top 0
-          right -1rem
-          display none
-          align-items center
-          justify-content center
-          box-sizing border-box
-          min-width 1.1rem
-          height 1.1rem
-          padding 0 0.2rem
-          color var(--badge-color)
-          font-size 12px
-          background var(--badge-background-color)
-          border-radius 0.4rem
-
-          +keep-tablet() {
-            display none !important
-          }
-        }
-      }
-    }
-  }
-}
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
 
         </div>
     
