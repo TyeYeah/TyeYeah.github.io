@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-03-15 21:25:58</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sat Nov 05 2022 10:32:26 GMT+0800">2022-11-05 10:32:26</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sat Nov 05 2022 10:32:26 GMT+0800">2022-11-05 10:32:26</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>When performing penetration testing, there are always network connection limits.<br>Port forwarding can bypass them and provide other advantages.</p>
+                    
+                         <p>When performing penetration testing, there are always network connection limits.<br>Port forwarding can bypass them and provide other advantages.</p>
 <h2 id="SSH-Tunnel"><a href="#SSH-Tunnel" class="headerlink" title="SSH Tunnel"></a>SSH Tunnel</h2><p><code>SSH</code> can automatically encrypt and decrypt all network data between server and client, can also forward network data from other TCP ports via SSH connection, which is called “<code>SSH</code> Tunnel”.</p>
 <p>“<code>SSH</code> Tunnel” has two advantages:</p>
 <ul>
@@ -314,7 +342,7 @@
 <li>User config: <code>~/.ssh/config</code></li>
 </ul>
 <p>Here are related items </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">AllowTcpForwarding yes</span><br><span class="line"><span class="comment"># seems necessary </span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">GatewayPorts yes</span><br><span class="line"><span class="comment"># allow all remote to connect local forwarding port</span></span><br><span class="line"><span class="comment"># default &#x27;no&#x27;</span></span><br><span class="line"><span class="comment"># parameter &#x27;clientspecified&#x27; means client assigns one IP to connect</span></span><br><span class="line"><span class="comment"># if we have:</span></span><br><span class="line"><span class="comment"># `ssh -R specified_ip:local_port:remote_ip:remote_port www.example.com`</span></span><br><span class="line"><span class="comment"># &#x27;specified_ip&#x27; is the allowed IP</span></span><br><span class="line">TCPKeepAlive yes</span><br><span class="line"><span class="comment"># helps detect dead connection, improper connection, client crash</span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">PasswordAuthentication yes</span><br><span class="line"><span class="comment"># always needed</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">AllowTcpForwarding <span class="built_in">yes</span></span><br><span class="line"><span class="comment"># seems necessary </span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">GatewayPorts <span class="built_in">yes</span></span><br><span class="line"><span class="comment"># allow all remote to connect local forwarding port</span></span><br><span class="line"><span class="comment"># default &#x27;no&#x27;</span></span><br><span class="line"><span class="comment"># parameter &#x27;clientspecified&#x27; means client assigns one IP to connect</span></span><br><span class="line"><span class="comment"># if we have:</span></span><br><span class="line"><span class="comment"># `ssh -R specified_ip:local_port:remote_ip:remote_port www.example.com`</span></span><br><span class="line"><span class="comment"># &#x27;specified_ip&#x27; is the allowed IP</span></span><br><span class="line">TCPKeepAlive <span class="built_in">yes</span></span><br><span class="line"><span class="comment"># helps detect dead connection, improper connection, client crash</span></span><br><span class="line"><span class="comment"># default &#x27;yes&#x27;</span></span><br><span class="line">PasswordAuthentication <span class="built_in">yes</span></span><br><span class="line"><span class="comment"># always needed</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Detailed-Parameters"><a href="#Detailed-Parameters" class="headerlink" title="Detailed Parameters"></a>Detailed Parameters</h3><p>Here are related parameters for building the tunnel</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-C -- compress transmission, speed it up </span><br><span class="line">-f -- authenticate in the background</span><br><span class="line">-N -- only forwarding without getting shell</span><br><span class="line">-q -- quiet mode, no debug info</span><br><span class="line">-l -- assign ssh username</span><br><span class="line">-g -- allow remote to connect local </span><br><span class="line">-L -- local forwarding</span><br><span class="line">-R -- remote forwarding</span><br><span class="line">-D -- dynamic forwarding (socks proxy)</span><br><span class="line">-T -- no pseudo terminal assignment</span><br><span class="line">-p -- assign remote ssh port</span><br></pre></td></tr></table></figure>
@@ -366,10 +394,10 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -w net.ipv4.icmp_echo_ignore_all=1</span><br></pre></td></tr></table></figure>
 
 <h3 id="ptunnel"><a href="#ptunnel" class="headerlink" title="ptunnel"></a>ptunnel</h3><p>It can build server as springboard or proxy.<br>On the same server (as a springboard) , we run <code>ptunnel</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install ptunnel <span class="comment"># install first</span></span><br><span class="line">$ ptunnel <span class="comment"># run </span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ ptunnel -x whoami</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install ptunnel <span class="comment"># install first</span></span><br><span class="line">$ ptunnel <span class="comment"># run </span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ ptunnel -x <span class="built_in">whoami</span></span><br></pre></td></tr></table></figure>
 
 <p>Then on a client, we do</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ptunnel -p server_ip -lp local_port -da target_ip  -dp target_port</span><br><span class="line"><span class="comment"># -p  server (springboard) ip</span></span><br><span class="line"><span class="comment"># -lp local listening port</span></span><br><span class="line"><span class="comment"># -da final target host ip</span></span><br><span class="line"><span class="comment"># -dp final target host port</span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ ptunnel -p VPS_ip -lp local_port -da target_ip -dp target_port -x whoami</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ptunnel -p server_ip -lp local_port -da target_ip  -dp target_port</span><br><span class="line"><span class="comment"># -p  server (springboard) ip</span></span><br><span class="line"><span class="comment"># -lp local listening port</span></span><br><span class="line"><span class="comment"># -da final target host ip</span></span><br><span class="line"><span class="comment"># -dp final target host port</span></span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ ptunnel -p VPS_ip -lp local_port -da target_ip -dp target_port -x <span class="built_in">whoami</span></span><br></pre></td></tr></table></figure>
 
 <p>Connect local listening port to use this tunnel, to reach target host.</p>
 <h3 id="icmpsh"><a href="#icmpsh" class="headerlink" title="icmpsh"></a>icmpsh</h3><p>It provides ICMP reverse shell.<br>Click <a class="link"   target="_blank" rel="noopener" href="https://github.com/inquisb/icmpsh" >this link<i class="fas fa-external-link-alt"></i></a> to download icmpsh.</p>
@@ -399,11 +427,18 @@
 
 <p>Client side deployment</p>
 <ul>
-<li>Compile first<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iagox86/dnscat2.git</span><br><span class="line">$ <span class="built_in">cd</span> dnscat2/client/</span><br><span class="line">$ make (on windows, load `client/win32/dnscat2.vcproj` to Visual Studio and <span class="string">&quot;build&quot;</span> )</span><br></pre></td></tr></table></figure></li>
-<li>Connect secondly<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./dnscat --dns server=server_ip,port=53 --secret=xxx_give_in_server_display_xxx</span><br></pre></td></tr></table></figure></li>
-<li>Use ‘help’ to see commands<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">windows/sessions  --  display current sessions</span><br><span class="line">window/session -i 1  --  enter session 1</span><br><span class="line">shell  --  create new session</span><br><span class="line">ctrl+z  --  go back to last layer</span><br></pre></td></tr></table></figure>
-Now we use client to control server.</li>
+<li>Compile first</li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iagox86/dnscat2.git</span><br><span class="line">$ <span class="built_in">cd</span> dnscat2/client/</span><br><span class="line">$ make (on windows, load `client/win32/dnscat2.vcproj` to Visual Studio and <span class="string">&quot;build&quot;</span> )</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Connect secondly</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./dnscat --dns server=server_ip,port=53 --secret=xxx_give_in_server_display_xxx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Use ‘help’ to see commands</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">windows/sessions  --  display current sessions</span><br><span class="line">window/session -i 1  --  enter session 1</span><br><span class="line">shell  --  create new session</span><br><span class="line">ctrl+z  --  go back to last layer</span><br></pre></td></tr></table></figure>
+<p>Now we use client to control server.</p>
 <h3 id="iodine"><a href="#iodine" class="headerlink" title="iodine"></a>iodine</h3><p>It is the relay mode like <code>dns2tcp</code> (another util).<br>The point is to register server as DNS server with a domain name.</p>
 <p>First download it and compile to build</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/yarrick/iodine</span><br><span class="line">$ <span class="built_in">cd</span> iodine</span><br><span class="line">$ make install</span><br><span class="line"><span class="comment"># under ./bin/, &#x27;iodined&#x27; is server, &#x27;iodine&#x27; is client</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ apt install iodine <span class="comment"># available for debian</span></span><br></pre></td></tr></table></figure>
@@ -493,7 +528,7 @@ lcx_listen -- like lcx -listen
 <p>Server side first.<br>The important part is its config file.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ vim frps.ini</span><br><span class="line">----------------------</span><br><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0   </span><br><span class="line">bind_port = 7000</span><br><span class="line">dashboard_addr = 0.0.0.0   </span><br><span class="line">dashboard_port = 7500  </span><br><span class="line">token = 12345678   </span><br><span class="line">dashboard_user = admin  </span><br><span class="line">dashboard_pwd = admin </span><br><span class="line">vhost_http_port = 10080 </span><br><span class="line">vhost_https_port = 10443</span><br></pre></td></tr></table></figure>
 <p>Start server by doing this</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./frps -c frps.ini</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">nohup ./frps -c frps.ini &amp; <span class="comment"># run background</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./frps -c frps.ini</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">nohup</span> ./frps -c frps.ini &amp; <span class="comment"># run background</span></span><br></pre></td></tr></table></figure>
 <p>Access server 7500 port to see GUI dashboard.</p>
 <p>Client side config file</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ vim frpc.ini</span><br><span class="line">----------------------</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 12345678 <span class="comment"># same as server side</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># service name</span></span><br><span class="line">[ssh]</span><br><span class="line"><span class="comment"># forwarding protocol type</span></span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 7001</span><br></pre></td></tr></table></figure>
@@ -521,7 +556,9 @@ lcx_listen -- like lcx -listen
 <p>Projects:<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/SECFORCE/Tunna" >Tunna<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://sourceforge.net/projects/ssocks/" >sSocks<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/ehang-io/nps" >NPS<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/vzex/dog-tunnel" >Dog Tunnel<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/samhocevar/rinetd" >rinetd<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/rssnsj/portfwd" >portfwd<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://github.com/cw1997/NATBypass" >NATBypass<i class="fas fa-external-link-alt"></i></a></p>
 <p>Tools in <code>Linux</code> repo:<br><code>iptables</code> (before CentOS 7.0), <code>firewall</code> (after CentOS 7.0), <code>netcat</code> (<code>ncat</code>, <code>nc</code>), <code>socat</code></p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -623,29 +660,25 @@ lcx_listen -- like lcx -listen
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -653,7 +686,9 @@ lcx_listen -- like lcx -listen
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -663,7 +698,10 @@ lcx_listen -- like lcx -listen
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -696,13 +734,17 @@ lcx_listen -- like lcx -listen
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -785,7 +827,9 @@ lcx_listen -- like lcx -listen
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -802,7 +846,7 @@ lcx_listen -- like lcx -listen
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -813,6 +857,10 @@ lcx_listen -- like lcx -listen
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

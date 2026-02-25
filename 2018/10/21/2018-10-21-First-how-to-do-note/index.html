@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2018-10-21 22:04:22</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Aug 03 2021 17:46:38 GMT+0800">2021-08-03 17:46:38</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Aug 03 2021 17:46:38 GMT+0800">2021-08-03 17:46:38</span>
+                </span>
+            
         
 
         
@@ -284,7 +311,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>1k Words</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.1k Words</span>
             </span>
         
         
@@ -303,15 +330,16 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>This is the first note. It’s about how to use mysql in docker, how to use hexo to build blog and post it on Github using Pages.</p>
+                    
+                         <p>This is the first note. It’s about how to use mysql in docker, how to use hexo to build blog and post it on Github using Pages.</p>
 <h2 id="First-how-to-do-note（mysql-with-docker、hexo）"><a href="#First-how-to-do-note（mysql-with-docker、hexo）" class="headerlink" title="First how-to-do note（mysql with docker、hexo）"></a>First how-to-do note（mysql with docker、hexo）</h2><p>Due to my project in college, I have to migrate the <code>MYSQL 5.5</code> environment to <code>MYSQL 8.0</code> version on my cloud hosting, but with a problem that I ccouldn’t start my <code>mysql.service</code> correctly ,I decided to deploy <code>mysql</code> with <code>docker</code> and learning basic <code>docker</code> using skills in the meantime.<br>By the way I have forgotten how to build my GitHub Pages with <code>hexo</code>, and this time I will give it a summary.</p>
 <h2 id="Basic-Steps-for-MySQL-Server-Deployment-with-Docker"><a href="#Basic-Steps-for-MySQL-Server-Deployment-with-Docker" class="headerlink" title="Basic Steps for MySQL Server Deployment with Docker"></a>Basic Steps for MySQL Server Deployment with Docker</h2><h3 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h3><p>first you need to install <code>docker</code> and test it (using root on debian)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ apt update </span><br><span class="line">$ apt install docker <span class="comment"># &quot;wget -qO- https://get.docker.com/ | sh&quot;, to get the newest </span></span><br><span class="line">$ apt install docker.io <span class="comment"># turns out to be useful, while the one above does not...</span></span><br><span class="line">$ systemctl start docker <span class="comment"># or service docker start, to start service</span></span><br><span class="line">$ docker run hello-world <span class="comment"># docker-style hello-world to check your install</span></span><br></pre></td></tr></table></figure>
 <p>some usages</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show help</span></span><br><span class="line">$ docker / docker xxx --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># show images on localhost </span></span><br><span class="line">$ docker images / docker image ls</span><br><span class="line"><span class="comment"># show running containers </span></span><br><span class="line">$ docker ps [-a] / docker container ls</span><br><span class="line"><span class="comment"># search images xxx</span></span><br><span class="line">$ docker search xxx</span><br><span class="line"><span class="comment"># get what you want</span></span><br><span class="line">$ docker pull xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you have a specific target like me, only one step to get the image</span></span><br><span class="line">$ docker run --name=mysqlxxx -p 33060:3306 -d mysql/mysql-server:tag</span><br><span class="line"><span class="comment"># &#x27;--name=mysqlxxx&#x27; means name it &amp; call it by name, rather than by calling its long random id string</span></span><br><span class="line"><span class="comment"># &#x27;-d&#x27; means run it in the background</span></span><br><span class="line"><span class="comment"># &#x27;-p 33060:3306&#x27; to bind local port 33060 with docker&#x27;s 3306 port</span></span><br><span class="line"><span class="comment"># notice:tag should be replaced with 5.5/5.6/5.7/8.0/8.0.x(x-&gt;latest)...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile usage</span></span><br><span class="line"><span class="comment"># to build your own docker image</span></span><br><span class="line"><span class="comment"># please search how to write Dockerfile, then</span></span><br><span class="line">$ docker build -t xxx .</span><br><span class="line"><span class="comment"># &#x27;-t&#x27; to assign name of image </span></span><br><span class="line"><span class="comment"># the &#x27;.&#x27; at the tail indicate location of Dockerfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#to delete</span></span><br><span class="line">$ docker stop containerID</span><br><span class="line">$ docker rm containerID</span><br><span class="line">$ docker rmi imageID</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># show help</span></span><br><span class="line">$ docker / docker xxx --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># show images on localhost </span></span><br><span class="line">$ docker images / docker image <span class="built_in">ls</span></span><br><span class="line"><span class="comment"># show running containers </span></span><br><span class="line">$ docker ps [-a] / docker container <span class="built_in">ls</span></span><br><span class="line"><span class="comment"># search images xxx</span></span><br><span class="line">$ docker search xxx</span><br><span class="line"><span class="comment"># get what you want</span></span><br><span class="line">$ docker pull xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># if you have a specific target like me, only one step to get the image</span></span><br><span class="line">$ docker run --name=mysqlxxx -p 33060:3306 -d mysql/mysql-server:tag</span><br><span class="line"><span class="comment"># &#x27;--name=mysqlxxx&#x27; means name it &amp; call it by name, rather than by calling its long random id string</span></span><br><span class="line"><span class="comment"># &#x27;-d&#x27; means run it in the background</span></span><br><span class="line"><span class="comment"># &#x27;-p 33060:3306&#x27; to bind local port 33060 with docker&#x27;s 3306 port</span></span><br><span class="line"><span class="comment"># notice:tag should be replaced with 5.5/5.6/5.7/8.0/8.0.x(x-&gt;latest)...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile usage</span></span><br><span class="line"><span class="comment"># to build your own docker image</span></span><br><span class="line"><span class="comment"># please search how to write Dockerfile, then</span></span><br><span class="line">$ docker build -t xxx .</span><br><span class="line"><span class="comment"># &#x27;-t&#x27; to assign name of image </span></span><br><span class="line"><span class="comment"># the &#x27;.&#x27; at the tail indicate location of Dockerfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#to delete</span></span><br><span class="line">$ docker stop containerID</span><br><span class="line">$ docker <span class="built_in">rm</span> containerID</span><br><span class="line">$ docker rmi imageID</span><br></pre></td></tr></table></figure>
 <h3 id="About-MYSQL"><a href="#About-MYSQL" class="headerlink" title="About MYSQL"></a>About MYSQL</h3><p>then we have a mysql docker, can be accessed by localhost:33060, but some configurations are needed</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this step is to see original password </span></span><br><span class="line">$ docker logs mysqlxxx 2&gt;&amp;1 | grep GENERATED <span class="comment"># logs to see logs</span></span><br><span class="line"><span class="comment"># outputs like ↓</span></span><br><span class="line">GENERATED ROOT PASSWORD: Axegh3kAJyDLaRuBemecis&amp;EShOs</span><br><span class="line"></span><br><span class="line"><span class="comment"># login mysql first</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it mysqlxxx mysql -uroot -p </span><br><span class="line"><span class="comment"># &#x27;-it&#x27; usually combined to get interact with dockers, with commands follow</span></span><br><span class="line"><span class="comment"># &#x27;mysql -uroot -p&#x27; is the example</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># change password</span></span><br><span class="line">mysql&gt; ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line"><span class="comment"># or commands in docker shell</span></span><br><span class="line">$ docker -it mysqlxxx /bin/bash </span><br><span class="line">$ mysqladmin -uroot -p password newpassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># then open remote connection permit</span></span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> host = <span class="string">&#x27;%&#x27;</span> <span class="built_in">where</span> user = <span class="string">&#x27;root&#x27;</span>; </span><br></pre></td></tr></table></figure>
 <p>Now we have a mysql docker which can be accessed remotely</p>
@@ -342,10 +370,19 @@ $ hexo s -g
 </li>
 </ol>
 <ul>
-<li>configure git’s username &amp; email (ensure your updates show on the wall)<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;your GitHub username&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;your GitHub mailaddress&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li>check out whether you have public&#x2F;private keys<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ ls </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure></li>
+<li>configure git’s username &amp; email (ensure your updates show on the wall)</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;your GitHub username&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;your GitHub mailaddress&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>check out whether you have public&#x2F;private keys</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">$ <span class="built_in">ls</span> </span><br><span class="line"><span class="comment"># things may look like ...</span></span><br><span class="line">authorized_keys2  id_rsa       known_hosts</span><br><span class="line">config            id_rsa.pub</span><br></pre></td></tr></table></figure>
+<ul>
 <li>if you can see <code>xxx</code> and <code>xxx.pub</code>, it means u got a keypair</li>
-<li>if not, generate by yourself<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;xx@xx.com&quot;</span></span><br><span class="line"><span class="comment"># &#x27;-t&#x27; have encryption method followed, and &#x27;rsa&#x27; can be replaced</span></span><br><span class="line"><span class="comment"># no need to bother other args </span></span><br></pre></td></tr></table></figure></li>
+<li>if not, generate by yourself</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;xx@xx.com&quot;</span></span><br><span class="line"><span class="comment"># &#x27;-t&#x27; have encryption method followed, and &#x27;rsa&#x27; can be replaced</span></span><br><span class="line"><span class="comment"># no need to bother other args </span></span><br></pre></td></tr></table></figure>
+<ul>
 <li>type some password once, and you have a keypair now</li>
 <li>then paste strings in <code>xxx.pub</code> to : <code>github</code> index -&gt; ur head portrait -&gt; Settings -&gt; SSH and GPG keys<br> and now you can login <code>github</code> without typing password in ssh or git bash</li>
 </ul>
@@ -353,17 +390,29 @@ $ hexo s -g
 <li>configure hexo</li>
 </ol>
 <ul>
-<li>in _config.yml (xxx&#x3D;&gt;<code>github</code> username):<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if only deploy to one repo</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line"><span class="comment"># deploy to two or more repos</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: </span><br><span class="line">    github: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    gitlab: git@gitlab.com:xxx/xxx.gitlab.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure></li>
-<li>install plugin<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># $ npm install hexo-generator-search  --save</span></span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure></li>
-<li>deploy blog on github<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure></li>
-<li>sticky post<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &#x27;top: true&#x27; in &#x27;Front-matter&#x27; to use it</span><br></pre></td></tr></table></figure>
-<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3>Replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> &#x2F;&#x2F;maybe not necessary</li>
+<li>in _config.yml (xxx&#x3D;&gt;<code>github</code> username):</li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if only deploy to one repo</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line"><span class="comment"># deploy to two or more repos</span></span><br><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: </span><br><span class="line">    github: git@github.com:xxx/xxx.github.io.git</span><br><span class="line">    gitlab: git@gitlab.com:xxx/xxx.gitlab.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+<ul>
+<li>install plugin</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"><span class="comment"># $ npm install hexo-generator-search  --save</span></span><br><span class="line">$ npm install hexo-generator-searchdb --save <span class="comment"># needed for my theme.</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>deploy blog on github</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">$ hexo -d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sticky post</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br><span class="line"># add &#x27;top: true&#x27; in &#x27;Front-matter&#x27; to use it</span><br></pre></td></tr></table></figure>
+<h3 id="Notes-for-Markdown-in-Hexo"><a href="#Notes-for-Markdown-in-Hexo" class="headerlink" title="Notes for Markdown in Hexo"></a>Notes for Markdown in Hexo</h3><p>Replace <code>&lt; &gt;</code>with <code>&amp;lt; &amp;gt;</code> &#x2F;&#x2F;maybe not necessary</p>
 <p>When using <code>{something...}</code>, add {% raw %} at the front and {% endraw %} as the tail,and finally it looks like <code>{% raw %}{something...}{% endraw %}</code>in your text to escape <code>&#123;</code> and<code>&#125;</code><br>but in the code block sorrounded by three `, you can input whatever u want.</p>
 <p>As for multiple tags in hexo articles writing, use tags:[tag1, tag2, …]</p>
 <p>image hosting<br><a class="link"   target="_blank" rel="noopener" href="https://sm.ms/" >https://sm.ms/<i class="fas fa-external-link-alt"></i></a><br>tables generator<br><a class="link"   target="_blank" rel="noopener" href="http://www.tablesgenerator.com/" >http://www.tablesgenerator.com/<i class="fas fa-external-link-alt"></i></a></p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -424,11 +473,11 @@ $ hexo s -g
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2018/10/01/2018-09-31-Resource-Lists/"
-                                   title="Resource Lists"
+                                   href="/2018/10/01/2018-09-31-IoT-Resources/"
+                                   title="IoT Resources"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Resource Lists</span>
+                                        <span class="post-nav-title-item text-ellipsis">IoT Resources</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -473,29 +522,25 @@ $ hexo s -g
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -503,7 +548,9 @@ $ hexo s -g
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -513,7 +560,10 @@ $ hexo s -g
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -546,13 +596,17 @@ $ hexo s -g
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -635,7 +689,9 @@ $ hexo s -g
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -652,7 +708,7 @@ $ hexo s -g
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -663,6 +719,10 @@ $ hexo s -g
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

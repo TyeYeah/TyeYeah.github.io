@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-03-05 15:49:12</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Nov 12 2020 21:23:54 GMT+0800">2020-11-12 21:23:54</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Nov 12 2020 21:23:54 GMT+0800">2020-11-12 21:23:54</span>
+                </span>
+            
         
 
         
@@ -300,10 +327,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Besides Fuzzing, Symbolic Execution is another choice to approach reverse engineering and binary analysis. </p>
+                    
+                         <p>Besides Fuzzing, Symbolic Execution is another choice to approach reverse engineering and binary analysis. </p>
 <h2 id="Symbolic-Execution-Intro"><a href="#Symbolic-Execution-Intro" class="headerlink" title="Symbolic Execution Intro"></a>Symbolic Execution Intro</h2><p><img   src="/imghost/lse/1.png"  alt="reverse engineering concept diagram"></p>
 <p>This is a general reverse engineering concept diagram. </p>
 <p>The second layer shows that there are multiple reverse engineering methods that fall under different categories. </p>
@@ -317,14 +345,14 @@
 <p>All execution paths of a program can be represented as a tree –&gt; execution tree</p>
 <p>To explore paths, formally, symbolic execution maintains two variables globally:</p>
 <ul>
-<li>&amp;sigma; : maps variable to symbolic expression</li>
+<li>&sigma; : maps variable to symbolic expression</li>
 <li><code>PC</code>: symbolic path constraints</li>
 </ul>
-<p>When symbol execution starts, the &amp;sigma; is empty and the <code>PC</code> is true.</p>
-<p>In <code>main</code> we meet a read statement whose form is <code>var = sym_input()</code>. After execution a <code>var -&gt; s</code> is added to &amp;sigma; . We will get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub> }.</p>
-<p>The assignment statement like <code>var = expression</code> is the same, so after line6, we get: &amp;sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub>, z-&gt;2y<sub>0</sub> }.</p>
-<p>When we meet conditional statements <code>if(e) S1 else S2</code>, two updates for <code>PC</code>.<br>Update <code>PC</code> –&gt; <code>PC</code> &amp;and; &amp;sigma;(e) to represent <code>then</code> branch.<br>Create <code>PC&#39;</code> –&gt; <code>PC</code> &amp;and; &amp;not; &amp;sigma;(e) to represent <code>else</code> branch.</p>
-<p>After line 7, we get two symbolic execution instances and path constraints are: x<sub>0</sub> &#x3D; 2y<sub>0</sub>   and  x<sub>0</sub> &amp;ne; 2y<sub>0</sub><br>After line 8, Another two instances and <code>PC</code>: (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &gt; y<sub>0</sub> + 10)  and  (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &amp;and; (x<sub>0</sub> &amp;le; y<sub>0</sub> + 10)</p>
+<p>When symbol execution starts, the &sigma; is empty and the <code>PC</code> is true.</p>
+<p>In <code>main</code> we meet a read statement whose form is <code>var = sym_input()</code>. After execution a <code>var -&gt; s</code> is added to &sigma; . We will get: &sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub> }.</p>
+<p>The assignment statement like <code>var = expression</code> is the same, so after line6, we get: &sigma;&#x3D;{ x-&gt;x<sub>0</sub>, y-&gt;y<sub>0</sub>, z-&gt;2y<sub>0</sub> }.</p>
+<p>When we meet conditional statements <code>if(e) S1 else S2</code>, two updates for <code>PC</code>.<br>Update <code>PC</code> –&gt; <code>PC</code> &and; &sigma;(e) to represent <code>then</code> branch.<br>Create <code>PC&#39;</code> –&gt; <code>PC</code> &and; &not; &sigma;(e) to represent <code>else</code> branch.</p>
+<p>After line 7, we get two symbolic execution instances and path constraints are: x<sub>0</sub> &#x3D; 2y<sub>0</sub>   and  x<sub>0</sub> &ne; 2y<sub>0</sub><br>After line 8, Another two instances and <code>PC</code>: (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &and; (x<sub>0</sub> &gt; y<sub>0</sub> + 10)  and  (x<sub>0</sub> &#x3D; 2y<sub>0</sub>) &and; (x<sub>0</sub> &le; y<sub>0</sub> + 10)</p>
 <p>If things satisfy neither of the conditions, or program breaks, instance terminates. We can use constraint solver to generate values which leads to specific path.</p>
 <p>Example above belongs to classical symbolic execution, pure static symbolic execution. There are two tricky problems resulting in its impractical: </p>
 <ul>
@@ -334,8 +362,8 @@
 <h3 id="Concolic-Execution"><a href="#Concolic-Execution" class="headerlink" title="Concolic Execution"></a>Concolic Execution</h3><p>Key element of modern symbolic execution technology is their ability to mix concrete execution with symbolic execution.</p>
 <p><img   src="/imghost/lse/4.png"  alt="concolic"></p>
 <p>Concolic maintains two states:<br>Concrete State: maps all variables to their concrete values.<br>Symbolic State: only maps variables that have non-concrete values.</p>
-<p>We use the previous example to see this process. Concolic execution first generates some random input: {x &#x3D; A, y &#x3D; B}(A &amp;ne; 2B). </p>
-<p>When it goes to the first fork, it adds x<sub>0</sub> &amp;ne; 2y<sub>0</sub> to path constraints. Then reverse conjunction, to solve x<sub>0</sub> &#x3D; 2y<sub>0<sub>.</p>
+<p>We use the previous example to see this process. Concolic execution first generates some random input: {x &#x3D; A, y &#x3D; B}(A &ne; 2B). </p>
+<p>When it goes to the first fork, it adds x<sub>0</sub> &ne; 2y<sub>0</sub> to path constraints. Then reverse conjunction, to solve x<sub>0</sub> &#x3D; 2y<sub>0<sub>.</p>
 <p>We can get {x &#x3D; C, y &#x3D; 2C}. When this input reaches next fork, then it does the same as above. </p>
 <p>To sum up, it’s a process of testing inputs along with generating new inputs using constraint solver. Finally we explore all feasible paths.</p>
 <p>Concolic execution deals problems of classic static symbolic execution  – just replace tricky parts for solver with actual values. Meanwhile you’ll sacrifice the completeness of path exploration.</p>
@@ -386,7 +414,7 @@
 <h3 id="Symbolic-Execution-Example"><a href="#Symbolic-Execution-Example" class="headerlink" title="Symbolic Execution Example"></a>Symbolic Execution Example</h3><p><img   src="/imghost/lse/5.png"  alt="flow chart"></p>
 <p>This is a general flow chart for symbolic execution with <code>angr</code>. Begin by loading the binary with parameters, set the program state to begin at, then create the path and pathgroup to explore on.</p>
 <h4 id="Simple-Solution-0x00"><a href="#Simple-Solution-0x00" class="headerlink" title="Simple Solution 0x00"></a>Simple Solution 0x00</h4><p>Here we write demo <code>check.c</code> ourselves. It contains a simple fork when guessing the string.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">success</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;success\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;here is your flag if it&#x27;s a ctf\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">failed</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;failed\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> check[<span class="number">9</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,check);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(check,<span class="string">&quot;p4ssw0rd&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">success</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">failed</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">success</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;success\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;here is your flag if it&#x27;s a ctf\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">failed</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;failed\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="type">char</span> check[<span class="number">9</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,check);</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(check,<span class="string">&quot;p4ssw0rd&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">success</span>();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">failed</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Main logic is to input specific word to activate success method.<br>Now we use <code>angr</code> to analyse it.</p>
 <p>You should have read <a class="link"   target="_blank" rel="noopener" href="https://docs.angr.io/core-concepts" >docs.angr.io&#x2F;core-concepts<i class="fas fa-external-link-alt"></i></a> and known basic properties.<br>Then we follow the flow chart to do.</p>
@@ -411,7 +439,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fork 1 dump is: b<span class="string">&#x27;p4ssw0rd\x00\x00\x02\x00\x02\x00\x00\x00\x00\x02\x02\x02I\x00\x02\x00\x00\x01\x02\x02\x01\x01\x02\x08\x00\x08\x00\x01\x00\x00\x00\x01\x00\x00\x19\x01\xa0\x00\x00\x00\x08\x00\x00\x00\x00\x00\x80\x08\x00\x00\x00\x01&#x27;</span></span><br><span class="line">Fork 2 dump is: b<span class="string">&#x27;\x01\x0e\x00\x00\x89\x00\x04&quot;IJ\x00\x08\x89\x00\x19\xa4I\x0e\x8a\x01\x03\x02I*J\x00\x89II\x02\x00@\x8a@\x02\x89\x89\x02\x02I\x00\x01\x08\x89\x82\x89\x00\x0f\xd9*\x19\x89\x02\x02\x01@\x02\x02\x02\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="Pass-Arguments-0x02"><a href="#Pass-Arguments-0x02" class="headerlink" title="Pass Arguments 0x02"></a>Pass Arguments 0x02</h4><p>We write another demo <code>check2.c</code> to learn about passing args.<br>And we compile without <code>PIE</code> to try another way of exploring.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">1</span>], <span class="string">&quot;hello args test&quot;</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you win!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you lose!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">1</span>], <span class="string">&quot;hello args test&quot;</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you win!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;you lose!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Solver engine of <code>angr</code> is called Claripy.<br>The way we pass command line arguments is </p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">args = claripy.BVS(<span class="string">&quot;args&quot;</span>, <span class="number">8</span> * <span class="number">16</span>)                      </span><br><span class="line"><span class="comment"># create a bitvector symbol named &quot;args&quot; of length 8 * 16 bits</span></span><br><span class="line"><span class="comment"># state.solver.BVV(num, size) is used to set value with exact number and size</span></span><br><span class="line">state = p.factory.entry_state(args=[<span class="string">&#x27;./check2&#x27;</span>, args])  </span><br><span class="line"><span class="comment"># in this way we pass args</span></span><br></pre></td></tr></table></figure>
@@ -428,7 +456,9 @@
 <p>Then we guess the key word is “g3t fl4g”</p>
 <h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p><code>angr</code> is not only a gadget for symbolic execution but a tool for reverse engineering.<br>What I show you here is simple implementation for simple puzzles related with symbolic execution.<br>See <a class="link"   target="_blank" rel="noopener" href="https://github.com/angr/angr-doc/tree/master/examples/" >angr examples<i class="fas fa-external-link-alt"></i></a> to learn advanced techniques of <code>angr</code>.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -534,29 +564,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -564,7 +590,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -574,7 +602,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -607,13 +638,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -696,7 +731,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -713,7 +750,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -724,6 +761,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

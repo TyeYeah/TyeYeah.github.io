@@ -1,6 +1,6 @@
 /* global KEEP */
 
-function initTOC() {
+KEEP.initTOC = () => {
   const pageContainer = document.querySelector('.page-container')
   const postPageContainer = document.querySelector('.post-page-container')
   const pcTocContainer = document.querySelector('.pc-post-toc')
@@ -15,9 +15,13 @@ function initTOC() {
       // get active index
       getActiveIndex(navSections) {
         if (!Array.isArray(navSections)) return
+        const offsetY = 20
+        const { isHideHeader, headerWrapperDom } = KEEP.utils
+        const headerH = isHideHeader ? 0 : headerWrapperDom.getBoundingClientRect().height
         let index = navSections.findIndex((element) => {
-          return element && element.getBoundingClientRect().top - 20 > 0
+          return element && element.getBoundingClientRect().top - (offsetY + headerH) > 0
         })
+
         if (index === -1) {
           index = navSections.length - 1
         } else if (index > 0) {
@@ -111,7 +115,7 @@ function initTOC() {
 }
 
 if (KEEP.theme_config?.pjax?.enable === true && KEEP.utils) {
-  initTOC()
+  KEEP.initTOC()
 } else {
-  window.addEventListener('DOMContentLoaded', initTOC)
+  window.addEventListener('DOMContentLoaded', KEEP.initTOC)
 }

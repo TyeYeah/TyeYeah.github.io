@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-01-11 19:25:50</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jan 12 2021 20:05:10 GMT+0800">2021-01-12 20:05:10</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Jan 12 2021 20:05:10 GMT+0800">2021-01-12 20:05:10</span>
+                </span>
+            
         
 
         
@@ -262,10 +289,10 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/pwn/">pwn</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
                         
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/qemu/">qemu</a></li>
@@ -303,10 +330,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>To analyse firmwares or apps from different architectures on your Linux PC, you have to use emulator to run them.<br>Here I introduce QEMU to you.</p>
+                    
+                         <p>To analyse firmwares or apps from different architectures on your Linux PC, you have to use emulator to run them.<br>Here I introduce QEMU to you.</p>
 <h2 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h2><p>QEMU is a generic and open source machine emulator and virtualizer.<br>QEMU has two operating modes:</p>
 <ul>
 <li><p>Full system emulation<br>In this mode, QEMU emulates a full system (for example a PC), including a processor and various peripherals. It can be used to launch different Operating Systems without rebooting the PC or to debug system code.</p>
@@ -320,7 +348,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-user <span class="comment"># to run apps with dynamic linked libs</span></span><br><span class="line">$ apt install qemu-user-binfmt <span class="comment"># installed along with qemu-user</span></span><br><span class="line">$ apt install binfmt-support</span><br><span class="line">$ apt install qemu-user-static <span class="comment"># to run apps with static linked libs</span></span><br></pre></td></tr></table></figure>
 <h3 id="Create-Virtual-Disk"><a href="#Create-Virtual-Disk" class="headerlink" title="Create Virtual Disk"></a>Create Virtual Disk</h3><p>It prepares for installation of virtual machine.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-img create -f qcow2 OS.img 20G</span><br><span class="line"><span class="comment"># &#x27;create&#x27; means to create vm disk</span></span><br><span class="line"><span class="comment"># &#x27;-f qcow2&#x27; assigns its format. vmdk and qcow are ok.</span></span><br><span class="line"><span class="comment"># &#x27;OS.img&#x27; names the vm disk</span></span><br><span class="line"><span class="comment"># &#x27;20G&#x27; means the size</span></span><br></pre></td></tr></table></figure>
-<h3 id="Install-x2F-Run-Virtual-Machine"><a href="#Install-x2F-Run-Virtual-Machine" class="headerlink" title="Install&#x2F;Run Virtual Machine"></a>Install&#x2F;Run Virtual Machine</h3><p>To install virtual machine</p>
+<h3 id="Install-Run-Virtual-Machine"><a href="#Install-Run-Virtual-Machine" class="headerlink" title="Install&#x2F;Run Virtual Machine"></a>Install&#x2F;Run Virtual Machine</h3><p>To install virtual machine</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ qemu-system-x86_64 -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br><span class="line"><span class="comment"># &#x27;qemu-system-xxx&#x27; depends on what platform you want to use</span></span><br><span class="line"><span class="comment"># &#x27;-boot d&#x27; means boot from cdrom</span></span><br><span class="line"><span class="comment"># &#x27;-cdrom ubuntu-xxx&#x27; assigns the image to install</span></span><br><span class="line"><span class="comment"># &#x27;-hda OS.img&#x27; assigns the vm disk to use</span></span><br><span class="line"><span class="comment"># &#x27;-m 2048&#x27; means using 2048MB memory</span></span><br><span class="line"><span class="comment"># &#x27;-bios OVMF.fd&#x27; assigns bios (default bios is seabios)</span></span><br></pre></td></tr></table></figure>
 <p>To accelerate (use kvm)</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install qemu-kvm </span><br><span class="line"></span><br><span class="line">$ kvm -boot d -cdrom ubuntu-16.04-desktop-amd64.iso -hda OS.img -m 2048 -bios OVMF.fd</span><br></pre></td></tr></table></figure>
@@ -384,7 +412,7 @@
 <p>Now the picture of network (bridge and internet)<br><img   src="/imghost/rpp/5.jpg"  alt="bridge 2"></p>
 <p>Well, if other device or interface is needed…<br>Existence of more than 2 interfaces is permitted in the bridge:<br><img   src="/imghost/rpp/6.jpg"  alt="ifconfig result 3"></p>
 <h3 id="Connect-QEMU-to-tap0"><a href="#Connect-QEMU-to-tap0" class="headerlink" title="Connect QEMU to tap0"></a>Connect QEMU to tap0</h3><p>Now we just need to connect QEMU vm to tap0</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo qemu-system-mipsel -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_squeeze_mipsel_standard.qcow2 -append <span class="string">&quot;root=/dev/sda1 console=tty0&quot;</span> -nographic -net nic -net tap,ifname=tap0,script=no,downscript=no</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> qemu-system-mipsel -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_squeeze_mipsel_standard.qcow2 -append <span class="string">&quot;root=/dev/sda1 console=tty0&quot;</span> -nographic -net nic -net tap,ifname=tap0,script=no,downscript=no</span><br></pre></td></tr></table></figure>
 <p>Finally we get vm connected to internet</p>
 <p>But the problems are:</p>
 <ol>
@@ -397,12 +425,12 @@
 <p>Edit &#x2F;etc&#x2F;qemu-ifup</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line">echo &quot;Executing /etc/qemu-ifup&quot; </span><br><span class="line">echo &quot;Bringing $1 for bridged mode...&quot; </span><br><span class="line">sudo /sbin/ifconfig $1 0.0.0.0 promisc up </span><br><span class="line">echo &quot;Adding $1 to br0...&quot; </span><br><span class="line">sudo /sbin/brctl addif br0 $1 </span><br><span class="line">sleep 3</span><br></pre></td></tr></table></figure>
 <p>Then</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod a+x /etc/qemu-ifup</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">chmod</span> a+x /etc/qemu-ifup</span><br></pre></td></tr></table></figure>
 <p>Restart network</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
 <p>In this way, there is no need to configure  next time you boot up.</p>
 <h3 id="Method-for-WSL-users"><a href="#Method-for-WSL-users" class="headerlink" title="Method for WSL users"></a>Method for WSL users</h3><p>If you use WSL(Windows Subsystem for Linux), the above network modifying is not recommended, because </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># on WSL 1 Ubuntu we failed to add devices</span></span><br><span class="line">$ tunctl</span><br><span class="line">Failed to open <span class="string">&#x27;/dev/net/tun&#x27;</span> : No such file or directory</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">add bridge failed: Invalid argument</span><br><span class="line">$ ifconfig  -a  <span class="comment"># no new devices</span></span><br><span class="line">eth1: ...</span><br><span class="line">eth2: ...</span><br><span class="line">...</span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 1500</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0xfe&lt;compat,link,site,host&gt;</span><br><span class="line">        loop  (Local Loopback)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># but normally we get (like on WSL 2 Ubuntu):</span></span><br><span class="line">$ tunctl</span><br><span class="line">Set <span class="string">&#x27;tap0&#x27;</span> persistent and owned by uid 0</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">$ ifconfig  -a  <span class="comment"># added br0 and tap0</span></span><br><span class="line">...</span><br><span class="line">br0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 12:93:04:50:e6:db  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">...</span><br><span class="line">tap0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 2a:a7:6d:67:b2:00  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># on WSL 1 Ubuntu we failed to add devices</span></span><br><span class="line">$ tunctl</span><br><span class="line">Failed to open <span class="string">&#x27;/dev/net/tun&#x27;</span> : No such file or directory</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">add bridge failed: Invalid argument</span><br><span class="line">$ ifconfig  -a  <span class="comment"># no new devices</span></span><br><span class="line">eth1: ...</span><br><span class="line">eth2: ...</span><br><span class="line">...</span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 1500</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0xfe&lt;compat,<span class="built_in">link</span>,site,host&gt;</span><br><span class="line">        loop  (Local Loopback)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># but normally we get (like on WSL 2 Ubuntu):</span></span><br><span class="line">$ tunctl</span><br><span class="line">Set <span class="string">&#x27;tap0&#x27;</span> persistent and owned by uid 0</span><br><span class="line">$ brctl addbr br0</span><br><span class="line">$ ifconfig  -a  <span class="comment"># added br0 and tap0</span></span><br><span class="line">...</span><br><span class="line">br0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 12:93:04:50:e6:db  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">...</span><br><span class="line">tap0: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 2a:a7:6d:67:b2:00  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
 <p>Well, it doesn’t mean this method works on WSL 2. If continue, we have to disable <code>ethx</code> and enable <code>br0</code> to get <code>ip</code> by<code>DHCP</code>. </p>
 <p>This step is dangerous since <code>br0</code> cannot receive a valid <code>ip</code> via <code>DHCP</code> and your <code>ethx</code> may not be fine as well.</p>
 <p>But We can use available bridge device that <code>docker</code> provides us with – <code>docker0</code>.</p>
@@ -411,14 +439,16 @@
 <p>And the bridge <code>docker0</code> is assigned a <code>ip</code>: <code>172.17.10.1</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig  -a</span><br><span class="line">...</span><br><span class="line">docker0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.10.1  netmask 255.255.255.0  broadcast 172.17.10.255</span><br><span class="line">        ether 02:42:69:86:df:1f  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>Then we add a TAP device <code>tap0</code> and connect it with <code>docker0</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tunctl -t tap0</span><br><span class="line">Set <span class="string">&#x27;tap0&#x27;</span> persistent and owned by uid 0</span><br><span class="line">$ ifconfig tap0 up</span><br><span class="line">$ brctl addif docker0 tap0</span><br><span class="line">$ brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br0             8000.000000000000       no</span><br><span class="line">docker0         8000.02426986df1f       no              tap0</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tunctl -t tap0</span><br><span class="line">Set <span class="string">&#x27;tap0&#x27;</span> persistent and owned by uid 0</span><br><span class="line">$ ifconfig tap0 up</span><br><span class="line">$ brctl addif docker0 tap0</span><br><span class="line">$ brctl show</span><br><span class="line">bridge name     bridge <span class="built_in">id</span>               STP enabled     interfaces</span><br><span class="line">br0             8000.000000000000       no</span><br><span class="line">docker0         8000.02426986df1f       no              tap0</span><br></pre></td></tr></table></figure>
 <p>When starting QEMU we add <code>-net nic -net tap,ifname=tap0,script=no,downscript=no</code> at the tail.</p>
 <p>On QEMU guest we configure <code>ip</code> and <code>gateway</code> and <code>dns</code> </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig eth0 172.17.10.xxx/24</span><br><span class="line">$ route add default gw 172.17.10.1</span><br><span class="line">$ echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf</span><br></pre></td></tr></table></figure>
 <p>Then the network configuration is finished.</p>
 <p>But when using docker virtual machines, conflicts may occur, so you can add <code>&quot;bip&quot;: &quot;x.x.x.x/24&quot;</code> to <code>/etc/docker/daemon.json</code> to assign new <code>ip</code> for <code>docker0</code>.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -427,11 +457,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/pwn/">pwn</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/pwn/">pwn</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
@@ -511,7 +541,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Virtual-Disk"><span class="nav-number">1.2.</span> <span class="nav-text">Create Virtual Disk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-x2F-Run-Virtual-Machine"><span class="nav-number">1.3.</span> <span class="nav-text">Install&#x2F;Run Virtual Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-Programs"><span class="nav-number">1.4.</span> <span class="nav-text">Debug Programs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Network Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Preparations"><span class="nav-number">2.1.</span> <span class="nav-text">Software Preparations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-a-network-bridge"><span class="nav-number">2.2.</span> <span class="nav-text">Build a network bridge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-TAP-device"><span class="nav-number">2.3.</span> <span class="nav-text">Create a TAP device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-QEMU-to-tap0"><span class="nav-number">2.4.</span> <span class="nav-text">Connect QEMU to tap0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-Method"><span class="nav-number">2.5.</span> <span class="nav-text">Another Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-for-WSL-users"><span class="nav-number">2.6.</span> <span class="nav-text">Method for WSL users</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Virtual-Disk"><span class="nav-number">1.2.</span> <span class="nav-text">Create Virtual Disk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Run-Virtual-Machine"><span class="nav-number">1.3.</span> <span class="nav-text">Install&#x2F;Run Virtual Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-Programs"><span class="nav-number">1.4.</span> <span class="nav-text">Debug Programs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Network Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Preparations"><span class="nav-number">2.1.</span> <span class="nav-text">Software Preparations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-a-network-bridge"><span class="nav-number">2.2.</span> <span class="nav-text">Build a network bridge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-TAP-device"><span class="nav-number">2.3.</span> <span class="nav-text">Create a TAP device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-QEMU-to-tap0"><span class="nav-number">2.4.</span> <span class="nav-text">Connect QEMU to tap0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-Method"><span class="nav-number">2.5.</span> <span class="nav-text">Another Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-for-WSL-users"><span class="nav-number">2.6.</span> <span class="nav-text">Method for WSL users</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -528,29 +558,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -558,7 +584,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -568,7 +596,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -601,13 +632,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -679,7 +714,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Virtual-Disk"><span class="nav-number">1.2.</span> <span class="nav-text">Create Virtual Disk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-x2F-Run-Virtual-Machine"><span class="nav-number">1.3.</span> <span class="nav-text">Install&#x2F;Run Virtual Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-Programs"><span class="nav-number">1.4.</span> <span class="nav-text">Debug Programs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Network Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Preparations"><span class="nav-number">2.1.</span> <span class="nav-text">Software Preparations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-a-network-bridge"><span class="nav-number">2.2.</span> <span class="nav-text">Build a network bridge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-TAP-device"><span class="nav-number">2.3.</span> <span class="nav-text">Create a TAP device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-QEMU-to-tap0"><span class="nav-number">2.4.</span> <span class="nav-text">Connect QEMU to tap0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-Method"><span class="nav-number">2.5.</span> <span class="nav-text">Another Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-for-WSL-users"><span class="nav-number">2.6.</span> <span class="nav-text">Method for WSL users</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Virtual-Disk"><span class="nav-number">1.2.</span> <span class="nav-text">Create Virtual Disk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Run-Virtual-Machine"><span class="nav-number">1.3.</span> <span class="nav-text">Install&#x2F;Run Virtual Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-Programs"><span class="nav-number">1.4.</span> <span class="nav-text">Debug Programs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Network Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Preparations"><span class="nav-number">2.1.</span> <span class="nav-text">Software Preparations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-a-network-bridge"><span class="nav-number">2.2.</span> <span class="nav-text">Build a network bridge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-TAP-device"><span class="nav-number">2.3.</span> <span class="nav-text">Create a TAP device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-QEMU-to-tap0"><span class="nav-number">2.4.</span> <span class="nav-text">Connect QEMU to tap0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-Method"><span class="nav-number">2.5.</span> <span class="nav-text">Another Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-for-WSL-users"><span class="nav-number">2.6.</span> <span class="nav-text">Method for WSL users</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -690,7 +725,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -707,7 +744,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -718,6 +755,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

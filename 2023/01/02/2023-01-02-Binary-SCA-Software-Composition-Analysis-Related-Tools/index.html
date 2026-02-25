@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2023-01-02 10:28:26</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Feb 17 2023 08:00:40 GMT+0800">2023-02-17 08:00:40</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Feb 17 2023 08:00:40 GMT+0800">2023-02-17 08:00:40</span>
+                </span>
+            
         
 
         
@@ -262,10 +289,10 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/linux/">linux</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/note/">note</a></li>
                         
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/windows/">windows</a></li>
@@ -300,18 +327,19 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Software Composition Analysis (SCA) for binary helps a lot for vulnerability discovery and program analysis, related fields include: stripped binary symbols recovery, and open-source components detection.</p>
+                    
+                         <p>Software Composition Analysis (SCA) for binary helps a lot for vulnerability discovery and program analysis, related fields include: stripped binary symbols recovery, and open-source components detection.</p>
 <h2 id="Recover-Symbols-for-Stripped-Binaries"><a href="#Recover-Symbols-for-Stripped-Binaries" class="headerlink" title="Recover Symbols for Stripped Binaries"></a>Recover Symbols for Stripped Binaries</h2><p>Stripping symbols is a good way to reduce size of binaries, and to hide program information.</p>
 <p>Use <code>strip</code> or <code>sstrip</code> in <a class="link"   target="_blank" rel="noopener" href="http://www.muppetlabs.com/~breadbox/software/elfkickers.html" >Kickers of ELF<i class="fas fa-external-link-alt"></i></a> to remove symbols and sections.</p>
 <p>But for program analysts, recovering binary symbols helps a lot.</p>
 <h3 id="IDA-Pro-FLIRT"><a href="#IDA-Pro-FLIRT" class="headerlink" title="IDA Pro FLIRT"></a>IDA Pro FLIRT</h3><p>The traditional technique <code>FLIRT</code> (Fast Library Identification and Recognition Technology) using signatures to match binary functions if they are stripped library functions linked statically.</p>
 <h4 id="Prepare-Sig-Files"><a href="#Prepare-Sig-Files" class="headerlink" title="Prepare Sig Files"></a>Prepare Sig Files</h4><p>In <code>/path/to/IDA/ida_plugin/</code> there is a <code>flair70.zip</code> (for IDA 7.0 version, backup <a href="/filehost/bsrt/flair70.zip">here</a>), unzip for binaries we want to use (e.g. in linux), and remember to give them executable permission:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/path/to/flair70/bin/linux</span><br><span class="line">$ ls</span><br><span class="line">dumpsig  pcf  pelf  pelf.rtb  plb  pmacho  pomf166  ppsx  ptmobj  sigmake  zipsig</span><br><span class="line">$ chmod +x pelf sigmake </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/path/to/flair70/bin/linux</span><br><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">dumpsig  pcf  pelf  pelf.rtb  plb  pmacho  pomf166  ppsx  ptmobj  sigmake  zipsig</span><br><span class="line">$ <span class="built_in">chmod</span> +x pelf sigmake </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>To prepare signature database, first choose materials (compiled archived libraries, like <code>libc.a</code>), then use <code>pelf</code>(it’s for linux <code>ELF</code> format, <code>pcf</code> for windows <code>COFF</code> format) and <code>sigmake</code> to generate <code>sig</code> file:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># choose one small lib as an example, not *.so but *.a format </span></span><br><span class="line">$ file /lib/libsupp.a   </span><br><span class="line">/lib/libsupp.a: current ar archive</span><br><span class="line"><span class="comment"># copy to flair bins&#x27; dir</span></span><br><span class="line">$ cp /lib/libsupp.a /path/to/flair70/bin/linux</span><br><span class="line">$ <span class="built_in">cd</span> /path/to/flair70/bin/linux</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate pattern (intermediate) file</span></span><br><span class="line">$ ./pelf libsupp.a libsupp.pat</span><br><span class="line">/path/to/flair70/bin/linux/libsupp.a: skipped 0, total 1    </span><br><span class="line"><span class="comment"># it goes smoothly, while sometimes goes wrong:</span></span><br><span class="line">$  ./pelf libcurl.a libcurl.ptn</span><br><span class="line">Fatal [libcurl.a] (libcurl_la-file.o): Unknown relocation <span class="built_in">type</span> 42 (offset <span class="keyword">in</span> section=0x14).     </span><br><span class="line"><span class="comment"># to deal with it, : -rN:O:L     support relocation type N (mark as variable L bytes at offset O from the relocation address). can be specified multiple times</span></span><br><span class="line">$  ./pelf -r42:0:0 libcurl.a libcurl.ptn</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate signature file</span></span><br><span class="line">$ ./sigmake libsupp.pat libsupp.sig</span><br><span class="line"><span class="comment"># still smoothly, while not always when meeting big libraries:</span></span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line">libboost_thread-1.63.sig: modules/leaves: 95/146, COLLISIONS: 4</span><br><span class="line"><span class="comment"># when collisions occur, edit XXX.exc and make again</span></span><br><span class="line">$ vim libboost_thread.exc</span><br><span class="line">...</span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line"></span><br><span class="line"><span class="comment"># finally copy `sig` files to `/path/to/IDA/sig/pc` </span></span><br><span class="line"><span class="comment"># (`pc` or `arm` or `ppc` or `mips` at the tail indicates ISA)</span></span><br><span class="line">$ cp *.sig /path/to/IDA/sig/pc</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># choose one small lib as an example, not *.so but *.a format </span></span><br><span class="line">$ file /lib/libsupp.a   </span><br><span class="line">/lib/libsupp.a: current ar archive</span><br><span class="line"><span class="comment"># copy to flair bins&#x27; dir</span></span><br><span class="line">$ <span class="built_in">cp</span> /lib/libsupp.a /path/to/flair70/bin/linux</span><br><span class="line">$ <span class="built_in">cd</span> /path/to/flair70/bin/linux</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate pattern (intermediate) file</span></span><br><span class="line">$ ./pelf libsupp.a libsupp.pat</span><br><span class="line">/path/to/flair70/bin/linux/libsupp.a: skipped 0, total 1    </span><br><span class="line"><span class="comment"># it goes smoothly, while sometimes goes wrong:</span></span><br><span class="line">$  ./pelf libcurl.a libcurl.ptn</span><br><span class="line">Fatal [libcurl.a] (libcurl_la-file.o): Unknown relocation <span class="built_in">type</span> 42 (offset <span class="keyword">in</span> section=0x14).     </span><br><span class="line"><span class="comment"># to deal with it, : -rN:O:L     support relocation type N (mark as variable L bytes at offset O from the relocation address). can be specified multiple times</span></span><br><span class="line">$  ./pelf -r42:0:0 libcurl.a libcurl.ptn</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate signature file</span></span><br><span class="line">$ ./sigmake libsupp.pat libsupp.sig</span><br><span class="line"><span class="comment"># still smoothly, while not always when meeting big libraries:</span></span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line">libboost_thread-1.63.sig: modules/leaves: 95/146, COLLISIONS: 4</span><br><span class="line"><span class="comment"># when collisions occur, edit XXX.exc and make again</span></span><br><span class="line">$ vim libboost_thread.exc</span><br><span class="line">...</span><br><span class="line">$  ./sigmake libboost_thread.ptn libboost_thread-1.63.sig</span><br><span class="line"></span><br><span class="line"><span class="comment"># finally copy `sig` files to `/path/to/IDA/sig/pc` </span></span><br><span class="line"><span class="comment"># (`pc` or `arm` or `ppc` or `mips` at the tail indicates ISA)</span></span><br><span class="line">$ <span class="built_in">cp</span> *.sig /path/to/IDA/sig/pc</span><br></pre></td></tr></table></figure>
 
 <p>There are databases for matching already: </p>
 <ul>
@@ -325,9 +353,10 @@
 <p>While <code>sig</code> files may be too much, so how to quickly locate which <code>sig</code> to use? </p>
 <ul>
 <li>Use <code>file</code> or <code>strings</code> to match version information first.</li>
-<li>Use <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan" >lscan<i class="fas fa-external-link-alt"></i></a> <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pyelftools pefile</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br><span class="line">$ <span class="built_in">cd</span> lscan</span><br><span class="line">$ python lscan.py -S amd64/sig -f stripped</span><br><span class="line">No symbol table found bin binary</span><br><span class="line">amd64/sig/libm-2.13.sig 6/445 (1.35%)</span><br><span class="line">amd64/sig/libpthread-2.13.sig 18/319 (5.64%)</span><br><span class="line">amd64/sig/libc-2.23.sig 447/2869 (15.58%)</span><br><span class="line">amd64/sig/libc-2.22.sig 420/2859 (14.69%)</span><br><span class="line">amd64/sig/libssl-1.0.2h.sig 0/665 (0.00%)</span><br><span class="line">amd64/sig/libm-2.23.sig 5/600 (0.83%)</span><br><span class="line">amd64/sig/libc-2.13.sig 133/3369 (3.95%)</span><br><span class="line">amd64/sig/libm-2.22.sig 5/582 (0.86%)</span><br><span class="line">amd64/sig/libpthread-2.22.sig 18/262 (6.87%)</span><br><span class="line">amd64/sig/libcrypto-1.0.2h.sig 3375/5057 (66.74%)</span><br><span class="line">amd64/sig/libpcre-8.38.sig 1/150 (0.67%)</span><br><span class="line">amd64/sig/libpthread-2.23.sig 19/258 (7.36%)</span><br></pre></td></tr></table></figure>
-check <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan/wiki/Reverse-Engineer-a-stripped-binary-with-lscan-and-IDApro" >This DEMO<i class="fas fa-external-link-alt"></i></a> out</li>
+<li>Use <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan" >lscan<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ pip install pyelftools pefile</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br><span class="line">$ <span class="built_in">cd</span> lscan</span><br><span class="line">$ python lscan.py -S amd64/sig -f stripped</span><br><span class="line">No symbol table found bin binary</span><br><span class="line">amd64/sig/libm-2.13.sig 6/445 (1.35%)</span><br><span class="line">amd64/sig/libpthread-2.13.sig 18/319 (5.64%)</span><br><span class="line">amd64/sig/libc-2.23.sig 447/2869 (15.58%)</span><br><span class="line">amd64/sig/libc-2.22.sig 420/2859 (14.69%)</span><br><span class="line">amd64/sig/libssl-1.0.2h.sig 0/665 (0.00%)</span><br><span class="line">amd64/sig/libm-2.23.sig 5/600 (0.83%)</span><br><span class="line">amd64/sig/libc-2.13.sig 133/3369 (3.95%)</span><br><span class="line">amd64/sig/libm-2.22.sig 5/582 (0.86%)</span><br><span class="line">amd64/sig/libpthread-2.22.sig 18/262 (6.87%)</span><br><span class="line">amd64/sig/libcrypto-1.0.2h.sig 3375/5057 (66.74%)</span><br><span class="line">amd64/sig/libpcre-8.38.sig 1/150 (0.67%)</span><br><span class="line">amd64/sig/libpthread-2.23.sig 19/258 (7.36%)</span><br></pre></td></tr></table></figure>
+<p>check <a class="link"   target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscan/wiki/Reverse-Engineer-a-stripped-binary-with-lscan-and-IDApro" >This DEMO<i class="fas fa-external-link-alt"></i></a> out</p>
 <h3 id="Finger"><a href="#Finger" class="headerlink" title="Finger"></a>Finger</h3><p>The Best by far<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/aliyunav/Finger" >Finger<i class="fas fa-external-link-alt"></i></a>, a tool for recognizing function symbol, developed by Alibaba Cloud · Cloud Security Technology Lab.<br>Let’s take a look at the before-and-after comparison:<br><img   src="/imghost/bsrt/Finger-before.png"  alt="before Finger match"><br><img   src="/imghost/bsrt/Finger-after.png"  alt="Finger matched"></p>
 <h3 id="Rizzo"><a href="#Rizzo" class="headerlink" title="Rizzo"></a>Rizzo</h3><p>It also generate signatures to match, like <code>FLIRT</code>.</p>
 <p>While, “Formal” signatures, “Fuzzy” signatures, String-based signatures and Immediate-based signatures can be generated separately, to face scenarios requiring different accuracy.</p>
@@ -367,14 +396,14 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 <h3 id="Pigaios"><a href="#Pigaios" class="headerlink" title="Pigaios"></a>Pigaios</h3><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/joxeankoret/pigaios" >Pigaios<i class="fas fa-external-link-alt"></i></a> (‘πηγαίος’, Greek for ‘source’ as in ‘source code’) is a tool for diffing&#x2F;matching source codes directly against binaries.</p>
 <p>It can match binaries with source regardless of it being compilable or not, using Python CLang bindings to match, and import IDA symbols . However if source can be compiled easily, <a class="link"   target="_blank" rel="noopener" href="https://github.com/joxeankoret/diaphora" >Diaphora<i class="fas fa-external-link-alt"></i></a> might be preferred.</p>
 <p>Install requirements first (my env: kali-rolling, python 3.10, LLVM-14, IDA 7.7):</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install clang python3-clang libclang-dev python-colorama python-sklearn</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ pip install clang</span><br><span class="line">$ pip install colorama</span><br><span class="line">$ pip install scikit-learn</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get install clang python3-clang libclang-dev python-colorama python-sklearn</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">$ pip install clang</span><br><span class="line">$ pip install colorama</span><br><span class="line">$ pip install scikit-learn</span><br></pre></td></tr></table></figure>
 <p>Choose <a class="link"   target="_blank" rel="noopener" href="https://zlib.net/zlib-1.2.13.tar.gz" >Zlib 1.2.13<i class="fas fa-external-link-alt"></i></a> as an example, first generate code signature database.</p>
 <p>Step 1: generate project file <code>sbd.project</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://zlib.net/zlib-1.2.13.tar.gz</span><br><span class="line">$ tar -xzf zlib-1.2.13.tar.gz </span><br><span class="line">$ <span class="built_in">cd</span> zlib-1.2.13</span><br><span class="line"></span><br><span class="line">$ python /path/to/srcbindiff.py -create</span><br><span class="line">Project file <span class="string">&#x27;sbd.project&#x27;</span> created.</span><br><span class="line"></span><br><span class="line">$ cat sbd.project</span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line"><span class="comment"># Default Source-Binary-Differ project configuration</span></span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line">[GENERAL]</span><br><span class="line">includes = /usr/lib/llvm-14/lib/clang/14.0.6/include</span><br><span class="line">inlines = 0</span><br><span class="line"></span><br><span class="line">[PROJECT]</span><br><span class="line">cflags = -I. -I./include</span><br><span class="line">cxxflags = -I. -I./include</span><br><span class="line">export-file = zlib-1.2.13.sqlite</span><br><span class="line">export-header = zlib-1.2.13-exported.h</span><br><span class="line">export-indent = clang-format -i</span><br><span class="line"></span><br><span class="line">[FILES]</span><br><span class="line">contrib/blast/blast.c = 1</span><br><span class="line">contrib/infback9/infback9.c = 1</span><br><span class="line">contrib/infback9/inftree9.c = 1</span><br><span class="line">contrib/iostream/test.cpp = 1</span><br><span class="line">contrib/iostream/zfstream.cpp = 1</span><br><span class="line">contrib/iostream2/zstream_test.cpp = 1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://zlib.net/zlib-1.2.13.tar.gz</span><br><span class="line">$ tar -xzf zlib-1.2.13.tar.gz </span><br><span class="line">$ <span class="built_in">cd</span> zlib-1.2.13</span><br><span class="line"></span><br><span class="line">$ python /path/to/srcbindiff.py -create</span><br><span class="line">Project file <span class="string">&#x27;sbd.project&#x27;</span> created.</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> sbd.project</span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line"><span class="comment"># Default Source-Binary-Differ project configuration</span></span><br><span class="line"><span class="comment">####################################################</span></span><br><span class="line">[GENERAL]</span><br><span class="line">includes = /usr/lib/llvm-14/lib/clang/14.0.6/include</span><br><span class="line">inlines = 0</span><br><span class="line"></span><br><span class="line">[PROJECT]</span><br><span class="line">cflags = -I. -I./include</span><br><span class="line">cxxflags = -I. -I./include</span><br><span class="line">export-file = zlib-1.2.13.sqlite</span><br><span class="line">export-header = zlib-1.2.13-exported.h</span><br><span class="line">export-indent = clang-format -i</span><br><span class="line"></span><br><span class="line">[FILES]</span><br><span class="line">contrib/blast/blast.c = 1</span><br><span class="line">contrib/infback9/infback9.c = 1</span><br><span class="line">contrib/infback9/inftree9.c = 1</span><br><span class="line">contrib/iostream/test.cpp = 1</span><br><span class="line">contrib/iostream/zfstream.cpp = 1</span><br><span class="line">contrib/iostream2/zstream_test.cpp = 1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>Step 2: generate sqlite database <code>zlib-1.2.13.sqlite</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">$ python /path/to/srcbindiff.py --no-parallel -<span class="built_in">export</span>    <span class="comment"># parallel also work</span></span><br><span class="line">[i] Removing existing file zlib-1.2.13.sqlite</span><br><span class="line">[+] CC contrib/blast/blast.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">[+] CC contrib/infback9/infback9.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">[+] CC contrib/infback9/inftree9.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">[+] CXX contrib/iostream/test.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6/include ..</span><br><span class="line">contrib/iostream/zfstream.h:5,10: fatal: <span class="string">&#x27;fstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream/zfstream.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6/incl..</span><br><span class="line">contrib/iostream/zfstream.h:5,10: fatal: <span class="string">&#x27;fstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream2/zstream_test.cpp -I/usr/lib/llvm-14/lib/clang/14.0.6..</span><br><span class="line">contrib/iostream2/zstream.h:27,10: fatal: <span class="string">&#x27;strstream.h&#x27;</span> file not found</span><br><span class="line">[+] CXX contrib/iostream3/test.cc -I/usr/lib/llvm-14/lib/clang/14.0.6/include ..</span><br><span class="line">[+] CXX contrib/iostream3/zfstream.cc -I/usr/lib/llvm-14/lib/clang/14.0.6/incl..</span><br><span class="line">[+] CC contrib/minizip/ioapi.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/minizip/iowin32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">contrib/minizip/iowin32.h:14,10: fatal: <span class="string">&#x27;windows.h&#x27;</span> file not found</span><br><span class="line">[+] CC contrib/minizip/miniunz.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/minizip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/mztools.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -..</span><br><span class="line">[+] CC contrib/minizip/unzip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/minizip/zip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">[+] CC contrib/puff/puff.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I...</span><br><span class="line">[+] CC contrib/puff/pufftest.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I...</span><br><span class="line">[+] CC contrib/testzlib/testzlib.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include..</span><br><span class="line">contrib/testzlib/testzlib.c:3,10: fatal: <span class="string">&#x27;windows.h&#x27;</span> file not found</span><br><span class="line">[+] CC contrib/untgz/untgz.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -..</span><br><span class="line">contrib/untgz/untgz.c:277,7: warning: implicit declaration of <span class="keyword">function</span> <span class="string">&#x27;chmod&#x27;</span>..</span><br><span class="line">contrib/untgz/untgz.c:341,7: warning: implicit declaration of <span class="keyword">function</span> <span class="string">&#x27;mkdir&#x27;</span>..</span><br><span class="line">contrib/untgz/untgz.c:659,11: warning: incompatible pointer types assigning to..</span><br><span class="line">contrib/untgz/untgz.c:665,18: warning: incompatible pointer types passing <span class="string">&#x27;gzF..</span></span><br><span class="line"><span class="string">[+] CC examples/enough.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/fitblk.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/gun.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./incl..</span></span><br><span class="line"><span class="string">[+] CC examples/gzappend.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I...</span></span><br><span class="line"><span class="string">[+] CC examples/gzjoin.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/gzlog.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./in..</span></span><br><span class="line"><span class="string">[+] CC examples/gznorm.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./i..</span></span><br><span class="line"><span class="string">[+] CC examples/zpipe.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./in..</span></span><br><span class="line"><span class="string">[+] CC examples/zran.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC test/example.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./incl..</span></span><br><span class="line"><span class="string">[+] CC test/infcover.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC test/minigzip.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./inc..</span></span><br><span class="line"><span class="string">[+] CC adler32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC compress.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC crc32.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC deflate.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzclose.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzlib.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzread.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC gzwrite.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC infback.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inffast.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inflate.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC inftrees.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC trees.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC uncompr.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC ztest19.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] CC zutil.c -I/usr/lib/llvm-14/lib/clang/14.0.6/include -I. -I./include</span></span><br><span class="line"><span class="string">[+] Building definitions...</span></span><br><span class="line"><span class="string">[+] Building the callgraphs...</span></span><br><span class="line"><span class="string">[+] Building the constants table...</span></span><br><span class="line"><span class="string">[+] Creating indexes...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">4 warning(s), 0 error(s), 5 fatal error(s)</span></span><br></pre></td></tr></table></figure>
 <p>We can open this sqlite db file</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sqlite3 zlib-1.2.13.sqlite</span><br><span class="line">SQLite version 3.40.0 2022-11-16 12:10:08</span><br><span class="line">Enter <span class="string">&quot;.help&quot;</span> <span class="keyword">for</span> usage hints.</span><br><span class="line">sqlite&gt; select name from <span class="built_in">functions</span> <span class="built_in">limit</span> 5;</span><br><span class="line">BeginCountPerfCounter</span><br><span class="line">BeginCountRdtsc</span><br><span class="line">Display64BitsSize</span><br><span class="line">ExprMatch</span><br><span class="line">ExprMatch</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sqlite3 zlib-1.2.13.sqlite</span><br><span class="line">SQLite version 3.40.0 2022-11-16 12:10:08</span><br><span class="line">Enter <span class="string">&quot;.help&quot;</span> <span class="keyword">for</span> usage hints.</span><br><span class="line">sqlite&gt; <span class="keyword">select</span> name from <span class="built_in">functions</span> <span class="built_in">limit</span> 5;</span><br><span class="line">BeginCountPerfCounter</span><br><span class="line">BeginCountRdtsc</span><br><span class="line">Display64BitsSize</span><br><span class="line">ExprMatch</span><br><span class="line">ExprMatch</span><br><span class="line">sqlite&gt;</span><br></pre></td></tr></table></figure>
 <p>Finally use IDA to match binary with source. Take busybox installed from kali-rolling apt repo as an example, as it uses functions in zlib.<br><code>File</code> -&gt; <code>Script File...</code> to choose script <code>sourceimp_ida.py</code><br><img   src="/imghost/bsrt/pigaios1.jpg"  alt="pigaios sourceimp_ida.py panel"></p>
 <p>choose right sqlite file, and we can see the result<br><img   src="/imghost/bsrt/pigaios2.jpg"  alt="pigaios match result"></p>
 <p>We can even visually diffing the pseudo-code of functions, like function <code>gzopen</code><br><img   src="/imghost/bsrt/pigaios3.jpg"  alt="pigaios pseudo-code diffing"></p>
@@ -395,7 +424,9 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 <p><a class="link"   target="_blank" rel="noopener" href="https://github.com/jeremylong/DependencyCheck" >Dependency-Check<i class="fas fa-external-link-alt"></i></a> is also a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries.<br>It also has <a target="_blank" rel="noopener" href="https://plugins.jenkins.io/dependency-check-jenkins-plugin/"><code>Jenkins</code> plugin</a> to use.</p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://snyk.io/" >Synk<i class="fas fa-external-link-alt"></i></a> is another SCA scanner, which provides more accurate service than <code>Dependency-Check</code>, but it is not open source and needs token authentication.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -404,11 +435,11 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/note/">note</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/linux/">linux</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/note/">note</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
@@ -501,29 +532,25 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -531,7 +558,9 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -541,7 +570,10 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -574,13 +606,17 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -663,7 +699,9 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -680,7 +718,7 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -691,6 +729,10 @@ height: 100%; left: 0; top: 0;"> </iframe></div>
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

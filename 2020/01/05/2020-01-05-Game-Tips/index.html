@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-01-05 21:29:11</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Aug 09 2020 09:48:48 GMT+0800">2020-08-09 09:48:48</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Feb 25 2026 21:07:30 GMT+0800">2026-02-25 21:07:30</span>
+                </span>
+            
         
 
         
@@ -275,7 +302,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.6k Words</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.7k Words</span>
             </span>
         
         
@@ -294,10 +321,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Here are some tips of games.</p>
+                    
+                         <p>Here are some tips of games.</p>
 <h2 id="Red-Orchestra-2-Heroes-of-Stalingrad"><a href="#Red-Orchestra-2-Heroes-of-Stalingrad" class="headerlink" title="Red Orchestra 2: Heroes of Stalingrad"></a>Red Orchestra 2: Heroes of Stalingrad</h2><p>If you want to play sole mode (PVE)<br>Enter the game and press [~] to open the console and enter: <code>open gamemode-mapname</code> </p>
 <h3 id="Game-Mode"><a href="#Game-Mode" class="headerlink" title="Game Mode"></a>Game Mode</h3><p>1 TE：Territory（attack &amp; defence）<br>2 FF：FireFighter（TeamDeath Match）<br>3 CD：Countdown（timed awd）</p>
 <h3 id="Match-Map"><a href="#Match-Map" class="headerlink" title="Match Map"></a>Match Map</h3><p>Apartments<br>Barracks<br>CommissarsHouse<br>FallenFighters<br>GrainElevator<br>Gumrak<br>PavlovsHouse<br>RedOctoberFactory<br>Spartanovka<br>Station<br>…</p>
@@ -395,12 +423,23 @@ quit/exit
 <p>As for cfg file, it is in <code>steamapp-&gt;common-&gt;Counter-Strike Global Offensivecsgo-&gt;cfg-&gt;xxx.cfg</code>.<br>Enter <code>exec xxx.cfg</code> in command to get it effect.<br>You can also add <code>-console +exec xxx</code> to boot option for convenience.</p>
 <p>Share my training <code>cfg</code></p>
 <ul>
-<li><code>train_practice.cfg</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sv_cheats 1</span><br><span class="line">mp_restartgame 1</span><br><span class="line">mp_autoteambalance 0</span><br><span class="line">mp_buyanywhere 1</span><br><span class="line">mp_freezetime 0</span><br><span class="line">sv_infinite_ammo 2</span><br><span class="line">mp_limitteams 10</span><br><span class="line">mp_startmoney 99999</span><br><span class="line">mp_roundtime_defuse 60</span><br><span class="line">sv_grenade_trajectory 1</span><br><span class="line">sv_grenade_trajectory_time 15  </span><br><span class="line">sv_showimpacts 1 </span><br><span class="line">sv_showimpacts_time 3</span><br><span class="line">net_graph 1</span><br><span class="line">bot_stop</span><br><span class="line"></span><br><span class="line">bind &quot;alt&quot; &quot;noclip&quot;</span><br><span class="line">bind &quot;x&quot; &quot;toggle r_drawothermodels 1 2&quot;</span><br><span class="line">bind &quot;c&quot; &quot;bot_place&quot;</span><br></pre></td></tr></table></figure>
-And</li>
+<li><code>train_practice.cfg</code></li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sv_cheats 1</span><br><span class="line">mp_restartgame 1</span><br><span class="line">mp_autoteambalance 0</span><br><span class="line">mp_buyanywhere 1</span><br><span class="line">mp_freezetime 0</span><br><span class="line">sv_infinite_ammo 2</span><br><span class="line">mp_limitteams 10</span><br><span class="line">mp_startmoney 99999</span><br><span class="line">mp_roundtime_defuse 60</span><br><span class="line">sv_grenade_trajectory 1</span><br><span class="line">sv_grenade_trajectory_time 15  </span><br><span class="line">sv_showimpacts 1 </span><br><span class="line">sv_showimpacts_time 3</span><br><span class="line">net_graph 1</span><br><span class="line">bot_stop</span><br><span class="line"></span><br><span class="line">bind &quot;alt&quot; &quot;noclip&quot;</span><br><span class="line">bind &quot;x&quot; &quot;toggle r_drawothermodels 1 2&quot;</span><br><span class="line">bind &quot;c&quot; &quot;bot_place&quot;</span><br></pre></td></tr></table></figure>
+<p>And</p>
 <ul>
-<li><code>train_challenge.cfg</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">bot_kick</span><br><span class="line">mp_autoteambalance 0</span><br><span class="line">mp_limitteams 100</span><br><span class="line">mp_restartgame 1</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">mp_restartgame 1</span><br></pre></td></tr></table></figure></li>
+<li><code>train_challenge.cfg</code></li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">bot_kick</span><br><span class="line">mp_autoteambalance 0</span><br><span class="line">mp_limitteams 100</span><br><span class="line">mp_restartgame 1</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">bot_add_t</span><br><span class="line">mp_restartgame 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Counter-Strike-2"><a href="#Counter-Strike-2" class="headerlink" title="Counter-Strike 2"></a>Counter-Strike 2</h2><p>Since the default bot difficulty is too low and cannot be changed in-game, you’ll need to adjust it via the developer console (~). For instructions, refer to <a class="link"   target="_blank" rel="noopener" href="https://skin.land/blog/how-to-change-bot-difficulty-in-cs2/" >Skin.Land<i class="fas fa-external-link-alt"></i></a>.</p>
+<ol>
+<li><p>Set <code>bot_difficulty 0/1/2/3/4/5</code> first, then <code>Play</code> then <code>Practice</code>.</p>
+</li>
+<li><p>Midgame, open console and enter <code>bot_kick</code> to get rid of those weak bots, then reopen console and enter <code>bot_add expert</code> (<code>easy</code>, <code>normal</code>, <code>hard</code> or <code>expert</code>) and repeat the previous step as many times as you want (You can add bots for specific teams by entering <code>bot_add ct expert</code> or <code>bot_add t expert</code>)</p>
+</li>
+</ol>
+<p>To increase the difficulty, enter <code>mp_autoteambalance false</code> and <code>mp_limitteams 0</code> allow uneven team sizes.</p>
 <h2 id="Wallpaper-Engine"><a href="#Wallpaper-Engine" class="headerlink" title="Wallpaper Engine"></a>Wallpaper Engine</h2><p>&lt; Gear Button &gt; –&gt; &lt; About Tab &gt; –&gt; &lt;↑&gt;+&lt;↑&gt;+&lt;↓&gt;+&lt;↓&gt;+&lt;←&gt;+&lt;→&gt;+&lt;←&gt;+&lt;→&gt;+&lt; B &gt;+&lt; A &gt;+&lt; Enter &gt;<br>to unlock an achievement (and a new theme).</p>
 <h2 id="Grand-Theft-Auto"><a href="#Grand-Theft-Auto" class="headerlink" title="Grand Theft Auto"></a>Grand Theft Auto</h2><p>Cheat Codes</p>
 <h3 id="GTA-III"><a href="#GTA-III" class="headerlink" title="GTA III"></a>GTA III</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">gunsgunsguns = get all weapons</span><br><span class="line">　　ifiwerearichman = get $250,000</span><br><span class="line">　　gesundheit = full healty</span><br><span class="line">　　morepoliceplease = wanted level +1</span><br><span class="line">　　nopoliceplease = 0 wanted level</span><br><span class="line">　　giveusatank = get tank</span><br><span class="line">　　bangbangbang = blow all cars in sight</span><br><span class="line">　　ilikedressingup = change clothes</span><br><span class="line">　　itsallgoingmaaad = people beat each other</span><br><span class="line">　　nobodylikesme = people beat u</span><br><span class="line">　　weaponsforall = people get weapons</span><br><span class="line">　　timeflieswhenyou = timer goes fast</span><br><span class="line">　　madweather = heavy rain</span><br><span class="line">　　boooooring = speed up the game</span><br><span class="line">　　turtoise = 100 armor</span><br><span class="line">　　skincancerforme = sunny </span><br><span class="line">　　ilikescotland = cloudy</span><br><span class="line">　　ilovescotland = rainy</span><br><span class="line">　　peasoup = foggy</span><br><span class="line">　　anicesetofwheels = only see wheels</span><br><span class="line">　　chittycittybb = cars fly</span><br><span class="line">　　cornerslikemad = improved car controlling</span><br><span class="line">　　nastylimbscheat = bloody mode</span><br></pre></td></tr></table></figure>
@@ -868,7 +907,9 @@ And</li>
 </tbody></table>
 <h2 id="Human-Fall-Flat"><a href="#Human-Fall-Flat" class="headerlink" title="Human Fall Flat"></a>Human Fall Flat</h2><p>Press <code>~</code> to enter command mode<br><code>FPS</code>           –  change ftp and tps<br><code>climbcheat</code>    –  change climb cheat mode</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -949,7 +990,7 @@ And</li>
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Orchestra-2-Heroes-of-Stalingrad"><span class="nav-number">1.</span> <span class="nav-text">Red Orchestra 2: Heroes of Stalingrad</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Mode"><span class="nav-number">1.1.</span> <span class="nav-text">Game Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match-Map"><span class="nav-number">1.2.</span> <span class="nav-text">Match Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local"><span class="nav-number">1.3.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Bots"><span class="nav-number">1.4.</span> <span class="nav-text">Add Bots</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rising-Storm-2-Vietnam"><span class="nav-number">2.</span> <span class="nav-text">Rising Storm 2: Vietnam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local-1"><span class="nav-number">2.1.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-Set"><span class="nav-number">2.2.</span> <span class="nav-text">Map Set</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEAD-OR-ALIVE-5-Last-Round-Core-Fighters"><span class="nav-number">3.</span> <span class="nav-text">DEAD OR ALIVE 5 Last Round: Core Fighters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-Global-Offensive"><span class="nav-number">4.</span> <span class="nav-text">Counter-Strike: Global Offensive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cheat-Mode"><span class="nav-number">4.1.</span> <span class="nav-text">Cheat Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Setting"><span class="nav-number">4.2.</span> <span class="nav-text">Game Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Display-Setting"><span class="nav-number">4.3.</span> <span class="nav-text">Display Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-Options"><span class="nav-number">4.4.</span> <span class="nav-text">Boot Options:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-file"><span class="nav-number">4.5.</span> <span class="nav-text">Config file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wallpaper-Engine"><span class="nav-number">5.</span> <span class="nav-text">Wallpaper Engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grand-Theft-Auto"><span class="nav-number">6.</span> <span class="nav-text">Grand Theft Auto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-III"><span class="nav-number">6.1.</span> <span class="nav-text">GTA III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-Vice-City"><span class="nav-number">6.2.</span> <span class="nav-text">GTA Vice City</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-San-Andreas"><span class="nav-number">6.3.</span> <span class="nav-text">GTA San Andreas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-IV"><span class="nav-number">6.4.</span> <span class="nav-text">GTA IV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#General"><span class="nav-number">6.4.1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLAD-Only"><span class="nav-number">6.4.2.</span> <span class="nav-text">TLAD Only</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TBoGT-Only"><span class="nav-number">6.4.3.</span> <span class="nav-text">TBoGT Only</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-V"><span class="nav-number">6.5.</span> <span class="nav-text">GTA V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Dead-Redemption-2"><span class="nav-number">7.</span> <span class="nav-text">Red Dead Redemption 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Fall-Flat"><span class="nav-number">8.</span> <span class="nav-text">Human Fall Flat</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Orchestra-2-Heroes-of-Stalingrad"><span class="nav-number">1.</span> <span class="nav-text">Red Orchestra 2: Heroes of Stalingrad</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Mode"><span class="nav-number">1.1.</span> <span class="nav-text">Game Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match-Map"><span class="nav-number">1.2.</span> <span class="nav-text">Match Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local"><span class="nav-number">1.3.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Bots"><span class="nav-number">1.4.</span> <span class="nav-text">Add Bots</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rising-Storm-2-Vietnam"><span class="nav-number">2.</span> <span class="nav-text">Rising Storm 2: Vietnam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local-1"><span class="nav-number">2.1.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-Set"><span class="nav-number">2.2.</span> <span class="nav-text">Map Set</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEAD-OR-ALIVE-5-Last-Round-Core-Fighters"><span class="nav-number">3.</span> <span class="nav-text">DEAD OR ALIVE 5 Last Round: Core Fighters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-Global-Offensive"><span class="nav-number">4.</span> <span class="nav-text">Counter-Strike: Global Offensive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cheat-Mode"><span class="nav-number">4.1.</span> <span class="nav-text">Cheat Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Setting"><span class="nav-number">4.2.</span> <span class="nav-text">Game Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Display-Setting"><span class="nav-number">4.3.</span> <span class="nav-text">Display Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-Options"><span class="nav-number">4.4.</span> <span class="nav-text">Boot Options:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-file"><span class="nav-number">4.5.</span> <span class="nav-text">Config file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-2"><span class="nav-number">5.</span> <span class="nav-text">Counter-Strike 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wallpaper-Engine"><span class="nav-number">6.</span> <span class="nav-text">Wallpaper Engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grand-Theft-Auto"><span class="nav-number">7.</span> <span class="nav-text">Grand Theft Auto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-III"><span class="nav-number">7.1.</span> <span class="nav-text">GTA III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-Vice-City"><span class="nav-number">7.2.</span> <span class="nav-text">GTA Vice City</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-San-Andreas"><span class="nav-number">7.3.</span> <span class="nav-text">GTA San Andreas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-IV"><span class="nav-number">7.4.</span> <span class="nav-text">GTA IV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#General"><span class="nav-number">7.4.1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLAD-Only"><span class="nav-number">7.4.2.</span> <span class="nav-text">TLAD Only</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TBoGT-Only"><span class="nav-number">7.4.3.</span> <span class="nav-text">TBoGT Only</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-V"><span class="nav-number">7.5.</span> <span class="nav-text">GTA V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Dead-Redemption-2"><span class="nav-number">8.</span> <span class="nav-text">Red Dead Redemption 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Fall-Flat"><span class="nav-number">9.</span> <span class="nav-text">Human Fall Flat</span></a></li></ol>
     </div>
 </div>
 
@@ -966,29 +1007,25 @@ And</li>
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -996,7 +1033,9 @@ And</li>
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -1006,7 +1045,10 @@ And</li>
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -1039,13 +1081,17 @@ And</li>
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -1117,7 +1163,7 @@ And</li>
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Orchestra-2-Heroes-of-Stalingrad"><span class="nav-number">1.</span> <span class="nav-text">Red Orchestra 2: Heroes of Stalingrad</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Mode"><span class="nav-number">1.1.</span> <span class="nav-text">Game Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match-Map"><span class="nav-number">1.2.</span> <span class="nav-text">Match Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local"><span class="nav-number">1.3.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Bots"><span class="nav-number">1.4.</span> <span class="nav-text">Add Bots</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rising-Storm-2-Vietnam"><span class="nav-number">2.</span> <span class="nav-text">Rising Storm 2: Vietnam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local-1"><span class="nav-number">2.1.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-Set"><span class="nav-number">2.2.</span> <span class="nav-text">Map Set</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEAD-OR-ALIVE-5-Last-Round-Core-Fighters"><span class="nav-number">3.</span> <span class="nav-text">DEAD OR ALIVE 5 Last Round: Core Fighters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-Global-Offensive"><span class="nav-number">4.</span> <span class="nav-text">Counter-Strike: Global Offensive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cheat-Mode"><span class="nav-number">4.1.</span> <span class="nav-text">Cheat Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Setting"><span class="nav-number">4.2.</span> <span class="nav-text">Game Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Display-Setting"><span class="nav-number">4.3.</span> <span class="nav-text">Display Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-Options"><span class="nav-number">4.4.</span> <span class="nav-text">Boot Options:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-file"><span class="nav-number">4.5.</span> <span class="nav-text">Config file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wallpaper-Engine"><span class="nav-number">5.</span> <span class="nav-text">Wallpaper Engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grand-Theft-Auto"><span class="nav-number">6.</span> <span class="nav-text">Grand Theft Auto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-III"><span class="nav-number">6.1.</span> <span class="nav-text">GTA III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-Vice-City"><span class="nav-number">6.2.</span> <span class="nav-text">GTA Vice City</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-San-Andreas"><span class="nav-number">6.3.</span> <span class="nav-text">GTA San Andreas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-IV"><span class="nav-number">6.4.</span> <span class="nav-text">GTA IV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#General"><span class="nav-number">6.4.1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLAD-Only"><span class="nav-number">6.4.2.</span> <span class="nav-text">TLAD Only</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TBoGT-Only"><span class="nav-number">6.4.3.</span> <span class="nav-text">TBoGT Only</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-V"><span class="nav-number">6.5.</span> <span class="nav-text">GTA V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Dead-Redemption-2"><span class="nav-number">7.</span> <span class="nav-text">Red Dead Redemption 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Fall-Flat"><span class="nav-number">8.</span> <span class="nav-text">Human Fall Flat</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Orchestra-2-Heroes-of-Stalingrad"><span class="nav-number">1.</span> <span class="nav-text">Red Orchestra 2: Heroes of Stalingrad</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Mode"><span class="nav-number">1.1.</span> <span class="nav-text">Game Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match-Map"><span class="nav-number">1.2.</span> <span class="nav-text">Match Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local"><span class="nav-number">1.3.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Bots"><span class="nav-number">1.4.</span> <span class="nav-text">Add Bots</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rising-Storm-2-Vietnam"><span class="nav-number">2.</span> <span class="nav-text">Rising Storm 2: Vietnam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PvE-local-1"><span class="nav-number">2.1.</span> <span class="nav-text">PvE (local)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-Set"><span class="nav-number">2.2.</span> <span class="nav-text">Map Set</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEAD-OR-ALIVE-5-Last-Round-Core-Fighters"><span class="nav-number">3.</span> <span class="nav-text">DEAD OR ALIVE 5 Last Round: Core Fighters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-Global-Offensive"><span class="nav-number">4.</span> <span class="nav-text">Counter-Strike: Global Offensive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cheat-Mode"><span class="nav-number">4.1.</span> <span class="nav-text">Cheat Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Game-Setting"><span class="nav-number">4.2.</span> <span class="nav-text">Game Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Display-Setting"><span class="nav-number">4.3.</span> <span class="nav-text">Display Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-Options"><span class="nav-number">4.4.</span> <span class="nav-text">Boot Options:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-file"><span class="nav-number">4.5.</span> <span class="nav-text">Config file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-Strike-2"><span class="nav-number">5.</span> <span class="nav-text">Counter-Strike 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wallpaper-Engine"><span class="nav-number">6.</span> <span class="nav-text">Wallpaper Engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grand-Theft-Auto"><span class="nav-number">7.</span> <span class="nav-text">Grand Theft Auto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-III"><span class="nav-number">7.1.</span> <span class="nav-text">GTA III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-Vice-City"><span class="nav-number">7.2.</span> <span class="nav-text">GTA Vice City</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-San-Andreas"><span class="nav-number">7.3.</span> <span class="nav-text">GTA San Andreas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-IV"><span class="nav-number">7.4.</span> <span class="nav-text">GTA IV</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#General"><span class="nav-number">7.4.1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLAD-Only"><span class="nav-number">7.4.2.</span> <span class="nav-text">TLAD Only</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TBoGT-Only"><span class="nav-number">7.4.3.</span> <span class="nav-text">TBoGT Only</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTA-V"><span class="nav-number">7.5.</span> <span class="nav-text">GTA V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Red-Dead-Redemption-2"><span class="nav-number">8.</span> <span class="nav-text">Red Dead Redemption 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Fall-Flat"><span class="nav-number">9.</span> <span class="nav-text">Human Fall Flat</span></a></li></ol>
     </div>
 </div>
 
@@ -1128,7 +1174,9 @@ And</li>
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -1145,7 +1193,7 @@ And</li>
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -1156,6 +1204,10 @@ And</li>
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

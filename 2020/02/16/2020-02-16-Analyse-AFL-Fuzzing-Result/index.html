@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-02-16 11:39:23</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Sep 24 2020 08:34:02 GMT+0800">2020-09-24 08:34:02</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Sep 24 2020 08:34:02 GMT+0800">2020-09-24 08:34:02</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>After doing fuzzing, we concentrate on result analysis.</p>
+                    
+                         <p>After doing fuzzing, we concentrate on result analysis.</p>
 <h2 id="Check-Fuzzer-Status"><a href="#Check-Fuzzer-Status" class="headerlink" title="Check Fuzzer Status"></a>Check Fuzzer Status</h2><h3 id="afl-whatsup"><a href="#afl-whatsup" class="headerlink" title="afl-whatsup"></a>afl-whatsup</h3><p>It helps showing the running status and overall running overview of each fuzzer, where the data is the sum of all fuzzers.<br>Plus the -s option to display only the overview.</p>
 <p>Use:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ afl-whatsup -s syncdir</span><br></pre></td></tr></table></figure>
@@ -328,7 +356,7 @@
 </ul>
 <p>Once you have waited for several days,<br><img   src="/imghost/aafr/5.jpg"  alt="pythia 2"><br>or the path coverage reaches 99%, or correctness decreases to 1e-08, stop the fuzz.</p>
 <h2 id="Output-Result"><a href="#Output-Result" class="headerlink" title="Output Result"></a>Output Result</h2><p>Contents of multi-fuzzer instance sync dirs</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tree -L 3</span><br><span class="line">.</span><br><span class="line">├── fuzzer1</span><br><span class="line">│   ├── crashes</span><br><span class="line">│   │   ├── id:000000,sig:06,src:000019+000074,op:splice,rep:2</span><br><span class="line">│   │   ├── ...</span><br><span class="line">│   │   ├── id:000002,sig:06,src:000038+000125,op:splice,rep:4</span><br><span class="line">│   │   └── README.txt</span><br><span class="line">│   ├── fuzz_bitmap</span><br><span class="line">│   ├── fuzzer_stats</span><br><span class="line">│   ├── hangs</span><br><span class="line">│   │   └── id:000000,src:000007,op:flip1,pos:55595</span><br><span class="line">│   ├── plot_data</span><br><span class="line">│   └── queue</span><br><span class="line">│       ├── id:000000,orig:1.png</span><br><span class="line">│       ├── ....</span><br><span class="line">│       └── id:000101,sync:fuzzer10,src:000102</span><br><span class="line">└── fuzzer2</span><br><span class="line">        ├── crashes</span><br><span class="line">        ├── ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ tree -L 3</span><br><span class="line">.</span><br><span class="line">├── fuzzer1</span><br><span class="line">│   ├── crashes</span><br><span class="line">│   │   ├── <span class="built_in">id</span>:000000,sig:06,src:000019+000074,op:splice,rep:2</span><br><span class="line">│   │   ├── ...</span><br><span class="line">│   │   ├── <span class="built_in">id</span>:000002,sig:06,src:000038+000125,op:splice,rep:4</span><br><span class="line">│   │   └── README.txt</span><br><span class="line">│   ├── fuzz_bitmap</span><br><span class="line">│   ├── fuzzer_stats</span><br><span class="line">│   ├── hangs</span><br><span class="line">│   │   └── <span class="built_in">id</span>:000000,src:000007,op:flip1,pos:55595</span><br><span class="line">│   ├── plot_data</span><br><span class="line">│   └── queue</span><br><span class="line">│       ├── <span class="built_in">id</span>:000000,orig:1.png</span><br><span class="line">│       ├── ....</span><br><span class="line">│       └── <span class="built_in">id</span>:000101,<span class="built_in">sync</span>:fuzzer10,src:000102</span><br><span class="line">└── fuzzer2</span><br><span class="line">        ├── crashes</span><br><span class="line">        ├── ...</span><br></pre></td></tr></table></figure>
 <ul>
 <li>queue: stores all testcases with special executive paths.</li>
 <li>crashes: stores cases causing target to receive fatal signal and crash.</li>
@@ -345,10 +373,10 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ./triage_crashes.sh /path/to/afl_output_dir /path/to/tested_binary [...target params...]</span><br><span class="line"></span><br><span class="line">  +++ ID 000000, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000001, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000002, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000003, SIGNAL 06 +++</span><br><span class="line">  +++ ID 000004, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000005, SIGNAL 11 +++</span><br><span class="line">  +++ ID 000006, SIGNAL 11 +++</span><br></pre></td></tr></table></figure>
 <p>Different SIGNAL means different signals.<br>For example, 11 means SIGSEGV (indicates buffer overflow), 06 means SIGABRT (indicates double free) …<br><a class="link"   target="_blank" rel="noopener" href="https://www-uxsup.csx.cam.ac.uk/courses/moved.Building/signals.pdf" >Linux signal list<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://linux.die.net/man/7/signal" >signal(7) man page<i class="fas fa-external-link-alt"></i></a></p>
 <h3 id="crashwalk"><a href="#crashwalk" class="headerlink" title="crashwalk"></a>crashwalk</h3><p><code>crashwalk</code> gets you more detailed crashes classification results, and the specific causes of crashes.<br>It is based on <code>exploitable</code> plugin of gdb, install on ubuntu:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb golang</span><br><span class="line">$ mkdir ~/tools</span><br><span class="line">$ <span class="built_in">cd</span> ~/tools</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/jfoote/exploitable.git</span><br><span class="line">$ mkdir go</span><br><span class="line">$ <span class="built_in">export</span> GOPATH=~/tools/go</span><br><span class="line">$ <span class="built_in">export</span> CW_EXPLOITABLE=~/tools/exploitable/exploitable/exploitable.py</span><br><span class="line">$ go get -u -v github.com/bnagy/crashwalk/cmd/...</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ apt install gdb golang</span><br><span class="line">$ <span class="built_in">mkdir</span> ~/tools</span><br><span class="line">$ <span class="built_in">cd</span> ~/tools</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/jfoote/exploitable.git</span><br><span class="line">$ <span class="built_in">mkdir</span> go</span><br><span class="line">$ <span class="built_in">export</span> GOPATH=~/tools/go</span><br><span class="line">$ <span class="built_in">export</span> CW_EXPLOITABLE=~/tools/exploitable/exploitable/exploitable.py</span><br><span class="line">$ go get -u -v github.com/bnagy/crashwalk/cmd/...</span><br></pre></td></tr></table></figure>
 <p>Follow the lead, use correct path. You will find three binary files in $GOPATH.</p>
 <p><code>crashwalk</code> has <code>Manual Mode</code> and <code>AFL Mode</code>.<br><code>Manual Mode</code> reads crashes&#x2F;README.txt to get command.<br><code>AFL Mode</code> set parameters manually.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Manual Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir/fuzzer1/crashes/ -match id -- /path/to/target @@</span><br><span class="line"></span><br><span class="line"><span class="comment">#AFL Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir -afl</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Manual Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir/fuzzer1/crashes/ -match <span class="built_in">id</span> -- /path/to/target @@</span><br><span class="line"></span><br><span class="line"><span class="comment">#AFL Mode</span></span><br><span class="line">$ ~/tools/go/bin/cwtriage -root syncdir -afl</span><br></pre></td></tr></table></figure>
 <p><img   src="/imghost/aafr/6.jpg"  alt="crashwalk e.g."></p>
 <h3 id="afl-collect"><a href="#afl-collect" class="headerlink" title="afl-collect"></a>afl-collect</h3><p>One of <a class="link"   target="_blank" rel="noopener" href="https://gitlab.com/rc0r/afl-utils" >afl-utils<i class="fas fa-external-link-alt"></i></a> suite, also based on <code>exploitable</code> plugin to check availability of crash.<br>It also delete useless or duplicated crash sample </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usage: afl-collect [-d DATABASE] [-e|-g GDB_EXPL_SCRIPT_FILE] [-f LIST_FILENAME]</span><br><span class="line"> [-h] [-j THREADS] [-m] [-r [-rt TIMEOUT]] [-rr] sync_dir collection_dir -- target_cmd</span><br><span class="line"></span><br><span class="line">the following arguments are required: </span><br><span class="line">sync_dir, collection_dir, target_cmd</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">$ afl-collect -j 8 -d crashes.db -e gdb_script ./afl_sync_dir ./collection_dir -- /path/to/target --target-opts</span><br></pre></td></tr></table></figure>
@@ -376,7 +404,9 @@
 <p><img   src="/imghost/aafr/10.jpg"  alt="afl-cov e.g."></p>
 <p>Finally we get a code coverage report in html.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -478,29 +508,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -508,7 +534,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -518,7 +546,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -551,13 +582,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -640,7 +675,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -657,7 +694,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -668,6 +705,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

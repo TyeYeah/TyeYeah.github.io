@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2020-02-14 09:25:47</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Oct 04 2020 07:42:20 GMT+0800">2020-10-04 07:42:20</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Oct 04 2020 07:42:20 GMT+0800">2020-10-04 07:42:20</span>
+                </span>
+            
         
 
         
@@ -297,10 +324,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>It’s not too late to learn fuzzing which is booming in this age.</p>
+                    
+                         <p>It’s not too late to learn fuzzing which is booming in this age.</p>
 <h2 id="Fuzzing-Intro"><a href="#Fuzzing-Intro" class="headerlink" title="Fuzzing Intro"></a>Fuzzing Intro</h2><p>When performing software vulnerability mining or discovery, there are several technical methods includes: static analysis, dynamic analysis, symbolic execution and fuzzing.</p>
 <ul>
 <li>Static Analysis:<br>  Through its analysis of various syntax, semantics, data flow, etc., to carry out vulnerability discovery.</li>
@@ -341,7 +369,7 @@
 <p><code>afl-gcc</code> is a wrapper for the gcc compiler. It calls the <code>gcc</code> compiler for compilation on the one hand, and specifies <code>afl-as</code> instead of <code>as</code> for assembly. <code>afl-as</code> is also a package of <code>as</code>. It analyzes the assembly code and performs instrumentation on the one hand, and calls <code>as</code> to change the assembly code after instrumentation to machine code.</p>
 <p>If you can’t&#x2F;don’t want to recompile the source code of the target program, AFL also supports a QEMU mode, an extension that leverages the QEMU “user emulation” mode and allows callers to obtain instrumentation output for black-box, closed-source binaries. This mechanism can be then used by afl-fuzz to stress-test targets that couldn’t be built with afl-gcc.</p>
 <h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>Download the <a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz" >latest version<i class="fas fa-external-link-alt"></i></a> of the source code (<a class="link"   target="_blank" rel="noopener" href="http://lcamtuf.coredump.cx/afl/releases/" >older releases<i class="fas fa-external-link-alt"></i></a>), extract it and do the usual:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make </span><br><span class="line">$ sudo make install </span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make </span><br><span class="line">$ <span class="built_in">sudo</span> make install </span><br></pre></td></tr></table></figure>
 
 <p>You have to set CPU to <code>performance mode</code> so that <code>afl-fuzz</code> can normally run.<br>Install CPU frequency management software and set</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt install cpufrequtils</span><br><span class="line">$ cpufreq-info</span><br><span class="line">$ cpufreq-set -g performance</span><br></pre></td></tr></table></figure>
@@ -353,11 +381,11 @@
 <p>The following command will instruct the system to output coredumps as files instead of sending them to a specific crash handler app</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> core &gt; /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
 <p>Create an input folder to put ELF file, which AFL will use as a base template.<br>Create an output folder for fuzzer to store its state and all the generated samples that make the application crash or hang.<br>This time we give &#x2F;bin&#x2F;sh a chance.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir afl_in afl_out</span><br><span class="line">$ cp /bin/sh afl_in/</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> afl_in afl_out</span><br><span class="line">$ <span class="built_in">cp</span> /bin/sh afl_in/</span><br></pre></td></tr></table></figure>
 <p>Run the fuzzer</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -i afl_in -o afl_out ./binutils/objdump -d @@</span><br><span class="line"><span class="comment"># &#x27;-i&#x27; to choose input files&#x27; dir</span></span><br><span class="line"><span class="comment"># &#x27;-o&#x27; to choose output files&#x27; dir</span></span><br><span class="line"><span class="comment"># then the following should be usage of target elf file</span></span><br><span class="line"><span class="comment"># &#x27;@@&#x27; will be replaced by input files when running</span></span><br></pre></td></tr></table></figure>
 <p>And we see</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[+] All <span class="built_in">set</span> and ready to roll!</span><br><span class="line"></span><br><span class="line">                       american fuzzy lop 2.52b (objdump)</span><br><span class="line"></span><br><span class="line">┌─ process timing ─────────────────────────────────────┬─ overall results ─────┐</span><br><span class="line">│        run time : 0 days, 0 hrs, 0 min, 54 sec       │  cycles <span class="keyword">done</span> : 0      │</span><br><span class="line">│   last new path : 0 days, 0 hrs, 0 min, 24 sec       │  total paths : 40     │</span><br><span class="line">│ last uniq crash : none seen yet                      │ uniq crashes : 0      │</span><br><span class="line">│  last uniq hang : none seen yet                      │   uniq hangs : 0      │</span><br><span class="line">├─ cycle progress ────────────────────┬─ map coverage ─┴───────────────────────┤</span><br><span class="line">│  now processing : 0 (0.00%)         │    map density : 3.75% / 4.37%         │</span><br><span class="line">│ paths timed out : 0 (0.00%)         │ count coverage : 1.28 bits/tuple       │</span><br><span class="line">├─ stage progress ────────────────────┼─ findings <span class="keyword">in</span> depth ────────────────────┤</span><br><span class="line">│  now trying : bitflip 1/1           │ favored paths : 1 (2.50%)              │</span><br><span class="line">│ stage execs : 848/971k (0.09%)      │  new edges on : 31 (77.50%)            │</span><br><span class="line">│ total execs : 3048                  │ total crashes : 0 (0 unique)           │</span><br><span class="line">│  <span class="built_in">exec</span> speed : 12.54/sec (zzzz...)   │  total tmouts : 0 (0 unique)           │</span><br><span class="line">├─ fuzzing strategy yields ───────────┴───────────────┬─ path geometry ────────┤</span><br><span class="line">│   bit flips : 0/0, 0/0, 0/0                         │    levels : 2          │</span><br><span class="line">│  byte flips : 0/0, 0/0, 0/0                         │   pending : 40         │</span><br><span class="line">│ arithmetics : 0/0, 0/0, 0/0                         │  pend fav : 1          │</span><br><span class="line">│  known ints : 0/0, 0/0, 0/0                         │ own finds : 39         │</span><br><span class="line">│  dictionary : 0/0, 0/0, 0/0                         │  imported : n/a        │</span><br><span class="line">│       havoc : 0/0, 0/0                              │ stability : 100.00%    │</span><br><span class="line">│        trim : 0.00%/1879, n/a                       ├────────────────────────┘</span><br><span class="line">^C────────────────────────────────────────────────────┘          [cpu000: 53%]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[+] All <span class="built_in">set</span> and ready to roll!</span><br><span class="line"></span><br><span class="line">                       american fuzzy lop 2.52b (objdump)</span><br><span class="line"></span><br><span class="line">┌─ process timing ─────────────────────────────────────┬─ overall results ─────┐</span><br><span class="line">│        run <span class="keyword">time</span> : 0 days, 0 hrs, 0 min, 54 sec       │  cycles <span class="keyword">done</span> : 0      │</span><br><span class="line">│   last new path : 0 days, 0 hrs, 0 min, 24 sec       │  total paths : 40     │</span><br><span class="line">│ last <span class="built_in">uniq</span> crash : none seen yet                      │ <span class="built_in">uniq</span> crashes : 0      │</span><br><span class="line">│  last <span class="built_in">uniq</span> hang : none seen yet                      │   <span class="built_in">uniq</span> hangs : 0      │</span><br><span class="line">├─ cycle progress ────────────────────┬─ map coverage ─┴───────────────────────┤</span><br><span class="line">│  now processing : 0 (0.00%)         │    map density : 3.75% / 4.37%         │</span><br><span class="line">│ paths timed out : 0 (0.00%)         │ count coverage : 1.28 bits/tuple       │</span><br><span class="line">├─ stage progress ────────────────────┼─ findings <span class="keyword">in</span> depth ────────────────────┤</span><br><span class="line">│  now trying : bitflip 1/1           │ favored paths : 1 (2.50%)              │</span><br><span class="line">│ stage execs : 848/971k (0.09%)      │  new edges on : 31 (77.50%)            │</span><br><span class="line">│ total execs : 3048                  │ total crashes : 0 (0 unique)           │</span><br><span class="line">│  <span class="built_in">exec</span> speed : 12.54/sec (zzzz...)   │  total tmouts : 0 (0 unique)           │</span><br><span class="line">├─ fuzzing strategy yields ───────────┴───────────────┬─ path geometry ────────┤</span><br><span class="line">│   bit flips : 0/0, 0/0, 0/0                         │    levels : 2          │</span><br><span class="line">│  byte flips : 0/0, 0/0, 0/0                         │   pending : 40         │</span><br><span class="line">│ arithmetics : 0/0, 0/0, 0/0                         │  pend fav : 1          │</span><br><span class="line">│  known ints : 0/0, 0/0, 0/0                         │ own finds : 39         │</span><br><span class="line">│  dictionary : 0/0, 0/0, 0/0                         │  imported : n/a        │</span><br><span class="line">│       havoc : 0/0, 0/0                              │ stability : 100.00%    │</span><br><span class="line">│        trim : 0.00%/1879, n/a                       ├────────────────────────┘</span><br><span class="line">^C────────────────────────────────────────────────────┘          [cpu000: 53%]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>In the afl_out&#x2F;crashes folder you will find the files that made objdump crash, and you can run crash samples to see what happens.</p>
 <h3 id="Corpus-Distillation"><a href="#Corpus-Distillation" class="headerlink" title="Corpus Distillation"></a>Corpus Distillation</h3><p>After finding input samples, we have to trim them to make them efficient and smaller size.<br>AFL provides two utils for us to do so: <code>afl-cmin</code> and <code>afl-tmin</code>.</p>
 <p>(1) Remove files that executes same code – <code>afl-cmin</code></p>
@@ -400,7 +428,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params]</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br></pre></td></tr></table></figure>
 
 <p>(3) Use screen</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ screen -S fuzzer1</span><br><span class="line"><span class="comment"># start a new screen</span></span><br><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br><span class="line"><span class="comment"># run fuzzer and use ctrl+d to detach</span></span><br><span class="line">$ screen -ls</span><br><span class="line"><span class="comment"># list screen </span></span><br><span class="line">$ screen -r fuzzer1</span><br><span class="line"><span class="comment"># recovery screen</span></span><br><span class="line"><span class="comment"># if cannot recovery [attached] screen</span></span><br><span class="line"><span class="comment"># add &#x27;-D&#x27; parameter to kick former user</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ screen -S fuzzer1</span><br><span class="line"><span class="comment"># start a new screen</span></span><br><span class="line">$ afl-fuzz -i testcase_dir -o findings_dir /path/to/program [params] @@</span><br><span class="line"><span class="comment"># run fuzzer and use ctrl+d to detach</span></span><br><span class="line">$ screen -<span class="built_in">ls</span></span><br><span class="line"><span class="comment"># list screen </span></span><br><span class="line">$ screen -r fuzzer1</span><br><span class="line"><span class="comment"># recovery screen</span></span><br><span class="line"><span class="comment"># if cannot recovery [attached] screen</span></span><br><span class="line"><span class="comment"># add &#x27;-D&#x27; parameter to kick former user</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="Black-Box-Testing"><a href="#Black-Box-Testing" class="headerlink" title="Black Box Testing"></a>Black Box Testing</h4><p>Without source code, instrumentation won’t be finished.</p>
 <p>It’s time for QEMU mode, which you should compile first as LLVM mode does.</p>
@@ -412,7 +440,7 @@
 
 <h4 id="Parallel-Testing"><a href="#Parallel-Testing" class="headerlink" title="Parallel Testing"></a>Parallel Testing</h4><p>(1) Sole-system parallel testing</p>
 <p>In theory, you can run fuzzing instance according to your computer’s core number, since one one instance is bound to one corresponding core.<br>Check core number in this way:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/cpuinfo| grep <span class="string">&quot;cpu cores&quot;</span>| uniq</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /proc/cpuinfo| grep <span class="string">&quot;cpu cores&quot;</span>| <span class="built_in">uniq</span></span><br></pre></td></tr></table></figure>
 
 <p>Use afl-fuzz to do parallel fuzzing, you have to use <code>-M</code> parameter to assign a <code>Master Fuzzer</code>, use <code>-S</code> to assign multiple <code>Slave Fuzzer</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -M fuzzer1 -- ./program</span><br><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -S fuzzer2 -- ./program</span><br><span class="line">$ screen afl-fuzz -i testcases/ -o sync_dir/ -S fuzzer3 -- ./program</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
@@ -423,7 +451,9 @@
 <p>(2) Multi-system parallel testing</p>
 <p>I Bet I’ll Hardly Use This. See You Next Time.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -525,29 +555,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -555,7 +581,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -565,7 +593,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -598,13 +629,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -687,7 +722,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -704,7 +741,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -715,6 +752,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

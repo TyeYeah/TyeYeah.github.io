@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2021-01-08 19:28:23</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Jan 10 2021 18:37:02 GMT+0800">2021-01-10 18:37:02</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Jan 10 2021 18:37:02 GMT+0800">2021-01-10 18:37:02</span>
+                </span>
+            
         
 
         
@@ -312,10 +339,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <p>Just now I found the site <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>&#x2F;<code>GDB</code>&#x2F;<code>Linux Header</code> versions. </p>
+                    
+                         <p>Just now I found the site <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> to download suitable prebuilt toolchain, it provides detailed <code>GCC</code>&#x2F;<code>GDB</code>&#x2F;<code>Linux Header</code> versions. </p>
 <p>Before knowing this site, I tried <code>buildroot</code> and <code>crosstool-ng</code> to build my own toolchain, here is to share the experience.</p>
 <p>But to be honest the <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a> seems better, because it built tools for us, and you can choose version of <code>GCC</code> and <code>GDB</code>, while <code>buildroot</code> and <code>crosstool-ng</code> can’t.</p>
 <h2 id="Buildroot"><a href="#Buildroot" class="headerlink" title="Buildroot"></a>Buildroot</h2><p><a class="link"   target="_blank" rel="noopener" href="https://buildroot.org/" >Buildroot<i class="fas fa-external-link-alt"></i></a> is a framework to build embedded Linux software on Linux. It is made up of <code>makefile</code> and <code>Kconfig</code> configuration files. L</p>
@@ -323,10 +351,10 @@
 <p>Download <code>buildroot</code>.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://buildroot.uclibc.org/downloads/snapshots/buildroot-snapshot.tar.bz2</span><br><span class="line">$ tar -jxvf buildroot-snapshot.tar.bz2</span><br><span class="line">$ <span class="built_in">cd</span> buildroot</span><br></pre></td></tr></table></figure>
 <p>Configure <code>buildroot</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libncurses-dev patch</span><br><span class="line">$ make clean</span><br><span class="line">$ make menuconfig</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get install libncurses-dev patch</span><br><span class="line">$ make clean</span><br><span class="line">$ make menuconfig</span><br></pre></td></tr></table></figure>
 <p>When interface shows up like this,<br><img   src="/imghost/rpp/7.jpg"  alt="Target Option"><br>Set <code>Target Architecture</code> as <code>MIPS (little endian)</code> (depending on your target);<br><img   src="/imghost/rpp/8.jpg"  alt="Target Architecture"><br>Set <code>Kernel Headers</code> as your host Linux version,because it will run on your pc.<br><img   src="/imghost/rpp/9.jpg"  alt="Kernel Headers"></p>
 <p>Install it. </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install texinfo</span><br><span class="line">$ sudo apt-get install bison</span><br><span class="line">$ sudo apt-get install flex</span><br><span class="line">$ sudo make</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get install texinfo</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get install bison</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get install flex</span><br><span class="line">$ <span class="built_in">sudo</span> make</span><br></pre></td></tr></table></figure>
 <p>Compiled files will be found in directory <code>output</code>. Cross compile utils will be in <code>buildroot/output/host/usr/bin</code>, and the compiler is <code>mips-linux-gcc</code>.</p>
 <p>Configure environment variables and test.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gedit ~/.bashrc</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:Path/to/buildroot/output/host/usr/bin</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">$ mips-linux-gcc -o <span class="built_in">test</span> test.c -static</span><br></pre></td></tr></table></figure>
@@ -339,22 +367,24 @@
 <p>To solve it, add things to <code>./ct-ng</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim ./ct-ng</span><br><span class="line">... <span class="comment"># add the following</span></span><br><span class="line"><span class="built_in">export</span> CT_EXPERIMENTAL:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT:=y</span><br><span class="line"><span class="built_in">export</span> CT_ALLOW_BUILD_AS_ROOT_SURE:=Y</span><br></pre></td></tr></table></figure>
 <p>It can be operated like <code>buildroot</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /some/place/bin</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  ct-ng</span><br><span class="line">$ ./ct-ng menuconfig</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /some/place/bin</span><br><span class="line">$ <span class="built_in">ls</span> -a</span><br><span class="line">.  ..  ct-ng</span><br><span class="line">$ ./ct-ng menuconfig</span><br></pre></td></tr></table></figure>
 <p>Or a more convenient way, use the templates&#x2F;samples</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng list-samples      <span class="comment"># show templates</span></span><br><span class="line">Status  Sample name</span><br><span class="line">[G..X]   aarch64-ol7u9-linux-gnu</span><br><span class="line">[G..X]   aarch64-rpi3-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-android</span><br><span class="line">[G..X]   aarch64-unknown-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-uclibc</span><br><span class="line">...</span><br><span class="line">$ ./ct-ng mips-malta-linux-gnu  <span class="comment"># choose one</span></span><br><span class="line">  CONF  mips-malta-linux-gnu</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># configuration written to .config</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Initially reported by: Antony Pavlov</span><br><span class="line">URL:</span><br><span class="line"></span><br><span class="line">Comment:</span><br><span class="line">Experimental toolchain <span class="keyword">for</span> MIPS32r2</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Now configured <span class="keyword">for</span> <span class="string">&quot;mips-malta-linux-gnu&quot;</span></span><br><span class="line">$ ./ct-ng build</span><br><span class="line">[INFO ]  Performing some trivial sanity checks</span><br><span class="line">[WARN ]  Number of open files 1024 may not be sufficient to build the toolchain; increasing to 2048</span><br><span class="line">...</span><br><span class="line">$ ls -a</span><br><span class="line">.  ..  .build  build.log  .config  .config.old  ct-ng</span><br><span class="line">$ ls .build/</span><br><span class="line">mips-malta-linux-gnu  src  tarballs  tools</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ ./ct-ng list-samples      <span class="comment"># show templates</span></span><br><span class="line">Status  Sample name</span><br><span class="line">[G..X]   aarch64-ol7u9-linux-gnu</span><br><span class="line">[G..X]   aarch64-rpi3-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-android</span><br><span class="line">[G..X]   aarch64-unknown-linux-gnu</span><br><span class="line">[G..X]   aarch64-unknown-linux-uclibc</span><br><span class="line">...</span><br><span class="line">$ ./ct-ng mips-malta-linux-gnu  <span class="comment"># choose one</span></span><br><span class="line">  CONF  mips-malta-linux-gnu</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># configuration written to .config</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Initially reported by: Antony Pavlov</span><br><span class="line">URL:</span><br><span class="line"></span><br><span class="line">Comment:</span><br><span class="line">Experimental toolchain <span class="keyword">for</span> MIPS32r2</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line"></span><br><span class="line">Now configured <span class="keyword">for</span> <span class="string">&quot;mips-malta-linux-gnu&quot;</span></span><br><span class="line">$ ./ct-ng build</span><br><span class="line">[INFO ]  Performing some trivial sanity checks</span><br><span class="line">[WARN ]  Number of open files 1024 may not be sufficient to build the toolchain; increasing to 2048</span><br><span class="line">...</span><br><span class="line">$ <span class="built_in">ls</span> -a</span><br><span class="line">.  ..  .build  build.log  .config  .config.old  ct-ng</span><br><span class="line">$ <span class="built_in">ls</span> .build/</span><br><span class="line">mips-malta-linux-gnu  src  tarballs  tools</span><br></pre></td></tr></table></figure>
 <p>Now the <code>ct-ng</code> downloads what it needs to <code>.build</code> dir according to <code>.config</code> (made automatically).<br>However these are not what produced. Check your home dir u will find <code>x-tools</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">mips-malta-linux-gnu</span><br><span class="line">$ ls mips-malta-linux-gnu/</span><br><span class="line">bin  build.log.bz2  include  lib  libexec  mips-malta-linux-gnu  share</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">mips-malta-linux-gnu</span><br><span class="line">$ <span class="built_in">ls</span> mips-malta-linux-gnu/</span><br><span class="line">bin  build.log.bz2  include  lib  libexec  mips-malta-linux-gnu  share</span><br></pre></td></tr></table></figure>
 <p>These are the built toolchain.</p>
 <p>The truth is, the binarys compiled by it cannot run on old kernels (encounter <code>FATAL:kernel too old</code> in <code>QEMU</code>), that might because the libs (<code>~/x-tools/mips-malta-linux-gnu/mips-malta-linux-gnu/sysroot/lib/ld-2.32.so</code>) it use are latest.</p>
 <p>So for old devices or <code>QEMU</code>, better use <a class="link"   target="_blank" rel="noopener" href="https://buildroot.org/" >buildroot<i class="fas fa-external-link-alt"></i></a>, or try <a class="link"   target="_blank" rel="noopener" href="https://toolchains.bootlin.com/" >toolchains.bootlin.com<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Compile-GDB-amp-GDBserver"><a href="#Compile-GDB-amp-GDBserver" class="headerlink" title="Compile GDB&amp;GDBserver"></a>Compile GDB&amp;GDBserver</h2><p>It is for dynamic analysis, and I almost messed up by this. Get source code on <a class="link"   target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gdb/" >FTP<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Compile-GDB-GDBserver"><a href="#Compile-GDB-GDBserver" class="headerlink" title="Compile GDB&amp;GDBserver"></a>Compile GDB&amp;GDBserver</h2><p>It is for dynamic analysis, and I almost messed up by this. Get source code on <a class="link"   target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gdb/" >FTP<i class="fas fa-external-link-alt"></i></a></p>
 <p>First see how to set configuration</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --target=mipsel-linux --host=mipsel-linux --program-prefix=mipsel-linux  --prefix=`<span class="built_in">echo</span> <span class="variable">$PWD</span>`/bin CC=/path/to/buildroot/output/host/bin/mipsel-linux-gcc CXX=/path/to/buildroot/output/host/bin/mipsel-linux-g++  AR=/path/to/buildroot/output/host/bin/mipsel-linux-ar LD=/path/to/buildroot/output/host/bin/mipsel-linux-ld RANLIB=/path/to/buildroot/output/host/bin/mipsel-linux-ranlib  STRIP=/path/to/buildroot/output/host/bin/mipsel-linux-strip CFLAGS=<span class="string">&quot;-w -static&quot;</span> CXXFLAGS=<span class="string">&quot;-w -static&quot;</span> LDFLAGS=<span class="string">&quot;-static&quot;</span></span><br><span class="line">...   <span class="comment"># make sure paths are absolute</span></span><br><span class="line">$ sudo make -j8</span><br><span class="line">...</span><br><span class="line">$ make install</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --target=mipsel-linux --host=mipsel-linux --program-prefix=mipsel-linux  --prefix=`<span class="built_in">echo</span> <span class="variable">$PWD</span>`/bin CC=/path/to/buildroot/output/host/bin/mipsel-linux-gcc CXX=/path/to/buildroot/output/host/bin/mipsel-linux-g++  AR=/path/to/buildroot/output/host/bin/mipsel-linux-ar LD=/path/to/buildroot/output/host/bin/mipsel-linux-ld RANLIB=/path/to/buildroot/output/host/bin/mipsel-linux-ranlib  STRIP=/path/to/buildroot/output/host/bin/mipsel-linux-strip CFLAGS=<span class="string">&quot;-w -static&quot;</span> CXXFLAGS=<span class="string">&quot;-w -static&quot;</span> LDFLAGS=<span class="string">&quot;-static&quot;</span></span><br><span class="line">...   <span class="comment"># make sure paths are absolute</span></span><br><span class="line">$ <span class="built_in">sudo</span> make -j8</span><br><span class="line">...</span><br><span class="line">$ make install</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>Recommended versions includes <code>7.10</code> …<br>Versions too high cause <code>configure: error: ***A compiler with support for c++11 language features is required</code>, while lower versions gives <code>configure: error: no termcap library found</code>.</p>
 <p>However problems still come out, if your toolchain is so latest, or if some other libraries are required. </p>
 <p>The <a class="link"   target="_blank" rel="noopener" href="https://github.com/rapid7/embedded-tools/tree/master/binaries/gdbserver" >built gdbservers<i class="fas fa-external-link-alt"></i></a> are off the shelf, you can use them or things built by others directly.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -459,7 +489,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buildroot"><span class="nav-number">1.</span> <span class="nav-text">Buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crosstool-NG"><span class="nav-number">2.</span> <span class="nav-text">Crosstool-NG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-GDB-amp-GDBserver"><span class="nav-number">3.</span> <span class="nav-text">Compile GDB&amp;GDBserver</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buildroot"><span class="nav-number">1.</span> <span class="nav-text">Buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crosstool-NG"><span class="nav-number">2.</span> <span class="nav-text">Crosstool-NG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-GDB-GDBserver"><span class="nav-number">3.</span> <span class="nav-text">Compile GDB&amp;GDBserver</span></a></li></ol>
     </div>
 </div>
 
@@ -476,29 +506,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -506,7 +532,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -516,7 +544,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -549,13 +580,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -627,7 +662,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buildroot"><span class="nav-number">1.</span> <span class="nav-text">Buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crosstool-NG"><span class="nav-number">2.</span> <span class="nav-text">Crosstool-NG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-GDB-amp-GDBserver"><span class="nav-number">3.</span> <span class="nav-text">Compile GDB&amp;GDBserver</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buildroot"><span class="nav-number">1.</span> <span class="nav-text">Buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crosstool-NG"><span class="nav-number">2.</span> <span class="nav-text">Crosstool-NG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-GDB-GDBserver"><span class="nav-number">3.</span> <span class="nav-text">Compile GDB&amp;GDBserver</span></a></li></ol>
     </div>
 </div>
 
@@ -638,7 +673,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -655,7 +692,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -666,6 +703,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         

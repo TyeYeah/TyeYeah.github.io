@@ -8,7 +8,7 @@ KEEP.initModeToggle = () => {
     enableLightMode() {
       document.documentElement.classList.remove('dark-mode')
       document.documentElement.classList.add('light-mode')
-      this.iconDom.className = 'fas fa-moon'
+      this.iconDom && (this.iconDom.className = 'fas fa-moon')
       KEEP.themeInfo.styleStatus.isDark = false
       KEEP.setStyleStatus()
     },
@@ -16,7 +16,7 @@ KEEP.initModeToggle = () => {
     enableDarkMode() {
       document.documentElement.classList.add('dark-mode')
       document.documentElement.classList.remove('light-mode')
-      this.iconDom.className = 'fas fa-sun'
+      this.iconDom && (this.iconDom.className = 'fas fa-sun')
       KEEP.themeInfo.styleStatus.isDark = true
       KEEP.setStyleStatus()
     },
@@ -26,6 +26,18 @@ KEEP.initModeToggle = () => {
     },
 
     initModeStatus() {
+      const configMode = KEEP.theme_config?.base_info?.mode
+
+      if (configMode === 'dark') {
+        this.enableDarkMode()
+        return
+      }
+
+      if (configMode === 'light') {
+        this.enableLightMode()
+        return
+      }
+
       const styleStatus = KEEP.getStyleStatus()
 
       if (styleStatus) {
@@ -36,10 +48,13 @@ KEEP.initModeToggle = () => {
     },
 
     initModeToggleButton() {
-      this.themeModeToggleBtn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.contains('dark-mode')
-        isDark ? this.enableLightMode() : this.enableDarkMode()
-      })
+      if (this.themeModeToggleBtn && !this.themeModeToggleBtn?.hasClickListener) {
+        this.themeModeToggleBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.contains('dark-mode')
+          isDark ? this.enableLightMode() : this.enableDarkMode()
+        })
+        this.themeModeToggleBtn.hasClickListener = true
+      }
     },
 
     initModeAutoTrigger() {

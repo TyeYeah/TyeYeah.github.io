@@ -34,8 +34,8 @@
     
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2018,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Relish the Moment","author":"TyeYeah","avatar":"/img/aliwangwang.svg","logo":"/images/logo.svg","favicon":"/img/wang.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags","categories":"/categories","about":"/about"},"first_screen":{"enable":true,"background_img":"/images/bg2.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/tyeyeah","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":true,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -65,7 +65,7 @@
 <header class="header-wrapper">
 
     <div class="border-box header-content">
-        <div class="left border-box">
+        <div class="left flex-start border-box">
             
                 <a class="logo-image border-box" href="/">
                     <img src="/images/logo.svg">
@@ -77,67 +77,67 @@
         </div>
 
         <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
                                 
                                 HOME
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
                                 
                                 ARCHIVES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
                                 
                                 TAGS
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
                                 
                                 CATEGORIES
+                                
                             </a>
+                            
                         </li>
                     
                         
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
                                 
                                 ABOUT
+                                
                             </a>
+                            
                         </li>
                     
                     
                         <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
+                            <i class="menu-text-color fas search fa-search"></i>
                         </li>
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                     <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
@@ -149,41 +149,66 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >HOME</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >ARCHIVES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >TAGS</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                            TAGS
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >CATEGORIES</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                            CATEGORIES
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
                 
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >ABOUT</a>
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            ABOUT
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -241,10 +266,12 @@
                 <span class="datetime">2021-01-09 22:34:28</span>
             </span>
 
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Jan 10 2021 10:30:56 GMT+0800">2021-01-10 10:30:56</span>
-            </span>
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Jan 10 2021 10:30:56 GMT+0800">2021-01-10 10:30:56</span>
+                </span>
+            
         
 
         
@@ -303,10 +330,11 @@
                     </div>
                 
 
-                <div class="post-content keep-markdown-body">
+                <div class="post-content keep-markdown-body ">
                     
 
-                    <h2 id="CISC-and-RISC"><a href="#CISC-and-RISC" class="headerlink" title="CISC and RISC"></a>CISC and RISC</h2><p>There are two main types of computer architectures that will be covered in this project: Complex Instruction Set Computing (<code>CISC</code>) and Reduced Instruction Set Computing (<code>RISC</code>).<br>An example of <code>CISC</code> is the <code>x86</code> architecture. Examples of <code>RISC</code> are the <code>ARM</code>, the <code>MIPS</code>, and the <code>PowerPC</code> architectures.<br>The differences between <code>CISC</code> and <code>RISC</code> is their  behaviors in how they execute instructions. </p>
+                    
+                         <h2 id="CISC-and-RISC"><a href="#CISC-and-RISC" class="headerlink" title="CISC and RISC"></a>CISC and RISC</h2><p>There are two main types of computer architectures that will be covered in this project: Complex Instruction Set Computing (<code>CISC</code>) and Reduced Instruction Set Computing (<code>RISC</code>).<br>An example of <code>CISC</code> is the <code>x86</code> architecture. Examples of <code>RISC</code> are the <code>ARM</code>, the <code>MIPS</code>, and the <code>PowerPC</code> architectures.<br>The differences between <code>CISC</code> and <code>RISC</code> is their  behaviors in how they execute instructions. </p>
 <h3 id="CISC"><a href="#CISC" class="headerlink" title="CISC"></a>CISC</h3><p>The <code>CISC</code> architecture aims to complete a task in as few assembly instructions as possible. This is done with an emphasis on building rich instruction sets with an emphasis on complex hardware.<br>The hardware in a <code>CISC</code> system must have the ability to interpret several series of operations at a given time.<br>The <code>CISC</code> architecture uses microcode,which is the interpreter between the hardware of a computer and the architectural level of a computer.<br>Characteristics of the <code>CISC</code> instruction set include:</p>
 <ul>
 <li>2-operand format: instructions have a source and destination</li>
@@ -365,8 +393,10 @@
 <li><p>Block copy addressing<br>LDM and STM are instruction prefixes, indicating multi-register addressing, instruction suffixes (IA, DA, IB, DB).<br>LDMIA R0!, {R1-R3} @Retrieve 3 words from the memory address pointed to by R0 to the R1, R2, R3 registers<br>STMIA R0!, {R1-R3} @ Stores the contents stored by R1, R2, and R3 in the memory pointed to by R0.</p>
 </li>
 <li><p>Relative addressing<br>With the current value of the current program counter PC as the base address, the label mark position is offset, and the two are added together.<br>To a valid address.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BL NEXT</span><br><span class="line">    ...        </span><br><span class="line">NEXT:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></li>
+</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BL NEXT</span><br><span class="line">    ...        </span><br><span class="line">NEXT:</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
 <h3 id="Instruction-set"><a href="#Instruction-set" class="headerlink" title="Instruction set"></a>Instruction set</h3><ol>
 <li><p>Since the arm chip is updated very quickly, there are many instruction sets. The most common ones are the arm instruction set and the Thumb instruction set.</p>
 </li>
@@ -374,34 +404,56 @@
 </li>
 </ol>
 <ul>
-<li>B jump instruction<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure B&#123;cond&#125; label</span><br><span class="line">Jump directly, such as `BNE LABEL`</span><br></pre></td></tr></table></figure></li>
-<li>BL jump instruction<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Structure BL&#123;cond&#125; label</span><br><span class="line">When the BL instruction is executed, if the condition is satisfied, the address of the next instruction of the current instruction is first assigned to the R14 register (LR).</span><br><span class="line">Then jump to the address marked by the label to continue execution. Generally used in process calls, after the process is over, return via `MOV PC, LR`</span><br></pre></td></tr></table></figure></li>
-<li>BX jump instruction with state switching<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BX&#123;cond&#125;Rm</span><br><span class="line">When the BX instruction is executed, if the condition is satisfied, it will judge whether the bit [0] of the Rm register is 1, and if it is 1, the T flag of the CPSR register is automatically set to 1 at the time of the jump, and the instruction at the target position is Resolved as a Thumb instruction. Conversely, if bit [0] of the Rm register is 0, the T flag of the CPSR register is reset and the instruction at the target position is interpreted as an arm instruction.</span><br></pre></td></tr></table></figure></li>
-<li>as follows:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ADR R0, thumbcode + 1</span><br><span class="line">BX R0 @ Jump to thumbcode. And the processor runs in thumb mode</span><br><span class="line">thumbcode:</span><br><span class="line">.code 16</span><br></pre></td></tr></table></figure></li>
-<li>BLX jump instruction with link and state switch<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BLX&#123;cond&#125;Rm</span><br><span class="line">The BLX instruction aggregates the functions of BL and BX, and simultaneously saves the return address to R14 (LR) on the function of BX.</span><br></pre></td></tr></table></figure></li>
+<li>B jump instruction</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure B&#123;cond&#125; label</span><br><span class="line">Jump directly, such as `BNE LABEL`</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BL jump instruction</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Structure BL&#123;cond&#125; label</span><br><span class="line">When the BL instruction is executed, if the condition is satisfied, the address of the next instruction of the current instruction is first assigned to the R14 register (LR).</span><br><span class="line">Then jump to the address marked by the label to continue execution. Generally used in process calls, after the process is over, return via `MOV PC, LR`</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BX jump instruction with state switching</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BX&#123;cond&#125;Rm</span><br><span class="line">When the BX instruction is executed, if the condition is satisfied, it will judge whether the bit [0] of the Rm register is 1, and if it is 1, the T flag of the CPSR register is automatically set to 1 at the time of the jump, and the instruction at the target position is Resolved as a Thumb instruction. Conversely, if bit [0] of the Rm register is 0, the T flag of the CPSR register is reset and the instruction at the target position is interpreted as an arm instruction.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>as follows:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ADR R0, thumbcode + 1</span><br><span class="line">BX R0 @ Jump to thumbcode. And the processor runs in thumb mode</span><br><span class="line">thumbcode:</span><br><span class="line">.code 16</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BLX jump instruction with link and state switch</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Structure BLX&#123;cond&#125;Rm</span><br><span class="line">The BLX instruction aggregates the functions of BL and BX, and simultaneously saves the return address to R14 (LR) on the function of BX.</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>Register access instruction<br>Memory access instruction operations include loading data from a memory area, storing data to a memory, exchanging data between registers and memory, and the like.</li>
 </ol>
 <ul>
-<li><p><code>LDR</code><br>Put the data in memory into the register<br>Example of instruction:</p>
+<li><code>LDR</code><br>Put the data in memory into the register<br>Example of instruction:</li>
+</ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LDRH R0, [R1] ; Read halfword data with memory address R1 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, #8] ; Read halfword data with memory address R1+8 into register R0 and clear the upper 16 bits of R0.</span><br><span class="line">LDRH R0, [R1, R2] ; Read halfword data with memory address R1+R2 into register R0 and clear the upper 16 bits of R0.</span><br></pre></td></tr></table></figure>
-</li>
+
+<ul>
 <li><p><code>STR</code><br>The STR is used to store data to an address. The format is as follows:<br>STR{type}{cond}Rd,label<br>STRD {cond} Rd, Rd2, label<br>The usage is as follows:<br><code>STR R0,[R2,#04]</code> Store the value of R0 at the address of R2+4</p>
 </li>
 <li><p><code>LDM</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LDM&#123;addr_mode&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure></li>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LDM&#123;addr_mode&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure>
+<ul>
 <li><p>This instruction is to allocate the data in the stack in memory to the register in batches, that is, the pop operation.<br>&gt; Special note, ! is an optional suffix. If there is! Then the final address will be written back to the Rn register.</p>
 </li>
 <li><p><code>STM</code><br>The STM stores the data of a register list into a specified address location. Format is as follows</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STM&#123;addr_mod&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure></li>
-<li><p><code>PUSH&amp;&amp;POP</code><br>The format is as follows:<br>PUSH {cond} reglist<br>POP {cond}<br>Stack operation instruction</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUSH &#123;r0,r4-r7&#125;</span><br><span class="line">POP &#123;r0,r4-r7&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><code>SWP</code></p>
 </li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STM&#123;addr_mod&#125;&#123;cond&#125;Rn&#123;!&#125;reglist</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>PUSH&amp;&amp;POP</code><br>The format is as follows:<br>PUSH {cond} reglist<br>POP {cond}<br>Stack operation instruction</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PUSH &#123;r0,r4-r7&#125;</span><br><span class="line">POP &#123;r0,r4-r7&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SWP</code></li>
+</ul>
 <ol start="4">
-<li>Data exchange between registers.<br>The format is <code>SWP&#123;B&#125;&#123;cond&#125;Rd,Rm,[Rn]</code><br>B is an optional byte. If there is B, the byte is exchanged. Otherwise, the word is exchanged.<br>Rd is a temporarily stored register, and Rm is the value to be replaced.<br>Rn is the data address of &#96;to be replaced&#39;</li>
+<li>Data exchange between registers.<br>The format is <code>SWP{B}{cond}Rd,Rm,[Rn]</code><br>B is an optional byte. If there is B, the byte is exchanged. Otherwise, the word is exchanged.<br>Rd is a temporarily stored register, and Rm is the value to be replaced.<br>Rn is the data address of &#96;to be replaced&#39;</li>
 </ol>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>The whole list can be found in <a class="link"   target="_blank" rel="noopener" href="https://iitd-plos.github.io/col718/ref/arm-instructionset.pdf" >arm-instructionset.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://pages.cs.wisc.edu/~markhill/restricted/arm_isa_quick_reference.pdf" >arm_isa_quick_reference.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="http://imrannazar.com/ARM-Opcode-Map" >ARM-Opcode-Map<i class="fas fa-external-link-alt"></i></a>.</p>
 <h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><h3 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h3><p>In  <code>MIPS</code>,  there  are  32  registers  of  size  32-bits  that  are  for  use  with  integer  and  logic instructions.<br>They are labeled <code>$0</code> - <code>$31</code>.<br>Table in the following shows this usage of these 32 registers. There are registers for a dedicated zero value, return values, temporary data, saved registers, etc.</p>
@@ -1435,7 +1487,9 @@
 </tbody></table>
 <h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><p>The whole list is in <a class="link"   target="_blank" rel="noopener" href="https://www.dsi.unive.it/~gasparetto/materials/MIPS_Instruction_Set.pdf" >MIPS_Instruction_Set.pdf<i class="fas fa-external-link-alt"></i></a> and <a class="link"   target="_blank" rel="noopener" href="https://uweb.engr.arizona.edu/~ece369/Resources/spim/MIPSReference.pdf" >MIPSReference.pdf<i class="fas fa-external-link-alt"></i></a>.</p>
 
+                    
                 </div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -1545,29 +1599,25 @@
         <div class="page-main-content-bottom border-box">
             
 <footer class="footer border-box">
-    <div class="border-box website-info-box default">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
         
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2018</span>&nbsp;-&nbsp;2025
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">TyeYeah</a>
-                
-            </div>
+    </div>
 
-            <div class="theme-info info-item default">
-                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
-            </div>
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
 
+    
+
+    
+        <div class="count-info info-item">
             
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-                <span class="count-box border-box word">
+                <span class="count-item border-box word">
                     <span class="item-type border-box">Total words</span>
-                    <span class="item-value border-box word">137k</span>
+                    <span class="item-value border-box word">137.1k</span>
                 </span>
             
 
@@ -1575,7 +1625,9 @@
 
             
         </div>
-    </div>
+    
+
+    
 </footer>
 
         </div>
@@ -1585,7 +1637,10 @@
     
         <div class="post-tools right-toc">
             <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
         <!-- PC TOC show toggle -->
         
             <li class="tools-item flex-center toggle-show-toc">
@@ -1618,13 +1673,17 @@
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
@@ -1707,7 +1766,9 @@
 
 
 
-<!-- common -->
+
+
+<!-- common js -->
 
 <script src="/js/utils.js"></script>
 
@@ -1724,7 +1785,7 @@
 <script src="/js/libs/anime.min.js"></script>
 
 
-<!-- local-search -->
+<!-- local search -->
 
     
 <script src="/js/local-search.js"></script>
@@ -1735,6 +1796,10 @@
 
 
 <div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
     
         <!-- post-helper -->
         
