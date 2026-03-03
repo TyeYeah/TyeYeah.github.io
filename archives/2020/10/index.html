@@ -44,74 +44,14 @@
 
 
 <body>
-.progress-bar-container {
-  position fixed
-  top 0
-  left 0
-  z-index $z-index-9
-  width 100%
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
-  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
+    
+</div>
 
-    .pjax-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-8
-      width 0
-      height 2px
-      background var(--pjax-progress-bar-color)
-      visibility hidden
-      opacity 0
-      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
-
-
-      &.show {
-        visibility visible
-        opacity 1
-      }
-    }
-
-
-    .pjax-progress-icon {
-      position absolute
-      top 0.4rem
-      right 0.3rem
-      z-index $z-index-8
-      color var(--text-color-3)
-      font-size 1.1rem
-      visibility hidden
-
-      +keep-tablet() {
-        top 0.3rem
-        right 0.2rem
-        font-size 1rem
-      }
-
-      &.show {
-        visibility visible
-      }
-    }
-  }
-
-  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
-    .scroll-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-7
-      width 0
-      height var(--header-scroll-progress-bar-height)
-      background var(--primary-color)
-      visibility hidden
-      transition-t("width", "0", "0.1", "linear")
-
-      &.hide {
-        display none !important
-      }
-    }
-  }
-}
 
 
 <main class="page-container border-box">
@@ -361,94 +301,7 @@
 
         </div>
     </div>
-    .paginator {
-  gap 1rem
-  margin-top $page-container-gap
-  user-select none
-
-  .paginator-btn {
-    cursor not-allowed
-
-    a {
-      padding 0.3rem 0.6rem
-      pointer-events none
-
-      i {
-        color var(--text-color-4)
-        font-size 1rem
-      }
-    }
-
-
-    &.allowed {
-      cursor pointer
-
-      a {
-        pointer-events auto
-
-        i {
-          color var(--text-color-3)
-        }
-      }
-
-      &:hover {
-        a {
-          i {
-            color var(--primary-color)
-          }
-        }
-      }
-    }
-  }
-
-
-  .base-style {
-    color var(--text-color-4)
-    font-size 1.1rem
-  }
-
-
-  .page-number-box {
-    margin 0 0.2rem
-
-    .page-number-input {
-      width 2.8rem
-      height 2rem
-      margin 0
-      padding 0
-      font-weight 400 !important
-      font-size 1rem
-      text-align center
-      background none
-      border 0.1rem solid var(--border-color)
-      border-radius 0.3rem
-      outline none
-      -webkit-appearance none
-      transition-t("width, border-color", "0, 0", "0.2, 0.2", "ease, ease")
-
-
-      &::-webkit-outer-spin-button
-      &::-webkit-inner-spin-button {
-        -webkit-appearance none !important
-      }
-
-      &:hover
-      &:focus {
-        width 3.8rem
-        border-color var(--primary-color)
-      }
-    }
-
-
-    .delimiter {
-      margin 0 0.6rem
-    }
-  }
-}
-
-
-
-
+    
 
 
 

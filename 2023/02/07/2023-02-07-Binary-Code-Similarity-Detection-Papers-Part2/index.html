@@ -44,74 +44,14 @@
 
 
 <body>
-.progress-bar-container {
-  position fixed
-  top 0
-  left 0
-  z-index $z-index-9
-  width 100%
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
-  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
+    
+</div>
 
-    .pjax-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-8
-      width 0
-      height 2px
-      background var(--pjax-progress-bar-color)
-      visibility hidden
-      opacity 0
-      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
-
-
-      &.show {
-        visibility visible
-        opacity 1
-      }
-    }
-
-
-    .pjax-progress-icon {
-      position absolute
-      top 0.4rem
-      right 0.3rem
-      z-index $z-index-8
-      color var(--text-color-3)
-      font-size 1.1rem
-      visibility hidden
-
-      +keep-tablet() {
-        top 0.3rem
-        right 0.2rem
-        font-size 1rem
-      }
-
-      &.show {
-        visibility visible
-      }
-    }
-  }
-
-  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
-    .scroll-progress-bar {
-      position absolute
-      top 0
-      left 0
-      z-index $z-index-7
-      width 0
-      height var(--header-scroll-progress-bar-height)
-      background var(--primary-color)
-      visibility hidden
-      transition-t("width", "0", "0.1", "linear")
-
-      &.hide {
-        display none !important
-      }
-    }
-  }
-}
 
 
 <main class="page-container border-box">
@@ -715,118 +655,11 @@
 
         
             <div class="pc-post-toc right-toc">
-                .post-toc-wrap {
-  width 100%
-  height 100%
-  overflow-y auto
-  font-size 0.92rem
-
-  &::-webkit-scrollbar-thumb {
-    background var(--toc-scrollbar-color)
-    border-radius 0.3rem
-  }
-
-  &::-webkit-scrollbar-track {
-    background transparent
-  }
-
-  .post-toc {
-
-    ol {
-      position relative
-      box-sizing border-box
-      margin 0
-      text-align left
-      list-style none
-
-      a {
-        transition-property all
-      }
-    }
-
-
-    .nav {
-
-      .nav-item {
-        position relative
-        box-sizing border-box
-        overflow hidden
-        line-height 2
-        white-space nowrap
-        text-overflow ellipsis
-
-
-        &.active {
-          > .nav-child {
-            display block
-          }
-        }
-
-
-        .nav-link {
-          position relative
-          box-sizing border-box
-          padding-left 0.8rem
-
-          &:hover {
-            .nav-number
-            .nav-text {
-              color var(--primary-color)
-            }
-          }
-
-          &.active-current {
-            > .nav-child {
-              display block
-
-              > .nav-item {
-                display block
-              }
-            }
-
-
-            &::before {
-              position absolute
-              top 50%
-              left 0
-              width 0.2rem
-              height 1.2rem
-              background var(--primary-color)
-              border-radius 0.2rem
-              transform translateY(-50%)
-              content ''
-            }
-
-            .nav-number
-            .nav-text {
-              color var(--primary-color)
-            }
-          }
-
-
-          .nav-number
-          .nav-text {
-            color var(--toc-text-color)
-          }
-        }
-
-
-        .nav-child {
-          padding-left 1rem
-
-
-          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
-            display block
-          }
-          else {
-            display none
-          }
-        }
-      }
-    }
-  }
-}
-
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><span class="nav-number">1.</span> <span class="nav-text">A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><span class="nav-number">2.</span> <span class="nav-text">An Investigation of the Android Kernel Patch Ecosystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Code-Similarity-Detection"><span class="nav-number">3.</span> <span class="nav-text">Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Binary Diffing as a Network Alignment Problem via Belief Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-%E2%80%93-Arxiv-2022"><span class="nav-number">5.</span> <span class="nav-text">COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><span class="nav-number">6.</span> <span class="nav-text">jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><span class="nav-number">7.</span> <span class="nav-text">Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-%E2%80%93-IST-2020"><span class="nav-number">8.</span> <span class="nav-text">Semantically find similar binary codes with mixed key instruction sequence – IST 2020</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><span class="nav-number">9.</span> <span class="nav-text">Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><span class="nav-number">10.</span> <span class="nav-text">VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</span></a></li></ol>
+    </div>
+</div>
 
             </div>
         
@@ -995,118 +828,11 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                .post-toc-wrap {
-  width 100%
-  height 100%
-  overflow-y auto
-  font-size 0.92rem
-
-  &::-webkit-scrollbar-thumb {
-    background var(--toc-scrollbar-color)
-    border-radius 0.3rem
-  }
-
-  &::-webkit-scrollbar-track {
-    background transparent
-  }
-
-  .post-toc {
-
-    ol {
-      position relative
-      box-sizing border-box
-      margin 0
-      text-align left
-      list-style none
-
-      a {
-        transition-property all
-      }
-    }
-
-
-    .nav {
-
-      .nav-item {
-        position relative
-        box-sizing border-box
-        overflow hidden
-        line-height 2
-        white-space nowrap
-        text-overflow ellipsis
-
-
-        &.active {
-          > .nav-child {
-            display block
-          }
-        }
-
-
-        .nav-link {
-          position relative
-          box-sizing border-box
-          padding-left 0.8rem
-
-          &:hover {
-            .nav-number
-            .nav-text {
-              color var(--primary-color)
-            }
-          }
-
-          &.active-current {
-            > .nav-child {
-              display block
-
-              > .nav-item {
-                display block
-              }
-            }
-
-
-            &::before {
-              position absolute
-              top 50%
-              left 0
-              width 0.2rem
-              height 1.2rem
-              background var(--primary-color)
-              border-radius 0.2rem
-              transform translateY(-50%)
-              content ''
-            }
-
-            .nav-number
-            .nav-text {
-              color var(--primary-color)
-            }
-          }
-
-
-          .nav-number
-          .nav-text {
-            color var(--toc-text-color)
-          }
-        }
-
-
-        .nav-child {
-          padding-left 1rem
-
-
-          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
-            display block
-          }
-          else {
-            display none
-          }
-        }
-      }
-    }
-  }
-}
-
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Large-Scale-Empirical-Analysis-of-the-Vulnerabilities-Introduced-by-Third-Party-Components-in-IoT-Firmware"><span class="nav-number">1.</span> <span class="nav-text">A Large-Scale Empirical Analysis of the Vulnerabilities Introduced by Third-Party Components in IoT Firmware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Investigation-of-the-Android-Kernel-Patch-Ecosystem"><span class="nav-number">2.</span> <span class="nav-text">An Investigation of the Android Kernel Patch Ecosystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Code-Similarity-Detection"><span class="nav-number">3.</span> <span class="nav-text">Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Diffing-as-a-Network-Alignment-Problem-via-Belief-Propagation"><span class="nav-number">4.</span> <span class="nav-text">Binary Diffing as a Network Alignment Problem via Belief Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#COMBO-Pre-Training-Representations-of-Binary-Code-Using-Contrastive-Learning-%E2%80%93-Arxiv-2022"><span class="nav-number">5.</span> <span class="nav-text">COMBO: Pre-Training Representations of Binary Code Using Contrastive Learning – Arxiv 2022</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jTrans-Jump-Aware-Transformer-for-Binary-Code-Similarity-Detection"><span class="nav-number">6.</span> <span class="nav-text">jTrans: Jump-Aware Transformer for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practical-Binary-Code-Similarity-Detection-with-BERT-based-Transferable-Similarity-Learning"><span class="nav-number">7.</span> <span class="nav-text">Practical Binary Code Similarity Detection with BERT-based Transferable Similarity Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantically-find-similar-binary-codes-with-mixed-key-instruction-sequence-%E2%80%93-IST-2020"><span class="nav-number">8.</span> <span class="nav-text">Semantically find similar binary codes with mixed key instruction sequence – IST 2020</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tracer-Signature-based-Static-Analysis-for-Detecting-Recurring-Vulnerabilities"><span class="nav-number">9.</span> <span class="nav-text">Tracer: Signature-based Static Analysis for Detecting Recurring Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulHawk-Cross-architecture-Vulnerability-Detection-with-Entropy-based-Binary-Code-Search"><span class="nav-number">10.</span> <span class="nav-text">VulHawk Cross-architecture Vulnerability Detection with Entropy-based Binary Code Search</span></a></li></ol>
+    </div>
+</div>
 
             </div>
         </div>
