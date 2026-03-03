@@ -44,14 +44,74 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height var(--header-scroll-progress-bar-height)
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 
 <main class="page-container border-box">
@@ -940,11 +1000,118 @@
 
         
             <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Survey-of-Binary-Code-Similarity"><span class="nav-number">1.</span> <span class="nav-text">A Survey of Binary Code Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Cross-Architecture-Instruction-Embedding-Model-for-Natural-Language-Processing-Inspired-Binary-Code-Analysis"><span class="nav-number">2.</span> <span class="nav-text">A Cross-Architecture Instruction Embedding Model for Natural Language Processing-Inspired Binary Code Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization"><span class="nav-number">3.</span> <span class="nav-text">Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection"><span class="nav-number">4.</span> <span class="nav-text">Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching"><span class="nav-number">5.</span> <span class="nav-text">CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search"><span class="nav-number">6.</span> <span class="nav-text">Codee: A Tensor Embedding Scheme for Binary Code Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing"><span class="nav-number">7.</span> <span class="nav-text">DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Matching-Networks-for-Learning-the-Similarity-of-Graph-Structured-Objects"><span class="nav-number">8.</span> <span class="nav-text">Graph Matching Networks for Learning the Similarity of Graph Structured Objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-could-Neural-Networks-understand-Programs"><span class="nav-number">9.</span> <span class="nav-text">How could Neural Networks understand Programs?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Machine-Learning-Is-Solving-the-Binary-Function-Similarity-Problem"><span class="nav-number">10.</span> <span class="nav-text">How Machine Learning Is Solving the Binary Function Similarity Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities"><span class="nav-number">11.</span> <span class="nav-text">Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-%E2%80%93-ASE-2017"><span class="nav-number">12.</span> <span class="nav-text">In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs"><span class="nav-number">13.</span> <span class="nav-text">Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection"><span class="nav-number">14.</span> <span class="nav-text">Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection"><span class="nav-number">15.</span> <span class="nav-text">Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding"><span class="nav-number">16.</span> <span class="nav-text">PalmTree: Learning an Assembly Language Model for Instruction Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patch-Based-Vulnerability-Matching-for-Binary-Programs"><span class="nav-number">17.</span> <span class="nav-text">Patch Based Vulnerability Matching for Binary Programs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity"><span class="nav-number">18.</span> <span class="nav-text">SAFE: Self-Attentive Function Embeddings for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture"><span class="nav-number">19.</span> <span class="nav-text">Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPAIN-Security-Patch-Analysis-for-Binaries-Towards-Understanding-the-Pain-and-Pills"><span class="nav-number">20.</span> <span class="nav-text">SPAIN: Security Patch Analysis for Binaries Towards Understanding the Pain and Pills</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity"><span class="nav-number">21.</span> <span class="nav-text">TREX: Learning Execution Semantics from Micro-Traces for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature"><span class="nav-number">22.</span> <span class="nav-text">VIVA: Binary Level Vulnerability Identification via Partial Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary"><span class="nav-number">23.</span> <span class="nav-text">VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation"><span class="nav-number">24.</span> <span class="nav-text">VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker"><span class="nav-number">25.</span> <span class="nav-text">Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         
@@ -1113,11 +1280,118 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Survey-of-Binary-Code-Similarity"><span class="nav-number">1.</span> <span class="nav-text">A Survey of Binary Code Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Cross-Architecture-Instruction-Embedding-Model-for-Natural-Language-Processing-Inspired-Binary-Code-Analysis"><span class="nav-number">2.</span> <span class="nav-text">A Cross-Architecture Instruction Embedding Model for Natural Language Processing-Inspired Binary Code Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asm2Vec-Boosting-Static-Representation-Robustness-for-Binary-Clone-Search-against-Code-Obfuscation-and-Compiler-Optimization"><span class="nav-number">3.</span> <span class="nav-text">Asm2Vec: Boosting Static Representation Robustness for Binary Clone Search against Code Obfuscation and Compiler Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asteria-Deep-Learning-based-AST-Encoding-for-Cross-platform-Binary-Code-Similarity-Detection"><span class="nav-number">4.</span> <span class="nav-text">Asteria: Deep Learning-based AST-Encoding for Cross-platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeCMR-Cross-Modal-Retrieval-For-Function-Level-Binary-Source-Code-Matching"><span class="nav-number">5.</span> <span class="nav-text">CodeCMR: Cross-Modal Retrieval For Function-Level Binary Source Code Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codee-A-Tensor-Embedding-Scheme-for-Binary-Code-Search"><span class="nav-number">6.</span> <span class="nav-text">Codee: A Tensor Embedding Scheme for Binary Code Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEEPBINDIFF-Learning-Program-Wide-Code-Representations-for-Binary-Diffing"><span class="nav-number">7.</span> <span class="nav-text">DEEPBINDIFF: Learning Program-Wide Code Representations for Binary Diffing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Matching-Networks-for-Learning-the-Similarity-of-Graph-Structured-Objects"><span class="nav-number">8.</span> <span class="nav-text">Graph Matching Networks for Learning the Similarity of Graph Structured Objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-could-Neural-Networks-understand-Programs"><span class="nav-number">9.</span> <span class="nav-text">How could Neural Networks understand Programs?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Machine-Learning-Is-Solving-the-Binary-Function-Similarity-Problem"><span class="nav-number">10.</span> <span class="nav-text">How Machine Learning Is Solving the Binary Function Similarity Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hybrid-Firmware-Analysis-for-Known-Mobile-and-IoT-Security-Vulnerabilities"><span class="nav-number">11.</span> <span class="nav-text">Hybrid Firmware Analysis for Known Mobile and IoT Security Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#In-Memory-Fuzzing-for-Binary-Code-Similarity-Analysis-%E2%80%93-ASE-2017"><span class="nav-number">12.</span> <span class="nav-text">In-Memory Fuzzing for Binary Code Similarity Analysis – ASE 2017</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Machine-Translation-Inspired-Binary-Code-Similarity-Comparison-beyond-Function-Pairs"><span class="nav-number">13.</span> <span class="nav-text">Neural Machine Translation Inspired Binary Code Similarity Comparison beyond Function Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-based-Graph-Embedding-for-Cross-Platform-Binary-Code-Similarity-Detection"><span class="nav-number">14.</span> <span class="nav-text">Neural Network-based Graph Embedding for Cross-Platform Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Order-Matters-Semantic-Aware-Neural-Networks-for-Binary-Code-Similarity-Detection"><span class="nav-number">15.</span> <span class="nav-text">Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PalmTree-Learning-an-Assembly-Language-Model-for-Instruction-Embedding"><span class="nav-number">16.</span> <span class="nav-text">PalmTree: Learning an Assembly Language Model for Instruction Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patch-Based-Vulnerability-Matching-for-Binary-Programs"><span class="nav-number">17.</span> <span class="nav-text">Patch Based Vulnerability Matching for Binary Programs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAFE-Self-Attentive-Function-Embeddings-for-Binary-Similarity"><span class="nav-number">18.</span> <span class="nav-text">SAFE: Self-Attentive Function Embeddings for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Similarity-Metric-Method-for-Binary-Basic-Blocks-of-Cross-Instruction-Set-Architecture"><span class="nav-number">19.</span> <span class="nav-text">Similarity Metric Method for Binary Basic Blocks of Cross-Instruction Set Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPAIN-Security-Patch-Analysis-for-Binaries-Towards-Understanding-the-Pain-and-Pills"><span class="nav-number">20.</span> <span class="nav-text">SPAIN: Security Patch Analysis for Binaries Towards Understanding the Pain and Pills</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TREX-Learning-Execution-Semantics-from-Micro-Traces-for-Binary-Similarity"><span class="nav-number">21.</span> <span class="nav-text">TREX: Learning Execution Semantics from Micro-Traces for Binary Similarity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIVA-Binary-Level-Vulnerability-Identification-via-Partial-Signature"><span class="nav-number">22.</span> <span class="nav-text">VIVA: Binary Level Vulnerability Identification via Partial Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-A-Semantic-Learning-Based-Vulnerability-Seeker-for-Cross-Platform-Binary"><span class="nav-number">23.</span> <span class="nav-text">VulSeeker: A Semantic Learning Based Vulnerability Seeker for Cross-Platform Binary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VulSeeker-Pro-Enhanced-Semantic-Learning-Based-Binary-Vulnerability-Seeker-with-Emulation"><span class="nav-number">24.</span> <span class="nav-text">VulSeeker-Pro: Enhanced Semantic Learning Based Binary Vulnerability Seeker with Emulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-Learning-and-Emulation-Based-Cross-platform-Binary-Vulnerability-Seeker"><span class="nav-number">25.</span> <span class="nav-text">Semantic Learning and Emulation Based Cross-platform Binary Vulnerability Seeker</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         </div>

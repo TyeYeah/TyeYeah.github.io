@@ -44,14 +44,74 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height var(--header-scroll-progress-bar-height)
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 
 <main class="page-container border-box">
@@ -493,11 +553,118 @@
 
         
             <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Reinforce"><span class="nav-number">1.</span> <span class="nav-text">Linux Reinforce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security-Response"><span class="nav-number">2.</span> <span class="nav-text">Security Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#check-suspicious-users"><span class="nav-number">2.1.</span> <span class="nav-text">check suspicious users</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#port-and-process"><span class="nav-number">2.2.</span> <span class="nav-text">port and process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startup-item-and-timed-tasks"><span class="nav-number">2.3.</span> <span class="nav-text">startup item and timed tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-check"><span class="nav-number">2.4.</span> <span class="nav-text">log check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-hidden-processes"><span class="nav-number">2.5.</span> <span class="nav-text">view hidden processes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commands-Summary"><span class="nav-number">2.6.</span> <span class="nav-text">Commands Summary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files-Recovery"><span class="nav-number">3.</span> <span class="nav-text">Files Recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">3.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Useful-Scripts"><span class="nav-number">4.</span> <span class="nav-text">Useful Scripts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal"><span class="nav-number">4.1.</span> <span class="nav-text">Normal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tide-sec-team%E2%80%99s-auto-script-in-Chinese"><span class="nav-number">4.2.</span> <span class="nav-text">Tide sec team’s auto script( in Chinese)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-miner-cleaner"><span class="nav-number">4.3.</span> <span class="nav-text">A miner cleaner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-your-ass-finally"><span class="nav-number">4.4.</span> <span class="nav-text">Clean your ass finally</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Files"><span class="nav-number">5.</span> <span class="nav-text">Key Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.</span> <span class="nav-text">Tools</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         
@@ -666,11 +833,118 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Reinforce"><span class="nav-number">1.</span> <span class="nav-text">Linux Reinforce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security-Response"><span class="nav-number">2.</span> <span class="nav-text">Security Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#check-suspicious-users"><span class="nav-number">2.1.</span> <span class="nav-text">check suspicious users</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#port-and-process"><span class="nav-number">2.2.</span> <span class="nav-text">port and process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startup-item-and-timed-tasks"><span class="nav-number">2.3.</span> <span class="nav-text">startup item and timed tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-check"><span class="nav-number">2.4.</span> <span class="nav-text">log check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-hidden-processes"><span class="nav-number">2.5.</span> <span class="nav-text">view hidden processes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commands-Summary"><span class="nav-number">2.6.</span> <span class="nav-text">Commands Summary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files-Recovery"><span class="nav-number">3.</span> <span class="nav-text">Files Recovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tools"><span class="nav-number">3.1.</span> <span class="nav-text">Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Useful-Scripts"><span class="nav-number">4.</span> <span class="nav-text">Useful Scripts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal"><span class="nav-number">4.1.</span> <span class="nav-text">Normal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tide-sec-team%E2%80%99s-auto-script-in-Chinese"><span class="nav-number">4.2.</span> <span class="nav-text">Tide sec team’s auto script( in Chinese)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-miner-cleaner"><span class="nav-number">4.3.</span> <span class="nav-text">A miner cleaner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-your-ass-finally"><span class="nav-number">4.4.</span> <span class="nav-text">Clean your ass finally</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Files"><span class="nav-number">5.</span> <span class="nav-text">Key Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools-1"><span class="nav-number">6.</span> <span class="nav-text">Tools</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         </div>

@@ -44,14 +44,74 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height var(--header-scroll-progress-bar-height)
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 
 <main class="page-container border-box">
@@ -554,11 +614,118 @@
 
         
             <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         
@@ -727,11 +894,118 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Up-Phishing-Mail-Server"><span class="nav-number">1.</span> <span class="nav-text">Set Up Phishing Mail Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camouflage-Malicious-PE"><span class="nav-number">2.</span> <span class="nav-text">Camouflage Malicious PE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX"><span class="nav-number">2.1.</span> <span class="nav-text">SFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLL-Hijacking-Recreate-the-Installer"><span class="nav-number">2.2.</span> <span class="nav-text">DLL Hijacking &amp; Recreate the Installer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-Evil-Links-Shotcuts"><span class="nav-number">3.</span> <span class="nav-text">Make Evil Links&#x2F;Shotcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evil-CHM-to-Phish"><span class="nav-number">4.</span> <span class="nav-text">Evil CHM to Phish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Evil-Office-Suite"><span class="nav-number">5.</span> <span class="nav-text">Create Evil Office Suite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Word"><span class="nav-number">5.1.</span> <span class="nav-text">Macros in Word</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Macros-in-Excel"><span class="nav-number">5.2.</span> <span class="nav-text">Macros in Excel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OLE"><span class="nav-number">5.3.</span> <span class="nav-text">OLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">5.4.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">5.5.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE"><span class="nav-number">5.6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phish-in-PPSX"><span class="nav-number">5.7.</span> <span class="nav-text">Phish in PPSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Ultra-One"><span class="nav-number">5.8.</span> <span class="nav-text">The Ultra One</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other Resources</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         </div>

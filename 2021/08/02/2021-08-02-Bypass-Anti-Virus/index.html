@@ -44,14 +44,74 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height var(--header-scroll-progress-bar-height)
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 
 <main class="page-container border-box">
@@ -664,11 +724,118 @@
 
         
             <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Metasploit"><span class="nav-number">1.1.</span> <span class="nav-text">Metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Veil"><span class="nav-number">1.2.</span> <span class="nav-text">Veil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charlotte"><span class="nav-number">1.3.</span> <span class="nav-text">charlotte</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#White-list"><span class="nav-number">2.</span> <span class="nav-text">White list</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forfiles"><span class="nav-number">2.1.</span> <span class="nav-text">forfiles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcalua"><span class="nav-number">2.2.</span> <span class="nav-text">pcalua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyncAppvPublishingServer"><span class="nav-number">2.3.</span> <span class="nav-text">SyncAppvPublishingServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cmd-Hijack"><span class="nav-number">2.4.</span> <span class="nav-text">Cmd Hijack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conhost-exe"><span class="nav-number">2.5.</span> <span class="nav-text">conhost.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explorer-exe"><span class="nav-number">2.6.</span> <span class="nav-text">explorer.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#waitfor"><span class="nav-number">2.7.</span> <span class="nav-text">waitfor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InstallUtil-exe"><span class="nav-number">2.8.</span> <span class="nav-text">InstallUtil.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regsvcs-exe"><span class="nav-number">2.9.</span> <span class="nav-text">Regsvcs.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regasm-exe"><span class="nav-number">2.10.</span> <span class="nav-text">Regasm.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regsvr32-exe"><span class="nav-number">2.11.</span> <span class="nav-text">Regsvr32.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rundll32-exe"><span class="nav-number">2.12.</span> <span class="nav-text">Rundll32.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Msiexec"><span class="nav-number">2.13.</span> <span class="nav-text">Msiexec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypass-UAC"><span class="nav-number">2.14.</span> <span class="nav-text">Bypass UAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-Programming-Language"><span class="nav-number">3.</span> <span class="nav-text">Multiple Programming Language</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Powershell"><span class="nav-number">3.1.</span> <span class="nav-text">Powershell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Golang"><span class="nav-number">3.2.</span> <span class="nav-text">Golang</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP"><span class="nav-number">3.3.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">3.4.</span> <span class="nav-text">Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shellcode-in-Picture"><span class="nav-number">4.</span> <span class="nav-text">Shellcode in Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Addition"><span class="nav-number">5.</span> <span class="nav-text">Addition</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         
@@ -837,11 +1004,118 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Metasploit"><span class="nav-number">1.1.</span> <span class="nav-text">Metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Veil"><span class="nav-number">1.2.</span> <span class="nav-text">Veil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charlotte"><span class="nav-number">1.3.</span> <span class="nav-text">charlotte</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#White-list"><span class="nav-number">2.</span> <span class="nav-text">White list</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forfiles"><span class="nav-number">2.1.</span> <span class="nav-text">forfiles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcalua"><span class="nav-number">2.2.</span> <span class="nav-text">pcalua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyncAppvPublishingServer"><span class="nav-number">2.3.</span> <span class="nav-text">SyncAppvPublishingServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cmd-Hijack"><span class="nav-number">2.4.</span> <span class="nav-text">Cmd Hijack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conhost-exe"><span class="nav-number">2.5.</span> <span class="nav-text">conhost.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explorer-exe"><span class="nav-number">2.6.</span> <span class="nav-text">explorer.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#waitfor"><span class="nav-number">2.7.</span> <span class="nav-text">waitfor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InstallUtil-exe"><span class="nav-number">2.8.</span> <span class="nav-text">InstallUtil.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regsvcs-exe"><span class="nav-number">2.9.</span> <span class="nav-text">Regsvcs.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regasm-exe"><span class="nav-number">2.10.</span> <span class="nav-text">Regasm.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regsvr32-exe"><span class="nav-number">2.11.</span> <span class="nav-text">Regsvr32.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rundll32-exe"><span class="nav-number">2.12.</span> <span class="nav-text">Rundll32.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Msiexec"><span class="nav-number">2.13.</span> <span class="nav-text">Msiexec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypass-UAC"><span class="nav-number">2.14.</span> <span class="nav-text">Bypass UAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-Programming-Language"><span class="nav-number">3.</span> <span class="nav-text">Multiple Programming Language</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Powershell"><span class="nav-number">3.1.</span> <span class="nav-text">Powershell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Golang"><span class="nav-number">3.2.</span> <span class="nav-text">Golang</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP"><span class="nav-number">3.3.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">3.4.</span> <span class="nav-text">Python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shellcode-in-Picture"><span class="nav-number">4.</span> <span class="nav-text">Shellcode in Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Addition"><span class="nav-number">5.</span> <span class="nav-text">Addition</span></a></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         </div>

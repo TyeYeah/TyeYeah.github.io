@@ -44,14 +44,74 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+.progress-bar-container {
+  position fixed
+  top 0
+  left 0
+  z-index $z-index-9
+  width 100%
 
-    
-</div>
+  if (hexo-config('pjax') && hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-8
+      width 0
+      height 2px
+      background var(--pjax-progress-bar-color)
+      visibility hidden
+      opacity 0
+      transition-t("width, opacity", "0, 0", "0.1, 0.1", "linear")
+
+
+      &.show {
+        visibility visible
+        opacity 1
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position absolute
+      top 0.4rem
+      right 0.3rem
+      z-index $z-index-8
+      color var(--text-color-3)
+      font-size 1.1rem
+      visibility hidden
+
+      +keep-tablet() {
+        top 0.3rem
+        right 0.2rem
+        font-size 1rem
+      }
+
+      &.show {
+        visibility visible
+      }
+    }
+  }
+
+  if (hexo-config('scroll') && hexo-config('scroll.progress_bar') == true) {
+    .scroll-progress-bar {
+      position absolute
+      top 0
+      left 0
+      z-index $z-index-7
+      width 0
+      height var(--header-scroll-progress-bar-height)
+      background var(--primary-color)
+      visibility hidden
+      transition-t("width", "0", "0.1", "linear")
+
+      &.hide {
+        display none !important
+      }
+    }
+  }
+}
 
 
 <main class="page-container border-box">
@@ -467,11 +527,118 @@
 
         
             <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Features-of-Kali-2019-4"><span class="nav-number">1.</span> <span class="nav-text">New Features of Kali 2019.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-With-Chinese"><span class="nav-number">2.</span> <span class="nav-text">Problems With Chinese</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-Language"><span class="nav-number">2.1.</span> <span class="nav-text">Choose Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Fonts"><span class="nav-number">2.2.</span> <span class="nav-text">Install Fonts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time-Display-Error"><span class="nav-number">3.</span> <span class="nav-text">Time Display Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Repo-Source-Edit-Source-List"><span class="nav-number">4.</span> <span class="nav-text">Change Repo Source (Edit Source List)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-Kali-Source"><span class="nav-number">4.1.</span> <span class="nav-text">Change Kali Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources"><span class="nav-number">4.1.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key"><span class="nav-number">4.1.2.</span> <span class="nav-text">Add Pub Key</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Deepin-Source"><span class="nav-number">4.2.</span> <span class="nav-text">Add Deepin Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Add Pub Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Don%E2%80%99t-Upgrade-Just-Install"><span class="nav-number">4.2.3.</span> <span class="nav-text">Don’t Upgrade, Just Install</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Undercover-Mode"><span class="nav-number">5.</span> <span class="nav-text">New Undercover Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">5.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-Customization"><span class="nav-number">5.2.</span> <span class="nav-text">More Customization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Grub-Background"><span class="nav-number">5.2.1.</span> <span class="nav-text">Grub Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login-Background"><span class="nav-number">5.2.2.</span> <span class="nav-text">Login Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Undercover-Mode-Background"><span class="nav-number">5.2.3.</span> <span class="nav-text">Undercover Mode Background</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Last"><span class="nav-number">5.3.</span> <span class="nav-text">Last</span></a></li></ol></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         
@@ -640,11 +807,118 @@
     
         <div class="tablet-post-toc-mask">
             <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Features-of-Kali-2019-4"><span class="nav-number">1.</span> <span class="nav-text">New Features of Kali 2019.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-With-Chinese"><span class="nav-number">2.</span> <span class="nav-text">Problems With Chinese</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Choose-Language"><span class="nav-number">2.1.</span> <span class="nav-text">Choose Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Fonts"><span class="nav-number">2.2.</span> <span class="nav-text">Install Fonts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time-Display-Error"><span class="nav-number">3.</span> <span class="nav-text">Time Display Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Repo-Source-Edit-Source-List"><span class="nav-number">4.</span> <span class="nav-text">Change Repo Source (Edit Source List)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-Kali-Source"><span class="nav-number">4.1.</span> <span class="nav-text">Change Kali Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources"><span class="nav-number">4.1.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key"><span class="nav-number">4.1.2.</span> <span class="nav-text">Add Pub Key</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Deepin-Source"><span class="nav-number">4.2.</span> <span class="nav-text">Add Deepin Source</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend-Sources-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">Recommend Sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Pub-Key-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Add Pub Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Don%E2%80%99t-Upgrade-Just-Install"><span class="nav-number">4.2.3.</span> <span class="nav-text">Don’t Upgrade, Just Install</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Undercover-Mode"><span class="nav-number">5.</span> <span class="nav-text">New Undercover Mode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">5.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-Customization"><span class="nav-number">5.2.</span> <span class="nav-text">More Customization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Grub-Background"><span class="nav-number">5.2.1.</span> <span class="nav-text">Grub Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login-Background"><span class="nav-number">5.2.2.</span> <span class="nav-text">Login Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Undercover-Mode-Background"><span class="nav-number">5.2.3.</span> <span class="nav-text">Undercover Mode Background</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Last"><span class="nav-number">5.3.</span> <span class="nav-text">Last</span></a></li></ol></li></ol>
-    </div>
-</div>
+                .post-toc-wrap {
+  width 100%
+  height 100%
+  overflow-y auto
+  font-size 0.92rem
+
+  &::-webkit-scrollbar-thumb {
+    background var(--toc-scrollbar-color)
+    border-radius 0.3rem
+  }
+
+  &::-webkit-scrollbar-track {
+    background transparent
+  }
+
+  .post-toc {
+
+    ol {
+      position relative
+      box-sizing border-box
+      margin 0
+      text-align left
+      list-style none
+
+      a {
+        transition-property all
+      }
+    }
+
+
+    .nav {
+
+      .nav-item {
+        position relative
+        box-sizing border-box
+        overflow hidden
+        line-height 2
+        white-space nowrap
+        text-overflow ellipsis
+
+
+        &.active {
+          > .nav-child {
+            display block
+          }
+        }
+
+
+        .nav-link {
+          position relative
+          box-sizing border-box
+          padding-left 0.8rem
+
+          &:hover {
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+          &.active-current {
+            > .nav-child {
+              display block
+
+              > .nav-item {
+                display block
+              }
+            }
+
+
+            &::before {
+              position absolute
+              top 50%
+              left 0
+              width 0.2rem
+              height 1.2rem
+              background var(--primary-color)
+              border-radius 0.2rem
+              transform translateY(-50%)
+              content ''
+            }
+
+            .nav-number
+            .nav-text {
+              color var(--primary-color)
+            }
+          }
+
+
+          .nav-number
+          .nav-text {
+            color var(--toc-text-color)
+          }
+        }
+
+
+        .nav-child {
+          padding-left 1rem
+
+
+          if (hexo-config('toc') && hexo-config('toc.expand_all') == true) {
+            display block
+          }
+          else {
+            display none
+          }
+        }
+      }
+    }
+  }
+}
+
 
             </div>
         </div>
